@@ -46,7 +46,7 @@ The following samples are categorized by CrowdStrike product, and further catego
 
 | Topic | Samples |
 | :-- | :-- |
-| [Hosts](#hosts-samples)<BR/>[Host Groups](#hosts-samples)<BR/> | List sensors by hostname<BR/>Manage duplicate sensors<BR/>CUSSED (Manage stale sensors)<BR/>Default Groups<BR/>Get Host Groups<BR/>Hosts Report<BR/>Host Search<BR/>Host Search Advanced<BR/>Host Tagger<BR/>Policy Check<BR/>RFM Report<BR/>Serial Search<BR/>Match usernames to hosts<BR/>Offset vs. Token<BR/>Prune Hosts by Hostname or AID<BR/>Quarantine a host<BR/>Quarantine a host (updated version) |
+| [Hosts](#hosts-samples)<BR/>[Host Groups](#hosts-samples)<BR/> | List sensors by hostname<BR/>Manage duplicate sensors<BR/>CUSSED (Manage stale sensors)<BR/>Default Groups<BR/>Get Host Groups<BR/>High Activity Hosts<BR/>Hosts Report<BR/>Host Search<BR/>Host Search Advanced<BR/>Host Tagger<BR/>Policy Check<BR/>RFM Report<BR/>Serial Search<BR/>Match usernames to hosts<BR/>Offset vs. Token<BR/>Prune Hosts by Hostname or AID<BR/>Quarantine a host<BR/>Quarantine a host (updated version) |
 | [Report Executions](#report-executions-samples) | Retrieve all report results |
 | [Sensor Download](#sensor-download-samples) | Download the CrowdStrike sensor |
 | [Sensor Update Policies](#sensor-update-policies-samples) | Clone Update Policy<BR/>Create Host Group and attach Update Policy<BR/>Policy Wonk |
@@ -209,6 +209,7 @@ The samples collected in this section demonstrate leveraging CrowdStrike's Hosts
 - [CUSSED (Stale sensor detector)](#cussed-manage-stale-sensors)
 - [Default Groups](#default-groups)
 - [Get Host Groups](#get-host-group)
+- [High Activity Hosts](#high-activity-hosts)
 - [Hosts Report](#hosts-report)
 - [Host Search](#host-search)
 - [Host Search Advanced](#host-search-advanced)
@@ -313,6 +314,50 @@ This sample demonstrates the following CrowdStrike Flight Control API operations
 | :--- | :--- |
 | [getChildren](https://www.falconpy.io/Service-Collections/MSSP.html#getchildren) | Get child customer detail by child CID(s). |
 | [queryChildren](https://www.falconpy.io/Service-Collections/MSSP.html#querychildren) | Query for customers linked as children. |
+
+---
+
+#### High Activity Hosts
+Submitted by `@Manjula101`, this [example](hosts#high-activity-hosts) identifies the most active and high risk hosts in your Falcon environment by compositing data from five Falcon APIs (Hosts, Alerts, RTR Audit, Spotlight Vulnerabilities, and Zero Trust Assessment) into a single weighted activity score per host.
+
+[![Hosts](https://img.shields.io/badge/Service%20Class-High_Activity_Hosts-silver?style=for-the-badge&labelColor=C30A16&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](hosts#high-activity-hosts) [![MSSP Use supported](https://img.shields.io/badge/-Supports%20MSSP-darkblue?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==&style=for-the-badge)](hosts#high-activity-hosts)
+[![Community Contribution](https://img.shields.io/badge/-Contribution-2C6B07?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](https://github.com/CrowdStrike/falconpy/blob/main/AUTHORS.md)
+
+##### Hosts API operations discussed
+This sample demonstrates the following CrowdStrike Hosts API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [GetDeviceDetails](https://falconpy.io/Service-Collections/Hosts.html#getdevicedetails) | Get details on one or more hosts by providing agent IDs (AID). You can get a host's agent IDs (AIDs) from the [QueryDevicesByFilter](https://www.falconpy.io/Service-Collections/Hosts.html#querydevicesbyfilter) operation, the Falcon console or the Streaming API. |
+| [QueryDevicesByFilter](https://falconpy.io/Service-Collections/Hosts.html#querydevicesbyfilter) | Search for hosts in your environment by platform, hostname, IP, and other criteria. |
+
+##### Alerts API operations discussed
+This sample demonstrates the following CrowdStrike Alerts API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [GetQueriesAlertsV2](https://www.falconpy.io/Service-Collections/Alerts.html#getqueriesalertsv2) | Retrieve alerts based on the provided criteria, including cursor-based pagination for large result sets. |
+
+##### RTR Audit API operations discussed
+This sample demonstrates the following CrowdStrike Real Time Response Audit API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [AuditSessions](https://www.falconpy.io/Service-Collections/Real-Time-Response-Audit.html#auditsessions) | Get all the RTR audit sessions created for the specified time range. |
+
+##### Spotlight Vulnerabilities API operations discussed
+This sample demonstrates the following CrowdStrike Spotlight Vulnerabilities API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [queryVulnerabilitiesCombined](https://www.falconpy.io/Service-Collections/Spotlight-Vulnerabilities.html#combinedqueryvulnerabilities) | Search for Spotlight vulnerabilities matching the provided filter criteria with full resource data in the response. |
+
+##### Zero Trust Assessment API operations discussed
+This sample demonstrates the following CrowdStrike Zero Trust Assessment API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [getAssessmentsByScore](https://www.falconpy.io/Service-Collections/Zero-Trust-Assessment.html#getassessmentsbyscorev1) | Get Zero Trust Assessment data for one or more hosts by providing a score range. |
 
 ---
 
