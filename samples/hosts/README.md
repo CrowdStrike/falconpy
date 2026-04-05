@@ -8,6 +8,7 @@ The examples in this folder focus on leveraging CrowdStrike's Hosts API to perfo
 - [Add Falcon Tags in bulk](#add-falcon-tags-in-bulk)
 - [Default Groups](#default-groups)
 - [Get Host Groups](#get-host-groups)
+- [High Activity Hosts](#high-activity-hosts)
 - [Host Report](#host-report)
 - [Host Search](#host-search)
 - [Host Search Advanced](#host-search-advanced)
@@ -361,6 +362,149 @@ Required arguments:
 
 ### Example source code
 The source code for these examples can be found [here](get_host_groups.py).
+
+---
+
+## High Activity Hosts
+This script identifies the most active and potentially high risk hosts in your CrowdStrike Falcon environment by compositing data from five Falcon APIs (Hosts, Alerts, RTR Audit, Spotlight Vulnerabilities, and Zero Trust Assessment) into a single weighted activity score per host. Results can be displayed in an interactive table with progressive loading, a simple static table, or exported to CSV.
+
+### Running the program
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__ |
+| Alerts | __READ__ |
+| Real Time Response Audit | __READ__ (optional, skip with `--no-rtr`) |
+| Spotlight Vulnerabilities | __READ__ (optional, skip with `--no-spotlight`) |
+| Zero Trust Assessment | __READ__ (optional, skip with `--no-zta`) |
+
+### Execution syntax
+This sample leverages simple command-line arguments to implement functionality.
+
+> Run in demo mode with synthetic data (no API credentials required).
+
+```shell
+python3 high_activity_hosts.py --demo
+```
+
+> Execute the default example, displaying the top 10 most active hosts from the last 7 days.
+
+```shell
+python3 high_activity_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute any of the command lines shown below without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 high_activity_hosts.py
+```
+
+> Show the top 25 hosts from the last 30 days.
+
+```shell
+python3 high_activity_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -l 25 -t 30
+```
+
+> Apply an additional FQL filter to scope results to Windows hosts only.
+
+```shell
+python3 high_activity_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f "platform_name:'Windows'"
+```
+
+> Export results to CSV.
+
+```shell
+python3 high_activity_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -o high_activity_report.csv
+```
+
+> Skip optional API sources for faster results or when API scopes are limited.
+
+```shell
+python3 high_activity_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET --no-rtr --no-spotlight --no-zta
+```
+
+> Force simple table output (disable interactive mode).
+
+```shell
+python3 high_activity_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET --simple
+```
+
+> Query a child tenant (MSSP).
+
+```shell
+python3 high_activity_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -m CHILD_CID
+```
+
+> API debugging can be enabled using the `--debug` argument.
+
+```shell
+python3 high_activity_hosts.py --debug
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: high_activity_hosts.py [-h] [-d] [-l LIMIT] [-t DAYS] [-o OUTPUT]
+                              [-f FILTER]
+                              [--table_format {plain,simple,grid,fancy_grid,pipe,orgtbl,rst,mediawiki,html,latex}]
+                              [--sort {hostname,activity_score,alerts,rtr_sessions,last_seen}]
+                              [--no-rtr] [--no-spotlight] [--no-zta]
+                              [--workers WORKERS] [--debug] [--simple]
+                              [-k CLIENT_ID] [-s CLIENT_SECRET] [-b BASE_URL]
+                              [-m MEMBER_CID]
+
+High Activity Hosts - CrowdStrike Falcon Endpoint Behavior Analytics.
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |           FalconPy
+`-------'                         `-------'
+
+This script identifies the most active and highest-risk hosts in your
+CrowdStrike Falcon environment by compositing data from five Falcon APIs
+into a single weighted activity score per host.
+
+Created by: Manjula Wickramasuriya (@Manjula101) - Enterprise Security Lab
+Overarchitected by: jshcodes@CrowdStrike
+
+options:
+  -h, --help            show this help message and exit
+  -d, --demo            Run in demo mode with sample data (no API credentials required)
+  -l, --limit LIMIT     Number of top active hosts to display (default: 10)
+  -t, --days DAYS       Number of days to analyze for activity (default: 7)
+  -o, --output OUTPUT   Output CSV file path (optional, displays to console if not provided)
+  -f, --filter FILTER   Additional FQL filter to apply to host query
+  --table_format {plain,simple,grid,fancy_grid,pipe,orgtbl,rst,mediawiki,html,latex}
+                        Table format for console output (default: simple)
+  --sort {hostname,activity_score,alerts,rtr_sessions,last_seen}
+                        Sort results by field (default: activity_score)
+  --no-rtr              Skip RTR session analysis (faster but less complete)
+  --no-spotlight        Skip Spotlight vulnerability analysis
+  --no-zta              Skip Zero Trust Assessment analysis
+  --workers WORKERS     Number of parallel workers for alert processing (default: 10)
+  --debug               Enable API debugging output
+  --simple              Use simple table output (disable interactive mode). Interactive mode is
+                        the default when the rich library is installed. Install rich and readchar
+                        for interactive mode: pip install rich readchar
+
+API credentials (not required in demo mode):
+  -k, --client_id CLIENT_ID
+                        CrowdStrike Falcon API Client ID
+  -s, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API Client Secret
+  -b, --base_url BASE_URL
+                        CrowdStrike API base URL (default: auto-discover)
+  -m, --member_cid MEMBER_CID
+                        Child CID to access (MSSP only)
+```
+
+### Example source code
+The source code for this example can be found [here](high_activity_hosts.py).
 
 ---
 
