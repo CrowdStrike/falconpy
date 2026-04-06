@@ -62,11 +62,15 @@ The following samples are categorized by CrowdStrike product, and further catego
 
 | Topic | Samples |
 | :-- | :-- |
+| [Alerts](#alerts-samples) | Alert Manager<BR/>Alerts Triage Dashboard |
 | [Custom IOA](#custom-ioa-samples) | Custom IOA Cloner |
 | [IOA Exclusions](#ioa-exclusions-samples) | IOA Exclusion Audit |
+| [Device Control Policies](#device-control-policies-samples) | Device Control Policy Manager |
 | [Detects](#detects-samples) | Detects Advisor |
+| [FileVantage](#filevantage-samples) | FileVantage Change Monitor |
 | [IOC](#ioc-samples) | Create indicators<BR/>IOC Audit<BR/>IOC Restore |
 | [ML Exclusions](#ml-exclusions-samples) | ML Exclusion Audit |
+| [On-Demand Scans](#on-demand-scans-samples) | ODS Manager |
 | [Prevention Policies](#prevention-policies-samples) | Clone Prevention Policy<BR/>Create Host Group and attach Prevention Policies<BR/>Prevention Policy Hawk |
 | [Incidents](#incidents-samples) | CrowdScore QuickChart<BR/>Incident Triage |
 | [Real Time Response](#real-time-response-samples) | Bulk execute a command<BR/>Bulk execute a command (queued)<BR/>Get file from multiple hosts<BR/>Get host uptime<BR/>Get RTR result<BR/>Dump memory for a running process<BR/>My Little RTR<BR/>Remotely restart a sensor while taking a capture<BR/>RTR Script Manager<BR/>RTR Session Replay<BR/>Stream file download |
@@ -94,7 +98,8 @@ The following samples are categorized by CrowdStrike product, and further catego
 | Topic | Samples |
 | :-- | :-- |
 | [Asset Management (Discover)](#asset-management-samples) | List discovered hosts<BR/>Spyglass |
-| [Vulnerability Management (Spotlight)](#vulnerability-management-samples) | Find vulnerable hosts by CVE ID<BR/>CISA DHS Known Exploited Vulnerabilities<BR/>Spotlight Quick Report |
+| [Vulnerability Management (Spotlight)](#vulnerability-management-samples) | Find vulnerable hosts by CVE ID<BR/>CISA DHS Known Exploited Vulnerabilities<BR/>Spotlight Quick Report<BR/>Spotlight Vulnerability Dashboard |
+| [Zero Trust Assessment](#zero-trust-assessment-samples) | ZTA Score Viewer |
 
 <a id="fusion-and-foundry-toc"></a>
 
@@ -118,6 +123,7 @@ The following samples are categorized by CrowdStrike product, and further catego
 | [Falcon Intelligence (includes MalQuery)](#falcon-intelligence-samples) | Intel Search<BR/>MISP Import<BR/>Malqueryinator |
 | [Falcon Intelligence Sandbox (includes QuickScan)](#falcon-intelligence-sandbox-samples) | Manage sandbox uploads<BR/>Falcon Intelligence sandbox scan<BR/>Get all artifacts<BR/>Quick Scan a target<BR/>Quick Scan quota check<BR/>S3 Bucket Protection |
 | [Falcon Intelligence Recon](#recon-samples) | Create monitoring rules for an email list |
+| [Tailored Intelligence](#tailored-intelligence-samples) | Tailored Intelligence Event Browser |
 
 </details>
 
@@ -1647,6 +1653,148 @@ This sample demonstrates the following CrowdStrike Firewall Management API opera
 
 ---
 
+<a id="alerts-samples"></a>
+<details>
+<summary><h3>Alerts</h3> <small>(click to expand)</small><br/>
+These samples demonstrate using CrowdStrike's Alerts API service collection.
+</summary>
+
+- [Alert Manager](#alert-manager)
+- [Alerts Triage Dashboard](alerts/alerts_triage)
+
+#### Alert Manager
+[Alert Manager](alerts#query-and-manage-security-alerts) provides functionality to query, retrieve, and manage security alerts from your CrowdStrike Falcon environment including listing alerts with filters, viewing detailed alert information, updating alert statuses, and exporting results.
+
+[![Alerts](https://img.shields.io/badge/Service%20Class-Alert_Manager-silver?style=for-the-badge&labelColor=C30A16&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](alerts#query-and-manage-security-alerts)
+
+##### Alerts API operations discussed
+This sample demonstrates the following CrowdStrike Alerts API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [GetAlertsV2](https://falconpy.io/Service-Collections/Alerts.html#getalertsv2) | Get details on one or more alerts by providing alert IDs. |
+| [QueryAlertsV2](https://falconpy.io/Service-Collections/Alerts.html#queryalertsv2) | Search for alert IDs matching a given FQL filter. |
+| [UpdateAlertsV2](https://falconpy.io/Service-Collections/Alerts.html#updatealertsv2) | Perform actions on alerts identified by composite ID(s). |
+
+---
+
+#### Alerts Triage Dashboard
+The [Alerts Triage Dashboard](alerts/alerts_triage) is a PyQt6 desktop GUI for triaging CrowdStrike Falcon behavioral alerts. It presents alerts in a split-pane interface with severity color-coding, FQL filtering, bulk status updates, and progressive API loading.
+
+[![Alerts Triage](https://img.shields.io/badge/Service%20Class-Alerts_Triage_Dashboard-silver?style=for-the-badge&labelColor=C30A16&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](alerts/alerts_triage)
+
+##### Alerts API operations discussed
+This sample demonstrates the following CrowdStrike Alerts API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [GetAlertsV2](https://falconpy.io/Service-Collections/Alerts.html#getalertsv2) | Get details on one or more alerts by providing alert IDs. |
+| [QueryAlertsV2](https://falconpy.io/Service-Collections/Alerts.html#queryalertsv2) | Search for alert IDs matching a given FQL filter. |
+| [UpdateAlertsV2](https://falconpy.io/Service-Collections/Alerts.html#updatealertsv2) | Perform actions on alerts identified by composite ID(s). |
+
+</details>
+
+[Back to top](#falconpy-sample-library) | [How to authenticate](#authentication-for-these-examples) | [Table of Contents](#endpoint-security-toc)
+
+---
+
+<a id="device-control-policies-samples"></a>
+<details>
+<summary><h3>Device Control Policies</h3> <small>(click to expand)</small><br/>
+These samples demonstrate using CrowdStrike's Device Control Policies API service collection.
+</summary>
+
+- [Device Control Policy Manager](device_control_policies/device_control_policy_manager)
+
+#### Device Control Policy Manager
+The [Device Control Policy Manager](device_control_policies/device_control_policy_manager) is a PySide6 desktop GUI for managing CrowdStrike Falcon USB Device Control Policies. Browse, create, edit, enable/disable, and delete policies with host group assignment via a searchable modal dialog.
+
+[![Device Control](https://img.shields.io/badge/Service%20Class-Device_Control_Policy_Manager-silver?style=for-the-badge&labelColor=C30A16&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](device_control_policies/device_control_policy_manager)
+
+##### Device Control Policies API operations discussed
+This sample demonstrates the following CrowdStrike Device Control Policies API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [queryCombinedDeviceControlPolicies](https://falconpy.io/Service-Collections/Device-Control-Policies.html#querycombineddevicecontrolpolicies) | Search for Device Control Policies with additional support for filtering and sorting. |
+| [createDeviceControlPolicies](https://falconpy.io/Service-Collections/Device-Control-Policies.html#createdevicecontrolpolicies) | Create Device Control Policies by specifying details about the policy to create. |
+| [updateDeviceControlPolicies](https://falconpy.io/Service-Collections/Device-Control-Policies.html#updatedevicecontrolpolicies) | Update Device Control Policies by specifying the ID of the policy and details to update. |
+| [deleteDeviceControlPolicies](https://falconpy.io/Service-Collections/Device-Control-Policies.html#deletedevicecontrolpolicies) | Delete a set of Device Control Policies by specifying their IDs. |
+| [performDeviceControlPoliciesAction](https://falconpy.io/Service-Collections/Device-Control-Policies.html#performdevicecontrolpoliciesaction) | Perform the specified action on the Device Control Policies specified in the request. |
+
+##### Host Group API operations discussed
+This sample demonstrates the following CrowdStrike Host Group API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [queryCombinedHostGroups](https://falconpy.io/Service-Collections/Host-Group.html#querycombinedhostgroups) | Search for host groups in your environment by providing a FQL filter and paging details. |
+
+</details>
+
+[Back to top](#falconpy-sample-library) | [How to authenticate](#authentication-for-these-examples) | [Table of Contents](#endpoint-security-toc)
+
+---
+
+<a id="filevantage-samples"></a>
+<details>
+<summary><h3>FileVantage</h3> <small>(click to expand)</small><br/>
+These samples demonstrate using CrowdStrike's FileVantage API service collection for file integrity monitoring.
+</summary>
+
+- [FileVantage Change Monitor](filevantage/filevantage_monitor)
+
+#### FileVantage Change Monitor
+The [FileVantage Change Monitor](filevantage/filevantage_monitor) is a PyQt6 desktop GUI for monitoring CrowdStrike Falcon FileVantage file integrity monitoring (FIM) change events. It provides an auto-refreshing live feed with drill-down detail dialogs, suppress/purge actions, and CSV export.
+
+[![FileVantage](https://img.shields.io/badge/Service%20Class-FileVantage_Change_Monitor-silver?style=for-the-badge&labelColor=C30A16&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](filevantage/filevantage_monitor)
+
+##### FileVantage API operations discussed
+This sample demonstrates the following CrowdStrike FileVantage API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [queryChanges](https://falconpy.io/Service-Collections/FileVantage.html#querychanges) | Returns one or more change IDs. |
+| [getChanges](https://falconpy.io/Service-Collections/FileVantage.html#getchanges) | Retrieve information on changes. |
+| [startActions](https://falconpy.io/Service-Collections/FileVantage.html#startactions) | Initiate the specified action on the provided change IDs. |
+| [getActions](https://falconpy.io/Service-Collections/FileVantage.html#getactions) | Retrieves the processing result for one or more actions. |
+
+</details>
+
+[Back to top](#falconpy-sample-library) | [How to authenticate](#authentication-for-these-examples) | [Table of Contents](#endpoint-security-toc)
+
+---
+
+<a id="on-demand-scans-samples"></a>
+<details>
+<summary><h3>On-Demand Scans</h3> <small>(click to expand)</small><br/>
+These samples demonstrate using CrowdStrike's ODS API service collection for on-demand antivirus scanning.
+</summary>
+
+- [ODS Manager](ods/ods_manager)
+
+#### ODS Manager
+The [ODS Manager](ods/ods_manager) is a wxPython desktop GUI for managing CrowdStrike Falcon On-Demand Scans. Launch agent-side AV scans, monitor progress with auto-polling, inspect per-host results and failure reasons, and cancel scan jobs.
+
+[![ODS](https://img.shields.io/badge/Service%20Class-ODS_Manager-silver?style=for-the-badge&labelColor=C30A16&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](ods/ods_manager)
+
+##### ODS API operations discussed
+This sample demonstrates the following CrowdStrike ODS API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [query_scans](https://falconpy.io/Service-Collections/ODS.html#queryscans) | Query scan IDs. |
+| [get_scans](https://falconpy.io/Service-Collections/ODS.html#getscans) | Get scan entities by ID. |
+| [create_scan](https://falconpy.io/Service-Collections/ODS.html#createscan) | Create an ODS scan and start or schedule it. |
+| [cancel_scans](https://falconpy.io/Service-Collections/ODS.html#cancelscans) | Cancel ODS scans for the given scan IDs. |
+| [query_scan_host_metadata](https://falconpy.io/Service-Collections/ODS.html#queryscanhostmetadata) | Query scan host metadata by scan ID. |
+| [get_scan_host_metadata_by_ids](https://falconpy.io/Service-Collections/ODS.html#getscanhostmetadatabyids) | Get scan host metadata by IDs. |
+
+</details>
+
+[Back to top](#falconpy-sample-library) | [How to authenticate](#authentication-for-these-examples) | [Table of Contents](#endpoint-security-toc)
+
+---
+
 </details>
 
 <!--Cloud Security-->
@@ -1812,6 +1960,7 @@ These samples discuss leveraging the CrowdStrike Spotlight Evaluation Logic and 
 - [Find vulnerable hosts by CVE ID](#find-vulnerable-hosts-by-cve-id)
 - [CISA DHS Known Exploited Vulnerabilities](#cisa-dhs-known-exploited-vulnerabilities)
 - [Spotlight Quick Report](#spotlight-quick-report)
+- [Spotlight Vulnerability Dashboard](spotlight/spotlight_vuln_dashboard)
 
 #### Find vulnerable hosts by CVE ID
 In this [example](spotlight#identify-hosts-with-vulnerabilities-by-cve) we demonstrate searching Falcon Spotlight for vulnerable hosts based upon CVE ID.
@@ -1856,6 +2005,57 @@ This sample demonstrates the following CrowdStrike Spotlight Vulnerability API a
 | [combinedQueryVulnerabilities](https://www.falconpy.io/Service-Collections/Spotlight-Vulnerabilities.html#combinedqueryvulnerabilities) | Search for Vulnerabilities in your environment by providing a FQL filter and paging details. Returns a set of Vulnerability entities which match the filter criteria. |
 | [GetDeviceDetails](https://www.falconpy.io/Service-Collections/Hosts.html#getdevicedetails) | Get details on one or more hosts by providing agent IDs (AID). You can get a host's agent IDs (AIDs) from the QueryDevicesByFilterScroll operation, the Falcon console or the Streaming API. |
 | [QueryDevicesByFilterScroll](https://www.falconpy.io/Service-Collections/Hosts.html#querydevicesbyfilterscroll) | Search for hosts in your environment by platform, hostname, IP, and other criteria with continuous pagination capability (based on offset pointer which expires after 2 minutes with no maximum limit). |
+
+---
+
+#### Spotlight Vulnerability Dashboard
+The [Spotlight Vulnerability Dashboard](spotlight/spotlight_vuln_dashboard) is a PySide6 desktop GUI for browsing and triaging Falcon Spotlight vulnerabilities across a protected fleet. It provides incremental loading, in-memory view filters, CSV export, and an optional matplotlib severity breakdown chart.
+
+[![Spotlight Vulnerabilities](https://img.shields.io/badge/Service%20Class-Spotlight_Vulnerability_Dashboard-silver?style=for-the-badge&labelColor=C30A16&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](spotlight/spotlight_vuln_dashboard)
+
+##### Spotlight Vulnerabilities / Hosts API operations discussed
+This sample demonstrates the following CrowdStrike Spotlight Vulnerabilities and Hosts API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [queryVulnerabilitiesCombined](https://www.falconpy.io/Service-Collections/Spotlight-Vulnerabilities.html#combinedqueryvulnerabilities) | Search for Spotlight vulnerabilities matching the provided filter criteria with full resource data in the response. |
+| [queryVulnerabilities](https://falconpy.io/Service-Collections/Spotlight-Vulnerabilities.html#queryvulnerabilities) | Search for Vulnerabilities in your environment by providing a FQL filter and paging details. |
+| [GetDeviceDetailsV2](https://www.falconpy.io/Service-Collections/Hosts.html#getdevicedetailsv2) | Get details on one or more hosts by providing agent IDs (AID). |
+
+</details>
+
+[Back to top](#falconpy-sample-library) | [How to authenticate](#authentication-for-these-examples) | [Table of Contents](#exposure-management-toc)
+
+---
+
+<a id="zero-trust-assessment-samples"></a>
+<details>
+<summary><h3>Zero Trust Assessment</h3> <small>(click to expand)</small><br/>
+These samples demonstrate using CrowdStrike's Zero Trust Assessment API service collection.
+</summary>
+
+- [ZTA Score Viewer](zero_trust_assessment/zta_score_viewer)
+
+#### ZTA Score Viewer
+The [ZTA Score Viewer](zero_trust_assessment/zta_score_viewer) is a Dear PyGui desktop application for visualising CrowdStrike Falcon Zero Trust Assessment (ZTA) scores across your fleet. Features a score distribution chart, sortable device table with hostname resolution, worst offenders panel, and audit report viewer.
+
+[![ZTA](https://img.shields.io/badge/Service%20Class-ZTA_Score_Viewer-silver?style=for-the-badge&labelColor=C30A16&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](zero_trust_assessment/zta_score_viewer)
+
+##### Zero Trust Assessment API operations discussed
+This sample demonstrates the following CrowdStrike Zero Trust Assessment API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [getAssessmentsByScoreV1](https://falconpy.io/Service-Collections/Zero-Trust-Assessment.html#getassessmentsbyscorev1) | Get Zero Trust Assessment data for one or more hosts by providing a score range. |
+| [getAssessmentV1](https://falconpy.io/Service-Collections/Zero-Trust-Assessment.html#getassessmentv1) | Get Zero Trust Assessment data for one or more hosts by providing agent IDs (AID). |
+| [getAuditV1](https://falconpy.io/Service-Collections/Zero-Trust-Assessment.html#getauditv1) | Get the Zero Trust Assessment audit report for one customer ID (CID). |
+
+##### Hosts API operations discussed
+This sample demonstrates the following CrowdStrike Hosts API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [GetDeviceDetailsV2](https://www.falconpy.io/Service-Collections/Hosts.html#getdevicedetailsv2) | Get details on one or more hosts by providing agent IDs (AID). |
 
 </details>
 
@@ -2215,6 +2415,35 @@ This sample demonstrates the following CrowdStrike Recon API operations:
 | Operation | Description |
 | :--- | :--- |
 | [CreateRulesV1](https://www.falconpy.io/Service-Collections/Recon.html#createrulesv1) | Create monitoring rules. |
+
+</details>
+
+[Back to top](#falconpy-sample-library) | [How to authenticate](#authentication-for-these-examples) | [Table of Contents](#threat-intelligence-toc)
+
+---
+
+<a id="tailored-intelligence-samples"></a>
+<details>
+<summary><h3>Tailored Intelligence</h3> <small>(click to expand)</small><br/>
+These samples demonstrate using CrowdStrike's Tailored Intelligence API service collection.
+</summary>
+
+- [Tailored Intelligence Event Browser](tailored_intelligence/tailored_intel_browser)
+
+#### Tailored Intelligence Event Browser
+The [Tailored Intelligence Event Browser](tailored_intelligence/tailored_intel_browser) is a Kivy desktop application for browsing customer-environment-specific threat events generated by active tailored rules. Features a card-based event feed with drill-down detail screens, a rules tab, and date-range filtering.
+
+[![Tailored Intelligence](https://img.shields.io/badge/Service%20Class-Tailored_Intel_Browser-silver?style=for-the-badge&labelColor=C30A16&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](tailored_intelligence/tailored_intel_browser)
+
+##### Tailored Intelligence API operations discussed
+This sample demonstrates the following CrowdStrike Tailored Intelligence API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [QueryEvents](https://falconpy.io/Service-Collections/Tailored-Intelligence.html#queryevents) | Get event IDs based on the provided filter criteria. |
+| [GetEventEntities](https://falconpy.io/Service-Collections/Tailored-Intelligence.html#getevententities) | Get event entities for specified IDs. |
+| [QueryRules](https://falconpy.io/Service-Collections/Tailored-Intelligence.html#queryrules) | Get rule IDs based on the provided filter criteria. |
+| [GetRuleEntities](https://falconpy.io/Service-Collections/Tailored-Intelligence.html#getruleentities) | Get rule entities for specified IDs. |
 
 </details>
 
