@@ -1,0 +1,2 @@
+crowdstrike-falconpy>=1.4.1,<2.0.0
+PySide6>=6.5,<7.0

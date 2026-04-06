@@ -10,6 +10,7 @@ The examples within this folder focus on leveraging CrowdStrike's Falcon Spotlig
 - [CISA Known exploited vulnerabilities](CISA_known_exploited_vulns)
 - [Query installed patches](#query-installed-patches)
 - [Spotlight Quick Report](#spotlight-quick-report)
+- [Spotlight Vulnerability Dashboard](spotlight_vuln_dashboard) - PySide6 desktop GUI for browsing and triaging Spotlight vulnerabilities with incremental loading, in-memory view filters, and optional severity chart.
 
 ## Identify hosts with vulnerabilities by CVE
 Retrieves a list of hosts with vulnerabilities matching the CVE(s) specified. Also provides remediation recommendations when available.
