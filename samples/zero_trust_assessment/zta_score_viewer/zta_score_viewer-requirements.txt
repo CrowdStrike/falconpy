@@ -1,0 +1,10 @@
+# ZTAScoreViewer runtime dependencies
+# Generated from Pipfile.lock
+
+certifi==2026.2.25
+charset-normalizer==3.4.5
+crowdstrike-falconpy==1.6.0
+dearpygui==2.2
+idna==3.11
+requests==2.32.5
+urllib3==2.6.3
