@@ -5,6 +5,7 @@
 # Alerts examples
 The examples in this folder focus on leveraging CrowdStrike's Falcon Alerts service collection.
 - [alert_manager - Query and Manage Security Alerts](#Query-and-Manage-Security-Alerts)
+- [Alerts Triage Dashboard](alerts_triage) - PyQt6 desktop GUI for triaging behavioral alerts with severity color-coding, bulk status updates, and progressive loading.
 
 ## Query and Manage Security Alerts
 Query, retrieve, and manage security alerts from your CrowdStrike Falcon environment. This sample provides functionality to list alerts with filters, view detailed alert information, update alert statuses, and export results.
