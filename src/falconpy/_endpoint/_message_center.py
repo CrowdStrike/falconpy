@@ -167,13 +167,13 @@ _message_center_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "activity.type.asc",
           "activity.type.desc",
           "activity.created_time.asc",
           "activity.created_time.desc"
         ],
-        "type": "string",
         "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
         "\"asc\" or \"desc\".",
         "name": "sort",
@@ -182,7 +182,7 @@ _message_center_endpoints = [
       {
         "type": "string",
         "description": "Optional filter and sort criteria in the form of an FQL query. Allowed filters are: "
-        "activity.created_time\nactivity.type",
+        "\n\nactivity.created_time\nactivity.type",
         "name": "filter",
         "in": "query"
       },
@@ -215,6 +215,7 @@ _message_center_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "case.created_time.asc",
           "case.created_time.desc",
@@ -227,7 +228,6 @@ _message_center_endpoints = [
           "case.id.asc",
           "case.id.desc"
         ],
-        "type": "string",
         "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
         "\"asc\" or \"desc\".",
         "name": "sort",
@@ -235,11 +235,11 @@ _message_center_endpoints = [
       },
       {
         "type": "string",
-        "description": "Optional filter and sort criteria in the form of an FQL query. Allowed filters are: _a "
-        "ll\nactivity.body\ncase.aids\ncase.assigner.display_name\ncase.assigner.first_name\ncase.assigner.last_name\nc "
-        "ase.assigner.uid\ncase.assigner.uuid\ncase.body\ncase.created_time\ncase.detections.id\ncase.hosts\ncase.id\nc "
-        "ase.incidents.id\ncase.ip_addresses\ncase.key\ncase.last_modified_time\ncase.status\ncase.status\ncase.title\n"
-        "case.type",
+        "description": "Optional filter and sort criteria in the form of an FQL query. Allowed filters are: \n"
+        "\n_all\nactivity.body\ncase.aids\ncase.assigner.display_name\ncase.assigner.first_name\ncase.assigner.last_nam "
+        "e\ncase.assigner.uid\ncase.assigner.uuid\ncase.body\ncase.created_time\ncase.detections.id\ncase.hosts\ncase.i "
+        "d\ncase.incidents.id\ncase.ip_addresses\ncase.key\ncase.last_modified_time\ncase.status\ncase.status\ncase.tit "
+        "le\ncase.type",
         "name": "filter",
         "in": "query"
       },
