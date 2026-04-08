@@ -45,29 +45,26 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The end key to end listing to",
         "name": "end",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "integer",
         "description": "The limit of results to return",
         "name": "limit",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The start key to start listing from",
         "name": "start",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       }
     ]
   ],
@@ -99,9 +96,9 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
@@ -117,38 +114,35 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The end key to end listing to",
         "name": "end",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "integer",
         "description": "The limit of results to return",
         "name": "limit",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The start key to start listing from",
         "name": "start",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       }
     ]
   ],
@@ -160,18 +154,18 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The filter to limit the returned results.",
         "name": "filter",
         "in": "query",
@@ -181,20 +175,18 @@ _custom_storage_endpoints = [
         "type": "integer",
         "description": "The limit of results to return",
         "name": "limit",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "integer",
         "description": "The offset of results to return",
         "name": "offset",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The sort order for the returned results.",
         "name": "sort",
         "in": "query"
@@ -209,18 +201,18 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The object key",
         "name": "object_key",
         "in": "path",
@@ -241,9 +233,9 @@ _custom_storage_endpoints = [
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
@@ -254,21 +246,20 @@ _custom_storage_endpoints = [
         "description": "If false, run the operation as normal.  If true, validate that the request *would* "
         "succeed, but don't execute it.",
         "name": "dry_run",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The object key",
         "name": "object_key",
         "in": "path",
         "required": True
       },
       {
-        "minLength": 1,
         "type": "string",
+        "minLength": 1,
         "description": "The version of the collection schema",
         "name": "schema_version",
         "in": "query"
@@ -283,9 +274,9 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
@@ -296,13 +287,12 @@ _custom_storage_endpoints = [
         "description": "If false, run the operation as normal.  If true, validate that the request *would* "
         "succeed, but don't execute it.",
         "name": "dry_run",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The object key",
         "name": "object_key",
         "in": "path",
@@ -318,18 +308,18 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The object key",
         "name": "object_key",
         "in": "path",
@@ -345,38 +335,35 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The end key to end listing to",
         "name": "end",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "integer",
         "description": "The limit of results to return",
         "name": "limit",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The start key to start listing from",
         "name": "start",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       }
     ]
   ],
@@ -388,17 +375,17 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
         "required": True
       },
       {
-        "minLength": 1,
         "type": "string",
+        "minLength": 1,
         "description": "The version of the collection schema or 'latest' for the latest version",
         "name": "schema_version",
         "in": "path",
@@ -414,17 +401,17 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
         "required": True
       },
       {
-        "minLength": 1,
         "type": "string",
+        "minLength": 1,
         "description": "The version of the collection schema or 'latest' for the latest version",
         "name": "schema_version",
         "in": "path",
@@ -440,47 +427,44 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 20,
         "minLength": 1,
-        "type": "string",
         "description": "The version of the collection",
         "name": "collection_version",
         "in": "path",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The end key to end listing to",
         "name": "end",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "integer",
         "description": "The limit of results to return",
         "name": "limit",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The start key to start listing from",
         "name": "start",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       }
     ]
   ],
@@ -492,27 +476,27 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 20,
         "minLength": 1,
-        "type": "string",
         "description": "The version of the collection",
         "name": "collection_version",
         "in": "path",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The filter to limit the returned results.",
         "name": "filter",
         "in": "query",
@@ -522,20 +506,18 @@ _custom_storage_endpoints = [
         "type": "integer",
         "description": "The limit of results to return",
         "name": "limit",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "integer",
         "description": "The offset of results to return",
         "name": "offset",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The sort order for the returned results.",
         "name": "sort",
         "in": "query"
@@ -550,27 +532,27 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 20,
         "minLength": 1,
-        "type": "string",
         "description": "The version of the collection",
         "name": "collection_version",
         "in": "path",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The object key",
         "name": "object_key",
         "in": "path",
@@ -591,18 +573,18 @@ _custom_storage_endpoints = [
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 20,
         "minLength": 1,
-        "type": "string",
         "description": "The version of the collection",
         "name": "collection_version",
         "in": "path",
@@ -613,13 +595,12 @@ _custom_storage_endpoints = [
         "description": "If false, run the operation as normal.  If true, validate that the request *would* "
         "succeed, but don't execute it.",
         "name": "dry_run",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The object key",
         "name": "object_key",
         "in": "path",
@@ -635,18 +616,18 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 20,
         "minLength": 1,
-        "type": "string",
         "description": "The version of the collection",
         "name": "collection_version",
         "in": "path",
@@ -657,13 +638,12 @@ _custom_storage_endpoints = [
         "description": "If false, run the operation as normal.  If true, validate that the request *would* "
         "succeed, but don't execute it.",
         "name": "dry_run",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The object key",
         "name": "object_key",
         "in": "path",
@@ -679,27 +659,27 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 1,
-        "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 20,
         "minLength": 1,
-        "type": "string",
         "description": "The version of the collection",
         "name": "collection_version",
         "in": "path",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 1000,
         "minLength": 1,
-        "type": "string",
         "description": "The object key",
         "name": "object_key",
         "in": "path",
