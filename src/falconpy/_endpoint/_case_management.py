@@ -83,16 +83,16 @@ _case_management_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 10,
         "minimum": 1,
-        "type": "integer",
         "description": "Page size",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Page offset",
         "name": "offset",
         "in": "query"
@@ -282,16 +282,16 @@ _case_management_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 10,
         "minimum": 1,
-        "type": "integer",
         "description": "Page size",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Page offset",
         "name": "offset",
         "in": "query"
@@ -376,12 +376,12 @@ _case_management_endpoints = [
     "case_management",
     [
       {
-        "uniqueItems": True,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
@@ -403,12 +403,12 @@ _case_management_endpoints = [
     "case_management",
     [
       {
-        "uniqueItems": True,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
@@ -424,12 +424,12 @@ _case_management_endpoints = [
     "case_management",
     [
       {
-        "uniqueItems": True,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
@@ -452,6 +452,27 @@ _case_management_endpoints = [
     ]
   ],
   [
+    "entities_notification_groups_delete_v1",
+    "DELETE",
+    "/casemgmt/entities/notification-groups/v1",
+    "Delete notification groups by ID",
+    "case_management",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "uniqueItems": True,
+        "description": "Resource IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_notification_groups_patch_v1",
     "PATCH",
     "/casemgmt/entities/notification-groups/v1",
@@ -466,27 +487,6 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_notification_groups_delete_v1",
-    "DELETE",
-    "/casemgmt/entities/notification-groups/v1",
-    "Delete notification groups by ID",
-    "case_management",
-    [
-      {
-        "uniqueItems": True,
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "Resource IDs",
-        "name": "ids",
-        "in": "query",
-        "required": True
-      }
-    ]
-  ],
-  [
     "entities_notification_groups_get_v2",
     "GET",
     "/casemgmt/entities/notification-groups/v2",
@@ -494,12 +494,12 @@ _case_management_endpoints = [
     "case_management",
     [
       {
-        "uniqueItems": True,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
@@ -522,6 +522,27 @@ _case_management_endpoints = [
     ]
   ],
   [
+    "entities_notification_groups_delete_v2",
+    "DELETE",
+    "/casemgmt/entities/notification-groups/v2",
+    "Delete notification groups by ID",
+    "case_management",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "uniqueItems": True,
+        "description": "Resource IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_notification_groups_patch_v2",
     "PATCH",
     "/casemgmt/entities/notification-groups/v2",
@@ -536,27 +557,6 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_notification_groups_delete_v2",
-    "DELETE",
-    "/casemgmt/entities/notification-groups/v2",
-    "Delete notification groups by ID",
-    "case_management",
-    [
-      {
-        "uniqueItems": True,
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "Resource IDs",
-        "name": "ids",
-        "in": "query",
-        "required": True
-      }
-    ]
-  ],
-  [
     "entities_slas_get_v1",
     "GET",
     "/casemgmt/entities/slas/v1",
@@ -564,12 +564,12 @@ _case_management_endpoints = [
     "case_management",
     [
       {
-        "uniqueItems": True,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
@@ -592,6 +592,27 @@ _case_management_endpoints = [
     ]
   ],
   [
+    "entities_slas_delete_v1",
+    "DELETE",
+    "/casemgmt/entities/slas/v1",
+    "Delete SLAs",
+    "case_management",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "uniqueItems": True,
+        "description": "Resource IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_slas_patch_v1",
     "PATCH",
     "/casemgmt/entities/slas/v1",
@@ -606,27 +627,6 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_slas_delete_v1",
-    "DELETE",
-    "/casemgmt/entities/slas/v1",
-    "Delete SLAs",
-    "case_management",
-    [
-      {
-        "uniqueItems": True,
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "Resource IDs",
-        "name": "ids",
-        "in": "query",
-        "required": True
-      }
-    ]
-  ],
-  [
     "entities_template_snapshots_get_v1",
     "GET",
     "/casemgmt/entities/template-snapshots/v1",
@@ -634,23 +634,23 @@ _case_management_endpoints = [
     "case_management",
     [
       {
-        "uniqueItems": True,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "uniqueItems": True,
         "description": "Snapshot IDs",
         "name": "ids",
         "in": "query"
       },
       {
-        "uniqueItems": True,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "uniqueItems": True,
         "description": "Retrieves the latest snapshot for all Template IDs",
         "name": "template_ids",
         "in": "query"
@@ -658,7 +658,7 @@ _case_management_endpoints = [
       {
         "type": "array",
         "items": {
-          "type": "integer"
+          "type": "string"
         },
         "collectionFormat": "multi",
         "description": "Retrieve a specific version of the template from the parallel array template_ids. A "
@@ -676,12 +676,12 @@ _case_management_endpoints = [
     "case_management",
     [
       {
-        "uniqueItems": True,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "uniqueItems": True,
         "description": "Template IDs",
         "name": "ids",
         "in": "query"
@@ -693,12 +693,12 @@ _case_management_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
+        "default": "yaml",
         "enum": [
           "yaml",
           "json"
         ],
-        "type": "string",
-        "default": "yaml",
         "description": "Export file format",
         "name": "format",
         "in": "query"
@@ -735,12 +735,12 @@ _case_management_endpoints = [
     "case_management",
     [
       {
-        "uniqueItems": True,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
@@ -769,6 +769,27 @@ _case_management_endpoints = [
     ]
   ],
   [
+    "entities_templates_delete_v1",
+    "DELETE",
+    "/casemgmt/entities/templates/v1",
+    "Delete templates",
+    "case_management",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "uniqueItems": True,
+        "description": "Resource IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_templates_patch_v1",
     "PATCH",
     "/casemgmt/entities/templates/v1",
@@ -778,27 +799,6 @@ _case_management_endpoints = [
       {
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "entities_templates_delete_v1",
-    "DELETE",
-    "/casemgmt/entities/templates/v1",
-    "Delete templates",
-    "case_management",
-    [
-      {
-        "uniqueItems": True,
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "Resource IDs",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -823,9 +823,9 @@ _case_management_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 200,
         "minimum": 1,
-        "type": "integer",
         "description": "Page size",
         "name": "limit",
         "in": "query"
@@ -852,16 +852,16 @@ _case_management_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 200,
         "minimum": 1,
-        "type": "integer",
         "description": "Page size",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Page offset",
         "name": "offset",
         "in": "query"
@@ -888,16 +888,16 @@ _case_management_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 200,
         "minimum": 1,
-        "type": "integer",
         "description": "Page size",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Page offset",
         "name": "offset",
         "in": "query"
@@ -924,16 +924,16 @@ _case_management_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 200,
         "minimum": 1,
-        "type": "integer",
         "description": "Page size",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Page offset",
         "name": "offset",
         "in": "query"
@@ -960,16 +960,16 @@ _case_management_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 200,
         "minimum": 1,
-        "type": "integer",
         "description": "Page size",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Page offset",
         "name": "offset",
         "in": "query"
@@ -990,16 +990,16 @@ _case_management_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 200,
         "minimum": 1,
-        "type": "integer",
         "description": "Page size",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Page offset",
         "name": "offset",
         "in": "query"
@@ -1026,16 +1026,16 @@ _case_management_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 200,
         "minimum": 1,
-        "type": "integer",
         "description": "Page size",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Page offset",
         "name": "offset",
         "in": "query"
@@ -1161,9 +1161,9 @@ _case_management_endpoints = [
     "case_management",
     [
       {
+        "type": "integer",
         "maximum": 10000,
         "minimum": 0,
-        "type": "integer",
         "description": "The maximum number of Cases to return in this response (default: 100; max: 10000). Use "
         "this parameter together with the offset parameter to manage pagination of the results.",
         "name": "limit",
