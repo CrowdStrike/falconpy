@@ -95,18 +95,18 @@ _network_scan_scanners_endpoints = [
     "network_scan_scanners",
     [
       {
-        "minimum": 0,
         "type": "integer",
-        "description": "An offset used with the `limit` parameter to manage pagination of results. On your "
-        "first request, don’t provide an `offset`. On subsequent requests, add previous `offset` with the previous "
-        "`limit` to continue from that place in the results",
+        "minimum": 0,
+        "description": "An offset used with the limit parameter to manage pagination of results. On your first "
+        " request, don’t provide an offset. On subsequent requests, add previous offset with the previous limit to "
+        "continue from that place in the results",
         "name": "offset",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 100,
         "minimum": 1,
-        "type": "integer",
         "description": "The number of \"scanners IDs\" to return in this response (Min: 1, Max: 100, Default: 100)",
         "name": "limit",
         "in": "query"
