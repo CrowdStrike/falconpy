@@ -90,17 +90,17 @@ _spotlight_evaluation_logic_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "string",
+        "minimum": 0,
         "description": "Starting index of overall result set from which to return ids.",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 400,
-        "minimum": 1,
         "type": "integer",
         "default": 100,
+        "maximum": 400,
+        "minimum": 1,
         "description": "The number of items to return in this response (default: 100, max: 400). Use with the "
         "after parameter to manage pagination of results.",
         "name": "limit",
@@ -108,9 +108,9 @@ _spotlight_evaluation_logic_endpoints = [
       },
       {
         "type": "string",
-        "description": "Sort vulnerabilities by their properties. Available sort options: "
-        "<ul><li>created_timestamp|asc/desc</li><li>updated_timestamp|asc/desc</li></ul>. Can be used in a format "
-        "<field>|asc for ascending order or <field>|desc for descending order.",
+        "description": "Sort vulnerabilities by their properties. Available sort "
+        "options:\n\n<ul><li>created_timestamp|asc/desc</li><li>updated_timestamp|asc/desc</li></ul>. Can be used in a "
+        "format <field>|asc for ascending order or <field>|desc for descending order.",
         "name": "sort",
         "in": "query"
       },
