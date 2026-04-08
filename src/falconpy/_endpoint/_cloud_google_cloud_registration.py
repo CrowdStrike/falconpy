@@ -59,7 +59,7 @@ _cloud_google_cloud_registration_endpoints = [
         "type": "string",
         "description": "FQL (Falcon Query Language) string for filtering results. Allowed filters are "
         "entity_type, entity_id, entity_name, registration_id, registration_name, registration_scope, parent_id, "
-        "ioa_status, iom_status, created, updated",
+        "project_number, ioa_status, iom_status, created, updated",
         "name": "filter",
         "in": "query"
       },
@@ -71,18 +71,18 @@ _cloud_google_cloud_registration_endpoints = [
         "in": "query"
       },
       {
-        "maximum": 500,
-        "minimum": 0,
         "type": "integer",
         "default": 100,
+        "maximum": 500,
+        "minimum": 0,
         "description": "Maximum number of records to return (default: 100, max: 500). Limit applies across all entity types.",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "Starting index of result",
         "name": "offset",
         "in": "query"
@@ -153,6 +153,22 @@ _cloud_google_cloud_registration_endpoints = [
     ]
   ],
   [
+    "cloud_registration_gcp_delete_registration",
+    "DELETE",
+    "/cloud-security-registration-google-cloud/entities/registrations/v1",
+    "Deletes a Google Cloud Registration and returns the deleted registration in the response body.",
+    "cloud_google_cloud_registration",
+    [
+      {
+        "type": "string",
+        "description": "Google Cloud Registration ID",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "cloud_registration_gcp_update_registration",
     "PATCH",
     "/cloud-security-registration-google-cloud/entities/registrations/v1",
@@ -169,22 +185,6 @@ _cloud_google_cloud_registration_endpoints = [
       {
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "cloud_registration_gcp_delete_registration",
-    "DELETE",
-    "/cloud-security-registration-google-cloud/entities/registrations/v1",
-    "Deletes a Google Cloud Registration and returns the deleted registration in the response body.",
-    "cloud_google_cloud_registration",
-    [
-      {
-        "type": "string",
-        "description": "Google Cloud Registration ID",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
