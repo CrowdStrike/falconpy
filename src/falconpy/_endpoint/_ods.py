@@ -134,6 +134,20 @@ _ods_endpoints = [
     ]
   ],
   [
+    "scans-report",
+    "POST",
+    "/ods/entities/scans-reports/v1",
+    "Launch a scans report creation job",
+    "ods",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "get_scans_by_scan_ids",
     "GET",
     "/ods/entities/scans/v1",
@@ -259,8 +273,7 @@ _ods_endpoints = [
         "description": "A FQL compatible query string. Terms: [id scan_id host_id host_scan_id filepath "
         "filename hash pattern_id severity quarantined last_updated]",
         "name": "filter",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "integer",
@@ -277,6 +290,8 @@ _ods_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
+        "default": "last_updated|desc",
         "enum": [
           "id|asc",
           "id|desc",
@@ -297,12 +312,9 @@ _ods_endpoints = [
           "last_updated|asc",
           "last_updated|desc"
         ],
-        "type": "string",
-        "default": "last_updated|desc",
         "description": "The property to sort on, followed by a |, followed by the sort direction, either \"asc\" or \"desc\"",
         "name": "sort",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       }
     ]
   ],
@@ -319,8 +331,7 @@ _ods_endpoints = [
         "filecount.scanned filecount.malicious filecount.quarantined filecount.skipped affected_hosts_count status "
         "severity completed_on started_on last_updated scan_control_reason]",
         "name": "filter",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "integer",
@@ -337,6 +348,8 @@ _ods_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
+        "default": "last_updated|desc",
         "enum": [
           "id|asc",
           "id|desc",
@@ -365,12 +378,9 @@ _ods_endpoints = [
           "scan_control_reason.keyword|asc",
           "scan_control_reason.keyword|desc"
         ],
-        "type": "string",
-        "default": "last_updated|desc",
         "description": "The property to sort on, followed by a |, followed by the sort direction, either \"asc\" or \"desc\"",
         "name": "sort",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       }
     ]
   ],
@@ -388,8 +398,7 @@ _ods_endpoints = [
         "affected_hosts_count status severity scan_started_on scan_completed_on created_on created_by last_updated "
         "targeted_host_count missing_host_count targeted_platforms targeted_platforms.keyword]",
         "name": "filter",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "integer",
@@ -406,6 +415,8 @@ _ods_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
+        "default": "created_on|desc",
         "enum": [
           "id|asc",
           "id|desc",
@@ -444,12 +455,9 @@ _ods_endpoints = [
           "missing_host_count|asc",
           "missing_host_count|desc"
         ],
-        "type": "string",
-        "default": "created_on|desc",
         "description": "The property to sort on, followed by a |, followed by the sort direction, either \"asc\" or \"desc\"",
         "name": "sort",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       }
     ]
   ],
@@ -465,8 +473,7 @@ _ods_endpoints = [
         "description": "A FQL compatible query string. Terms: [id description.keyword description "
         "initiated_from status schedule.start_timestamp schedule.Interval created_on created_by last_updated deleted]",
         "name": "filter",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "integer",
@@ -483,6 +490,8 @@ _ods_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
+        "default": "schedule.start_timestamp|desc",
         "enum": [
           "id|asc",
           "id|desc",
@@ -501,14 +510,13 @@ _ods_endpoints = [
           "created_by|asc",
           "created_by|desc",
           "last_updated|asc",
-          "last_updated|desc"
+          "last_updated|desc",
+          "targeted_host_count|asc",
+          "targeted_host_count|desc"
         ],
-        "type": "string",
-        "default": "schedule.start_timestamp|desc",
         "description": "The property to sort on, followed by a |, followed by the sort direction, either \"asc\" or \"desc\"",
         "name": "sort",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       }
     ]
   ]
