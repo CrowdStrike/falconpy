@@ -46,6 +46,7 @@ _aspm_endpoints = [
     "aspm",
     [
       {
+        "type": "string",
         "enum": [
           "sensitive_data",
           "reachable",
@@ -55,18 +56,17 @@ _aspm_endpoints = [
           "risk_severity",
           "sensitive_data_tags"
         ],
-        "type": "string",
         "name": "query_name",
         "in": "query",
         "required": True
       },
       {
+        "type": "string",
         "enum": [
           "aws",
           "azure",
           "gcp"
         ],
-        "type": "string",
         "name": "cloud_provider",
         "in": "query",
         "required": True
@@ -111,6 +111,7 @@ _aspm_endpoints = [
     "aspm",
     [
       {
+        "type": "string",
         "enum": [
           "sensitive_data",
           "reachable",
@@ -118,22 +119,21 @@ _aspm_endpoints = [
           "dependencies",
           "vulnerable_libraries"
         ],
-        "type": "string",
         "name": "query_name",
         "in": "query",
         "required": True
       },
       {
-        "enum": [
-          "aws",
-          "azure",
-          "gcp"
-        ],
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "csv",
+        "enum": [
+          "aws",
+          "azure",
+          "gcp"
+        ],
         "name": "cloud_provider",
         "in": "query"
       },
@@ -323,26 +323,26 @@ _aspm_endpoints = [
         "in": "query"
       },
       {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
         "enum": [
           "artifact_id",
           "artifact_name",
           "artifact_hash",
           "artifact_full_path"
         ],
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "csv",
         "name": "orderBy",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "asc",
           "desc"
         ],
-        "type": "string",
         "name": "direction",
         "in": "query"
       }
@@ -413,22 +413,22 @@ _aspm_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "name",
           "id",
           "state",
           "type"
         ],
-        "type": "string",
         "name": "order_by",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "asc",
           "desc"
         ],
-        "type": "string",
         "name": "direction",
         "in": "query"
       },
@@ -455,7 +455,7 @@ _aspm_endpoints = [
       {
         "type": "array",
         "items": {
-          "type": "integer"
+          "type": "string"
         },
         "collectionFormat": "csv",
         "description": "executor node states",
@@ -532,7 +532,7 @@ _aspm_endpoints = [
       {
         "type": "array",
         "items": {
-          "type": "integer"
+          "type": "string"
         },
         "collectionFormat": "csv",
         "description": "executor node states",
@@ -559,8 +559,8 @@ _aspm_endpoints = [
     "aspm",
     [
       {
-        "pattern": "[0-9]+",
         "type": "integer",
+        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -575,8 +575,8 @@ _aspm_endpoints = [
     "aspm",
     [
       {
-        "pattern": "[0-9]+",
         "type": "integer",
+        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -610,8 +610,8 @@ _aspm_endpoints = [
     "aspm",
     [
       {
-        "pattern": "[0-9]+",
         "type": "integer",
+        "pattern": "[0-9]+",
         "description": "Group ID",
         "name": "ID",
         "in": "path",
@@ -627,8 +627,8 @@ _aspm_endpoints = [
     "aspm",
     [
       {
-        "pattern": "[0-9]+",
         "type": "integer",
+        "pattern": "[0-9]+",
         "description": "Group ID",
         "name": "ID",
         "in": "path",
@@ -644,8 +644,8 @@ _aspm_endpoints = [
     "aspm",
     [
       {
-        "pattern": "[0-9]+",
         "type": "integer",
+        "pattern": "[0-9]+",
         "description": "Group ID",
         "name": "ID",
         "in": "path",
@@ -661,8 +661,8 @@ _aspm_endpoints = [
     "aspm",
     [
       {
-        "pattern": "[0-9]+",
         "type": "integer",
+        "pattern": "[0-9]+",
         "description": "Group ID",
         "name": "ID",
         "in": "path",
@@ -726,21 +726,21 @@ _aspm_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "name",
           "id",
           "integrationTask"
         ],
-        "type": "string",
         "name": "orderBy",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "asc",
           "desc"
         ],
-        "type": "string",
         "name": "direction",
         "in": "query"
       },
@@ -803,21 +803,21 @@ _aspm_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "name",
           "id",
           "integrationTask"
         ],
-        "type": "string",
         "name": "orderBy",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "asc",
           "desc"
         ],
-        "type": "string",
         "name": "direction",
         "in": "query"
       },
@@ -846,11 +846,11 @@ _aspm_endpoints = [
     "aspm",
     [
       {
+        "type": "string",
         "enum": [
           "collecting",
           "exporting"
         ],
-        "type": "string",
         "name": "category",
         "in": "query"
       },
@@ -899,21 +899,21 @@ _aspm_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "name",
           "id",
           "integrationTask"
         ],
-        "type": "string",
         "name": "orderBy",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "asc",
           "desc"
         ],
-        "type": "string",
         "name": "direction",
         "in": "query"
       },
@@ -942,8 +942,8 @@ _aspm_endpoints = [
     "aspm",
     [
       {
-        "pattern": "[0-9]+",
         "type": "integer",
+        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -963,8 +963,8 @@ _aspm_endpoints = [
     "aspm",
     [
       {
-        "pattern": "[0-9]+",
         "type": "integer",
+        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -979,8 +979,8 @@ _aspm_endpoints = [
     "aspm",
     [
       {
-        "pattern": "[0-9]+",
         "type": "integer",
+        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -1005,8 +1005,8 @@ _aspm_endpoints = [
     "aspm",
     [
       {
-        "pattern": "[0-9]+",
         "type": "integer",
+        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -1031,8 +1031,8 @@ _aspm_endpoints = [
     "aspm",
     [
       {
-        "pattern": "[0-9]+",
         "type": "integer",
+        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -1117,8 +1117,8 @@ _aspm_endpoints = [
     "aspm",
     [
       {
-        "pattern": "[0-9]+",
         "type": "integer",
+        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -1138,8 +1138,8 @@ _aspm_endpoints = [
     "aspm",
     [
       {
-        "pattern": "[0-9]+",
         "type": "integer",
+        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
