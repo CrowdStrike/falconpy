@@ -153,14 +153,6 @@ _foundry_logscale_endpoints = [
     "foundry_logscale",
     [
       {
-        "maxLength": 36,
-        "minLength": 36,
-        "type": "string",
-        "description": "Requester UUID.",
-        "name": "X-CS-USERUUID",
-        "in": "header"
-      },
-      {
         "type": "file",
         "description": "File to be uploaded",
         "name": "file",
@@ -168,34 +160,34 @@ _foundry_logscale_endpoints = [
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 50,
         "minLength": 5,
-        "type": "string",
         "description": "Name used to identify the file",
         "name": "name",
         "in": "formData",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 5,
-        "type": "string",
         "description": "File description",
         "name": "description",
         "in": "formData"
       },
       {
+        "type": "string",
         "maxLength": 32,
         "minLength": 32,
-        "type": "string",
         "description": "Unique identifier of the file being updated.",
         "name": "id",
         "in": "formData"
       },
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 5,
-        "type": "string",
         "description": "Name of repository or view to save the file",
         "name": "repo",
         "in": "formData"
@@ -210,25 +202,17 @@ _foundry_logscale_endpoints = [
     "foundry_logscale",
     [
       {
-        "maxLength": 36,
-        "minLength": 36,
         "type": "string",
-        "description": "Requester UUID.",
-        "name": "X-CS-USERUUID",
-        "in": "header"
-      },
-      {
         "minLength": 32,
-        "type": "string",
         "description": "Unique identifier of the file being updated.",
         "name": "id",
         "in": "formData",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 255,
         "minLength": 5,
-        "type": "string",
         "description": "File description",
         "name": "description",
         "in": "formData"
@@ -289,12 +273,12 @@ _foundry_logscale_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "sync",
           "async",
           "async_offload"
         ],
-        "type": "string",
         "description": "Mode to execute the query under.",
         "name": "mode",
         "in": "query"
@@ -341,8 +325,8 @@ _foundry_logscale_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "string",
+        "minimum": 0,
         "description": "Maximum number of records to return.",
         "name": "limit",
         "in": "query"
@@ -362,8 +346,8 @@ _foundry_logscale_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "string",
+        "minimum": 0,
         "description": "Starting pagination offset of records to return.",
         "name": "offset",
         "in": "query"
@@ -461,11 +445,11 @@ _foundry_logscale_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "json",
           "csv"
         ],
-        "type": "string",
         "description": "Result Format",
         "name": "result_format",
         "in": "query"
