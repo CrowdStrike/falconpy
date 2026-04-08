@@ -104,13 +104,12 @@ _filevantage_endpoints = [
     "filevantage",
     [
       {
-        "maxItems": 500,
-        "minItems": 1,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "maxItems": 500,
         "description": "One or more change ids in the form of ids=ID1&ids=ID2. The maximum number of ids that "
         "can be requested at once is 500.",
         "name": "ids",
@@ -254,25 +253,6 @@ _filevantage_endpoints = [
     ]
   ],
   [
-    "updatePolicies",
-    "PATCH",
-    "/filevantage/entities/policies/v1",
-    "Updates the general information of the provided policy.",
-    "filevantage",
-    [
-      {
-        "description": "Enables updates to the following fields for an existing policy. \n\n * id of the "
-        "policy to update.\n\n * name must be between 1 and 100 characters.\n\n * description can be between 0 and 500 "
-        "characters.\n\n * platform may not be modified after the policy is created.\n\n * enabled must be one of true "
-        "or false.\n\n Rule and host group assignment and policy precedence setting is performed via their respective "
-        "patch end-points.",
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "deletePolicies",
     "DELETE",
     "/filevantage/entities/policies/v1",
@@ -288,6 +268,25 @@ _filevantage_endpoints = [
         "description": "One or more (up to 500) policy ids in the form of ids=ID1&ids=ID2",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "updatePolicies",
+    "PATCH",
+    "/filevantage/entities/policies/v1",
+    "Updates the general information of the provided policy.",
+    "filevantage",
+    [
+      {
+        "description": "Enables updates to the following fields for an existing policy. \n\n * id of the "
+        "policy to update.\n\n * name must be between 1 and 100 characters.\n\n * description can be between 0 and 500 "
+        "characters.\n\n * platform may not be modified after the policy is created.\n\n * enabled must be one of true "
+        "or false.\n\n Rule and host group assignment and policy precedence setting is performed via their respective "
+        "patch end-points.",
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
@@ -357,6 +356,33 @@ _filevantage_endpoints = [
     ]
   ],
   [
+    "deleteScheduledExclusions",
+    "DELETE",
+    "/filevantage/entities/policy-scheduled-exclusions/v1",
+    "Deletes 1 or more scheduled exclusions from the provided policy id.",
+    "filevantage",
+    [
+      {
+        "type": "string",
+        "description": "ID of the policy to delete the scheduled exclusions from.",
+        "name": "policy_id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "One or more (up to 500) scheduled exclusion ids in the form of ids=ID1&ids=ID2.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "updateScheduledExclusions",
     "PATCH",
     "/filevantage/entities/policy-scheduled-exclusions/v1",
@@ -389,33 +415,6 @@ _filevantage_endpoints = [
         "between 1 and 31  when frequency is set to monthly and occurrence is set to Days. ",
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "deleteScheduledExclusions",
-    "DELETE",
-    "/filevantage/entities/policy-scheduled-exclusions/v1",
-    "Deletes 1 or more scheduled exclusions from the provided policy id.",
-    "filevantage",
-    [
-      {
-        "type": "string",
-        "description": "ID of the policy to delete the scheduled exclusions from.",
-        "name": "policy_id",
-        "in": "query",
-        "required": True
-      },
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "One or more (up to 500) scheduled exclusion ids in the form of ids=ID1&ids=ID2.",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -517,6 +516,33 @@ _filevantage_endpoints = [
     ]
   ],
   [
+    "deleteRules",
+    "DELETE",
+    "/filevantage/entities/rule-groups-rules/v1",
+    "Deletes 1 or more rules from the specified rule group.",
+    "filevantage",
+    [
+      {
+        "type": "string",
+        "description": "The id of the rule group from which the rules will be deleted.",
+        "name": "rule_group_id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "One or more (up to 500) rule ids in the form of ids=ID1&ids=ID2",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "updateRules",
     "PATCH",
     "/filevantage/entities/rule-groups-rules/v1",
@@ -553,33 +579,6 @@ _filevantage_endpoints = [
         "* watch_set_value_changes\n\n * watch_delete_value_changes\n\n * watch_create_file_changes",
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "deleteRules",
-    "DELETE",
-    "/filevantage/entities/rule-groups-rules/v1",
-    "Deletes 1 or more rules from the specified rule group.",
-    "filevantage",
-    [
-      {
-        "type": "string",
-        "description": "The id of the rule group from which the rules will be deleted.",
-        "name": "rule_group_id",
-        "in": "query",
-        "required": True
-      },
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "One or more (up to 500) rule ids in the form of ids=ID1&ids=ID2",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -623,24 +622,6 @@ _filevantage_endpoints = [
     ]
   ],
   [
-    "updateRuleGroups",
-    "PATCH",
-    "/filevantage/entities/rule-groups/v1",
-    "Updates the provided rule group.",
-    "filevantage",
-    [
-      {
-        "description": "Enables updates to the following fields for an existing rule group. \n\n * id of the "
-        "rule group to update.\n\n * name must be between 1 and 100 characters.\n\n * description can be between 0 and "
-        "500 characters.\n\n * type may not be modified after the rule group is created.\n\n Note: rules are "
-        "added/removed from rule groups using their dedicated end-points.",
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "deleteRuleGroups",
     "DELETE",
     "/filevantage/entities/rule-groups/v1",
@@ -656,6 +637,24 @@ _filevantage_endpoints = [
         "description": "One or more (up to 500) rule group ids in the form of ids=ID1&ids=ID2",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "updateRuleGroups",
+    "PATCH",
+    "/filevantage/entities/rule-groups/v1",
+    "Updates the provided rule group.",
+    "filevantage",
+    [
+      {
+        "description": "Enables updates to the following fields for an existing rule group. \n\n * id of the "
+        "rule group to update.\n\n * name must be between 1 and 100 characters.\n\n * description can be between 0 and "
+        "500 characters.\n\n * type may not be modified after the rule group is created.\n\n Note: rules are "
+        "added/removed from rule groups using their dedicated end-points.",
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
@@ -683,8 +682,8 @@ _filevantage_endpoints = [
     "filevantage",
     [
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "The first action index to return in the response. If not provided it will default to "
         "'0'. Use with the limit parameter to manage pagination of results.",
         "name": "offset",
@@ -721,17 +720,17 @@ _filevantage_endpoints = [
     "filevantage",
     [
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "The offset to start retrieving records from. Defaults to 0 if not specified.",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 500,
         "type": "integer",
         "default": 100,
+        "maximum": 500,
         "description": "The maximum number of ids to return. Defaults to 100 if not specified. The maximum "
         "number of results that can be returned in a single call is 500.",
         "name": "limit",
@@ -772,9 +771,9 @@ _filevantage_endpoints = [
         "in": "query"
       },
       {
-        "maximum": 5000,
         "type": "integer",
         "default": 100,
+        "maximum": 5000,
         "description": "The maximum number of ids to return. Defaults to 100 if not specified. The maximum "
         "number of results that can be returned in a single call is 5000.",
         "name": "limit",
@@ -808,8 +807,8 @@ _filevantage_endpoints = [
     "filevantage",
     [
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "The offset to start retrieving records from. Defaults to 0 if not specified.",
         "name": "offset",
         "in": "query"
@@ -862,8 +861,8 @@ _filevantage_endpoints = [
     "filevantage",
     [
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "The offset to start retrieving records from. Defaults to 0 if not specified.",
         "name": "offset",
         "in": "query"
