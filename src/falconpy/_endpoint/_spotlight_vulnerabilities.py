@@ -54,9 +54,9 @@ _spotlight_vulnerabilities_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 5000,
         "minimum": 1,
-        "type": "integer",
         "description": "The number of items to return in this response (default: 100, max: 5000). Use with the "
         "after parameter to manage pagination of results.",
         "name": "limit",
@@ -191,9 +191,9 @@ _spotlight_vulnerabilities_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 400,
         "minimum": 1,
-        "type": "integer",
         "description": "The number of items to return in this response (default: 100, max: 400). Use with the "
         "after parameter to manage pagination of results.",
         "name": "limit",
@@ -201,9 +201,9 @@ _spotlight_vulnerabilities_endpoints = [
       },
       {
         "type": "string",
-        "description": "Sort vulnerabilities by their properties. Available sort options: "
-        "<ul><li>updated_timestamp|asc/desc</li><li>closed_timestamp|asc</li><li>updated_timestamp|asc/desc</li></ul>. "
-        "Can be used in a format <field>|asc for ascending order or <field>|desc for descending order.",
+        "description": "Sort vulnerabilities by their properties. Available sort options:\n\n<ul><li>updated_t "
+        "imestamp|asc/desc</li><li>closed_timestamp|asc</li><li>updated_timestamp|asc/desc</li></ul>. Can be used in a "
+        "format <field>|asc for ascending order or <field>|desc for descending order.",
         "name": "sort",
         "in": "query"
       },
@@ -212,12 +212,13 @@ _spotlight_vulnerabilities_endpoints = [
         "description": "Filter items using a query in Falcon Query Language (FQL). Wildcards * and empty "
         "filter values are unsupported.\n\t\t\tAvailable filter fields that supports match (~): N/A\n\t\t\tAvailable "
         "filter fields that supports exact match: aid, cid, last_seen_within, status, cve.id, cve.is_cisa_kev, "
-        "cve.remediation_level, cve.cps_rating, cve.exprt_rating, cve.exploit_status_to_include, cve.severity, "
-        "cve.base_score, cve.types, host_info.asset_criticality, host_info.asset_roles, host_info.internet_exposure, "
-        "host_info.tags, host_info.groups, host_info.product_type_desc, host_info.platform_name, "
-        "suppression_info.is_suppressed, suppression_info.reason, host_info.instance_state\n\t\t\tAvailable filter "
-        "fields that supports wildcard (*): N/A\n\t\t\tAvailable filter fields that supports range comparisons (>, <, "
-        ">=, <=): created_timestamp, closed_timestamp, updated_timestamp, cve.base_score\n\t\t\t",
+        "cve.remediation_level,\n\t\t\tcve.cps_rating, cve.exprt_rating, cve.exploit_status_to_include, cve.severity, "
+        "cve.base_score, cve.types, host_info.asset_criticality,\n\t\t\thost_info.asset_roles, "
+        "host_info.internet_exposure, host_info.tags, host_info.groups, host_info.product_type_desc, "
+        "host_info.platform_name,\n\t\t\tsuppression_info.is_suppressed, suppression_info.reason, "
+        "host_info.instance_state\n\t\t\tAvailable filter fields that supports wildcard (*): N/A\n\t\t\tAvailable "
+        "filter fields that supports range comparisons (>, <, >=, <=): created_timestamp, closed_timestamp, "
+        "updated_timestamp, cve.base_score\n\t\t\t",
         "name": "filter",
         "in": "query",
         "required": True
