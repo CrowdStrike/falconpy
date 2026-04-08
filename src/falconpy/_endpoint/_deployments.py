@@ -55,26 +55,25 @@ _deployments_endpoints = [
         "type": "string",
         "description": "FQL query specifying filter parameters.",
         "name": "filter",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
-        "maximum": 500,
         "type": "integer",
+        "maximum": 500,
         "description": "Maximum number of records to return.",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "string",
+        "minimum": 0,
         "description": "Starting pagination offset of records to return.",
         "name": "offset",
         "in": "query"
       },
       {
-        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "type": "string",
+        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "description": "Sort items by providing a comma separated list of property and direction (eg "
         "name.desc,time.asc). If direction is omitted, defaults to descending.",
         "name": "sort",
@@ -100,26 +99,25 @@ _deployments_endpoints = [
         "type": "string",
         "description": "FQL query specifying filter parameters.",
         "name": "filter",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
-        "maximum": 500,
         "type": "integer",
+        "maximum": 500,
         "description": "Maximum number of records to return.",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "string",
+        "minimum": 0,
         "description": "Starting pagination offset of records to return.",
         "name": "offset",
         "in": "query"
       },
       {
-        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "type": "string",
+        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "description": "Sort items by providing a comma separated list of property and direction (eg "
         "name.desc,time.asc). If direction is omitted, defaults to descending.",
         "name": "sort",
@@ -142,7 +140,6 @@ _deployments_endpoints = [
         "required": True
       },
       {
-        "minItems": 1,
         "type": "array",
         "items": {
           "type": "string"
@@ -215,26 +212,25 @@ _deployments_endpoints = [
         "type": "string",
         "description": "FQL query specifying filter parameters.",
         "name": "filter",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
-        "maximum": 500,
         "type": "integer",
+        "maximum": 500,
         "description": "Maximum number of records to return.",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "string",
+        "minimum": 0,
         "description": "Starting pagination offset of records to return.",
         "name": "offset",
         "in": "query"
       },
       {
-        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "type": "string",
+        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "description": "Sort items by providing a comma separated list of property and direction (eg "
         "name.desc,time.asc). If direction is omitted, defaults to descending.",
         "name": "sort",
