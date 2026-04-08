@@ -88,21 +88,6 @@ _network_scan_scans_endpoints = [
     ]
   ],
   [
-    "update_scans",
-    "PATCH",
-    "/netscan/entities/scans/v1",
-    "Update \"scans\" using provided specifications",
-    "network_scan_scans",
-    [
-      {
-        "description": "\"scans\" specifications for updating",
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "delete_scans",
     "DELETE",
     "/netscan/entities/scans/v1",
@@ -123,6 +108,21 @@ _network_scan_scans_endpoints = [
     ]
   ],
   [
+    "update_scans",
+    "PATCH",
+    "/netscan/entities/scans/v1",
+    "Update \"scans\" using provided specifications",
+    "network_scan_scans",
+    [
+      {
+        "description": "\"scans\" specifications for updating",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "query_scansMixin0",
     "GET",
     "/netscan/queries/scans/v1",
@@ -130,18 +130,18 @@ _network_scan_scans_endpoints = [
     "network_scan_scans",
     [
       {
-        "minimum": 0,
         "type": "integer",
-        "description": "An offset used with the `limit` parameter to manage pagination of results. On your "
-        "first request, don’t provide an `offset`. On subsequent requests, add previous `offset` with the previous "
-        "`limit` to continue from that place in the results",
+        "minimum": 0,
+        "description": "An offset used with the limit parameter to manage pagination of results. On your first "
+        " request, don’t provide an offset. On subsequent requests, add previous offset with the previous limit to "
+        "continue from that place in the results",
         "name": "offset",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 100,
         "minimum": 1,
-        "type": "integer",
         "description": "The number of \"scans IDs\" to return in this response (Min: 1, Max: 100, Default: 100)",
         "name": "limit",
         "in": "query"
