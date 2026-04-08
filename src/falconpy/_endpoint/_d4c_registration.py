@@ -45,10 +45,10 @@ _d4c_registration_endpoints = [
     "d4c_registration",
     [
       {
+        "type": "string",
         "maxLength": 4,
         "minLength": 3,
         "pattern": "^(full|dry)$",
-        "type": "string",
         "description": "Type of scan, dry or full, to perform on selected accounts",
         "name": "scan-type",
         "in": "query"
@@ -74,17 +74,17 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^(provisioned|operational)$",
         "type": "string",
+        "pattern": "^(provisioned|operational)$",
         "description": "Account status to filter results by.",
         "name": "status",
         "in": "query"
       },
       {
-        "maxLength": 3,
-        "minLength": 1,
         "type": "integer",
         "default": 100,
+        "maxLength": 3,
+        "minLength": 1,
         "description": "The maximum records to return. Defaults to 100.",
         "name": "limit",
         "in": "query"
@@ -96,11 +96,11 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "true",
           "false"
         ],
-        "type": "string",
         "description": "Only return migrated d4c accounts",
         "name": "migrated",
         "in": "query"
@@ -159,8 +159,8 @@ _d4c_registration_endpoints = [
     "d4c_registration",
     [
       {
-        "pattern": "^[0-9a-z-]{2,}$",
         "type": "string",
+        "pattern": "^[0-9a-z-]{2,}$",
         "description": "Region",
         "name": "region",
         "in": "query"
@@ -186,11 +186,11 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
+        "default": "aws-bash",
         "enum": [
           "aws-bash"
         ],
-        "type": "string",
-        "default": "aws-bash",
         "description": "Template to be rendered",
         "name": "template",
         "in": "query"
@@ -206,29 +206,29 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "true",
           "false"
         ],
-        "type": "string",
         "name": "behavior_assessment_enabled",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "true",
           "false"
         ],
-        "type": "string",
         "name": "sensor_management_enabled",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "true",
           "false"
         ],
-        "type": "string",
         "name": "dspm_enabled",
         "in": "query"
       },
@@ -242,20 +242,20 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "\\d{12}",
         "type": "string",
+        "pattern": "\\d{12}",
         "name": "dspm_host_account_id",
         "in": "query"
       },
       {
-        "pattern": "^[a-zA-Z0-9+=,.@_-]{1,64}$",
         "type": "string",
+        "pattern": "^[a-zA-Z0-9+=,.@_-]{1,64}$",
         "name": "dspm_host_integration_role_name",
         "in": "query"
       },
       {
-        "pattern": "^[a-zA-Z0-9+=,.@_-]{1,64}$",
         "type": "string",
+        "pattern": "^[a-zA-Z0-9+=,.@_-]{1,64}$",
         "name": "dspm_host_scanner_role_name",
         "in": "query"
       },
@@ -265,11 +265,11 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "true",
           "false"
         ],
-        "type": "string",
         "name": "vulnerability_scanning_enabled",
         "in": "query"
       },
@@ -283,20 +283,20 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "\\d{12}",
         "type": "string",
+        "pattern": "\\d{12}",
         "name": "vulnerability_scanning_host_account_id",
         "in": "query"
       },
       {
-        "pattern": "^[a-zA-Z0-9+=,.@_-]{1,64}$",
         "type": "string",
+        "pattern": "^[a-zA-Z0-9+=,.@_-]{1,64}$",
         "name": "vulnerability_scanning_host_integration_role_name",
         "in": "query"
       },
       {
-        "pattern": "^[a-zA-Z0-9+=,.@_-]{1,64}$",
         "type": "string",
+        "pattern": "^[a-zA-Z0-9+=,.@_-]{1,64}$",
         "name": "vulnerability_scanning_host_scanner_role_name",
         "in": "query"
       },
@@ -306,17 +306,17 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "true",
           "false"
         ],
-        "type": "string",
         "name": "use_existing_cloudtrail",
         "in": "query"
       },
       {
-        "pattern": ".*",
         "type": "string",
+        "pattern": ".*",
         "description": "The AWS organization ID to be registered",
         "name": "organization_id",
         "in": "query"
@@ -332,43 +332,43 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
-        "pattern": ".*",
         "type": "string",
+        "pattern": ".*",
         "description": "The AWS profile to be used during registration",
         "name": "aws_profile",
         "in": "query"
       },
       {
-        "pattern": ".*",
         "type": "string",
+        "pattern": ".*",
         "description": "The AWS region to be used during registration",
         "name": "aws_region",
         "in": "query"
       },
       {
-        "pattern": ".*",
         "type": "string",
+        "pattern": ".*",
         "description": "The custom IAM role to be used during registration",
         "name": "iam_role_arn",
         "in": "query"
       },
       {
-        "pattern": ".*",
         "type": "string",
+        "pattern": ".*",
         "description": "The Falcon client ID used during registration",
         "name": "falcon_client_id",
         "in": "query"
       },
       {
-        "pattern": ".*",
         "type": "string",
+        "pattern": ".*",
         "description": "Set to true to enable Identity Protection feature",
         "name": "idp_enabled",
         "in": "query"
       },
       {
-        "pattern": ".*",
         "type": "string",
+        "pattern": ".*",
         "description": "Base64 encoded JSON string to be used as AWS tags",
         "name": "tags",
         "in": "query"
@@ -404,26 +404,26 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 4,
         "minLength": 3,
         "pattern": "^(full|dry)$",
-        "type": "string",
         "description": "Type of scan, dry or full, to perform on selected accounts",
         "name": "scan-type",
         "in": "query"
       },
       {
-        "pattern": "^(provisioned|operational)$",
         "type": "string",
+        "pattern": "^(provisioned|operational)$",
         "description": "Account status to filter results by.",
         "name": "status",
         "in": "query"
       },
       {
-        "maxLength": 3,
-        "minLength": 1,
         "type": "integer",
         "default": 100,
+        "maxLength": 3,
+        "minLength": 1,
         "description": "The maximum records to return. Defaults to 100.",
         "name": "limit",
         "in": "query"
@@ -460,29 +460,29 @@ _d4c_registration_endpoints = [
     "d4c_registration",
     [
       {
+        "type": "string",
         "maxLength": 36,
         "minLength": 36,
         "pattern": "^[0-9a-z-]{36}$",
-        "type": "string",
         "description": "ClientID to use for the Service Principal associated with the customer's Azure account",
         "name": "id",
         "in": "query",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 36,
         "minLength": 36,
         "pattern": "^[0-9a-z-]{36}$",
-        "type": "string",
         "description": "Object ID to use for the Service Principal associated with the customer's Azure account",
         "name": "object_id",
         "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 36,
         "minLength": 36,
         "pattern": "^[0-9a-z-]{36}$",
-        "type": "string",
         "description": "Tenant ID to update client ID for. Required if multiple tenants are registered.",
         "name": "tenant-id",
         "in": "query"
@@ -515,10 +515,10 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 2,
         "minLength": 1,
         "pattern": "^[0-9]{1,2}$",
-        "type": "string",
         "description": "Years the certificate should be valid (only used when refresh=true)",
         "name": "years_valid",
         "in": "query"
@@ -592,12 +592,12 @@ _d4c_registration_endpoints = [
     "d4c_registration",
     [
       {
+        "type": "string",
         "enum": [
           "Folder",
           "Organization",
           "Project"
         ],
-        "type": "string",
         "description": "GCP Hierarchy Parent Type, organization/folder/project",
         "name": "parent_type",
         "in": "query"
@@ -613,30 +613,30 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "dry",
           "full"
         ],
-        "type": "string",
         "description": "Type of scan, dry or full, to perform on selected accounts",
         "name": "scan-type",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "operational",
           "provisioned"
         ],
-        "type": "string",
         "description": "Account status to filter results by.",
         "name": "status",
         "in": "query"
       },
       {
-        "maxLength": 3,
-        "minLength": 1,
         "type": "integer",
         "default": 100,
+        "maxLength": 3,
+        "minLength": 1,
         "description": "The maximum records to return. Defaults to 100.",
         "name": "limit",
         "in": "query"
@@ -669,15 +669,6 @@ _d4c_registration_endpoints = [
         "required": True
       }
     ]
-  ],
-  [
-    "GetCSPMGCPUserScriptsAttachment",
-    "GET",
-    "/cloud-connect-gcp/entities/user-scripts-download/v1",
-    "Return a script for customer to run in their cloud environment to grant us access to their GCP "
-    "environment as a downloadable attachment",
-    "d4c_registration",
-    []
   ],
   [
     "DeleteD4CGCPAccount",
@@ -721,8 +712,8 @@ _d4c_registration_endpoints = [
     "d4c_registration",
     [
       {
-        "pattern": "^\\d+$",
         "type": "string",
+        "pattern": "^\\d+$",
         "description": "Service Account ID",
         "name": "id",
         "in": "query"
@@ -752,12 +743,12 @@ _d4c_registration_endpoints = [
     "d4c_registration",
     [
       {
+        "type": "string",
         "enum": [
           "Folder",
           "Organization",
           "Project"
         ],
-        "type": "string",
         "description": "GCP Hierarchy Parent Type, organization/folder/project",
         "name": "parent_type",
         "in": "query"
@@ -773,11 +764,11 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "operational",
           "provisioned"
         ],
-        "type": "string",
         "description": "Account status to filter results by.",
         "name": "status",
         "in": "query"
@@ -792,12 +783,12 @@ _d4c_registration_endpoints = [
     "d4c_registration",
     [
       {
+        "type": "string",
         "enum": [
           "Folder",
           "Organization",
           "Project"
         ],
-        "type": "string",
         "description": "GCP Hierarchy Parent Type, organization/folder/project",
         "name": "parent_type",
         "in": "query"
@@ -812,40 +803,40 @@ _d4c_registration_endpoints = [
     "d4c_registration",
     [
       {
-        "pattern": "^(true|false)$",
+        "type": "string",
         "enum": [
           "false",
           "true"
         ],
-        "type": "string",
+        "pattern": "^(true|false)$",
         "description": "Get static script for single account",
         "name": "single_account",
         "in": "query"
       },
       {
-        "pattern": "^o-[0-9a-z]{10,32}$",
         "type": "string",
+        "pattern": "^o-[0-9a-z]{10,32}$",
         "description": "AWS organization ID",
         "name": "organization-id",
         "in": "query"
       },
       {
-        "pattern": "^(true|false)$",
+        "type": "string",
         "enum": [
           "false",
           "true"
         ],
-        "type": "string",
+        "pattern": "^(true|false)$",
         "name": "delete",
         "in": "query"
       },
       {
-        "pattern": "^(commercial|gov)$",
+        "type": "string",
         "enum": [
           "commercial",
           "gov"
         ],
-        "type": "string",
+        "pattern": "^(commercial|gov)$",
         "description": "Account type (e.g.: commercial,gov) Only applicable when registering AWS commercial "
         "account in a Gov environment",
         "name": "account_type",
