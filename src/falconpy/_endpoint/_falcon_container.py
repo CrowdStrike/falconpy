@@ -132,6 +132,22 @@ _falcon_container_endpoints = [
     ]
   ],
   [
+    "DeleteRegistryEntities",
+    "DELETE",
+    "/container-security/entities/registries/v1",
+    "Delete the registry entity identified by the entity UUID",
+    "falcon_container",
+    [
+      {
+        "type": "string",
+        "description": "Registry entity UUID",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "UpdateRegistryEntities",
     "PATCH",
     "/container-security/entities/registries/v1",
@@ -148,22 +164,6 @@ _falcon_container_endpoints = [
       {
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "DeleteRegistryEntities",
-    "DELETE",
-    "/container-security/entities/registries/v1",
-    "Delete the registry entity identified by the entity UUID",
-    "falcon_container",
-    [
-      {
-        "type": "string",
-        "description": "Registry entity UUID",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -226,41 +226,6 @@ _falcon_container_endpoints = [
     ]
   ],
   [
-    "GetCombinedImages",
-    "GET",
-    "/container-security/combined/image-assessment/images/v1",
-    "Get image assessment results by providing an FQL filter and paging details",
-    "falcon_container_image",
-    [
-      {
-        "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  "
-        "container_running_status, cve_id, first_seen, registry, repository, tag, vulnerability_severity",
-        "name": "filter",
-        "in": "query"
-      },
-      {
-        "type": "integer",
-        "description": "The upper-bound on the number of records to retrieve [1-100]",
-        "name": "limit",
-        "in": "query"
-      },
-      {
-        "type": "integer",
-        "description": "The offset from where to begin.",
-        "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "The fields to sort the records on. Supported columns:  [first_seen registry repository "
-        "tag vulnerability_severity]",
-        "name": "sort",
-        "in": "query"
-      }
-    ]
-  ],
-  [
     "GetImageAssessmentReport",
     "GET",
     "/reports",
@@ -271,29 +236,25 @@ _falcon_container_endpoints = [
         "type": "string",
         "description": "The hash digest for the image.",
         "name": "digest",
-        "in": "query",
-        "required": False
+        "in": "query"
       },
       {
         "type": "string",
         "description": "The image ID.",
         "name": "image_id",
-        "in": "query",
-        "required": False
+        "in": "query"
       },
       {
         "type": "string",
         "description": "The repository the image resides within.",
         "name": "repository",
-        "in": "query",
-        "required": False
+        "in": "query"
       },
       {
         "type": "string",
         "description": "The image tag.",
         "name": "tag",
-        "in": "query",
-        "required": False
+        "in": "query"
       }
     ]
   ],
