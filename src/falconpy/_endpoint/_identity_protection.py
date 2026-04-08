@@ -88,14 +88,13 @@ _identity_protection_endpoints = [
     "identity_protection",
     [
       {
-        "maxItems": 100,
-        "minItems": 1,
-        "uniqueItems": True,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "maxItems": 100,
+        "uniqueItems": True,
         "description": "Rule IDs",
         "name": "ids",
         "in": "query",
@@ -125,14 +124,13 @@ _identity_protection_endpoints = [
     "identity_protection",
     [
       {
-        "maxItems": 100,
-        "minItems": 1,
-        "uniqueItems": True,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "maxItems": 100,
+        "uniqueItems": True,
         "description": "Rule IDs",
         "name": "ids",
         "in": "query",
