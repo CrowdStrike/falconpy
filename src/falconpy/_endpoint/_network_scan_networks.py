@@ -88,21 +88,6 @@ _network_scan_networks_endpoints = [
     ]
   ],
   [
-    "update_networks",
-    "PATCH",
-    "/netscan/entities/networks/v1",
-    "Update \"networks\" using provided specifications",
-    "network_scan_networks",
-    [
-      {
-        "description": "\"networks\" specifications for updating",
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "delete_networks",
     "DELETE",
     "/netscan/entities/networks/v1",
@@ -123,6 +108,21 @@ _network_scan_networks_endpoints = [
     ]
   ],
   [
+    "update_networks",
+    "PATCH",
+    "/netscan/entities/networks/v1",
+    "Update \"networks\" using provided specifications",
+    "network_scan_networks",
+    [
+      {
+        "description": "\"networks\" specifications for updating",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "query_networks",
     "GET",
     "/netscan/queries/networks/v1",
@@ -130,18 +130,18 @@ _network_scan_networks_endpoints = [
     "network_scan_networks",
     [
       {
-        "minimum": 0,
         "type": "integer",
-        "description": "An offset used with the `limit` parameter to manage pagination of results. On your "
-        "first request, don’t provide an `offset`. On subsequent requests, add previous `offset` with the previous "
-        "`limit` to continue from that place in the results",
+        "minimum": 0,
+        "description": "An offset used with the limit parameter to manage pagination of results. On your first "
+        " request, don’t provide an offset. On subsequent requests, add previous offset with the previous limit to "
+        "continue from that place in the results",
         "name": "offset",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 100,
         "minimum": 1,
-        "type": "integer",
         "description": "The number of \"networks IDs\" to return in this response (Min: 1, Max: 100, Default: 100)",
         "name": "limit",
         "in": "query"
