@@ -870,11 +870,16 @@ class ODS(ServiceClass):
         parameters - full parameters payload, not required if using other keywords.
         sort -- The property to sort by. FQL syntax (e.g. id|desc or status|asc).
                 Available sort fields:
-                id                      schedule.start_timestamp
-                description             schedule.interval
-                status                  last_updated
-                created_on              created_by
-                description
+                created_by|asc                   created_by|desc
+                created_on|asc                   created_on|desc
+                description.keyword|asc          description.keyword|desc
+                description|asc                  description|desc
+                id|asc                           id|desc
+                last_updated|asc                 last_updated|desc
+                schedule.interval|asc            schedule.interval|desc
+                schedule.start_timestamp|asc     schedule.start_timestamp|desc
+                status|asc                       status|desc
+                targeted_host_count|asc          targeted_host_count|desc
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
