@@ -46,13 +46,12 @@ _data_protection_configuration_endpoints = [
     "data_protection_configuration",
     [
       {
-        "maxItems": 100,
-        "minItems": 1,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "maxItems": 100,
         "description": "IDs of the classifications to get",
         "name": "ids",
         "in": "query",
@@ -75,6 +74,27 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
+    "entities_classification_delete_v2",
+    "DELETE",
+    "/data-protection/entities/classifications/v2",
+    "Deletes classifications that match the provided ids",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "maxItems": 100,
+        "description": "IDs of the classifications to delete",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_classification_patch_v2",
     "PATCH",
     "/data-protection/entities/classifications/v2",
@@ -84,28 +104,6 @@ _data_protection_configuration_endpoints = [
       {
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "entities_classification_delete_v2",
-    "DELETE",
-    "/data-protection/entities/classifications/v2",
-    "Deletes classifications that match the provided ids",
-    "data_protection_configuration",
-    [
-      {
-        "maxItems": 100,
-        "minItems": 1,
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "IDs of the classifications to delete",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -146,6 +144,26 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
+    "entities_cloud_application_delete",
+    "DELETE",
+    "/data-protection/entities/cloud-applications/v1",
+    "Delete cloud application",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The id of the cloud application to delete.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_cloud_application_patch",
     "PATCH",
     "/data-protection/entities/cloud-applications/v1",
@@ -163,26 +181,6 @@ _data_protection_configuration_endpoints = [
         "description": "The new cloud-application definition",
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "entities_cloud_application_delete",
-    "DELETE",
-    "/data-protection/entities/cloud-applications/v1",
-    "Delete cloud application",
-    "data_protection_configuration",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "The id of the cloud application to delete.",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -223,6 +221,26 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
+    "entities_content_pattern_delete",
+    "DELETE",
+    "/data-protection/entities/content-patterns/v1",
+    "Delete content pattern",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The id(s) of the content pattern to delete.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_content_pattern_patch",
     "PATCH",
     "/data-protection/entities/content-patterns/v1",
@@ -240,26 +258,6 @@ _data_protection_configuration_endpoints = [
         "description": "Definition of content-pattern to create",
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "entities_content_pattern_delete",
-    "DELETE",
-    "/data-protection/entities/content-patterns/v1",
-    "Delete content pattern",
-    "data_protection_configuration",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "The id(s) of the content pattern to delete.",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -314,6 +312,26 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
+    "entities_enterprise_account_delete",
+    "DELETE",
+    "/data-protection/entities/enterprise-accounts/v1",
+    "Delete enterprise account",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The id of the enterprise account to delete.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_enterprise_account_patch",
     "PATCH",
     "/data-protection/entities/enterprise-accounts/v1",
@@ -331,26 +349,6 @@ _data_protection_configuration_endpoints = [
         "description": "Definition of enterprise-account to create",
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "entities_enterprise_account_delete",
-    "DELETE",
-    "/data-protection/entities/enterprise-accounts/v1",
-    "Delete enterprise account",
-    "data_protection_configuration",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "The id of the enterprise account to delete.",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -466,6 +464,26 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
+    "entities_local_application_group_delete",
+    "DELETE",
+    "/data-protection/entities/local-application-groups/v1",
+    "Soft Delete local application. The application won't be visible anymore, but will still be in the database",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The id of the local application group to delete.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_local_application_group_patch",
     "PATCH",
     "/data-protection/entities/local-application-groups/v1",
@@ -483,26 +501,6 @@ _data_protection_configuration_endpoints = [
         "description": "The new local-application group definition",
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "entities_local_application_group_delete",
-    "DELETE",
-    "/data-protection/entities/local-application-groups/v1",
-    "Soft Delete local application. The application won't be visible anymore, but will still be in the database",
-    "data_protection_configuration",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "The id of the local application group to delete.",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -543,6 +541,26 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
+    "entities_local_application_delete",
+    "DELETE",
+    "/data-protection/entities/local-applications/v1",
+    "Soft Delete local application. The application wont be visible anymore, but will still be in the database",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The id of the local application to delete.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_local_application_patch",
     "PATCH",
     "/data-protection/entities/local-applications/v1",
@@ -565,26 +583,6 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_local_application_delete",
-    "DELETE",
-    "/data-protection/entities/local-applications/v1",
-    "Soft Delete local application. The application wont be visible anymore, but will still be in the database",
-    "data_protection_configuration",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "The id of the local application to delete.",
-        "name": "ids",
-        "in": "query",
-        "required": True
-      }
-    ]
-  ],
-  [
     "entities_policy_get_v2",
     "GET",
     "/data-protection/entities/policies/v2",
@@ -592,13 +590,12 @@ _data_protection_configuration_endpoints = [
     "data_protection_configuration",
     [
       {
-        "maxItems": 100,
-        "minItems": 1,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "maxItems": 100,
         "description": "IDs of the policies to get",
         "name": "ids",
         "in": "query",
@@ -628,6 +625,34 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
+    "entities_policy_delete_v2",
+    "DELETE",
+    "/data-protection/entities/policies/v2",
+    "Deletes policies that match the provided ids",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "maxItems": 100,
+        "description": "IDs of the policies to delete",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "platform name of the policies to update, either 'win' or 'mac'",
+        "name": "platform_name",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_policy_patch_v2",
     "PATCH",
     "/data-protection/entities/policies/v2",
@@ -644,35 +669,6 @@ _data_protection_configuration_endpoints = [
       {
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "entities_policy_delete_v2",
-    "DELETE",
-    "/data-protection/entities/policies/v2",
-    "Deletes policies that match the provided ids",
-    "data_protection_configuration",
-    [
-      {
-        "maxItems": 100,
-        "minItems": 1,
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "IDs of the policies to delete",
-        "name": "ids",
-        "in": "query",
-        "required": True
-      },
-      {
-        "type": "string",
-        "description": "platform name of the policies to update, either 'win' or 'mac'",
-        "name": "platform_name",
-        "in": "query",
         "required": True
       }
     ]
@@ -713,6 +709,26 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
+    "entities_web_location_delete_v2",
+    "DELETE",
+    "/data-protection/entities/web-locations/v2",
+    "Delete web-location",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "The ids of the web-location to delete.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_web_location_patch_v2",
     "PATCH",
     "/data-protection/entities/web-locations/v2",
@@ -735,26 +751,6 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_web_location_delete_v2",
-    "DELETE",
-    "/data-protection/entities/web-locations/v2",
-    "Delete web-location",
-    "data_protection_configuration",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "csv",
-        "description": "The ids of the web-location to delete.",
-        "name": "ids",
-        "in": "query",
-        "required": True
-      }
-    ]
-  ],
-  [
     "queries_classification_get_v2",
     "GET",
     "/data-protection/queries/classifications/v2",
@@ -763,26 +759,26 @@ _data_protection_configuration_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter results by specific attributes , allowed attributes are [created_at created_by "
-        "modified_by modified_at properties.content_patterns properties.content_patterns_operator "
-        "properties.evidence_duplication_enabled properties.file_types properties.protection_mode "
-        "properties.sensitivity_labels properties.web_sources name]",
+        "description": "Filter results by specific attributes , allowed attributes are [name created_at "
+        "created_by properties.content_patterns properties.content_patterns_operator properties.file_types "
+        "properties.sensitivity_labels modified_by modified_at properties.evidence_duplication_enabled "
+        "properties.protection_mode properties.web_sources]",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 10000,
         "minimum": 0,
-        "type": "integer",
         "description": "The offset to start retrieving records from",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 500,
-        "minimum": 0,
         "type": "integer",
         "default": 100,
+        "maximum": 500,
+        "minimum": 0,
         "description": "The maximum records to return",
         "name": "limit",
         "in": "query"
@@ -1063,39 +1059,40 @@ _data_protection_configuration_endpoints = [
       },
       {
         "type": "string",
-        "description": "Filter results by specific attributes , allowed attributes are [name "
-        "properties.enable_content_inspection properties.be_exclude_domains properties.be_upload_timeout_response "
-        "properties.be_paste_clipboard_max_size properties.evidence_storage_max_size precedence created_at modified_at "
-        "properties.similarity_threshold properties.enable_clipboard_inspection properties.evidence_encrypted_enabled "
-        "properties.enable_network_inspection properties.besplash_message_source properties.min_confidence_level "
-        "properties.unsupported_browsers_action properties.similarity_detection properties.classifications "
-        "properties.besplash_enabled properties.be_paste_timeout_response properties.be_paste_clipboard_min_size_unit "
-        "properties.be_paste_clipboard_over_size_behaviour_block properties.browsers_without_active_extension "
-        "description is_enabled created_by properties.max_file_size_to_inspect_unit properties.block_all_data_access "
-        "properties.be_paste_timeout_duration_milliseconds properties.be_paste_clipboard_min_size is_default "
-        "modified_by properties.enable_context_inspection properties.inspection_depth "
-        "properties.evidence_download_enabled properties.besplash_custom_message "
-        "properties.be_upload_timeout_duration_seconds properties.enable_end_user_notifications_unsupported_browser "
-        "properties.custom_allow_notification properties.custom_block_notification "
-        "properties.be_paste_clipboard_max_size_unit properties.evidence_storage_free_disk_perc "
-        "properties.max_file_size_to_inspect properties.allow_notifications properties.block_notifications "
-        "properties.evidence_duplication_enabled_default properties.network_inspection_files_exceeding_size_limit]",
+        "description": "Filter results by specific attributes , allowed attributes are "
+        "[properties.similarity_detection properties.network_inspection_files_exceeding_size_limit "
+        "properties.classifications properties.be_paste_clipboard_min_size_unit properties.be_paste_clipboard_max_size "
+        "modified_by properties.inspection_depth properties.allow_notifications properties.besplash_custom_message "
+        "description is_default created_by properties.unsupported_browsers_action properties.similarity_threshold "
+        "properties.enable_clipboard_inspection properties.evidence_duplication_enabled_default "
+        "properties.be_exclude_domains precedence properties.evidence_encrypted_enabled "
+        "properties.be_upload_timeout_duration_seconds properties.be_paste_timeout_response "
+        "properties.be_paste_clipboard_max_size_unit properties.be_paste_clipboard_over_size_behaviour_block "
+        "properties.max_file_size_to_inspect is_enabled properties.min_confidence_level "
+        "properties.max_file_size_to_inspect_unit properties.browsers_without_active_extension "
+        "properties.block_all_data_access properties.enable_end_user_notifications_unsupported_browser "
+        "properties.block_notifications properties.evidence_download_enabled name created_at modified_at "
+        "properties.custom_block_notification properties.enable_network_inspection properties.besplash_enabled "
+        "properties.be_paste_timeout_duration_milliseconds properties.be_paste_clipboard_min_size "
+        "properties.custom_allow_notification properties.besplash_message_source properties.be_upload_timeout_response "
+        "properties.evidence_storage_free_disk_perc properties.evidence_storage_max_size "
+        "properties.enable_content_inspection properties.enable_context_inspection]",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 10000,
         "minimum": 0,
-        "type": "integer",
         "description": "The offset to start retrieving records from",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 500,
-        "minimum": 0,
         "type": "integer",
         "default": 100,
+        "maximum": 500,
+        "minimum": 0,
         "description": "The maximum records to return",
         "name": "limit",
         "in": "query"
