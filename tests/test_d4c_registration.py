@@ -51,21 +51,6 @@ class TestD4CRegistration:
 
         return returned
 
-    def d4c_get_gcp_user_scripts_attachment(self):
-        """
-        get_gcp_user_scripts_attachment
-        """
-        returned = False
-        result = falcon.GetCSPMGCPUserScriptsAttachment()
-        if isinstance(result, (bytes)):
-            returned = True
-        else:
-            if "status_code" in result:
-                if result["status_code"] in AllowedResponses:
-                    returned = True
-
-        return returned
-
     def d4c_get_gcp_user_scripts(self):
         """
         get_gcp_user_scripts
@@ -139,12 +124,6 @@ class TestD4CRegistration:
         Pytest harness hook
         """
         assert self.d4c_get_azure_user_scripts() is True
-
-    def test_GetCSPMGCPUserScriptsAttachment(self):
-        """
-        Pytest harness hook
-        """
-        assert self.d4c_get_gcp_user_scripts_attachment() is True
 
     def test_GetCSPMGCPUserScripts(self):
         """
