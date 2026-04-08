@@ -349,7 +349,7 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_policies.py`
 
-+ Removed: Removed `GetCSPMGCPUserScriptsAttachment` operation from the __D4cRegistration__ service collection.
++ Removed: Removed `GetCSPMGCPUserScriptsAttachment` operation from the __D4CRegistration__ service collection.
 
 + Removed: Removed `GetCombinedImages` operation from the __FalconContainer__ service collection.
 
