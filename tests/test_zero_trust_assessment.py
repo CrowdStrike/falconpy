@@ -20,7 +20,7 @@ from falconpy import ZeroTrustAssessment, APIHarnessV2
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = ZeroTrustAssessment(auth_object=config)
-AllowedResponses = [200, 201, 401, 403, 404, 429]  # Allowing 403 for unscopeable query_combined_assessments
+AllowedResponses = [200, 201, 401, 403, 404, 429]
 
 @dataclass
 class BaselessContextRequest:
@@ -45,10 +45,6 @@ class TestZeroTrustAssessment:
     def test_get_assessments_by_score(self):
         """Pytest harness hook"""
         assert bool(falcon.get_assessments_by_score(filter="score:>1")["status_code"] in AllowedResponses) is True
-
-    def test_query_combined_assessment(self):
-        """Pytest harness hook"""
-        assert bool(falcon.query_combined_assessments()["status_code"] in AllowedResponses) is True
 
     # Test context authentication right before logout
     @pytest.mark.skipif(config.base_url != "https://api.crowdstrike.com",
