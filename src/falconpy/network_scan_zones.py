@@ -145,10 +145,9 @@ class NetworkScanZones(ServiceClass):
         """Get zones by filter.
 
         Keyword arguments:
-        offset -- An offset used with the `limit` parameter to manage pagination of results.
-                  On your first request, don't provide an `offset`. On subsequent requests,
-                  add previous `offset` with the previous `limit` to continue from that place
-                  in the results. Integer.
+        offset -- An offset used with the limit parameter to manage pagination of results. On your first request, don’t provide
+                  an offset. On subsequent requests, add previous offset with the previous limit to continue from that place in
+                  the results Integer.
         limit -- The number of zones to return in this response (Min: 1, Max: 100, Default: 100). Integer.
         sort -- Sort zones by their properties. A single sort field is allowed. String.
         filter -- Search for zones by providing an FQL filter. String.
@@ -323,10 +322,9 @@ class NetworkScanZones(ServiceClass):
         """Get zone IDs by filter.
 
         Keyword arguments:
-        offset -- An offset used with the `limit` parameter to manage pagination of results.
-                  On your first request, don't provide an `offset`. On subsequent requests,
-                  add previous `offset` with the previous `limit` to continue from that place
-                  in the results. Integer.
+        offset -- An offset used with the limit parameter to manage pagination of results. On your first request, don’t provide
+                  an offset. On subsequent requests, add previous offset with the previous limit to continue from that place in
+                  the results Integer.
         limit -- The number of zone IDs to return in this response (Min: 1, Max: 100, Default: 100). Integer.
         sort -- Sort zones by their properties. A single sort field is allowed. String.
         filter -- Search for zones by providing an FQL filter. String.
