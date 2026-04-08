@@ -46,11 +46,11 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
+        "type": "string",
         "enum": [
           "dry",
           "full"
         ],
-        "type": "string",
         "description": "Type of scan, dry or full, to perform on selected accounts",
         "name": "scan-type",
         "in": "query"
@@ -86,40 +86,40 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "provisioned",
           "operational"
         ],
-        "type": "string",
         "description": "Account status to filter results by.",
         "name": "status",
         "in": "query"
       },
       {
-        "maxLength": 3,
-        "minLength": 1,
         "type": "integer",
         "default": 100,
+        "maxLength": 3,
+        "minLength": 1,
         "description": "The maximum records to return. Defaults to 100.",
         "name": "limit",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "true",
           "false"
         ],
-        "type": "string",
         "description": "Only return CSPM Lite accounts",
         "name": "cspm_lite",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "true",
           "false"
         ],
-        "type": "string",
         "description": "Only return migrated d4c accounts",
         "name": "migrated",
         "in": "query"
@@ -131,10 +131,10 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "organization"
         ],
-        "type": "string",
         "description": "Field to group by.",
         "name": "group_by",
         "in": "query"
@@ -147,20 +147,6 @@ _cspm_registration_endpoints = [
     "/cloud-connect-cspm-aws/entities/account/v1",
     "Creates a new account in our system for a customer and generates a script for them to run in their AWS "
     "cloud environment to grant us access.",
-    "cspm_registration",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "PatchCSPMAwsAccount",
-    "PATCH",
-    "/cloud-connect-cspm-aws/entities/account/v1",
-    "Patches a existing account in our system for a customer.",
     "cspm_registration",
     [
       {
@@ -200,6 +186,20 @@ _cspm_registration_endpoints = [
     ]
   ],
   [
+    "PatchCSPMAwsAccount",
+    "PATCH",
+    "/cloud-connect-cspm-aws/entities/account/v1",
+    "Patches a existing account in our system for a customer.",
+    "cspm_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetCSPMAwsConsoleSetupURLs",
     "GET",
     "/cloud-connect-cspm-aws/entities/console-setup-urls/v1",
@@ -217,29 +217,30 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "true",
           "false"
         ],
-        "type": "string",
         "name": "use_existing_cloudtrail",
         "in": "query"
       },
       {
-        "pattern": "^[0-9a-z-]{2,}$",
         "type": "string",
+        "pattern": "^[0-9a-z-]{2,}$",
         "description": "Region",
         "name": "region",
         "in": "query"
       },
       {
-        "pattern": ".*",
         "type": "string",
+        "pattern": ".*",
         "description": "Base64 encoded JSON string to be used as AWS tags",
         "name": "tags",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "aws-url",
           "aws-iom-url",
@@ -250,7 +251,6 @@ _cspm_registration_endpoints = [
           "aws-modular-cft-url",
           "aws-modular-cft-gov-commercial-url"
         ],
-        "type": "string",
         "description": "Template to be rendered",
         "name": "template",
         "in": "query"
@@ -276,21 +276,21 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "aws-bash",
           "aws-terraform"
         ],
-        "type": "string",
         "description": "Template to be rendered",
         "name": "template",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "commercial",
           "gov"
         ],
-        "type": "string",
         "description": "Type of account, it can be commercial or gov",
         "name": "account_type",
         "in": "query"
@@ -306,29 +306,29 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "true",
           "false"
         ],
-        "type": "string",
         "name": "behavior_assessment_enabled",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "true",
           "false"
         ],
-        "type": "string",
         "name": "sensor_management_enabled",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "true",
           "false"
         ],
-        "type": "string",
         "name": "dspm_enabled",
         "in": "query"
       },
@@ -347,31 +347,31 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "true",
           "false"
         ],
-        "type": "string",
         "name": "use_existing_cloudtrail",
         "in": "query"
       },
       {
-        "pattern": ".*",
         "type": "string",
+        "pattern": ".*",
         "description": "The AWS organization ID to be registered",
         "name": "organization_id",
         "in": "query"
       },
       {
-        "pattern": ".*",
         "type": "string",
+        "pattern": ".*",
         "description": "The AWS profile to be used during registration",
         "name": "aws_profile",
         "in": "query"
       },
       {
-        "pattern": ".*",
         "type": "string",
+        "pattern": ".*",
         "description": "The custom IAM role to be used during registration",
         "name": "custom_role_name",
         "in": "query"
@@ -407,37 +407,37 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 4,
         "minLength": 3,
         "pattern": "^(full|dry)$",
-        "type": "string",
         "description": "Type of scan, dry or full, to perform on selected accounts",
         "name": "scan-type",
         "in": "query"
       },
       {
-        "pattern": "^(provisioned|operational)$",
         "type": "string",
+        "pattern": "^(provisioned|operational)$",
         "description": "Account status to filter results by.",
         "name": "status",
         "in": "query"
       },
       {
-        "pattern": "^(true|false)$",
+        "type": "string",
         "enum": [
           "false",
           "true"
         ],
-        "type": "string",
+        "pattern": "^(true|false)$",
         "description": "Only return CSPM Lite accounts",
         "name": "cspm_lite",
         "in": "query"
       },
       {
-        "maxLength": 3,
-        "minLength": 1,
         "type": "integer",
         "default": 100,
+        "maxLength": 3,
+        "minLength": 1,
         "description": "The maximum records to return. Defaults to 100.",
         "name": "limit",
         "in": "query"
@@ -456,20 +456,6 @@ _cspm_registration_endpoints = [
     "/cloud-connect-cspm-azure/entities/account/v1",
     "Creates a new account in our system for a customer and generates a script for them to run in their cloud "
     "environment to grant us access.",
-    "cspm_registration",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "UpdateCSPMAzureAccount",
-    "PATCH",
-    "/cloud-connect-cspm-azure/entities/account/v1",
-    "Patches a existing account in our system for a customer.",
     "cspm_registration",
     [
       {
@@ -507,12 +493,26 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 5,
         "minLength": 4,
         "pattern": "^(true|false)$",
-        "type": "string",
         "name": "retain_tenant",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "UpdateCSPMAzureAccount",
+    "PATCH",
+    "/cloud-connect-cspm-azure/entities/account/v1",
+    "Patches a existing account in our system for a customer.",
+    "cspm_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
       }
     ]
   ],
@@ -525,20 +525,20 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
+        "type": "string",
         "maxLength": 36,
         "minLength": 36,
         "pattern": "^[0-9a-z-]{36}$",
-        "type": "string",
         "description": "ClientID to use for the Service Principal associated with the customer's Azure account",
         "name": "id",
         "in": "query",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 36,
         "minLength": 36,
         "pattern": "^[0-9a-z-]{36}$",
-        "type": "string",
         "description": "Tenant ID to update client ID for. Required if multiple tenants are registered.",
         "name": "tenant-id",
         "in": "query"
@@ -553,19 +553,19 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
+        "type": "string",
         "maxLength": 36,
         "minLength": 36,
         "pattern": "^[0-9a-z-]{36}$",
-        "type": "string",
         "description": "Tenant ID to update client ID for. Required if multiple tenants are registered.",
         "name": "tenant-id",
         "in": "query"
       },
       {
+        "type": "string",
         "maxLength": 36,
         "minLength": 36,
         "pattern": "^[0-9a-z-]{36}$",
-        "type": "string",
         "description": "Default Subscription ID to patch for all subscriptions belonged to a tenant.",
         "name": "subscription_id",
         "in": "query",
@@ -611,10 +611,10 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
-        "maxLength": 3,
-        "minLength": 1,
         "type": "integer",
         "default": 100,
+        "maxLength": 3,
+        "minLength": 1,
         "description": "The maximum records to return. Defaults to 100.",
         "name": "limit",
         "in": "query"
@@ -679,11 +679,11 @@ _cspm_registration_endpoints = [
         "required": True
       },
       {
+        "type": "string",
+        "default": "1",
         "maxLength": 2,
         "minLength": 1,
         "pattern": "^[0-9]{1,2}$",
-        "type": "string",
-        "default": "1",
         "description": "Years the certificate should be valid. Max 2",
         "name": "years_valid",
         "in": "query"
@@ -699,10 +699,10 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
+        "type": "string",
         "maxLength": 36,
         "minLength": 36,
         "pattern": "^[0-9a-z-]{36}$",
-        "type": "string",
         "description": "Tenant ID to generate script for. Defaults to most recently registered tenant.",
         "name": "tenant-id",
         "in": "query"
@@ -718,12 +718,12 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^(commercial|gov)$",
+        "type": "string",
         "enum": [
           "commercial",
           "gov"
         ],
-        "type": "string",
+        "pattern": "^(commercial|gov)$",
         "name": "account_type",
         "in": "query"
       },
@@ -749,12 +749,12 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
+        "type": "string",
         "enum": [
           "Folder",
           "Organization",
           "Project"
         ],
-        "type": "string",
         "description": "GCP Hierarchy Parent Type, organization/folder/project",
         "name": "parent_type",
         "in": "query"
@@ -770,30 +770,30 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "dry",
           "full"
         ],
-        "type": "string",
         "description": "Type of scan, dry or full, to perform on selected accounts",
         "name": "scan-type",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "operational",
           "provisioned"
         ],
-        "type": "string",
         "description": "Account status to filter results by.",
         "name": "status",
         "in": "query"
       },
       {
-        "maxLength": 3,
-        "minLength": 1,
         "type": "integer",
         "default": 100,
+        "maxLength": 3,
+        "minLength": 1,
         "description": "The maximum records to return. Defaults to 100.",
         "name": "limit",
         "in": "query"
@@ -828,20 +828,6 @@ _cspm_registration_endpoints = [
     ]
   ],
   [
-    "UpdateCSPMGCPAccount",
-    "PATCH",
-    "/cloud-connect-cspm-gcp/entities/account/v1",
-    "Patches a existing account in our system for a customer.",
-    "cspm_registration",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "DeleteCSPMGCPAccount",
     "DELETE",
     "/cloud-connect-cspm-gcp/entities/account/v1",
@@ -857,6 +843,20 @@ _cspm_registration_endpoints = [
         "description": "Hierarchical Resource IDs of accounts",
         "name": "ids",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "UpdateCSPMGCPAccount",
+    "PATCH",
+    "/cloud-connect-cspm-gcp/entities/account/v1",
+    "Patches a existing account in our system for a customer.",
+    "cspm_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
       }
     ]
   ],
@@ -897,8 +897,8 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
-        "pattern": "^\\d+$",
         "type": "string",
+        "pattern": "^\\d+$",
         "description": "Service Account ID",
         "name": "id",
         "in": "query"
@@ -942,12 +942,12 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
+        "type": "string",
         "enum": [
           "Folder",
           "Organization",
           "Project"
         ],
-        "type": "string",
         "description": "GCP Hierarchy Parent Type, organization/folder/project",
         "name": "parent_type",
         "in": "query"
@@ -972,17 +972,18 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
-        "pattern": "^(aws|azure)$",
+        "type": "string",
         "enum": [
           "aws",
           "azure"
         ],
-        "type": "string",
+        "pattern": "^(aws|azure)$",
         "description": "Cloud Provider (e.g.: aws|azure)",
         "name": "cloud_provider",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "ACM",
           "ACR",
@@ -1039,7 +1040,6 @@ _cspm_registration_endpoints = [
           "VirtualMachine",
           "VirtualNetwork"
         ],
-        "type": "string",
         "description": "Cloud Service (e.g. EC2 | EBS | S3)",
         "name": "service",
         "in": "query"
@@ -1069,11 +1069,11 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "closed",
           "open"
         ],
-        "type": "string",
         "description": "State (e.g.: open | closed)",
         "name": "state",
         "in": "query"
@@ -1092,13 +1092,13 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "Critical",
           "High",
           "Informational",
           "Medium"
         ],
-        "type": "string",
         "description": "Policy Severity",
         "name": "severity",
         "in": "query"
@@ -1111,8 +1111,8 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^\\d+$",
         "type": "integer",
+        "pattern": "^\\d+$",
         "description": "The maximum records to return. [1-500]",
         "name": "limit",
         "in": "query"
@@ -1143,17 +1143,17 @@ _cspm_registration_endpoints = [
     "GetConfigurationDetections",
     "GET",
     "/detects/entities/iom/v1",
-    "Get list of active misconfigurations. This endpoint is deprecated, please use "
-    "GetConfigurationDetectionIDsV2 and GetConfigurationDetectionEntities instead",
+    "Get list of active misconfigurations. This endpoint is deprecated, please use /queries/iom/v2 and "
+    "/entities/iom/v2 instead",
     "cspm_registration",
     [
       {
+        "type": "string",
         "enum": [
           "aws",
           "azure",
           "gcp"
         ],
-        "type": "string",
         "description": "Cloud Provider (e.g.: aws|azure|gcp)",
         "name": "cloud_provider",
         "in": "query"
@@ -1177,36 +1177,37 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "all",
           "new",
           "reoccurring"
         ],
-        "type": "string",
         "description": "Status (e.g.: new|reoccurring|all)",
         "name": "status",
         "in": "query"
       },
       {
-        "pattern": "^[0-9a-z-_]{2,}$",
         "type": "string",
+        "pattern": "^[0-9a-z-_]{2,}$",
         "description": "Cloud Provider Region",
         "name": "region",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "Critical",
           "High",
           "Informational",
           "Medium"
         ],
-        "type": "string",
         "description": "Policy Severity",
         "name": "severity",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "ACM",
           "ACR",
@@ -1263,7 +1264,6 @@ _cspm_registration_endpoints = [
           "VirtualMachine",
           "VirtualNetwork"
         ],
-        "type": "string",
         "description": "Cloud Service (e.g.: EBS|EC2|S3 etc.)",
         "name": "service",
         "in": "query"
@@ -1276,8 +1276,8 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^\\d+$",
         "type": "integer",
+        "pattern": "^\\d+$",
         "description": "The maximum records to return. [1-500]",
         "name": "limit",
         "in": "query"
@@ -1346,17 +1346,17 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 0,
         "type": "integer",
         "default": 500,
+        "maximum": 1000,
+        "minimum": 0,
         "description": "The max number of detections to return",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Offset returned detections. Cannot be combined with next_token filter",
         "name": "offset",
         "in": "query"
@@ -1377,16 +1377,16 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
-        "pattern": "^\\d+$",
         "type": "string",
+        "pattern": "^\\d+$",
         "description": "Policy ID",
         "name": "policy_id",
         "in": "query",
         "required": True
       },
       {
-        "pattern": "^(aws|azure|gcp)$",
         "type": "string",
+        "pattern": "^(aws|azure|gcp)$",
         "description": "Cloud Provider (e.g.: aws|azure|gcp)",
         "name": "cloud_provider",
         "in": "query",
@@ -1454,8 +1454,8 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
-        "pattern": "^\\d+$",
         "type": "string",
+        "pattern": "^\\d+$",
         "description": "Policy ID",
         "name": "policy_id",
         "in": "query",
@@ -1468,8 +1468,8 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^(aws|azure|gcp)$",
         "type": "string",
+        "pattern": "^(aws|azure|gcp)$",
         "description": "Cloud Provider (e.g.: aws|azure|gcp)",
         "name": "cloud_provider",
         "in": "query",
@@ -1509,8 +1509,8 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
-        "pattern": "^\\d+$",
         "type": "integer",
+        "pattern": "^\\d+$",
         "description": "Policy ID",
         "name": "ids",
         "in": "query",
@@ -1528,7 +1528,7 @@ _cspm_registration_endpoints = [
       {
         "type": "array",
         "items": {
-          "type": "integer"
+          "type": "string"
         },
         "collectionFormat": "multi",
         "description": "Policy IDs",
@@ -1546,6 +1546,7 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
+        "type": "string",
         "enum": [
           "ACM",
           "ACR",
@@ -1602,26 +1603,25 @@ _cspm_registration_endpoints = [
           "VirtualMachine",
           "VirtualNetwork"
         ],
-        "type": "string",
         "description": "Service type to filter policy settings by.",
         "name": "service",
         "in": "query"
       },
       {
-        "pattern": "^\\d+$",
         "type": "string",
+        "pattern": "^\\d+$",
         "description": "Policy ID",
         "name": "policy-id",
         "in": "query"
       },
       {
-        "pattern": "^(aws|azure|gcp)$",
+        "type": "string",
         "enum": [
           "aws",
           "azure",
           "gcp"
         ],
-        "type": "string",
+        "pattern": "^(aws|azure|gcp)$",
         "description": "Cloud Platform (e.g.: aws|azure|gcp)",
         "name": "cloud-platform",
         "in": "query"
