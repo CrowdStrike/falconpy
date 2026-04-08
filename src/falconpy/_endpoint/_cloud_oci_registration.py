@@ -47,14 +47,14 @@ _cloud_oci_registration_endpoints = [
       {
         "type": "string",
         "description": "FQL (Falcon Query Language) string for filtering results. Allowed filters are "
-        "Set{updated_at, tenancy_ocid, tenancy_name, home_region, key_age, overall_status, created_at}",
+        "Set{tenancy_ocid, tenancy_name, home_region, key_age, overall_status, created_at, updated_at}",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Field and direction for sorting results - allowed sort fields are Set{updated_at, "
-        "tenancy_ocid, tenancy_name, home_region, key_age, overall_status, created_at}",
+        "description": "Field and direction for sorting results - allowed sort fields are Set{tenancy_name, "
+        "home_region, key_age, overall_status, created_at, updated_at, tenancy_ocid}",
         "name": "sort",
         "in": "query"
       },
@@ -65,18 +65,18 @@ _cloud_oci_registration_endpoints = [
         "in": "query"
       },
       {
-        "maximum": 10000,
-        "minimum": 0,
         "type": "integer",
         "default": 100,
+        "maximum": 10000,
+        "minimum": 0,
         "description": "Maximum number of records to return (default: 100, max: 10000)",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "Starting index of result",
         "name": "offset",
         "in": "query"
@@ -126,20 +126,6 @@ _cloud_oci_registration_endpoints = [
     ]
   ],
   [
-    "cloud_security_registration_oci_update_account",
-    "PATCH",
-    "/cloud-security-registration-oci/entities/accounts/v1",
-    "Patch an existing OCI account in our system for a customer.",
-    "cloud_oci_registration",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "cloud_security_registration_oci_delete_account",
     "DELETE",
     "/cloud-security-registration-oci/entities/accounts/v1",
@@ -155,6 +141,20 @@ _cloud_oci_registration_endpoints = [
         "description": "OCI tenancy ocids to remove",
         "name": "ids",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "cloud_security_registration_oci_update_account",
+    "PATCH",
+    "/cloud-security-registration-oci/entities/accounts/v1",
+    "Patch an existing OCI account in our system for a customer.",
+    "cloud_oci_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
       }
     ]
   ],
