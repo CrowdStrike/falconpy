@@ -70,18 +70,18 @@ _cloud_security_assets_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "Pagination offset",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 1,
         "type": "integer",
         "default": 50,
+        "maximum": 1000,
+        "minimum": 1,
         "description": "Page size",
         "name": "limit",
         "in": "query"
@@ -117,19 +117,19 @@ _cloud_security_assets_endpoints = [
         "in": "query"
       },
       {
-        "maximum": 10000,
-        "minimum": 0,
         "type": "integer",
         "default": 20,
+        "maximum": 10000,
+        "minimum": 0,
         "description": "The maximum number of items to return. When not specified or 0, 20 is used. When "
         "larger than 10000, 10000 is used.",
         "name": "limit",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 9999,
         "minimum": 0,
-        "type": "integer",
         "description": "Offset returned controls. Use only one of 'offset' and 'after' parameter for "
         "paginating. 'offset' can only be used on offsets < 10,000. For paginating through the entire result set, use "
         "'after' parameter",
@@ -214,32 +214,32 @@ _cloud_security_assets_endpoints = [
       {
         "type": "string",
         "description": "The field to sort on.  Sortable fields include:  account_id  account_name  active  "
-        "aspm.deployment_cloud_resource_id  aspm.deployment_provider  aspm.deployment_type  aspm.technologies  "
-        "cloud_provider  cloud_risks.open_risk_count  cluster_id  cluster_name  compartment_name  compartment_ocid  "
-        "compartment_path  creation_time  data_classifications.found  data_classifications.scanned  first_seen  id  "
-        "instance_id  instance_state  ioa_count  iom_count  managed_by  organization_Id  os_version  platform_name  "
-        "publicly_exposed  region  resource_id  resource_name  resource_parent  resource_type  resource_type_name  "
-        "service  service_category  ssm_managed  status  tenancy_name  tenancy_ocid  tenancy_type  tenant_id  "
-        "updated_at  vmware.guest_os_id  vmware.guest_os_version  vmware.host_system_name  vmware.host_type  "
-        "vmware.instance_uuid  vmware.vm_host_name  vmware.vm_tools_status  zone  publiclyExposedToTheInternet  "
+        "aspm.deployment_cloud_resource_id  aspm.deployment_provider  aspm.deployment_type  aspm.exprt_rating  "
+        "aspm.technologies  cloud_provider  cloud_risks.open_risk_count  cluster_id  cluster_name  compartment_name  "
+        "compartment_ocid  compartment_path  creation_time  data_classifications.found  data_classifications.scanned  "
+        "first_seen  id  instance_id  instance_state  ioa_count  iom_count  managed_by  organization_Id  os_version  "
+        "platform_name  publicly_exposed  region  resource_id  resource_name  resource_parent  resource_type  "
+        "resource_type_name  service  service_category  ssm_managed  status  tenancy_name  tenancy_ocid  tenancy_type  "
+        "tenant_id  updated_at  vmware.guest_os_id  vmware.guest_os_version  vmware.host_system_name  vmware.host_type "
+        "  vmware.instance_uuid  vmware.vm_host_name  vmware.vm_tools_status  zone  publiclyExposedToTheInternet  "
         "publiclyExposedAccessRange  publiclyExposedExposureMethod\n\nUse |asc or |desc suffix to specify sort "
         "direction.",
         "name": "sort",
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 0,
         "type": "integer",
         "default": 500,
+        "maximum": 1000,
+        "minimum": 0,
         "description": "The maximum number of items to return. When not specified or 0, 500 is used. When "
         "larger than 1000, 1000 is used.",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Offset returned assets. Use only one of 'offset' and 'after' parameter for paginating. "
         " 'offset' can only be used on offsets < 10,000. For paginating through the entire result set, use 'after' "
         "parameter",
