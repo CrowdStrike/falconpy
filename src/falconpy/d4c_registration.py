@@ -773,27 +773,6 @@ class D4CRegistration(ServiceClass):
             operation_id="GetDiscoverCloudAzureTenantIDs"
             )
 
-    def get_gcp_user_scripts_attachment(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Retrieve GCP user script attachment.
-
-        Return a script for customer to run in their cloud environment to
-        grant us access to their GCP environment as a downloadable attachment.
-
-        This method does not accept arguments or keywords.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: GET
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMGCPUserScriptsAttachment
-        """
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="GetCSPMGCPUserScriptsAttachment"
-            )
-
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_gcp_user_scripts(self: object,
                              *args,
@@ -890,7 +869,6 @@ class D4CRegistration(ServiceClass):
     GetD4CGCPUserScriptsAttachment = get_gcp_user_scripts_attachment_v2
     GetD4CGCPServiceAccountsExt = get_gcp_service_account
     UpdateD4CGCPServiceAccountsExt = update_gcp_service_account
-    GetCSPMGCPUserScriptsAttachment = get_gcp_user_scripts_attachment
     GetCSPMGCPUserScripts = get_gcp_user_scripts
     GetD4CGCPUserScripts = get_gcp_user_scripts
     GetHorizonD4CScripts = get_aws_horizon_scripts
