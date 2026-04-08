@@ -193,18 +193,6 @@ _ngsiem_endpoints = [
         "name": "id",
         "in": "path",
         "required": True
-      },
-      {
-        "type": "integer",
-        "description": "pagination limit",
-        "name": "paginationLimit",
-        "in": "query"
-      },
-      {
-        "type": "integer",
-        "description": "pagination offset",
-        "name": "paginationOffset",
-        "in": "query"
       }
     ]
   ],
@@ -245,13 +233,13 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "all",
           "falcon",
           "third-party",
           "dashboards"
         ],
-        "type": "string",
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
@@ -266,12 +254,12 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
+        "type": "string",
         "enum": [
           "all",
           "falcon",
           "third-party"
         ],
-        "type": "string",
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "formData"
@@ -298,12 +286,12 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
+        "type": "string",
         "enum": [
           "all",
           "falcon",
           "third-party"
         ],
-        "type": "string",
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "formData"
@@ -336,12 +324,12 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "all",
           "falcon",
           "third-party"
         ],
-        "type": "string",
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
@@ -356,13 +344,13 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
+        "type": "string",
         "enum": [
           "all",
           "falcon",
           "third-party",
           "parsers-repository"
         ],
-        "type": "string",
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "formData"
@@ -380,11 +368,11 @@ _ngsiem_endpoints = [
         "in": "formData"
       },
       {
+        "type": "string",
         "enum": [
           "append",
           "update"
         ],
-        "type": "string",
         "description": "How to update the file entries",
         "name": "update_mode",
         "in": "formData"
@@ -397,11 +385,11 @@ _ngsiem_endpoints = [
         "in": "formData"
       },
       {
+        "type": "string",
         "enum": [
           "true",
           "false"
         ],
-        "type": "string",
         "description": "For update mode, whether to ignore case when matching keys (REQUIRED when update_mode=update)",
         "name": "ignore_case",
         "in": "formData"
@@ -422,6 +410,7 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "all",
           "falcon",
@@ -429,7 +418,6 @@ _ngsiem_endpoints = [
           "dashboards",
           "parsers-repository"
         ],
-        "type": "string",
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
@@ -444,13 +432,13 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
+        "type": "string",
         "enum": [
           "all",
           "falcon",
           "third-party",
           "parsers-repository"
         ],
-        "type": "string",
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "formData"
@@ -458,39 +446,6 @@ _ngsiem_endpoints = [
       {
         "type": "string",
         "description": "Filename of the lookup file to create",
-        "name": "filename",
-        "in": "formData"
-      },
-      {
-        "type": "file",
-        "description": "file content to upload",
-        "name": "file",
-        "in": "formData"
-      }
-    ]
-  ],
-  [
-    "UpdateLookupFile",
-    "PATCH",
-    "/ngsiem-content/entities/lookupfiles/v1",
-    "Update an entire Lookup File in NGSIEM",
-    "ngsiem",
-    [
-      {
-        "enum": [
-          "all",
-          "falcon",
-          "third-party",
-          "parsers-repository"
-        ],
-        "type": "string",
-        "description": "name of search domain (view or repo)",
-        "name": "search_domain",
-        "in": "formData"
-      },
-      {
-        "type": "string",
-        "description": "Filename of the lookup file to update",
         "name": "filename",
         "in": "formData"
       },
@@ -516,16 +471,49 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "all",
           "falcon",
           "third-party",
           "parsers-repository"
         ],
-        "type": "string",
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "UpdateLookupFile",
+    "PATCH",
+    "/ngsiem-content/entities/lookupfiles/v1",
+    "Update an entire Lookup File in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "enum": [
+          "all",
+          "falcon",
+          "third-party",
+          "parsers-repository"
+        ],
+        "description": "name of search domain (view or repo)",
+        "name": "search_domain",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "Filename of the lookup file to update",
+        "name": "filename",
+        "in": "formData"
+      },
+      {
+        "type": "file",
+        "description": "file content to upload",
+        "name": "file",
+        "in": "formData"
       }
     ]
   ],
@@ -573,10 +561,10 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "parsers-repository"
         ],
-        "type": "string",
         "description": "name of repository",
         "name": "repository",
         "in": "query"
@@ -591,10 +579,10 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
+        "type": "string",
         "enum": [
           "parsers-repository"
         ],
-        "type": "string",
         "description": "name of repository",
         "name": "repository",
         "in": "formData"
@@ -616,10 +604,10 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
+        "type": "string",
         "enum": [
           "parsers-repository"
         ],
-        "type": "string",
         "description": "name of repository",
         "name": "repository",
         "in": "formData"
@@ -702,10 +690,10 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "parsers-repository"
         ],
-        "type": "string",
         "description": "name of repository",
         "name": "repository",
         "in": "query"
@@ -728,22 +716,6 @@ _ngsiem_endpoints = [
     ]
   ],
   [
-    "UpdateParser",
-    "PATCH",
-    "/ngsiem-content/entities/parsers/v1",
-    "Update Parser in NGSIEM. Please note that name changes are not supported, but rather should be created as "
-    "a new parser.  This endpoint has been deprecated in favour of the PATCH /entities/parsers-template/v1 API.",
-    "ngsiem",
-    [
-      {
-        "description": "update parser request",
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "DeleteParser",
     "DELETE",
     "/ngsiem-content/entities/parsers/v1",
@@ -757,13 +729,29 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "parsers-repository"
         ],
-        "type": "string",
         "description": "name of repository",
         "name": "repository",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "UpdateParser",
+    "PATCH",
+    "/ngsiem-content/entities/parsers/v1",
+    "Update Parser in NGSIEM. Please note that name changes are not supported, but rather should be created as "
+    "a new parser.  This endpoint has been deprecated in favour of the PATCH /entities/parsers-template/v1 API.",
+    "ngsiem",
+    [
+      {
+        "description": "update parser request",
+        "name": "body",
+        "in": "body",
+        "required": True
       }
     ]
   ],
@@ -781,13 +769,13 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "all",
           "falcon",
           "third-party",
           "dashboards"
         ],
-        "type": "string",
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
@@ -802,12 +790,12 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
+        "type": "string",
         "enum": [
           "all",
           "falcon",
           "third-party"
         ],
-        "type": "string",
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "formData"
@@ -828,12 +816,12 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
+        "type": "string",
         "enum": [
           "all",
           "falcon",
           "third-party"
         ],
-        "type": "string",
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "formData"
@@ -866,12 +854,12 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "all",
           "falcon",
           "third-party"
         ],
-        "type": "string",
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
@@ -886,17 +874,17 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
-        "pattern": "^\\d{1,4}$",
         "type": "string",
         "default": "50",
+        "pattern": "^\\d{1,4}$",
         "description": "maximum number of results to return",
         "name": "limit",
         "in": "query"
       },
       {
-        "pattern": "^\\d{1,4}$",
         "type": "string",
         "default": "0",
+        "pattern": "^\\d{1,4}$",
         "description": "number of results to offset the returned results by",
         "name": "offset",
         "in": "query"
@@ -909,13 +897,13 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "all",
           "falcon",
           "third-party",
           "dashboards"
         ],
-        "type": "string",
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
@@ -930,17 +918,17 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
-        "pattern": "^\\d{1,4}$",
         "type": "string",
         "default": "50",
+        "pattern": "^\\d{1,4}$",
         "description": "maximum number of results to return",
         "name": "limit",
         "in": "query"
       },
       {
-        "pattern": "^\\d{1,4}$",
         "type": "string",
         "default": "0",
+        "pattern": "^\\d{1,4}$",
         "description": "number of results to offset the returned results by",
         "name": "offset",
         "in": "query"
@@ -953,6 +941,7 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "all",
           "falcon",
@@ -960,7 +949,6 @@ _ngsiem_endpoints = [
           "dashboards",
           "parsers-repository"
         ],
-        "type": "string",
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
@@ -975,17 +963,17 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
-        "pattern": "^\\d{1,4}$",
         "type": "string",
         "default": "50",
+        "pattern": "^\\d{1,4}$",
         "description": "maximum number of results to return",
         "name": "limit",
         "in": "query"
       },
       {
-        "pattern": "^\\d{1,4}$",
         "type": "string",
         "default": "0",
+        "pattern": "^\\d{1,4}$",
         "description": "number of results to offset the returned results by",
         "name": "offset",
         "in": "query"
@@ -998,35 +986,33 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "parsers-repository"
         ],
-        "type": "string",
         "description": "name of repository",
         "name": "repository",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "true",
           "false"
         ],
-        "type": "string",
         "description": "filter parsers by update availability",
         "name": "update_available",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "ootb",
           "custom"
         ],
-        "type": "string",
         "description": "filter parsers by type",
         "name": "parser_type",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       }
     ]
   ],
@@ -1038,17 +1024,17 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
-        "pattern": "^\\d{1,4}$",
         "type": "string",
         "default": "50",
+        "pattern": "^\\d{1,4}$",
         "description": "maximum number of results to return",
         "name": "limit",
         "in": "query"
       },
       {
-        "pattern": "^\\d{1,4}$",
         "type": "string",
         "default": "0",
+        "pattern": "^\\d{1,4}$",
         "description": "number of results to offset the returned results by",
         "name": "offset",
         "in": "query"
@@ -1061,13 +1047,13 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "all",
           "falcon",
           "third-party",
           "dashboards"
         ],
-        "type": "string",
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
@@ -1248,6 +1234,22 @@ _ngsiem_endpoints = [
     ]
   ],
   [
+    "ExternalDeleteDataConnection",
+    "DELETE",
+    "/ngsiem/entities/connections/v1",
+    "Delete a data connection",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "Unique identifier of the data connection",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ExternalUpdateDataConnection",
     "PATCH",
     "/ngsiem/entities/connections/v1",
@@ -1264,22 +1266,6 @@ _ngsiem_endpoints = [
       {
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "ExternalDeleteDataConnection",
-    "DELETE",
-    "/ngsiem/entities/connections/v1",
-    "Delete a data connection",
-    "ngsiem",
-    [
-      {
-        "type": "string",
-        "description": "Unique identifier of the data connection",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -1315,6 +1301,35 @@ _ngsiem_endpoints = [
     ]
   ],
   [
+    "ExternalDeleteConnectorConfigs",
+    "DELETE",
+    "/ngsiem/entities/connectors/configs/v1",
+    "Delete data connection config",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "Unique identifier of the connector",
+        "name": "connector_id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "maxItems": 20,
+        "uniqueItems": True,
+        "description": "Unique identifiers of the config(s) to delete",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ExternalPatchConnectorConfig",
     "PATCH",
     "/ngsiem/entities/connectors/configs/v1",
@@ -1331,35 +1346,6 @@ _ngsiem_endpoints = [
       {
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "ExternalDeleteConnectorConfigs",
-    "DELETE",
-    "/ngsiem/entities/connectors/configs/v1",
-    "Delete data connection config",
-    "ngsiem",
-    [
-      {
-        "type": "string",
-        "description": "Unique identifier of the connector",
-        "name": "connector_id",
-        "in": "query",
-        "required": True
-      },
-      {
-        "maxItems": 20,
-        "uniqueItems": True,
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "csv",
-        "description": "Unique identifiers of the config(s) to delete",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
