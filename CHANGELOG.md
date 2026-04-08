@@ -139,6 +139,16 @@
     - `_endpoint/_container_images.py`
     - `container_images.py`
 
++ Updated: Updated available FQL filter fields documentation in the _combinedQueryVulnerabilities_ operation within the __Spotlight Vulnerabilities__ service collection.
+    - `_endpoint/_spotlight_vulnerabilities.py`
+    - `_endpoint/deprecated/_spotlight_vulnerabilities.py`
+    - `spotlight_vulnerabilities.py`
+
++ Updated: Updated available sort fields documentation in the _query_scheduled_scans_ operation within the __ODS__ service collection.
+    - `_endpoint/_ods.py`
+    - `_endpoint/deprecated/_ods.py`
+    - `ods.py`
+
 + Removed: Removed the _AggregateFCIncidents_ and _QueryIncidentIdsByFilter_ operations from the __Falcon Complete Dashboard__ service collection.
     - `_endpoint/_falcon_complete_dashboard.py`
     - `falcon_complete_dashboard.py`
@@ -338,6 +348,12 @@
     - `cloud_policies.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_policies.py`
+
++ Removed: Removed `GetCSPMGCPUserScriptsAttachment` operation from the __D4cRegistration__ service collection.
+
++ Removed: Removed `GetCombinedImages` operation from the __FalconContainer__ service collection.
+
++ Removed: Removed `getCombinedAssessmentsQuery` operation from the __ZeroTrustAssessment__ service collection.
 
 + Added: Added `rule_category`, `rule_cloneable`, `rule_compliance_benchmark_uuid`, `rule_resource_type_name`, and `rule_risk_factor` as allowed filter and sort fields in the _QueryRules_ operation within the __Cloud Policies__ service collection.
     - `_endpoint/_cloud_policies.py`
