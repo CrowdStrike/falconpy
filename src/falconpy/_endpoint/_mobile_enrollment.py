@@ -45,15 +45,14 @@ _mobile_enrollment_endpoints = [
     "mobile_enrollment",
     [
       {
+        "type": "string",
         "enum": [
           "enroll",
           "re-enroll"
         ],
-        "type": "string",
         "description": "Action to perform",
         "name": "action_name",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "string",
@@ -76,15 +75,14 @@ _mobile_enrollment_endpoints = [
     "mobile_enrollment",
     [
       {
+        "type": "string",
         "enum": [
           "enroll",
           "re-enroll"
         ],
-        "type": "string",
         "description": "Action to perform",
         "name": "action_name",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "string",
