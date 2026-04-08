@@ -59,6 +59,7 @@ _hosts_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "device_policies.sca.policy_type",
           "device_policies.data-protection-cloud.policy_id",
@@ -253,7 +254,6 @@ _hosts_endpoints = [
           "policies.applied",
           "device_policies.identity-protection.policy_type"
         ],
-        "type": "string",
         "description": "The property to sort by (e.g. status.desc or hostname.asc). If not specified, the "
         "default sort will be device_id.asc. This should be supplied for each consecutive call.",
         "name": "sort",
@@ -361,6 +361,7 @@ _hosts_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "device_policies.sca.policy_type",
           "device_policies.data-protection-cloud.policy_id",
@@ -555,7 +556,6 @@ _hosts_endpoints = [
           "policies.applied",
           "device_policies.identity-protection.policy_type"
         ],
-        "type": "string",
         "description": "The property to sort by (e.g. status.desc or hostname.asc). If not specified, the "
         "default sort will be device_id.asc. This should be supplied for each consecutive call.",
         "name": "sort",
@@ -664,12 +664,12 @@ _hosts_endpoints = [
     "hosts",
     [
       {
-        "maxItems": 100,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "maxItems": 100,
         "description": "The host agentIDs used to get details on",
         "name": "ids",
         "in": "query",
@@ -710,12 +710,12 @@ _hosts_endpoints = [
         "required": True
       },
       {
+        "type": "string",
         "enum": [
           "add_group_member",
           "remove_all",
           "remove_group_member"
         ],
-        "type": "string",
         "description": "The action to perform.",
         "name": "action_name",
         "in": "query",
@@ -741,8 +741,8 @@ _hosts_endpoints = [
     "/devices/entities/online-state/v1",
     "Get the online status for one or more hosts by specifying each host’s unique ID. Successful requests "
     "return an HTTP 200 response and the status for each host identified by a `state` of `online`, `offline`, or "
-    "`unknown` for each host, identified by host `id`.\n\nUse QueryDevicesByFilterScroll to get a list of host "
-    "IDs.",
+    "`unknown` for each host, identified by host `id`.\n\nMake a `GET` request to `/devices/queries/devices/v1` to "
+    "get a list of host IDs.",
     "hosts",
     [
       {
