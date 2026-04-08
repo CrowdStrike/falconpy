@@ -263,10 +263,9 @@ class NetworkScanScanRuns(ServiceClass):
         """Get scan-run IDs by filter.
 
         Keyword arguments:
-        offset -- An offset used with the `limit` parameter to manage pagination of results.
-                  On your first request, don't provide an `offset`. On subsequent requests,
-                  add previous `offset` with the previous `limit` to continue from that place
-                  in the results. Integer.
+        offset -- An offset used with the limit parameter to manage pagination of results. On your first request, don’t provide
+                  an offset. On subsequent requests, add previous offset with the previous limit to continue from that place in
+                  the results Integer.
         limit -- The number of scan-run IDs to return in this response (Min: 1, Max: 100,
                  Default: 100). Integer.
         sort -- Sort scan-runs by their properties. A single sort field is allowed. String.
