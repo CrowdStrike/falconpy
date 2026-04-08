@@ -48,8 +48,7 @@ _workflows_endpoints = [
         "type": "string",
         "description": "FQL query specifying filter parameters.",
         "name": "filter",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "string",
@@ -64,8 +63,8 @@ _workflows_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "type": "string",
+        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "description": "Sort items by providing a comma separated list of property and direction (eg "
         "name.desc,time.asc). If direction is omitted, defaults to descending.",
         "name": "sort",
@@ -84,8 +83,7 @@ _workflows_endpoints = [
         "type": "string",
         "description": "FQL query specifying filter parameters.",
         "name": "filter",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "string",
@@ -100,8 +98,8 @@ _workflows_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "type": "string",
+        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "description": "Sort items by providing a comma separated list of property and direction (eg "
         "name.desc,time.asc). If direction is omitted, defaults to descending.",
         "name": "sort",
@@ -121,8 +119,7 @@ _workflows_endpoints = [
         "type": "string",
         "description": "FQL query specifying filter parameters.",
         "name": "filter",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "string",
@@ -137,8 +134,8 @@ _workflows_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "type": "string",
+        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "description": "Sort items by providing a comma separated list of property and direction (eg "
         "name.desc,time.asc). If direction is omitted, defaults to descending.",
         "name": "sort",
@@ -157,8 +154,7 @@ _workflows_endpoints = [
         "type": "string",
         "description": "FQL query specifying filter parameters.",
         "name": "filter",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "string",
@@ -173,8 +169,8 @@ _workflows_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "type": "string",
+        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "description": "Sort items by providing a comma separated list of property and direction (eg "
         "name.desc,time.asc). If direction is omitted, defaults to descending.",
         "name": "sort",
@@ -194,8 +190,7 @@ _workflows_endpoints = [
         "type": "string",
         "description": "FQL query specifying filter parameters.",
         "name": "filter",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "string",
@@ -243,9 +238,9 @@ _workflows_endpoints = [
     "workflows",
     [
       {
+        "type": "string",
         "maxLength": 40,
         "minLength": 32,
-        "type": "string",
         "description": "ID of workflow definitions to return details for",
         "name": "id",
         "in": "query",
@@ -269,7 +264,6 @@ _workflows_endpoints = [
     [
       {
         "type": "file",
-        "x-mimetype": "application/yaml",
         "description": "A workflow definition in YAML format to import",
         "name": "data_file",
         "in": "formData",
@@ -446,11 +440,11 @@ _workflows_endpoints = [
     "workflows",
     [
       {
+        "type": "string",
         "enum": [
           "resume",
           "cancel"
         ],
-        "type": "string",
         "description": "Specify one of these actions:\n  resume: resume/retry the workflow execution(s) "
         "specified in ids\n  cancel: cancel/stop the workflow execution specified in ids",
         "name": "action_name",
@@ -472,13 +466,12 @@ _workflows_endpoints = [
     "workflows",
     [
       {
-        "maxItems": 500,
-        "minItems": 1,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "csv",
+        "maxItems": 500,
         "description": "workflow execution id to return results for.",
         "name": "ids",
         "in": "query",
@@ -515,9 +508,9 @@ _workflows_endpoints = [
     "workflows",
     [
       {
+        "type": "string",
         "maxLength": 32,
         "minLength": 32,
-        "type": "string",
         "description": "ID of human input to provide an input to",
         "name": "id",
         "in": "query",
@@ -678,8 +671,7 @@ _workflows_endpoints = [
         "type": "string",
         "description": "FQL query specifying filter parameters.",
         "name": "filter",
-        "in": "query",
-        "allowEmptyValue": True
+        "in": "query"
       },
       {
         "type": "string",
@@ -694,8 +686,8 @@ _workflows_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "type": "string",
+        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
         "description": "Sort items by providing a comma separated list of property and direction (eg "
         "name.desc,time.asc). If direction is omitted, defaults to descending.",
         "name": "sort",
