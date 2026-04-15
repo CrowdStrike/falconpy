@@ -125,7 +125,7 @@
     - `spotlight_vulnerabilities.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_spotlight_vulnerabilities.py`
-    - Thanks to @vratiskol for the contribution!
+    - Thanks to @vratiskol for their contribution!
 
 + Added: Added two new operations to the __NGSIEM__ service collection.
     - _CloneParser_
