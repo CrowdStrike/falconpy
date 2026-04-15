@@ -1842,3 +1842,5 @@ Configs
 configs
 combinedqueryinstalledpatches
 combinedQueryInstalledPatches
+vratiskol
+JSONDecodeError
