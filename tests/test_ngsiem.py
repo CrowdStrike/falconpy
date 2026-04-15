@@ -342,3 +342,35 @@ class TestNGSIEMConnectorCoverage:
                 print(f"{key} returned {tests[key]['status_code']}")
 
         assert error_checks
+
+
+class TestNGSIEMUploadCoverage:
+    """Cover ngsiem.py upload_file response handling branches."""
+
+    def test_upload_file_json_response(self, monkeypatch):
+        """Cover upload_file when API returns Response with application/json content type (line 128)."""
+        import falconpy.ngsiem as ngsiem_mod
+
+        class FakeResponse(Response):
+            def __init__(self):
+                super().__init__()
+                self.status_code = 200
+                self.headers["Content-Type"] = "application/json"
+                self._content = b'{"resources": ["file-id-123"]}'
+
+            def json(self):
+                return {"resources": ["file-id-123"]}
+
+        monkeypatch.setattr(ngsiem_mod, "process_service_request", lambda **kw: FakeResponse())
+        result = falcon.upload_file(repository="search-all", lookup_file="tests/testfile.csv")
+        assert result["status_code"] == 200
+        assert result["body"]["resources"] == ["file-id-123"]
+
+    def test_upload_file_non_response(self, monkeypatch):
+        """Cover upload_file when process_service_request returns a dict (line 133)."""
+        import falconpy.ngsiem as ngsiem_mod
+
+        error_dict = {"status_code": 403, "body": {"errors": [{"message": "forbidden"}]}, "headers": {}}
+        monkeypatch.setattr(ngsiem_mod, "process_service_request", lambda **kw: error_dict)
+        result = falcon.upload_file(repository="search-all", lookup_file="tests/testfile.csv")
+        assert result["status_code"] == 403
