@@ -451,6 +451,67 @@ class TestUtilFunctionsCoverage:
             assert len(w) == 1
             assert issubclass(w[0].category, FutureWarning)
 
+    def test_url_encoded_warning_with_logger(self):
+        """Cover args_to_params URL-encoded warning with logger, non-pythonic (line 638)."""
+        test_object = Hosts(
+            client_id=auth.config["falcon_client_id"],
+            client_secret=auth.config["falcon_client_secret"],
+            debug=True
+        )
+        result = test_object.query_devices_by_filter_scroll(
+            limit=1,
+            filter="platform_name%3A'Windows'"
+        )
+        assert result["status_code"] in [200, 400, 401, 403, 429]
+
+    def test_simplejson_fallback_functions(self):
+        """Cover the simplejson import fallback in _functions.py (lines 45-46)."""
+        import sys
+        sj_keys = [k for k in sys.modules if k == "simplejson" or k.startswith("simplejson.")]
+        saved_sj = {k: sys.modules.pop(k) for k in sj_keys}
+        class BlockSimplejson:
+            def find_spec(self, name, path, target=None):
+                if name == "simplejson" or name.startswith("simplejson."):
+                    raise ImportError(f"blocked: {name}")
+                return None
+        blocker = BlockSimplejson()
+        sys.meta_path.insert(0, blocker)
+        try:
+            source_path = "src/falconpy/_util/_functions.py"
+            with open(source_path, "r") as f:
+                source = f.read()
+            code = compile(source, source_path, "exec")
+            mod_ns = {"__name__": "falconpy._util._functions", "__file__": source_path}
+            exec(code, mod_ns)  # noqa: S102
+            assert mod_ns["SimplejsonJSONDecodeError"] is None
+        finally:
+            sys.meta_path.remove(blocker)
+            sys.modules.update(saved_sj)
+
+    def test_simplejson_fallback_auth(self):
+        """Cover the simplejson import fallback in _auth.py (lines 42-43)."""
+        import sys
+        sj_keys = [k for k in sys.modules if k == "simplejson" or k.startswith("simplejson.")]
+        saved_sj = {k: sys.modules.pop(k) for k in sj_keys}
+        class BlockSimplejson:
+            def find_spec(self, name, path, target=None):
+                if name == "simplejson" or name.startswith("simplejson."):
+                    raise ImportError(f"blocked: {name}")
+                return None
+        blocker = BlockSimplejson()
+        sys.meta_path.insert(0, blocker)
+        try:
+            source_path = "src/falconpy/_util/_auth.py"
+            with open(source_path, "r") as f:
+                source = f.read()
+            code = compile(source, source_path, "exec")
+            mod_ns = {"__name__": "falconpy._util._auth", "__file__": source_path}
+            exec(code, mod_ns)  # noqa: S102
+            assert mod_ns["SimplejsonJSONDecodeError"] is None
+        finally:
+            sys.meta_path.remove(blocker)
+            sys.modules.update(saved_sj)
+
 
 class TestOAuth2LogoutCoverage:
     """Cover oauth2.py logout with logging."""
@@ -578,6 +639,31 @@ class TestFalconInterfaceCoverage:
     def test_logout_handler_invalid_creds_with_logging(self):
         """Cover InvalidCredentials caught in _logout_handler with debug."""
         oauth = OAuth2(debug=True)
+        result = oauth.logout()
+        assert isinstance(result, dict)
+        assert result.get("status_code") is not None
+
+    def test_no_auth_mechanism_with_logging(self):
+        """Cover NoAuthenticationMechanism warning with debug logging (line 246)."""
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            oauth = OAuth2(debug=True, environment={"prefix": "ZCOV_NOEXIST_"})
+            assert not oauth.cred_format_valid
+
+    def test_login_handler_invalid_creds_with_logging(self):
+        """Cover InvalidCredentials caught in _login_handler with debug (line 341)."""
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            oauth = OAuth2(debug=True, environment={"prefix": "ZCOV_NOEXIST_"})
+        result = oauth.login()
+        assert isinstance(result, dict)
+        assert result.get("status_code") is not None
+
+    def test_logout_handler_invalid_creds_no_env_with_logging(self):
+        """Cover InvalidCredentials caught in _logout_handler with debug (line 376)."""
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            oauth = OAuth2(debug=True, environment={"prefix": "ZCOV_NOEXIST_"})
         result = oauth.logout()
         assert isinstance(result, dict)
         assert result.get("status_code") is not None
