@@ -38,12 +38,18 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Optional
 from json import loads
 try:
-    from simplejson import JSONDecodeError
+    from simplejson import JSONDecodeError as SimplejsonJSONDecodeError
 except (ImportError, ModuleNotFoundError):  # Support import as a module
-    from json.decoder import JSONDecodeError
+    SimplejsonJSONDecodeError = None  # Support import as a module
+from json.decoder import JSONDecodeError as StdJSONDecodeError
 from ._functions import generate_b64cred
 from .._endpoint._oauth2 import _oauth2_endpoints as AuthEndpoints
 from .._error import InvalidCredentialFormat
+
+# create a tuple of all possible JSONDecodeError types for exception handling
+# pylint: disable=invalid-name
+JSONDecodeError = (SimplejsonJSONDecodeError, StdJSONDecodeError) if SimplejsonJSONDecodeError else (StdJSONDecodeError,)
+_CredParseErrors = (TypeError,) + JSONDecodeError
 
 
 def login_payloads(creds: dict, base: str):
@@ -107,7 +113,7 @@ def review_provided_credentials(cid: Optional[str] = None,
             # Try and clean up any attempts to provide the dictionary as a string
             returned: Dict[str, str] = loads(cdict.replace("'", "\""))
             returned_style = "CREDENTIAL"
-        except (TypeError, JSONDecodeError) as bad_cred_format:
+        except _CredParseErrors as bad_cred_format:
             raise InvalidCredentialFormat from bad_cred_format
     elif isinstance(cdict, dict):
         returned: Dict[str, str] = cdict
