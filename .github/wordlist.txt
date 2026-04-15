@@ -1840,3 +1840,5 @@ TestParserFromTemplate
 CloneParser
 Configs
 configs
+combinedqueryinstalledpatches
+combinedQueryInstalledPatches
