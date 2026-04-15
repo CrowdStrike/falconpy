@@ -119,6 +119,14 @@
     - `__init__.py`
     - `network_scan.py`
 
++ Added: Added one new operation to the __Spotlight Vulnerabilities__ service collection.
+    - _combinedQueryInstalledPatches_
+    - `_endpoint/_spotlight_vulnerabilties.py`
+    - `spotlight_vulnerabilities.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_spotlight_vulnerabilities.py`
+    - Thanks to @vratiskol for the contribution!
+
 + Added: Added two new operations to the __NGSIEM__ service collection.
     - _CloneParser_
     - _TestParserFromTemplate_
@@ -159,6 +167,10 @@
     - `cspm_registration.py`
 
 ## Issues resolved
++ Fixed: JSONDecodeError import bug.
+    - `util/_functions.py`
+    - `util/_auth.py`
+
 + Fixed: Added missing parameters `is_enabled` and `host_groups` to the _entities_policy_patch_v2_ operation from the __Data Protection Configuration__ service collection.
     - `_payload/_data_protection_configuration.py`
     - `data_protection_configuration.py`
