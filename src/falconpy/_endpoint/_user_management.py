@@ -55,7 +55,7 @@ _user_management_endpoints = [
     "combinedUserRolesV1",
     "GET",
     "/user-management/combined/user-roles/v1",
-    "Deprecated : Please use GET /user-management/combined/user-roles/v2. Get User Grant(s). This endpoint "
+    "Deprecated : Please use CombinedUserRolesV2. Get User Grant(s). This endpoint "
     "lists both direct as well as flight control grants between a User and a Customer.",
     "user_management",
     [
@@ -250,7 +250,7 @@ _user_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "ID of a role. Find a role ID from /user-management/queries/roles/v1.",
+        "description": "ID of a role. Find a role ID from queriesRolesV1.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -407,7 +407,7 @@ _user_management_endpoints = [
     "GET",
     "/user-management/queries/users/v1",
     "List user IDs for all users in your customer account. For more information on each user, provide the user "
-    "ID to `/user-management/entities/users/GET/v1`.",
+    "ID to `retrieveUsersGETV1`.",
     "user_management",
     [
       {
@@ -480,7 +480,7 @@ _user_management_endpoints = [
     "GetRoles",
     "GET",
     "/user-roles/entities/user-roles/v1",
-    "Deprecated : Please use GET /user-management/entities/roles/v1. Get info about a role",
+    "Deprecated : Please use entitiesRolesV1. Get info about a role",
     "user_management",
     [
       {
@@ -500,7 +500,7 @@ _user_management_endpoints = [
     "GrantUserRoleIds",
     "POST",
     "/user-roles/entities/user-roles/v1",
-    "Deprecated : Please use POST /user-management/entities/user-role-actions/v1. Assign one or more roles to a user",
+    "Deprecated : Please use userRolesActionV1. Assign one or more roles to a user",
     "user_management",
     [
       {
@@ -522,7 +522,7 @@ _user_management_endpoints = [
     "RevokeUserRoleIds",
     "DELETE",
     "/user-roles/entities/user-roles/v1",
-    "Deprecated : Please use POST /user-management/entities/user-role-actions/v1. Revoke one or more roles from a user",
+    "Deprecated : Please use userRolesActionV1. Revoke one or more roles from a user",
     "user_management",
     [
       {
@@ -549,7 +549,7 @@ _user_management_endpoints = [
     "GetAvailableRoleIds",
     "GET",
     "/user-roles/queries/user-role-ids-by-cid/v1",
-    "Deprecated : Please use GET /user-management/queries/roles/v1. Show role IDs for all roles available in "
+    "Deprecated : Please use GET queriesRolesV1. Show role IDs for all roles available in "
     "your customer account. For more information on each role, provide the role ID to "
     "`/customer/entities/roles/v1`.",
     "user_management",
@@ -559,7 +559,7 @@ _user_management_endpoints = [
     "GetUserRoleIds",
     "GET",
     "/user-roles/queries/user-role-ids-by-user-uuid/v1",
-    "Deprecated : Please use GET /user-management/combined/user-roles/v1. Show role IDs of roles assigned to a "
+    "Deprecated : Please use GET combinedUserRolesV1. Show role IDs of roles assigned to a "
     "user. For more information on each role, provide the role ID to `/customer/entities/roles/v1`.",
     "user_management",
     [
@@ -596,7 +596,7 @@ _user_management_endpoints = [
     "retrieveUser",
     "GET",
     "/users/entities/users/v1",
-    "Deprecated : Please use POST /user-management/entities/users/GET/v1. Get info about a user",
+    "Deprecated : Please use retrieveUsersGETV1. Get info about a user",
     "user_management",
     [
       {
@@ -616,7 +616,7 @@ _user_management_endpoints = [
     "CreateUser",
     "POST",
     "/users/entities/users/v1",
-    "Deprecated : Please use POST /user-management/entities/users/v1. Create a new user. After creating a "
+    "Deprecated : Please use createUserV1. Create a new user. After creating a "
     "user, assign one or more roles with POST /user-roles/entities/user-roles/v1",
     "user_management",
     [
@@ -637,7 +637,7 @@ _user_management_endpoints = [
     "DeleteUser",
     "DELETE",
     "/users/entities/users/v1",
-    "Deprecated : Please use DELETE /user-management/entities/users/v1. Delete a user permanently",
+    "Deprecated : Please use deleteUserV1. Delete a user permanently",
     "user_management",
     [
       {
@@ -653,7 +653,7 @@ _user_management_endpoints = [
     "UpdateUser",
     "PATCH",
     "/users/entities/users/v1",
-    "Deprecated : Please use PATCH /user-management/entities/users/v1. Modify an existing user's first or last name",
+    "Deprecated : Please use updateUserV1. Modify an existing user's first or last name",
     "user_management",
     [
       {
@@ -675,7 +675,7 @@ _user_management_endpoints = [
     "RetrieveEmailsByCID",
     "GET",
     "/users/queries/emails-by-cid/v1",
-    "Deprecated : Please use POST /user-management/entities/users/GET/v1. List the usernames (usually an email "
+    "Deprecated : Please use retrieveUsersGETV1. List the usernames (usually an email "
     "address) for all users in your customer account",
     "user_management",
     []
@@ -684,7 +684,7 @@ _user_management_endpoints = [
     "RetrieveUserUUIDsByCID",
     "GET",
     "/users/queries/user-uuids-by-cid/v1",
-    "Deprecated : Please use GET /user-management/queries/users/v1. List user IDs for all users in your "
+    "Deprecated : Please use queryUserV1. List user IDs for all users in your "
     "customer account. For more information on each user, provide the user ID to `/users/entities/user/v1`.",
     "user_management",
     []
@@ -693,7 +693,7 @@ _user_management_endpoints = [
     "RetrieveUserUUID",
     "GET",
     "/users/queries/user-uuids-by-email/v1",
-    "Deprecated : Please use GET /user-management/queries/users/v1. Get a user's ID by providing a username "
+    "Deprecated : Please use queryUserV1. Get a user's ID by providing a username "
     "(usually an email address)",
     "user_management",
     [
