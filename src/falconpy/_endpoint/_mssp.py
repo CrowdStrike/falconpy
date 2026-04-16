@@ -145,7 +145,7 @@ _mssp_endpoints = [
     "deleteCIDGroupMembers",
     "DELETE",
     "/mssp/entities/cid-group-members/v1",
-    "Deprecated : Please use DeleteCIDGroupMembers. Delete CID group members.",
+    "Deprecated : Please use deleteCIDGroupMembers. Delete CID group members.",
     "mssp",
     [
       {
@@ -195,7 +195,7 @@ _mssp_endpoints = [
     "getCIDGroupByIdV1",
     "GET",
     "/mssp/entities/cid-groups/v1",
-    "Deprecated : Please use GetCIDGroupById. Get CID groups by ID.",
+    "Deprecated : Please use getCIDGroupById. Get CID groups by ID.",
     "mssp",
     [
       {
