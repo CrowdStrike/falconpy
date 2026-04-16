@@ -5,6 +5,8 @@ import os
 import sys
 import pytest
 import warnings
+import importlib
+import unittest.mock as mock
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -465,52 +467,18 @@ class TestUtilFunctionsCoverage:
         assert result["status_code"] in [200, 400, 401, 403, 429]
 
     def test_simplejson_fallback_functions(self):
-        """Cover the simplejson import fallback in _functions.py (lines 45-46)."""
-        import sys
-        sj_keys = [k for k in sys.modules if k == "simplejson" or k.startswith("simplejson.")]
-        saved_sj = {k: sys.modules.pop(k) for k in sj_keys}
-        class BlockSimplejson:
-            def find_spec(self, name, path, target=None):
-                if name == "simplejson" or name.startswith("simplejson."):
-                    raise ImportError(f"blocked: {name}")
-                return None
-        blocker = BlockSimplejson()
-        sys.meta_path.insert(0, blocker)
-        try:
-            source_path = "src/falconpy/_util/_functions.py"
-            with open(source_path, "r") as f:
-                source = f.read()
-            code = compile(source, source_path, "exec")
-            mod_ns = {"__name__": "falconpy._util._functions", "__file__": source_path}
-            exec(code, mod_ns)  # noqa: S102
-            assert mod_ns["SimplejsonJSONDecodeError"] is None
-        finally:
-            sys.meta_path.remove(blocker)
-            sys.modules.update(saved_sj)
+        """Cover the simplejson import fallback in _functions.py."""
+        with mock.patch.dict(sys.modules, {"simplejson": None}):
+            mod = importlib.import_module("falconpy._util._functions")
+            importlib.reload(mod)
+            assert mod.SimplejsonJSONDecodeError is None
 
     def test_simplejson_fallback_auth(self):
-        """Cover the simplejson import fallback in _auth.py (lines 42-43)."""
-        import sys
-        sj_keys = [k for k in sys.modules if k == "simplejson" or k.startswith("simplejson.")]
-        saved_sj = {k: sys.modules.pop(k) for k in sj_keys}
-        class BlockSimplejson:
-            def find_spec(self, name, path, target=None):
-                if name == "simplejson" or name.startswith("simplejson."):
-                    raise ImportError(f"blocked: {name}")
-                return None
-        blocker = BlockSimplejson()
-        sys.meta_path.insert(0, blocker)
-        try:
-            source_path = "src/falconpy/_util/_auth.py"
-            with open(source_path, "r") as f:
-                source = f.read()
-            code = compile(source, source_path, "exec")
-            mod_ns = {"__name__": "falconpy._util._auth", "__file__": source_path}
-            exec(code, mod_ns)  # noqa: S102
-            assert mod_ns["SimplejsonJSONDecodeError"] is None
-        finally:
-            sys.meta_path.remove(blocker)
-            sys.modules.update(saved_sj)
+        """Cover the simplejson import fallback in _auth.py."""
+        with mock.patch.dict(sys.modules, {"simplejson": None}):
+            mod = importlib.import_module("falconpy._util._auth")
+            importlib.reload(mod)
+            assert mod.SimplejsonJSONDecodeError is None
 
 
 class TestOAuth2LogoutCoverage:
