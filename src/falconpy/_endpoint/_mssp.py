@@ -75,7 +75,7 @@ _mssp_endpoints = [
     "getCIDGroupMembersByV1",
     "GET",
     "/mssp/entities/cid-group-members/v1",
-    "Deprecated : Please use GET /mssp/entities/cid-group-members/v2. Get CID group members by CID group ID.",
+    "Deprecated : Please use getCIDGroupMembersBy. Get CID group members by CID group ID.",
     "mssp",
     [
       {
@@ -145,7 +145,7 @@ _mssp_endpoints = [
     "deleteCIDGroupMembers",
     "DELETE",
     "/mssp/entities/cid-group-members/v1",
-    "Deprecated : Please use DELETE /entities/cid-group-members/v2. Delete CID group members.",
+    "Deprecated : Please use DeleteCIDGroupMembers. Delete CID group members.",
     "mssp",
     [
       {
@@ -195,7 +195,7 @@ _mssp_endpoints = [
     "getCIDGroupByIdV1",
     "GET",
     "/mssp/entities/cid-groups/v1",
-    "Deprecated : Please use GET /mssp/entities/cid-groups/v2. Get CID groups by ID.",
+    "Deprecated : Please use GetCIDGroupById. Get CID groups by ID.",
     "mssp",
     [
       {
@@ -364,7 +364,7 @@ _mssp_endpoints = [
     "getUserGroupMembersByIDV1",
     "GET",
     "/mssp/entities/user-group-members/v1",
-    "Deprecated : Please use GET /mssp/entities/user-group-members/v2. Get user group members by user group ID.",
+    "Deprecated : Please use getUserGroupMembersByID. Get user group members by user group ID.",
     "mssp",
     [
       {
@@ -454,7 +454,7 @@ _mssp_endpoints = [
     "getUserGroupsByIDV1",
     "GET",
     "/mssp/entities/user-groups/v1",
-    "Deprecated : Please use GET /entities/user-groups/v2. Get user groups by ID.",
+    "Deprecated : Please use getUserGroupsByID. Get user groups by ID.",
     "mssp",
     [
       {
