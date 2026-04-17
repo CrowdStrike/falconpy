@@ -473,6 +473,49 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
+    def aggregate_fc_incidents(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve aggregate incident values based on the matched filter.
+
+        DECOMMISSIONED: This operation has been decommissioned by CrowdStrike.
+        Calls to this method will return a 410 status code.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateFCIncidents
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="AggregateFCIncidents",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_incident_ids_by_filter(self: object,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve incidents that match the provided filter criteria with scrolling enabled.
+
+        DECOMMISSIONED: This operation has been decommissioned by CrowdStrike.
+        Calls to this method will return a 410 status code.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/QueryIncidentIdsByFilter
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryIncidentIdsByFilter",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["list"])
     def aggregate_prevention_policy(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregate prevention policy values based on the matched filter.
 
@@ -1151,6 +1194,7 @@ class CompleteDashboard(ServiceClass):
     AggregateBlockList = aggregate_block_list
     AggregateDeviceCountCollection = aggregate_device_count_collection
     AggregateEscalations = aggregate_escalations
+    AggregateFCIncidents = aggregate_fc_incidents
     AggregatePreventionPolicy = aggregate_prevention_policy
     AggregateRemediations = aggregate_remediations
     AggregateSensorUpdatePolicy = aggregate_sensor_update_policy
@@ -1163,6 +1207,7 @@ class CompleteDashboard(ServiceClass):
     QueryBlockListFilter = query_block_list_filter
     GetDeviceCountCollectionQueriesByFilter = get_device_count_collection_queries_by_filter
     QueryEscalationsFilter = query_escalations_filter
+    QueryIncidentIdsByFilter = query_incident_ids_by_filter
     QueryRemediationsFilter = query_remediations_filter
 
 
