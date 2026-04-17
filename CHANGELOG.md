@@ -183,6 +183,9 @@
 + Fixed: Fixed `case_id` and `description` not being sent as form data in the _upload_file_ operation within the __Case Management__ service collection. Closes #1445.
     - `case_management.py`
 
++ Fixed: Added missing `anomaly`, `guardrail_notifications`, `mitre_attack`, and `template_id` parameters to the correlation rules payload builder. List parameters now accept comma-delimited strings or lists. Closes #1450.
+    - `_payload/_correlation_rules.py`
+
 + Fixed: Added missing `facet` keyword argument documentation to the _query_combined_hosts_ operation within the __Discover__ service collection. Closes #1382.
     - `discover.py`
 
