@@ -220,7 +220,7 @@ _discover_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more account IDs (max: 100). Find account IDs with GET /discover/queries/accounts/v1",
+        "description": "One or more account IDs (max: 100). Find account IDs with query_accounts",
         "name": "ids",
         "in": "query",
         "required": True
@@ -260,7 +260,7 @@ _discover_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more asset IDs (max: 100). Find asset IDs with GET /discover/queries/hosts/v1",
+        "description": "One or more asset IDs (max: 100). Find asset IDs with query_hosts",
         "name": "ids",
         "in": "query",
         "required": True
@@ -280,7 +280,7 @@ _discover_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more asset IDs (max: 100). Find asset IDs with GET /discover/queries/iot-hosts/v1",
+        "description": "One or more asset IDs (max: 100). Find asset IDs with query_iot_hosts",
         "name": "ids",
         "in": "query",
         "required": True
@@ -300,7 +300,7 @@ _discover_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more login IDs (max: 100). Find login IDs with GET /discover/queries/logins/v1",
+        "description": "One or more login IDs (max: 100). Find login IDs with query_logins",
         "name": "ids",
         "in": "query",
         "required": True

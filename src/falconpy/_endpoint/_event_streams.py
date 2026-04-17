@@ -41,7 +41,7 @@ _event_streams_endpoints = [
     "refreshActiveStreamSession",
     "POST",
     "/sensors/entities/datafeed-actions/v1/{}",
-    "Refresh an active event stream. Use the URL shown in a GET /sensors/entities/datafeed/v2 response.",
+    "Refresh an active event stream. Use the URL shown in a listAvailableStreamsOAuth2 response.",
     "event_streams",
     [
       {

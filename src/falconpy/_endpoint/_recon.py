@@ -85,7 +85,7 @@ _recon_endpoints = [
     "GetActionsV1",
     "GET",
     "/recon/entities/actions/v1",
-    "Get actions based on their IDs. IDs can be retrieved using the GET /queries/actions/v1 endpoint.",
+    "Get actions based on their IDs. IDs can be retrieved using the QueryActionsV1 endpoint.",
     "recon",
     [
       {
@@ -187,7 +187,7 @@ _recon_endpoints = [
     "CreateExportJobsV1",
     "POST",
     "/recon/entities/exports/v1",
-    "Launch asynchronous export job. Use the job ID to poll the status of the job using GET /entities/exports/v1.",
+    "Launch asynchronous export job. Use the job ID to poll the status of the job using GetExportJobsV1.",
     "recon",
     [
       {
@@ -285,7 +285,7 @@ _recon_endpoints = [
     "GetNotificationsTranslatedV1",
     "GET",
     "/recon/entities/notifications-translated/v1",
-    "Get notifications based on their IDs. IDs can be retrieved using the GET /queries/notifications/v1 "
+    "Get notifications based on their IDs. IDs can be retrieved using the QueryNotificationsV1 "
     "endpoint. This endpoint will return translated notification content. The only target language available is "
     "English.",
     "recon",
@@ -307,7 +307,7 @@ _recon_endpoints = [
     "GetNotificationsV1",
     "GET",
     "/recon/entities/notifications/v1",
-    "Get notifications based on their IDs. IDs can be retrieved using the GET /queries/notifications/v1 endpoint.",
+    "Get notifications based on their IDs. IDs can be retrieved using the QueryNotificationsV1 endpoint.",
     "recon",
     [
       {
@@ -361,7 +361,7 @@ _recon_endpoints = [
     "GetRulesV1",
     "GET",
     "/recon/entities/rules/v1",
-    "Get monitoring rules based on their IDs. IDs can be retrieved using the GET /queries/rules/v1 endpoint.",
+    "Get monitoring rules based on their IDs. IDs can be retrieved using the QueryRulesV1 endpoint.",
     "recon",
     [
       {
@@ -436,7 +436,7 @@ _recon_endpoints = [
     "GET",
     "/recon/queries/actions/v1",
     "Query actions based on provided criteria. Use the IDs from this response to get the action entities on "
-    "GET /entities/actions/v1.",
+    "GetActionsV1.",
     "recon",
     [
       {
@@ -480,7 +480,7 @@ _recon_endpoints = [
     "GET",
     "/recon/queries/notifications-exposed-data-records/v1",
     "Query notifications exposed data records based on provided criteria. Use the IDs from this response to "
-    "get the notification +entities on GET /entities/notifications-exposed-data-records/v1",
+    "get the notification +entities on GetNotificationsExposedDataRecordsV1.",
     "recon",
     [
       {
@@ -530,8 +530,8 @@ _recon_endpoints = [
     "GET",
     "/recon/queries/notifications/v1",
     "Query notifications based on provided criteria. Use the IDs from this response to get the notification "
-    "+entities on GET /entities/notifications/v1, GET /entities/notifications-detailed/v1, +GET "
-    "/entities/notifications-translated/v1 or GET /entities/notifications-detailed-translated/v1.",
+    "+entities on GetNotificationsV1, GetNotificationsDetailedV1, +GET "
+    "/entities/notifications-translated/v1 or GetNotificationsDetailedTranslatedV1.",
     "recon",
     [
       {

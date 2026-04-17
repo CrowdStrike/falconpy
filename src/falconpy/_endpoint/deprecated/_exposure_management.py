@@ -204,7 +204,7 @@ _exposure_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more asset IDs (max: 100). Find asset IDs with GET /fem/queries/external-assets/v1",
+        "description": "One or more asset IDs (max: 100). Find asset IDs with query_external_assets",
         "name": "ids",
         "in": "query",
         "required": True
