@@ -387,9 +387,41 @@ class CorrelationRules(ServiceClass):
         Keyword arguments:
         body -- Full body payload provided as a JSON format dictionary.
                 {
+                    "anomaly": {
+                        "event_field_name": "string",
+                        "lookback_timeframe": "string",
+                        "scope": "string",
+                        "type": "string",
+                        "use_established_entity_only": boolean
+                    },
                     "comment": "string",
                     "customer_id": "string",
                     "description": "string",
+                    "guardrail_notifications": [
+                        {
+                            "config": {
+                                "cid": "string",
+                                "config_id": "string",
+                                "plugin_id": "string",
+                                "recipients": [
+                                    "string"
+                                ],
+                                "severity": "string"
+                            },
+                            "options": {
+                                "additionalProp1": "string",
+                                "additionalProp2": "string",
+                                "additionalProp3": "string"
+                            },
+                            "type": "string"
+                        }
+                    ],
+                    "mitre_attack": [
+                        {
+                            "tactic_id": "string",
+                            "technique_id": "string"
+                        }
+                    ],
                     "name": "string",
                     "notifications": [
                         {
@@ -414,24 +446,39 @@ class CorrelationRules(ServiceClass):
                         "schedule": {
                             "definition": "string"
                         },
-                        "start_on": "2025-02-12T02:11:22.284Z",
-                        "stop_on": "2025-02-12T02:11:22.284Z"
+                        "start_on": "2026-04-17T16:10:23.160Z",
+                        "stop_on": "2026-04-17T16:10:23.160Z",
+                        "suppression": {
+                            "filter": {
+                                "field_based": {
+                                    "field": "string"
+                                }
+                            },
+                            "suppression_period": "string"
+                        }
                     },
                     "search": {
+                        "case_template_id": "string",
+                        "execution_mode": "string",
                         "filter": "string",
                         "lookback": "string",
                         "outcome": "string",
-                        "trigger_mode": "string"
+                        "trigger_mode": "string",
+                        "use_ingest_time": boolean
                     },
                     "severity": 0,
                     "status": "string",
                     "tactic": "string",
                     "technique": "string",
+                    "template_id": "string",
                     "trigger_on_create": boolean
                 }
+        anomaly -- Anomaly detection configuration. Dictionary.
         comment -- Correlation rule comment. String.
         customer_id -- CID for the tenant. String.
         description -- Correlation rule description. String.
+        guardrail_notifications -- List of guardrail notifications. List of dictionaries.
+        mitre_attack -- List of MITRE ATT&CK tactic and technique mappings. List of dictionaries.
         name -- Correlation rule name. String.
         notifications -- List of notifications to implement. List of dictionaries.
         operation -- Operation to perform. Dictionary.
@@ -440,6 +487,7 @@ class CorrelationRules(ServiceClass):
         status -- Correlation rule status. String.
         tactic -- Identified tactic. String.
         technique -- Identified technique. String.
+        template_id -- Template identifier to base the rule on. String.
         trigger_on_create -- Flag indicating if the rule triggers on creation. Boolean.
 
         This method only supports keywords for providing arguments.
@@ -492,15 +540,47 @@ class CorrelationRules(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def update_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Create rule.
+        """Update rule.
 
         Keyword arguments:
         body -- Full body payload provided as a JSON format dictionary.
                 [{
+                    "anomaly": {
+                        "event_field_name": "string",
+                        "lookback_timeframe": "string",
+                        "scope": "string",
+                        "type": "string",
+                        "use_established_entity_only": boolean
+                    },
                     "comment": "string",
                     "customer_id": "string",
                     "description": "string",
+                    "guardrail_notifications": [
+                        {
+                            "config": {
+                                "cid": "string",
+                                "config_id": "string",
+                                "plugin_id": "string",
+                                "recipients": [
+                                    "string"
+                                ],
+                                "severity": "string"
+                            },
+                            "options": {
+                                "additionalProp1": "string",
+                                "additionalProp2": "string",
+                                "additionalProp3": "string"
+                            },
+                            "type": "string"
+                        }
+                    ],
                     "id": "string",
+                    "mitre_attack": [
+                        {
+                            "tactic_id": "string",
+                            "technique_id": "string"
+                        }
+                    ],
                     "name": "string",
                     "notifications": [
                         {
@@ -525,24 +605,40 @@ class CorrelationRules(ServiceClass):
                         "schedule": {
                             "definition": "string"
                         },
-                        "start_on": "2025-02-12T02:11:22.284Z",
-                        "stop_on": "2025-02-12T02:11:22.284Z"
+                        "start_on": "2026-04-17T16:10:23.160Z",
+                        "stop_on": "2026-04-17T16:10:23.160Z",
+                        "suppression": {
+                            "filter": {
+                                "field_based": {
+                                    "field": "string"
+                                }
+                            },
+                            "suppression_period": "string"
+                        }
                     },
                     "search": {
+                        "case_template_id": "string",
+                        "execution_mode": "string",
                         "filter": "string",
                         "lookback": "string",
                         "outcome": "string",
-                        "trigger_mode": "string"
+                        "trigger_mode": "string",
+                        "use_ingest_time": boolean
                     },
                     "severity": 0,
                     "status": "string",
                     "tactic": "string",
-                    "technique": "string"
+                    "technique": "string",
+                    "template_id": "string",
+                    "trigger_on_create": boolean
                 }]
+        anomaly -- Anomaly detection configuration. Dictionary.
         comment -- Correlation rule comment. String.
         customer_id -- CID for the tenant. String.
         description -- Correlation rule description. String.
+        guardrail_notifications -- List of guardrail notifications. List of dictionaries.
         id -- Correlation rule ID to be updated. String.
+        mitre_attack -- List of MITRE ATT&CK tactic and technique mappings. List of dictionaries.
         name -- Correlation rule name. String.
         notifications -- List of notifications to implement. List of dictionaries.
         operation -- Operation to perform. Dictionary.
@@ -551,6 +647,8 @@ class CorrelationRules(ServiceClass):
         status -- Correlation rule status. String.
         tactic -- Identified tactic. String.
         technique -- Identified technique. String.
+        template_id -- Template identifier to base the rule on. String.
+        trigger_on_create -- Flag indicating if the rule triggers on creation. Boolean.
 
         This method only supports keywords for providing arguments.
 

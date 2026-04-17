@@ -42,56 +42,108 @@ def correlation_rules_payload(passed_keywords: dict) -> Dict[str, Union[str, int
     """Craft a properly formatted correlation rules payload.
 
     {
+        "anomaly": {
+            "event_field_name": "string",
+            "lookback_timeframe": "string",
+            "scope": "string",
+            "type": "string",
+            "use_established_entity_only": true
+        },
         "comment": "string",
         "customer_id": "string",
         "description": "string",
+        "guardrail_notifications": [
+            {
+            "config": {
+                "cid": "string",
+                "config_id": "string",
+                "plugin_id": "string",
+                "recipients": [
+                "string"
+                ],
+                "severity": "string"
+            },
+            "options": {
+                "additionalProp1": "string",
+                "additionalProp2": "string",
+                "additionalProp3": "string"
+            },
+            "type": "string"
+            }
+        ],
+        "mitre_attack": [
+            {
+            "tactic_id": "string",
+            "technique_id": "string"
+            }
+        ],
         "name": "string",
         "notifications": [
             {
-                "config": {
-                    "cid": "string",
-                    "config_id": "string",
-                    "plugin_id": "string",
-                    "recipients": [
-                        "string"
-                    ],
-                    "severity": "string"
-                },
-                "options": {
-                    "additionalProp1": "string",
-                    "additionalProp2": "string",
-                    "additionalProp3": "string"
-                },
-                "type": "string"
+            "config": {
+                "cid": "string",
+                "config_id": "string",
+                "plugin_id": "string",
+                "recipients": [
+                "string"
+                ],
+                "severity": "string"
+            },
+            "options": {
+                "additionalProp1": "string",
+                "additionalProp2": "string",
+                "additionalProp3": "string"
+            },
+            "type": "string"
             }
         ],
         "operation": {
             "schedule": {
-                "definition": "string"
+            "definition": "string"
             },
-            "start_on": "2025-02-12T02:11:22.284Z",
-            "stop_on": "2025-02-12T02:11:22.284Z"
+            "start_on": "2026-04-17T16:10:23.160Z",
+            "stop_on": "2026-04-17T16:10:23.160Z",
+            "suppression": {
+            "filter": {
+                "field_based": {
+                "field": "string"
+                }
+            },
+            "suppression_period": "string"
+            }
         },
         "search": {
+            "case_template_id": "string",
+            "execution_mode": "string",
             "filter": "string",
             "lookback": "string",
             "outcome": "string",
-            "trigger_mode": "string"
+            "trigger_mode": "string",
+            "use_ingest_time": true
         },
         "severity": 0,
         "status": "string",
         "tactic": "string",
         "technique": "string",
-        "trigger_on_create": boolean
+        "template_id": "string",
+        "trigger_on_create": true
     }
     """
     returned = {}
-    keys = ["comment", "customer_id", "description", "name", "notifications", "operation",
-            "search", "severity", "status", "tactic", "technique", "id"
+    keys = ["anomaly", "comment", "customer_id", "description", "name",
+            "operation", "search", "severity", "status", "tactic",
+            "technique", "template_id", "id"
             ]
+    list_keys = ["guardrail_notifications", "mitre_attack", "notifications"]
     for key in keys:
-        if passed_keywords.get(key, None):
+        if passed_keywords.get(key, None) is not None:
             returned[key] = passed_keywords.get(key, None)
+    for key in list_keys:
+        if passed_keywords.get(key, None) is not None:
+            key_value = passed_keywords.get(key, None)
+            if isinstance(key_value, str):
+                key_value = key_value.split(",")
+            returned[key] = key_value
     if passed_keywords.get("trigger_on_create", None) is not None:
         returned["trigger_on_create"] = passed_keywords.get("trigger_on_create", None)
 
