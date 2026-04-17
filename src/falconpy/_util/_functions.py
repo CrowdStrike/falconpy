@@ -52,7 +52,7 @@ import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
 from .._api_request import APIRequest
-from .._endpoint import operation_deprecation_mapping
+from .._endpoint import operation_deprecation_mapping, decommissioned_operations
 from .._enum import BaseURL, ContainerBaseURL
 from .._constant import (
     PREFER_NONETYPE,
@@ -203,6 +203,8 @@ def force_default(defaults: List[str], default_types: List[str] = None):
                 # Should only receive this in pythonic mode
                 raise api_error
             except (SDKError, InvalidMethod) as bad_sdk_command:
+                if getattr(bad_sdk_command, 'code', None) == 410:
+                    raise bad_sdk_command
                 created = bad_sdk_command.result
             return created
         return factory
@@ -689,6 +691,13 @@ def process_service_request(calling_object: ServiceClass,  # pylint: disable=R09
     # Log the operation ID if we have logging enabled.
     if calling_object.log:
         calling_object.log.debug("OPERATION: %s", operation_id)
+    # Intercept decommissioned operations before making any API call.
+    if operation_id in decommissioned_operations:
+        _msg = (f"The {operation_id} operation has been decommissioned "
+                f"by CrowdStrike and is no longer available.")
+        if calling_object.log:
+            calling_object.log.warning(_msg)
+        return generate_error_result(message=_msg, code=410, caller=calling_object)
     # We have to create our headers dictionary first, as authentication happens here.
     # For scenarios where cloud region autodiscovery is leveraged, we cannot create
     # the target URL for our call to requests until we know our correct base_url.

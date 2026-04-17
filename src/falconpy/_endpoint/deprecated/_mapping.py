@@ -72,3 +72,8 @@ _deprecated_cls_mapping = {
     "Iocs": "IOC",
     "Detects": "Alerts"
 }
+
+_decommissioned_operations = [
+    "AggregateFCIncidents",
+    "QueryIncidentIdsByFilter",
+]
