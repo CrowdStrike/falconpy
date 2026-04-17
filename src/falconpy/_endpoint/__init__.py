@@ -65,6 +65,7 @@ from .deprecated import _ngsiem_deprecated
 from .deprecated import _user_management_deprecated
 from .deprecated import _deprecated_operation_mapping
 from .deprecated import _deprecated_class_mapping
+from .deprecated import _decommissioned_operations
 from .deprecated import _zero_trust_assessment_deprecated
 
 from ._admission_control_policies import _admission_control_policies_endpoints
@@ -346,6 +347,7 @@ deprecated_endpoints.extend(_zero_trust_assessment_deprecated)
 # Mapping of manually deprecated endpoints
 operation_deprecation_mapping = _deprecated_operation_mapping
 class_deprecation_mapping = _deprecated_class_mapping
+decommissioned_operations = _decommissioned_operations
 
 # api_endpoints contains all endpoints, production and deprecated
 api_endpoints.extend(deprecated_endpoints)
