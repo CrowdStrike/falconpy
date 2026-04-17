@@ -49,6 +49,14 @@ class TestFalconCompleteDashboard:
 
         return returned
 
+    def ServiceFCD_QueryIncidentIdsByFilter(self):
+        returned = False
+        result = falcon.QueryIncidentIdsByFilter(bananas="yellow")
+        if result["status_code"] == 410:
+            returned = True
+
+        return returned
+
     def ServiceFCD_QueryEscalationsFilter(self):
         returned = False
         if falcon.QueryEscalationsFilter(limit=1,offset=2)["status_code"] in AllowedResponses:
@@ -82,6 +90,14 @@ class TestFalconCompleteDashboard:
         for key in tests:
             if tests[key]["status_code"] != 500:
                 error_checks = False
+        # Decommissioned operations return 410 regardless of base_url
+        decomm_tests = {
+            "AggregateFCIncidents": falcon.aggregate_fc_incidents(),
+            "QueryIncidentIdsByFilter": falcon.query_incident_ids_by_filter(),
+        }
+        for key in decomm_tests:
+            if decomm_tests[key]["status_code"] != 410:
+                error_checks = False
 
         return error_checks
 
@@ -102,6 +118,9 @@ class TestFalconCompleteDashboard:
 
     def test_QueryEscalationsFilter(self):
         assert self.ServiceFCD_QueryEscalationsFilter() is True
+
+    def test_QueryIncidentIdsByFilter(self):
+        assert self.ServiceFCD_QueryIncidentIdsByFilter() is True
 
     def test_QueryRemediationsFilter(self):
         assert self.ServiceFCD_QueryRemediationsFilter() is True
