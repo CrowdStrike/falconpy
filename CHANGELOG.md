@@ -157,15 +157,6 @@
     - `_endpoint/deprecated/_ods.py`
     - `ods.py`
 
-+ Removed: Removed the _AggregateFCIncidents_ and _QueryIncidentIdsByFilter_ operations from the __Falcon Complete Dashboard__ service collection.
-    - `_endpoint/_falcon_complete_dashboard.py`
-    - `falcon_complete_dashboard.py`
-    > Unit testing updated to reflect removed operations.
-    - `tests/test_falcon_complete_dashboard.py`
-
-+ Removed: Removed the stale `GetCSPMCGPAccount` backward-compatibility alias from the __CSPM Registration__ service collection.
-    - `cspm_registration.py`
-
 ## Issues resolved
 + Fixed: JSONDecodeError import bug.
     - `util/_functions.py`
