@@ -94,7 +94,7 @@ _iocs_endpoints = [
     "CreateIOC",
     "POST",
     "/indicators/entities/iocs/v1",
-    "Create a new IOC. *** Deprecated - Use the new IOC Management endpoint (POST /iocs/entities/indicators/v1). ***",
+    "Create a new IOC. *** Deprecated - Use the new IOC Management endpoint (indicator_create_v1). ***",
     "iocs",
     [
       {
@@ -179,7 +179,7 @@ _iocs_endpoints = [
     "DevicesRanOn",
     "GET",
     "/indicators/queries/devices/v1",
-    "Find hosts that have observed a given custom IOC. For details about those hosts, use GET /devices/entities/devices/v1",
+    "Find hosts that have observed a given custom IOC. For details about those hosts, use GetDeviceDetailsV2",
     "iocs",
     [
       {
@@ -220,7 +220,7 @@ _iocs_endpoints = [
     "GET",
     "/indicators/queries/iocs/v1",
     "Search the custom IOCs in your customer account. *** Deprecated - Use the new IOC Management endpoint "
-    "(GET /iocs/queries/indicators/v1). ***",
+    "(indicator_search_v1). ***",
     "iocs",
     [
       {

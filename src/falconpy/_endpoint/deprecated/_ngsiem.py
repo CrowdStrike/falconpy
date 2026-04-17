@@ -41,7 +41,7 @@ _ngsiem_endpoints = [
     "GetParser",
     "GET",
     "/ngsiem-content/entities/parsers/v1",
-    "Retrieve Parser in NGSIEM. This endpoint has been deprecated in favour of the GET /entities/parsers-template/v1 API.",
+    "Retrieve Parser in NGSIEM. This endpoint has been deprecated in favour of the GetParserTemplate API.",
     "ngsiem",
     [
       {
@@ -66,7 +66,7 @@ _ngsiem_endpoints = [
     "PATCH",
     "/ngsiem-content/entities/parsers/v1",
     "Update Parser in NGSIEM. Please note that name changes are not supported, but rather should be created as "
-    "a new parser.  This endpoint has been deprecated in favour of the PATCH /entities/parsers-template/v1 API.",
+    "a new parser.  This endpoint has been deprecated in favour of the UpdateParserFromTemplate API.",
     "ngsiem",
     [
       {
@@ -81,7 +81,7 @@ _ngsiem_endpoints = [
     "CreateParser",
     "POST",
     "/ngsiem-content/entities/parsers/v1",
-    "Create Parser in NGSIEM. This endpoint has been deprecated in favour of the POST /entities/parsers-template/v1 API.",
+    "Create Parser in NGSIEM. This endpoint has been deprecated in favour of the CreateParserFromTemplate API.",
     "ngsiem",
     [
       {

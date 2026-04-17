@@ -140,7 +140,7 @@ _installation_tokens_endpoints = [
     "tokens-delete",
     "DELETE",
     "/installation-tokens/entities/tokens/v1",
-    "Deletes a token immediately. To revoke a token, use PATCH /installation-tokens/entities/tokens/v1 instead.",
+    "Deletes a token immediately. To revoke a token, use tokens_update instead.",
     "installation_tokens",
     [
       {

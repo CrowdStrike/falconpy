@@ -41,7 +41,7 @@ _user_management_endpoints = [
     "combinedUserRolesV1",
     "GET",
     "/user-management/combined/user-roles/v1",
-    "Deprecated : Please use GET /user-management/combined/user-roles/v2. Get User Grant(s). This endpoint "
+    "Deprecated : Please use CombinedUserRolesV2 Get User Grant(s). This endpoint "
     "lists both direct as well as flight control grants between a User and a Customer.",
     "user_management",
     [
