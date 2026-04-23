@@ -76,7 +76,6 @@ from ._user_management import _user_management_endpoints
 from ._workflows import _workflows_endpoints
 from ._zero_trust_assessment import _zero_trust_assessment_endpoints
 from ._mapping import _deprecated_op_mapping, _deprecated_cls_mapping
-from ._mapping import _decommissioned_operations  # noqa: F401
 from ._certificate_based_exclusions import _certificate_based_exclusions_endpoints
 
 _admission_control_policies_deprecated = _admission_control_policies_endpoints
