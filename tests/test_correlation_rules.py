@@ -29,7 +29,8 @@ class TestCorrelationRules:
         tests = {
             "combined_rules_get_v1": falcon.get_rules_combined(filter="cid:'12345678901234567890123456789012'"),
             "entities_rules_get_v1": falcon.get_rules(ids="1234567890"),
-            "entities_rules_post_v1": falcon.create_rule(trigger_on_create=False, name="whatever"),
+            "entities_rules_post_v1": falcon.create_rule(trigger_on_create=False, name="whatever",
+                                                           mitre_attack="tactic1,technique1"),
             "entities_rules_delete_v1": falcon.delete_rules(ids="12345678"),
             "entities_rules_patch_v1": falcon.update_rule(id="12345678", name="whatever_else"),
             "queries_rules_get_v1": falcon.query_rules(filter="cid:'12345678901234567890123456789012'"),
