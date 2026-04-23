@@ -157,6 +157,18 @@
     - `_endpoint/deprecated/_ods.py`
     - `ods.py`
 
++ Deprecated: All operations within the __Incidents__ service collection have been deprecated by CrowdStrike and will be removed in the next major release.
+    - _CrowdScore_
+    - _GetBehaviors_
+    - _PerformIncidentAction_
+    - _GetIncidents_
+    - _QueryBehaviors_
+    - _QueryIncidents_
+    - `_endpoint/deprecated/_mapping.py`
+
++ Deprecated: The _AggregateFCIncidents_ and _QueryIncidentIdsByFilter_ operations within the __Falcon Complete Dashboard__ service collection have been deprecated by CrowdStrike and will be removed in the next major release.
+    - `_endpoint/deprecated/_mapping.py`
+
 ## Issues resolved
 + Fixed: JSONDecodeError import bug.
     - `util/_functions.py`
