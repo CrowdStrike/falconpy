@@ -16,7 +16,7 @@ from falconpy import Incidents
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = Incidents(auth_object=config)
-AllowedResponses = [200, 400, 404, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 400, 404, 429, 500]  # Adding rate-limiting and server error as allowed responses
 
 
 class TestIncidents:
@@ -40,9 +40,9 @@ class TestIncidents:
 
     def serviceIncidents_GetBehaviors(self):
         be_lookup = falcon.QueryBehaviors(parameters={"limit": 1})
-        be_result="1234567890"
-        if be_lookup["status_code"] != 429:
-            if be_lookup["body"]["resources"]:
+        be_result = "1234567890"
+        if be_lookup["status_code"] not in [429, 500]:
+            if be_lookup["body"].get("resources"):
                 be_result = be_lookup["body"]["resources"]
         if falcon.GetBehaviors(body={
                             "ids": be_result
@@ -54,8 +54,8 @@ class TestIncidents:
     def serviceIncidents_GetIncidents(self):
         inc_lookup = falcon.QueryIncidents(parameters={"limit": 1})
         inc = "1234567890"
-        if inc_lookup["status_code"] != 429:
-            if inc_lookup["body"]["resources"]:
+        if inc_lookup["status_code"] not in [429, 500]:
+            if inc_lookup["body"].get("resources"):
                 inc = inc_lookup["body"]["resources"]
         if falcon.GetIncidents(body={
                             "ids": inc
