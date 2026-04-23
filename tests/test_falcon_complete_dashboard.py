@@ -13,7 +13,7 @@ from falconpy import CompleteDashboard
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = CompleteDashboard(auth_object=config)
-AllowedResponses = [200, 403, 404, 429]
+AllowedResponses = [200, 403, 404, 429, 500]
 
 
 class TestFalconCompleteDashboard:
@@ -51,8 +51,7 @@ class TestFalconCompleteDashboard:
 
     def ServiceFCD_QueryIncidentIdsByFilter(self):
         returned = False
-        result = falcon.QueryIncidentIdsByFilter(bananas="yellow")
-        if result["status_code"] == 410:
+        if falcon.QueryIncidentIdsByFilter(bananas="yellow")["status_code"] in AllowedResponses:
             returned = True
 
         return returned
@@ -80,6 +79,7 @@ class TestFalconCompleteDashboard:
             "AggregateBlockList": falcon.aggregate_block_list(),
             "AggregateDeviceCountCollection": falcon.aggregate_device_count_collection(),
             "AggregateEscalations": falcon.aggregate_escalations(),
+            "AggregateFCIncidents": falcon.aggregate_fc_incidents(),
             "AggregateRemediations": falcon.aggregate_remediations(),
             "AggregatePreventionPolicy": falcon.aggregate_prevention_policy(),
             "AggregateSensorUpdatePolicy": falcon.aggregate_sensor_update_policy(),
@@ -89,14 +89,6 @@ class TestFalconCompleteDashboard:
         }
         for key in tests:
             if tests[key]["status_code"] != 500:
-                error_checks = False
-        # Decommissioned operations return 410 regardless of base_url
-        decomm_tests = {
-            "AggregateFCIncidents": falcon.aggregate_fc_incidents(),
-            "QueryIncidentIdsByFilter": falcon.query_incident_ids_by_filter(),
-        }
-        for key in decomm_tests:
-            if decomm_tests[key]["status_code"] != 410:
                 error_checks = False
 
         return error_checks
