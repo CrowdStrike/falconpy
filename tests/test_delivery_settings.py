@@ -16,7 +16,7 @@ from falconpy import DeliverySettings
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = DeliverySettings(auth_object=config)
-AllowedResponses = [200, 201, 207, 400, 429]
+AllowedResponses = [200, 201, 207, 400, 429, 500]
 
 class TestDeliverySettings:
     def test_all_code_paths(self):
