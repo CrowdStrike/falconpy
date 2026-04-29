@@ -49,7 +49,8 @@ class TestWorkflows:
             "WorkflowUpdateHumanInputV1": falcon.update_human_input(input="whatever", note="whatever"),
             "WorkflowActivitiesContentCombined": falcon.search_activities_content(limit=1),
             "WorkflowExecuteSingleNodeV1": falcon.execute_single_activity_node(definition = {"Definition": {}}, definition_id="12345678", execution_cid="12345678", depth=1),
-            "QueryChildExecutions": falcon.query_child_executions(filter="status:'running'", limit=10, offset=0)
+            "QueryChildExecutions": falcon.query_child_executions(filter="status:'running'", limit=10, offset=0),
+            "WorkflowDefinitionsDelete": falcon.delete_definitions(ids="12345678")
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

@@ -306,6 +306,28 @@ _workflows_endpoints = [
     ]
   ],
   [
+    "WorkflowDefinitionsDelete",
+    "DELETE",
+    "/workflows/entities/definitions/v1",
+    "Accepts a list of workflow definition IDs and deletes those definitions and all their associated versions.",
+    "workflows",
+    [
+      {
+        "maxItems": 5000,
+        "minItems": 1,
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "IDs of the workflow definitions to delete",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "WorkflowExecuteInternal",
     "POST",
     "/workflows/entities/execute/internal/v1",
