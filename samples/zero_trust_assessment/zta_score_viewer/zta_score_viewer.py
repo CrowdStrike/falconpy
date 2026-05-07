@@ -63,6 +63,7 @@ Required API scope
 # pylint: disable=too-many-lines
 # pylint: disable=too-many-locals,too-many-statements
 # pylint: disable=too-many-instance-attributes,too-many-branches
+# pylint: disable=too-few-public-methods,import-error
 
 import argparse
 import json
@@ -93,7 +94,7 @@ PLATFORM_NAMES = {
 }
 
 # Score distribution buckets: [0-9], [10-19], …, [90-100]
-BUCKET_LABELS = [f"{i*10}-{i*10+9}" if i < 10 else "100" for i in range(11)]
+BUCKET_LABELS = [f"{i * 10}-{i * 10 + 9}" if i < 10 else "100" for i in range(11)]
 NUM_BUCKETS = 11  # 0-9 through 100 (100 is its own bucket)
 
 AUTO_REFRESH_OPTIONS = ["Off", "30s", "1m", "5m"]
@@ -105,9 +106,9 @@ DEFAULT_PAGE_SIZE = 50
 # Severity colour bands (R, G, B, A) mapped to score ranges
 SCORE_COLOURS = {
     "critical": (220, 50, 50, 255),   # 0–39
-    "high":     (220, 130, 50, 255),  # 40–59
-    "medium":   (220, 200, 50, 255),  # 60–79
-    "good":     (50, 180, 80, 255),   # 80–100
+    "high": (220, 130, 50, 255),  # 40–59
+    "medium": (220, 200, 50, 255),  # 60–79
+    "good": (50, 180, 80, 255),   # 80–100
 }
 
 
@@ -299,7 +300,7 @@ class ZTAClient:
             try:
                 resp = self._hosts_sdk.get_device_details_v2(ids=batch)
             except Exception:  # pylint: disable=broad-except
-                continue # nosec - Allow silent 404 failure
+                continue  # nosec - Allow silent 404 failure
             for dev in (resp.get("body", {}).get("resources", []) or []):
                 aid = dev.get("device_id", "")
                 hostname = dev.get("hostname", "")
@@ -331,7 +332,7 @@ class AppState:
         self.bucket_counts: list[int] = [0] * NUM_BUCKETS
         self.audit_data: dict = {}
         self.loading: bool = False
-        self._refresh_pending: bool = False
+        self.refresh_pending: bool = False
         self.last_refreshed: str = ""
         self.error_message: str = ""
         self.auto_refresh_seconds: int = 0
@@ -389,7 +390,7 @@ def _worst_offenders(devices: list[DeviceRecord], n: int = 10) -> list[DeviceRec
 class ZTAScoreViewerApp:
     """Dear PyGui application for visualising Zero Trust Assessment scores."""
 
-    def __init__(self, client_id: str = "", client_secret: str = ""): # nosec - Bandit FP
+    def __init__(self, client_id: str = "", client_secret: str = ""):  # nosec - Bandit FP
         """Initialise the application, client, and state.
 
         *client_id* and *client_secret* are CLI-supplied credential overrides.
@@ -405,6 +406,7 @@ class ZTAScoreViewerApp:
         self._api_after_token: str = ""
         self._has_more_api_data: bool = False
         self._api_fetching_more: bool = False
+        self._load_more_pending: bool = False
 
     # ------------------------------------------------------------------
     # Lifecycle
@@ -438,8 +440,8 @@ class ZTAScoreViewerApp:
             dpg.render_dearpygui_frame()
             needs = False
             with self.state.lock:
-                if self.state._refresh_pending:
-                    self.state._refresh_pending = False
+                if self.state.refresh_pending:
+                    self.state.refresh_pending = False
                     needs = True
             if needs:
                 self._hide_loading()
@@ -647,7 +649,7 @@ class ZTAScoreViewerApp:
         finally:
             with self.state.lock:
                 self.state.loading = False
-                self.state._refresh_pending = True
+                self.state.refresh_pending = True
 
     def _async_load_more(self):
         """Fetch the next batch of devices using the saved API cursor."""
@@ -680,7 +682,7 @@ class ZTAScoreViewerApp:
             self._api_fetching_more = False
             with self.state.lock:
                 self.state.loading = False
-                self.state._refresh_pending = True
+                self.state.refresh_pending = True
 
     def _refresh_ui(self):
         """Rebuild all data-driven widgets from self.state.devices."""

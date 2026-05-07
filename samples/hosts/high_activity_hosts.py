@@ -87,6 +87,10 @@ Optional (for interactive mode):
 Created by: Manjula Wickramasuriya (@Manjula101) - Enterprise Security Lab
 Modified and then overarchitected by: jshcodes@CrowdStrike
 """
+# pylint: disable=too-many-lines,invalid-name,import-outside-toplevel
+# pylint: disable=global-statement,broad-exception-caught
+# pylint: disable=too-many-locals,too-many-branches,too-many-statements
+# pylint: disable=too-many-nested-blocks,unused-argument
 import os
 import sys
 import csv
@@ -400,9 +404,9 @@ def generate_demo_data(limit: int) -> List[Dict]:
         # and export_to_csv reference
         demo_hosts.append({
             # Zero-padded hostname for consistent column width
-            'hostname': f'HOST{str(i+1).zfill(6)}.example.com',
+            'hostname': f'HOST{str(i + 1).zfill(6)}.example.com',
             # Fake device ID; zero-padded to 32 chars like a real UUID
-            'device_id': f'demo{str(i+1).zfill(32)}',
+            'device_id': f'demo{str(i + 1).zfill(32)}',
             'alerts': total_alerts,
             'severity_breakdown': severity_breakdown,
             'rtr_sessions': rtr_sessions,
@@ -477,7 +481,7 @@ def fetch_device_details(
     # within the Falcon API's per-call payload limit
     batch_size = 5000
     batches = [
-        device_ids[i:i+batch_size]
+        device_ids[i:i + batch_size]
         for i in range(0, len(device_ids), batch_size)
     ]
 
@@ -555,14 +559,13 @@ def fetch_device_details(
     return hosts_by_id
 
 
-def query_high_activity_hosts(
+def query_high_activity_hosts(  # noqa: C901
     hosts_api: "Hosts",
     alerts_api: "Alerts",
     rtr_api: Optional["RealTimeResponseAudit"],
     days: int,
     limit: int,
     additional_filter: Optional[str] = None,
-    max_workers: int = 10,
     spotlight_api=None,
     zta_api=None
 ) -> List[Dict]:
@@ -833,7 +836,7 @@ def query_high_activity_hosts(
     return enriched_hosts[:limit], len(enriched_hosts)
 
 
-def count_alerts_by_host(
+def count_alerts_by_host(  # noqa: C901
     alerts_api: "Alerts",
     device_ids: List[str],
     start_date: datetime,
@@ -1129,7 +1132,7 @@ def count_rtr_sessions_by_host(
     return dict(session_counts)
 
 
-def fetch_spotlight_by_host(
+def fetch_spotlight_by_host(  # noqa: C901
     spotlight_api: "SpotlightVulnerabilities",
     device_ids: List[str],
     incremental_callback=None
@@ -1527,6 +1530,7 @@ def query_hosts_fast(
     end_date = datetime.now(timezone.utc)
     start_date = end_date - timedelta(days=days)
     # Build FQL date filter: only hosts seen within the window
+    date_filter = f"last_seen:>='{start_date.strftime('%Y-%m-%d')}'"
 
     # Combine with any user-supplied FQL filter using '+' (FQL AND)
     fql_filter = date_filter
@@ -1602,7 +1606,7 @@ def query_hosts_fast(
     return hosts_by_id, all_device_ids, start_date
 
 
-def enrich_hosts_background(
+def enrich_hosts_background(  # noqa: C901
     hosts_by_id: Dict[str, Dict],
     all_device_ids: List[str],
     start_date: datetime,
@@ -1610,7 +1614,6 @@ def enrich_hosts_background(
     rtr_api: Optional["RealTimeResponseAudit"],
     loading_state,
     days: int,
-    max_workers: int = 10,
     spotlight_api=None,
     zta_api=None
 ):
@@ -2173,7 +2176,7 @@ def export_to_csv(
         raise SystemExit(1) from err
 
 
-def main():
+def main():  # noqa: C901
     """Run the high activity hosts analysis.
 
     Orchestrates the full pipeline:
@@ -2404,7 +2407,6 @@ def main():
                         rtr_api,
                         loading_state,
                         args.days,
-                        args.workers,
                         spotlight_api,
                         zta_api
                     ),
@@ -2445,7 +2447,7 @@ def main():
                 hosts, total_analyzed = query_high_activity_hosts(
                     hosts_api, alerts_api, rtr_api,
                     args.days, args.limit,
-                    args.filter, args.workers,
+                    args.filter,
                     spotlight_api=spotlight_api,
                     zta_api=zta_api
                 )

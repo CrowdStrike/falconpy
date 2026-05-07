@@ -76,7 +76,7 @@ Architecture overview
 Created by: Manjula Wickramasuriya (@Manjula101) - Enterprise Security Lab
 Ridiculous GUI by: jshcodes@CrowdStrike
 """
-# pylint: disable=too-many-lines
+# pylint: disable=too-many-lines,unsupported-binary-operation
 # pylint: disable=too-many-arguments,too-many-positional-arguments
 # pylint: disable=too-many-locals,too-few-public-methods
 # pylint: disable=too-many-instance-attributes,too-many-statements
@@ -86,7 +86,7 @@ import sys
 from argparse import ArgumentParser, Namespace, RawTextHelpFormatter
 from datetime import datetime
 
-# pylint: disable=import-error
+# pylint: disable=import-error,no-name-in-module
 from PySide6.QtCore import (
     Qt, QDate, QEvent, QThread, Signal, QSortFilterProxyModel,
     QMutex, QMutexLocker, QWaitCondition,
@@ -96,7 +96,6 @@ from PySide6.QtWidgets import (
     QApplication,
     QComboBox,
     QDateEdit,
-    QDialog,
     QFrame,
     QGroupBox,
     QHBoxLayout,
@@ -119,7 +118,7 @@ from PySide6.QtWidgets import (
 from falconpy import (
     BaseURL, RealTimeResponseAudit, version as _falconpy_version
 )
-# pylint: enable=import-error
+# pylint: enable=import-error,no-name-in-module
 
 # ── Constants ────────────────────────────────────────────────────────────────
 

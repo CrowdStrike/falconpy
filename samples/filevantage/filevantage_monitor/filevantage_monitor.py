@@ -82,7 +82,7 @@ Architecture overview
   API calls run on a background QThread (FetchChangesWorker) and deliver
   results back to the main thread via Qt signals, keeping the UI responsive.
 """
-# pylint: disable=too-many-lines
+# pylint: disable=too-many-lines,unsupported-binary-operation
 # pylint: disable=too-many-arguments,too-many-positional-arguments
 # pylint: disable=too-many-locals,too-few-public-methods
 # pylint: disable=too-many-instance-attributes,too-many-statements
@@ -95,7 +95,7 @@ import time
 from argparse import ArgumentParser, RawTextHelpFormatter
 from datetime import datetime
 
-# pylint: disable=import-error
+# pylint: disable=import-error,no-name-in-module
 from PyQt6.QtCore import (
     Qt, QThread, pyqtSignal, QTimer, QSortFilterProxyModel,
 )
@@ -125,7 +125,7 @@ from PyQt6.QtWidgets import (
 )
 
 from falconpy import FileVantage
-# pylint: enable=import-error
+# pylint: enable=import-error,no-name-in-module
 
 # ── Constants ────────────────────────────────────────────────────────────────
 
@@ -217,7 +217,7 @@ _DEMO_CHANGES = [
         "entity_type": "FILE",
         "severity": "LOW",
         "file_name": "backdoor.sh",
-        "entity_path": "/tmp/backdoor.sh", # nosec - Ridiculous Bandit FP
+        "entity_path": "/tmp/backdoor.sh",  # nosec - Ridiculous Bandit FP
         "process_image_file_name": "bash",
         "user_name": "www-data",
         "sha256_hash_before": "",
@@ -304,7 +304,7 @@ def _get_nested(obj: dict, *keys: str, default: str = "") -> str:
 
 
 def _resolve_file_path(change: dict) -> str:
-    """Extract the file path from a change resource.
+    r"""Extract the file path from a change resource.
 
     The FileVantage getChanges API returns the path in ``entity_path``
     (confirmed against live API — field contains the full device path,
@@ -442,7 +442,7 @@ class FetchChangesWorker(QThread):
             for i in range(0, len(all_ids), _PAGE_SIZE):
                 if self.isInterruptionRequested():
                     return
-                batch = all_ids[i : i + _PAGE_SIZE]
+                batch = all_ids[i: i + _PAGE_SIZE]
                 resp = sdk.get_changes(ids=batch)
                 status = resp.get("status_code", 0)
                 body = resp.get("body", {})
@@ -825,7 +825,7 @@ class FileVantageWindow(QMainWindow):
     - Dispatch Suppress / Export actions.
     """
 
-    def __init__(self, client_id: str = "", client_secret: str = "", # nosec - Bandit FP
+    def __init__(self, client_id: str = "", client_secret: str = "",  # nosec - Bandit FP
                  base_url: str = "") -> None:
         """Initialise window, read credentials, build UI, trigger first load.
 

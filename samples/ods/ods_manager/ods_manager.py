@@ -49,7 +49,7 @@ Required API scopes
   on-demand-scans:read
   on-demand-scans:write
 """
-# pylint: disable=too-many-lines
+# pylint: disable=too-many-lines,unsupported-binary-operation
 # pylint: disable=too-many-locals,too-many-statements
 # pylint: disable=too-many-instance-attributes,too-many-branches
 # pylint: disable=too-few-public-methods
@@ -62,9 +62,11 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Optional
 
+# pylint: disable=import-error
 import wx
 import wx.lib.mixins.listctrl as listmix
 from falconpy import Hosts, ODS
+# pylint: enable=import-error
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -85,34 +87,34 @@ ACTIVE_STATUSES = {"pending_stop", "running", "pending", "queued"}
 
 # Colour table used to tint status text in the scan list
 STATUS_COLOURS = {
-    "running":       wx.Colour(50, 200, 80),
-    "complete":      wx.Colour(100, 180, 255),
-    "failed":        wx.Colour(220, 50, 50),
-    "cancelled":     wx.Colour(180, 130, 50),
-    "pending_stop":  wx.Colour(220, 200, 50),
-    "queued":        wx.Colour(180, 180, 180),
-    "pending":       wx.Colour(180, 180, 180),
+    "running": wx.Colour(50, 200, 80),
+    "complete": wx.Colour(100, 180, 255),
+    "failed": wx.Colour(220, 50, 50),
+    "cancelled": wx.Colour(180, 130, 50),
+    "pending_stop": wx.Colour(220, 200, 50),
+    "queued": wx.Colour(180, 180, 180),
+    "pending": wx.Colour(180, 180, 180),
 }
 
 # Columns for the main scan table
 SCAN_COLUMNS = [
-    ("Scan ID",       180),
-    ("Status",        110),
-    ("Targets",        70),
-    ("Initiated By",  160),
-    ("Started",       160),
-    ("Findings",       80),
-    ("Description",   220),
+    ("Scan ID", 180),
+    ("Status", 110),
+    ("Targets", 70),
+    ("Initiated By", 160),
+    ("Started", 160),
+    ("Findings", 80),
+    ("Description", 220),
 ]
 
 # Columns for the per-host table in the detail panel
 HOST_COLUMNS = [
-    ("Host ID",  180),
-    ("Status",   110),
-    ("Scanned",   80),
+    ("Host ID", 180),
+    ("Status", 110),
+    ("Scanned", 80),
     ("Malicious", 80),
-    ("Quarant.",  80),
-    ("Started",  155),
+    ("Quarant.", 80),
+    ("Started", 155),
 ]
 
 
@@ -235,7 +237,7 @@ class ODSClient:
         self.status: str = "disconnected"
         self.error: str = ""
 
-    def connect(self, client_id: str = "", client_secret: str = "") -> bool: # nosec - Bandit FP
+    def connect(self, client_id: str = "", client_secret: str = "") -> bool:  # nosec - Bandit FP
         """Authenticate against the Falcon API and return True on success.
 
         *client_id* and *client_secret* override the FALCON_CLIENT_ID /
@@ -1048,7 +1050,7 @@ class ODSManagerFrame(wx.Frame):
         self._show_new_scan_dialog(available_hosts, prefill=None)
 
     def _show_new_scan_dialog(self, available_hosts: list[dict], prefill: dict | None):
-        """Internal: display the New Scan dialog; re-opens with prefill if scan fails."""
+        """Display the New Scan dialog; re-opens with prefill if scan fails."""
         dlg = NewScanDialog(self, available_hosts=available_hosts, prefill=prefill)
         if dlg.ShowModal() != wx.ID_OK:
             dlg.Destroy()

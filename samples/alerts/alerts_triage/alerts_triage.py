@@ -69,6 +69,7 @@ Architecture overview
 # pylint: disable=too-many-locals,too-few-public-methods
 # pylint: disable=too-many-instance-attributes,too-many-statements
 # pylint: disable=line-too-long  # ASCII banner in module docstring exceeds 100 chars
+# pylint: disable=import-error,no-name-in-module,unsupported-binary-operation
 import argparse
 import os
 import sys
@@ -108,22 +109,22 @@ SEVERITY_COLORS = {
     "4": "#E03030",   # high — red
     "5": "#990000",   # critical — dark red
     # Named severity labels (severity_name field)
-    "critical":      "#990000",
-    "high":          "#E03030",
-    "medium":        "#FF8C00",
-    "low":           "#F5E642",
+    "critical": "#990000",
+    "high": "#E03030",
+    "medium": "#FF8C00",
+    "low": "#F5E642",
     "informational": "#5B9BD5",
-    "unknown":       "#8E8E93",
+    "unknown": "#8E8E93",
 }
 
 # Text colour to use on each severity background (ensures contrast).
 SEVERITY_FG_COLORS = {
-    "critical":      "#FFFFFF",
-    "high":          "#FFFFFF",
-    "medium":        "#000000",
-    "low":           "#000000",
+    "critical": "#FFFFFF",
+    "high": "#FFFFFF",
+    "medium": "#000000",
+    "low": "#000000",
     "informational": "#000000",
-    "unknown":       "#FFFFFF",
+    "unknown": "#FFFFFF",
     "1": "#000000",
     "2": "#000000",
     "3": "#000000",
@@ -321,7 +322,7 @@ class AlertFetchWorker(QThread):
             for i in range(0, len(composite_ids), chunk_size):
                 if self._cancelled:
                     break
-                chunk = composite_ids[i : i + chunk_size]
+                chunk = composite_ids[i: i + chunk_size]
                 detail_resp = self._sdk.get_alerts_v2(composite_ids=chunk)
                 if detail_resp["status_code"] not in (200, 201):
                     raise RuntimeError(
@@ -774,8 +775,6 @@ class AlertsTriageApp(QMainWindow):
         self.setWindowTitle(f"Alerts Triage Dashboard — {label}")
         self._render_current_page()
 
-
-
     # ------------------------------------------------------------------
     # Pagination helpers
     # ------------------------------------------------------------------
@@ -936,40 +935,40 @@ class AlertsTriageApp(QMainWindow):
         lines.append("=" * 52)
         lines.append(f"Composite ID:  {alert.get('composite_id', '')}")
         lines.append("=" * 52)
-        _field("Severity",     "severity_name")
-        _field("Status",       "status")
-        _field("Name",         "name")
-        _field("Title",        "title")
-        _field("Tactic",       "tactic")
-        _field("Technique",    "technique")
+        _field("Severity", "severity_name")
+        _field("Status", "status")
+        _field("Name", "name")
+        _field("Title", "title")
+        _field("Tactic", "tactic")
+        _field("Technique", "technique")
         _field("Display Name", "display_name")
-        _field("Description",  "description")
+        _field("Description", "description")
         lines.append("")
         # Device fields (endpoint alerts)
         device = alert.get("device") or {}
         if device:
             lines.append("--- Device ---")
-            _field("Hostname",     "hostname",      device)
-            _field("AID",          "device_id",     device)
-            _field("OS",           "os_version",    device)
-            _field("Platform",     "platform_name", device)
+            _field("Hostname", "hostname", device)
+            _field("AID", "device_id", device)
+            _field("OS", "os_version", device)
+            _field("Platform", "platform_name", device)
             lines.append("")
         # Cloud / CWPP fields
         if alert.get("image_repository") or alert.get("cwpp_detect_id"):
             lines.append("--- Cloud / Image ---")
-            _field("Registry",     "image_registry")
-            _field("Repository",   "image_repository")
-            _field("Tag",          "image_tag")
-            _field("OS Name",      "os_name")
-            _field("OS Version",   "os_version")
-            _field("CWPP ID",      "cwpp_detect_id")
+            _field("Registry", "image_registry")
+            _field("Repository", "image_repository")
+            _field("Tag", "image_tag")
+            _field("OS Name", "os_name")
+            _field("OS Version", "os_version")
+            _field("CWPP ID", "cwpp_detect_id")
             lines.append("")
         lines.append("--- Timestamps ---")
-        _field("Created",      "created_timestamp")
-        _field("Updated",      "updated_timestamp")
+        _field("Created", "created_timestamp")
+        _field("Updated", "updated_timestamp")
         lines.append("")
         lines.append("--- Assignment ---")
-        _field("Assigned to",  "assigned_to_name")
+        _field("Assigned to", "assigned_to_name")
         _field("Assigned UID", "assigned_to_uid")
         comments = alert.get("comments") or []
         if comments:
@@ -1079,7 +1078,8 @@ class AlertsTriageApp(QMainWindow):
         """Cancel in-flight workers before closing to prevent signal-after-destroy crashes."""
         for worker in (self._fetch_worker, self._update_worker):
             if worker and worker.isRunning():
-                worker.cancel() if hasattr(worker, "cancel") else None
+                if hasattr(worker, "cancel"):
+                    worker.cancel()
                 worker.wait(2000)
         super().closeEvent(event)
 
@@ -1092,41 +1092,41 @@ def _dark_palette() -> QPalette:
     """Return a dark QPalette for use with the Fusion style."""
     p = QPalette()
     # Base colours
-    dark        = QColor(45,  45,  45)
-    mid_dark    = QColor(55,  55,  55)
-    mid         = QColor(65,  65,  65)
-    mid_light   = QColor(75,  75,  75)
-    light       = QColor(90,  90,  90)
-    text        = QColor(210, 210, 210)
-    dim_text    = QColor(140, 140, 140)
-    highlight   = QColor(42,  130, 218)
-    hi_text     = QColor(255, 255, 255)
-    link        = QColor(80,  160, 230)
+    dark = QColor(45, 45, 45)
+    mid_dark = QColor(55, 55, 55)
+    mid = QColor(65, 65, 65)
+    mid_light = QColor(75, 75, 75)
+    light = QColor(90, 90, 90)
+    text = QColor(210, 210, 210)
+    dim_text = QColor(140, 140, 140)
+    highlight = QColor(42, 130, 218)
+    hi_text = QColor(255, 255, 255)
+    link = QColor(80, 160, 230)
 
-    p.setColor(QPalette.ColorRole.Window,          dark)
-    p.setColor(QPalette.ColorRole.WindowText,      text)
-    p.setColor(QPalette.ColorRole.Base,            mid_dark)
-    p.setColor(QPalette.ColorRole.AlternateBase,   dark)
-    p.setColor(QPalette.ColorRole.ToolTipBase,     mid_dark)
-    p.setColor(QPalette.ColorRole.ToolTipText,     text)
-    p.setColor(QPalette.ColorRole.Text,            text)
-    p.setColor(QPalette.ColorRole.Button,          mid)
-    p.setColor(QPalette.ColorRole.ButtonText,      text)
-    p.setColor(QPalette.ColorRole.BrightText,      hi_text)
-    p.setColor(QPalette.ColorRole.Link,            link)
-    p.setColor(QPalette.ColorRole.Highlight,       highlight)
+    p.setColor(QPalette.ColorRole.Window, dark)
+    p.setColor(QPalette.ColorRole.WindowText, text)
+    p.setColor(QPalette.ColorRole.Base, mid_dark)
+    p.setColor(QPalette.ColorRole.AlternateBase, dark)
+    p.setColor(QPalette.ColorRole.ToolTipBase, mid_dark)
+    p.setColor(QPalette.ColorRole.ToolTipText, text)
+    p.setColor(QPalette.ColorRole.Text, text)
+    p.setColor(QPalette.ColorRole.Button, mid)
+    p.setColor(QPalette.ColorRole.ButtonText, text)
+    p.setColor(QPalette.ColorRole.BrightText, hi_text)
+    p.setColor(QPalette.ColorRole.Link, link)
+    p.setColor(QPalette.ColorRole.Highlight, highlight)
     p.setColor(QPalette.ColorRole.HighlightedText, hi_text)
     # Disabled state
     p.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.WindowText, dim_text)
-    p.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Text,       dim_text)
+    p.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Text, dim_text)
     p.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.ButtonText, dim_text)
-    p.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Button,     mid_light)
-    p.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Base,       mid_dark)
+    p.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Button, mid_light)
+    p.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Base, mid_dark)
     # Mid / shadow shades used by Fusion for borders and panel separators
-    p.setColor(QPalette.ColorRole.Mid,        light)
-    p.setColor(QPalette.ColorRole.Shadow,     QColor(20, 20, 20))
-    p.setColor(QPalette.ColorRole.Dark,       mid_dark)
-    p.setColor(QPalette.ColorRole.Midlight,   mid_light)
+    p.setColor(QPalette.ColorRole.Mid, light)
+    p.setColor(QPalette.ColorRole.Shadow, QColor(20, 20, 20))
+    p.setColor(QPalette.ColorRole.Dark, mid_dark)
+    p.setColor(QPalette.ColorRole.Midlight, mid_light)
     return p
 
 

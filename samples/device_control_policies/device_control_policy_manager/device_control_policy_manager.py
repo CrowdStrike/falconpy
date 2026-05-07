@@ -85,7 +85,7 @@ import argparse
 import os
 import sys
 
-# pylint: disable=import-error
+# pylint: disable=import-error,no-name-in-module
 from PySide6.QtCore import (
     Qt, QThread, Signal, QSortFilterProxyModel,
 )
@@ -117,7 +117,7 @@ from PySide6.QtWidgets import (
 )
 
 from falconpy import DeviceControlPolicies, HostGroup
-# pylint: enable=import-error
+# pylint: enable=import-error,no-name-in-module
 
 # ── USB device class identifiers expected by the API ─────────────────────────
 DEVICE_CLASSES = [
@@ -529,7 +529,7 @@ class ExceptionDialog(QDialog):
             return
         try:
             val = int(vid, 16)
-            if not (0 <= val <= 0xFFFF):
+            if not 0 <= val <= 0xFFFF:
                 raise ValueError
         except ValueError:
             QMessageBox.warning(self, "Validation",
@@ -539,7 +539,7 @@ class ExceptionDialog(QDialog):
         if pid:
             try:
                 val = int(pid, 16)
-                if not (0 <= val <= 0xFFFF):
+                if not 0 <= val <= 0xFFFF:
                     raise ValueError
             except ValueError:
                 QMessageBox.warning(self, "Validation",

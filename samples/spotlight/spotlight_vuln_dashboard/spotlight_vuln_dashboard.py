@@ -84,6 +84,9 @@ Environment variables (optional — skips credential dialog)
 
 CLI arguments take precedence over environment variables.
 """
+# pylint: disable=too-many-lines,too-many-instance-attributes,too-many-statements
+# pylint: disable=too-many-arguments,too-few-public-methods,attribute-defined-outside-init
+# pylint: disable=invalid-name,unsupported-binary-operation
 
 import argparse
 import csv
@@ -93,10 +96,10 @@ import threading
 import time
 from concurrent.futures import CancelledError, Future, ThreadPoolExecutor
 from dataclasses import dataclass
-from datetime import date, datetime
+from datetime import datetime
 from typing import Dict, List, Optional
 
-# pylint: disable=import-error
+# pylint: disable=import-error,no-name-in-module
 from PySide6.QtCore import QDate, Qt, QThread, QTimer, QUrl, Signal
 from PySide6.QtGui import QBrush, QColor, QDesktopServices, QPixmap
 from PySide6.QtWidgets import (
@@ -126,7 +129,7 @@ from PySide6.QtWidgets import (
 )
 
 from falconpy import Hosts, SpotlightVulnerabilities  # pylint: disable=import-error
-# pylint: enable=import-error
+# pylint: enable=import-error,no-name-in-module
 
 # ---------------------------------------------------------------------------
 # Optional matplotlib dependency — chart is hidden gracefully when absent.
@@ -366,7 +369,7 @@ class FalconDataLayer:
         """
         return self.get_vulnerabilities_paged(on_page=lambda *_: None)
 
-    def get_vulnerabilities_paged(
+    def get_vulnerabilities_paged(  # noqa: C901
         self,
         on_page,
         stop_event: Optional[threading.Event] = None,
@@ -541,7 +544,7 @@ class FalconDataLayer:
         host_map: Dict[str, dict] = {}
 
         for i in range(0, len(host_ids), HOST_BATCH_SIZE):
-            batch = host_ids[i : i + HOST_BATCH_SIZE]
+            batch = host_ids[i: i + HOST_BATCH_SIZE]
             try:
                 resp = self._call_with_retry(
                     self._hosts.get_device_details, ids=batch
@@ -740,6 +743,7 @@ class CredentialDialog(QDialog):
     """
 
     def __init__(self, parent=None, region_default: str = "auto") -> None:
+        """Build the credential dialog with optional region default."""
         super().__init__(parent)
         self.setWindowTitle("Falcon API Credentials")
         self.setModal(True)
@@ -1539,7 +1543,7 @@ class DashboardWindow(QMainWindow):
             return False
         if hostname_search and hostname_search not in rec.hostname.upper():
             return False
-        if os_filter != "All" and rec.os_platform != os_filter:
+        if os_filter not in ("All", rec.os_platform):
             return False
         return True
 

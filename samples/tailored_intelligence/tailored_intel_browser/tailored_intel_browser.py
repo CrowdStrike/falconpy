@@ -73,45 +73,34 @@ Required API scope
 # pylint: disable=too-many-locals,too-many-statements
 # pylint: disable=too-many-instance-attributes,too-many-branches
 # pylint: disable=wrong-import-position,wrong-import-order,import-error
+# pylint: disable=too-few-public-methods,attribute-defined-outside-init,protected-access
+# pylint: disable=too-many-return-statements
 
 import argparse
 import json
 import os
-import re
-import sys
 import threading
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
-# ---------------------------------------------------------------------------
-# PRE-IMPORT argv scrubbing — MUST happen before any Kivy import.
-#
-# Kivy processes sys.argv at import time and treats -k (fake-fullscreen) and
-# -s (save) as its own flags.  Scrub our credential flags out of sys.argv
-# now, store the values in module-level variables, and restore argv minus our
-# flags so Kivy never sees -k/-s.
-# ---------------------------------------------------------------------------
-
+# KIVY_NO_ARGS must be set before any Kivy import to prevent Kivy from
+# consuming -k/-s as its own fake-fullscreen/save flags.
 os.environ["KIVY_NO_ARGS"] = "1"
 
-from kivy.app import App
-from kivy.clock import Clock
-from kivy.lang import Builder
-from kivy.properties import (
-    BooleanProperty,
+from kivy.app import App  # noqa: E402
+from kivy.clock import Clock  # noqa: E402
+from kivy.lang import Builder  # noqa: E402
+from kivy.properties import (  # noqa: E402
     ListProperty,
     NumericProperty,
-    ObjectProperty,
     StringProperty,
 )
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.label import Label
-from kivy.uix.recycleview import RecycleView
-from kivy.uix.recycleview.views import RecycleDataViewBehavior
-from kivy.uix.screenmanager import Screen, ScreenManager
-from kivy.uix.widget import Widget
-from falconpy import TailoredIntelligence
+from kivy.uix.boxlayout import BoxLayout  # noqa: E402
+from kivy.uix.floatlayout import FloatLayout  # noqa: E402
+from kivy.uix.recycleview import RecycleView  # noqa: E402
+from kivy.uix.recycleview.views import RecycleDataViewBehavior  # noqa: E402
+from kivy.uix.screenmanager import Screen, ScreenManager  # noqa: E402
+from falconpy import TailoredIntelligence  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Kivy KV layout definitions
@@ -744,6 +733,7 @@ KV = r"""
 # Data models
 # ---------------------------------------------------------------------------
 
+
 class EventRecord:
     """Holds data for a single TailoredIntelligence event."""
 
@@ -1230,7 +1220,7 @@ class TailoredIntelClient:
     def connect(
         self,
         client_id_override: str = "",
-        client_secret_override: str = "", # nosec - Bandit FP
+        client_secret_override: str = "",  # nosec - Bandit FP
     ) -> bool:
         """Authenticate using provided credentials or env vars.
 
@@ -1313,7 +1303,7 @@ class TailoredIntelClient:
         # Fetch event entities in batches.
         records: list[EventRecord] = []
         for i in range(0, len(all_ids), self._BATCH_SIZE):
-            batch = all_ids[i : i + self._BATCH_SIZE]
+            batch = all_ids[i: i + self._BATCH_SIZE]
             resp = self._sdk.get_event_entities(ids=batch)
             if resp.get("status_code", 0) not in (200, 201):
                 continue
@@ -1357,7 +1347,7 @@ class TailoredIntelClient:
 
         records: list[RuleRecord] = []
         for i in range(0, len(all_ids), self._BATCH_SIZE):
-            batch = all_ids[i : i + self._BATCH_SIZE]
+            batch = all_ids[i: i + self._BATCH_SIZE]
             resp = self._sdk.get_rule_entities(ids=batch)
             if resp.get("status_code", 0) not in (200, 201):
                 continue
@@ -1397,7 +1387,7 @@ class EventCard(RecycleDataViewBehavior, BoxLayout):
     confidence_color = ListProperty([0.6, 0.6, 0.6, 1])
 
     def refresh_view_attrs(self, rv, index, data):
-        """Called by RecycleView to bind data to this widget instance."""
+        """Bind data to this widget instance (called by RecycleView)."""
         self.index = index
         return super().refresh_view_attrs(rv, index, data)
 
@@ -1432,7 +1422,7 @@ class RuleCard(RecycleDataViewBehavior, BoxLayout):
     rule_status_color = ListProperty([0.6, 0.6, 0.6, 1])
 
     def refresh_view_attrs(self, rv, index, data):
-        """Called by RecycleView to bind data to this widget instance."""
+        """Bind data to this widget instance (called by RecycleView)."""
         self.index = index
         return super().refresh_view_attrs(rv, index, data)
 
@@ -1514,7 +1504,7 @@ class TailoredIntelBrowserApp(App):
     # Current tab ('events' or 'rules').
     _active_tab = "events"
 
-    def __init__(self, client_id: str = "", client_secret: str = "", **kwargs): # nosec - Bandit FP
+    def __init__(self, client_id: str = "", client_secret: str = "", **kwargs):  # nosec - Bandit FP
         """Initialise the app and its supporting components.
 
         *client_id* and *client_secret* may be provided from CLI args.  When
@@ -1620,8 +1610,8 @@ class TailoredIntelBrowserApp(App):
 
     def _make_tab_button(self, text: str, active: bool):
         """Create a styled tab Button widget."""
-        from kivy.uix.button import Button
-        from kivy.metrics import dp
+        from kivy.uix.button import Button  # pylint: disable=import-outside-toplevel
+        from kivy.metrics import dp  # pylint: disable=import-outside-toplevel
         btn = Button(
             text=text,
             size_hint_x=None,
@@ -1636,7 +1626,7 @@ class TailoredIntelBrowserApp(App):
         return btn
 
     def on_start(self):
-        """Called after build() — authenticate in background then load data."""
+        """Authenticate in background then load data after build() completes."""
         self._set_status("connecting")
 
         def _auth_worker():
@@ -1649,7 +1639,7 @@ class TailoredIntelBrowserApp(App):
         threading.Thread(target=_auth_worker, daemon=True).start()
 
     def _on_connect_done(self, ok: bool):
-        """Called on main thread after background auth completes."""
+        """Handle auth completion on the main thread after background auth."""
         if ok:
             self._set_status("connected")
             self._load_data()
@@ -1795,7 +1785,7 @@ class TailoredIntelBrowserApp(App):
     # ------------------------------------------------------------------
 
     def _on_events_loaded(self, _dt):
-        """Called on the main thread after event loading completes."""
+        """Populate the event feed on the main thread after loading completes."""
         self._show_loading(False)
         with self.state.lock:
             events = list(self.state.events)
@@ -1811,7 +1801,7 @@ class TailoredIntelBrowserApp(App):
         self._rebuild_events_list(events)
 
     def _on_rules_loaded(self, _dt):
-        """Called on the main thread after rule loading completes."""
+        """Populate the rules list on the main thread after loading completes."""
         with self.state.lock:
             rules = list(self.state.rules)
         self._rebuild_rules_list(rules)
