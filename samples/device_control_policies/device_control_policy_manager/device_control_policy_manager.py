@@ -466,54 +466,48 @@ class ExceptionDialog(QDialog):
 
         layout = QVBoxLayout(self)
 
-        # ── Class ────────────────────────────────────────────────────────────
         layout.addWidget(QLabel("Device Class *"))
-        self._class_combo = QComboBox()
-        self._class_combo.addItems(class_ids)
-        layout.addWidget(self._class_combo)
+        self.class_combo = QComboBox()
+        self.class_combo.addItems(class_ids)
+        layout.addWidget(self.class_combo)
 
-        # ── Vendor ───────────────────────────────────────────────────────────
         layout.addWidget(QLabel("Vendor ID  (4-digit hex, e.g. ffff)"))
-        self._vendor_id = QLineEdit()
-        self._vendor_id.setPlaceholderText("ffff")
-        layout.addWidget(self._vendor_id)
+        self.vendor_id = QLineEdit()
+        self.vendor_id.setPlaceholderText("ffff")
+        layout.addWidget(self.vendor_id)
 
         layout.addWidget(QLabel("Vendor Name"))
-        self._vendor_name = QLineEdit()
-        self._vendor_name.setPlaceholderText("e.g. Acme Corp")
-        layout.addWidget(self._vendor_name)
+        self.vendor_name = QLineEdit()
+        self.vendor_name.setPlaceholderText("e.g. Acme Corp")
+        layout.addWidget(self.vendor_name)
 
-        # ── Product ──────────────────────────────────────────────────────────
         layout.addWidget(QLabel("Product ID  (4-digit hex, e.g. abcd)"))
-        self._product_id = QLineEdit()
-        self._product_id.setPlaceholderText("abcd")
-        layout.addWidget(self._product_id)
+        self.product_id = QLineEdit()
+        self.product_id.setPlaceholderText("abcd")
+        layout.addWidget(self.product_id)
 
         layout.addWidget(QLabel("Product Name"))
-        self._product_name = QLineEdit()
-        self._product_name.setPlaceholderText("e.g. USB Drive")
-        layout.addWidget(self._product_name)
+        self.product_name = QLineEdit()
+        self.product_name.setPlaceholderText("e.g. USB Drive")
+        layout.addWidget(self.product_name)
 
-        # ── Action ───────────────────────────────────────────────────────────
         layout.addWidget(QLabel("Action *"))
-        self._action_combo = QComboBox()
-        self._action_combo.addItems(CLASS_ACTIONS)
-        layout.addWidget(self._action_combo)
+        self.action_combo = QComboBox()
+        self.action_combo.addItems(CLASS_ACTIONS)
+        layout.addWidget(self.action_combo)
 
-        # ── Optional fields ──────────────────────────────────────────────────
         layout.addWidget(QLabel("Serial Number  (optional)"))
-        self._serial = QLineEdit()
-        self._serial.setPlaceholderText("Leave blank to match any serial")
-        layout.addWidget(self._serial)
+        self.serial = QLineEdit()
+        self.serial.setPlaceholderText("Leave blank to match any serial")
+        layout.addWidget(self.serial)
 
         layout.addWidget(QLabel("Description  (optional)"))
-        self._description = QLineEdit()
-        layout.addWidget(self._description)
+        self.description = QLineEdit()
+        layout.addWidget(self.description)
 
-        self._use_wildcard = QCheckBox("Use wildcard matching")
-        layout.addWidget(self._use_wildcard)
+        self.use_wildcard = QCheckBox("Use wildcard matching")
+        layout.addWidget(self.use_wildcard)
 
-        # ── Buttons ──────────────────────────────────────────────────────────
         buttons = QDialogButtonBox(
             QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel
         )
@@ -523,7 +517,7 @@ class ExceptionDialog(QDialog):
 
     def _on_accept(self):
         """Validate vendor ID is present and is valid 4-digit hex before accepting."""
-        vid = self._vendor_id.text().strip()
+        vid = self.vendor_id.text().strip()
         if not vid:
             QMessageBox.warning(self, "Validation", "Vendor ID is required.")
             return
@@ -535,7 +529,7 @@ class ExceptionDialog(QDialog):
             QMessageBox.warning(self, "Validation",
                                 "Vendor ID must be a 4-digit hexadecimal value (e.g. ffff).")
             return
-        pid = self._product_id.text().strip()
+        pid = self.product_id.text().strip()
         if pid:
             try:
                 val = int(pid, 16)
@@ -546,53 +540,6 @@ class ExceptionDialog(QDialog):
                                     "Product ID must be a 4-digit hexadecimal value (e.g. abcd).")
                 return
         self.accept()
-
-    # ── Properties used by caller ─────────────────────────────────────────────
-
-    @property
-    def class_id(self):
-        """Return the selected device class ID."""
-        return self._class_combo.currentText()
-
-    @property
-    def vendor_id(self):
-        """Return the entered vendor ID string."""
-        return self._vendor_id.text().strip()
-
-    @property
-    def vendor_name(self):
-        """Return the entered vendor name."""
-        return self._vendor_name.text().strip()
-
-    @property
-    def product_id(self):
-        """Return the entered product ID string."""
-        return self._product_id.text().strip()
-
-    @property
-    def product_name(self):
-        """Return the entered product name."""
-        return self._product_name.text().strip()
-
-    @property
-    def action(self):
-        """Return the selected action string."""
-        return self._action_combo.currentText()
-
-    @property
-    def serial_number(self):
-        """Return the entered serial number (empty string if blank)."""
-        return self._serial.text().strip()
-
-    @property
-    def description(self):
-        """Return the entered description."""
-        return self._description.text().strip()
-
-    @property
-    def use_wildcard(self):
-        """Return True if the wildcard checkbox is checked."""
-        return self._use_wildcard.isChecked()
 
 
 # ── New / Edit policy dialog ──────────────────────────────────────────────────
@@ -1181,19 +1128,19 @@ class DeviceControlWindow(QMainWindow):
         orig_map = {c.get("id", ""): dict(c) for c in original_classes}
 
         new_exc = {
-            "vendor_id": dlg.vendor_id,
-            "vendor_name": dlg.vendor_name,
-            "product_id": dlg.product_id,
-            "product_name": dlg.product_name,
-            "action": dlg.action,
-            "use_wildcard": dlg.use_wildcard,
+            "vendor_id": dlg.vendor_id.text().strip(),
+            "vendor_name": dlg.vendor_name.text().strip(),
+            "product_id": dlg.product_id.text().strip(),
+            "product_name": dlg.product_name.text().strip(),
+            "action": dlg.action_combo.currentText(),
+            "use_wildcard": dlg.use_wildcard.isChecked(),
         }
-        if dlg.serial_number:
-            new_exc["serial_number"] = dlg.serial_number
-        if dlg.description:
-            new_exc["description"] = dlg.description
+        if dlg.serial.text().strip():
+            new_exc["serial_number"] = dlg.serial.text().strip()
+        if dlg.description.text().strip():
+            new_exc["description"] = dlg.description.text().strip()
 
-        target_class_id = dlg.class_id
+        target_class_id = dlg.class_combo.currentText()
         if target_class_id not in orig_map:
             orig_map[target_class_id] = {"id": target_class_id, "action": "FULL_ACCESS"}
 
