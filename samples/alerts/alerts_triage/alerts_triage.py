@@ -262,9 +262,12 @@ class AlertFetchWorker(QThread):
             if self._status:
                 clauses.append(f"status:'{self._status}'")
 
-            # Add default time window unless caller explicitly provided one in FQL
+            # Add default time window unless caller explicitly provided a timestamp clause.
+            # Match on field-name prefix followed by ':' to avoid false positives on
+            # hostnames or field names that happen to contain these substrings.
             has_time_filter = any(
-                kw in self._fql_filter for kw in ("created_timestamp", "timestamp", "last_")
+                f"{kw}:" in self._fql_filter
+                for kw in ("created_timestamp", "updated_timestamp", "timestamp", "last_seen")
             )
             if not has_time_filter and self._hours > 0:
                 since = datetime.now(timezone.utc) - timedelta(hours=self._hours)
@@ -298,7 +301,7 @@ class AlertFetchWorker(QThread):
                 composite_ids.extend(resources)
                 meta = body.get("meta", {}).get("pagination", {})
                 total = meta.get("total", 0)
-                last_api_offset = meta.get("offset", "")
+                last_api_offset = meta.get("offset", 0)
                 if not resources or len(composite_ids) >= total:
                     has_more = False
                     break
@@ -986,7 +989,7 @@ class AlertsTriageApp(QMainWindow):
 
     def _on_select_all(self, state: int) -> None:
         """Toggle selection on all rows when the select-all checkbox changes."""
-        if state == Qt.CheckState.Checked.value:
+        if Qt.CheckState(state) == Qt.CheckState.Checked:
             self._alert_table.selectAll()
         else:
             self._alert_table.clearSelection()
@@ -1067,6 +1070,18 @@ class AlertsTriageApp(QMainWindow):
         self.statusBar().showMessage(
             f"Total: {total}  |  Page {self._page_index + 1}/{total_pages}  |  Selected: {selected}"
         )
+
+    # ------------------------------------------------------------------
+    # Window lifecycle
+    # ------------------------------------------------------------------
+
+    def closeEvent(self, event) -> None:  # pylint: disable=invalid-name
+        """Cancel in-flight workers before closing to prevent signal-after-destroy crashes."""
+        for worker in (self._fetch_worker, self._update_worker):
+            if worker and worker.isRunning():
+                worker.cancel() if hasattr(worker, "cancel") else None
+                worker.wait(2000)
+        super().closeEvent(event)
 
 
 # ---------------------------------------------------------------------------

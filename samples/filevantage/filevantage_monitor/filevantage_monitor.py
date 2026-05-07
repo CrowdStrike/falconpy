@@ -91,6 +91,7 @@ import json
 import math
 import os
 import sys
+import time
 from argparse import ArgumentParser, RawTextHelpFormatter
 from datetime import datetime
 
@@ -182,7 +183,7 @@ _DEMO_CHANGES = [
         "entity_type": "FILE",
         "severity": "HIGH",
         "file_name": "svchost.dll",
-        "file_path": "C:\\Windows\\System32\\svchost.dll",
+        "entity_path": "C:\\Windows\\System32\\svchost.dll",
         "process_image_file_name": "installer.exe",
         "user_name": "SYSTEM",
         "sha256_hash_before": "abc123def456abc123def456abc123def456abc123def456abc123def456abc1",
@@ -199,7 +200,7 @@ _DEMO_CHANGES = [
         "entity_type": "FILE",
         "severity": "MEDIUM",
         "file_name": "passwd",
-        "file_path": "/etc/passwd",
+        "entity_path": "/etc/passwd",
         "process_image_file_name": "rm",
         "user_name": "root",
         "sha256_hash_before": "111222333444111222333444111222333444111222333444111222333444111f",
@@ -216,7 +217,7 @@ _DEMO_CHANGES = [
         "entity_type": "FILE",
         "severity": "LOW",
         "file_name": "backdoor.sh",
-        "file_path": "/tmp/backdoor.sh", # nosec - Ridiculous Bandit FP
+        "entity_path": "/tmp/backdoor.sh", # nosec - Ridiculous Bandit FP
         "process_image_file_name": "bash",
         "user_name": "www-data",
         "sha256_hash_before": "",
@@ -233,7 +234,7 @@ _DEMO_CHANGES = [
         "entity_type": "FILE",
         "severity": "MEDIUM",
         "file_name": "config.bak",
-        "file_path": "C:\\Users\\alice\\Documents\\config.bak",
+        "entity_path": "C:\\Users\\alice\\Documents\\config.bak",
         "process_image_file_name": "explorer.exe",
         "user_name": "alice",
         "sha256_hash_before": "aaaa1111bbbb2222cccc3333dddd4444aaaa1111bbbb2222cccc3333dddd4444",
@@ -371,28 +372,22 @@ class FetchChangesWorker(QThread):
     finished = pyqtSignal(list, int, bool)
     error = pyqtSignal(str)
 
-    def __init__(self, client_id: str, client_secret: str, base_url: str,
-                 fql_filter: str, start_offset: int = 0, parent=None) -> None:
-        """Initialise the worker with Falcon API credentials and an optional FQL filter.
+    def __init__(self, sdk: "FileVantage", fql_filter: str,
+                 start_offset: int = 0, parent=None) -> None:
+        """Initialise the worker with an authenticated SDK instance and an optional FQL filter.
 
         *start_offset* is the API offset to begin from (0 for a fresh load,
         non-zero to continue fetching after a previous batch).
         """
         super().__init__(parent)
-        self._client_id = client_id
-        self._client_secret = client_secret
-        self._base_url = base_url
+        self._sdk = sdk
         self._fql_filter = fql_filter
         self._start_offset = start_offset
 
     def run(self) -> None:  # pylint: disable=too-many-branches
-        """Authenticate, paginate through FileVantage change IDs, hydrate, and emit results."""
+        """Paginate through FileVantage change IDs, hydrate, and emit results."""
         try:
-            sdk = FileVantage(
-                client_id=self._client_id,
-                client_secret=self._client_secret,
-                base_url=self._base_url,
-            )
+            sdk = self._sdk
 
             # Page through query_changes in _PAGE_SIZE chunks until we have
             # _MAX_CHANGES IDs or the API signals no more results.
@@ -444,7 +439,6 @@ class FetchChangesWorker(QThread):
 
             # Hydrate IDs in batches of 100 (get_changes API limit).
             changes: list[dict] = []
-            debug_printed = False
             for i in range(0, len(all_ids), _PAGE_SIZE):
                 if self.isInterruptionRequested():
                     return
@@ -461,15 +455,6 @@ class FetchChangesWorker(QThread):
                     return
 
                 resources = body.get("resources", []) or []
-
-                # Debug: print the first raw resource so field names can be verified
-                # if unexpected columns appear empty.
-                if not debug_printed and resources:
-                    debug_printed = True
-                    print("[FileVantage DEBUG] First change keys:", list(resources[0].keys()))
-                    truncated = dict(list(resources[0].items())[:15])
-                    print("[FileVantage DEBUG] First change (truncated):",
-                          json.dumps(truncated, indent=2, default=str))
 
                 for resource in resources:
                     # Attach raw JSON for the detail dialog's JSON tab.
@@ -515,7 +500,6 @@ class SuppressWorker(QThread):
 
     def run(self) -> None:
         """Submit the action via start_actions, then poll get_actions for status."""
-        import time  # pylint: disable=import-outside-toplevel
         try:
             sdk = FileVantage(
                 client_id=self._client_id,
@@ -896,6 +880,13 @@ class FileVantageWindow(QMainWindow):
         self._bulk_change_ids: list[str] = []
 
         self._demo_mode = not (self._client_id and self._client_secret)
+        self._sdk: FileVantage | None = None
+        if not self._demo_mode:
+            self._sdk = FileVantage(
+                client_id=self._client_id,
+                client_secret=self._client_secret,
+                base_url=self._base_url,
+            )
 
         self._build_ui()
         self._start_auto_refresh()
@@ -1099,7 +1090,7 @@ class FileVantageWindow(QMainWindow):
         for worker in (self._fetch_worker, self._suppress_worker):
             if worker and worker.isRunning():
                 worker.requestInterruption()
-                worker.wait()  # Block until the thread exits (no timeout — must finish).
+                worker.wait(5000)  # 5s timeout; OS reclaims thread on process exit if exceeded.
         super().closeEvent(event)
 
     # ── Auto-refresh timer ────────────────────────────────────────────────────
@@ -1246,9 +1237,7 @@ class FileVantageWindow(QMainWindow):
 
         fql = self._fql_input.text().strip()
         self._fetch_worker = FetchChangesWorker(
-            client_id=self._client_id,
-            client_secret=self._client_secret,
-            base_url=self._base_url,
+            sdk=self._sdk,
             fql_filter=fql,
             start_offset=0,
             parent=self,
@@ -1271,9 +1260,7 @@ class FileVantageWindow(QMainWindow):
 
         fql = self._fql_input.text().strip()
         self._fetch_worker = FetchChangesWorker(
-            client_id=self._client_id,
-            client_secret=self._client_secret,
-            base_url=self._base_url,
+            sdk=self._sdk,
             fql_filter=fql,
             start_offset=self._api_offset,
             parent=self,

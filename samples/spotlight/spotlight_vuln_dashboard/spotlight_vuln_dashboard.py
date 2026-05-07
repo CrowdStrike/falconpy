@@ -271,21 +271,12 @@ class FalconDataLayer:
             ValueError: Credentials rejected by the API (HTTP 401).
             RuntimeError: Probe failed for a non-authentication reason.
         """
-        if region == "auto":
-            base_url = "https://api.crowdstrike.com"
-        else:
-            base_url = f"https://api.{region}.crowdstrike.com"
-
         self._spotlight = SpotlightVulnerabilities(
             client_id=client_id,
             client_secret=client_secret,
-            base_url=base_url,
+            base_url=region,
         )
-        self._hosts = Hosts(
-            client_id=client_id,
-            client_secret=client_secret,
-            base_url=base_url,
-        )
+        self._hosts = Hosts(auth_object=self._spotlight)
 
         # Fail fast: verify credentials before the caller builds any UI.
         self._validate_credentials()
@@ -471,7 +462,6 @@ class FalconDataLayer:
             # request with the *current* page's parse/notify work, which is the
             # maximum pipeline depth achievable under cursor pagination.
             pending: Future = executor.submit(_fetch, None)
-            _after_token: Optional[str] = None
 
             while True:
                 # Poll with a short timeout so a stop request is honoured within
@@ -512,7 +502,8 @@ class FalconDataLayer:
                 if not next_after:
                     break
 
-                _after_token = next_after  # noqa: F841  (kept for clarity)
+                # next_after is consumed by the next loop iteration via `pending`.
+                _ = next_after
 
                 # Post-processing stop check: avoid submitting the just-queued
                 # next fetch if a stop was requested while we were processing.
@@ -615,74 +606,6 @@ def normalise_cve_id(raw: str) -> str:
 # ---------------------------------------------------------------------------
 
 _FQL_INJECTION_RE = re.compile(r"['\"]")
-
-
-def _build_fql(
-    *,
-    status: str = "open",
-    cve_id: str = "",
-    severity: str = "",
-    cvss_min: float = 0.0,
-    cvss_max: float = 10.0,
-    created_after: str = "",
-    created_before: str = "",
-) -> str:
-    """Build a Spotlight FQL filter string from UI widget values.
-
-    All string inputs are sanitised: single-quotes and double-quotes are
-    stripped to prevent FQL injection.
-
-    Args:
-        status: Remediation status — ``"open"``, ``"closed"``, or ``""``
-            for no status filter.
-        cve_id: CVE ID fragment to match (partial allowed); already
-            normalised by ``normalise_cve_id()`` before being passed here.
-        severity: Severity level — ``"CRITICAL"``, ``"HIGH"``, etc., or
-            ``""`` for no severity filter.
-        cvss_min: Minimum CVSS score (inclusive).
-        cvss_max: Maximum CVSS score (inclusive).
-        created_after: ISO date string ``YYYY-MM-DD`` for lower bound on
-            ``created_timestamp``, or ``""`` to omit.
-        created_before: ISO date string ``YYYY-MM-DD`` for upper bound, or
-            ``""`` to omit.
-
-    Returns:
-        FQL filter string, e.g.
-        ``"status:'open'+cve.id:'CVE-2024-*'+cve.base_score:>=7.0"``.
-        Returns ``""`` when no filters are active (Spotlight returns all
-        records).
-    """
-
-    def _sanitise(s: str) -> str:
-        return _FQL_INJECTION_RE.sub("", s)
-
-    parts: List[str] = []
-
-    if status:
-        parts.append(f"status:'{_sanitise(status)}'")
-
-    if cve_id:
-        safe_cve = _sanitise(cve_id)
-        # Append wildcard to support partial prefix matches (e.g. CVE-2024-*).
-        if not safe_cve.endswith("*"):
-            safe_cve += "*"
-        parts.append(f"cve.id:'{safe_cve}'")
-
-    if severity:
-        parts.append(f"cve.severity:'{_sanitise(severity)}'")
-
-    # CVSS range — only emit when non-default.
-    if cvss_min > 0.0:
-        parts.append(f"cve.base_score:>={cvss_min:.1f}")
-    if cvss_max < 10.0:
-        parts.append(f"cve.base_score:<={cvss_max:.1f}")
-
-    if created_after:
-        parts.append(f"created_timestamp:>'{_sanitise(created_after)}T00:00:00Z'")
-    if created_before:
-        parts.append(f"created_timestamp:<'{_sanitise(created_before)}T23:59:59Z'")
-
-    return "+".join(parts)
 
 
 # ---------------------------------------------------------------------------
@@ -1707,6 +1630,8 @@ class DashboardWindow(QMainWindow):
                 item = QTableWidgetItem(getattr(rec, attr))
                 item.setForeground(brush)
                 item.setFlags(item.flags() & ~Qt.ItemIsEditable)
+                if col == 0:
+                    item.setData(Qt.ItemDataRole.UserRole, rec)
                 self._table.setItem(row, col, item)
 
         self._table.setSortingEnabled(True)
@@ -1718,12 +1643,15 @@ class DashboardWindow(QMainWindow):
     def _on_cell_double_clicked(self, row: int, _col: int) -> None:
         """Open a CVE detail dialog for the selected row.
 
-        The row index maps directly into ``_filtered_records`` — the same list
-        that ``_populate_table`` iterated over to build the current table view.
+        Uses the VulnRecord stored in UserRole on column 0 so the lookup
+        remains correct after the user sorts the table.
         """
-        if row < 0 or row >= len(self._filtered_records):
+        item = self._table.item(row, 0)
+        if not item:
             return
-        rec = self._filtered_records[row]
+        rec = item.data(Qt.ItemDataRole.UserRole)
+        if not rec:
+            return
         dlg = CveDetailDialog(rec, parent=self)
         dlg.show()  # Non-modal — user can open multiple dialogs.
 

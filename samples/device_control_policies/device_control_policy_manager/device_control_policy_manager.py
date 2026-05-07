@@ -73,7 +73,7 @@ Architecture overview
     LoadPoliciesWorker   — calls query_combined_policies (paginated)
     SavePolicyWorker     — calls create_policies or update_policies
     DeletePolicyWorker   — calls delete_policies
-    ActionWorker         — calls performDeviceControlPoliciesAction (enable/disable/assign group)
+    ActionWorker         — calls perform_action (enable/disable/assign group)
     LoadGroupsWorker     — calls HostGroup.query_combined_host_groups
 """
 # pylint: disable=too-many-lines
@@ -272,7 +272,7 @@ class ActionWorker(QThread):
         self._group_id = group_id
 
     def run(self):
-        """Call performDeviceControlPoliciesAction with the requested action."""
+        """Call perform_action with the requested action."""
         try:
             kwargs = {
                 "action_name": self._action_name,
@@ -283,7 +283,7 @@ class ActionWorker(QThread):
                     {"name": "group_id", "value": self._group_id}
                 ]
 
-            response = self._sdk.performDeviceControlPoliciesAction(**kwargs)
+            response = self._sdk.perform_action(**kwargs)
             status = response.get("status_code", 0)
             if status != 200:
                 errors = response.get("body", {}).get("errors", [])
@@ -522,10 +522,29 @@ class ExceptionDialog(QDialog):
         layout.addWidget(buttons)
 
     def _on_accept(self):
-        """Validate that at least vendor ID is provided before accepting."""
-        if not self._vendor_id.text().strip():
+        """Validate vendor ID is present and is valid 4-digit hex before accepting."""
+        vid = self._vendor_id.text().strip()
+        if not vid:
             QMessageBox.warning(self, "Validation", "Vendor ID is required.")
             return
+        try:
+            val = int(vid, 16)
+            if not (0 <= val <= 0xFFFF):
+                raise ValueError
+        except ValueError:
+            QMessageBox.warning(self, "Validation",
+                                "Vendor ID must be a 4-digit hexadecimal value (e.g. ffff).")
+            return
+        pid = self._product_id.text().strip()
+        if pid:
+            try:
+                val = int(pid, 16)
+                if not (0 <= val <= 0xFFFF):
+                    raise ValueError
+            except ValueError:
+                QMessageBox.warning(self, "Validation",
+                                    "Product ID must be a 4-digit hexadecimal value (e.g. abcd).")
+                return
         self.accept()
 
     # ── Properties used by caller ─────────────────────────────────────────────
@@ -1549,6 +1568,13 @@ class DeviceControlWindow(QMainWindow):
             self._btn_enable.setEnabled(False)
             self._btn_disable.setEnabled(False)
 
+    def closeEvent(self, event):  # pylint: disable=invalid-name
+        """Stop active background workers before closing to prevent use-after-free crashes."""
+        for worker in list(self._active_workers):
+            if worker.isRunning():
+                worker.wait(2000)
+        super().closeEvent(event)
+
 
 # ── Entry point ───────────────────────────────────────────────────────────────
 
@@ -1599,17 +1625,13 @@ def main():
         )
         sys.exit(1)
 
-    # Build SDK instances; both share the same credential pair
+    # Build SDK instances; group_sdk shares the auth token from sdk.
     sdk = DeviceControlPolicies(
         client_id=client_id,
         client_secret=client_secret,
         base_url=base_url,
     )
-    group_sdk = HostGroup(
-        client_id=client_id,
-        client_secret=client_secret,
-        base_url=base_url,
-    )
+    group_sdk = HostGroup(auth_object=sdk)
 
     app = QApplication(sys.argv)
     app.setApplicationName("Device Control Policy Manager")

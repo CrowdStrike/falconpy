@@ -91,12 +91,12 @@ import os
 import sys
 import csv
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from argparse import ArgumentParser, RawTextHelpFormatter, Namespace
 from typing import List, Dict, Optional
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from threading import Lock, Thread
+from threading import Thread
 
 # Deferred imports: these are set to None at module level so the script can
 # display --help output without requiring third-party packages to be installed.
@@ -333,7 +333,7 @@ def generate_demo_data(limit: int) -> List[Dict]:
     # Cycle through platforms to simulate a heterogeneous environment
     platforms = ['Windows', 'Linux', 'Mac']
     # Anchor point for computing relative last_seen timestamps
-    base_date = datetime.utcnow()
+    base_date = datetime.now(timezone.utc)
 
     for i in range(limit):
         # Create a declining alert count with periodic bumps (i % 5)
@@ -389,8 +389,12 @@ def generate_demo_data(limit: int) -> List[Dict]:
         elif zta_overall < 60:
             activity_score += 15
         # Recent hosts get a bonus, matching the real scoring logic
-        if hours_since < 24:
+        if hours_since < 1:
+            activity_score += 100
+        elif hours_since < 24:
             activity_score += 50
+        elif hours_since < 72:
+            activity_score += 25
 
         # Build the host dict with all fields that display_results
         # and export_to_csv reference
@@ -592,7 +596,7 @@ def query_high_activity_hosts(
                contains at most ``limit`` host dicts sorted by score.
     """
     # Calculate the date range for the query — all timestamps are UTC
-    end_date = datetime.utcnow()
+    end_date = datetime.now(timezone.utc)
     start_date = end_date - timedelta(days=days)
     # FQL (Falcon Query Language) date filter using '>=' for inclusive start
     date_filter = f"last_seen:>='{start_date.strftime('%Y-%m-%d')}'"
@@ -688,7 +692,6 @@ def query_high_activity_hosts(
             alerts_api,
             all_device_ids,
             start_date,
-            max_workers
         )
         future_to_step[future_alerts] = 'alerts'
 
@@ -834,7 +837,6 @@ def count_alerts_by_host(
     alerts_api: "Alerts",
     device_ids: List[str],
     start_date: datetime,
-    max_workers: int = 10,
     quiet: bool = False,
     progress_callback=None,
     incremental_callback=None
@@ -1463,7 +1465,7 @@ def calculate_activity_score(host: Dict, days: int) -> int:
             )
             # Calculate hours elapsed since the host last reported in
             hours_since = (
-                (datetime.utcnow() - last_seen_dt).total_seconds()
+                (datetime.now(timezone.utc) - last_seen_dt).total_seconds()
                 / 3600
             )
             # Tiered bonus: more recent = higher bonus
@@ -1522,10 +1524,9 @@ def query_hosts_fast(
                enrichment.
     """
     # Compute the UTC date window for the FQL filter
-    end_date = datetime.utcnow()
+    end_date = datetime.now(timezone.utc)
     start_date = end_date - timedelta(days=days)
     # Build FQL date filter: only hosts seen within the window
-    date_filter = f"last_seen:>='{start_date.strftime('%Y-%m-%d')}'"
 
     # Combine with any user-supplied FQL filter using '+' (FQL AND)
     fql_filter = date_filter
@@ -1866,7 +1867,7 @@ def enrich_hosts_background(
     # --- Alerts: run in this thread with incremental callbacks ---
     try:
         alert_counts, severity_counts, _ = count_alerts_by_host(
-            alerts_api, all_device_ids, start_date, max_workers,
+            alerts_api, all_device_ids, start_date,
             quiet=True,
             progress_callback=loading_state.update_alerts,
             incremental_callback=_apply_partial_alerts
@@ -2158,7 +2159,7 @@ def export_to_csv(
                 total_rtr = sum(h['rtr_sessions'] for h in hosts)
                 csvfile.write(f"# Total RTR sessions: {total_rtr:,}\n")
             # Record generation timestamp for audit trail
-            timestamp = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+            timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
             csvfile.write(f"# Generated: {timestamp} UTC\n")
 
         # Confirm successful export to the user
@@ -2593,6 +2594,4 @@ if __name__ == "__main__":
         # Flush output before exit so buffered text (tables, etc.) is visible
         sys.stdout.flush()
         sys.stderr.flush()
-        # Use os._exit to avoid hanging on atexit handlers from
-        # ThreadPoolExecutor or background daemon threads
-        os._exit(_exit_code)  # pylint: disable=protected-access
+        sys.exit(_exit_code)

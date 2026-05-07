@@ -83,7 +83,7 @@ Ridiculous GUI by: jshcodes@CrowdStrike
 import math
 import os
 import sys
-from argparse import ArgumentParser, RawTextHelpFormatter
+from argparse import ArgumentParser, Namespace, RawTextHelpFormatter
 from datetime import datetime
 
 # pylint: disable=import-error
@@ -169,8 +169,6 @@ def _asset_path(filename: str) -> str:
 _LOGO_PATH = _asset_path("cs-logo-red.png")
 # FalconPy logo displayed in the upper-right of the credential panel.
 _FALCONPY_LOGO_PATH = _asset_path("falconpy-logo.png")
-# Punk spider easter-egg image.
-_PUNK_SPIDER_PATH = _asset_path("punk-spider.png")
 
 # Human-readable short labels for each CrowdStrike cloud region.
 # The dict maps BaseURL enum names (e.g. "US1") to display strings
@@ -299,7 +297,7 @@ _DEMO_SESSIONS = [
 # ── Argument parsing ─────────────────────────────────────────────────────────
 
 
-def consume_arguments() -> object:
+def consume_arguments() -> Namespace:
     """Parse and return command-line arguments for the GUI launcher.
 
     All arguments are optional — the window can be opened with no
@@ -719,6 +717,11 @@ class PrefetchWorker(QThread):
         """
         cursor = self._start_cursor
         page = self._start_page
+        sdk = RealTimeResponseAudit(
+            client_id=self._client_id,
+            client_secret=self._client_secret,
+            base_url=self._base_url,
+        )
 
         while cursor and not self._stop:
             # ── Pause gate ───────────────────────────────────────────
@@ -736,11 +739,6 @@ class PrefetchWorker(QThread):
 
             # ── API call ─────────────────────────────────────────────
             try:
-                sdk = RealTimeResponseAudit(
-                    client_id=self._client_id,
-                    client_secret=self._client_secret,
-                    base_url=self._base_url,
-                )
                 kwargs = {
                     "with_command_info": True,
                     "limit": str(self._page_size),
@@ -854,24 +852,6 @@ def build_session_model(sessions: list) -> QStandardItemModel:
 # ── Main window ──────────────────────────────────────────────────────────────
 
 
-class _ClickableLabel(QLabel):
-    """QLabel that emits a ``ctrl_shift_clicked`` signal on Ctrl+Shift+click.
-
-    Used for the FalconPy logo to trigger the easter-egg dialog without
-    affecting normal label behaviour for plain clicks.
-    """
-
-    ctrl_shift_clicked = Signal()
-
-    def mousePressEvent(self, event):  # pylint: disable=invalid-name
-        """Emit ctrl_shift_clicked when both Ctrl and Shift are held."""
-        mods = event.modifiers()
-        if (mods & Qt.ControlModifier) and (mods & Qt.ShiftModifier):
-            self.ctrl_shift_clicked.emit()
-        else:
-            super().mousePressEvent(event)
-
-
 class _SmartDateEdit(QDateEdit):
     """QDateEdit that opens its calendar popup at the current month.
 
@@ -932,23 +912,6 @@ class _SmartDateEdit(QDateEdit):
             today = QDate.currentDate()
             watched.setCurrentPage(today.year(), today.month())
         return False
-
-
-class SessionFilterProxy(QSortFilterProxyModel):
-    """QSortFilterProxyModel with case-insensitive substring matching.
-
-    Wraps the built-in ``setFilterFixedString`` / ``setFilterKeyColumn``
-    behaviour with a convenient subclass so future filter extensions have
-    a natural home.
-
-    Usage::
-
-        proxy = SessionFilterProxy()
-        proxy.setSourceModel(source_model)
-        proxy.setFilterKeyColumn(-1)          # all-column text filter
-        proxy.setFilterCaseSensitivity(Qt.CaseInsensitive)
-        proxy.setFilterFixedString("WIN")
-    """
 
 
 class RTRReplayWindow(QMainWindow):  # pylint: disable=too-few-public-methods
@@ -1294,11 +1257,10 @@ class RTRReplayWindow(QMainWindow):  # pylint: disable=too-few-public-methods
             fp_scaled = fp_big.scaledToHeight(
                 80, Qt.SmoothTransformation
             )
-            fp_label = _ClickableLabel(self)
+            fp_label = QLabel(self)
             fp_label.setPixmap(fp_scaled)
             fp_label.setAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
             fp_label.setContentsMargins(0, 0, 0, 0)
-            fp_label.ctrl_shift_clicked.connect(self._show_easter_egg)
 
             # Clickable "Source code" hyperlink.
             link_label = QLabel(
@@ -2356,45 +2318,6 @@ class RTRReplayWindow(QMainWindow):  # pylint: disable=too-few-public-methods
             f"Copied command log ({lines} line(s)) to clipboard."
         )
 
-    def _show_easter_egg(self):
-        """Display the easter-egg dialog (Ctrl+Shift+click on FalconPy logo).
-
-        Shows the CrowdStrike logo, the punk spider image, and the text
-        "WE STOP BREACHES" in a simple modal dialog.
-        """
-        dlg = QDialog(self)
-        dlg.setWindowTitle("CrowdStrike")
-        layout = QVBoxLayout(dlg)
-        layout.setContentsMargins(24, 24, 24, 24)
-        layout.setSpacing(12)
-
-        if os.path.exists(_LOGO_PATH):
-            cs_pixmap = QPixmap(_LOGO_PATH)
-            cs_label = QLabel()
-            cs_label.setPixmap(
-                cs_pixmap.scaledToHeight(80, Qt.SmoothTransformation)
-            )
-            cs_label.setAlignment(Qt.AlignHCenter)
-            layout.addWidget(cs_label)
-
-        if os.path.exists(_PUNK_SPIDER_PATH):
-            spider_pixmap = QPixmap(_PUNK_SPIDER_PATH)
-            spider_label = QLabel()
-            spider_label.setPixmap(
-                spider_pixmap.scaledToHeight(180, Qt.SmoothTransformation)
-            )
-            spider_label.setAlignment(Qt.AlignHCenter)
-            layout.addWidget(spider_label)
-
-        tagline = QLabel("WE STOP BREACHES")
-        tagline.setAlignment(Qt.AlignHCenter)
-        tagline.setStyleSheet(
-            "font-size: 18pt; font-weight: bold; color: #ec0000;"
-        )
-        layout.addWidget(tagline)
-
-        dlg.exec()
-
     def _on_session_selected(self, selected, _deselected):
         """Populate the replay panel when the user selects a table row.
 
@@ -2457,9 +2380,10 @@ class RTRReplayWindow(QMainWindow):  # pylint: disable=too-few-public-methods
                 else:
                     worker.quit()
                 if not worker.wait(500):
-                    # Graceful exit timed out — force-kill the OS thread.
-                    worker.terminate()
-                    worker.wait()
+                    # Worker did not exit within timeout. Calling terminate() here
+                    # would send pthread_cancel into urllib3/SSL, corrupting the GIL.
+                    # Accept the leak — the OS will reclaim the thread on process exit.
+                    pass
 
         super().closeEvent(event)
 
@@ -2541,8 +2465,8 @@ class RTRReplayWindow(QMainWindow):  # pylint: disable=too-few-public-methods
         """
         source_model = build_session_model(sessions)
 
-        # Wrap in SessionFilterProxy to enable text filter across all columns.
-        self._proxy_model = SessionFilterProxy()
+        # Wrap in QSortFilterProxyModel to enable text filter across all columns.
+        self._proxy_model = QSortFilterProxyModel()
         self._proxy_model.setSourceModel(source_model)
         # filterKeyColumn(-1) searches across all columns simultaneously.
         self._proxy_model.setFilterKeyColumn(-1)

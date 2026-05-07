@@ -77,9 +77,10 @@ Required API scope
 import argparse
 import json
 import os
+import re
 import sys
 import threading
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 # ---------------------------------------------------------------------------
@@ -90,23 +91,6 @@ from typing import Optional
 # now, store the values in module-level variables, and restore argv minus our
 # flags so Kivy never sees -k/-s.
 # ---------------------------------------------------------------------------
-
-def _scrub_credentials_from_argv() -> tuple:
-    """Remove -k/-s from sys.argv before Kivy imports consume them.
-
-    Returns (client_id, client_secret) extracted from sys.argv, or ("", "")
-    if not present.  sys.argv is modified in-place to strip the flags.
-    """
-    _parser = argparse.ArgumentParser(description=__doc__,
-                                      formatter_class=argparse.RawDescriptionHelpFormatter)
-    _parser.add_argument("-k", dest="client_id", default="", metavar="CLIENT_ID")
-    _parser.add_argument("-s", dest="client_secret", default="", metavar="CLIENT_SECRET")
-    _args, _remainder = _parser.parse_known_args()
-    sys.argv = sys.argv[:1] + _remainder
-    return _args.client_id, _args.client_secret
-
-
-_PRE_IMPORT_CLIENT_ID, _PRE_IMPORT_CLIENT_SECRET = _scrub_credentials_from_argv()
 
 os.environ["KIVY_NO_ARGS"] = "1"
 
@@ -812,7 +796,7 @@ class EventRecord:
             or ""
         )
         # Full raw dict for the detail view.
-        self._raw: dict = raw
+        self._raw: dict = dict(raw)
 
     def confidence_color(self) -> list:
         """Return an RGBA list colour-coded by confidence string."""
@@ -844,7 +828,7 @@ class RuleRecord:
             self.enabled: Optional[bool] = None
         else:
             self.enabled = bool(enabled_raw)
-        self._raw: dict = raw
+        self._raw: dict = dict(raw)
 
     def status_text(self) -> str:
         """Return a human-readable status string."""
@@ -875,7 +859,7 @@ def _format_ts(raw_ts: str) -> str:
             ts_val = float(raw_ts)
             if ts_val > 1e10:
                 ts_val /= 1000  # milliseconds → seconds
-            dt = datetime.utcfromtimestamp(ts_val)
+            dt = datetime.fromtimestamp(ts_val, tz=timezone.utc)
             return dt.strftime("%Y-%m-%d %H:%M")
         # ISO8601 string; strip trailing Z or +offset.
         clean = str(raw_ts)[:19].replace("T", " ")
@@ -924,85 +908,18 @@ def _format_raw(raw: dict, max_entries: int = 30) -> str:
 
 
 def _parse_body_flexible(text: str) -> Optional[dict]:
-    """Attempt to parse *text* as structured data, tolerating common non-JSON formats.
-
-    Tries in order:
-      1. Standard JSON (json.loads).
-      2. Lua-table notation — ``["key"] = value`` — converted to JSON-like form.
-      3. Regex heuristic: extract ``key = value`` or ``"key": value`` pairs.
-
-    Returns a dict if any method succeeds, or ``None`` if the text is not
-    parseable as a key-value structure.  Callers should treat the raw string as
-    plain text when ``None`` is returned.
-    """
-    import re  # pylint: disable=import-outside-toplevel
-
+    """Attempt to parse *text* as a JSON object. Returns None if not parseable."""
     if not text:
         return None
     stripped = text.strip()
-
-    # ── Pass 1: standard JSON ────────────────────────────────────────────────
     if stripped[:1] in ("{", "[", '"'):
         try:
             result = json.loads(stripped)
             if isinstance(result, dict):
                 return result
-            return None  # arrays / scalars handled by callers directly
         except (json.JSONDecodeError, ValueError):
             pass
-
-    # Only attempt further parsing if the text looks like a table/struct.
-    if stripped[:1] != "{":
-        return None
-
-    # ── Pass 2: Lua-table / annotated-JSON heuristic ─────────────────────────
-    # Lua tables use  ["key"] = value  instead of  "key": value.
-    # Also handles JS-style  key: value  (unquoted keys).
-    # Steps:
-    #   a) ["key"] = value  →  "key": value
-    #   b) key = value  (bare identifier)  →  "key": value
-    #   c) Remove trailing commas before } or ]
-    #   d) Convert Lua true/false/nil → JSON true/false/null
-    lua = stripped
-    # a) ["key"] = expr  →  "key": expr
-    lua = re.sub(r'\["([^"]+)"\]\s*=\s*', r'"\1": ', lua)
-    # b) bare_key = expr  (only if looks like identifier, not already a string)
-    lua = re.sub(r'(?<!["\w])([A-Za-z_][A-Za-z0-9_.]*)\s*=\s*(?!")', r'"\1": ', lua)
-    # c) trailing commas before closing brackets
-    lua = re.sub(r',\s*([}\]])', r'\1', lua)
-    # d) Lua literals
-    lua = re.sub(r'\btrue\b', 'true', lua)
-    lua = re.sub(r'\bfalse\b', 'false', lua)
-    lua = re.sub(r'\bnil\b', 'null', lua)
-
-    try:
-        result = json.loads(lua)
-        if isinstance(result, dict):
-            return result
-    except (json.JSONDecodeError, ValueError):
-        pass
-
-    # ── Pass 3: pure regex extraction ────────────────────────────────────────
-    # Extract all  "key": value  or  key = value  pairs from the raw text.
-    pairs: dict = {}
-    # Pattern A: quoted key, colon, value (JSON-like)
-    for m in re.finditer(r'"([^"]+)"\s*[:=]\s*("(?:[^"\\]|\\.)*"|\d[\d.]*|true|false|null|\[[^\]]*\])', stripped):
-        k = m.group(1)
-        v_raw = m.group(2)
-        try:
-            pairs[k] = json.loads(v_raw)
-        except (json.JSONDecodeError, ValueError):
-            pairs[k] = v_raw.strip('"')
-    # Pattern B: bare key = value (Lua-style, e.g. motd.enable = true)
-    for m in re.finditer(r'([A-Za-z_][A-Za-z0-9_.]*)\s*=\s*("(?:[^"\\]|\\.)*"|\d[\d.]*|true|false|nil)', stripped):
-        k = m.group(1)
-        v_raw = m.group(2).replace("nil", "null")
-        try:
-            pairs[k] = json.loads(v_raw)
-        except (json.JSONDecodeError, ValueError):
-            pairs[k] = v_raw.strip('"')
-
-    return pairs if pairs else None
+    return None
 
 
 def _extract_headline_from_body(body: str) -> str:
@@ -1466,10 +1383,6 @@ class TabBar(BoxLayout):
     """Horizontal tab bar for switching between Events and Rules views."""
 
 
-class TabButton(Widget):
-    """Single tab button (inactive state)."""
-
-
 class EventCard(RecycleDataViewBehavior, BoxLayout):
     """One row in the event RecycleView — displays type, headline, confidence."""
 
@@ -1816,7 +1729,7 @@ class TailoredIntelBrowserApp(App):
         if delta is None:
             return ""  # 'all' — no filter
 
-        since = (datetime.utcnow() - delta).strftime("%Y-%m-%dT%H:%M:%SZ")
+        since = (datetime.now(timezone.utc) - delta).strftime("%Y-%m-%dT%H:%M:%SZ")
         return f"created_date:>='{since}'"
 
     # ------------------------------------------------------------------
@@ -2105,15 +2018,19 @@ class TailoredIntelBrowserApp(App):
 # ---------------------------------------------------------------------------
 
 def main():
-    """Launch the Tailored Intel Browser application.
-
-    Credentials from -k/-s are scraped from sys.argv at module import time
-    (before Kivy can consume -k/-s as its own fake-fullscreen / save flags)
-    and stored in _PRE_IMPORT_CLIENT_ID / _PRE_IMPORT_CLIENT_SECRET.
-    """
+    """Launch the Tailored Intel Browser application."""
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument("-k", dest="client_id", default="", metavar="CLIENT_ID",
+                        help="Falcon API client ID (overrides FALCON_CLIENT_ID env var)")
+    parser.add_argument("-s", dest="client_secret", default="", metavar="CLIENT_SECRET",
+                        help="Falcon API client secret (overrides FALCON_CLIENT_SECRET env var)")
+    args = parser.parse_args()
     TailoredIntelBrowserApp(
-        client_id=_PRE_IMPORT_CLIENT_ID,
-        client_secret=_PRE_IMPORT_CLIENT_SECRET,
+        client_id=args.client_id,
+        client_secret=args.client_secret,
     ).run()
 
 

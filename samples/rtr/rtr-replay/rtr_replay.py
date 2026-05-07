@@ -30,7 +30,8 @@ Modified by: jshcodes@CrowdStrike
 """
 import os
 from datetime import datetime
-from argparse import ArgumentParser, RawTextHelpFormatter
+from argparse import ArgumentParser, Namespace, RawTextHelpFormatter
+from typing import Optional
 
 from falconpy import RealTimeResponseAudit  # pylint: disable=import-error
 
@@ -91,7 +92,7 @@ _DEMO_SESSION = {
 # ── Argument parsing ──────────────────────────────────────────────────────────
 
 
-def consume_arguments() -> object:
+def consume_arguments() -> Namespace:
     """Consume provided command line arguments."""
     parser = ArgumentParser(description=__doc__, formatter_class=RawTextHelpFormatter)
 
@@ -160,7 +161,7 @@ def format_datetime(iso_str: str) -> str:
         return iso_str
 
 
-def format_duration(seconds: float) -> str:
+def format_duration(seconds: Optional[float]) -> str:
     """Format a float duration in seconds as a human-readable string."""
     if seconds is None:
         return "—"
@@ -202,7 +203,7 @@ def print_command_log(logs: list):
     ordered = sorted(logs, key=lambda e: (e.get("created_at") or "", e.get("id") or 0))
 
     print(f"  Commands ({len(ordered)}):")
-    print("  " + "-" * 68)
+    print("  " + "-" * 70)
     for entry in ordered:
         timestamp = format_datetime(entry.get("created_at"))
         cwd = entry.get("current_directory") or "—"
@@ -243,7 +244,7 @@ def call_audit_sessions(sdk: RealTimeResponseAudit,
     if fql_filter:
         kwargs["filter"] = fql_filter
     if limit is not None:
-        kwargs["limit"] = str(limit)
+        kwargs["limit"] = limit
     if offset is not None:
         kwargs["offset"] = str(offset)
 
@@ -360,7 +361,7 @@ if __name__ == "__main__":
     args = consume_arguments()
 
     # Demo mode: no credentials required.
-    if args.demo or (not args.falcon_client_id and not args.falcon_client_secret):
+    if args.demo:
         run_demo()
         raise SystemExit(0)
 

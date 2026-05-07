@@ -259,7 +259,7 @@ class ODSClient:
                 self.status = "error"
                 return False
             self._sdk = sdk
-            self._hosts_sdk = Hosts(client_id=client_id, client_secret=client_secret)
+            self._hosts_sdk = Hosts(auth_object=sdk)
             self.status = "connected"
             self.error = ""
             return True
@@ -851,9 +851,10 @@ class ODSManagerFrame(wx.Frame):
 
     def _async_refresh(self):
         """Kick off a background thread to reload the scan list."""
-        if self._loading:
-            return
-        self._loading = True
+        with self._lock:
+            if self._loading:
+                return
+            self._loading = True
         self._set_status("Loading…", wx.Colour(180, 180, 180))
         t = threading.Thread(target=self._worker_refresh, daemon=True)
         t.start()
@@ -874,7 +875,8 @@ class ODSManagerFrame(wx.Frame):
         except Exception as exc:  # pylint: disable=broad-except
             wx.CallAfter(self._set_status, f"Error: {exc}", wx.Colour(220, 50, 50))
         finally:
-            self._loading = False
+            with self._lock:
+                self._loading = False
 
     def _populate_scan_list(self, scans: list[ScanRecord], ts: str):
         """Rebuild the scan list control from *scans* (runs on main thread)."""
@@ -1062,12 +1064,14 @@ class ODSManagerFrame(wx.Frame):
         dlg.Destroy()
 
         if not hosts and not groups:
-            wx.MessageDialog(
+            _dlg = wx.MessageDialog(
                 self,
                 "Please enter at least one host AID or host group ID.",
                 "Validation Error",
                 wx.OK | wx.ICON_WARNING,
-            ).ShowModal()
+            )
+            _dlg.ShowModal()
+            _dlg.Destroy()
             # Re-open with same values so user can correct
             self._show_new_scan_dialog(available_hosts, prefill={
                 "use_groups": bool(groups),
@@ -1082,13 +1086,15 @@ class ODSManagerFrame(wx.Frame):
             return
 
         if not file_paths:
-            wx.MessageDialog(
+            _dlg = wx.MessageDialog(
                 self,
                 "At least one file path is required.\n"
                 "Add a path (e.g. C:\\ or /) before starting the scan.",
                 "Validation Error",
                 wx.OK | wx.ICON_WARNING,
-            ).ShowModal()
+            )
+            _dlg.ShowModal()
+            _dlg.Destroy()
             self._show_new_scan_dialog(available_hosts, prefill={
                 "use_groups": bool(groups),
                 "aids": "\n".join(hosts),
@@ -1113,7 +1119,9 @@ class ODSManagerFrame(wx.Frame):
             )
         )
         icon = wx.ICON_INFORMATION if ok else wx.ICON_ERROR
-        wx.MessageDialog(self, msg, "New Scan", wx.OK | icon).ShowModal()
+        _dlg = wx.MessageDialog(self, msg, "New Scan", wx.OK | icon)
+        _dlg.ShowModal()
+        _dlg.Destroy()
         if ok:
             self._async_refresh()
         else:
@@ -1133,8 +1141,9 @@ class ODSManagerFrame(wx.Frame):
         """Cancel the selected scan if it is active."""
         scan_id = self._get_selected_scan_id()
         if not scan_id:
-            wx.MessageDialog(self, "No scan selected.", "Cancel Scan",
-                             wx.OK | wx.ICON_WARNING).ShowModal()
+            _dlg = wx.MessageDialog(self, "No scan selected.", "Cancel Scan", wx.OK | wx.ICON_WARNING)
+            _dlg.ShowModal()
+            _dlg.Destroy()
             return
 
         # Resolve truncated ID against the full list
@@ -1153,7 +1162,9 @@ class ODSManagerFrame(wx.Frame):
 
         ok, msg = self._client.cancel_scans([full_id])
         icon = wx.ICON_INFORMATION if ok else wx.ICON_ERROR
-        wx.MessageDialog(self, msg, "Cancel Scan", wx.OK | icon).ShowModal()
+        _dlg = wx.MessageDialog(self, msg, "Cancel Scan", wx.OK | icon)
+        _dlg.ShowModal()
+        _dlg.Destroy()
         if ok:
             self._async_refresh()
 
@@ -1196,12 +1207,14 @@ class ODSManagerFrame(wx.Frame):
                 self._on_cancel_selected(_event)
         else:
             # Completed/failed/cancelled scan: nothing can be done
-            wx.MessageDialog(
+            _dlg = wx.MessageDialog(
                 self,
                 "On-demand scan records cannot be deleted.",
                 "Delete Not Supported",
                 wx.OK | wx.ICON_INFORMATION,
-            ).ShowModal()
+            )
+            _dlg.ShowModal()
+            _dlg.Destroy()
 
     def _resolve_full_id(self, truncated: str) -> Optional[str]:
         """Find the full scan_id in self._scans matching the (possibly truncated) display value."""
@@ -1249,7 +1262,7 @@ def main():
     ok = client.connect(client_id=args.client_id, client_secret=args.client_secret)
     if not ok:
         # Show the auth error before opening the main window
-        wx.MessageDialog(
+        _dlg = wx.MessageDialog(
             None,
             f"Authentication failed:\n\n{client.error}\n\n"
             "Provide credentials via environment variables or -k / -s arguments:\n"
@@ -1257,7 +1270,9 @@ def main():
             "  pipenv run python3 ods_manager.py -k CLIENT_ID -s CLIENT_SECRET",
             "ODS Manager — Auth Error",
             wx.OK | wx.ICON_ERROR,
-        ).ShowModal()
+        )
+        _dlg.ShowModal()
+        _dlg.Destroy()
         sys.exit(1)
 
     frame = ODSManagerFrame(client)

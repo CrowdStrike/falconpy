@@ -146,9 +146,10 @@ class DeviceRecord:
         platform = PLATFORM_NAMES.get(platform_code, platform_code)
         product = raw.get("product_type_desc", "")
         self.os: str = f"{platform} {product}".strip() if (platform or product) else ""
-        # Score is in assessment.overall for full records, or raw.score for score-only records
+        # Score is in assessment.overall for full records, or raw.score for score-only records.
+        # Guard against null values returned by the API (overall: null).
         self.score: float = float(
-            assessment.get("overall", raw.get("score", 0))
+            assessment.get("overall") or raw.get("score") or 0
         )
         ts = raw.get("modified_time", "")
         self.last_seen: str = ts[:19].replace("T", " ") if ts else ""
@@ -203,7 +204,7 @@ class ZTAClient:
                 self.status = "error"
                 return False
             self._sdk = sdk
-            self._hosts_sdk = Hosts(client_id=client_id, client_secret=client_secret)
+            self._hosts_sdk = Hosts(auth_object=sdk)
             self.status = "connected"
             self.error = ""
             return True
@@ -283,48 +284,6 @@ class ZTAClient:
 
         return records, (after_token or "")
 
-    def fetch_bucket_counts(self) -> list[int]:
-        """Return accurate per-bucket device counts by querying each score range.
-
-        The standard fetch_assessments() only retrieves up to *limit* devices
-        sorted ascending by score, which causes all sampled devices to fall in
-        the lowest bucket on large environments.  This method queries each
-        10-point range individually to get the true count for every bucket.
-
-        Returns a list of 11 integers: indices 0-9 = ranges 0-9…90-99,
-        index 10 = score 100.
-        """
-        if self._sdk is None:
-            return [0] * NUM_BUCKETS
-
-        counts = [0] * NUM_BUCKETS
-        for i in range(10):
-            lo = i * 10
-            hi = lo + 9
-            resp = self._sdk.getAssessmentsByScoreV1(
-                filter=f"score:>={lo}+score:<={hi}", limit=1
-            )
-            if resp.get("status_code", 0) == 200:
-                total = (
-                    resp.get("body", {})
-                    .get("meta", {})
-                    .get("pagination", {})
-                    .get("total", 0)
-                )
-                counts[i] = total
-
-        # Bucket 10: score exactly 100
-        resp100 = self._sdk.getAssessmentsByScoreV1(filter="score:>=100", limit=1)
-        if resp100.get("status_code", 0) == 200:
-            counts[10] = (
-                resp100.get("body", {})
-                .get("meta", {})
-                .get("pagination", {})
-                .get("total", 0)
-            )
-
-        return counts
-
     def fetch_hostnames(self, aids: list[str]) -> dict[str, str]:
         """Return a dict mapping AID → hostname for AIDs that resolve via Hosts API.
 
@@ -348,14 +307,14 @@ class ZTAClient:
                     result[aid] = hostname
         return result
 
-    def fetch_audit(self) -> dict:
-        """Return the raw audit report body dict, or an error body."""
+    def fetch_audit(self) -> tuple[bool, dict]:
+        """Return (success, body) for the audit report. success=False on non-200."""
         if self._sdk is None:
-            return {}
+            return False, {}
         resp = self._sdk.get_audit()
         if resp.get("status_code", 0) == 200:
-            return resp.get("body", {})
-        return resp.get("body", {})
+            return True, resp.get("body", {})
+        return False, resp.get("body", {})
 
 
 # ---------------------------------------------------------------------------
@@ -438,21 +397,14 @@ class ZTAScoreViewerApp:
         """
         self.client = ZTAClient()
         self.state = AppState()
-        # CLI credential overrides — forwarded to connect() and reconnect
         self._client_id = client_id
         self._client_secret = client_secret
-        # Dear PyGui item tags — populated during setup
-        self._tags: dict = {}
-        # Pagination state for device table
         self._page_index: int = 0
         self._page_size: int = DEFAULT_PAGE_SIZE
-        # Sorted device list (may differ from state.devices after column sort)
         self._sorted_devices: list[DeviceRecord] = []
-        # Progressive API pagination state
         self._api_after_token: str = ""
         self._has_more_api_data: bool = False
         self._api_fetching_more: bool = False
-        self._load_more_pending: bool = False  # set True when _worker_load_more completes
 
     # ------------------------------------------------------------------
     # Lifecycle
@@ -675,16 +627,16 @@ class ZTAScoreViewerApp:
         """Background worker: fetch assessments and update UI."""
         try:
             devices, next_after = self.client.fetch_assessments()
-            bucket_counts = self.client.fetch_bucket_counts()
+            bucket_counts = _build_buckets(devices)
             # Resolve hostnames for endpoint AIDs (CWPP AIDs will not resolve)
             aids = [d.aid for d in devices]
             hostname_map = self.client.fetch_hostnames(aids)
             for dev in devices:
                 dev.hostname = hostname_map.get(dev.aid, "")
             ts = datetime.now().strftime("%H:%M:%S")
-            self._api_after_token = next_after
-            self._has_more_api_data = bool(next_after)
             with self.state.lock:
+                self._api_after_token = next_after
+                self._has_more_api_data = bool(next_after)
                 self.state.devices = devices
                 self.state.bucket_counts = bucket_counts
                 self.state.last_refreshed = ts
@@ -716,10 +668,9 @@ class ZTAScoreViewerApp:
             hostname_map = self.client.fetch_hostnames(aids)
             for dev in new_devices:
                 dev.hostname = hostname_map.get(dev.aid, "")
-            self._api_after_token = next_after
-            self._has_more_api_data = bool(next_after)
-            self._load_more_pending = True
             with self.state.lock:
+                self._api_after_token = next_after
+                self._has_more_api_data = bool(next_after)
                 self.state.devices = self.state.devices + new_devices
                 self.state.error_message = ""
         except Exception as exc:  # pylint: disable=broad-except
@@ -990,8 +941,8 @@ class ZTAScoreViewerApp:
             return str(v)
 
         def _worker():
-            audit = self.client.fetch_audit()
-            if not audit:
+            ok, audit = self.client.fetch_audit()
+            if not ok or not audit:
                 dpg.set_value("audit_text", "No audit data returned or not authenticated.")
                 return
             lines = []
