@@ -116,20 +116,6 @@ _recon_endpoints = [
     ]
   ],
   [
-    "UpdateActionV1",
-    "PATCH",
-    "/recon/entities/actions/v1",
-    "Update an action for a monitoring rule.",
-    "recon",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "DeleteActionV1",
     "DELETE",
     "/recon/entities/actions/v1",
@@ -141,6 +127,20 @@ _recon_endpoints = [
         "description": "ID of the action.",
         "name": "id",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateActionV1",
+    "PATCH",
+    "/recon/entities/actions/v1",
+    "Update an action for a monitoring rule.",
+    "recon",
+    [
+      {
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
@@ -165,9 +165,9 @@ _recon_endpoints = [
     "GetExportJobsV1",
     "GET",
     "/recon/entities/exports/v1",
-    "Get the status of export jobs based on their IDs. Export jobs can be launched by calling POST "
-    "/entities/exports/v1. When a job is complete, use the job ID to download the file(s) associated with it using "
-    "GET entities/export-files/v1.",
+    "Get the status of export jobs based on their IDs. Export jobs can be launched by calling "
+    "CreateExportJobsV1 When a job is complete, use the job ID to download the file(s) associated with it using GET "
+    "entities/export-files/v1.",
     "recon",
     [
       {
@@ -187,7 +187,7 @@ _recon_endpoints = [
     "CreateExportJobsV1",
     "POST",
     "/recon/entities/exports/v1",
-    "Launch asynchronous export job. Use the job ID to poll the status of the job using GetExportJobsV1.",
+    "Launch asynchronous export job. Use the job ID to poll the status of the job using GetExportJobsV1",
     "recon",
     [
       {
@@ -263,8 +263,8 @@ _recon_endpoints = [
     "GetNotificationsExposedDataRecordsV1",
     "GET",
     "/recon/entities/notifications-exposed-data-records/v1",
-    "Get notifications exposed data records based on their IDs. IDs can be retrieved using the GET "
-    "/queries/notifications-exposed-data-records/v1 endpoint. The associate notification can be fetched using the "
+    "Get notifications exposed data records based on their IDs. IDs can be retrieved using the "
+    "QueryNotificationsExposedDataRecordsV1 endpoint. The associate notification can be fetched using the "
     "/entities/notifications/v* endpoints",
     "recon",
     [
@@ -285,9 +285,8 @@ _recon_endpoints = [
     "GetNotificationsTranslatedV1",
     "GET",
     "/recon/entities/notifications-translated/v1",
-    "Get notifications based on their IDs. IDs can be retrieved using the QueryNotificationsV1 "
-    "endpoint. This endpoint will return translated notification content. The only target language available is "
-    "English.",
+    "Get notifications based on their IDs. IDs can be retrieved using the QueryNotificationsV1 endpoint. This "
+    "endpoint will return translated notification content. The only target language available is English.",
     "recon",
     [
       {
@@ -324,20 +323,6 @@ _recon_endpoints = [
     ]
   ],
   [
-    "UpdateNotificationsV1",
-    "PATCH",
-    "/recon/entities/notifications/v1",
-    "Update notification status or assignee. Accepts bulk requests",
-    "recon",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "DeleteNotificationsV1",
     "DELETE",
     "/recon/entities/notifications/v1",
@@ -353,6 +338,20 @@ _recon_endpoints = [
         "description": "Notifications IDs.",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateNotificationsV1",
+    "PATCH",
+    "/recon/entities/notifications/v1",
+    "Update notification status or assignee. Accepts bulk requests",
+    "recon",
+    [
+      {
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
@@ -392,20 +391,6 @@ _recon_endpoints = [
     ]
   ],
   [
-    "UpdateRulesV1",
-    "PATCH",
-    "/recon/entities/rules/v1",
-    "Update monitoring rules.",
-    "recon",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "DeleteRulesV1",
     "DELETE",
     "/recon/entities/rules/v1",
@@ -432,11 +417,24 @@ _recon_endpoints = [
     ]
   ],
   [
+    "UpdateRulesV1",
+    "PATCH",
+    "/recon/entities/rules/v1",
+    "Update monitoring rules.",
+    "recon",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "QueryActionsV1",
     "GET",
     "/recon/queries/actions/v1",
-    "Query actions based on provided criteria. Use the IDs from this response to get the action entities on "
-    "GetActionsV1.",
+    "Query actions based on provided criteria. Use the IDs from this response to get the action entities on GetActionsV1",
     "recon",
     [
       {
@@ -446,9 +444,9 @@ _recon_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 500,
         "minimum": 1,
-        "type": "integer",
         "description": "Number of IDs to return. Offset + limit should NOT be above 10K.",
         "name": "limit",
         "in": "query"
@@ -480,7 +478,7 @@ _recon_endpoints = [
     "GET",
     "/recon/queries/notifications-exposed-data-records/v1",
     "Query notifications exposed data records based on provided criteria. Use the IDs from this response to "
-    "get the notification +entities on GetNotificationsExposedDataRecordsV1.",
+    "get the notification +entities on GetNotificationsExposedDataRecordsV1",
     "recon",
     [
       {
@@ -490,9 +488,9 @@ _recon_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 500,
         "minimum": 1,
-        "type": "integer",
         "description": "Number of IDs to return. Offset + limit should NOT be above 10K.",
         "name": "limit",
         "in": "query"
@@ -530,8 +528,8 @@ _recon_endpoints = [
     "GET",
     "/recon/queries/notifications/v1",
     "Query notifications based on provided criteria. Use the IDs from this response to get the notification "
-    "+entities on GetNotificationsV1, GetNotificationsDetailedV1, +GET "
-    "/entities/notifications-translated/v1 or GetNotificationsDetailedTranslatedV1.",
+    "+entities on GetNotificationsV1, GetNotificationsDetailedV1, +GetNotificationsTranslatedV1 or "
+    "GetNotificationsDetailedTranslatedV1",
     "recon",
     [
       {
@@ -541,9 +539,9 @@ _recon_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 500,
         "minimum": 1,
-        "type": "integer",
         "description": "Number of IDs to return. Offset + limit should NOT be above 10K.",
         "name": "limit",
         "in": "query"
@@ -592,9 +590,9 @@ _recon_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 500,
         "minimum": 1,
-        "type": "integer",
         "description": "Number of IDs to return. Offset + limit should NOT be above 10K.",
         "name": "limit",
         "in": "query"
