@@ -544,6 +544,13 @@ _ngsiem_endpoints = [
         "description": "LogScale Parser YAML template content, see schema at https://schemas.humio.com/",
         "name": "yaml_template",
         "in": "formData"
+      },
+      {
+        "type": "boolean",
+        "description": "When true, schema validation is enforced (CPS) and validates against Crowdstrike "
+        "Parsing Standard\n\n",
+        "name": "schema_validation_enabled",
+        "in": "formData"
       }
     ]
   ],
