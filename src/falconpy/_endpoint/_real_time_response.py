@@ -191,8 +191,8 @@ _real_time_response_endpoints = [
     "BatchGetCmd",
     "POST",
     "/real-time-response/combined/batch-get-command/v1",
-    "Batch executes `get` command across hosts to retrieve files. After this call is made `GET /real-time-"
-    "response/combined/batch-get-command/v1` is used to query for the results.",
+    "Batch executes `get` command across hosts to retrieve files. After this call is made `BatchGetCmdStatus "
+    "is used to query for the results.",
     "real_time_response",
     [
       {
