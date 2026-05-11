@@ -346,6 +346,12 @@ _falcon_container_endpoints = [
         "name": "tag",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "string",
+        "description": "Architecture e.g. 'amd64', 'arm64'...",
+        "name": "architecture",
+        "in": "query"
       }
     ]
   ],
@@ -384,6 +390,12 @@ _falcon_container_endpoints = [
         "type": "string",
         "description": "Digest",
         "name": "digest",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Platform architecture to filter multi-arch images (e.g. amd64, arm64)",
+        "name": "architecture",
         "in": "query"
       },
       {
