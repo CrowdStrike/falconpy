@@ -1,10 +1,45 @@
 #!/usr/bin/env python3
-"""
-NG-SIEM QueryJob paginator (FalconPy) — retrieves all results from a
-QueryJob using cursor-based pagination via the `around` parameter.
+r"""NG-SIEM QueryJob paginator (FalconPy).
+
+ ██████   █████   █████████              █████████  █████ ██████████ ██████   ██████
+░░██████ ░░███   ███░░░░░███            ███░░░░░███░░███ ░░███░░░░░█░░██████ ██████
+ ░███░███ ░███  ███     ░░░            ░███    ░░░  ░███  ░███  █ ░  ░███░█████░███
+ ░███░░███░███ ░███          ██████████░░█████████  ░███  ░██████    ░███░░███ ░███
+ ░███ ░░██████ ░███    █████░░░░░░░░░░  ░░░░░░░░███ ░███  ░███░░█    ░███ ░░░  ░███
+ ░███  ░░█████ ░░███  ░░███             ███    ░███ ░███  ░███ ░   █ ░███      ░███
+ █████  ░░█████ ░░█████████            ░░█████████  █████ ██████████ █████     █████
+░░░░░    ░░░░░   ░░░░░░░░░              ░░░░░░░░░  ░░░░░ ░░░░░░░░░░ ░░░░░     ░░░░░
+
+
+                                                         ███           █████
+                                                        ░░░           ░░███
+  ████████ █████ ████  ██████  ████████  █████ ████     █████  ██████  ░███████
+ ███░░███ ░░███ ░███  ███░░███░░███░░███░░███ ░███     ░░███  ███░░███ ░███░░███
+░███ ░███  ░███ ░███ ░███████  ░███ ░░░  ░███ ░███      ░███ ░███ ░███ ░███ ░███
+░███ ░███  ░███ ░███ ░███░░░   ░███      ░███ ░███      ░███ ░███ ░███ ░███ ░███
+░░███████  ░░████████░░██████  █████     ░░███████      ░███ ░░██████  ████████
+ ░░░░░███   ░░░░░░░░  ░░░░░░  ░░░░░       ░░░░░███      ░███  ░░░░░░  ░░░░░░░░
+     ░███                                 ███ ░███  ███ ░███
+     █████                               ░░██████  ░░██████
+    ░░░░░                                 ░░░░░░    ░░░░░░
+                               ███                        █████
+                              ░░░                        ░░███
+ ████████   ██████    ███████ ████  ████████    ██████   ███████    ██████  ████████
+░░███░░███ ░░░░░███  ███░░███░░███ ░░███░░███  ░░░░░███ ░░░███░    ███░░███░░███░░███
+ ░███ ░███  ███████ ░███ ░███ ░███  ░███ ░███   ███████   ░███    ░███ ░███ ░███ ░░░
+ ░███ ░███ ███░░███ ░███ ░███ ░███  ░███ ░███  ███░░███   ░███ ███░███ ░███ ░███
+ ░███████ ░░████████░░███████ █████ ████ █████░░████████  ░░█████ ░░██████  █████
+ ░███░░░   ░░░░░░░░  ░░░░░███░░░░░ ░░░░ ░░░░░  ░░░░░░░░    ░░░░░   ░░░░░░  ░░░░░
+ ░███                ███ ░███
+ █████              ░░██████
+░░░░░                ░░░░░░                                          🦅 FalconPy
+
+Retrieves all results from a QueryJob using cursor-based pagination
+via the `around` parameter.
 
 Uses the FalconPy NGSIEM service class with OAuth2 authentication.
-The pagination mechanism is identical to direct LogScale QueryJobs:
+The QueryJobs API returns a 200-event result buffer for filter queries.
+This script automatically paginates through all matching events:
   1. Create a QueryJob and poll until done
   2. Collect the initial 200-event buffer
   3. If hasMoreEvents="true", use cursor-based `around` pagination to
@@ -186,7 +221,7 @@ def main():
               f"(processedEvents={processed}  hasMoreEvents={has_more})")
 
         # Step 2: Cursor pagination using `around`
-        # LogScale returns newest events first; the last event in the buffer is
+        # Results are returned newest-first; the last event in the buffer is
         # the oldest. Anchor on it and request numberOfEventsBefore to walk
         # backward through time.
         page = 0
