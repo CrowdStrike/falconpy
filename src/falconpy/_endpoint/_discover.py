@@ -54,9 +54,9 @@ _discover_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 1000,
         "minimum": 1,
-        "type": "integer",
         "description": "The number of application ids to return in this response (Min: 1, Max: 1000, Default: "
         "100). Use with the after parameter to manage pagination of results.",
         "name": "limit",
@@ -99,8 +99,8 @@ _discover_endpoints = [
         },
         "collectionFormat": "multi",
         "description": "Select various details blocks to be returned for each application entity. Supported va "
-        "lues:\n\n<ul><li>browser_extension</li><li>host_info</li><li>install_usage</li><li>package</li><li>ide_extensi "
-        "on</li></ul>",
+        "lues:\n\n<ul><li>browser_extension</li><li>host_info</li><li>install_usage</li><li>dev_package</li><li>ide_ext "
+        "ension</li></ul>",
         "name": "facet",
         "in": "query"
       }
@@ -123,9 +123,9 @@ _discover_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 1000,
         "minimum": 1,
-        "type": "integer",
         "description": "The number of asset IDs to return in this response (min: 1, max: 1000, default: 100). "
         "Use with the after parameter to manage pagination of results.",
         "name": "limit",
@@ -220,7 +220,7 @@ _discover_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more account IDs (max: 100). Find account IDs with query_accounts",
+        "description": "One or more account IDs (max: 100). Find account IDs with GET /discover/queries/accounts/v1",
         "name": "ids",
         "in": "query",
         "required": True
@@ -260,7 +260,7 @@ _discover_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more asset IDs (max: 100). Find asset IDs with query_hosts",
+        "description": "One or more asset IDs (max: 100). Find asset IDs with GET /discover/queries/hosts/v1",
         "name": "ids",
         "in": "query",
         "required": True
@@ -280,7 +280,7 @@ _discover_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more asset IDs (max: 100). Find asset IDs with query_iot_hosts",
+        "description": "One or more asset IDs (max: 100). Find asset IDs with GET /discover/queries/iot-hosts/v1",
         "name": "ids",
         "in": "query",
         "required": True
@@ -300,7 +300,7 @@ _discover_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more login IDs (max: 100). Find login IDs with query_logins",
+        "description": "One or more login IDs (max: 100). Find login IDs with GET /discover/queries/logins/v1",
         "name": "ids",
         "in": "query",
         "required": True
@@ -316,8 +316,8 @@ _discover_endpoints = [
     "discover",
     [
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "An offset used with the limit parameter to manage pagination of results. On your first "
         " request, don’t provide an offset. On subsequent requests, add previous offset with the previous limit to "
         "continue from that place in the results.",
@@ -325,9 +325,9 @@ _discover_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 100,
         "minimum": 1,
-        "type": "integer",
         "description": "The number of account IDs to return in this response (min: 1, max: 100, default: 100). "
         "Use with the offset parameter to manage pagination of results.",
         "name": "limit",
@@ -370,8 +370,8 @@ _discover_endpoints = [
     "discover",
     [
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "An offset used with the limit parameter to manage pagination of results. On your first "
         " request, don’t provide an offset. On subsequent requests, add previous offset with the previous limit to "
         "continue from that place in the results.",
@@ -379,9 +379,9 @@ _discover_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 100,
         "minimum": 1,
-        "type": "integer",
         "description": "The number of application ids to return in this response (Min: 1, Max: 100, Default: 100).",
         "name": "limit",
         "in": "query"
@@ -426,8 +426,8 @@ _discover_endpoints = [
     "discover",
     [
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "An offset used with the limit parameter to manage pagination of results. On your first "
         " request, don’t provide an offset. On subsequent requests, add previous offset with the previous limit to "
         "continue from that place in the results.",
@@ -435,9 +435,9 @@ _discover_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 100,
         "minimum": 1,
-        "type": "integer",
         "description": "The number of asset IDs to return in this response (min: 1, max: 100, default: 100). "
         "Use with the offset parameter to manage pagination of results.",
         "name": "limit",
@@ -516,8 +516,8 @@ _discover_endpoints = [
     "discover",
     [
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "An offset used with the limit parameter to manage pagination of results. On your first "
         " request, don’t provide an offset. On subsequent requests, add previous offset with the previous limit to "
         "continue from that place in the results.",
@@ -525,9 +525,9 @@ _discover_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 100,
         "minimum": 1,
-        "type": "integer",
         "description": "The number of asset IDs to return in this response (min: 1, max: 100, default: 100). "
         "Use with the offset parameter to manage pagination of results.",
         "name": "limit",
@@ -574,9 +574,9 @@ _discover_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 100,
         "minimum": 1,
-        "type": "integer",
         "description": "The number of asset IDs to return in this response (min: 1, max: 100, default: 100). "
         "Use with the after parameter to manage pagination of results.",
         "name": "limit",
@@ -614,8 +614,8 @@ _discover_endpoints = [
     "discover",
     [
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "An offset used with the limit parameter to manage pagination of results. On your first "
         " request, don’t provide an offset. On subsequent requests, add previous offset with the previous limit to "
         "continue from that place in the results.",
@@ -623,9 +623,9 @@ _discover_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 100,
         "minimum": 1,
-        "type": "integer",
         "description": "The number of login IDs to return in this response (min: 1, max: 100, default: 100). "
         "Use with the offset parameter to manage pagination of results.",
         "name": "limit",
