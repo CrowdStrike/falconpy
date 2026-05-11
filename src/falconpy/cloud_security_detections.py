@@ -65,22 +65,31 @@ class CloudSecurityDetections(ServiceClass):
         Keyword arguments:
         filter -- FQL string to filter results. String.
                   Supported fields:
-                    account_id            account_name          applicable_profile
-                    attack_type           benchmark_name        benchmark_version
-                    business_impact       cid                   cloud_group
-                    cloud_label           cloud_label_id        cloud_provider
-                    cloud_scope           created_at            environment
-                    extension_status      first_detected        framework
-                    last_detected         policy_id             policy_name
-                    region                requirement           resource_gcrn
-                    resource_id           resource_parent       resource_status
-                    resource_type         resource_type_name    rule_group
-                    rule_id               rule_name             rule_origin
-                    section               service               service_category
-                    severity              status                suppressed_by
-                    tactic_id             tactic_name           tag_key
-                    tag_value             tags                  tags_string
-                    technique_id          technique_name        zone
+                    account_id            account_name
+                    applicable_profile    attack_type
+                    benchmark_name        benchmark_version
+                    business_impact       cid
+                    cloud_group           cloud_label
+                    cloud_label_id        cloud_provider
+                    cloud_scope           created_at
+                    environment           extension_status
+                    first_detected        framework
+                    last_detected         policy_id
+                    policy_name           region
+                    requirement           resource_gcrn
+                    resource_id           resource_parent
+                    resource_status       resource_type
+                    resource_type_name    rule_group
+                    rule_id               rule_name
+                    rule_origin           section
+                    service               service_category
+                    severity              status
+                    suppressed_by         tactic_id
+                    tactic_name           tag_key
+                    tag_value             tags
+                    tags_string           technique_id
+                    technique_name        tenant_id
+                    zone
         sort -- The field to sort on. String.
                 Sortable fields:
                     assessed_assets       cloud_provider
@@ -147,42 +156,60 @@ class CloudSecurityDetections(ServiceClass):
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. String.
                   Allowed filter fields:
-                    account_id                account_name              applicable_profile
-                    attack_type               benchmark_name            benchmark_version
-                    business_impact           cid                       cloud_group
-                    cloud_label               cloud_label_id            cloud_provider
-                    cloud_scope               created_at                environment
-                    extension_status          first_detected            framework
-                    last_detected             policy_id                 policy_name
-                    policy_uuid               region                    requirement
-                    requirement_name          resource_gcrn             resource_id
-                    resource_status           resource_type             resource_type_name
-                    rule_group                rule_id                   rule_name
-                    rule_origin               rule_remediation          section
-                    service                   service_category          severity
-                    status                    suppressed_by             suppression_reason
-                    tactic_id                 tactic_name               tag_key
-                    tag_value                 tags                      technique_id
-                    technique_name            tags_string               resource_parent
+                    account_id            account_name
+                    applicable_profile    attack_type
+                    benchmark_name        benchmark_version
+                    business_impact       cid
+                    cloud_group           cloud_label
+                    cloud_label_id        cloud_provider
+                    cloud_scope           created_at
+                    environment           extension_status
+                    first_detected        framework
+                    last_detected         policy_id
+                    policy_name           policy_uuid
+                    region                requirement
+                    requirement_name      resource_gcrn
+                    resource_id           resource_parent
+                    resource_status       resource_type
+                    resource_type_name    rule_group
+                    rule_id               rule_name
+                    rule_origin           rule_remediation
+                    section               service
+                    service_category      severity
+                    status                suppressed_by
+                    suppression_reason    tactic_id
+                    tactic_name           tag_key
+                    tag_value             tags
+                    tags_string           technique_id
+                    technique_name        tenant_id
 
         sort -- The field to sort on. Use |asc or |desc suffix to specify sort direction. String. Supported fields:
-                account_id                account_name              applicable_profile
-                attack_type               benchmark_name            benchmark_version
-                business_impact           cid                       cloud_group
-                cloud_label               cloud_label_id            cloud_provider
-                cloud_scope               created_at                environment
-                extension_status          first_detected            framework
-                last_detected             policy_id                 policy_name
-                policy_uuid               region                    requirement
-                requirement_name          resource_gcrn             resource_id
-                resource_parent           resource_status           resource_type_name
-                rule_group                rule_id                   rule_name
-                rule_origin               rule_remediation          section
-                service                   service_category          severity
-                status                    suppressed_by             suppression_reason
-                tactic_id                 tactic_name               tag_key
-                tag_value                 tags                      technique_id
-                technique_name            tags_string
+                  account_id            account_name
+                  applicable_profile    attack_type
+                  benchmark_name        benchmark_version
+                  business_impact       cid
+                  cloud_group           cloud_label
+                  cloud_label_id        cloud_provider
+                  cloud_scope           created_at
+                  environment           extension_status
+                  first_detected        framework
+                  last_detected         policy_id
+                  policy_name           policy_uuid
+                  region                requirement
+                  requirement_name      resource_gcrn
+                  resource_id           resource_parent
+                  resource_status       resource_type
+                  resource_type_name    rule_group
+                  rule_id               rule_name
+                  rule_origin           rule_remediation
+                  section               service
+                  service_category      severity
+                  status                suppressed_by
+                  suppression_reason    tactic_id
+                  tactic_name           tag_key
+                  tag_value             tags
+                  tags_string           technique_id
+                  technique_name        tenant_id
 
         limit -- The maximum number of items to return. When not specified or 0, 500 is used.
         When larger than 1000, 1000 is used. Integer.

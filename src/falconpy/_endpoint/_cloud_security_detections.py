@@ -52,7 +52,7 @@ _cloud_security_detections_endpoints = [
         "extension_status  first_detected  framework  last_detected  policy_id  policy_name  region  requirement  "
         "resource_gcrn  resource_id  resource_parent  resource_status  resource_type  resource_type_name  rule_group  "
         "rule_id  rule_name  rule_origin  section  service  service_category  severity  status  suppressed_by  "
-        "tactic_id  tactic_name  tag_key  tag_value  tags  tags_string  technique_id  technique_name  zone",
+        "tactic_id  tactic_name  tag_key  tag_value  tags  tags_string  technique_id  technique_name  tenant_id  zone",
         "name": "filter",
         "in": "query"
       },
@@ -64,18 +64,18 @@ _cloud_security_detections_endpoints = [
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 0,
         "type": "integer",
         "default": 500,
+        "maximum": 1000,
+        "minimum": 0,
         "description": "The maximum number of items to return. When not specified or 0, 500 is used. When "
         "larger than 1000, 1000 is used.",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Offset returned assets",
         "name": "offset",
         "in": "query"
@@ -118,7 +118,7 @@ _cloud_security_detections_endpoints = [
         "requirement  requirement_name  resource_gcrn  resource_id  resource_parent  resource_status  resource_type  "
         "resource_type_name  rule_group  rule_id  rule_name  rule_origin  rule_remediation  section  service  "
         "service_category  severity  status  suppressed_by  suppression_reason  tactic_id  tactic_name  tag_key  "
-        "tag_value  tags  tags_string  technique_id  technique_name",
+        "tag_value  tags  tags_string  technique_id  technique_name  tenant_id",
         "name": "filter",
         "in": "query"
       },
@@ -131,23 +131,23 @@ _cloud_security_detections_endpoints = [
         "region  requirement  requirement_name  resource_gcrn  resource_id  resource_parent  resource_status  "
         "resource_type  resource_type_name  rule_group  rule_id  rule_name  rule_origin  rule_remediation  section  "
         "service  service_category  severity  status  suppressed_by  suppression_reason  tactic_id  tactic_name  "
-        "tag_key  tag_value  tags  tags_string  technique_id  technique_name",
+        "tag_key  tag_value  tags  tags_string  technique_id  technique_name  tenant_id",
         "name": "sort",
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 0,
         "type": "integer",
         "default": 500,
+        "maximum": 1000,
+        "minimum": 0,
         "description": "The maximum number of items to return. When not specified or 0, 500 is used. When "
         "larger than 1000, 1000 is used.",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Offset returned assets",
         "name": "offset",
         "in": "query"
