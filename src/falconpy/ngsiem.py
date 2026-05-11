@@ -831,6 +831,8 @@ class NGSIEM(ServiceClass):
 
         Keyword arguments:
         yaml_template -- LogScale Parser YAML template content, see schema at https://schemas.humio.com/. Binary data.
+        schema_validation_enabled -- When true, schema validation is enforced (CPS) and validates against Crowdstrike Parsing
+                                     Standard Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
