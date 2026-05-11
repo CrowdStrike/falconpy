@@ -161,7 +161,8 @@ class TestCloudPolicies:
                 suppression_reason="update testing"
             ),
             "DeleteSuppressionRules": falcon.DeleteSuppressionRules(ids="1234567"),
-            "QuerySuppressionRules": falcon.QuerySuppressionRules(filter="name:*test*", limit=50, offset=0, sort="name.asc")
+            "QuerySuppressionRules": falcon.QuerySuppressionRules(filter="name:*test*", limit=50, offset=0, sort="name.asc"),
+            "CloneComplianceFramework": falcon.clone_compliance_framework(ids="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
