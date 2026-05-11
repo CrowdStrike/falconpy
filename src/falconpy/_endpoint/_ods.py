@@ -471,7 +471,8 @@ _ods_endpoints = [
       {
         "type": "string",
         "description": "A FQL compatible query string. Terms: [id description.keyword description "
-        "initiated_from status schedule.start_timestamp schedule.Interval created_on created_by last_updated deleted]",
+        "initiated_from status schedule.start_timestamp schedule.Interval created_on created_by last_updated deleted "
+        "targeted_platforms channel_file_status]",
         "name": "filter",
         "in": "query"
       },
@@ -512,7 +513,11 @@ _ods_endpoints = [
           "last_updated|asc",
           "last_updated|desc",
           "targeted_host_count|asc",
-          "targeted_host_count|desc"
+          "targeted_host_count|desc",
+          "targeted_platforms|asc",
+          "targeted_platforms|desc",
+          "channel_file_status|asc",
+          "channel_file_status|desc"
         ],
         "description": "The property to sort on, followed by a |, followed by the sort direction, either \"asc\" or \"desc\"",
         "name": "sort",

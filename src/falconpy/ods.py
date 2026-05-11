@@ -859,12 +859,13 @@ class ODS(ServiceClass):
         Keyword arguments:
         filter -- A FQL compatible query string. String.
                   Available filters:
-                  id                    schedule.start_timestamp
-                  cid                   schedule.interval
-                  description           created_on
-                  initiated_from        created_by
-                  status                deleted
-                  last_updated          description.keyword
+                    channel_file_status         created_by
+                    created_on                  deleted
+                    description                 description.keyword
+                    id                          initiated_from
+                    last_updated                schedule.Interval
+                    schedule.start_timestamp    status
+                    targeted_platforms
         limit -- The maximum number of records to return. [Integer, 1-500]
         offset -- The integer offset to start retrieving records from. Integer.
         parameters - full parameters payload, not required if using other keywords.
