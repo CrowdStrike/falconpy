@@ -102,8 +102,8 @@ _exposure_management_endpoints = [
     "blob_download_external_assets",
     "GET",
     "/fem/entities/blobs-download/v1",
-    "Download the entire contents of the blob. The relative link to this endpoint is returned in the GET "
-    "/entities/external-assets/v1 request.",
+    "Download the entire contents of the blob. The relative link to this endpoint is returned in the "
+    "get_external_assets request.",
     "exposure_management",
     [
       {
@@ -126,8 +126,7 @@ _exposure_management_endpoints = [
     "blob_preview_external_assets",
     "GET",
     "/fem/entities/blobs-preview/v1",
-    "Download a preview of the blob. The relative link to this endpoint is returned in the GET "
-    "/entities/external-assets/v1 request.",
+    "Download a preview of the blob. The relative link to this endpoint is returned in the get_external_assets request.",
     "exposure_management",
     [
       {
@@ -204,23 +203,9 @@ _exposure_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more asset IDs (max: 100). Find asset IDs with query_external_assets",
+        "description": "One or more asset IDs (max: 100). Find asset IDs with GET /fem/queries/external-assets/v1",
         "name": "ids",
         "in": "query",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "patch_external_assets",
-    "PATCH",
-    "/fem/entities/external-assets/v1",
-    "Update the details of external assets.",
-    "exposure_management",
-    [
-      {
-        "name": "body",
-        "in": "body",
         "required": True
       }
     ]
@@ -243,6 +228,20 @@ _exposure_management_endpoints = [
         "in": "query",
         "required": True
       },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "patch_external_assets",
+    "PATCH",
+    "/fem/entities/external-assets/v1",
+    "Update the details of external assets.",
+    "exposure_management",
+    [
       {
         "name": "body",
         "in": "body",
