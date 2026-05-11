@@ -6,6 +6,7 @@
 The examples within this folder focus on leveraging CrowdStrike Falcon Next-Gen SIEM and the NGSIEM service collection.
 
 - [What the HEC?](#what-the-hec)
+- [QueryJobs Pagination](queryjobs-pagination/) - Paginate through NG-SIEM QueryJob results beyond the 200-event buffer
 
 ## What the HEC?
 This sample discusses ingestion into Falcon Next-Gen SIEM. The solution demonstrates singular, list, file and raw ingest. Events can be randomly generated or provided via a file.
