@@ -52,9 +52,9 @@ _threatgraph_endpoints = [
         "required": True
       },
       {
-        "maximum": 100,
         "type": "integer",
         "default": 100,
+        "maximum": 100,
         "description": "How many edges to return in a single request [1-100]",
         "name": "limit",
         "in": "query"
@@ -66,6 +66,7 @@ _threatgraph_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "accessed_ad_computer",
           "accessed_adfs_application",
@@ -78,6 +79,8 @@ _threatgraph_endpoints = [
           "accessed_service_account",
           "accessed_web",
           "agent_to_self_diagnostic",
+          "ai_agent_used_by",
+          "ai_runs_on",
           "allowed_by_process",
           "allowed_firewall_rule",
           "app_uninstalled_from_host",
@@ -147,6 +150,7 @@ _threatgraph_endpoints = [
           "cert_is_presented_by",
           "cert_presented",
           "child_process",
+          "child_session",
           "closed_ip4_socket",
           "closed_ip6_socket",
           "command_line_parent_process",
@@ -155,6 +159,7 @@ _threatgraph_endpoints = [
           "connected_from_process",
           "connected_ip4",
           "connected_ip6",
+          "connected_mcp",
           "connected_on_customer",
           "connected_on_sensor",
           "connected_to_accessory",
@@ -243,6 +248,7 @@ _threatgraph_endpoints = [
           "invalid_from_process",
           "invalidated_by_process",
           "invalidated_firewall_rule",
+          "invokes_model",
           "involved_ad_computer",
           "involved_service_account",
           "ip4_socket_closed_by_app",
@@ -264,7 +270,9 @@ _threatgraph_endpoints = [
           "linking_event",
           "loaded_by_process",
           "loaded_module",
+          "loaded_skill",
           "macro_executed_by_process",
+          "mcp_tool_call",
           "member_of_full_command_line",
           "module",
           "module_written",
@@ -303,13 +311,18 @@ _threatgraph_endpoints = [
           "resolved_to_ip6",
           "rooted_control_graph",
           "rule_set_by_process",
+          "runs_session",
           "script",
           "self_diagnostic_to_agent",
+          "session_process",
+          "session_run_by",
           "set_by_process",
           "set_firewall_rule",
           "set_rule",
           "shell_io_redirect",
           "shield_activated_on_host",
+          "spawns_agent",
+          "tool_spawned_process",
           "trigger_process",
           "triggered_by_control_graph",
           "triggered_by_process",
@@ -326,8 +339,10 @@ _threatgraph_endpoints = [
           "uninstalled_app",
           "unmounted_from_host",
           "unmounted_on_host",
+          "used_tool",
           "user",
           "user_session",
+          "uses_ai_agent",
           "witnessed_by_sensor",
           "witnessed_process",
           "wmicreated_by_incident",
@@ -335,7 +350,6 @@ _threatgraph_endpoints = [
           "written_by_process",
           "wrote_module"
         ],
-        "type": "string",
         "description": "The type of edges that you would like to retrieve",
         "name": "edge_type",
         "in": "query",
@@ -348,12 +362,12 @@ _threatgraph_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
+        "default": "device",
         "enum": [
           "device",
           "customer"
         ],
-        "type": "string",
-        "default": "device",
         "description": "Scope of the request",
         "name": "scope",
         "in": "query"
@@ -383,6 +397,7 @@ _threatgraph_endpoints = [
         "required": True
       },
       {
+        "type": "string",
         "enum": [
           "domain",
           "ipv4",
@@ -391,16 +406,15 @@ _threatgraph_endpoints = [
           "sha1",
           "sha256"
         ],
-        "type": "string",
         "description": "The type of indicator that you would like to retrieve",
         "name": "type",
         "in": "query",
         "required": True
       },
       {
-        "maximum": 100,
         "type": "integer",
         "default": 100,
+        "maximum": 100,
         "description": "How many edges to return in a single request [1-100]",
         "name": "limit",
         "in": "query"
@@ -428,6 +442,7 @@ _threatgraph_endpoints = [
     "threatgraph",
     [
       {
+        "type": "string",
         "enum": [
           "accessory",
           "accessories",
@@ -440,8 +455,18 @@ _threatgraph_endpoints = [
           "ad-groups",
           "aggregate_indicator",
           "aggregate-indicators",
+          "ai_agent",
+          "ai-agents",
           "sensor",
           "devices",
+          "ai_model",
+          "ai-models",
+          "ai_session",
+          "ai-sessions",
+          "ai_skill",
+          "ai-skills",
+          "ai_tool",
+          "ai-tools",
           "mobile_app",
           "mobile-apps",
           "azure_application",
@@ -490,6 +515,8 @@ _threatgraph_endpoints = [
           "k8s_clusters",
           "legacy_detection",
           "legacy-detections",
+          "mcp_server",
+          "mcp-servers",
           "mobile_os_forensics_report",
           "mobile_os_forensics_reports",
           "mobile_indicator",
@@ -528,31 +555,30 @@ _threatgraph_endpoints = [
           "xdr",
           "any-vertex"
         ],
-        "type": "string",
         "description": "Type of vertex to get properties for",
         "name": "vertex_type",
         "in": "path",
         "required": True
       },
       {
-        "maxItems": 100,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "maxItems": 100,
         "description": "Vertex ID to get details for",
         "name": "ids",
         "in": "query",
         "required": True
       },
       {
+        "type": "string",
+        "default": "device",
         "enum": [
           "device",
           "customer"
         ],
-        "type": "string",
-        "default": "device",
         "description": "Scope of the request",
         "name": "scope",
         "in": "query"
@@ -576,6 +602,7 @@ _threatgraph_endpoints = [
     "threatgraph",
     [
       {
+        "type": "string",
         "enum": [
           "accessory",
           "accessories",
@@ -588,8 +615,18 @@ _threatgraph_endpoints = [
           "ad-groups",
           "aggregate_indicator",
           "aggregate-indicators",
+          "ai_agent",
+          "ai-agents",
           "sensor",
           "devices",
+          "ai_model",
+          "ai-models",
+          "ai_session",
+          "ai-sessions",
+          "ai_skill",
+          "ai-skills",
+          "ai_tool",
+          "ai-tools",
           "mobile_app",
           "mobile-apps",
           "azure_application",
@@ -638,6 +675,8 @@ _threatgraph_endpoints = [
           "k8s_clusters",
           "legacy_detection",
           "legacy-detections",
+          "mcp_server",
+          "mcp-servers",
           "mobile_os_forensics_report",
           "mobile_os_forensics_reports",
           "mobile_indicator",
@@ -676,31 +715,30 @@ _threatgraph_endpoints = [
           "xdr",
           "any-vertex"
         ],
-        "type": "string",
         "description": "Type of vertex to get properties for",
         "name": "vertex_type",
         "in": "path",
         "required": True
       },
       {
-        "maxItems": 100,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "maxItems": 100,
         "description": "Vertex ID to get details for",
         "name": "ids",
         "in": "query",
         "required": True
       },
       {
+        "type": "string",
+        "default": "device",
         "enum": [
           "device",
           "customer"
         ],
-        "type": "string",
-        "default": "device",
         "description": "Scope of the request",
         "name": "scope",
         "in": "query"
@@ -722,6 +760,7 @@ _threatgraph_endpoints = [
     "threatgraph",
     [
       {
+        "type": "string",
         "enum": [
           "accessory",
           "accessories",
@@ -734,8 +773,18 @@ _threatgraph_endpoints = [
           "ad-groups",
           "aggregate_indicator",
           "aggregate-indicators",
+          "ai_agent",
+          "ai-agents",
           "sensor",
           "devices",
+          "ai_model",
+          "ai-models",
+          "ai_session",
+          "ai-sessions",
+          "ai_skill",
+          "ai-skills",
+          "ai_tool",
+          "ai-tools",
           "mobile_app",
           "mobile-apps",
           "azure_application",
@@ -784,6 +833,8 @@ _threatgraph_endpoints = [
           "k8s_clusters",
           "legacy_detection",
           "legacy-detections",
+          "mcp_server",
+          "mcp-servers",
           "mobile_os_forensics_report",
           "mobile_os_forensics_reports",
           "mobile_indicator",
@@ -822,31 +873,30 @@ _threatgraph_endpoints = [
           "xdr",
           "any-vertex"
         ],
-        "type": "string",
         "description": "Type of vertex to get properties for",
         "name": "vertex_type",
         "in": "path",
         "required": True
       },
       {
-        "maxItems": 100,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "maxItems": 100,
         "description": "Vertex ID to get details for",
         "name": "ids",
         "in": "query",
         "required": True
       },
       {
+        "type": "string",
+        "default": "device",
         "enum": [
           "device",
           "customer"
         ],
-        "type": "string",
-        "default": "device",
         "description": "Scope of the request",
         "name": "scope",
         "in": "query"
