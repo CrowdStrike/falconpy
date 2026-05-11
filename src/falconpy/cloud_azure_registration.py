@@ -413,6 +413,10 @@ class CloudAzureRegistration(ServiceClass):
     def deployment_script(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download Azure deployment script (Terraform or Bicep).
 
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
+
         Keyword arguments:
         tenant_id -- Azure tenant ID to retrieve deployment scripts for. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
@@ -494,7 +498,36 @@ class CloudAzureRegistration(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def cloud_registration_azure_get_script(self: object,
+                                            parameters: dict = None,
+                                            **kwargs
+                                            ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Download Azure deployment script (Terraform or Bicep).
+
+        Keyword arguments:
+        tenant_id -- Azure tenant ID String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_script
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_get_script",
+            keywords=kwargs,
+            params=parameters
+            )
+
     cloud_registration_azure_delete_legacy_subscription = delete_legacy_subscription
+    cloud_registration_azure_get_script = cloud_registration_azure_get_script
     cloud_registration_azure_trigger_health_check = health_check
     cloud_registration_azure_get_registration = get_registration
     cloud_registration_azure_create_registration = create_registration
