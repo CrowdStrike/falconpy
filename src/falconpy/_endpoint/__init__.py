@@ -118,6 +118,7 @@ from ._falcon_complete_dashboard import _falcon_complete_dashboard_endpoints
 from ._falcon_container import _falcon_container_endpoints
 from ._falconx_sandbox import _falconx_sandbox_endpoints
 from ._fdr import _fdr_endpoints
+from ._federated_connections import _federated_connections_endpoints
 from ._filevantage import _filevantage_endpoints
 from ._firewall_management import _firewall_management_endpoints
 from ._firewall_policies import _firewall_policies_endpoints
@@ -234,6 +235,7 @@ api_endpoints.extend(_falcon_complete_dashboard_endpoints)
 api_endpoints.extend(_falcon_container_endpoints)
 api_endpoints.extend(_falconx_sandbox_endpoints)
 api_endpoints.extend(_fdr_endpoints)
+api_endpoints.extend(_federated_connections_endpoints)
 api_endpoints.extend(_filevantage_endpoints)
 api_endpoints.extend(_firewall_management_endpoints)
 api_endpoints.extend(_firewall_policies_endpoints)
