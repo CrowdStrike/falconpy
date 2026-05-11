@@ -77,6 +77,7 @@ from ._workflows import _workflows_endpoints
 from ._zero_trust_assessment import _zero_trust_assessment_endpoints
 from ._mapping import _deprecated_op_mapping, _deprecated_cls_mapping
 from ._certificate_based_exclusions import _certificate_based_exclusions_endpoints
+from ._falcon_complete_dashboard import _falcon_complete_dashboard_endpoints
 
 _admission_control_policies_deprecated = _admission_control_policies_endpoints
 _alerts_deprecated = _alerts_endpoints
@@ -123,5 +124,6 @@ _user_management_deprecated = _user_management_endpoints
 _workflows_deprecated = _workflows_endpoints
 _zero_trust_assessment_deprecated = _zero_trust_assessment_endpoints
 _certificate_based_exclusions_deprecated = _certificate_based_exclusions_endpoints
+_falcon_complete_dashboard_deprecated = _falcon_complete_dashboard_endpoints
 _deprecated_operation_mapping = _deprecated_op_mapping
 _deprecated_class_mapping = _deprecated_cls_mapping

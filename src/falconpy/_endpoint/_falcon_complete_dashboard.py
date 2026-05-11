@@ -108,20 +108,6 @@ _falcon_complete_dashboard_endpoints = [
     ]
   ],
   [
-    "AggregateFCIncidents",
-    "POST",
-    "/falcon-complete-dashboards/aggregates/incidents/GET/v1",
-    "Retrieve aggregate incident values based on the matched filter",
-    "falcon_complete_dashboard",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "AggregatePreventionPolicy",
     "POST",
     "/falcon-complete-dashboards/aggregates/prevention-policies/v1",
@@ -408,10 +394,10 @@ _falcon_complete_dashboard_endpoints = [
     ]
   ],
   [
-    "QueryIncidentIdsByFilter",
+    "QueryRemediationsFilter",
     "GET",
-    "/falcon-complete-dashboards/queries/incidents/v1",
-    "Retrieve incidents that match the provided filter criteria with scrolling enabled",
+    "/falcon-complete-dashboards/queries/remediations/v1",
+    "Retrieve remediation tickets that match the provided filter criteria with scrolling enabled",
     "falcon_complete_dashboard",
     [
       {
@@ -444,10 +430,24 @@ _falcon_complete_dashboard_endpoints = [
     ]
   ],
   [
-    "QueryRemediationsFilter",
+    "AggregateFCIncidents",
+    "POST",
+    "/falcon-complete-dashboards/aggregates/incidents/GET/v1",
+    "DECOMMISSIONED: Retrieve aggregate incident values based on the matched filter",
+    "falcon_complete_dashboard",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "QueryIncidentIdsByFilter",
     "GET",
-    "/falcon-complete-dashboards/queries/remediations/v1",
-    "Retrieve remediation tickets that match the provided filter criteria with scrolling enabled",
+    "/falcon-complete-dashboards/queries/incidents/v1",
+    "DECOMMISSIONED: Retrieve incidents that match the provided filter criteria with scrolling enabled",
     "falcon_complete_dashboard",
     [
       {
@@ -459,15 +459,20 @@ _falcon_complete_dashboard_endpoints = [
       {
         "type": "string",
         "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+
         "\"asc\" or \"desc\".",
+
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
         "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+
         "about FQL queries, see [our FQL documentation in "
+
         "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+
         "name": "filter",
         "in": "query"
       },
