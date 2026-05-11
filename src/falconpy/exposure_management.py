@@ -310,8 +310,7 @@ class ExposureManagement(ServiceClass):
         """Get details on external assets by providing one or more IDs.
 
         Keyword arguments:
-        ids -- One or more asset IDs (max: 100). Find asset IDs with query_external_assets.
-               String or list of strings.
+        ids -- One or more asset IDs (max: 100). Find asset IDs with `query_external_assets`.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
