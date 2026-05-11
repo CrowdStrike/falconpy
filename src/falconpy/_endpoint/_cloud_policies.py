@@ -59,13 +59,13 @@ _cloud_policies_endpoints = [
         "required": True
       },
       {
+        "type": "string",
         "enum": [
           "aws",
           "azure",
           "gcp",
           "oci"
         ],
-        "type": "string",
         "description": "Cloud service provider for the resource type",
         "name": "cloud_provider",
         "in": "query"
@@ -74,6 +74,22 @@ _cloud_policies_endpoints = [
         "type": "string",
         "description": "Selects the resource type for which to retrieve the rule input schema",
         "name": "resource_type",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "CloneComplianceFramework",
+    "POST",
+    "/cloud-policies/entities/compliance/clone-framework/v1",
+    "Clone an existing compliance framework to create a custom copy",
+    "cloud_policies",
+    [
+      {
+        "type": "string",
+        "description": "The uuid of the compliance framework to clone",
+        "name": "ids",
         "in": "query",
         "required": True
       }
@@ -135,6 +151,26 @@ _cloud_policies_endpoints = [
     ]
   ],
   [
+    "DeleteComplianceControl",
+    "DELETE",
+    "/cloud-policies/entities/compliance/controls/v1",
+    "Delete custom compliance controls",
+    "cloud_policies",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The uuids of compliance control to delete",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "UpdateComplianceControl",
     "PATCH",
     "/cloud-policies/entities/compliance/controls/v1",
@@ -151,26 +187,6 @@ _cloud_policies_endpoints = [
       {
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "DeleteComplianceControl",
-    "DELETE",
-    "/cloud-policies/entities/compliance/controls/v1",
-    "Delete custom compliance controls",
-    "cloud_policies",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "The uuids of compliance control to delete",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -238,6 +254,22 @@ _cloud_policies_endpoints = [
     ]
   ],
   [
+    "DeleteComplianceFramework",
+    "DELETE",
+    "/cloud-policies/entities/compliance/frameworks/v1",
+    "Delete a custom compliance framework and all associated controls and rule assignments",
+    "cloud_policies",
+    [
+      {
+        "type": "string",
+        "description": "The uuids of compliance framework to delete",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "UpdateComplianceFramework",
     "PATCH",
     "/cloud-policies/entities/compliance/frameworks/v1",
@@ -259,22 +291,6 @@ _cloud_policies_endpoints = [
     ]
   ],
   [
-    "DeleteComplianceFramework",
-    "DELETE",
-    "/cloud-policies/entities/compliance/frameworks/v1",
-    "Delete a custom compliance framework and all associated controls and rule assignments",
-    "cloud_policies",
-    [
-      {
-        "type": "string",
-        "description": "The uuids of compliance framework to delete",
-        "name": "ids",
-        "in": "query",
-        "required": True
-      }
-    ]
-  ],
-  [
     "GetEnrichedAsset",
     "GET",
     "/cloud-policies/entities/enriched-resources/v1",
@@ -290,6 +306,38 @@ _cloud_policies_endpoints = [
         "description": "List of asset IDs (maximum 100 IDs allowed).",
         "name": "ids",
         "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Rule domain (Currently only used for KAC Rego rules)",
+        "name": "domain",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Rule subdomain (Currently only used for KAC Rego rules)",
+        "name": "subdomain",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "enum": [
+          "cronjobs",
+          "daemonsets",
+          "deployments",
+          "jobs",
+          "pods",
+          "replicasets",
+          "replicationcontrollers",
+          "services",
+          "statefulsets"
+        ],
+        "description": "Currently the Resource type field is only used when KAC Rules are specified vai "
+        "Domain: Runtime & Subdomain: IOM. For KAC rules, we return static sample data instead of real assets b/c we "
+        "don't have KAC payloads stored for customers. This field valued selects what sample data resource type we "
+        "return which the UI shows in the Rego Editor to do test evaluations",
+        "name": "resource_type",
+        "in": "query"
       }
     ]
   ],
@@ -301,13 +349,13 @@ _cloud_policies_endpoints = [
     "cloud_policies",
     [
       {
+        "type": "string",
         "enum": [
           "aws",
           "azure",
           "gcp",
           "oci"
         ],
-        "type": "string",
         "description": "Cloud Service Provider of the provided IDs",
         "name": "cloud_provider",
         "in": "query"
@@ -370,20 +418,6 @@ _cloud_policies_endpoints = [
     ]
   ],
   [
-    "UpdateRuleOverride",
-    "PATCH",
-    "/cloud-policies/entities/rule-overrides/v1",
-    "Update a rule override",
-    "cloud_policies",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "DeleteRuleOverride",
     "DELETE",
     "/cloud-policies/entities/rule-overrides/v1",
@@ -399,6 +433,20 @@ _cloud_policies_endpoints = [
         "description": "The uuids of rule overrides to delete",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateRuleOverride",
+    "PATCH",
+    "/cloud-policies/entities/rule-overrides/v1",
+    "Update a rule override",
+    "cloud_policies",
+    [
+      {
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
@@ -443,20 +491,6 @@ _cloud_policies_endpoints = [
     ]
   ],
   [
-    "UpdateRule",
-    "PATCH",
-    "/cloud-policies/entities/rules/v1",
-    "Update a rule",
-    "cloud_policies",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "DeleteRuleMixin0",
     "DELETE",
     "/cloud-policies/entities/rules/v1",
@@ -472,6 +506,20 @@ _cloud_policies_endpoints = [
         "description": "The uuids of rules to delete",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateRule",
+    "PATCH",
+    "/cloud-policies/entities/rules/v1",
+    "Update a rule",
+    "cloud_policies",
+    [
+      {
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
@@ -511,20 +559,6 @@ _cloud_policies_endpoints = [
     ]
   ],
   [
-    "UpdateSuppressionRule",
-    "PATCH",
-    "/cloud-policies/entities/suppression-rules/v1",
-    "Update a suppression rule",
-    "cloud_policies",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "DeleteSuppressionRules",
     "DELETE",
     "/cloud-policies/entities/suppression-rules/v1",
@@ -540,6 +574,20 @@ _cloud_policies_endpoints = [
         "description": "The uuids of the suppression rules to delete. A maximum of 10 IDs can be provided.",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateSuppressionRule",
+    "PATCH",
+    "/cloud-policies/entities/suppression-rules/v1",
+    "Update a suppression rule",
+    "cloud_policies",
+    [
+      {
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
