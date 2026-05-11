@@ -119,6 +119,10 @@ class SpotlightVulnerabilities(ServiceClass):
                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve installed patches information for hosts.
 
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
+
         Returns a set of host entities containing installed patch details.
 
         Keyword arguments:
