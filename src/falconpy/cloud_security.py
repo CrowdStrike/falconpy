@@ -63,13 +63,20 @@ class CloudSecurity(ServiceClass):
         Keyword arguments:
         filter -- FQL string to filter results in Falcon Query Language (FQL). String.
             Supported fields:
-                  account_id            account_name        asset_gcrn
-                  asset_id              asset_name          asset_region
-                  asset_type            cloud_group         cloud_provider
-                  first_seen            last_seen           resolved_at
-                  risk_factor           rule_id             rule_name
-                  service_category      severity            status
-                  suppressed_by         suppressed_reason   tags
+                    account_id                account_name
+                    adversary                 asset_gcrn
+                    asset_id                  asset_name
+                    asset_region              asset_type
+                    cloud_group               cloud_provider
+                    first_seen                groups
+                    groups.business_impact    groups.business_unit
+                    groups.environment        last_seen
+                    resolved_at               risk_factor
+                    rule_id                   rule_name
+                    service_category          severity
+                    status                    suppressed_by
+                    suppressed_reason         tags
+                    threat_actors
 
         sort -- The field to sort on. Use |asc or |desc suffix to specify sort direction. String.
             Supported fields:
