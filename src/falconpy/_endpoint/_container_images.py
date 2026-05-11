@@ -132,8 +132,9 @@ _container_images_endpoints = [
       {
         "type": "string",
         "description": "Filter images using a query in Falcon Query Language (FQL). Supported filter fields:  "
-        "ai_related  container_id  container_running_status  cve_id  detection_name  detection_severity  first_seen  "
-        "image_digest  image_id  index_digest  multi_arch  registry  repository  tag  vulnerability_severity",
+        "ai_related  architecture  container_id  container_running_status  cve_id  detection_name  detection_severity  "
+        "first_seen  image_digest  image_id  index_digest  multi_arch  registry  repository  tag  "
+        "vulnerability_severity",
         "name": "filter",
         "in": "query"
       },
