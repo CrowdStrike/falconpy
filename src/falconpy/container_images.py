@@ -238,14 +238,14 @@ class ContainerImages(ServiceClass):
         Keyword arguments:
         filter -- Filter images using a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    ai_related                  image_digest
-                    container_id                image_id
-                    container_running_status    index_digest
-                    cve_id                      multi_arch
-                    detection_name              registry
-                    detection_severity          repository
-                    first_seen                  tag
-                    vulnerability_severity
+                    ai_related                  architecture
+                    container_id                container_running_status
+                    cve_id                      detection_name
+                    detection_severity          first_seen
+                    image_digest                image_id
+                    index_digest                multi_arch
+                    registry                    repository
+                    tag                         vulnerability_severity
         limit -- The upper-bound on the number of records to retrieve [1-100]. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- The fields to sort the records on. String.
