@@ -177,6 +177,7 @@ from .iocs import Iocs
 from .it_automation import ITAutomation, F4IT
 from .knowledge_base_audit_events import KnowledgeBaseAuditEvents
 from .knowledge_base_files import KnowledgeBaseFiles
+from .knowledge_bases import KnowledgeBases
 from .kubernetes_container_compliance import KubernetesContainerCompliance
 from .kubernetes_protection import KubernetesProtection
 from .malquery import MalQuery
@@ -282,7 +283,8 @@ __all__ = [
     "NetworkScanScanRuns", "NetworkScanScanners", "NetworkScanScans",
     "NetworkScanTemplates", "NetworkScanZones", "NetworkScan",
     "CloudSecurityRisks", "FederatedConnections",
-    "KnowledgeBaseAuditEvents", "KnowledgeBaseFiles"
+    "KnowledgeBaseAuditEvents", "KnowledgeBaseFiles",
+    "KnowledgeBases"
     ]
 """
 This is free and unencumbered software released into the public domain.
