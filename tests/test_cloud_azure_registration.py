@@ -92,7 +92,8 @@ class TestCloudAzureRegistration:
             "cloud_registration_azure_delete_registration": falcon.delete_registration(tenant_ids="12345678"),
             "download_azure_script": falcon.deployment_script(tenant_id="12345678"),
             "cloud_registration_azure_download_script": falcon.download_script(tenant_id="12345678"),
-            "cloud_registration_azure_validate_registration": falcon.validate_registration(tenant_id="12345678", stack_name="12345678")
+            "cloud_registration_azure_validate_registration": falcon.validate_registration(tenant_id="12345678", stack_name="12345678"),
+            "cloud_registration_azure_get_script": falcon.cloud_registration_azure_get_script(tenant_id="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

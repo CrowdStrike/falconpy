@@ -173,5 +173,21 @@ _cloud_azure_registration_endpoints = [
         "required": True
       }
     ]
+  ],
+  [
+    "download_azure_script",
+    "GET",
+    "/cloud-security-registration-azure/entities/scripts/v1",
+    "Download Azure deployment script (Terraform or Bicep)",
+    "cloud_azure_registration",
+    [
+      {
+        "type": "string",
+        "description": "Azure tenant ID",
+        "name": "tenant_id",
+        "in": "query",
+        "required": True
+      }
+    ]
   ]
 ]

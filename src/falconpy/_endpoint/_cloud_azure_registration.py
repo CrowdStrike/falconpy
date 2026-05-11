@@ -101,20 +101,6 @@ _cloud_azure_registration_endpoints = [
     ]
   ],
   [
-    "cloud_registration_azure_update_registration",
-    "PATCH",
-    "/cloud-security-registration-azure/entities/registrations/v1",
-    "Update an existing Azure registration for a tenant.",
-    "cloud_azure_registration",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "cloud_registration_azure_delete_registration",
     "DELETE",
     "/cloud-security-registration-azure/entities/registrations/v1",
@@ -135,6 +121,20 @@ _cloud_azure_registration_endpoints = [
     ]
   ],
   [
+    "cloud_registration_azure_update_registration",
+    "PATCH",
+    "/cloud-security-registration-azure/entities/registrations/v1",
+    "Update an existing Azure registration for a tenant.",
+    "cloud_azure_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "cloud_registration_azure_validate_registration",
     "POST",
     "/cloud-security-registration-azure/entities/registrations/validate/v1",
@@ -143,10 +143,10 @@ _cloud_azure_registration_endpoints = [
     "cloud_azure_registration",
     [
       {
+        "type": "string",
         "maxLength": 36,
         "minLength": 36,
         "pattern": "^[0-9a-z-]{36}$",
-        "type": "string",
         "description": "Azure tenant ID to be validated",
         "name": "tenant_id",
         "in": "query",
@@ -161,7 +161,7 @@ _cloud_azure_registration_endpoints = [
     ]
   ],
   [
-    "download_azure_script",
+    "cloud_registration_azure_get_script",
     "GET",
     "/cloud-security-registration-azure/entities/scripts/v1",
     "Download Azure deployment script (Terraform or Bicep)",
@@ -186,6 +186,22 @@ _cloud_azure_registration_endpoints = [
       {
         "name": "body",
         "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "download_azure_script",
+    "GET",
+    "/cloud-security-registration-azure/entities/scripts/v1",
+    "DECOMMISSIONED: Download Azure deployment script (Terraform or Bicep)",
+    "cloud_azure_registration",
+    [
+      {
+        "type": "string",
+        "description": "Azure tenant ID",
+        "name": "tenant_id",
+        "in": "query",
         "required": True
       }
     ]
