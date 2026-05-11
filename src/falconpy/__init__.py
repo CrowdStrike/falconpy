@@ -156,6 +156,7 @@ from .falcon_complete_dashboard import CompleteDashboard
 from .falcon_container import FalconContainer
 from .falconx_sandbox import FalconXSandbox
 from .fdr import FDR
+from .federated_connections import FederatedConnections
 from .filevantage import FileVantage
 from .firewall_management import FirewallManagement
 from .firewall_policies import FirewallPolicies
@@ -278,7 +279,7 @@ __all__ = [
     "NetworkScanGlobalConfigs", "NetworkScanNetworks", "NetworkScanScanRunReports",
     "NetworkScanScanRuns", "NetworkScanScanners", "NetworkScanScans",
     "NetworkScanTemplates", "NetworkScanZones", "NetworkScan",
-    "CloudSecurityRisks"
+    "CloudSecurityRisks", "FederatedConnections"
     ]
 """
 This is free and unencumbered software released into the public domain.
