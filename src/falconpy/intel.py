@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 # pylint: disable=C0302
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import generic_payload_list
+from ._payload import generic_payload_list, cao_incidents_aggregates_v1_payload, cao_incidents_entities_v1_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._intel import _intel_endpoints as Endpoints
@@ -975,9 +975,188 @@ class Intel(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def cao_incidents_aggregates_v1(self: object,
+                                    body: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Perform statistical aggregations over incident data.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                    ],
+                    "exclude": "string",
+                    "extended_bounds": {
+                        "max": "string",
+                        "min": "string"
+                    },
+                    "field": "string",
+                    "filter": "string",
+                    "filters_spec": {
+                        "filters": "string",
+                        "other_bucket": true,
+                        "other_bucket_key": "string"
+                    },
+                    "from": 0,
+                    "include": "string",
+                    "interval": "string",
+                    "max_doc_count": 0,
+                    "min_doc_count": 0,
+                    "missing": "string",
+                    "name": "string",
+                    "percents": [
+                        "string"
+                    ],
+                    "q": "string",
+                    "ranges": [
+                        {
+                            "From": 0.0,
+                            "To": 0.0
+                        }
+                    ],
+                    "size": 0,
+                    "sort": "string",
+                    "sub_aggregates": [
+                        "string"
+                    ],
+                    "time_zone": "string",
+                    "type": "string"
+                }
+        date_ranges -- The date_ranges value. List.
+        exclude -- The exclude value. String.
+        extended_bounds -- The extended_bounds value. Dictionary.
+        field -- The field value. String.
+        filter -- The filter value. String.
+        filters_spec -- The filters_spec value. Dictionary.
+        from -- The from value. Integer.
+        include -- The include value. String.
+        interval -- The interval value. String.
+        max_doc_count -- The max_doc_count value. Integer.
+        min_doc_count -- The min_doc_count value. Integer.
+        missing -- The missing value. String.
+        name -- The name value. String.
+        percents -- The percents value. List.
+        q -- The q value. String.
+        ranges -- The ranges value. List.
+        size -- The size value. Integer.
+        sort -- The sort value. String.
+        sub_aggregates -- The sub_aggregates value. List.
+        time_zone -- The time_zone value. String.
+        type -- The type value. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/cao_incidents_aggregates_v1
+        """
+        if not body:
+            body = cao_incidents_aggregates_v1_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cao_incidents_aggregates_v1",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def cao_incidents_entities_v1(self: object,
+                                  body: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve full details for one or more adversary incidents by their IDs.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- The ids value. List.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/cao_incidents_entities_v1
+        """
+        if not body:
+            body = cao_incidents_entities_v1_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cao_incidents_entities_v1",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def cao_incidents_queries_v1(self: object,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Search for adversary incidents using FQL criteria and return a paginated list of matching incident IDs.
+
+        Keyword arguments:
+        sort -- The property to sort on, followed by a dot (.), followed by the sort direction, either "asc" or "desc".
+                Available sort properties: LastModifiedAt, ActivityStart, ActivityEnd, PublishDate, InvolvesAdversaries.Name,
+                InvolvesAdversaries.Slug. String.
+        filter -- Optional filter and sort criteria in the form of an FQL query. String.
+              Available filters:
+                    ActivityEnd                             ActivityStart
+                    All                                     Id
+                    InvolvesAdversaries.AnimalClassifier    InvolvesAdversaries.Id
+                    InvolvesAdversaries.Name                InvolvesAdversaries.Slug
+                    InvolvesIndicators.Value                InvolvesThreats.FamilyName
+                    LastModifiedAt                          MitreAttack.Id
+                    MitreAttack.TacticId                    MitreAttack.TacticName
+                    MitreAttack.TechniqueId                 MitreAttack.TechniqueName
+                    Motivations.Slug                        Objectives.Slug
+                    PublishDate                             ReferencesNotableEvents.Title
+                    TargetCountries.Slug                    TargetIndustries.Slug
+                    TargetRegions.Slug                      TargetingProfile.Slug
+                    TargetsVulnerabilities.CVE              Title
+        limit -- The maximum records to return. Cannot be higher than 200. Integer.
+        offset -- Starting index of overall result set from which to return ids. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/cao_incidents_queries_v1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cao_incidents_queries_v1",
+            keywords=kwargs,
+            params=parameters
+            )
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
+    cao_incidents_aggregates_v1 = cao_incidents_aggregates_v1
+    cao_incidents_entities_v1 = cao_incidents_entities_v1
+    cao_incidents_queries_v1 = cao_incidents_queries_v1
     QueryIntelActorEntities = query_actor_entities
     QueryIntelIndicatorEntities = query_indicator_entities
     QueryIntelReportEntities = query_report_entities

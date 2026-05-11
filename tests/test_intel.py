@@ -41,7 +41,20 @@ class TestIntel:
             "GetMalwareMitreReport": falcon.get_malware_report(id="fancy-bear"),
             "query_malware_entities": falcon.query_malware_entities(limit=5),
             # "get_vulnerabilities": falcon.get_vulnerabilities(ids="12345678"),
-            # "query_vulnerabilities": falcon.query_vulnerabilities()
+            # "query_vulnerabilities": falcon.query_vulnerabilities(),
+            "cao_incidents_aggregates_v1": falcon.cao_incidents_aggregates_v1(date_ranges="string", exclude="string",
+                extended_bounds="string", field="string",
+                filter="string", filters_spec="string",
+                include="string", interval="string",
+                max_doc_count="string", min_doc_count="string",
+                missing="string", name="string",
+                percents="string", q="string", ranges="string",
+                size="string", sort="string",
+                sub_aggregates="string", time_zone="string",
+                type="string"),
+            "cao_incidents_entities_v1": falcon.cao_incidents_entities_v1(ids="string"),
+            "cao_incidents_queries_v1": falcon.cao_incidents_queries_v1(sort="string", filter="string", limit=1,
+                offset="string"),
         }
 
         if falcon.base_url.replace("https://", "") == BaseURL["US1"].value:

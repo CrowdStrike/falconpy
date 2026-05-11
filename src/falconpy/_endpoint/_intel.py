@@ -38,6 +38,24 @@ For more information, please refer to <https://unlicense.org>
 
 _intel_endpoints = [
   [
+    "cao_incidents_aggregates_v1",
+    "POST",
+    "/intel/aggregates/incidents/v1",
+    "Perform statistical aggregations over incident data. Available aggregation properties: "
+    "InvolvesAdversaries.Slug, TargetIndustries.Slug, TargetIndustries.Name, ActivityStart, Id, "
+    "InvolvesThreats.FamilyName, TargetCountries.Slug, TargetRegions.Slug, MitreAttack.TacticId, "
+    "MitreAttack.TacticName, MitreAttack.TechniqueId, MitreAttack.TechniqueName, Objectives.Slug, Motivations.Slug, "
+    "InvolvesAdversaries.AnimalClassifier, TargetCountries.Name, TargetRegions.Name, PublishDate, ActivityEnd.",
+    "intel",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "QueryIntelActorEntities",
     "GET",
     "/intel/combined/actors/v1",
@@ -291,6 +309,22 @@ _intel_endpoints = [
         "\\_\\_full\\_\\_.\n\nDefaults to \\_\\_basic\\_\\_.",
         "name": "fields",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "cao_incidents_entities_v1",
+    "POST",
+    "/intel/entities/incidents/GET/v1",
+    "Retrieve full details for one or more adversary incidents by their IDs. Returns complete incident data "
+    "including adversary activity, timestamps, and associated metadata.",
+    "intel",
+    [
+      {
+        "description": "List of incident IDs.",
+        "name": "body",
+        "in": "body",
+        "required": True
       }
     ]
   ],
@@ -595,6 +629,50 @@ _intel_endpoints = [
         "type": "string",
         "description": "Perform a generic substring search across all fields.",
         "name": "q",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "cao_incidents_queries_v1",
+    "GET",
+    "/intel/queries/incidents/v1",
+    "Search for adversary incidents using FQL criteria and return a paginated list of matching incident IDs. "
+    "Use the returned IDs with the entities endpoint to retrieve full incident details.",
+    "intel",
+    [
+      {
+        "type": "string",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        " \"asc\" or \"desc\". Available sort properties: LastModifiedAt, ActivityStart, ActivityEnd, PublishDate, "
+        "InvolvesAdversaries.Name, InvolvesAdversaries.Slug.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+        "about FQL queries, see [our FQL documentation in "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide). \n "
+        "Available filters: TargetsVulnerabilities.CVE, Objectives.Slug, Motivations.Slug, MitreAttack.TechniqueName, "
+        "All, Title, MitreAttack.TechniqueId, ReferencesNotableEvents.Title, TargetCountries.Slug, LastModifiedAt, "
+        "PublishDate, InvolvesAdversaries.Id, InvolvesAdversaries.Name, InvolvesAdversaries.AnimalClassifier, "
+        "InvolvesThreats.FamilyName, MitreAttack.Id, TargetRegions.Slug, TargetIndustries.Slug, TargetingProfile.Slug, "
+        "MitreAttack.TacticId, MitreAttack.TacticName, InvolvesIndicators.Value, Id, ActivityStart, ActivityEnd, "
+        "InvolvesAdversaries.Slug. 'All' can be used for text queries on all attributes.",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The maximum records to return. Cannot be higher than 200.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Starting index of overall result set from which to return ids.",
+        "name": "offset",
         "in": "query"
       }
     ]
