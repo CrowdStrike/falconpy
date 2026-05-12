@@ -217,7 +217,7 @@ def cspm_service_account_validate_payload(passed_keywords: dict) -> dict:
     returned_payload = {
         "resources": []
     }
-    keys = ["client_email", "client_id", "private_key", "private_key_id", "project_id"
+    keys = ["client_email", "client_id", "private_key", "private_key_id", "project_id",
             "service_account_conditions", "service_account_id"
             ]
     if passed_keywords.get("resources", None):
