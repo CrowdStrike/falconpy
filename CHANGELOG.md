@@ -1,3 +1,305 @@
+# Version 1.6.3
+## Added features and functionality
++ Added: New __Access Scopes__ service collection with two operations.
+    - _list_access_scopes_external_
+    - _query_access_scopes_external_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_access_scopes.py`
+    - `_payload/__init__.py`
+    - `_payload/_access_scopes.py`
+    - `__init__.py`
+    - `access_scopes.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_access_scopes.py`
+
++ Added: New __Api Clients__ service collection with seven operations.
+    - _get_accessible_scopes_
+    - _reset_api_client_secret_
+    - _get_api_clients_
+    - _create_api_client_
+    - _delete_api_clients_
+    - _update_api_client_
+    - _get_all_api_client_ids_for_customer_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_api_clients.py`
+    - `_payload/__init__.py`
+    - `_payload/_api_clients.py`
+    - `__init__.py`
+    - `api_clients.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_api_clients.py`
+
++ Added: Added nine new operations to the __Cloud Azure Registration__ service collection.
+    - _cloud_registration_azure_get_issue_suppression_values_by_field_
+    - _cloud_registration_azure_get_issue_values_by_field_
+    - _cloud_registration_azure_get_suppressions_
+    - _cloud_registration_azure_create_suppressions_
+    - _cloud_registration_azure_delete_suppressions_
+    - _cloud_registration_azure_update_suppressions_
+    - _cloud_registration_azure_get_issues_
+    - _cloud_registration_azure_get_script_versions_
+    - _cloud_registration_azure_get_script_
+    - `_endpoint/_cloud_azure_registration.py`
+    - `cloud_azure_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_azure_registration.py`
+
++ Removed: Removed `download_azure_script` operation from the __Cloud Azure Registration__ service collection.
+    - `_endpoint/_cloud_azure_registration.py`
+    - `_endpoint/deprecated/_cloud_azure_registration.py`
+    - `_endpoint/deprecated/_mapping.py`
+    - `cloud_azure_registration.py`
+
++ Added: Added `CloneComplianceFramework` operation to the __Cloud Policies__ service collection.
+    - _clone_compliance_framework_
+    - `_endpoint/_cloud_policies.py`
+    - `cloud_policies.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_policies.py`
+
++ Updated: Added `adversary`, `groups`, `groups.business_impact`, `groups.business_unit`, `groups.environment`, and `threat_actors` as allowed filter fields in the __Cloud Security__ service collection.
+    - `_endpoint/_cloud_security.py`
+    - `cloud_security.py`
+
++ Added: Added `cloud_security_assets_entities_post` operation to the __Cloud Security Assets__ service collection.
+    - _cloud_security_assets_entities_post_
+    - `_endpoint/_cloud_security_assets.py`
+    - `cloud_security_assets.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_security_assets.py`
+
++ Updated: Added `resource_gcrn`, `resource_parent`, `tags_string`, `azure.resource_group`, and `insights.*` as allowed filter fields in the __Cloud Security Assets__ service collection.
+    - `_endpoint/_cloud_security_assets.py`
+    - `cloud_security_assets.py`
+
++ Updated: Added `tenant_id` as an allowed sort and filter field in the __Cloud Security Detections__ service collection.
+    - `_endpoint/_cloud_security_detections.py`
+    - `cloud_security_detections.py`
+
++ Added: New __Cloud Security Registration Combined__ service collection with one operation.
+    - _cloud_registration_cross_provider_get_account_aggregates_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_cloud_security_registration_combined.py`
+    - `_payload/__init__.py`
+    - `_payload/_cloud_security_registration_combined.py`
+    - `__init__.py`
+    - `cloud_security_registration_combined.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_security_registration_combined.py`
+
++ Added: New __Cloud Security Risks__ service collection with one operation.
+    - _cloud_security_timeline_risks_enriched_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_cloud_security_risks.py`
+    - `_payload/__init__.py`
+    - `_payload/_cloud_security_risks.py`
+    - `__init__.py`
+    - `cloud_security_risks.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_security_risks.py`
+
++ Updated: Added `architecture` as an allowed filter field in multiple operations within the __Container Images__ service collection.
+    - `_endpoint/_container_images.py`
+    - `container_images.py`
+
++ Removed: Removed `AggregateFCIncidents` operation from the __Falcon Complete Dashboard__ service collection.
+    - `_endpoint/_falcon_complete_dashboard.py`
+    - `_endpoint/deprecated/_falcon_complete_dashboard.py`
+    - `_endpoint/deprecated/_mapping.py`
+    - `falcon_complete_dashboard.py`
+
++ Removed: Removed `QueryIncidentIdsByFilter` operation from the __Falcon Complete Dashboard__ service collection.
+    - `_endpoint/_falcon_complete_dashboard.py`
+    - `_endpoint/deprecated/_falcon_complete_dashboard.py`
+    - `_endpoint/deprecated/_mapping.py`
+    - `falcon_complete_dashboard.py`
+
++ Updated: Added `architecture` parameter to _GetImageAssessmentImages_ and _GetImageAssessmentImagesByDigest_ operations in the __Falcon Container__ service collection.
+    - `_endpoint/_falcon_container.py`
+    - `falcon_container.py`
+
++ Added: New __Federated Connections__ service collection with three operations.
+    - _post_federated_connections_config_
+    - _delete_federated_connections_config_
+    - _patch_federated_connections_config_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_federated_connections.py`
+    - `_payload/__init__.py`
+    - `_payload/_federated_connections.py`
+    - `__init__.py`
+    - `federated_connections.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_federated_connections.py`
+
++ Removed: Removed `CreateFileV1` operation from the __Foundry Logscale__ service collection.
+    - `_endpoint/_foundry_logscale.py`
+    - `_endpoint/deprecated/_foundry_logscale.py`
+    - `_endpoint/deprecated/_mapping.py`
+    - `foundry_logscale.py`
+
++ Removed: Removed `UpdateFileV1` operation from the __Foundry Logscale__ service collection.
+    - `_endpoint/_foundry_logscale.py`
+    - `_endpoint/deprecated/_foundry_logscale.py`
+    - `_endpoint/deprecated/_mapping.py`
+    - `foundry_logscale.py`
+
++ Added: New __Foundry Lookup Files__ service collection with two operations.
+    - _create_file_v1_
+    - _update_file_v1_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_foundry_lookup_files.py`
+    - `_payload/__init__.py`
+    - `_payload/_foundry_lookup_files.py`
+    - `__init__.py`
+    - `foundry_lookup_files.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_foundry_lookup_files.py`
+
++ Updated: Updated __Host Migration__ endpoint definitions and docstrings.
+    - `_endpoint/_host_migration.py`
+    - `host_migration.py`
+
++ Updated: Expanded available sort and filter fields in the __Hosts__ service collection to include `device_policies.*` fields, `agent_load_flags`, `agent_version`, `criticality`, `deployment_type`, `detection_suppression_status`, and many more.
+    - `_endpoint/_hosts.py`
+    - `hosts.py`
+
++ Added: Added three new operations to the __Intel__ service collection.
+    - _cao_incidents_aggregates_v1_
+    - _cao_incidents_entities_v1_
+    - _cao_incidents_queries_v1_
+    - `_endpoint/_intel.py`
+    - `intel.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_intel.py`
+
++ Added: New __Knowledge Base Audit Events__ service collection with four operations.
+    - _aggregates_knowledge_base_audit_events_v1_
+    - _combined_knowledge_base_audit_events_v1_
+    - _entities_knowledge_base_audit_events_v1_
+    - _queries_knowledge_base_audit_events_v1_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_knowledge_base_audit_events.py`
+    - `_payload/__init__.py`
+    - `_payload/_knowledge_base_audit_events.py`
+    - `__init__.py`
+    - `knowledge_base_audit_events.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_knowledge_base_audit_events.py`
+
++ Added: New __Knowledge Base Files__ service collection with six operations.
+    - _entities_knowledge_base_files_download_v1_
+    - _entities_knowledge_base_files_v1_
+    - _entities_knowledge_base_files_update_v1_
+    - _entities_knowledge_base_files_create_v1_
+    - _entities_knowledge_base_files_delete_v1_
+    - _queries_knowledge_base_files_v1_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_knowledge_base_files.py`
+    - `_payload/__init__.py`
+    - `_payload/_knowledge_base_files.py`
+    - `__init__.py`
+    - `knowledge_base_files.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_knowledge_base_files.py`
+
++ Added: New __Knowledge Bases__ service collection with five operations.
+    - _aggregates_knowledge_bases_v1_
+    - _entities_knowledge_bases_v1_
+    - _entities_knowledge_bases_create_v1_
+    - _entities_knowledge_bases_update_v1_
+    - _queries_knowledge_bases_v1_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_knowledge_bases.py`
+    - `_payload/__init__.py`
+    - `_payload/_knowledge_bases.py`
+    - `__init__.py`
+    - `knowledge_bases.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_knowledge_bases.py`
+
++ Added: Added eight new operations to the __Ngsiem__ service collection.
+    - _bulk_create_dashboards_from_template_
+    - _bulk_update_dashboards_from_template_
+    - _bulk_get_lookup_files_
+    - _bulk_create_lookup_files_
+    - _bulk_update_lookup_files_
+    - _bulk_create_saved_queries_from_template_
+    - _bulk_update_saved_queries_from_template_
+    - _create_parser_extension_
+    - `_endpoint/_ngsiem.py`
+    - `ngsiem.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ngsiem.py`
+
++ Updated: Added `schema_validation_enabled` parameter to the _CreateConnectorConfig_ operation in the __Ngsiem__ service collection.
+    - `_endpoint/_ngsiem.py`
+    - `ngsiem.py`
+
++ Updated: Added `targeted_platforms` and `channel_file_status` as allowed filter fields in the _query_scheduled_scans_ operation within the __Ods__ service collection.
+    - `_endpoint/_ods.py`
+    - `ods.py`
+
++ Added: New __Profile Groups__ service collection with nine operations.
+    - _group_actions_v1_mixin0_
+    - _group_users_actions_v1_mixin0_
+    - _get_group_users_v1_
+    - _get_groups_v1_mixin0_
+    - _create_group_v1_mixin0_
+    - _delete_groups_v1_
+    - _update_group_v1_mixin0_
+    - _get_user_groups_v1_
+    - _query_groups_v1_mixin0_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_profile_groups.py`
+    - `_payload/__init__.py`
+    - `_payload/_profile_groups.py`
+    - `__init__.py`
+    - `profile_groups.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_profile_groups.py`
+
++ Removed: Removed `combinedQueryInstalledPatches` operation from the __Spotlight Vulnerabilities__ service collection.
+    - `_endpoint/_spotlight_vulnerabilities.py`
+    - `_endpoint/deprecated/_spotlight_vulnerabilities.py`
+    - `_endpoint/deprecated/_mapping.py`
+    - `spotlight_vulnerabilities.py`
+
++ Updated: Added new AI-related edge types (`ai_agent_used_by`, `connected_mcp`, `invokes_model`, `loaded_skill`, `mcp_tool_call`, `runs_session`, `session_process`, `session_run_by`, `spawns_agent`, `tool_spawned_process`, `used_tool`, `uses_ai_agent`) and vertex types (`ai_agent`, `ai_model`, `ai_session`, `ai_skill`, `ai_tool`, `mcp_server`) to the __Threatgraph__ service collection.
+    - `_endpoint/_threatgraph.py`
+    - `threatgraph.py`
+
++ Added: Added `WorkflowDefinitionsDelete` operation to the __Workflows__ service collection.
+    - _workflow_definitions_delete_
+    - `_endpoint/_workflows.py`
+    - `workflows.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_workflows.py`
+    - Thanks to @gkazimiarovich for their contribution!
+
+## Issues resolved
++ Fixed: Fixed bug in __ITAutomation__ causing `cancel_execution` to wrap `task_execution_id` in a list when the API expects a string. Passing `task_execution_id` as a keyword argument now correctly produces a flat body payload. Closes #1465.
+    - `it_automation.py`
+
++ Fixed: Fixed missing comma in `_payload/_generic.py` causing implicit string concatenation between `extended_bounds` and `filters_spec`, breaking both kwargs for all aggregate operations. Closes #1460.
+    - `_payload/_generic.py`
+
++ Fixed: Fixed missing comma in `_payload/_aspm.py` causing implicit string concatenation between `type` and `username`, breaking both kwargs for ASPM relay node retrieval operations. Closes #1461.
+    - `_payload/_aspm.py`
+
++ Fixed: Fixed missing comma in `_payload/_foundry.py` causing implicit string concatenation between `version` and `with_in`, breaking both kwargs for Foundry LogScale saved search execute operations. Closes #1462.
+    - `_payload/_foundry.py`
+
++ Fixed: Fixed missing comma in `_payload/_cspm_registration.py` causing implicit string concatenation between `project_id` and `service_account_conditions`, breaking both kwargs for GCP CSPM service account validation. Closes #1463.
+    - `_payload/_cspm_registration.py`
+
++ Fixed: Fixed typo `dashbaord_url` in `_payload/_aspm.py` causing `dashboard_url` kwargs to be silently ignored for ASPM node creation operations.
+    - `_payload/_aspm.py`
+
++ Fixed: Fixed missing `custom` keyword argument in the `create_data_connection` method of the __NGSIEM__ service collection. The `custom` field (a free-form string map used for connector-specific configuration such as `PluginConfigID`) was omitted from the payload builder, causing it to be silently dropped and the API to return HTTP 400 with "required custom property missing". Passing `custom={"PluginConfigID": "<value>"}` as a keyword argument now works correctly. Closes #1468.
+    - `_payload/_ngsiem.py`
+    - `ngsiem.py`
+
+
 # Version 1.6.2
 ## Added features and functionality
 + Added: New __Network Scan Global Configs__ service collection with two operations.
