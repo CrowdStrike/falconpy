@@ -721,7 +721,7 @@ def aspm_node_payload(passed_keywords: dict) -> dict:
     }
     """
     returned = {}
-    keys = ["additional_header", "current_aws_arn", "dashbaord_url", "id", "last_health_check",
+    keys = ["additional_header", "current_aws_arn", "dashboard_url", "id", "last_health_check",
             "name", "node_type", "password", "pod_settings", "proxy_address", "type", "use_jobs",
             "username"
             ]
@@ -796,7 +796,7 @@ def retrieve_relay_node_payload(passed_keywords: dict) -> dict:
     """
     returned = {}
     keys = ["additional_headers", "current_aws_arn", "dashboard_url", "id", "last_health_check",
-            "name", "node_type", "password", "pod_settings", "proxy_address", "status", "type"
+            "name", "node_type", "password", "pod_settings", "proxy_address", "status", "type",
             "username"
             ]
     for key in keys:
