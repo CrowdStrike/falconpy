@@ -100,7 +100,7 @@ def foundry_execute_search_payload(passed_keywords: dict):
     }
     """
     returned_payload = {}
-    keys = ["end", "id", "mode", "name", "search_parameters", "start", "version"
+    keys = ["end", "id", "mode", "name", "search_parameters", "start", "version",
             "with_in", "with_limit", "with_renames", "with_sort"
             ]
     for key in keys:
