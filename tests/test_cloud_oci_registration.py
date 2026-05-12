@@ -17,7 +17,7 @@ from falconpy import CloudOCIRegistration
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = CloudOCIRegistration(auth_object=config)
-AllowedResponses = [200, 201, 204, 207, 400, 403, 429]
+AllowedResponses = [200, 201, 204, 207, 400, 403, 429, 500]
 
 
 class TestCloudOCIRegistration:

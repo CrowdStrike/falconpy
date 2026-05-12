@@ -48,7 +48,8 @@ from ._payload import (
     automation_policy_payload,
     policy_host_group_payload,
     automation_live_query_payload,
-    automation_user_group_payload
+    automation_user_group_payload,
+    cancel_task_execution_payload
     )
 from ._result import Result
 from ._service_class import ServiceClass
@@ -1066,7 +1067,7 @@ class ITAutomation(ServiceClass):
         if not body:
             if not kwargs:
                 kwargs = handle_single_argument(args, kwargs, "task_execution_id")
-            body = generic_payload_list(submitted_keywords=kwargs, payload_value="task_execution_id")
+            body = cancel_task_execution_payload(passed_keywords=kwargs)
 
         return process_service_request(
             calling_object=self,
