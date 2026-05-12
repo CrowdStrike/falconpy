@@ -123,7 +123,7 @@ def aggregate_payload(submitted_keywords: dict) -> dict:  # pylint: disable=R091
     returned_payload = {}
 
     keys = ["date_ranges", "exclude", "include", "field", "filter", "interval", "missing",
-            "name", "q", "ranges", "sort", "sub_aggregates", "time_zone", "type", "extended_bounds"
+            "name", "q", "ranges", "sort", "sub_aggregates", "time_zone", "type", "extended_bounds",
             "filters_spec", "percents"
             ]
 
