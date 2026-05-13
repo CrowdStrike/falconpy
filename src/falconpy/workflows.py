@@ -258,6 +258,8 @@ class Workflows(ServiceClass):
                      Supports string or binary data.
         name -- Workflow name to override. String.
         validate_only -- When enabled, prevents saving workflow after validating. Boolean.
+        include_activity_metadata -- When true, populates the definition model with Activity metadata which includes Activity
+                                     Dependency and Vendor. Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.

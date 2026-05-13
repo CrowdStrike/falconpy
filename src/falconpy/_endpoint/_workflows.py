@@ -281,6 +281,14 @@ _workflows_endpoints = [
         "description": "When enabled, prevents saving workflow after validating",
         "name": "validate_only",
         "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "When true, populates the definition model with Activity metadata which includes "
+        "Activity Dependency and Vendor",
+        "name": "include_activity_metadata",
+        "in": "query"
       }
     ]
   ],
