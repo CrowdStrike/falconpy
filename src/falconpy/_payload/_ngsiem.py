@@ -249,6 +249,9 @@ def ngsiem_data_connection_payload(passed_keywords: dict) -> Dict[str, Union[str
         "config_id": "string",
         "connector_id": "string",
         "connector_type": "string",
+        "custom": {
+            "additionalProp1": "string"
+        },
         "description": "string",
         "enable_host_enrichment": true,
         "enable_user_enrichment": true,
@@ -262,7 +265,7 @@ def ngsiem_data_connection_payload(passed_keywords: dict) -> Dict[str, Union[str
     }
     """
     returned: dict = {}
-    keys = ["config", "config_id", "connector_id", "connector_type", "description",
+    keys = ["config", "config_id", "connector_id", "connector_type", "custom", "description",
             "enable_host_enrichment", "enable_user_enrichment", "log_sources", "name",
             "parser", "vendor_name", "vendor_product_name"
             ]

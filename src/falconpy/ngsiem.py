@@ -1845,6 +1845,9 @@ class NGSIEM(ServiceClass):
                     "config_id": "string",
                     "connector_id": "string",
                     "connector_type": "string",
+                    "custom": {
+                        "additionalProp1": "string"
+                    },
                     "description": "string",
                     "enable_host_enrichment": true,
                     "enable_user_enrichment": true,
@@ -1860,6 +1863,8 @@ class NGSIEM(ServiceClass):
         config_id -- Identifier of the connector configuration to use. String.
         connector_id -- Identifier of the connector for this data connection. String.
         connector_type -- Type of the connector. String.
+        custom -- Custom properties for the data connection, such as connector-specific configuration
+                  keys (e.g., PluginConfigID). Dictionary of string key/value pairs.
         description -- Description of the data connection. String.
         enable_host_enrichment -- Flag to enable host enrichment on ingested data. Boolean.
         enable_user_enrichment -- Flag to enable user enrichment on ingested data. Boolean.
