@@ -202,6 +202,7 @@ from .ngsiem import NGSIEM
 from .oauth2 import OAuth2
 from .ods import ODS
 from .prevention_policy import PreventionPolicy, PreventionPolicies
+from .profile_groups import ProfileGroups
 from .quarantine import Quarantine
 from .quick_scan import QuickScan
 from .quick_scan_pro import QuickScanPro
@@ -290,7 +291,7 @@ __all__ = [
     "CloudSecurityRegistrationCombined", "CloudSecurityRisks",
     "FederatedConnections", "FoundryLookupFiles",
     "KnowledgeBaseAuditEvents", "KnowledgeBaseFiles",
-    "KnowledgeBases"
+    "KnowledgeBases", "ProfileGroups"
     ]
 """
 This is free and unencumbered software released into the public domain.

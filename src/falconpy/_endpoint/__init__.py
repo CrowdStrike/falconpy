@@ -164,6 +164,7 @@ from ._ngsiem import _ngsiem_endpoints
 from ._oauth2 import _oauth2_endpoints
 from ._ods import _ods_endpoints
 from ._prevention_policies import _prevention_policies_endpoints
+from ._profile_groups import _profile_groups_endpoints
 from ._quarantine import _quarantine_endpoints
 from ._quick_scan import _quick_scan_endpoints
 from ._quick_scan_pro import _quick_scan_pro_endpoints
@@ -288,6 +289,7 @@ api_endpoints.extend(_ngsiem_endpoints)
 api_endpoints.extend(_oauth2_endpoints)
 api_endpoints.extend(_ods_endpoints)
 api_endpoints.extend(_prevention_policies_endpoints)
+api_endpoints.extend(_profile_groups_endpoints)
 api_endpoints.extend(_quarantine_endpoints)
 api_endpoints.extend(_quick_scan_endpoints)
 api_endpoints.extend(_quick_scan_pro_endpoints)
