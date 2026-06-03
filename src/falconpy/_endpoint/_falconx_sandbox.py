@@ -168,7 +168,7 @@ _falconx_sandbox_endpoints = [
         },
         "collectionFormat": "csv",
         "description": "ID of a summary. Find a summary ID from the response when submitting a malware sample "
-        "or search with /falconx/queries/reports/v1.",
+        "or search with QueryReports.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -189,7 +189,7 @@ _falconx_sandbox_endpoints = [
         },
         "collectionFormat": "csv",
         "description": "ID of a report. Find a report ID from the response when submitting a malware sample or "
-        "search with /falconx/queries/reports/v1.",
+        "search with QueryReports.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -227,7 +227,7 @@ _falconx_sandbox_endpoints = [
         },
         "collectionFormat": "csv",
         "description": "ID of a submitted malware sample. Find a submission ID from the response when "
-        "submitting a malware sample or search with /falconx/queries/submissions/v1.",
+        "submitting a malware sample or search with QuerySubmissions.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -250,8 +250,8 @@ _falconx_sandbox_endpoints = [
       },
       {
         "description": "Submit either a URL or a sample SHA256 for sandbox analysis. The sample file must have "
-        " been previously uploaded through /samples/entities/samples/v2. You must specify a JSON object that includes "
-        "the falconx.SubmissionParametersV1 key/value pairs shown below.\n\n**environment_id**: Specifies the sandbox "
+        " been previously uploaded through GetSampleV2. You must specify a JSON object that includes the "
+        "falconx.SubmissionParametersV1 key/value pairs shown below.\n\n**environment_id**: Specifies the sandbox "
         "environment used for analysis. Note: Deprecated platform values are still accepted to maintain backward "
         "compatibility; however, they will be automatically mapped to their recommended equivalents. It is strongly "
         "advised to update any integration scripts to use the current supported platform versions. Values:\n  430: "
@@ -378,8 +378,7 @@ _falconx_sandbox_endpoints = [
     "UploadSampleV2",
     "POST",
     "/samples/entities/samples/v2",
-    "Upload a file for sandbox analysis. After uploading, use `/falconx/entities/submissions/v1` to start "
-    "analyzing the file.",
+    "Upload a file for sandbox analysis. After uploading, use GetSubmissions to start analyzing the file.",
     "falconx_sandbox",
     [
       {
