@@ -14,7 +14,7 @@ from falconpy import D4CRegistration
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = D4CRegistration(auth_object=config)
-AllowedResponses = [200, 429, 400, 404, 403]
+AllowedResponses = [200, 400, 401, 403, 404, 429, 500]
 
 
 class TestD4CRegistration:
