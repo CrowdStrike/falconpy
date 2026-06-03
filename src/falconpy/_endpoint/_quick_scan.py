@@ -82,7 +82,7 @@ _quick_scan_endpoints = [
     [
       {
         "description": "Submit a batch of SHA256s for ml scanning. The samples must have been previously "
-        "uploaded through /samples/entities/samples/v3",
+        "uploaded through GetSampleV3",
         "name": "body",
         "in": "body",
         "required": True
