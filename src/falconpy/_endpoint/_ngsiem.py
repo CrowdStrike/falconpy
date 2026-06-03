@@ -220,15 +220,144 @@ _ngsiem_endpoints = [
     ]
   ],
   [
-    "GetDashboardTemplate",
-    "GET",
-    "/ngsiem-content/entities/dashboards-template/v1",
-    "Retrieve Dashboard in NGSIEM as LogScale YAML Template",
+    "BulkCreateDashboardsFromTemplate",
+    "POST",
+    "/ngsiem-content/entities/bulk-dashboards-template/v1",
+    "Create Multiple Dashboards from YAML Templates. Processes all items and returns per-item success/failure "
+    "results. Failed items are included in the errors array with appropriate HTTP status codes.",
     "ngsiem",
     [
       {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "BulkUpdateDashboardsFromTemplate",
+    "PATCH",
+    "/ngsiem-content/entities/bulk-dashboards-template/v1",
+    "Update Multiple Dashboards from YAML Templates. Processes all items and returns per-item success/failure "
+    "results. Failed items are included in the errors array with appropriate HTTP status codes.",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "BulkGetLookupFiles",
+    "GET",
+    "/ngsiem-content/entities/bulk-lookupfiles/v1",
+    "Retrieve Multiple Lookup Files by Filenames in NGSIEM.",
+    "ngsiem",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Lookup file filename(s) (required, multiple allowed)",
+        "name": "filename",
+        "in": "query",
+        "required": True
+      },
+      {
         "type": "string",
-        "description": "dashboard ID value",
+        "enum": [
+          "all",
+          "falcon",
+          "third-party",
+          "dashboards",
+          "parsers-repository"
+        ],
+        "description": "name of search domain (view or repo)",
+        "name": "search_domain",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "BulkCreateLookupFiles",
+    "POST",
+    "/ngsiem-content/entities/bulk-lookupfiles/v1",
+    "Create Multiple Lookup Files. Processes all items and returns per-item success/failure results. Failed "
+    "items are included in the errors array with appropriate HTTP status codes.",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "BulkUpdateLookupFiles",
+    "PATCH",
+    "/ngsiem-content/entities/bulk-lookupfiles/v1",
+    "Update Multiple Lookup Files. Processes all items and returns per-item success/failure results. Failed "
+    "items are included in the errors array with appropriate HTTP status codes.",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "BulkCreateSavedQueriesFromTemplate",
+    "POST",
+    "/ngsiem-content/entities/bulk-savedqueries-template/v1",
+    "Create Multiple Saved Queries from LogScale YAML Templates. Processes all items and returns per-item "
+    "success/failure results. Failed items are included in the errors array with appropriate HTTP status codes.",
+    "ngsiem",
+    [
+      {
+        "description": "bulk create saved queries request",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "BulkUpdateSavedQueriesFromTemplate",
+    "PATCH",
+    "/ngsiem-content/entities/bulk-savedqueries-template/v1",
+    "Update Multiple Saved Queries from LogScale YAML Templates. Processes all items and returns per-item "
+    "success/failure results. Failed items are included in the errors array with appropriate HTTP status codes.",
+    "ngsiem",
+    [
+      {
+        "description": "bulk update saved queries request",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetDashboardTemplate",
+    "GET",
+    "/ngsiem-content/entities/dashboards-template/v1",
+    "Retrieve Dashboard(s) in NGSIEM as LogScale YAML Template. Supports single or multiple IDs.",
+    "ngsiem",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "dashboard ID value(s)",
         "name": "ids",
         "in": "query"
       },
@@ -318,8 +447,12 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
-        "type": "string",
-        "description": "dashboard ID value",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "dashboard ID value(s). Supports single or multiple IDs for bulk delete.",
         "name": "ids",
         "in": "query"
       },
@@ -465,8 +598,12 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
-        "type": "string",
-        "description": "lookup file filename",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "lookup file filename(s). Supports single or multiple filenames for bulk delete.",
         "name": "filename",
         "in": "query"
       },
@@ -526,6 +663,21 @@ _ngsiem_endpoints = [
     [
       {
         "description": "clone parser request",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "CreateParserExtension",
+    "POST",
+    "/ngsiem-content/entities/parsers-extensions/v1",
+    "Create a Parser extension in NGSIEM for the provided base parser.",
+    "ngsiem",
+    [
+      {
+        "description": "create parser extension request",
         "name": "body",
         "in": "body",
         "required": True
@@ -766,12 +918,16 @@ _ngsiem_endpoints = [
     "GetSavedQueryTemplate",
     "GET",
     "/ngsiem-content/entities/savedqueries-template/v1",
-    "Retrieve Saved Query in NGSIEM as LogScale YAML Template",
+    "Retrieve Saved Quer(ies) in NGSIEM as LogScale YAML Template. Supports single or multiple IDs.",
     "ngsiem",
     [
       {
-        "type": "string",
-        "description": "saved query ID value",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "saved query ID value(s)",
         "name": "ids",
         "in": "query"
       },
@@ -855,8 +1011,12 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
-        "type": "string",
-        "description": "saved query ID value",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "saved query ID value(s). Supports single or multiple IDs for bulk delete.",
         "name": "ids",
         "in": "query"
       },
@@ -877,7 +1037,8 @@ _ngsiem_endpoints = [
     "ListDashboards",
     "GET",
     "/ngsiem-content/queries/dashboards/v1",
-    "List Dashboards in NGSIEM",
+    "List Dashboards in NGSIEM with Pagination and Filtering. Returns dashboard ID and name. Supports "
+    "pagination (default limit: 50) and optional name filtering.",
     "ngsiem",
     [
       {
@@ -921,7 +1082,8 @@ _ngsiem_endpoints = [
     "ListLookupFiles",
     "GET",
     "/ngsiem-content/queries/lookupfiles/v1",
-    "List Lookup Files in NGSIEM",
+    "List Lookup Files in NGSIEM with Pagination and Filtering. Supports bulk listing with pagination (default "
+    "limit: 50) and optional name filtering.",
     "ngsiem",
     [
       {
@@ -1027,7 +1189,8 @@ _ngsiem_endpoints = [
     "ListSavedQueries",
     "GET",
     "/ngsiem-content/queries/savedqueries/v1",
-    "Get Saved Queries in NGSIEM",
+    "List Saved Queries in NGSIEM with Pagination and Filtering. Supports bulk listing with pagination "
+    "(default limit: 50) and optional name filtering.",
     "ngsiem",
     [
       {
