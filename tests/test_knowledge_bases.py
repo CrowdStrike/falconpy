@@ -29,21 +29,27 @@ class TestKnowledgeBases:
                                                                                time_zone="string", type="string"),
             "EntitiesKnowledgeBasesV1": falcon.entities_knowledge_bases_v1(ids=["string"], include_deleted=True),
             "EntitiesKnowledgeBasesCreateV1": falcon.entities_knowledge_bases_create_v1(created_at="string",
-                                                                                        created_by="string",
                                                                                         description="string",
                                                                                         embedding_model="string",
                                                                                         files_count="string", id="string",
                                                                                         is_deleted="string", name="string",
-                                                                                        updated_at="string",
-                                                                                        updated_by="string"),
+                                                                                        updated_at="string", cid="string",
+                                                                                        factors="string", first_name="string",
+                                                                                        last_login_at="string",
+                                                                                        last_name="string", status="string",
+                                                                                        uid="string", user_type="string",
+                                                                                        uuid="string"),
             "EntitiesKnowledgeBasesUpdateV1": falcon.entities_knowledge_bases_update_v1(created_at="string",
-                                                                                        created_by="string",
                                                                                         description="string",
                                                                                         embedding_model="string",
                                                                                         files_count="string", id="string",
                                                                                         is_deleted="string", name="string",
-                                                                                        updated_at="string",
-                                                                                        updated_by="string"),
+                                                                                        updated_at="string", cid="string",
+                                                                                        factors="string", first_name="string",
+                                                                                        last_login_at="string",
+                                                                                        last_name="string", status="string",
+                                                                                        uid="string", user_type="string",
+                                                                                        uuid="string"),
             "QueriesKnowledgeBasesV1": falcon.queries_knowledge_bases_v1(offset=1, limit=1, sort="string", filter="string",
                                                                          include_deleted=True),
         }
@@ -51,8 +57,3 @@ class TestKnowledgeBases:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
         assert error_checks
-
-    def test_payload_coverage(self):
-        """Exercise payload builder nested object handling."""
-        falcon.entities_knowledge_bases_create_v1(cid="string", factors="string", first_name="string", last_login_at="string", last_name="string", status="string", uid="string", user_type="string", uuid="string")
-        falcon.entities_knowledge_bases_update_v1(cid="string", factors="string", first_name="string", last_login_at="string", last_name="string", status="string", uid="string", user_type="string", uuid="string")
