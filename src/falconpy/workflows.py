@@ -259,7 +259,7 @@ class Workflows(ServiceClass):
         name -- Workflow name to override. String.
         validate_only -- When enabled, prevents saving workflow after validating. Boolean.
         include_activity_metadata -- When true, populates the definition model with Activity metadata which includes Activity
-                                     Dependency and Vendor. Boolean.
+                                     Dependency and Vendor Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -996,12 +996,43 @@ class Workflows(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def workflow_definitions_delete(self: object,
+                                    *args,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Accept a list of workflow definition IDs and deletes those definitions and all their associated versions.
+
+        Keyword arguments:
+        ids -- IDs of the workflow definitions to delete String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsDelete
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="WorkflowDefinitionsDelete",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
     WorkflowActivitiesCombined = search_activities
     WorkflowDefinitionsCombined = search_definitions
     WorkflowActivitiesContentCombined = search_activities_content
+    WorkflowDefinitionsDelete = workflow_definitions_delete
     WorkflowExecutionsCombined = search_executions
     WorkflowTriggersCombined = search_triggers
     WorkflowDefinitionsExport = export_definition
