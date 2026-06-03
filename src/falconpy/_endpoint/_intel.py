@@ -41,11 +41,11 @@ _intel_endpoints = [
     "cao_incidents_aggregates_v1",
     "POST",
     "/intel/aggregates/incidents/v1",
-    "Perform statistical aggregations over incident data. Available aggregation properties: "
-    "InvolvesAdversaries.Slug, TargetIndustries.Slug, TargetIndustries.Name, ActivityStart, Id, "
-    "InvolvesThreats.FamilyName, TargetCountries.Slug, TargetRegions.Slug, MitreAttack.TacticId, "
-    "MitreAttack.TacticName, MitreAttack.TechniqueId, MitreAttack.TechniqueName, Objectives.Slug, Motivations.Slug, "
-    "InvolvesAdversaries.AnimalClassifier, TargetCountries.Name, TargetRegions.Name, PublishDate, ActivityEnd.",
+    "Perform statistical aggregations over incident data. Available aggregation properties: Id, "
+    "TargetIndustries.Slug, MitreAttack.TechniqueName, Objectives.Slug, Motivations.Slug, "
+    "InvolvesAdversaries.AnimalClassifier, MitreAttack.TacticName, PublishDate, InvolvesAdversaries.Slug, "
+    "TargetIndustries.Name, TargetRegions.Slug, MitreAttack.TacticId, MitreAttack.TechniqueId, ActivityStart, "
+    "ActivityEnd, InvolvesThreats.FamilyName, TargetCountries.Slug, TargetCountries.Name, TargetRegions.Name.",
     "intel",
     [
       {
@@ -91,11 +91,12 @@ _intel_endpoints = [
         "kill_chain.actions_and_objectives, kill_chain.actions_on_objectives, kill_chain.command_and_control, "
         "kill_chain.delivery, kill_chain.exploitation, kill_chain.installation, kill_chain.objectives, "
         "kill_chain.reconnaissance, kill_chain.weaponization, known_as, last_activity_date, last_modified_date, "
-        "motivations, motivations.id, motivations.slug, motivations.value, name, objectives, origins, origins.id, "
-        "origins.slug, origins.value, region, region.id, region.slug, region.value, short_description, slug, status, "
-        "target_countries, target_countries.id, target_countries.slug, target_countries.value, target_industries, "
-        "target_industries.id, target_industries.slug, target_industries.value, target_regions, target_regions.id, "
-        "target_regions.slug, target_regions.value.",
+        "mitre_attack.id, mitre_attack.tactic_id, mitre_attack.tactic_name, mitre_attack.technique_id, "
+        "mitre_attack.technique_name, motivations, motivations.id, motivations.slug, motivations.value, name, "
+        "objectives, origins, origins.id, origins.slug, origins.value, region, region.id, region.slug, region.value, "
+        "short_description, slug, status, target_countries, target_countries.id, target_countries.slug, "
+        "target_countries.value, target_industries, target_industries.id, target_industries.slug, "
+        "target_industries.value, target_regions, target_regions.id, target_regions.slug, target_regions.value.",
         "name": "filter",
         "in": "query"
       },
@@ -252,8 +253,9 @@ _intel_endpoints = [
         "description": "Filter your query by specifying FQL filter parameters. Filter parameters "
         "include:\n\nactors, actors.animal_classifier, actors.id, actors.name, actors.slug, actors.url, created_date, "
         "description, id, last_modified_date, malware, malware.community_identifiers, malware.family_name, "
-        "malware.slug, motivations, motivations.id, motivations.slug, motivations.value, name, name.raw, "
-        "short_description, slug, sub_type, sub_type.id, sub_type.name, sub_type.slug, summary, tags, tags.id, "
+        "malware.slug, mitre_attack.id, mitre_attack.tactic_id, mitre_attack.tactic_name, mitre_attack.technique_id, "
+        "mitre_attack.technique_name, motivations, motivations.id, motivations.slug, motivations.value, name, name.raw, "
+        " short_description, slug, sub_type, sub_type.id, sub_type.name, sub_type.slug, summary, tags, tags.id, "
         "tags.slug, tags.value, target_countries, target_countries.id, target_countries.slug, target_countries.value, "
         "target_industries, target_industries.id, target_industries.slug, target_industries.value, type, type.id, "
         "type.name, type.slug, url.",
@@ -617,11 +619,12 @@ _intel_endpoints = [
         "kill_chain.actions_and_objectives, kill_chain.actions_on_objectives, kill_chain.command_and_control, "
         "kill_chain.delivery, kill_chain.exploitation, kill_chain.installation, kill_chain.objectives, "
         "kill_chain.reconnaissance, kill_chain.weaponization, known_as, last_activity_date, last_modified_date, "
-        "motivations, motivations.id, motivations.slug, motivations.value, name, objectives, origins, origins.id, "
-        "origins.slug, origins.value, region, region.id, region.slug, region.value, short_description, slug, status, "
-        "target_countries, target_countries.id, target_countries.slug, target_countries.value, target_industries, "
-        "target_industries.id, target_industries.slug, target_industries.value, target_regions, target_regions.id, "
-        "target_regions.slug, target_regions.value.",
+        "mitre_attack.id, mitre_attack.tactic_id, mitre_attack.tactic_name, mitre_attack.technique_id, "
+        "mitre_attack.technique_name, motivations, motivations.id, motivations.slug, motivations.value, name, "
+        "objectives, origins, origins.id, origins.slug, origins.value, region, region.id, region.slug, region.value, "
+        "short_description, slug, status, target_countries, target_countries.id, target_countries.slug, "
+        "target_countries.value, target_industries, target_industries.id, target_industries.slug, "
+        "target_industries.value, target_regions, target_regions.id, target_regions.slug, target_regions.value.",
         "name": "filter",
         "in": "query"
       },
@@ -644,8 +647,8 @@ _intel_endpoints = [
       {
         "type": "string",
         "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
-        " \"asc\" or \"desc\". Available sort properties: LastModifiedAt, ActivityStart, ActivityEnd, PublishDate, "
-        "InvolvesAdversaries.Name, InvolvesAdversaries.Slug.",
+        " \"asc\" or \"desc\". Available sort properties: ActivityStart, ActivityEnd, PublishDate, "
+        "InvolvesAdversaries.Name, InvolvesAdversaries.Slug, LastModifiedAt.",
         "name": "sort",
         "in": "query"
       },
@@ -654,12 +657,12 @@ _intel_endpoints = [
         "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
         "about FQL queries, see [our FQL documentation in "
         "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide). \n "
-        "Available filters: TargetsVulnerabilities.CVE, Objectives.Slug, Motivations.Slug, MitreAttack.TechniqueName, "
-        "All, Title, MitreAttack.TechniqueId, ReferencesNotableEvents.Title, TargetCountries.Slug, LastModifiedAt, "
-        "PublishDate, InvolvesAdversaries.Id, InvolvesAdversaries.Name, InvolvesAdversaries.AnimalClassifier, "
-        "InvolvesThreats.FamilyName, MitreAttack.Id, TargetRegions.Slug, TargetIndustries.Slug, TargetingProfile.Slug, "
-        "MitreAttack.TacticId, MitreAttack.TacticName, InvolvesIndicators.Value, Id, ActivityStart, ActivityEnd, "
-        "InvolvesAdversaries.Slug. 'All' can be used for text queries on all attributes.",
+        "Available filters: InvolvesAdversaries.Name, Objectives.Slug, TargetingProfile.Slug, TargetRegions.Slug, "
+        "InvolvesIndicators.Value, ActivityStart, InvolvesAdversaries.Id, InvolvesAdversaries.Slug, MitreAttack.Id, "
+        "MitreAttack.TechniqueName, ReferencesNotableEvents.Title, TargetCountries.Slug, TargetIndustries.Slug, "
+        "ActivityEnd, InvolvesThreats.FamilyName, MitreAttack.TacticId, All, InvolvesAdversaries.AnimalClassifier, "
+        "TargetsVulnerabilities.CVE, Motivations.Slug, MitreAttack.TacticName, MitreAttack.TechniqueId, LastModifiedAt, "
+        "Id, Title, PublishDate. 'All' can be used for text queries on all attributes.",
         "name": "filter",
         "in": "query"
       },
@@ -848,8 +851,9 @@ _intel_endpoints = [
         "description": "Filter your query by specifying FQL filter parameters. Filter parameters "
         "include:\n\nactors, actors.animal_classifier, actors.id, actors.name, actors.slug, actors.url, created_date, "
         "description, id, last_modified_date, malware, malware.community_identifiers, malware.family_name, "
-        "malware.slug, motivations, motivations.id, motivations.slug, motivations.value, name, name.raw, "
-        "short_description, slug, sub_type, sub_type.id, sub_type.name, sub_type.slug, summary, tags, tags.id, "
+        "malware.slug, mitre_attack.id, mitre_attack.tactic_id, mitre_attack.tactic_name, mitre_attack.technique_id, "
+        "mitre_attack.technique_name, motivations, motivations.id, motivations.slug, motivations.value, name, name.raw, "
+        " short_description, slug, sub_type, sub_type.id, sub_type.name, sub_type.slug, summary, tags, tags.id, "
         "tags.slug, tags.value, target_countries, target_countries.id, target_countries.slug, target_countries.value, "
         "target_industries, target_industries.id, target_industries.slug, target_industries.value, type, type.id, "
         "type.name, type.slug, url.",

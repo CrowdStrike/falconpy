@@ -1113,8 +1113,8 @@ class Intel(ServiceClass):
 
         Keyword arguments:
         sort -- The property to sort on, followed by a dot (.), followed by the sort direction, either "asc" or "desc".
-                Available sort properties: LastModifiedAt, ActivityStart, ActivityEnd, PublishDate, InvolvesAdversaries.Name,
-                InvolvesAdversaries.Slug. String.
+                Available sort properties: ActivityStart, ActivityEnd, PublishDate, InvolvesAdversaries.Name,
+                InvolvesAdversaries.Slug, LastModifiedAt. String.
         filter -- Optional filter and sort criteria in the form of an FQL query. String.
               Available filters:
                     ActivityEnd                             ActivityStart
