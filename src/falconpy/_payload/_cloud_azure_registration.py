@@ -212,4 +212,3 @@ def cloud_registration_azure_update_suppressions_payload(passed_keywords: dict) 
             returned_payload[key] = passed_keywords.get(key)
 
     return returned_payload
-
