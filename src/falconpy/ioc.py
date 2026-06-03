@@ -875,9 +875,8 @@ class IOC(ServiceClass):
                  Use with the offset parameter to manage pagination of results.
         offset -- The first process to return, where 0 is the latest offset.
                   Use with the limit parameter to manage pagination of results.
-        device_id -- Specify a host's ID to return only processes from that host.
-                     Get a host's ID from get_device_details, the Falcon console,
-                     or the Streaming API.
+        device_id -- Specify a host's ID to return only processes from that host. Get a host's ID from QueryDevicesByFilter,
+                     the Falcon console, or the Streaming API.
         parameters -- full parameters payload, not required if using other keywords.
         value -- The string representation of the indicator.
 
