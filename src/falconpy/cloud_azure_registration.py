@@ -42,7 +42,7 @@ from ._payload import (
     cloud_azure_registration_create_payload,
     generic_payload_list,
     cloud_azure_registration_legacy_payload,
-    cloud_registration_azure_create_suppressions_payload,,
+    cloud_registration_azure_create_suppressions_payload,
     cloud_registration_azure_update_suppressions_payload,
     )
 from ._result import Result
@@ -803,7 +803,8 @@ class CloudAzureRegistration(ServiceClass):
     cloud_registration_azure_create_suppressions = cloud_registration_azure_create_suppressions
     cloud_registration_azure_delete_legacy_subscription = delete_legacy_subscription
     cloud_registration_azure_delete_suppressions = cloud_registration_azure_delete_suppressions
-    cloud_registration_azure_get_issue_suppression_values_by_field = cloud_registration_azure_get_issue_suppression_values_by_field
+    cloud_registration_azure_get_issue_suppression_values_by_field = \
+        cloud_registration_azure_get_issue_suppression_values_by_field
     cloud_registration_azure_get_issue_values_by_field = cloud_registration_azure_get_issue_values_by_field
     cloud_registration_azure_get_issues = cloud_registration_azure_get_issues
     cloud_registration_azure_get_script = cloud_registration_azure_get_script
