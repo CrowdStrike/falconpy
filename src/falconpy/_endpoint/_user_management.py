@@ -376,7 +376,7 @@ _user_management_endpoints = [
     "GET",
     "/user-management/queries/roles/v1",
     "Show role IDs for all roles available in your customer account. For more information on each role, "
-    "provide the role ID to `/user-management/entities/roles/v1`.",
+    "provide the role ID to entitiesRolesV1.",
     "user_management",
     [
       {
@@ -406,7 +406,7 @@ _user_management_endpoints = [
     "GET",
     "/user-management/queries/users/v1",
     "List user IDs for all users in your customer account. For more information on each user, provide the user "
-    "ID to `/user-management/entities/users/GET/v1`.",
+    "ID to retrieveUsersGETV1.",
     "user_management",
     [
       {
@@ -488,7 +488,7 @@ _user_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "ID of a role. Find a role ID from /customer/queries/roles/v1 or /users/queries/roles/v1.",
+        "description": "ID of a role. Find a role ID from queriesRolesV1 or queriesRolesV1.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -504,7 +504,7 @@ _user_management_endpoints = [
     [
       {
         "type": "string",
-        "description": "ID of a user. Find a user's ID from /users/entities/user/v1.",
+        "description": "ID of a user. Find a user's ID from retrieveUser.",
         "name": "user_uuid",
         "in": "query",
         "required": True
@@ -526,7 +526,7 @@ _user_management_endpoints = [
     [
       {
         "type": "string",
-        "description": "ID of a user. Find a user's ID from /users/entities/user/v1.",
+        "description": "ID of a user. Find a user's ID from retrieveUser.",
         "name": "user_uuid",
         "in": "query",
         "required": True
@@ -537,7 +537,7 @@ _user_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more role IDs to revoke. Find a role's ID from /users/queries/roles/v1.",
+        "description": "One or more role IDs to revoke. Find a role's ID from queriesRolesV1.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -549,7 +549,7 @@ _user_management_endpoints = [
     "GET",
     "/user-roles/queries/user-role-ids-by-cid/v1",
     "Deprecated : Please use queriesRolesV1 Show role IDs for all roles available in your customer account. "
-    "For more information on each role, provide the role ID to `/customer/entities/roles/v1`.",
+    "For more information on each role, provide the role ID to entitiesRolesV1.",
     "user_management",
     []
   ],
@@ -558,12 +558,12 @@ _user_management_endpoints = [
     "GET",
     "/user-roles/queries/user-role-ids-by-user-uuid/v1",
     "Deprecated : Please use combinedUserRolesV1 Show role IDs of roles assigned to a user. For more "
-    "information on each role, provide the role ID to `/customer/entities/roles/v1`.",
+    "information on each role, provide the role ID to entitiesRolesV1.",
     "user_management",
     [
       {
         "type": "string",
-        "description": "ID of a user. Find a user's ID from /users/entities/user/v1.",
+        "description": "ID of a user. Find a user's ID from retrieveUser.",
         "name": "user_uuid",
         "in": "query",
         "required": True
@@ -603,7 +603,7 @@ _user_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "ID of a user. Find a user's ID from /users/entities/user/v1.",
+        "description": "ID of a user. Find a user's ID from retrieveUser.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -640,7 +640,7 @@ _user_management_endpoints = [
     [
       {
         "type": "string",
-        "description": "ID of a user. Find a user's ID from /users/entities/user/v1.",
+        "description": "ID of a user. Find a user's ID from retrieveUser.",
         "name": "user_uuid",
         "in": "query",
         "required": True
@@ -656,7 +656,7 @@ _user_management_endpoints = [
     [
       {
         "type": "string",
-        "description": "ID of a user. Find a user's ID from /users/entities/user/v1.",
+        "description": "ID of a user. Find a user's ID from retrieveUser.",
         "name": "user_uuid",
         "in": "query",
         "required": True
@@ -683,7 +683,7 @@ _user_management_endpoints = [
     "GET",
     "/users/queries/user-uuids-by-cid/v1",
     "Deprecated : Please use queryUserV1 List user IDs for all users in your customer account. For more "
-    "information on each user, provide the user ID to `/users/entities/user/v1`.",
+    "information on each user, provide the user ID to retrieveUser.",
     "user_management",
     []
   ],
