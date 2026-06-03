@@ -563,9 +563,8 @@ class HostMigration(ServiceClass):
         Returns a set of Agent IDs which match the filter criteria.
 
         Keyword arguments:
-        filter -- The filter expression that should be used to limit the results.
-                  Valid fields: host_migration_id, groups, hostgroups, hostname,
-                  status, migration_id, created_time, static_host_groups, target_cid, source_cid, id
+        filter -- The filter expression that should be used to limit the results. Valid fields: groups, hostgroups, target_cid,
+                  migration_id, host_migration_id, static_host_groups, hostname, status, source_cid, id, created_time
         id -- The migration job to query. String.
         limit -- The maximum records to return. [1-10000]
         offset -- The offset to start retrieving records from
@@ -608,9 +607,8 @@ class HostMigration(ServiceClass):
         Returns a set of Agent IDs which match the filter criteria.
 
         Keyword arguments:
-        filter -- The filter expression that should be used to limit the results.
-                  Valid fields: target_cid, status, migration_status, created_by,
-                  created_time, name, id, migration_id
+        filter -- The filter expression that should be used to limit the results. Valid fields: name, id, migration_id,
+                  target_cid, status, migration_status, created_by, created_time
         limit -- The maximum records to return. [1-10000]
         offset -- The offset to start retrieving records from
         parameters - full parameters payload, not required if using other keywords.
