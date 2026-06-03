@@ -190,18 +190,20 @@ _quick_scan_pro_endpoints = [
       {
         "type": "string",
         "description": "Empty value means to not filter on anything\nAvailable filter fields that supports "
-        "match (~): _all, mitre_attacks.description\nAvailable filter fields that supports exact match: cid,sha256,id,s "
-        "tatus,type,entity,executor,verdict,verdict_reason,verdict_reasons,verdict_source,file_size,file_type,mime_type "
-        ",adversary,file_type_short,first_content_bytes_hex,first_content_bytes_ascii,artifacts.file_artifacts.sha256,a "
-        "rtifacts.file_artifacts.filename,artifacts.file_artifacts.verdict,artifacts.file_artifacts.verdict_reasons,art "
-        "ifacts.url_artifacts.url,artifacts.url_artifacts.verdict,artifacts.url_artifacts.verdict_reasons,mitre_attacks "
-        ".attack_id,mitre_attacks.attack_id_wiki,mitre_attacks.tactic,mitre_attacks.technique,mitre_attacks.capec_id,mi "
-        "tre_attacks.parent.attack_id,mitre_attacks.parent.attack_id_wiki,mitre_attacks.parent.technique,static_indicat "
-        "ors,malware_config.url,malware_config.domain,malware_config.ip,artifacts_tree.nodes.type,artifacts_tree.nodes. "
-        "value,artifacts_tree.nodes.verdict,artifacts_tree.edges.from,artifacts_tree.edges.to,artifacts_tree.edges.labe "
-        "l\nAvailable filter fields that supports wildcard (*): mitre_attacks.description\nAvailable filter fields that "
-        " supports range comparisons (>, <, >=, <=): created_timestamp, updated_timestamp, file_size\nAll filter fields "
-        "and operations supports negation (!).\n_all field is used to search between all fields.",
+        "match (~): _all, mitre_attacks.description, yara_rules.description\nAvailable filter fields that supports "
+        "exact match: cid,sha256,id,status,type,entity,executor,verdict,verdict_reason,verdict_reasons,verdict_source,f "
+        "ile_size,file_type,mime_type,adversary,file_type_short,first_content_bytes_hex,first_content_bytes_ascii,artif "
+        "acts.file_artifacts.sha256,artifacts.file_artifacts.filename,artifacts.file_artifacts.verdict,artifacts.file_a "
+        "rtifacts.verdict_reasons,artifacts.url_artifacts.url,artifacts.url_artifacts.verdict,artifacts.url_artifacts.v "
+        "erdict_reasons,mitre_attacks.attack_id,mitre_attacks.attack_id_wiki,mitre_attacks.tactic,mitre_attacks.techniq "
+        "ue,mitre_attacks.capec_id,mitre_attacks.parent.attack_id,mitre_attacks.parent.attack_id_wiki,mitre_attacks.par "
+        "ent.technique,static_indicators,malware_config.url,malware_config.domain,malware_config.ip,artifacts_tree.node "
+        "s.type,artifacts_tree.nodes.value,artifacts_tree.nodes.verdict,artifacts_tree.edges.from,artifacts_tree.edges. "
+        "to,artifacts_tree.edges.label,yara_rules.rule_name,yara_rules.sha256,yara_rules.tags\nAvailable filter fields "
+        "that supports wildcard (*): mitre_attacks.description, yara_rules.description\nAvailable filter fields that "
+        "supports range comparisons (>, <, >=, <=): created_timestamp, updated_timestamp, file_size, "
+        "yara_rules.created_at, yara_rules.updated_at\nAll filter fields and operations supports negation (!).\n_all "
+        "field is used to search between all fields.",
         "name": "filter",
         "in": "query",
         "required": True
