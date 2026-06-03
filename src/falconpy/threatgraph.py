@@ -68,114 +68,115 @@ class ThreatGraph(ServiceClass):
                      accessed_by_process                              accessed_by_session
                      accessed_okta_application                        accessed_ping_fed_application
                      accessed_service_account                         accessed_web
-                     agent_to_self_diagnostic                         ai_agent_used_by
-                     ai_runs_on                                       allowed_by_process
-                     allowed_firewall_rule                            app_uninstalled_from_host
-                     assigned_ipv4_address                            assigned_ipv6_address
-                     assigned_to_sensor                               associated_by_ad_computer
-                     associated_by_ad_group                           associated_by_ad_user
-                     associated_by_aggregate_indicator                associated_by_app
-                     associated_by_azure_ad_user                      associated_by_azure_app
-                     associated_by_certificate                        associated_by_control_graph
-                     associated_by_domain                             associated_by_host
-                     associated_by_host_name                          associated_by_idp_session
-                     associated_by_incident                           associated_by_indicator
-                     associated_by_ip                                 associated_by_ip4
-                     associated_by_ip6                                associated_by_okta_user
-                     associated_by_service_ticket                     associated_control_graph
-                     associated_firewall_rule                         associated_idp_indicator
-                     associated_incident                              associated_indicator
-                     associated_k8s_cluster                           associated_k8s_sensor
-                     associated_mobile_forensics_report               associated_mobile_indicator
-                     associated_module                                associated_primary_module
-                     associated_quarantined_file                      associated_quarantined_module
-                     associated_root_process                          associated_to_ad_computer
-                     associated_to_sensor                             associated_user_session
-                     associated_vmware_cluster                        associated_vmware_sensor
-                     associated_with_process                          associated_with_sensor
-                     attributed_by_process                            attributed_from_domain
-                     attributed_from_module                           attributed_on
-                     attributed_on_domain                             attributed_on_module
-                     attributed_to                                    attributed_to_actor
-                     authenticated_from_incident                      authenticated_host
-                     blocked_by_app                                   blocked_by_process
-                     blocked_by_sensor                                blocked_dns
-                     blocked_ip4                                      blocked_ip6
-                     blocked_module                                   bundled_in_app
-                     bundles_module                                   cert_is_presented_by
-                     cert_presented                                   child_process
-                     child_session                                    closed_ip4_socket
-                     closed_ip6_socket                                command_line_parent_process
-                     connected_from_app                               connected_from_host
-                     connected_from_process                           connected_ip4
-                     connected_ip6                                    connected_mcp
-                     connected_on_customer                            connected_on_sensor
-                     connected_to_accessory                           connected_to_wifi_ap
-                     connection_killed_by_app                         connection_killed_by_process
-                     containerized_app                                containerized_by_sensor
-                     control_graph                                    created_by_incident
-                     created_by_process                               created_by_user
-                     created_quarantined_file                         created_service
-                     customer_agent_has_user                          customer_has_sensor
-                     customer_ioc                                     customer_sensor_to_sensor
-                     customer_user_to_sensor_user                     deleted_by_process
-                     deleted_rule                                     denied_by_firewall_rule
-                     denied_by_process                                denied_firewall_rule
-                     detected_module                                  detection
-                     device                                           disconnect_from_wifi_ap
-                     disconnected_from_accessory                      disconnected_from_host
-                     dns                                              dns_request
-                     duplicated_by_app                                duplicates_app
-                     established_on_ad_computer                       established_on_host_name
-                     established_on_ip4                               established_on_ip6
-                     established_on_sensor                            established_session
-                     established_user_session                         executed_app
-                     executed_by_process                              executed_macro_script
-                     executed_script                                  extracted_file
-                     failed_to_authenticate_ad_user                   failed_to_authenticate_to_ad_computer
-                     failed_to_authenticate_to_adfs_app               failed_to_authenticate_to_azure_app
-                     failed_to_authenticate_to_okta_app               failed_to_authenticate_to_ping_app
-                     failed_to_authenticate_to_service_account        generated_by_renewing
-                     generated_by_session                             generated_dce_rpc_epm_request_against_dc
-                     generated_dce_rpc_request_against_dc             generated_failed_authentication_to_ad_computer
-                     generated_failed_authentication_to_adfs_app      generated_failed_authentication_to_azure_app
-                     generated_failed_authentication_to_okta_app      generated_failed_authentication_to_ping_app
-                     generated_failed_authentication_to_service_accountgenerated_ldap_search_against_dc
-                     generated_service_ticket                         had_code_injected_by_process
-                     has_app_installed                                has_attributed_process
-                     has_attribution                                  has_firmware
-                     implicated_by_incident                           implicated_sensor
-                     indexed                                          initiated_by_ad_computer
-                     initiated_by_azure_ad_user                       initiated_by_okta_user
-                     initiated_by_user                                initiated_session
-                     injected_code_into_process                       injected_thread
-                     injected_thread_from_process                     installed_app
-                     installed_by_app                                 installed_on_host
-                     invalid_firewall_rule                            invalid_from_process
-                     invalidated_by_process                           invalidated_firewall_rule
-                     invokes_model                                    involved_ad_computer
-                     involved_service_account                         ip4_socket_closed_by_app
-                     ip4_socket_closed_by_process                     ip4_socket_opened_by_process
-                     ip6_socket_closed_by_app                         ip6_socket_closed_by_process
-                     ip6_socket_opened_by_process                     ipv4
-                     ipv4_close                                       ipv4_listen
-                     ipv6                                             ipv6_close
-                     ipv6_listen                                      killed_ip4_connection
-                     killed_ip6_connection                            known_by_md5
-                     known_by_sha256                                  linking_event
-                     loaded_by_process                                loaded_module
-                     loaded_skill                                     macro_executed_by_process
-                     mcp_tool_call                                    member_of_full_command_line
-                     module                                           module_written
-                     mounted_on_host                                  mounted_to_host
-                     network_close_ip4                                network_close_ip6
-                     network_connect_ip4                              network_connect_ip6
-                     network_listen_ip4                               network_listen_ip6
-                     opened_ip4_socket                                opened_ip6_socket
-                     parent_of_command_line                           parent_process
-                     parented_by_process                              participating_process
-                     performed_psexec_against_dc                      presented_by_cloud
-                     primary_module                                   primary_module_of_process
+                     agent_process                                    agent_to_self_diagnostic
+                     ai_agent_used_by                                 ai_runs_on
+                     allowed_by_process                               allowed_firewall_rule
+                     app_uninstalled_from_host                        assigned_ipv4_address
+                     assigned_ipv6_address                            assigned_to_sensor
+                     associated_by_ad_computer                        associated_by_ad_group
+                     associated_by_ad_user                            associated_by_aggregate_indicator
+                     associated_by_app                                associated_by_azure_ad_user
+                     associated_by_azure_app                          associated_by_certificate
+                     associated_by_control_graph                      associated_by_domain
+                     associated_by_host                               associated_by_host_name
+                     associated_by_idp_session                        associated_by_incident
+                     associated_by_indicator                          associated_by_ip
+                     associated_by_ip4                                associated_by_ip6
+                     associated_by_okta_user                          associated_by_service_ticket
+                     associated_control_graph                         associated_firewall_rule
+                     associated_idp_indicator                         associated_incident
+                     associated_indicator                             associated_k8s_cluster
+                     associated_k8s_sensor                            associated_mobile_forensics_report
+                     associated_mobile_indicator                      associated_module
+                     associated_primary_module                        associated_quarantined_file
+                     associated_quarantined_module                    associated_root_process
+                     associated_to_ad_computer                        associated_to_sensor
+                     associated_user_session                          associated_vmware_cluster
+                     associated_vmware_sensor                         associated_with_process
+                     associated_with_sensor                           attributed_by_process
+                     attributed_from_domain                           attributed_from_module
+                     attributed_on                                    attributed_on_domain
+                     attributed_on_module                             attributed_to
+                     attributed_to_actor                              authenticated_from_incident
+                     authenticated_host                               blocked_by_app
+                     blocked_by_process                               blocked_by_sensor
+                     blocked_dns                                      blocked_ip4
+                     blocked_ip6                                      blocked_module
+                     bundled_in_app                                   bundles_module
+                     cert_is_presented_by                             cert_presented
+                     child_process                                    child_session
+                     closed_ip4_socket                                closed_ip6_socket
+                     command_line_parent_process                      connected_from_app
+                     connected_from_host                              connected_from_process
+                     connected_ip4                                    connected_ip6
+                     connected_mcp                                    connected_on_customer
+                     connected_on_sensor                              connected_to_accessory
+                     connected_to_wifi_ap                             connection_killed_by_app
+                     connection_killed_by_process                     containerized_app
+                     containerized_by_sensor                          control_graph
+                     created_by_incident                              created_by_process
+                     created_by_user                                  created_quarantined_file
+                     created_service                                  customer_agent_has_user
+                     customer_has_sensor                              customer_ioc
+                     customer_sensor_to_sensor                        customer_user_to_sensor_user
+                     deleted_by_process                               deleted_rule
+                     denied_by_firewall_rule                          denied_by_process
+                     denied_firewall_rule                             detected_module
+                     detection                                        device
+                     disconnect_from_wifi_ap                          disconnected_from_accessory
+                     disconnected_from_host                           dns
+                     dns_request                                      duplicated_by_app
+                     duplicates_app                                   established_on_ad_computer
+                     established_on_host_name                         established_on_ip4
+                     established_on_ip6                               established_on_sensor
+                     established_session                              established_user_session
+                     executed_app                                     executed_by_process
+                     executed_macro_script                            executed_script
+                     extracted_file                                   failed_to_authenticate_ad_user
+                     failed_to_authenticate_to_ad_computer            failed_to_authenticate_to_adfs_app
+                     failed_to_authenticate_to_azure_app              failed_to_authenticate_to_okta_app
+                     failed_to_authenticate_to_ping_app               failed_to_authenticate_to_service_account
+                     generated_by_renewing                            generated_by_session
+                     generated_dce_rpc_epm_request_against_dc         generated_dce_rpc_request_against_dc
+                     generated_failed_authentication_to_ad_computer   generated_failed_authentication_to_adfs_app
+                     generated_failed_authentication_to_azure_app     generated_failed_authentication_to_okta_app
+                     generated_failed_authentication_to_ping_app      generated_failed_authentication_to_service_account
+                     generated_ldap_search_against_dc                 generated_service_ticket
+                     had_code_injected_by_process                     has_app_installed
+                     has_attributed_process                           has_attribution
+                     has_firmware                                     implicated_by_incident
+                     implicated_sensor                                indexed
+                     initiated_by_ad_computer                         initiated_by_azure_ad_user
+                     initiated_by_okta_user                           initiated_by_user
+                     initiated_session                                injected_code_into_process
+                     injected_thread                                  injected_thread_from_process
+                     installed_app                                    installed_by_app
+                     installed_on_host                                invalid_firewall_rule
+                     invalid_from_process                             invalidated_by_process
+                     invalidated_firewall_rule                        invokes_model
+                     involved_ad_computer                             involved_service_account
+                     ip4_socket_closed_by_app                         ip4_socket_closed_by_process
+                     ip4_socket_opened_by_process                     ip6_socket_closed_by_app
+                     ip6_socket_closed_by_process                     ip6_socket_opened_by_process
+                     ipv4                                             ipv4_close
+                     ipv4_listen                                      ipv6
+                     ipv6_close                                       ipv6_listen
+                     killed_ip4_connection                            killed_ip6_connection
+                     known_by_md5                                     known_by_sha256
+                     linking_event                                    loaded_by_process
+                     loaded_module                                    loaded_skill
+                     macro_executed_by_process                        mcp_tool_call
+                     member_of_full_command_line                      module
+                     module_written                                   mounted_on_host
+                     mounted_to_host                                  network_close_ip4
+                     network_close_ip6                                network_connect_ip4
+                     network_connect_ip6                              network_listen_ip4
+                     network_listen_ip6                               opened_ip4_socket
+                     opened_ip6_socket                                parent_of_command_line
+                     parent_process                                   parented_by_process
+                     participating_process                            performed_psexec_against_dc
+                     presented_by_cloud                               primary_module
+                     primary_module_of_process                        process_ai_agent
                      protected_by_shield                              quarantined_file
                      queried_by_process                               queried_by_sensor
                      queried_dns                                      queried_on_customer
@@ -184,26 +185,25 @@ class ThreatGraph(ServiceClass):
                      renewed_to_generate                              reports_aggregate_indicator
                      resolved_from_domain                             resolved_to_ip4
                      resolved_to_ip6                                  rooted_control_graph
-                     rule_set_by_process                              runs_session
-                     script                                           self_diagnostic_to_agent
-                     session_process                                  session_run_by
-                     set_by_process                                   set_firewall_rule
-                     set_rule                                         shell_io_redirect
-                     shield_activated_on_host                         spawns_agent
-                     tool_spawned_process                             trigger_process
-                     triggered_by_control_graph                       triggered_by_process
-                     triggered_control_graph                          triggered_custom_ioa
-                     triggered_detection                              triggered_indicator
-                     triggered_mobile_indicator                       triggered_xdr
-                     triggering_domain                                triggering_network
-                     uncontainerized_app                              uncontainerized_by_sensor
-                     uninstalled_app                                  unmounted_from_host
-                     unmounted_on_host                                used_tool
-                     user                                             user_session
-                     uses_ai_agent                                    witnessed_by_sensor
-                     witnessed_process                                wmicreated_by_incident
-                     wmicreated_process                               written_by_process
-                     wrote_module
+                     rule_set_by_process                              script
+                     self_diagnostic_to_agent                         session_on_sensor
+                     session_process                                  set_by_process
+                     set_firewall_rule                                set_rule
+                     shell_io_redirect                                shield_activated_on_host
+                     submitted_prompt                                 tool_spawned_process
+                     trigger_process                                  triggered_by_control_graph
+                     triggered_by_process                             triggered_control_graph
+                     triggered_custom_ioa                             triggered_detection
+                     triggered_indicator                              triggered_mobile_indicator
+                     triggered_xdr                                    triggering_domain
+                     triggering_network                               uncontainerized_app
+                     uncontainerized_by_sensor                        uninstalled_app
+                     unmounted_from_host                              unmounted_on_host
+                     used_tool                                        user
+                     user_session                                     uses_ai_agent
+                     witnessed_by_sensor                              witnessed_process
+                     wmicreated_by_incident                           wmicreated_process
+                     written_by_process                               wrote_module
         ids -- Vertex ID to get details for.  Only one value is supported. String.
         limit -- How many edges to return in a single request [1-100]. Integer.
         nano -- Return nano-precision entity timestamps. Boolean.
@@ -283,9 +283,10 @@ class ThreatGraph(ServiceClass):
                        ad_group                       adfs-applications
                        adfs_application               aggregate-indicators
                        aggregate_indicator            ai-agents
-                       ai-models                      ai-sessions
-                       ai-skills                      ai-tools
-                       ai_agent                       ai_model
+                       ai-models                      ai-prompts
+                       ai-sessions                    ai-skills
+                       ai-tools                       ai_agent
+                       ai_model                       ai_prompt
                        ai_session                     ai_skill
                        ai_tool                        any-vertex
                        azure-ad-users                 azure-applications
@@ -426,9 +427,10 @@ class ThreatGraph(ServiceClass):
                        ad_group                       adfs-applications
                        adfs_application               aggregate-indicators
                        aggregate_indicator            ai-agents
-                       ai-models                      ai-sessions
-                       ai-skills                      ai-tools
-                       ai_agent                       ai_model
+                       ai-models                      ai-prompts
+                       ai-sessions                    ai-skills
+                       ai-tools                       ai_agent
+                       ai_model                       ai_prompt
                        ai_session                     ai_skill
                        ai_tool                        any-vertex
                        azure-ad-users                 azure-applications
@@ -565,9 +567,10 @@ class ThreatGraph(ServiceClass):
                        ad_group                       adfs-applications
                        adfs_application               aggregate-indicators
                        aggregate_indicator            ai-agents
-                       ai-models                      ai-sessions
-                       ai-skills                      ai-tools
-                       ai_agent                       ai_model
+                       ai-models                      ai-prompts
+                       ai-sessions                    ai-skills
+                       ai-tools                       ai_agent
+                       ai_model                       ai_prompt
                        ai_session                     ai_skill
                        ai_tool                        any-vertex
                        azure-ad-users                 azure-applications
