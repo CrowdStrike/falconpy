@@ -127,6 +127,7 @@ from ._filevantage import _filevantage_endpoints
 from ._firewall_management import _firewall_management_endpoints
 from ._firewall_policies import _firewall_policies_endpoints
 from ._foundry_logscale import _foundry_logscale_endpoints
+from ._foundry_lookup_files import _foundry_lookup_files_endpoints
 from ._host_group import _host_group_endpoints
 from ._hosts import _hosts_endpoints
 from ._host_migration import _host_migration_endpoints
@@ -250,6 +251,7 @@ api_endpoints.extend(_filevantage_endpoints)
 api_endpoints.extend(_firewall_management_endpoints)
 api_endpoints.extend(_firewall_policies_endpoints)
 api_endpoints.extend(_foundry_logscale_endpoints)
+api_endpoints.extend(_foundry_lookup_files_endpoints)
 api_endpoints.extend(_host_group_endpoints)
 api_endpoints.extend(_hosts_endpoints)
 api_endpoints.extend(_host_migration_endpoints)
