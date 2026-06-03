@@ -1143,8 +1143,8 @@ _cspm_registration_endpoints = [
     "GetConfigurationDetections",
     "GET",
     "/detects/entities/iom/v1",
-    "Get list of active misconfigurations. This endpoint is deprecated, please use /queries/iom/v2 and "
-    "/entities/iom/v2 instead",
+    "Get list of active misconfigurations. This endpoint is deprecated, please use "
+    "GetConfigurationDetectionIDsV2 and GetConfigurationDetectionEntities instead",
     "cspm_registration",
     [
       {
