@@ -53,12 +53,12 @@ from ._payload import (
     ngsiem_data_connection_payload,
     ngsiem_connector_config_payload,
     ngsiem_clone_parser_payload,
-    bulk_create_dashboards_from_template_payload,,
-    bulk_create_lookup_files_payload,,
-    bulk_create_saved_queries_from_template_payload,,
-    bulk_update_dashboards_from_template_payload,,
-    bulk_update_lookup_files_payload,,
-    bulk_update_saved_queries_from_template_payload,,
+    bulk_create_dashboards_from_template_payload,
+    bulk_create_lookup_files_payload,
+    bulk_create_saved_queries_from_template_payload,
+    bulk_update_dashboards_from_template_payload,
+    bulk_update_lookup_files_payload,
+    bulk_update_saved_queries_from_template_payload,
     create_parser_extension_payload,
     )
 from ._result import Result

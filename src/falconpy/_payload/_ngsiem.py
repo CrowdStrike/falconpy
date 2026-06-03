@@ -415,4 +415,3 @@ def create_parser_extension_payload(passed_keywords: dict) -> dict:
             returned_payload[key] = passed_keywords.get(key)
 
     return returned_payload
-
