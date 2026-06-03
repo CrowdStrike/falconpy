@@ -77,9 +77,9 @@ _real_time_response_admin_endpoints = [
         "  reg unload  restart  rm  run  runscript  shutdown  unmap  update history  update install  update list  "
         "update query  xmemdump  zip\n\n**base_command** Active-Responder command type we are going to execute, for "
         "example: get or cp.  Refer to the RTR documentation for the full list of commands.\n**batch_id** Batch ID to "
-        "execute the command on.  Received from /real-time-response/combined/batch-init-session/v1.\n**command_string** "
-        " Full command string for the command. For example  get some_file.txt\n**optional_hosts** List of a subset of "
-        "hosts we want to run the command on.  If this list is supplied, only these hosts will receive the command.",
+        "execute the command on.  Received from BatchInitSessions.\n**command_string** Full command string for the "
+        "command. For example  get some_file.txt\n**optional_hosts** List of a subset of hosts we want to run the "
+        "command on.  If this list is supplied, only these hosts will receive the command.",
         "name": "body",
         "in": "body",
         "required": True
@@ -211,15 +211,15 @@ _real_time_response_admin_endpoints = [
         "required": True
       },
       {
-        "maxLength": 32766,
         "type": "string",
+        "maxLength": 32766,
         "description": "File name (if different than actual file name)",
         "name": "name",
         "in": "formData"
       },
       {
-        "maxLength": 4096,
         "type": "string",
+        "maxLength": 4096,
         "description": "The audit log comment",
         "name": "comments_for_audit_log",
         "in": "formData"
@@ -284,15 +284,15 @@ _real_time_response_admin_endpoints = [
         "required": True
       },
       {
-        "maxLength": 32766,
         "type": "string",
+        "maxLength": 32766,
         "description": "File name (if different than actual file name)",
         "name": "name",
         "in": "formData"
       },
       {
-        "maxLength": 4096,
         "type": "string",
+        "maxLength": 4096,
         "description": "The audit log comment",
         "name": "comments_for_audit_log",
         "in": "formData"
@@ -340,15 +340,15 @@ _real_time_response_admin_endpoints = [
         "required": True
       },
       {
-        "maxLength": 32766,
         "type": "string",
+        "maxLength": 32766,
         "description": "File name (if different than actual file name)",
         "name": "name",
         "in": "formData"
       },
       {
-        "maxLength": 4096,
         "type": "string",
+        "maxLength": 4096,
         "description": "The audit log comment",
         "name": "comments_for_audit_log",
         "in": "formData"
@@ -383,6 +383,22 @@ _real_time_response_admin_endpoints = [
     ]
   ],
   [
+    "RTR_DeleteScripts",
+    "DELETE",
+    "/real-time-response/entities/scripts/v1",
+    "Delete a custom-script based on the ID given.  Can only delete one script at a time.",
+    "real_time_response_admin",
+    [
+      {
+        "type": "string",
+        "description": "File id",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "RTR_UpdateScripts",
     "PATCH",
     "/real-time-response/entities/scripts/v1",
@@ -409,15 +425,15 @@ _real_time_response_admin_endpoints = [
         "in": "formData"
       },
       {
-        "maxLength": 32766,
         "type": "string",
+        "maxLength": 32766,
         "description": "File name (if different than actual file name)",
         "name": "name",
         "in": "formData"
       },
       {
-        "maxLength": 4096,
         "type": "string",
+        "maxLength": 4096,
         "description": "The audit log comment",
         "name": "comments_for_audit_log",
         "in": "formData"
@@ -446,22 +462,6 @@ _real_time_response_admin_endpoints = [
         "description": "Platforms for the file. Currently supports: windows, mac, linux, ",
         "name": "platform",
         "in": "formData"
-      }
-    ]
-  ],
-  [
-    "RTR_DeleteScripts",
-    "DELETE",
-    "/real-time-response/entities/scripts/v1",
-    "Delete a custom-script based on the ID given.  Can only delete one script at a time.",
-    "real_time_response_admin",
-    [
-      {
-        "type": "string",
-        "description": "File id",
-        "name": "ids",
-        "in": "query",
-        "required": True
       }
     ]
   ],
@@ -506,15 +506,15 @@ _real_time_response_admin_endpoints = [
         "required": True
       },
       {
-        "maxLength": 32766,
         "type": "string",
+        "maxLength": 32766,
         "description": "File name (if different than actual file name)",
         "name": "name",
         "in": "formData"
       },
       {
-        "maxLength": 4096,
         "type": "string",
+        "maxLength": 4096,
         "description": "The audit log comment",
         "name": "comments_for_audit_log",
         "in": "formData"
@@ -575,15 +575,15 @@ _real_time_response_admin_endpoints = [
         "in": "formData"
       },
       {
-        "maxLength": 32766,
         "type": "string",
+        "maxLength": 32766,
         "description": "File name (if different than actual file name)",
         "name": "name",
         "in": "formData"
       },
       {
-        "maxLength": 4096,
         "type": "string",
+        "maxLength": 4096,
         "description": "The audit log comment",
         "name": "comments_for_audit_log",
         "in": "formData"
@@ -637,19 +637,19 @@ _real_time_response_admin_endpoints = [
         "in": "query"
       },
       {
-        "maximum": 100,
         "type": "integer",
+        "maximum": 100,
         "description": "Number of ids to return.",
         "name": "limit",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "created_timestamp",
           "modified_timestamp",
           "name"
         ],
-        "type": "string",
         "description": "Sort by spec. Ex: 'created_at|asc'.",
         "name": "sort",
         "in": "query"
