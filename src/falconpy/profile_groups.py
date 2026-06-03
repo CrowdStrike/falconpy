@@ -37,7 +37,15 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import create_group_v1_mixin0_payload, get_group_users_v1_payload, get_groups_v1_mixin0_payload, get_user_groups_v1_payload, group_actions_v1_mixin0_payload, group_users_actions_v1_mixin0_payload, update_group_v1_mixin0_payload
+from ._payload import (
+    create_group_v1_mixin0_payload,
+    get_group_users_v1_payload,
+    get_groups_v1_mixin0_payload,
+    get_user_groups_v1_payload,
+    group_actions_v1_mixin0_payload,
+    group_users_actions_v1_mixin0_payload,
+    update_group_v1_mixin0_payload
+    )
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._profile_groups import _profile_groups_endpoints as Endpoints
