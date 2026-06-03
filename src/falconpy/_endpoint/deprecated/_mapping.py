@@ -76,6 +76,8 @@ _deprecated_op_mapping = {
 
     "CreateFileV1": "",
     "UpdateFileV1": "",
+
+    "combinedQueryInstalledPatches": "",
 }
 
 _deprecated_cls_mapping = {
