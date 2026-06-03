@@ -117,6 +117,7 @@ _ioc_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "action",
           "applied_globally",
@@ -137,7 +138,6 @@ _ioc_endpoints = [
           "type",
           "value"
         ],
-        "type": "string",
         "description": "The sort expression that should be used to sort the results.",
         "name": "sort",
         "in": "query"
@@ -240,33 +240,6 @@ _ioc_endpoints = [
     ]
   ],
   [
-    "indicator_update_v1",
-    "PATCH",
-    "/iocs/entities/indicators/v1",
-    "Update Indicators.",
-    "ioc",
-    [
-      {
-        "type": "boolean",
-        "description": "Whether to submit to retrodetects",
-        "name": "retrodetects",
-        "in": "query"
-      },
-      {
-        "type": "boolean",
-        "default": False,
-        "description": "Set to true to ignore warnings and add all IOCs",
-        "name": "ignore_warnings",
-        "in": "query"
-      },
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "indicator_delete_v1",
     "DELETE",
     "/iocs/entities/indicators/v1",
@@ -302,6 +275,33 @@ _ioc_endpoints = [
         "description": "The filter for returning either only indicators for the request customer or its MSSP parents",
         "name": "from_parent",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "indicator_update_v1",
+    "PATCH",
+    "/iocs/entities/indicators/v1",
+    "Update Indicators.",
+    "ioc",
+    [
+      {
+        "type": "boolean",
+        "description": "Whether to submit to retrodetects",
+        "name": "retrodetects",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "Set to true to ignore warnings and add all IOCs",
+        "name": "ignore_warnings",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
       }
     ]
   ],
@@ -392,8 +392,8 @@ _ioc_endpoints = [
       },
       {
         "type": "string",
-        "description": "Specify a host's ID to return only processes from that host. Get a host's ID from GET "
-        "/devices/queries/devices/v1, the Falcon console, or the Streaming API.",
+        "description": "Specify a host's ID to return only processes from that host. Get a host's ID from "
+        "QueryDevicesByFilter, the Falcon console, or the Streaming API.",
         "name": "device_id",
         "in": "query",
         "required": True
@@ -442,6 +442,7 @@ _ioc_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "action",
           "applied_globally",
@@ -462,7 +463,6 @@ _ioc_endpoints = [
           "type",
           "value"
         ],
-        "type": "string",
         "description": "The sort expression that should be used to sort the results.",
         "name": "sort",
         "in": "query"
