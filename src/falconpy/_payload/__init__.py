@@ -314,5 +314,7 @@ __all__ = [
     "network_scan_zone_create_payload", "network_scan_zone_update_payload",
     "create_api_client_payload", "update_api_client_payload",
     "cloud_security_assets_entities_post_payload", "patch_federated_connections_config_payload",
-    "post_federated_connections_config_payload"
+    "post_federated_connections_config_payload", "cao_incidents_aggregates_v1_payload",
+    "cao_incidents_entities_v1_payload", "entities_knowledge_bases_create_v1_payload",
+    "entities_knowledge_bases_update_v1_payload"
 ]
