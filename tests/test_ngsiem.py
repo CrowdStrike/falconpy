@@ -51,6 +51,20 @@ class TestNGSIEM:
                                                                    ),
             "StartSearchV1": falcon.start_search(repository="search-all", search=test_search, is_live=False, start="1d", timezone_offset_minutes=0),
             "StartSearchV1B": falcon.start_search(repository="search-all", query_string="#event_simpleName=*", is_live=False, start="1d", timezone_offset_minutes=0),
+            "BulkCreateDashboardsFromTemplate": falcon.bulk_create_dashboards_from_template(dashboard_items="string",
+                search_domain="string"),
+            "BulkCreateLookupFiles": falcon.bulk_create_lookup_files(lookup_files="string", search_domain="string"),
+            "BulkCreateSavedQueriesFromTemplate": falcon.bulk_create_saved_queries_from_template(saved_query_items="string",
+                search_domain="string"),
+            "BulkGetLookupFiles": falcon.bulk_get_lookup_files(filename=["string"], search_domain="string"),
+            "BulkUpdateDashboardsFromTemplate": falcon.bulk_update_dashboards_from_template(dashboard_items="string",
+                search_domain="string"),
+            "BulkUpdateLookupFiles": falcon.bulk_update_lookup_files(lookup_files="string", search_domain="string"),
+            "BulkUpdateSavedQueriesFromTemplate": falcon.bulk_update_saved_queries_from_template(saved_query_items="string",
+                search_domain="string"),
+            "CreateParserExtension": falcon.create_parser_extension(base_parser_id="string", extension_name="string",
+                parser_id="string", post_processing_script="string",
+                pre_processing_script="string", test_cases="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
@@ -195,8 +209,8 @@ class TestNGSIEM:
         for test in more_tests:
             if more_tests[test]["status_code"] not in AllowedResponses:
                 error_checks = False
-                print(more_tests[test])
-                print(f"{test} operation returned a {more_tests[test]['status_code']} status code")
+                # print(more_tests[test])
+                # print(f"{test} operation returned a {more_tests[test]['status_code']} status code")
 
         return error_checks
 
@@ -339,7 +353,7 @@ class TestNGSIEMConnectorCoverage:
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
-                print(f"{key} returned {tests[key]['status_code']}")
+                # print(f"{key} returned {tests[key]['status_code']}")
 
         assert error_checks
 

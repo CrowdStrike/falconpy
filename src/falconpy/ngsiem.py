@@ -52,8 +52,15 @@ from ._payload import (
     ngsiem_bulk_install_parsers_payload,
     ngsiem_data_connection_payload,
     ngsiem_connector_config_payload,
-    ngsiem_clone_parser_payload
-)
+    ngsiem_clone_parser_payload,
+    bulk_create_dashboards_from_template_payload,,
+    bulk_create_lookup_files_payload,,
+    bulk_create_saved_queries_from_template_payload,,
+    bulk_update_dashboards_from_template_payload,,
+    bulk_update_lookup_files_payload,,
+    bulk_update_saved_queries_from_template_payload,,
+    create_parser_extension_payload,
+    )
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._ngsiem import _ngsiem_endpoints as Endpoints
@@ -2115,6 +2122,348 @@ class NGSIEM(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_create_dashboards_from_template(self: object,
+                                             body: dict = None,
+                                             **kwargs
+                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create Multiple Dashboards from YAML Templates.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "dashboard_items": [
+                        {
+                            "name": "string",
+                            "yaml_template": "string"
+                        }
+                    ],
+                    "search_domain": "string"
+                }
+        dashboard_items -- List of dashboards to create List.
+        search_domain -- The name of the search domain where the dashboards will be created String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkCreateDashboardsFromTemplate
+        """
+        if not body:
+            body = bulk_create_dashboards_from_template_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BulkCreateDashboardsFromTemplate",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_create_lookup_files(self: object,
+                                 body: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create Multiple Lookup Files.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "lookup_files": [
+                        {
+                            "content": "string",
+                            "filename": "string"
+                        }
+                    ],
+                    "search_domain": "string"
+                }
+        lookup_files -- List of lookup files to create List.
+        search_domain -- The name of the search domain where the lookup files will be created String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkCreateLookupFiles
+        """
+        if not body:
+            body = bulk_create_lookup_files_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BulkCreateLookupFiles",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_create_saved_queries_from_template(self: object,
+                                                body: dict = None,
+                                                **kwargs
+                                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create Multiple Saved Queries from LogScale YAML Templates.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "saved_query_items": [
+                        {
+                            "yaml_template": "string"
+                        }
+                    ],
+                    "search_domain": "string"
+                }
+        saved_query_items -- List of saved queries to create List.
+        search_domain -- The name of the search domain where saved queries will be created String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkCreateSavedQueriesFromTemplate
+        """
+        if not body:
+            body = bulk_create_saved_queries_from_template_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BulkCreateSavedQueriesFromTemplate",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def bulk_get_lookup_files(self: object,
+                              parameters: dict = None,
+                              **kwargs
+                              ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve Multiple Lookup Files by Filenames in NGSIEM.
+
+        Keyword arguments:
+        filename -- Lookup file filename(s) (required, multiple allowed) List.
+        search_domain -- name of search domain (view or repo) Available values: all, falcon, third-party, dashboards,
+                         parsers-repository. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkGetLookupFiles
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BulkGetLookupFiles",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_update_dashboards_from_template(self: object,
+                                             body: dict = None,
+                                             **kwargs
+                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update Multiple Dashboards from YAML Templates.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "dashboard_items": [
+                        {
+                            "id": "string",
+                            "yaml_template": "string"
+                        }
+                    ],
+                    "search_domain": "string"
+                }
+        dashboard_items -- Array of dashboards to update with their IDs and YAML templates List.
+        search_domain -- The name of the search domain containing the dashboards String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkUpdateDashboardsFromTemplate
+        """
+        if not body:
+            body = bulk_update_dashboards_from_template_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BulkUpdateDashboardsFromTemplate",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_update_lookup_files(self: object,
+                                 body: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update Multiple Lookup Files.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "lookup_files": [
+                        {
+                            "content": "string",
+                            "filename": "string"
+                        }
+                    ],
+                    "search_domain": "string"
+                }
+        lookup_files -- List of lookup files to update List.
+        search_domain -- The name of the search domain containing the lookup files String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkUpdateLookupFiles
+        """
+        if not body:
+            body = bulk_update_lookup_files_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BulkUpdateLookupFiles",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_update_saved_queries_from_template(self: object,
+                                                body: dict = None,
+                                                **kwargs
+                                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update Multiple Saved Queries from LogScale YAML Templates.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "saved_query_items": [
+                        {
+                            "id": "string",
+                            "yaml_template": "string"
+                        }
+                    ],
+                    "search_domain": "string"
+                }
+        saved_query_items -- Array of saved queries to update with their IDs and YAML templates List.
+        search_domain -- The name of the search domain containing the saved queries String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkUpdateSavedQueriesFromTemplate
+        """
+        if not body:
+            body = bulk_update_saved_queries_from_template_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BulkUpdateSavedQueriesFromTemplate",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_parser_extension(self: object,
+                                body: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create a Parser extension in NGSIEM for the provided base parser.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "base_parser_id": "string",
+                    "extension_name": "string",
+                    "parser_id": "string",
+                    "post_processing_script": "string",
+                    "pre_processing_script": "string",
+                    "test_cases": [
+                        {
+                            "event": {
+                                "raw_string": "string"
+                            },
+                            "output_assertions": [
+                                {
+                                    "assertions": {
+                                        "fields_have_values": [
+                                            {
+                                                "expected_value": "string",
+                                                "field_name": "string"
+                                            }
+                                        ],
+                                        "fields_not_present": [
+                                            "string"
+                                        ]
+                                    },
+                                    "output_event_index": 0
+                                }
+                            ]
+                        }
+                    ]
+                }
+        base_parser_id -- The base_parser_id value. String.
+        extension_name -- The extension_name value. String.
+        parser_id -- The parser_id value. String.
+        post_processing_script -- The post_processing_script value. String.
+        pre_processing_script -- The pre_processing_script value. String.
+        test_cases -- The test_cases value. List.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreateParserExtension
+        """
+        if not body:
+            body = create_parser_extension_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateParserExtension",
+            body=body
+            )
+
+    BulkCreateDashboardsFromTemplate = bulk_create_dashboards_from_template
+    BulkCreateLookupFiles = bulk_create_lookup_files
+    BulkCreateSavedQueriesFromTemplate = bulk_create_saved_queries_from_template
+    BulkGetLookupFiles = bulk_get_lookup_files
+    BulkUpdateDashboardsFromTemplate = bulk_update_dashboards_from_template
+    BulkUpdateLookupFiles = bulk_update_lookup_files
+    BulkUpdateSavedQueriesFromTemplate = bulk_update_saved_queries_from_template
+    CreateParserExtension = create_parser_extension
     UploadLookupV1 = upload_file
     GetLookupV1 = get_file
     GetLookupFromPackageWithNamespaceV1 = get_file_from_package_with_namespace
