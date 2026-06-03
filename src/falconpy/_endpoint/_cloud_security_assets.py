@@ -174,6 +174,21 @@ _cloud_security_assets_endpoints = [
     ]
   ],
   [
+    "cloud_security_assets_entities_post",
+    "POST",
+    "/cloud-security-assets/entities/resources/v1",
+    "Gets raw resources based on IDs in the request body. Maximum of 500 resources can be requested.",
+    "cloud_security_assets",
+    [
+      {
+        "description": "Body with array of 'ids' (maximum 500 IDs).",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "cloud_security_assets_queries",
     "GET",
     "/cloud-security-assets/queries/resources/v1",
@@ -189,26 +204,26 @@ _cloud_security_assets_endpoints = [
       },
       {
         "type": "string",
-        "description": "FQL string to filter on asset contents. Filterable fields include:  account_id  "
-        "account_name  active  aspm.deployment_cloud_resource_id  aspm.deployment_provider  aspm.deployment_type  "
-        "aspm.technologies  azure.resource_group  azure.vm_id  business_impact  cloud_group  cloud_label  "
-        "cloud_label_id  cloud_provider  cloud_risks.rule  cloud_risks.severity  cloud_risks.status  cloud_scope  "
-        "cluster_id  cluster_name  compartment_ocid  compliant.benchmark_name  compliant.benchmark_version  "
-        "compliant.framework  compliant.policy_id  compliant.requirement  compliant.rule  compliant.section  "
-        "configuration.id  control.benchmark.name  control.benchmark.version  control.framework  control.requirement  "
-        "control.type  control.version  creation_time  cve_ids  data_classifications.found  data_classifications.label "
-        "  data_classifications.label_id  data_classifications.scanned  data_classifications.tag  "
-        "data_classifications.tag_id  environment  exprt_ratings  first_seen  highest_severity  id  "
-        "insights.boolean_value  insights.date_value  insights.id  insights.integer_value  insights.string_list_value  "
-        "insights.string_value  instance_id  instance_state  ioa_count  iom_count  legacy_resource_id  legacy_uuid  "
-        "managed_by  non_compliant.benchmark_name  non_compliant.benchmark_version  non_compliant.framework  "
-        "non_compliant.policy_id  non_compliant.requirement  non_compliant.rule  non_compliant.rule_name  "
-        "non_compliant.section  non_compliant.severity  organization_Id  os_version  platform_name  publicly_exposed  "
-        "region  resource_gcrn  resource_id  resource_name  resource_parent  resource_type  resource_type_name  "
-        "sensor_priority  service  service_category  severity  snapshot_detections  ssm_managed  status  tag_key  "
-        "tag_value  tags  tags_string  tenant_id  updated_at  vmware.guest_os_id  vmware.guest_os_version  "
-        "vmware.host_system_name  vmware.host_type  vmware.instance_uuid  vmware.vm_host_name  vmware.vm_tools_status  "
-        "zone",
+        "description": "FQL string to filter on asset contents. Filterable fields include:  "
+        "account_bitmap_token_64  account_id  account_name  active  aspm.deployment_cloud_resource_id  "
+        "aspm.deployment_provider  aspm.deployment_type  aspm.technologies  azure.resource_group  azure.vm_id  "
+        "business_impact  cloud_group  cloud_label  cloud_label_id  cloud_provider  cloud_risks.rule  "
+        "cloud_risks.severity  cloud_risks.status  cloud_scope  cluster_id  cluster_name  compartment_ocid  "
+        "compliant.benchmark_name  compliant.benchmark_version  compliant.framework  compliant.policy_id  "
+        "compliant.requirement  compliant.rule  compliant.section  configuration.id  control.benchmark.name  "
+        "control.benchmark.version  control.framework  control.requirement  control.type  control.version  "
+        "creation_time  cve_ids  data_classifications.found  data_classifications.label  data_classifications.label_id "
+        "  data_classifications.scanned  data_classifications.tag  data_classifications.tag_id  environment  "
+        "exprt_ratings  first_seen  highest_severity  id  insights.boolean_value  insights.date_value  insights.id  "
+        "insights.integer_value  insights.string_list_value  insights.string_value  instance_id  instance_state  "
+        "ioa_count  iom_count  legacy_resource_id  legacy_uuid  managed_by  non_compliant.benchmark_name  "
+        "non_compliant.benchmark_version  non_compliant.framework  non_compliant.policy_id  non_compliant.requirement  "
+        "non_compliant.rule  non_compliant.rule_name  non_compliant.section  non_compliant.severity  organization_Id  "
+        "os_version  platform_name  publicly_exposed  region  resource_gcrn  resource_id  resource_name  "
+        "resource_parent  resource_type  resource_type_name  sensor_priority  service  service_category  severity  "
+        "snapshot_detections  ssm_managed  status  tag_key  tag_value  tags  tags_string  tenant_id  updated_at  "
+        "vmware.guest_os_id  vmware.guest_os_version  vmware.host_system_name  vmware.host_type  vmware.instance_uuid  "
+        "vmware.vm_host_name  vmware.vm_tools_status  zone",
         "name": "filter",
         "in": "query"
       },
