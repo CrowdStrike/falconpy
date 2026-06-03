@@ -321,13 +321,12 @@ _workflows_endpoints = [
     "workflows",
     [
       {
-        "maxItems": 5000,
-        "minItems": 1,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "maxItems": 5000,
         "description": "IDs of the workflow definitions to delete",
         "name": "ids",
         "in": "query",
@@ -506,6 +505,18 @@ _workflows_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "maxItems": 4,
+        "description": "Fields to omit from the response; valid values are (trigger, activities, flows, "
+        "submodels). When specified, the corresponding node-level details are skipped.",
+        "name": "skip_fields",
+        "in": "query"
       }
     ]
   ],
