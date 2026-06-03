@@ -158,8 +158,7 @@ _exposure_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more asset IDs (max: 100). Find ecosystem subsidiary IDs with GET "
-        "/fem/entities/ecosystem-subsidiaries/v1",
+        "description": "One or more asset IDs (max: 100). Find ecosystem subsidiary IDs with get_ecosystem_subsidiaries",
         "name": "ids",
         "in": "query",
         "required": True
@@ -253,8 +252,7 @@ _exposure_management_endpoints = [
     "query_ecosystem_subsidiaries",
     "GET",
     "/fem/queries/ecosystem-subsidiaries/v1",
-    "Retrieves a list of IDs for ecosystem subsidiaries. Use these IDs with the /entities/ecosystem-"
-    "subsidiaries/v1 endpoints.",
+    "Retrieves a list of IDs for ecosystem subsidiaries. Use these IDs with the get_ecosystem_subsidiaries endpoints.",
     "exposure_management",
     [
       {
@@ -301,7 +299,7 @@ _exposure_management_endpoints = [
     "GET",
     "/fem/queries/external-assets/v1",
     "Get a list of external asset IDs that match the provided filter conditions. Use these IDs with the "
-    "/entities/external-assets/v1 endpoints",
+    "get_external_assets endpoints",
     "exposure_management",
     [
       {
@@ -400,7 +398,7 @@ _exposure_management_endpoints = [
     "GET",
     "/fem/queries/external-assets/v2",
     "Get a list of external asset IDs that match the provided filter conditions. Use these IDs with the "
-    "/entities/external-assets/v1 endpoint",
+    "get_external_assets endpoint",
     "exposure_management",
     [
       {
