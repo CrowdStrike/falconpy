@@ -65,13 +65,13 @@ _detects_endpoints = [
         "description": "This endpoint modifies attributes (state and assignee) of detections. \n\nThis "
         "endpoint accepts a query formatted as a JSON array of key-value pairs. You can update one or more attributes "
         "one or more detections with a single request.\n\n**assigned_to_uuid values**\n\nA user ID, such as "
-        "1234567891234567891\n\n**ids values**\n\nOne or more detection IDs, which you can find with the "
-        "/detects/queries/detects/v1 endpoint, the Falcon console, or the Streaming API.\n\n**show_in_ui values**\n  "
-        "true: This detection is displayed in Falcon  false: This detection is not displayed in Falcon. Most commonly "
-        "used together with the status key's false_positive value.\n\n**status values**\n  new  in_progress  "
-        "true_positive  false_positive  closed  ignored\n\n**comment values**\nOptional comment to add to the "
-        "detection. Comments are displayed with the detection in Falcon and usually used to provide context or notes "
-        "for other Falcon users. A detection can have multiple comments over time.",
+        "1234567891234567891\n\n**ids values**\n\nOne or more detection IDs, which you can find with the QueryDetects "
+        "endpoint, the Falcon console, or the Streaming API.\n\n**show_in_ui values**\n  true: This detection is "
+        "displayed in Falcon  false: This detection is not displayed in Falcon. Most commonly used together with the "
+        "status key's false_positive value.\n\n**status values**\n  new  in_progress  true_positive  false_positive  "
+        "closed  ignored\n\n**comment values**\nOptional comment to add to the detection. Comments are displayed with "
+        "the detection in Falcon and usually used to provide context or notes for other Falcon users. A detection can "
+        "have multiple comments over time.",
         "name": "body",
         "in": "body",
         "required": True
@@ -90,8 +90,8 @@ _detects_endpoints = [
         "description": "View key attributes of detections, including the associated host, "
         "[disposition](https://falcon.crowdstrike.com/documentation/86/detections-monitoring-apis#pattern-disposition-"
         "value-descriptions), objective/tactic/technique, adversary, and more. Specify one or more detection IDs (max "
-        "1000 per request). Find detection IDs with the /detects/queries/detects/v1 endpoint, the Falcon console, or "
-        "the Streaming API.",
+        "1000 per request). Find detection IDs with the QueryDetects endpoint, the Falcon console, or the Streaming "
+        "API.",
         "name": "body",
         "in": "body",
         "required": True
@@ -114,9 +114,9 @@ _detects_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 9999,
         "minimum": 0,
-        "type": "integer",
         "description": "The maximum number of detections to return in this response (default: 9999; max: "
         "9999). Use with the offset parameter to manage pagination of results.",
         "name": "limit",
