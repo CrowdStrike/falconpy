@@ -41,8 +41,10 @@ from ._payload import (
     cloud_azure_registration_payload,
     cloud_azure_registration_create_payload,
     generic_payload_list,
-    cloud_azure_registration_legacy_payload
-)
+    cloud_azure_registration_legacy_payload,
+    cloud_registration_azure_create_suppressions_payload,,
+    cloud_registration_azure_update_suppressions_payload,
+    )
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._cloud_azure_registration import _cloud_azure_registration_endpoints as Endpoints
@@ -134,6 +136,7 @@ class CloudAzureRegistration(ServiceClass):
 
         Keyword arguments:
         tenant_id -- Tenant ID to retrieve. String.
+        registration_id -- Registration ID String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -498,6 +501,173 @@ class CloudAzureRegistration(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def cloud_registration_azure_create_suppressions(self: object,
+                                                     body: dict = None,
+                                                     **kwargs
+                                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create new issue suppression rules.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "reason": "string",
+                            "registration_id": "string",
+                            "target": {
+                                "entity_id": "string",
+                                "entity_type": "string",
+                                "issue_name": "string"
+                            },
+                            "type": "string"
+                        }
+                    ]
+                }
+        resources -- The resources value. List.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_create_suppressions
+        """
+        if not body:
+            body = cloud_registration_azure_create_suppressions_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_create_suppressions",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def cloud_registration_azure_delete_suppressions(self: object,
+                                                     parameters: dict = None,
+                                                     **kwargs
+                                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Remove/revoke suppression rules.
+
+        Keyword arguments:
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_delete_suppressions
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_delete_suppressions",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def cloud_registration_azure_get_issue_suppression_values_by_field(self: object,
+                                                                       parameters: dict = None,
+                                                                       **kwargs
+                                                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve distinct filterable values for issue suppression fields.
+
+        Keyword arguments:
+        registration_id -- Registration ID to filter values by String.
+        field -- Field to get values for Available values: issue_name, entity_id, suppressed_by, created_at, reason. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_issue_suppression_values_by_field
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_get_issue_suppression_values_by_field",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def cloud_registration_azure_get_issue_values_by_field(self: object,
+                                                           parameters: dict = None,
+                                                           **kwargs
+                                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve distinct filterable values for issue fields.
+
+        Keyword arguments:
+        registration_id -- Registration ID to filter values by String.
+        filter -- FQL (Falcon Query Language) string for filtering results. Allowed filters are
+                  name,issue,severity,category,impact,entity_type,entity_id,entity_name,status String.
+        field -- Field to get values for Available values: issue, name, severity, category, impact, entity_type, entity_id,
+                 entity_name, status, feature. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_issue_values_by_field
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_get_issue_values_by_field",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def cloud_registration_azure_get_issues(self: object,
+                                            parameters: dict = None,
+                                            **kwargs
+                                            ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve issues for Azure registrations.
+
+        Keyword arguments:
+        registration_id -- Registration ID String.
+        filter -- FQL (Falcon Query Language) string for filtering results. Allowed filters are
+                  name,issue,severity,category,impact,entity_type,entity_id,entity_name,status String.
+        sort -- Field and direction for sorting results - allowed sort fields are
+                issue,name,severity,category,impact,entity_type,entity_id,entity_name,impacted_entities String.
+        group_by -- Grouping method: 'name' (optional, default: ungrouped) Available values: name. String.
+        limit -- Maximum number of records to return (default: 100, max: 1000) Integer.
+        offset -- Starting index of result Integer.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_issues
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_get_issues",
+            keywords=kwargs,
+            params=parameters
+            )
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def cloud_registration_azure_get_script(self: object,
                                             parameters: dict = None,
@@ -526,13 +696,125 @@ class CloudAzureRegistration(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def cloud_registration_azure_get_script_versions(self: object,
+                                                     parameters: dict = None,
+                                                     **kwargs
+                                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve all available script versions with filtering and sorting.
+
+        Keyword arguments:
+        deployment_method -- Filter by deployment method (e.g., 'bicep-legacy', 'bicep-deployment-stack') String.
+        sort -- Field and direction for sorting results - allowed sort fields are version,deployment_method,published_date
+                String.
+        limit -- Maximum number of records to return (default: 100, max: 1000) Integer.
+        offset -- Starting index of result Integer.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_script_versions
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_get_script_versions",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def cloud_registration_azure_get_suppressions(self: object,
+                                                  parameters: dict = None,
+                                                  **kwargs
+                                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve existing suppression rules with filtering.
+
+        Keyword arguments:
+        registration_id -- Registration ID String.
+        filter -- FQL (Falcon Query Language) string for filtering results. Allowed filters are
+                  issue_name,entity_id,suppressed_by,created_at,reason String.
+        sort -- Field and direction for sorting results - allowed sort fields are
+                issue_name,entity_id,suppressed_by,created_at,reason String.
+        limit -- Maximum number of records to return (default: 100, max: 1000) Integer.
+        offset -- Starting index of result Integer.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_suppressions
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_get_suppressions",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def cloud_registration_azure_update_suppressions(self: object,
+                                                     body: dict = None,
+                                                     **kwargs
+                                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update existing suppression rules.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "reason": "string",
+                            "suppression_id": "string"
+                        }
+                    ]
+                }
+        resources -- The resources value. List.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_update_suppressions
+        """
+        if not body:
+            body = cloud_registration_azure_update_suppressions_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_update_suppressions",
+            body=body
+            )
+
+    cloud_registration_azure_create_suppressions = cloud_registration_azure_create_suppressions
     cloud_registration_azure_delete_legacy_subscription = delete_legacy_subscription
+    cloud_registration_azure_delete_suppressions = cloud_registration_azure_delete_suppressions
+    cloud_registration_azure_get_issue_suppression_values_by_field = cloud_registration_azure_get_issue_suppression_values_by_field
+    cloud_registration_azure_get_issue_values_by_field = cloud_registration_azure_get_issue_values_by_field
+    cloud_registration_azure_get_issues = cloud_registration_azure_get_issues
     cloud_registration_azure_get_script = cloud_registration_azure_get_script
+    cloud_registration_azure_get_script_versions = cloud_registration_azure_get_script_versions
+    cloud_registration_azure_get_suppressions = cloud_registration_azure_get_suppressions
     cloud_registration_azure_trigger_health_check = health_check
     cloud_registration_azure_get_registration = get_registration
     cloud_registration_azure_create_registration = create_registration
     cloud_registration_azure_update_registration = update_registration
     cloud_registration_azure_delete_registration = delete_registration
+    cloud_registration_azure_update_suppressions = cloud_registration_azure_update_suppressions
     download_azure_script = deployment_script
     cloud_registration_azure_download_script = download_script
     cloud_registration_azure_validate_registration = validate_registration

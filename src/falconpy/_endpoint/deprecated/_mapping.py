@@ -73,8 +73,6 @@ _deprecated_op_mapping = {
     "QueryBehaviors": "",
     "QueryIncidents": "",
     "download_azure_script": "",
-
-    "combinedQueryInstalledPatches": "",
 }
 
 _deprecated_cls_mapping = {
