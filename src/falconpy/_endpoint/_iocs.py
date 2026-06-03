@@ -316,8 +316,8 @@ _iocs_endpoints = [
       },
       {
         "type": "string",
-        "description": "Specify a host's ID to return only processes from that host. Get a host's ID from GET "
-        "/devices/queries/devices/v1, the Falcon console, or the Streaming API.",
+        "description": "Specify a host's ID to return only processes from that host. Get a host's ID from "
+        "QueryDevicesByFilter, the Falcon console, or the Streaming API.",
         "name": "device_id",
         "in": "query",
         "required": True
