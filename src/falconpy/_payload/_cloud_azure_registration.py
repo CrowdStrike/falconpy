@@ -176,3 +176,40 @@ def cloud_azure_registration_legacy_payload(passed_keywords: dict) -> Dict[str, 
     returned["resources"].append(item)
 
     return returned
+
+
+def cloud_registration_azure_create_suppressions_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a cloud_registration_azure_create_suppressions request.
+
+    {
+        "resources": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["resources"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def cloud_registration_azure_update_suppressions_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a cloud_registration_azure_update_suppressions request.
+
+    {
+        "resources": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["resources"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
