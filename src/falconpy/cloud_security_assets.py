@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
+from ._payload import cloud_security_assets_entities_post_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._cloud_security_assets import _cloud_security_assets_endpoints as Endpoints
@@ -194,57 +195,58 @@ class CloudSecurityAssets(ServiceClass):
                  Use only one of 'offset' and 'after' parameters for paginating.
         filter -- FQL string to filter on asset contents. String.
                   Filterable fields include:
-                    account_id                           account_name
-                    active                               aspm.deployment_cloud_resource_id
-                    aspm.deployment_provider             aspm.deployment_type
-                    aspm.technologies                    azure.resource_group
-                    azure.vm_id                          business_impact
-                    cloud_group                          cloud_label
-                    cloud_label_id                       cloud_provider
-                    cloud_risks.rule                     cloud_risks.severity
-                    cloud_risks.status                   cloud_scope
-                    cluster_id                           cluster_name
-                    compartment_ocid                     compliant.benchmark_name
-                    compliant.benchmark_version          compliant.framework
-                    compliant.policy_id                  compliant.requirement
-                    compliant.rule                       compliant.section
-                    configuration.id                     control.benchmark.name
-                    control.benchmark.version            control.framework
-                    control.requirement                  control.type
-                    control.version                      creation_time
-                    cve_ids                              data_classifications.found
-                    data_classifications.label           data_classifications.label_id
-                    data_classifications.scanned         data_classifications.tag
-                    data_classifications.tag_id          environment
-                    exprt_ratings                        first_seen
-                    highest_severity                     id
-                    insights.boolean_value               insights.date_value
-                    insights.id                          insights.integer_value
-                    insights.string_list_value           insights.string_value
-                    instance_id                          instance_state
-                    ioa_count                            iom_count
-                    legacy_resource_id                   legacy_uuid
-                    managed_by                           non_compliant.benchmark_name
-                    non_compliant.benchmark_version      non_compliant.framework
-                    non_compliant.policy_id              non_compliant.requirement
-                    non_compliant.rule                   non_compliant.rule_name
-                    non_compliant.section                non_compliant.severity
-                    organization_Id                      os_version
-                    platform_name                        publicly_exposed
-                    region                               resource_gcrn
-                    resource_id                          resource_name
-                    resource_parent                      resource_type
-                    resource_type_name                   sensor_priority
-                    service                              service_category
-                    severity                             snapshot_detections
-                    ssm_managed                          status
-                    tag_key                              tag_value
-                    tags                                 tags_string
-                    tenant_id                            updated_at
-                    vmware.guest_os_id                   vmware.guest_os_version
-                    vmware.host_system_name              vmware.host_type
-                    vmware.instance_uuid                 vmware.vm_host_name
-                    vmware.vm_tools_status               zone
+                    account_bitmap_token_64              account_id
+                    account_name                         active
+                    aspm.deployment_cloud_resource_id    aspm.deployment_provider
+                    aspm.deployment_type                 aspm.technologies
+                    azure.resource_group                 azure.vm_id
+                    business_impact                      cloud_group
+                    cloud_label                          cloud_label_id
+                    cloud_provider                       cloud_risks.rule
+                    cloud_risks.severity                 cloud_risks.status
+                    cloud_scope                          cluster_id
+                    cluster_name                         compartment_ocid
+                    compliant.benchmark_name             compliant.benchmark_version
+                    compliant.framework                  compliant.policy_id
+                    compliant.requirement                compliant.rule
+                    compliant.section                    configuration.id
+                    control.benchmark.name               control.benchmark.version
+                    control.framework                    control.requirement
+                    control.type                         control.version
+                    creation_time                        cve_ids
+                    data_classifications.found           data_classifications.label
+                    data_classifications.label_id        data_classifications.scanned
+                    data_classifications.tag             data_classifications.tag_id
+                    environment                          exprt_ratings
+                    first_seen                           highest_severity
+                    id                                   insights.boolean_value
+                    insights.date_value                  insights.id
+                    insights.integer_value               insights.string_list_value
+                    insights.string_value                instance_id
+                    instance_state                       ioa_count
+                    iom_count                            legacy_resource_id
+                    legacy_uuid                          managed_by
+                    non_compliant.benchmark_name         non_compliant.benchmark_version
+                    non_compliant.framework              non_compliant.policy_id
+                    non_compliant.requirement            non_compliant.rule
+                    non_compliant.rule_name              non_compliant.section
+                    non_compliant.severity               organization_Id
+                    os_version                           platform_name
+                    publicly_exposed                     region
+                    resource_gcrn                        resource_id
+                    resource_name                        resource_parent
+                    resource_type                        resource_type_name
+                    sensor_priority                      service
+                    service_category                     severity
+                    snapshot_detections                  ssm_managed
+                    status                               tag_key
+                    tag_value                            tags
+                    tags_string                          tenant_id
+                    updated_at                           vmware.guest_os_id
+                    vmware.guest_os_version              vmware.host_system_name
+                    vmware.host_type                     vmware.instance_uuid
+                    vmware.vm_host_name                  vmware.vm_tools_status
+                    zone
         sort -- The field to sort on. String.
                 Use `|asc` or `|desc` suffix to specify sort direction.
                 Sortable fields include:
@@ -299,7 +301,43 @@ class CloudSecurityAssets(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def cloud_security_assets_entities_post(self: object,
+                                            body: dict = None,
+                                            **kwargs
+                                            ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get raw resources based on IDs in the request body.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- The ids value. List.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-assets/cloud_security_assets_entities_post
+        """
+        if not body:
+            body = cloud_security_assets_entities_post_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_security_assets_entities_post",
+            body=body
+            )
+
     cloud_security_assets_combined_application_findings = combined_application_findings
     cloud_security_assets_combined_compliance_by_account = get_combined_compliance_by_account
     cloud_security_assets_entities_get = get_assets
+    cloud_security_assets_entities_post = cloud_security_assets_entities_post
     cloud_security_assets_queries = query_assets

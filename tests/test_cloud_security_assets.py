@@ -27,6 +27,7 @@ class TestCloudSecurityAssets:
             "cloud_security_assets_combined_compliance_by_account": falcon.get_combined_compliance_by_account(limit=1),
             "cloud_security_assets_entities_get": falcon.get_assets("12345678"),
             "cloud_security_assets_queries": falcon.query_assets(filter="zone:'bob'"),
+            "cloud_security_assets_entities_post": falcon.cloud_security_assets_entities_post(ids="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
