@@ -136,7 +136,7 @@ _user_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "ID of a role. Find a role ID from /user-management/queries/roles/v1.",
+        "description": "ID of a role. Find a role ID from queriesRolesV1.",
         "name": "ids",
         "in": "query",
         "required": True
