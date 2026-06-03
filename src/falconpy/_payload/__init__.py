@@ -67,7 +67,15 @@ from ._case_management import (
 from ._host_group import host_group_create_payload, host_group_update_payload
 from ._intel import cao_incidents_aggregates_v1_payload, cao_incidents_entities_v1_payload
 from ._knowledge_bases import entities_knowledge_bases_create_v1_payload, entities_knowledge_bases_update_v1_payload
-from ._profile_groups import create_group_v1_mixin0_payload, get_group_users_v1_payload, get_groups_v1_mixin0_payload, get_user_groups_v1_payload, group_actions_v1_mixin0_payload, group_users_actions_v1_mixin0_payload, update_group_v1_mixin0_payload
+from ._profile_groups import (
+    create_group_v1_mixin0_payload,
+    get_group_users_v1_payload,
+    get_groups_v1_mixin0_payload,
+    get_user_groups_v1_payload,
+    group_actions_v1_mixin0_payload,
+    group_users_actions_v1_mixin0_payload,
+    update_group_v1_mixin0_payload
+    )
 from ._recon import (
     recon_action_payload,
     recon_action_update_payload,
@@ -81,7 +89,9 @@ from ._cloud_aws_registration import cloud_aws_registration_payload
 from ._cloud_azure_registration import (
     cloud_azure_registration_payload,
     cloud_azure_registration_create_payload,
-    cloud_azure_registration_legacy_payload
+    cloud_azure_registration_legacy_payload,
+    cloud_registration_azure_create_suppressions_payload,
+    cloud_registration_azure_update_suppressions_payload
     )
 from ._cloud_google_cloud_registration import (
     cloud_google_registration_create_payload
@@ -177,8 +187,15 @@ from ._ngsiem import (
     ngsiem_bulk_install_parsers_payload,
     ngsiem_connector_config_payload,
     ngsiem_data_connection_payload,
-    ngsiem_clone_parser_payload
-)
+    ngsiem_clone_parser_payload,
+    bulk_create_dashboards_from_template_payload,
+    bulk_create_lookup_files_payload,
+    bulk_create_saved_queries_from_template_payload,
+    bulk_update_dashboards_from_template_payload,
+    bulk_update_lookup_files_payload,
+    bulk_update_saved_queries_from_template_payload,
+    create_parser_extension_payload
+    )
 from ._prevention_policy import prevention_policy_payload
 from ._sensor_update_policy import sensor_policy_payload, maintenance_token_payload
 from ._response_policy import response_policy_payload
@@ -320,5 +337,11 @@ __all__ = [
     "entities_knowledge_bases_update_v1_payload", "create_group_v1_mixin0_payload",
     "get_group_users_v1_payload", "get_groups_v1_mixin0_payload",
     "get_user_groups_v1_payload", "group_actions_v1_mixin0_payload",
-    "group_users_actions_v1_mixin0_payload", "update_group_v1_mixin0_payload"
+    "group_users_actions_v1_mixin0_payload", "update_group_v1_mixin0_payload",
+    "cloud_registration_azure_create_suppressions_payload",
+    "cloud_registration_azure_update_suppressions_payload",
+    "bulk_create_dashboards_from_template_payload", "bulk_create_lookup_files_payload",
+    "bulk_create_saved_queries_from_template_payload",
+    "bulk_update_dashboards_from_template_payload", "bulk_update_lookup_files_payload",
+    "bulk_update_saved_queries_from_template_payload", "create_parser_extension_payload"
 ]
