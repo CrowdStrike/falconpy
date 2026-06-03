@@ -180,6 +180,7 @@ from .ioc import IOC
 from .iocs import Iocs
 from .it_automation import ITAutomation, F4IT
 from .knowledge_base_audit_events import KnowledgeBaseAuditEvents
+from .knowledge_base_files import KnowledgeBaseFiles
 from .kubernetes_container_compliance import KubernetesContainerCompliance
 from .kubernetes_protection import KubernetesProtection
 from .malquery import MalQuery
@@ -287,7 +288,7 @@ __all__ = [
     "AccessScopes", "ApiClients",
     "CloudSecurityRegistrationCombined", "CloudSecurityRisks",
     "FederatedConnections", "FoundryLookupFiles",
-    "KnowledgeBaseAuditEvents"
+    "KnowledgeBaseAuditEvents", "KnowledgeBaseFiles"
     ]
 """
 This is free and unencumbered software released into the public domain.
