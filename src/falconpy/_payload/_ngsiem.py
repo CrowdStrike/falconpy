@@ -278,3 +278,141 @@ def ngsiem_data_connection_payload(passed_keywords: dict) -> Dict[str, Union[str
             returned[key] = keyval
 
     return returned
+
+
+def bulk_create_dashboards_from_template_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a BulkCreateDashboardsFromTemplate request.
+
+    {
+        "dashboard_items": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["dashboard_items", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def bulk_create_lookup_files_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a BulkCreateLookupFiles request.
+
+    {
+        "lookup_files": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["lookup_files", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def bulk_create_saved_queries_from_template_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a BulkCreateSavedQueriesFromTemplate request.
+
+    {
+        "saved_query_items": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["saved_query_items", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def bulk_update_dashboards_from_template_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a BulkUpdateDashboardsFromTemplate request.
+
+    {
+        "dashboard_items": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["dashboard_items", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def bulk_update_lookup_files_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a BulkUpdateLookupFiles request.
+
+    {
+        "lookup_files": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["lookup_files", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def bulk_update_saved_queries_from_template_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a BulkUpdateSavedQueriesFromTemplate request.
+
+    {
+        "saved_query_items": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["saved_query_items", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def create_parser_extension_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a CreateParserExtension request.
+
+    {
+        "base_parser_id": "string",
+        "extension_name": "string",
+        "parser_id": "string",
+        "post_processing_script": "string",
+        "pre_processing_script": "string",
+        "test_cases": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["base_parser_id", "extension_name", "parser_id", "post_processing_script", "pre_processing_script", "test_cases"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
