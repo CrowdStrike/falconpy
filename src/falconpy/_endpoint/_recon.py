@@ -167,7 +167,7 @@ _recon_endpoints = [
     "/recon/entities/exports/v1",
     "Get the status of export jobs based on their IDs. Export jobs can be launched by calling "
     "CreateExportJobsV1 When a job is complete, use the job ID to download the file(s) associated with it using GET "
-    "entities/export-files/v1.",
+    "entitiesGetFileContentForExportJobsV1.",
     "recon",
     [
       {
@@ -579,8 +579,7 @@ _recon_endpoints = [
     "QueryRulesV1",
     "GET",
     "/recon/queries/rules/v1",
-    "Query monitoring rules based on provided criteria. Use the IDs from this response to fetch the rules on "
-    "/entities/rules/v1.",
+    "Query monitoring rules based on provided criteria. Use the IDs from this response to fetch the rules on GetRulesV1.",
     "recon",
     [
       {
