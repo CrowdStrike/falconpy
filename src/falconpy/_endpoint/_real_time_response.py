@@ -98,9 +98,9 @@ _real_time_response_endpoints = [
         " unload  restart  rm  runscript  shutdown  unmap  update history  update install  update list  update query  "
         "xmemdump  zip\n\n**base_command** Active-Responder command type we are going to execute, for example: get or "
         "cp.  Refer to the RTR documentation for the full list of commands.\n**batch_id** Batch ID to execute the "
-        "command on.  Received from /real-time-response/combined/batch-init-session/v1.\n**command_string** Full "
-        "command string for the command. For example  get some_file.txt\n**optional_hosts** List of a subset of hosts "
-        "we want to run the command on.  If this list is supplied, only these hosts will receive the command.",
+        "command on.  Received from BatchInitSessions.\n**command_string** Full command string for the command. For "
+        "example  get some_file.txt\n**optional_hosts** List of a subset of hosts we want to run the command on.  If "
+        "this list is supplied, only these hosts will receive the command.",
         "name": "body",
         "in": "body",
         "required": True
@@ -145,9 +145,9 @@ _real_time_response_endpoints = [
         "containment#k893b7c0):  cat  cd  clear  env  eventlog  filehash  getsid  help  history  ipconfig  ls  mount  "
         "netstat  ps  reg query\n\n**base_command** read-only command type we are going to execute, for example: ls or "
         "cd.  Refer to the RTR documentation for the full list of commands.\n**batch_id** Batch ID to execute the "
-        "command on.  Received from /real-time-response/combined/batch-init-session/v1.\n**command_string** Full "
-        "command string for the command. For example  cd C:\\some_directory\n**optional_hosts** List of a subset of "
-        "hosts we want to run the command on.  If this list is supplied, only these hosts will receive the command.",
+        "command on.  Received from BatchInitSessions.\n**command_string** Full command string for the command. For "
+        "example  cd C:\\some_directory\n**optional_hosts** List of a subset of hosts we want to run the command on.  "
+        "If this list is supplied, only these hosts will receive the command.",
         "name": "body",
         "in": "body",
         "required": True
@@ -221,10 +221,10 @@ _real_time_response_endpoints = [
         "in": "query"
       },
       {
-        "description": "**batch_id** Batch ID to execute the command on.  Received from /real-time-"
-        "response/combined/batch-init-session/v1.\n**file_path** Full path to the file that is to be retrieved from "
-        "each host in the batch.\n**optional_hosts** List of a subset of hosts we want to run the command on.  If this "
-        "list is supplied, only these hosts will receive the command.",
+        "description": "**batch_id** Batch ID to execute the command on.  Received from "
+        "BatchInitSessions.\n**file_path** Full path to the file that is to be retrieved from each host in the "
+        "batch.\n**optional_hosts** List of a subset of hosts we want to run the command on.  If this list is supplied, "
+        "only these hosts will receive the command.",
         "name": "body",
         "in": "body",
         "required": True
@@ -300,9 +300,9 @@ _real_time_response_endpoints = [
         "in": "query"
       },
       {
-        "description": "**batch_id** Batch ID to execute the command on.  Received from /real-time-"
-        "response/combined/batch-init-session/v1.\n**hosts_to_remove** Hosts to remove from the batch session.  "
-        "Heartbeats will no longer happen on these hosts and the sessions will expire.",
+        "description": "**batch_id** Batch ID to execute the command on.  Received from "
+        "BatchInitSessions.\n**hosts_to_remove** Hosts to remove from the batch session.  Heartbeats will no longer "
+        "happen on these hosts and the sessions will expire.",
         "name": "body",
         "in": "body",
         "required": True
