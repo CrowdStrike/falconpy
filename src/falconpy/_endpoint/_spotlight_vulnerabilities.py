@@ -130,8 +130,7 @@ _spotlight_vulnerabilities_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more vulnerability IDs (max: 400). Find vulnerability IDs with GET "
-        "/spotlight/queries/vulnerabilities/v1",
+        "description": "One or more vulnerability IDs (max: 400). Find vulnerability IDs with queryVulnerabilities",
         "name": "ids",
         "in": "query",
         "required": True
