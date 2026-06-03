@@ -94,10 +94,9 @@ _sample_uploads_endpoints = [
     "ArchiveUploadV1",
     "POST",
     "/archives/entities/archives/v1",
-    "Uploads an archive and extracts files list from it. Operation is asynchronous use "
-    "`/archives/entities/archives/v1` to check the status. After uploading, use `/archives/entities/extractions/v1` "
-    " to copy the file to internal storage making it available for content analysis.\nThis method is deprecated in "
-    "favor of `/archives/entities/archives/v2`",
+    "Uploads an archive and extracts files list from it. Operation is asynchronous use ArchiveGetV1 to check "
+    "the status. After uploading, use ExtractionGetV1 to copy the file to internal storage making it available for "
+    "content analysis.\nThis method is deprecated in favor of ArchiveUploadV2",
     "sample_uploads",
     [
       {
@@ -158,9 +157,9 @@ _sample_uploads_endpoints = [
     "ArchiveUploadV2",
     "POST",
     "/archives/entities/archives/v2",
-    "Uploads an archive and extracts files list from it. Operation is asynchronous use "
-    "`/archives/entities/archives/v1` to check the status. After uploading, use `/archives/entities/extractions/v1` "
-    "to copy the file to internal storage making it available for content analysis.",
+    "Uploads an archive and extracts files list from it. Operation is asynchronous use ArchiveGetV1 to check "
+    "the status. After uploading, use ExtractionGetV1 to copy the file to internal storage making it available for "
+    "content analysis.",
     "sample_uploads",
     [
       {
