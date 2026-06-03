@@ -286,7 +286,8 @@ __all__ = [
     "NetworkScanScanRuns", "NetworkScanScanners", "NetworkScanScans",
     "NetworkScanTemplates", "NetworkScanZones", "NetworkScan",
     "AccessScopes", "ApiClients",
-    "CloudSecurityRegistrationCombined", "CloudSecurityRisks"
+    "CloudSecurityRegistrationCombined", "CloudSecurityRisks",
+    "FederatedConnections"
     ]
 """
 This is free and unencumbered software released into the public domain.

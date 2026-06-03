@@ -20,6 +20,8 @@
                                                         `---' OAuth2 API SDK for Python 3 `---'
 """
 from ._api_clients import create_api_client_payload, update_api_client_payload
+from ._cloud_security_assets import cloud_security_assets_entities_post_payload
+from ._federated_connections import patch_federated_connections_config_payload, post_federated_connections_config_payload
 from ._generic import (
     generic_payload_list,
     aggregate_payload,
@@ -310,5 +312,7 @@ __all__ = [
     "network_scan_network_create_payload", "network_scan_network_update_payload",
     "network_scan_scan_create_payload", "network_scan_scan_update_payload",
     "network_scan_zone_create_payload", "network_scan_zone_update_payload",
-    "create_api_client_payload", "update_api_client_payload"
+    "create_api_client_payload", "update_api_client_payload",
+    "cloud_security_assets_entities_post_payload", "patch_federated_connections_config_payload",
+    "post_federated_connections_config_payload"
 ]
