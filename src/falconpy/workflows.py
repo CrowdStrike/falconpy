@@ -351,37 +351,6 @@ class Workflows(ServiceClass):
             body=body
             )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_definitions(self: object,
-                           *args,
-                           parameters: dict = None,
-                           **kwargs
-                           ) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Delete workflow definitions and all their associated versions.
-
-        Keyword arguments:
-        ids -- IDs of workflow definitions to delete. String or List of Strings.
-        parameters -- Full parameters payload dictionary. Not required if ids is
-                      provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: DELETE
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsDelete
-        """
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="WorkflowDefinitionsDelete",
-            keywords=kwargs,
-            params=handle_single_argument(args, parameters, "ids")
-            )
-
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
     def execute(self: object,
                 body: dict = None,
@@ -1033,21 +1002,8 @@ class Workflows(ServiceClass):
     WorkflowDefinitionsCombined = search_definitions
     WorkflowActivitiesContentCombined = search_activities_content
     WorkflowDefinitionsDelete = workflow_definitions_delete
+    delete_definitions = workflow_definitions_delete
     WorkflowExecutionsCombined = search_executions
-    WorkflowTriggersCombined = search_triggers
-    WorkflowDefinitionsExport = export_definition
-    WorkflowDefinitionsImport = import_definition
-    WorkflowDefinitionsUpdate = update_definition
-    WorkflowDefinitionsStatus = workflow_definition_action
-    WorkflowDefinitionsAction = workflow_definition_action
-    WorkflowExecute = execute
-    WorkflowExecuteInternal = execute_internal
-    WorkflowMockExecute = mock_execute
-    WorkflowExecutionsAction = execution_action
-    WorkflowExecutionResults = execution_results
-    WorkflowGetHumanInputV1 = get_human_input
-    WorkflowUpdateHumanInputV1 = update_human_input
-    WorkflowDefinitionsDelete = delete_definitions
     WorkflowSystemDefinitionsDeProvision = deprovision
     WorkflowSystemDefinitionsPromote = promote
     WorkflowSystemDefinitionsProvision = provision
