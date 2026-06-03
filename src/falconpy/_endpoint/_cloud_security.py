@@ -91,7 +91,7 @@ _cloud_security_endpoints = [
       {
         "type": "string",
         "description": "A valid FQL filter. Supports filtering groups by:\nGroup properties:  name  "
-        "description  created_at  updated_at\n\nSelector properties:  cloud_provider  account_id  region  "
+        "description  created_at  updated_at\n\nSelector properties:  cloud_provider  account_id  region  gcrn  "
         "cloud_provider_tag  image_registry  image_repository  image_tag  selector.kubernetes_resource.cluster  "
         "selector.kubernetes_resource.namespace\n\nGroup tags:  business_unit  business_impact  environment",
         "name": "filter",
@@ -197,7 +197,7 @@ _cloud_security_endpoints = [
       {
         "type": "string",
         "description": "A valid FQL filter. Supports filtering groups by:\nGroup properties:  name  "
-        "description  created_at  updated_at\n\nSelector properties:  cloud_provider  account_id  region  "
+        "description  created_at  updated_at\n\nSelector properties:  cloud_provider  account_id  region  gcrn  "
         "cloud_provider_tag  image_registry  image_repository  image_tag  selector.kubernetes_resource.cluster  "
         "selector.kubernetes_resource.namespace\n\nGroup tags:  business_unit  business_impact  environment",
         "name": "filter",
