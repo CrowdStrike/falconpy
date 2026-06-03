@@ -143,8 +143,6 @@ from ._ioc import _ioc_endpoints
 from ._iocs import _iocs_endpoints
 from ._it_automation import _it_automation_endpoints
 from ._knowledge_base_audit_events import _knowledge_base_audit_events_endpoints
-from ._knowledge_base_files import _knowledge_base_files_endpoints
-from ._knowledge_bases import _knowledge_bases_endpoints
 from ._kubernetes_container_compliance import _kubernetes_container_compliance_endpoints
 from ._kubernetes_protection import _kubernetes_protection_endpoints
 from ._malquery import _malquery_endpoints
@@ -267,8 +265,6 @@ api_endpoints.extend(_ioc_endpoints)
 api_endpoints.extend(_iocs_endpoints)
 api_endpoints.extend(_it_automation_endpoints)
 api_endpoints.extend(_knowledge_base_audit_events_endpoints)
-api_endpoints.extend(_knowledge_base_files_endpoints)
-api_endpoints.extend(_knowledge_bases_endpoints)
 api_endpoints.extend(_kubernetes_container_compliance_endpoints)
 api_endpoints.extend(_kubernetes_protection_endpoints)
 api_endpoints.extend(_malquery_endpoints)
