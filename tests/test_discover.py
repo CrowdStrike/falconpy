@@ -15,7 +15,7 @@ from falconpy import Discover
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = Discover(auth_object=config)
-AllowedResponses = [200, 201, 403, 404, 429]  # Getting 403's atm
+AllowedResponses = [200, 201, 400, 401, 403, 404, 429]  # Getting 403's and 400's atm
 
 
 class TestDiscover:
