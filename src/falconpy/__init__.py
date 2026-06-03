@@ -164,6 +164,7 @@ from .filevantage import FileVantage
 from .firewall_management import FirewallManagement
 from .firewall_policies import FirewallPolicies
 from .foundry_logscale import FoundryLogScale
+from .foundry_lookup_files import FoundryLookupFiles
 from .host_group import HostGroup
 from .hosts import Hosts
 from .host_migration import HostMigration
@@ -287,7 +288,7 @@ __all__ = [
     "NetworkScanTemplates", "NetworkScanZones", "NetworkScan",
     "AccessScopes", "ApiClients",
     "CloudSecurityRegistrationCombined", "CloudSecurityRisks",
-    "FederatedConnections"
+    "FederatedConnections", "FoundryLookupFiles"
     ]
 """
 This is free and unencumbered software released into the public domain.
