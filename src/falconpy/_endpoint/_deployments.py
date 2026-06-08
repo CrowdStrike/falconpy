@@ -46,13 +46,6 @@ _deployments_endpoints = [
     [
       {
         "type": "string",
-        "description": "authorization header",
-        "name": "Authorization",
-        "in": "header",
-        "required": True
-      },
-      {
-        "type": "string",
         "description": "FQL query specifying filter parameters.",
         "name": "filter",
         "in": "query"
@@ -88,13 +81,6 @@ _deployments_endpoints = [
     "Queries for releases resources and returns details",
     "deployments",
     [
-      {
-        "type": "string",
-        "description": "authorization header",
-        "name": "Authorization",
-        "in": "header",
-        "required": True
-      },
       {
         "type": "string",
         "description": "FQL query specifying filter parameters.",
@@ -133,13 +119,6 @@ _deployments_endpoints = [
     "deployments",
     [
       {
-        "type": "string",
-        "description": "authorization header",
-        "name": "Authorization",
-        "in": "header",
-        "required": True
-      },
-      {
         "type": "array",
         "items": {
           "type": "string"
@@ -160,13 +139,6 @@ _deployments_endpoints = [
     "deployments",
     [
       {
-        "type": "string",
-        "description": "authorization header",
-        "name": "Authorization",
-        "in": "header",
-        "required": True
-      },
-      {
         "name": "body",
         "in": "body",
         "required": True
@@ -181,13 +153,6 @@ _deployments_endpoints = [
     "deployments",
     [
       {
-        "type": "string",
-        "description": "authorization header",
-        "name": "Authorization",
-        "in": "header",
-        "required": True
-      },
-      {
         "name": "body",
         "in": "body",
         "required": True
@@ -201,13 +166,6 @@ _deployments_endpoints = [
     "Queries for release-notes resources and returns ids",
     "deployments",
     [
-      {
-        "type": "string",
-        "description": "authorization header",
-        "name": "Authorization",
-        "in": "header",
-        "required": True
-      },
       {
         "type": "string",
         "description": "FQL query specifying filter parameters.",
