@@ -157,7 +157,8 @@ from ._it_automation import (
     automation_policy_payload,
     policy_host_group_payload,
     automation_live_query_payload,
-    automation_user_group_payload
+    automation_user_group_payload,
+    cancel_task_execution_payload
     )
 from ._mobile_enrollment import mobile_enrollment_payload
 from ._network_scan_global_configs import network_scan_global_configs_payload
@@ -303,7 +304,8 @@ __all__ = [
     "retrieve_relay_node_payload", "inventory_scan_payload", "cloud_azure_registration_create_payload",
     "task_payload", "task_execution_payload", "execution_results_search_payload", "rerun_payload",
     "scheduled_task_payload", "automation_policy_payload", "policy_host_group_payload",
-    "automation_live_query_payload", "automation_user_group_payload", "ngsiem_parser_payload",
+    "automation_live_query_payload", "automation_user_group_payload", "cancel_task_execution_payload",
+    "ngsiem_parser_payload",
     "case_management_notification_groups_payload", "case_management_create_notification_payload",
     "case_management_sla_payload", "case_management_template_payload", "data_protection_classification_payload",
     "data_protection_cloud_app_payload", "data_protection_content_pattern_payload",
