@@ -17,7 +17,7 @@ from falconpy import CorrelationRules
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = CorrelationRules(auth_object=config)
-AllowedResponses = [200, 201, 207, 400, 401, 403, 404, 429, 500]  # 400, 403, 404,
+AllowedResponses = [200, 201, 207, 400, 401, 403, 404, 429, 500]
 
 
 class TestCorrelationRules:
@@ -80,6 +80,6 @@ class TestCorrelationRules:
             if tests[key]["status_code"] not in AllowedResponses:
                 if key != "entities_rule_versions_import_post_v1" and not (key == "entities_rule_versions_publish_patch_v1" and tests[key]["status_code"] == 502):
                     error_checks = False
-                    print(key)
-                    print(tests[key])
+                    # print(key)
+                    # print(tests[key])
         assert error_checks
