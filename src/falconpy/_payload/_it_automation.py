@@ -490,6 +490,20 @@ def automation_user_group_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
+def cancel_task_execution_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted cancel task execution payload.
+
+    {
+        "task_execution_id": "string"
+    }
+    """
+    returned_payload = {}
+    if passed_keywords.get("task_execution_id", None) is not None:
+        returned_payload["task_execution_id"] = passed_keywords.get("task_execution_id", None)
+
+    return returned_payload
+
+
 def automation_live_query_payload(passed_keywords: dict) -> dict:
     """Craft a properly formatted live query payload.
 
