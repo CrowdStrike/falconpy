@@ -79,7 +79,7 @@ class TestNetworkScanScans:
                 pytest.skip("Rate limit hit")
             if test_result["status_code"] not in AllowedResponses:
                 error_checks = False
-                print(f"{test_name} failed: {test_result}")
+                # print(f"{test_name} failed: {test_result}")
 
         return error_checks
 
