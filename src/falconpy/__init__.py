@@ -108,7 +108,7 @@ from ._helper import random_string, Indicator, Color, find_operation
 from .access_scopes import AccessScopes
 from .admission_control_policies import AdmissionControlPolicies
 from .alerts import Alerts
-from .api_clients import ApiClients
+from .api_clients import APIClients
 from .api_integrations import APIIntegrations
 from .api_complete import APIHarness, APIHarnessV2
 from .aspm import ASPM
@@ -287,7 +287,7 @@ __all__ = [
     "NetworkScanGlobalConfigs", "NetworkScanNetworks", "NetworkScanScanRunReports",
     "NetworkScanScanRuns", "NetworkScanScanners", "NetworkScanScans",
     "NetworkScanTemplates", "NetworkScanZones", "NetworkScan",
-    "AccessScopes", "ApiClients",
+    "AccessScopes", "APIClients",
     "CloudSecurityRegistrationCombined", "CloudSecurityRisks",
     "FederatedConnections", "FoundryLookupFiles",
     "KnowledgeBaseAuditEvents", "KnowledgeBaseFiles",
