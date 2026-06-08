@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon ApiClients API interface class.
+"""CrowdStrike Falcon APIClients API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -43,7 +43,7 @@ from ._service_class import ServiceClass
 from ._endpoint._api_clients import _api_clients_endpoints as Endpoints
 
 
-class ApiClients(ServiceClass):
+class APIClients(ServiceClass):
     """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.

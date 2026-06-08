@@ -7,15 +7,15 @@ import sys
 from tests import test_authorization as Authorization
 
 sys.path.append(os.path.abspath('src'))
-from falconpy import ApiClients
+from falconpy import APIClients
 
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
-falcon = ApiClients(auth_object=config)
-AllowedResponses = [200, 201, 207, 400, 403, 404, 429, 500]
+falcon = APIClients(auth_object=config)
+AllowedResponses = [200, 201, 207, 400, 403, 404, 429]
 
 
-class TestApiClients:
+class TestAPIClients:
     def test_all_code_paths(self):
         error_checks = True
         tests = {
