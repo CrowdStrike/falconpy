@@ -18,13 +18,23 @@ AllowedResponses = [200, 201, 207, 400, 403, 404, 429]
 class TestKnowledgeBaseFiles:
     def test_all_code_paths(self):
         error_checks = True
+        payload = open("tests/testfile.png", "rb").read()
+        create = falcon.entities_knowledge_base_files_create_v1
+        update = falcon.entities_knowledge_base_files_update_v1
         tests = {
-            "EntitiesKnowledgeBaseFilesDownloadV1": falcon.entities_knowledge_base_files_download_v1(knowledge_base_id="string",
+            "EntitiesKnowledgeBaseFilesDownloadV1": falcon.entities_knowledge_base_files_download_v1(knowledge_base_id="str",
                                                                                                      id="string"),
             "EntitiesKnowledgeBaseFilesV1": falcon.entities_knowledge_base_files_v1(knowledge_base_id="string",
                                                                                     ids=["string"], include_deleted=True),
-            "EntitiesKnowledgeBaseFilesUpdateV1": falcon.entities_knowledge_base_files_update_v1(),
-            "EntitiesKnowledgeBaseFilesCreateV1": falcon.entities_knowledge_base_files_create_v1(),
+            "EntitiesKnowledgeBaseFilesUpdateV1": update(id="string", file=payload,
+                                                         file_name="testfile.csv", file_description="unit test"),
+            "EntitiesKnowledgeBaseFilesUpdateV1_fail": update(),
+            "EntitiesKnowledgeBaseFilesCreateV1": create(knowledge_base_id="string", file=payload,
+                                                         file_name="testfile.csv", file_description="unit test"),
+            "EntitiesKnowledgeBaseFilesCreateV1_fail": create(),
+            "EntitiesKnowledgeBaseFilesCreateV1_params": create(file_name="testfile.csv",
+                                                                parameters={"knowledge_base_id": "string",
+                                                                            "file": payload}),
             "EntitiesKnowledgeBaseFilesDeleteV1": falcon.entities_knowledge_base_files_delete_v1(knowledge_base_id="string",
                                                                                                  id="string"),
             "QueriesKnowledgeBaseFilesV1": falcon.queries_knowledge_base_files_v1(knowledge_base_id="string", offset=1,
