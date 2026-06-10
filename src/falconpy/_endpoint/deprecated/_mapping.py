@@ -73,10 +73,8 @@ _deprecated_op_mapping = {
     "QueryBehaviors": "",
     "QueryIncidents": "",
     "download_azure_script": "",
-
     "CreateFileV1": "",
     "UpdateFileV1": "",
-
     "combinedQueryInstalledPatches": "",
 }
 
