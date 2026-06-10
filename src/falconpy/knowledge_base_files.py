@@ -63,7 +63,7 @@ class KnowledgeBaseFiles(ServiceClass):
         """Download knowledge base file entities for the provided id.
 
         Keyword arguments:
-        knowledge_base_id -- ID of the knowledge base String.
+        knowledge_base_id -- ID of the knowledge base. String.
         id -- ID of entities to retrieve. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
@@ -92,7 +92,7 @@ class KnowledgeBaseFiles(ServiceClass):
         """Retrieve knowledge base file entities for the provided id.
 
         Keyword arguments:
-        knowledge_base_id -- ID of the knowledge base String.
+        knowledge_base_id -- ID of the knowledge base. String.
         ids -- IDs of entities to retrieve. List.
         include_deleted -- Include deleted knowledge base files in the result. Defaults to false. Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
@@ -210,8 +210,8 @@ class KnowledgeBaseFiles(ServiceClass):
         """Delete document from knowledge base.
 
         Keyword arguments:
-        knowledge_base_id -- ID of the knowledge base String.
-        id -- ID of the document to delete String.
+        knowledge_base_id -- ID of the knowledge base. String.
+        id -- ID of the document to delete. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -239,7 +239,7 @@ class KnowledgeBaseFiles(ServiceClass):
         """Query knowledge base files based on the provided filters.
 
         Keyword arguments:
-        knowledge_base_id -- ID of the knowledge base String.
+        knowledge_base_id -- ID of the knowledge base. String.
         offset -- Starting index of overall result set from which to return ids. Integer.
         limit -- Number of IDs to return. Offset + limit should NOT be above 10K. Integer.
         filter -- FQL query specifying the filter parameters. String.

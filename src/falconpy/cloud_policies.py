@@ -453,13 +453,13 @@ class CloudPolicies(ServiceClass):
 
         Keyword arguments:
         ids -- List of asset IDs (maximum 100 IDs allowed). String or list of strings.
-        domain -- Rule domain (Currently only used for KAC Rego rules) String.
-        subdomain -- Rule subdomain (Currently only used for KAC Rego rules) String.
+        domain -- Rule domain (Currently only used for KAC Rego rules). String.
+        subdomain -- Rule subdomain (Currently only used for KAC Rego rules). String.
         resource_type -- Currently the Resource type field is only used when KAC Rules are specified vai Domain: Runtime &
                          Subdomain: IOM. For KAC rules, we return static sample data instead of real
                          assets b/c we don't have KAC payloads stored for customers. This field valued
                          selects what sample data resource type we return which the UI shows in the
-                         Rego Editor to do test evaluations String.
+                         Rego Editor to do test evaluations. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'id'.
@@ -1287,7 +1287,7 @@ class CloudPolicies(ServiceClass):
         """Clone an existing compliance framework to create a custom copy.
 
         Keyword arguments:
-        ids -- The uuid of the compliance framework to clone String.
+        ids -- The uuid of the compliance framework to clone. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.

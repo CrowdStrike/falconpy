@@ -136,7 +136,7 @@ class CloudAzureRegistration(ServiceClass):
 
         Keyword arguments:
         tenant_id -- Tenant ID to retrieve. String.
-        registration_id -- Registration ID String.
+        registration_id -- Registration ID. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -580,8 +580,8 @@ class CloudAzureRegistration(ServiceClass):
         """Retrieve distinct filterable values for issue suppression fields.
 
         Keyword arguments:
-        registration_id -- Registration ID to filter values by String.
-        field -- Field to get values for Available values: issue_name, entity_id, suppressed_by, created_at, reason. String.
+        registration_id -- Registration ID to filter values by. String.
+        field -- Field to get values for. Available values: issue_name, entity_id, suppressed_by, created_at, reason. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -609,10 +609,10 @@ class CloudAzureRegistration(ServiceClass):
         """Retrieve distinct filterable values for issue fields.
 
         Keyword arguments:
-        registration_id -- Registration ID to filter values by String.
+        registration_id -- Registration ID to filter values by. String.
         filter -- FQL (Falcon Query Language) string for filtering results. Allowed filters are
-                  name,issue,severity,category,impact,entity_type,entity_id,entity_name,status String.
-        field -- Field to get values for Available values: issue, name, severity, category, impact, entity_type, entity_id,
+                  name,issue,severity,category,impact,entity_type,entity_id,entity_name,status. String.
+        field -- Field to get values for. Available values: issue, name, severity, category, impact, entity_type, entity_id,
                  entity_name, status, feature. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
@@ -641,14 +641,14 @@ class CloudAzureRegistration(ServiceClass):
         """Retrieve issues for Azure registrations.
 
         Keyword arguments:
-        registration_id -- Registration ID String.
+        registration_id -- Registration ID. String.
         filter -- FQL (Falcon Query Language) string for filtering results. Allowed filters are
-                  name,issue,severity,category,impact,entity_type,entity_id,entity_name,status String.
+                  name,issue,severity,category,impact,entity_type,entity_id,entity_name,status. String.
         sort -- Field and direction for sorting results - allowed sort fields are
-                issue,name,severity,category,impact,entity_type,entity_id,entity_name,impacted_entities String.
-        group_by -- Grouping method: 'name' (optional, default: ungrouped) Available values: name. String.
-        limit -- Maximum number of records to return (default: 100, max: 1000) Integer.
-        offset -- Starting index of result Integer.
+                issue,name,severity,category,impact,entity_type,entity_id,entity_name,impacted_entities. String.
+        group_by -- Grouping method: 'name' (optional, default: ungrouped). Available values: name. String.
+        limit -- Maximum number of records to return (default: 100, max: 1000). Integer.
+        offset -- Starting index of result. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -676,7 +676,7 @@ class CloudAzureRegistration(ServiceClass):
         """Download Azure deployment script (Terraform or Bicep).
 
         Keyword arguments:
-        tenant_id -- Azure tenant ID String.
+        tenant_id -- Azure tenant ID. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -704,11 +704,11 @@ class CloudAzureRegistration(ServiceClass):
         """Retrieve all available script versions with filtering and sorting.
 
         Keyword arguments:
-        deployment_method -- Filter by deployment method (e.g., 'bicep-legacy', 'bicep-deployment-stack') String.
+        deployment_method -- Filter by deployment method (e.g., 'bicep-legacy', 'bicep-deployment-stack'). String.
         sort -- Field and direction for sorting results - allowed sort fields are version,deployment_method,published_date
                 String.
-        limit -- Maximum number of records to return (default: 100, max: 1000) Integer.
-        offset -- Starting index of result Integer.
+        limit -- Maximum number of records to return (default: 100, max: 1000). Integer.
+        offset -- Starting index of result. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -736,13 +736,13 @@ class CloudAzureRegistration(ServiceClass):
         """Retrieve existing suppression rules with filtering.
 
         Keyword arguments:
-        registration_id -- Registration ID String.
+        registration_id -- Registration ID. String.
         filter -- FQL (Falcon Query Language) string for filtering results. Allowed filters are
-                  issue_name,entity_id,suppressed_by,created_at,reason String.
+                  issue_name,entity_id,suppressed_by,created_at,reason. String.
         sort -- Field and direction for sorting results - allowed sort fields are
-                issue_name,entity_id,suppressed_by,created_at,reason String.
-        limit -- Maximum number of records to return (default: 100, max: 1000) Integer.
-        offset -- Starting index of result Integer.
+                issue_name,entity_id,suppressed_by,created_at,reason. String.
+        limit -- Maximum number of records to return (default: 100, max: 1000). Integer.
+        offset -- Starting index of result. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.

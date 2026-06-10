@@ -839,7 +839,7 @@ class NGSIEM(ServiceClass):
         Keyword arguments:
         yaml_template -- LogScale Parser YAML template content, see schema at https://schemas.humio.com/. Binary data.
         schema_validation_enabled -- When true, schema validation is enforced (CPS) and validates against Crowdstrike Parsing
-                                     Standard Boolean.
+                                     Standard. Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -2140,8 +2140,8 @@ class NGSIEM(ServiceClass):
                     ],
                     "search_domain": "string"
                 }
-        dashboard_items -- List of dashboards to create List.
-        search_domain -- The name of the search domain where the dashboards will be created String.
+        dashboard_items -- List of dashboards to create. List.
+        search_domain -- The name of the search domain where the dashboards will be created. String.
 
         This method only supports keywords for providing arguments.
 
@@ -2180,8 +2180,8 @@ class NGSIEM(ServiceClass):
                     ],
                     "search_domain": "string"
                 }
-        lookup_files -- List of lookup files to create List.
-        search_domain -- The name of the search domain where the lookup files will be created String.
+        lookup_files -- List of lookup files to create. List.
+        search_domain -- The name of the search domain where the lookup files will be created. String.
 
         This method only supports keywords for providing arguments.
 
@@ -2219,8 +2219,8 @@ class NGSIEM(ServiceClass):
                     ],
                     "search_domain": "string"
                 }
-        saved_query_items -- List of saved queries to create List.
-        search_domain -- The name of the search domain where saved queries will be created String.
+        saved_query_items -- List of saved queries to create. List.
+        search_domain -- The name of the search domain where saved queries will be created. String.
 
         This method only supports keywords for providing arguments.
 
@@ -2249,8 +2249,8 @@ class NGSIEM(ServiceClass):
         """Retrieve Multiple Lookup Files by Filenames in NGSIEM.
 
         Keyword arguments:
-        filename -- Lookup file filename(s) (required, multiple allowed) List.
-        search_domain -- name of search domain (view or repo) Available values: all, falcon, third-party, dashboards,
+        filename -- Lookup file filename(s) (required, multiple allowed). List.
+        search_domain -- name of search domain (view or repo). Available values: all, falcon, third-party, dashboards,
                          parsers-repository. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
@@ -2289,8 +2289,8 @@ class NGSIEM(ServiceClass):
                     ],
                     "search_domain": "string"
                 }
-        dashboard_items -- Array of dashboards to update with their IDs and YAML templates List.
-        search_domain -- The name of the search domain containing the dashboards String.
+        dashboard_items -- Array of dashboards to update with their IDs and YAML templates. List.
+        search_domain -- The name of the search domain containing the dashboards. String.
 
         This method only supports keywords for providing arguments.
 
@@ -2329,8 +2329,8 @@ class NGSIEM(ServiceClass):
                     ],
                     "search_domain": "string"
                 }
-        lookup_files -- List of lookup files to update List.
-        search_domain -- The name of the search domain containing the lookup files String.
+        lookup_files -- List of lookup files to update. List.
+        search_domain -- The name of the search domain containing the lookup files. String.
 
         This method only supports keywords for providing arguments.
 
@@ -2369,8 +2369,8 @@ class NGSIEM(ServiceClass):
                     ],
                     "search_domain": "string"
                 }
-        saved_query_items -- Array of saved queries to update with their IDs and YAML templates List.
-        search_domain -- The name of the search domain containing the saved queries String.
+        saved_query_items -- Array of saved queries to update with their IDs and YAML templates. List.
+        search_domain -- The name of the search domain containing the saved queries. String.
 
         This method only supports keywords for providing arguments.
 
