@@ -18,9 +18,23 @@ AllowedResponses = [200, 201, 207, 400, 401, 403, 404, 429, 500]
 class TestFoundryLookupFiles:
     def test_all_code_paths(self):
         error_checks = True
+        payload = open("tests/testfile.png", "rb").read()
         tests = {
-            "CreateFileV1": falcon.create_file_v1(),
-            "UpdateFileV1": falcon.update_file_v1(),
+            "CreateFileV1": falcon.create_file_v1(file=payload,
+                                                  file_name="testfile.csv",
+                                                  name="unittestfile",
+                                                  description="FalconPy unit test",
+                                                  repo="unittest"
+                                                  ),
+            "CreateFileV1_fail": falcon.create_file_v1(),
+            "UpdateFileV1": falcon.update_file_v1(id="123456NOTAREALID",
+                                                  description="FalconPy unit test",
+                                                  file=payload,
+                                                  file_name="testfile.csv"
+                                                  ),
+            "UpdateFileV1_no_file": falcon.update_file_v1(id="123456NOTAREALID",
+                                                          description="FalconPy unit test"
+                                                          ),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
