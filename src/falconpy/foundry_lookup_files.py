@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
-from ._util import force_default, process_service_request, generate_error_result
+from ._util import force_default, process_service_request, generate_error_result, params_to_keywords
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._foundry_lookup_files import _foundry_lookup_files_endpoints as Endpoints
@@ -69,6 +69,7 @@ class FoundryLookupFiles(ServiceClass):
         description -- File description. String.
         id -- Unique identifier of the file being updated. String.
         repo -- Name of repository or view to save the file. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
@@ -79,6 +80,10 @@ class FoundryLookupFiles(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-lookup-files/CreateFileV1
         """
+        kwargs = params_to_keywords(["file", "name", "description", "id", "repo"],
+                                    parameters,
+                                    kwargs
+                                    )
         file_name = kwargs.get("file_name", None)
         file_data = kwargs.get("file", None)
         if not file_data:
@@ -97,8 +102,7 @@ class FoundryLookupFiles(ServiceClass):
             endpoints=Endpoints,
             operation_id="CreateFileV1",
             data=file_extended,
-            files=[("file", (file_name, file_data))],
-            params=parameters
+            files=[("file", (file_name, file_data))]
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -113,6 +117,7 @@ class FoundryLookupFiles(ServiceClass):
         id -- Unique identifier of the file being updated. String.
         description -- File description. String.
         file -- File to be uploaded. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
@@ -123,6 +128,10 @@ class FoundryLookupFiles(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-lookup-files/UpdateFileV1
         """
+        kwargs = params_to_keywords(["id", "description", "file"],
+                                    parameters,
+                                    kwargs
+                                    )
         file_name = kwargs.get("file_name", None)
         file_data = kwargs.get("file", None)
         file_extended = {}
@@ -138,8 +147,7 @@ class FoundryLookupFiles(ServiceClass):
             endpoints=Endpoints,
             operation_id="UpdateFileV1",
             data=file_extended,
-            files=file_uploads,
-            params=parameters
+            files=file_uploads
             )
     CreateFileV1 = create_file_v1
     UpdateFileV1 = update_file_v1

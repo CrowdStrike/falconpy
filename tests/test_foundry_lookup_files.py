@@ -35,6 +35,11 @@ class TestFoundryLookupFiles:
             "UpdateFileV1_no_file": falcon.update_file_v1(id="123456NOTAREALID",
                                                           description="FalconPy unit test"
                                                           ),
+            "CreateFileV1_params_dict": falcon.create_file_v1(file_name="testfile.csv",
+                                                              parameters={"file": payload,
+                                                                          "name": "unittestfile",
+                                                                          "repo": "unittest"}
+                                                              ),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
