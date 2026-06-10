@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
-from ._util import force_default, process_service_request
+from ._util import force_default, process_service_request, generate_error_result, params_to_keywords
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._knowledge_base_files import _knowledge_base_files_endpoints as Endpoints
@@ -114,18 +114,19 @@ class KnowledgeBaseFiles(ServiceClass):
             params=parameters
             )
 
-    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def entities_knowledge_base_files_update_v1(self: object,
                                                 parameters: dict = None,
-                                                body: dict = None,
                                                 **kwargs
                                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an existing file in a knowledge base.
 
         Keyword arguments:
-        id -- ID of the document to update String.
-        file -- New file content to replace the existing document String.
-        file_description -- New description for the document String.
+        file_name -- Name to use for the uploaded file. String.
+        id -- ID of the document to update. String.
+        file -- New file content to replace the existing document. String.
+        file_description -- New description for the document. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
@@ -136,27 +137,40 @@ class KnowledgeBaseFiles(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-base-files/EntitiesKnowledgeBaseFilesUpdateV1
         """
+        kwargs = params_to_keywords(["id", "file", "file_description"],
+                                    parameters,
+                                    kwargs
+                                    )
+        file_name = kwargs.get("file_name", None)
+        file_data = kwargs.get("file", None)
+        if not file_data:
+            return generate_error_result("You must provide a file to upload.", code=400)
+        file_extended = {}
+        if kwargs.get("id", None) is not None:
+            file_extended["id"] = kwargs.get("id")
+        if kwargs.get("file_description", None) is not None:
+            file_extended["file_description"] = kwargs.get("file_description")
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="EntitiesKnowledgeBaseFilesUpdateV1",
-            keywords=kwargs,
-            params=parameters,
-            body=body
+            data=file_extended,
+            files=[("file", (file_name, file_data))]
             )
 
-    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def entities_knowledge_base_files_create_v1(self: object,
                                                 parameters: dict = None,
-                                                body: dict = None,
                                                 **kwargs
                                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload a file to a knowledge base.
 
         Keyword arguments:
-        knowledge_base_id -- ID of the knowledge base String.
-        file -- File to be uploaded String.
-        file_description -- Description for the uploaded file String.
+        file_name -- Name to use for the uploaded file. String.
+        knowledge_base_id -- ID of the knowledge base. String.
+        file -- File to be uploaded. String.
+        file_description -- Description for the uploaded file. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
@@ -167,13 +181,25 @@ class KnowledgeBaseFiles(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-base-files/EntitiesKnowledgeBaseFilesCreateV1
         """
+        kwargs = params_to_keywords(["knowledge_base_id", "file", "file_description"],
+                                    parameters,
+                                    kwargs
+                                    )
+        file_name = kwargs.get("file_name", None)
+        file_data = kwargs.get("file", None)
+        if not file_data:
+            return generate_error_result("You must provide a file to upload.", code=400)
+        file_extended = {}
+        if kwargs.get("knowledge_base_id", None) is not None:
+            file_extended["knowledge_base_id"] = kwargs.get("knowledge_base_id")
+        if kwargs.get("file_description", None) is not None:
+            file_extended["file_description"] = kwargs.get("file_description")
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="EntitiesKnowledgeBaseFilesCreateV1",
-            keywords=kwargs,
-            params=parameters,
-            body=body
+            data=file_extended,
+            files=[("file", (file_name, file_data))]
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
