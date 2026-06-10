@@ -811,7 +811,7 @@ class FalconContainer(ServiceClass):
                            cyclonedx-json
                            json
                            sarif
-        architecture -- Platform architecture to filter multi-arch images (e.g. amd64, arm64) String.
+        architecture -- Platform architecture to filter multi-arch images (e.g. amd64, arm64). String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.

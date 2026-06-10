@@ -73,7 +73,7 @@ class ProfileGroups(ServiceClass):
         """Perform actions on profile groups (add/remove roles, user groups, FGA objects).
 
         Keyword arguments:
-        action_name -- Action to perform Available values: add_roles, remove_roles, add_user_groups, remove_user_groups,
+        action_name -- Action to perform. Available values: add_roles, remove_roles, add_user_groups, remove_user_groups,
                        add_fga_objects, remove_fga_objects. String.
         body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
@@ -123,7 +123,7 @@ class ProfileGroups(ServiceClass):
         """Add or remove users from profile groups.
 
         Keyword arguments:
-        action_name -- Action to perform Available values: add_users, remove_users. String.
+        action_name -- Action to perform. Available values: add_users, remove_users. String.
         body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "action_parameters": [
@@ -177,7 +177,7 @@ class ProfileGroups(ServiceClass):
                         "string"
                     ]
                 }
-        ids -- Profile Group IDs to get users for List.
+        ids -- Profile Group IDs to get users for. List.
 
         This method only supports keywords for providing arguments.
 
@@ -212,7 +212,7 @@ class ProfileGroups(ServiceClass):
                         "string"
                     ]
                 }
-        ids -- Profile Group IDs to retrieve List.
+        ids -- Profile Group IDs to retrieve. List.
 
         This method only supports keywords for providing arguments.
 
@@ -247,9 +247,9 @@ class ProfileGroups(ServiceClass):
                     "description": "string",
                     "name": "string"
                 }
-        cid -- CID for the new profile group in a Flight Control environment String.
-        description -- Optional description for the group String.
-        name -- Name for the new profile group String.
+        cid -- CID for the new profile group in a Flight Control environment. String.
+        description -- Optional description for the group. String.
+        name -- Name for the new profile group. String.
 
         This method only supports keywords for providing arguments.
 
@@ -309,14 +309,14 @@ class ProfileGroups(ServiceClass):
         """Update profile group metadata (name, description).
 
         Keyword arguments:
-        id -- ID of the group to update String.
+        id -- ID of the group to update. String.
         body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "description": "string",
                     "name": "string"
                 }
-        description -- New description for the group String.
-        name -- New name for the group String.
+        description -- New description for the group. String.
+        name -- New name for the group. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -354,7 +354,7 @@ class ProfileGroups(ServiceClass):
                         "string"
                     ]
                 }
-        ids -- User UUIDs to get groups for List.
+        ids -- User UUIDs to get groups for. List.
 
         This method only supports keywords for providing arguments.
 
@@ -383,10 +383,10 @@ class ProfileGroups(ServiceClass):
         """Query profile group IDs with FQL filtering, pagination, and sorting.
 
         Keyword arguments:
-        filter -- FQL filter expression to filter groups by name or cid String.
-        sort -- Sort by field|direction (name, updated_at, member_count) String.
-        offset -- Number of groups to skip Integer.
-        limit -- Maximum groups to return [1-500] Integer.
+        filter -- FQL filter expression to filter groups by name or cid. String.
+        sort -- Sort by field|direction (name, updated_at, member_count). String.
+        offset -- Number of groups to skip. Integer.
+        limit -- Maximum groups to return [1-500]. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.

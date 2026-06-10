@@ -70,9 +70,9 @@ class FederatedConnections(ServiceClass):
                     "connection_id": "string",
                     "view_token": "string"
                 }
-        cluster_url -- URL of the external cluster String.
-        connection_id -- ID of the federated connection String.
-        view_token -- token for accessing external cluster String.
+        cluster_url -- URL of the external cluster. String.
+        connection_id -- ID of the federated connection. String.
+        view_token -- token for accessing external cluster. String.
 
         This method only supports keywords for providing arguments.
 
@@ -101,7 +101,7 @@ class FederatedConnections(ServiceClass):
         """Delete configuration for a federated connection.
 
         Keyword arguments:
-        connection_id -- Connection ID to delete configuration for String.
+        connection_id -- Connection ID to delete configuration for. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -130,14 +130,14 @@ class FederatedConnections(ServiceClass):
         """Update configuration for a federated connection.
 
         Keyword arguments:
-        connection_id -- Connection ID to update configuration for String.
+        connection_id -- Connection ID to update configuration for. String.
         body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "cluster_url": "string",
                     "view_token": "string"
                 }
-        cluster_url -- URL of the external cluster String.
-        view_token -- token for accessing external cluster String.
+        cluster_url -- URL of the external cluster. String.
+        view_token -- token for accessing external cluster. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.

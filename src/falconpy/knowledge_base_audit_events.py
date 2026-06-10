@@ -146,7 +146,7 @@ class KnowledgeBaseAuditEvents(ServiceClass):
         """Get knowledge base audit events with full event details and pagination.
 
         Keyword arguments:
-        knowledge_base_id -- ID of the knowledge base to get audit events for String.
+        knowledge_base_id -- ID of the knowledge base to get audit events for. String.
         offset -- Starting index of overall result set from which to return events. Integer.
         limit -- Number of events to return. Integer.
         sort -- Sort order. Ex: 'created_at|desc'. String.
@@ -179,7 +179,7 @@ class KnowledgeBaseAuditEvents(ServiceClass):
         """Retrieve knowledge base audit event entities by their IDs.
 
         Keyword arguments:
-        knowledge_base_id -- ID of the knowledge base String.
+        knowledge_base_id -- ID of the knowledge base. String.
         ids -- IDs of audit events to retrieve. List.
         include_deleted -- Include audit events for deleted knowledge bases. Defaults to false. Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
@@ -209,7 +209,7 @@ class KnowledgeBaseAuditEvents(ServiceClass):
         """Query knowledge base audit event IDs with pagination and filtering.
 
         Keyword arguments:
-        knowledge_base_id -- ID of the knowledge base to query audit events for String.
+        knowledge_base_id -- ID of the knowledge base to query audit events for. String.
         offset -- Starting index of overall result set from which to return ids. Integer.
         limit -- Number of IDs to return. Integer.
         sort -- Sort order. Ex: 'created_at|desc'. String.

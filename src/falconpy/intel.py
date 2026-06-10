@@ -720,7 +720,7 @@ class Intel(ServiceClass):
         """Get MITRE tactics and techniques for the given actor.
 
         Keyword arguments:
-        id -- Actor ID, derived from the actor name. (Example: fancy-bear) String.
+        id -- Actor ID, derived from the actor name. (Example: fancy-bear). String.
         ids -- The actor ID(derived from the actor's name) for which to retrieve a list of attacks.
                Example: fancy-bear. Multiple values are allowed. List of strings.
         parameters - full parameters payload, not required if using `id` keyword.
