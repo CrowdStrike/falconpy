@@ -112,6 +112,7 @@ This has been a critical element in the development of the FalconPy project.
 + `@atav928`
 + `@subbu-cs`
 + Jay Prajapati, `@jayy-77`
++ Gene Kazimiarovich, `@gkazimiarovich`
 
 ## Sponsors
 Without the support of these executives, the FalconPy project would not have happened.
