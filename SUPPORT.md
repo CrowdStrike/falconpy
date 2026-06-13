@@ -60,7 +60,7 @@ _MCVE format_ is designed to reduce the potential for encountering confidentiali
 
 #### Questions
 
-Have a question you can't find answered in the [documentation](https://falconpy.io) or [samples](https://github.com/CrowdStrike/falconpy/tree/main/samples)?
+Have a question you can't find answered in the [documentation](https://developer.crowdstrike.com/sdks/python/) or [samples](https://github.com/CrowdStrike/falconpy/tree/main/samples)?
 
 Find out if anyone else in the community is experiencing the same issue on our [discussion board](#community-forums).
 Your questions are welcome; please submit them to the [Q&A section](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A).
@@ -90,13 +90,13 @@ There are four discussion categories:
 [![GitHub Discussions](https://img.shields.io/github/discussions/CrowdStrike/falconpy?logo=github&logoColor=white)](https://github.com/CrowdStrike/falconpy/discussions)
 
 ## Documentation
-### Official Project Documentation: [falconpy.io](https://falconpy.io)
+### Official Project Documentation: [CrowdStrike Developer Center](https://developer.crowdstrike.com/sdks/python/)
 
 Extended documentation is also available via the [wiki](https://github.com/CrowdStrike/falconpy/wiki) for this repository.
 
 This content is updated as part of our release cycle and synchronized hourly.
 
-[![Documentation Version](https://img.shields.io/endpoint?url=https%3A%2F%2Ffalconpy.io%2F_version.json&label=documentation%20version)](https://falconpy.io)
+[![Documentation Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fdeveloper.crowdstrike.com%2F_version.json&label=documentation%20version)](https://developer.crowdstrike.com/sdks/python/)
 
 ## Contributing
 Interested in earning a place on our [contributors list](https://github.com/CrowdStrike/falconpy/blob/main/AUTHORS.md#contributors)?
