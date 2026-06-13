@@ -10,7 +10,7 @@
 [![Release date](https://img.shields.io/github/release-date/CrowdStrike/falconpy)](https://github.com/CrowdStrike/falconpy/releases)
 [![Repo status](https://img.shields.io/osslifecycle/crowdstrike/falconpy?label=repo%20status)](https://github.com/CrowdStrike/falconpy/graphs/code-frequency)
 [![Commit activity](https://img.shields.io/github/commits-since/CrowdStrike/falconpy/latest)](https://github.com/CrowdStrike/falconpy/commits/main)
-![GitHub forks](https://img.shields.io/github/forks/crowdstrike/falconpy?style=flat)
+[![GitHub forks](https://img.shields.io/github/forks/crowdstrike/falconpy?style=flat)](https://github.com/CrowdStrike/falconpy/forks)
 
 The FalconPy SDK contains a collection of Python classes that abstract CrowdStrike Falcon OAuth2 API interaction, removing duplicative code and allowing developers to focus on just the logic of their solution requirements.
 
@@ -20,7 +20,7 @@ The FalconPy SDK contains a collection of Python classes that abstract CrowdStri
 + [Contribute to FalconPy](#contribute-to-falconpy-)
 
 ## Overview 🔎
-There are many CrowdStrike Falcon API [service collections](https://www.falconpy.io/Operations/Operations-by-Collection.html) collectively containing hundreds of [individual operations](https://www.falconpy.io/Operations/All-Operations.html), all of which are accessible to your project via FalconPy.
+There are many CrowdStrike Falcon API [service collections](https://developer.crowdstrike.com/api-reference/operations-by-collection/) collectively containing hundreds of [individual operations](https://developer.crowdstrike.com/api-reference/all-operations/), all of which are accessible to your project via FalconPy.
 
 The CrowdStrike Falcon SDK for Python completely abstracts token management, while also supporting interaction with all CrowdStrike regions, custom connection and response timeouts, routing requests through a list of proxies, disabling SSL verification, and custom header configuration.
 
@@ -32,7 +32,7 @@ The CrowdStrike Falcon SDK for Python completely abstracts token management, whi
 [![Development Installs](https://static.pepy.tech/personalized-badge/crowdstrike-falconpy-dev?left_text=development%20package%20installs/month&left_color=grey&right_color=blue&period=month)](https://pepy.tech/project/crowdstrike-falconpy-dev)
 
 #### Supported versions of Python
-The CrowdStrike Falcon SDK for Python was developed for Python 3. Current versions of FalconPy provide support for Python versions `3.8` - `3.13`. Every commit to the FalconPy code base is unit tested for functionality using all versions of Python the library currently supports.
+The CrowdStrike Falcon SDK for Python was developed for Python 3. Current versions of FalconPy provide support for Python versions `3.8` - `3.14`. Every commit to the FalconPy code base is unit tested for functionality using all versions of Python the library currently supports.
 
 > [!NOTE]
 > Developers working with Python version `3.6` will need to leverage versions of FalconPy less than `1.4.0`. 
@@ -71,14 +71,14 @@ The FalconPy SDK provides two distinct methods for interacting with CrowdStrike'
 | **[Service Classes](#service-classes)** | **[The Uber Class](#the-uber-class)** |
 | :-- | :-- |
 | <BR/>[![Service Classes](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/service-class-relationships.png)](#service-classes) | [![The Uber Class](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/uber-class-relationships.png)](#the-uber-class) | 
-| Each Service Class represents a single CrowdStrike API service collection providing an interface to the [operations available](https://www.falconpy.io/Operations/Operations-by-Collection.html) within that service collection.| An all-in-one class that provides a singular interface for [all operations](https://www.falconpy.io/Operations/All-Operations.html) in every CrowdStrike API service collection. |
+| Each Service Class represents a single CrowdStrike API service collection providing an interface to the [operations available](https://developer.crowdstrike.com/api-reference/operations-by-collection/) within that service collection.| An all-in-one class that provides a singular interface for [all operations](https://developer.crowdstrike.com/api-reference/all-operations/) in every CrowdStrike API service collection. |
 
 
 ### Service Classes
-Representing a single CrowdStrike Falcon API service collection, each Service Class has a method defined for [every operation available](https://www.falconpy.io/Operations/Operations-by-Collection.html) within that service collection.
+Representing a single CrowdStrike Falcon API service collection, each Service Class has a method defined for [every operation available](https://developer.crowdstrike.com/api-reference/operations-by-collection/) within that service collection.
 
 #### Available Service Classes
-For each CrowdStrike Falcon API service collection, a matching Service Class is available in the FalconPy library. For a complete list of service collections and their related Service Class, please review the [Operations by Collection](https://www.falconpy.io/Operations/Operations-by-Collection.html) page on [falconpy.io](https://falconpy.io).
+For each CrowdStrike Falcon API service collection, a matching Service Class is available in the FalconPy library. For a complete list of service collections and their related Service Class, please review the [Operations by Collection](https://developer.crowdstrike.com/api-reference/operations-by-collection/) page on the [CrowdStrike Developer Center](https://developer.crowdstrike.com).
 
 
 #### Service Class benefits
@@ -87,28 +87,28 @@ For each CrowdStrike Falcon API service collection, a matching Service Class is 
 - Completely abstracts token management, automatically refreshing your token when it expires.
 - Interact with newly released API operations not yet available in the library via the `override` method.
 - Provides simple programmatic patterns for interacting with CrowdStrike Falcon APIs.
-- Supports [cloud region autodiscovery](https://www.falconpy.io/Usage/Environment-Configuration.html#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
-- Supports dynamic [configuration](https://www.falconpy.io/Usage/Environment-Configuration.html) based upon the needs of your environment.
-- Supports CrowdStrike Falcon API [parameter abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#parameter-abstraction) functionality.
-- Supports CrowdStrike Falcon API [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) functionality.
+- Supports [cloud region autodiscovery](https://developer.crowdstrike.com/sdks/python/configuration/#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
+- Supports dynamic [configuration](https://developer.crowdstrike.com/sdks/python/configuration/) based upon the needs of your environment.
+- Supports CrowdStrike Falcon API [parameter abstraction](https://developer.crowdstrike.com/sdks/python/payloads/#parameter-abstraction) functionality.
+- Supports CrowdStrike Falcon API [body payload abstraction](https://developer.crowdstrike.com/sdks/python/payloads/#body-payload-abstraction) functionality.
 
 ### The Uber Class
-Operating as a single harness for interacting with the entire CrowdStrike Falcon API, the _Uber Class_ can access [every available operation](https://www.falconpy.io/Operations/All-Operations.html) within [every API service collection](https://www.falconpy.io/Operations/Operations-by-Collection.html).
+Operating as a single harness for interacting with the entire CrowdStrike Falcon API, the _Uber Class_ can access [every available operation](https://developer.crowdstrike.com/api-reference/all-operations/) within [every API service collection](https://developer.crowdstrike.com/api-reference/operations-by-collection/).
 
 
 #### Uber Class benefits
 
 - Access every CrowdStrike Falcon API service collection with only one import and only one class.
 - Completely abstracts token management, automatically refreshing your token when it expires.
-- Interact with newly released API operations not yet available in the library via the [`override`](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html#the-command-method) keyword.
+- Interact with newly released API operations not yet available in the library via the [`override`](https://developer.crowdstrike.com/sdks/python/uber-class/#the-command-method) keyword.
 - Provides simple programmatic patterns for interacting with CrowdStrike Falcon APIs.
-- Supports [cloud region autodiscovery](https://www.falconpy.io/Usage/Environment-Configuration.html#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
-- Supports CrowdStrike Falcon API [parameter abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#parameter-abstraction) functionality.
-- Supports all [environment configuration](https://www.falconpy.io/Usage/Environment-Configuration.html) options supported by FalconPy Service Classes.
+- Supports [cloud region autodiscovery](https://developer.crowdstrike.com/sdks/python/configuration/#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
+- Supports CrowdStrike Falcon API [parameter abstraction](https://developer.crowdstrike.com/sdks/python/payloads/#parameter-abstraction) functionality.
+- Supports all [environment configuration](https://developer.crowdstrike.com/sdks/python/configuration/) options supported by FalconPy Service Classes.
 
 
 ### Comparing FalconPy class types
-While the [usage syntax](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html) varies slightly, the Uber Class provides the same performance and [output](https://www.falconpy.io/Usage/Response-Handling.html) as FalconPy Service Classes, and can perform all of the same [operations](https://www.falconpy.io/Operations/All-Operations.html). The Uber Class does **not** support [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction).
+While the [usage syntax](https://developer.crowdstrike.com/sdks/python/uber-class/) varies slightly, the Uber Class provides the same performance and [output](https://developer.crowdstrike.com/sdks/python/responses/) as FalconPy Service Classes, and can perform all of the same [operations](https://developer.crowdstrike.com/api-reference/all-operations/). The Uber Class does **not** support [body payload abstraction](https://developer.crowdstrike.com/sdks/python/payloads/#body-payload-abstraction).
 
 
 <img width="1" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
@@ -181,14 +181,12 @@ else:
 If you are interested in reviewing more examples of FalconPy usage, this repository also maintains a collection of [samples](https://github.com/CrowdStrike/falconpy/tree/main/samples) to help get you started with integrating CrowdStrike Falcon into your DevOps processes.
 
 ## Documentation and Support 📖
-FalconPy is a community-driven, open source project designed to assist developers in leveraging the power of CrowdStrike APIs within their solutions. While not a formal CrowdStrike product, FalconPy is maintained by CrowdStrike and supported in partnership with the open source developer community.
+FalconPy is a community-driven, open source project designed to assist developers in leveraging the power of CrowdStrike APIs within their solutions. While not a formal CrowdStrike product, FalconPy is officially supported and maintained by CrowdStrike in partnership with the open source developer community.
 
-### Official Project Documentation: [falconpy.io](https://falconpy.io)
+### Official Project Documentation: [CrowdStrike Developer Center](https://developer.crowdstrike.com/sdks/python/)
 
-[![Website](https://img.shields.io/website?down_color=lightgrey&down_message=offline&label=falconpy.io&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f%2BCE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H%2Be9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu%2B7hHg512MZ%2Fm%2F%2B3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO%2BkPFY5bzFWStVWKNO%2FsNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338%2Fa5fIpdCrg0wcsyjDA2y6wefwe%2FeWvnxMS8pHAfaXxznYxAI7QL1quN8HztO%2FQQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL%2BTzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19%2B%2FdNo38%2Fhq9yr%2BiELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM%2BlkjFIlVEYht%2Fzn3sFkYYUyUnIRcemhCtCU6JQOLiIU%2BQeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17%2F97%2FvO9b4NK4g25157hfHCGB773%2FcA0HZIEAKiMj%2BLWiOxljG%2Fi96pnCFP58XHnrWX2%2B9cj0dYl9Yu2FE9%2F9rXrcAAgs2eSyiBfOe%2FXRD503h%2FCuffOubQVUXL%2BJh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx%2FbbXapMy21My%2BYizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL%2FQ3V0%2FmX95ILMXTTGYVfaut%2FaP2%2BoCMAvnZgCcsF5fcR0dg65YHAdwB%2BQApADvu0AuOe%2FftlJAD7Nsgmm6yBjDtfWORJZlNtFyo%2FlR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ%2FwOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg%3D%3D&up_color=green&up_message=online&url=https%3A%2F%2Ffalconpy.io)](https://falconpy.io)
-![Documentation Version](https://img.shields.io/endpoint?url=https%3A%2F%2Ffalconpy.io%2F_version.json&label=documentation%20version)
-
-Extended documentation is also available via the [wiki](https://github.com/CrowdStrike/falconpy/wiki) for this repository.
+[![Website](https://img.shields.io/website?down_color=lightgrey&down_message=offline&label=developer.crowdstrike.com&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f%2BCE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H%2Be9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu%2B7hHg512MZ%2Fm%2F%2B3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO%2BkPFY5bzFWStVWKNO%2FsNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338%2Fa5fIpdCrg0wcsyjDA2y6wefwe%2FeWvnxMS8pHAfaXxznYxAI7QL1quN8HztO%2FQQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL%2BTzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19%2B%2FdNo38%2Fhq9yr%2BiELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM%2BlkjFIlVEYht%2Fzn3sFkYYUyUnIRcemhCtCU6JQOLiIU%2BQeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17%2F97%2FvO9b4NK4g25157hfHCGB773%2FcA0HZIEAKiMj%2BLWiOxljG%2Fi96pnCFP58XHnrWX2%2B9cj0dYl9Yu2FE9%2F9rXrcAAgs2eSyiBfOe%2FXRD503h%2FCuffOubQVUXL%2BJh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx%2FbbXapMy21My%2BYizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL%2FQ3V0%2FmX95ILMXTTGYVfaut%2FaP2%2BoCMAvnZgCcsF5fcR0dg65YHAdwB%2BQApADvu0AuOe%2FftlJAD7Nsgmm6yBjDtfWORJZlNtFyo%2FlR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ%2FwOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg%3D%3D&up_color=green&up_message=online&url=https%3A%2F%2Fdeveloper.crowdstrike.com)](https://developer.crowdstrike.com/sdks/python/)
+[![Documentation Version](https://img.shields.io/endpoint?url=https%3A%2F%2Fdeveloper.crowdstrike.com%2F_version.json&label=documentation%20version)](https://developer.crowdstrike.com/sdks/python/)
 
 ### Issues and Questions
 
