@@ -40,7 +40,7 @@ from ._util import force_default, process_service_request, handle_single_argumen
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._cloud_google_cloud_registration import _cloud_google_cloud_registration_endpoints as Endpoints
-from ._payload import cloud_google_registration_create_payload
+from ._payload import cloud_google_registration_create_payload, cloud_registration_gcp_post_terraform_script_payload
 
 
 class CloudGoogleCloudRegistration(ServiceClass):
@@ -415,6 +415,60 @@ class CloudGoogleCloudRegistration(ServiceClass):
             operation_id="cloud_registration_gcp_delete_registration",
             keywords=kwargs,
             params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def cloud_registration_gcp_post_terraform_script(self: object,
+                                                     body: dict = None,
+                                                     **kwargs
+                                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Generate Google Cloud Terraform deployment scripts (zip files).
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "entity_id": [
+                                "string"
+                            ],
+                            "excluded_project_patterns": [
+                                "string"
+                            ],
+                            "falcon_client_key_id": "string",
+                            "falcon_client_key_type": "string",
+                            "infra_project_id": "string",
+                            "labels": "string",
+                            "realtime_visibility_enabled": true,
+                            "registration_id": "string",
+                            "registration_name": "string",
+                            "resource_name_prefix": "string",
+                            "resource_name_suffix": "string",
+                            "tags": "string",
+                            "vars_only": true,
+                            "wif_project_id": "string"
+                        }
+                    ]
+                }
+        resources -- The resources value. List.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud_registration_gcp_post_terraform_script
+        """
+        if not body:
+            body = cloud_registration_gcp_post_terraform_script_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_gcp_post_terraform_script",
+            body=body
             )
 
     cloud_registration_gcp_get_entities = get_entities

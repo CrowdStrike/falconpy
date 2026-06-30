@@ -94,8 +94,9 @@ from ._cloud_azure_registration import (
     cloud_registration_azure_update_suppressions_payload
     )
 from ._cloud_google_cloud_registration import (
-    cloud_google_registration_create_payload
-)
+    cloud_google_registration_create_payload,
+    cloud_registration_gcp_post_terraform_script_payload,
+    )
 from ._cloud_oci_registration import (
     cloud_oci_refresh_payload,
     cloud_oci_validate_payload,
@@ -345,5 +346,6 @@ __all__ = [
     "bulk_create_dashboards_from_template_payload", "bulk_create_lookup_files_payload",
     "bulk_create_saved_queries_from_template_payload",
     "bulk_update_dashboards_from_template_payload", "bulk_update_lookup_files_payload",
-    "bulk_update_saved_queries_from_template_payload", "create_parser_extension_payload"
+    "bulk_update_saved_queries_from_template_payload", "create_parser_extension_payload",
+    "cloud_registration_gcp_post_terraform_script_payload"
 ]
