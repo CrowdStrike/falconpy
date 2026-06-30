@@ -57,13 +57,6 @@ _falconx_sandbox_endpoints = [
         "description": "The name given to your downloaded file.",
         "name": "name",
         "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Format used to compress your downloaded file. Currently, you must provide the value "
-        "gzip, the only valid format.",
-        "name": "Accept-Encoding",
-        "in": "header"
       }
     ]
   ],
@@ -86,13 +79,6 @@ _falconx_sandbox_endpoints = [
         "description": "The name given to your downloaded file.",
         "name": "name",
         "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Format used to compress your downloaded file. Currently, you must provide the value "
-        "gzip, the only valid format.",
-        "name": "Accept-Encoding",
-        "in": "header"
       }
     ]
   ],
@@ -115,13 +101,6 @@ _falconx_sandbox_endpoints = [
         "description": "The name given to your downloaded file.",
         "name": "name",
         "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Format used to compress your downloaded file. Currently, you must provide the value "
-        "gzip, the only valid format.",
-        "name": "Accept-Encoding",
-        "in": "header"
       }
     ]
   ],
@@ -144,13 +123,6 @@ _falconx_sandbox_endpoints = [
         "description": "The name given to your downloaded file.",
         "name": "name",
         "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Format used to compress your downloaded file. Currently, you must provide the value "
-        "gzip, the only valid format.",
-        "name": "Accept-Encoding",
-        "in": "header"
       }
     ]
   ],
