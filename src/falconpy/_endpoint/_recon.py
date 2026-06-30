@@ -563,7 +563,8 @@ _recon_endpoints = [
         "typosquatting.base_domain.whois.registrar.name typosquatting.base_domain.whois.registrar.status "
         "typosquatting.base_domain.whois.registrant.email typosquatting.base_domain.whois.registrant.name "
         "typosquatting.base_domain.whois.registrant.org typosquatting.base_domain.whois.name_servers created_date "
-        "updated_date assigned_to_uuid breach_summary.credential_statuses breach_summary.is_retroactively_deduped]",
+        "updated_date assigned_to_uuid risk_score_label breach_summary.credential_statuses "
+        "breach_summary.is_retroactively_deduped]",
         "name": "filter",
         "in": "query"
       },
