@@ -66,6 +66,7 @@ from ._case_management import (
     update_case_payload
     )
 from ._host_group import host_group_create_payload, host_group_update_payload
+from ._hosts import devices_actions_delete_v1_payload
 from ._intel import cao_incidents_aggregates_v1_payload, cao_incidents_entities_v1_payload
 from ._knowledge_bases import entities_knowledge_bases_create_v1_payload, entities_knowledge_bases_update_v1_payload
 from ._profile_groups import (
@@ -348,5 +349,6 @@ __all__ = [
     "bulk_create_saved_queries_from_template_payload",
     "bulk_update_dashboards_from_template_payload", "bulk_update_lookup_files_payload",
     "bulk_update_saved_queries_from_template_payload", "create_parser_extension_payload",
-    "cloud_registration_gcp_post_terraform_script_payload", "update_third_party_passkey_registry_payload"
+    "cloud_registration_gcp_post_terraform_script_payload", "update_third_party_passkey_registry_payload",
+    "devices_actions_delete_v1_payload"
 ]
