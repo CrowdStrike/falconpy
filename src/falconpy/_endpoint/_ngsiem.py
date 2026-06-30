@@ -569,6 +569,7 @@ _ngsiem_endpoints = [
         "enum": [
           "all",
           "falcon",
+          "falcon-for-it",
           "third-party",
           "parsers-repository"
         ],
@@ -633,6 +634,7 @@ _ngsiem_endpoints = [
         "enum": [
           "all",
           "falcon",
+          "falcon-for-it",
           "third-party",
           "parsers-repository"
         ],
@@ -678,6 +680,21 @@ _ngsiem_endpoints = [
     [
       {
         "description": "create parser extension request",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateParserExtension",
+    "PATCH",
+    "/ngsiem-content/entities/parsers-extensions/v1",
+    "Update an existing Parser extension in NGSIEM. At least one field must be provided for update.",
+    "ngsiem",
+    [
+      {
+        "description": "update parser extension request",
         "name": "body",
         "in": "body",
         "required": True
@@ -1177,7 +1194,8 @@ _ngsiem_endpoints = [
         "type": "string",
         "enum": [
           "ootb",
-          "custom"
+          "custom",
+          "extension"
         ],
         "description": "filter parsers by type",
         "name": "parser_type",

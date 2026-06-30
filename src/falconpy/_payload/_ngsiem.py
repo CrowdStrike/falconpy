@@ -415,3 +415,24 @@ def create_parser_extension_payload(passed_keywords: dict) -> dict:
             returned_payload[key] = passed_keywords.get(key)
 
     return returned_payload
+
+
+def update_parser_extension_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a UpdateParserExtension request.
+
+    {
+        "extension_id": "string",
+        "post_processing_script": "string",
+        "pre_processing_script": "string",
+        "test_cases": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["extension_id", "post_processing_script", "pre_processing_script", "test_cases"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
