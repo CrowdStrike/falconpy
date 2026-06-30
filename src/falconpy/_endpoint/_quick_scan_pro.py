@@ -73,13 +73,6 @@ _quick_scan_pro_endpoints = [
         "uploads). If 'scan' is true, the value is used for the scan just starting.",
         "name": "password",
         "in": "formData"
-      },
-      {
-        "type": "string",
-        "description": "OCTET-STREAM ONLY - Password for encrypted archives (use for octet-stream uploads). If "
-        "'scan' is true, the value is used for the scan just starting.",
-        "name": "X-File-Password",
-        "in": "header"
       }
     ]
   ],
