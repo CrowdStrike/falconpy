@@ -60,6 +60,49 @@ _knowledge_bases_endpoints = [
     ]
   ],
   [
+    "CombinedKnowledgeBasesV1",
+    "GET",
+    "/agentic-studio/combined/knowledge_bases/v1",
+    "Search for knowledge bases with filtering and return full entity details in a single response.",
+    "knowledge_bases",
+    [
+      {
+        "type": "integer",
+        "description": "Starting index of overall result set from which to return ids.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 10,
+        "maximum": 500,
+        "minimum": 1,
+        "description": "Number of ids to return. Offset + limit should NOT be above 10K.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Possible order by fields: name, created_at. Ex: 'created_at|desc' or 'name|asc'.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "FQL query specifying the filter parameters.",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "Include deleted knowledge bases in the result. Defaults to false.",
+        "name": "include_deleted",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "EntitiesKnowledgeBasesV1",
     "GET",
     "/agentic-studio/entities/knowledge_bases/v1",

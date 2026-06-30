@@ -52,6 +52,8 @@ class TestKnowledgeBases:
                                                                                         uuid="string"),
             "QueriesKnowledgeBasesV1": falcon.queries_knowledge_bases_v1(offset=1, limit=1, sort="string", filter="string",
                                                                          include_deleted=True),
+            "CombinedKnowledgeBasesV1": falcon.combined_knowledge_bases_v1(offset=1, limit=1, sort="string", filter="string",
+                include_deleted=True),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
