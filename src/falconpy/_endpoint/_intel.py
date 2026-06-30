@@ -487,6 +487,12 @@ _intel_endpoints = [
     "intel",
     [
       {
+        "type": "string",
+        "description": "Choose the format you want the rule set in.",
+        "name": "Accept",
+        "in": "header"
+      },
+      {
         "type": "integer",
         "description": "The ID of the rule set.",
         "name": "id",
@@ -508,6 +514,25 @@ _intel_endpoints = [
     "Download the latest rule set.",
     "intel",
     [
+      {
+        "type": "string",
+        "description": "Choose the format you want the rule set in.",
+        "name": "Accept",
+        "in": "header"
+      },
+      {
+        "type": "string",
+        "description": "Download the latest rule set only if it doesn't have an ETag matching the given ones.",
+        "name": "If-None-Match",
+        "in": "header"
+      },
+      {
+        "type": "string",
+        "description": "Download the latest rule set only if the rule was modified after this date. http, "
+        "ANSIC and RFC850 formats accepted",
+        "name": "If-Modified-Since",
+        "in": "header"
+      },
       {
         "type": "string",
         "description": "The rule news report type. Accepted values:\n\nsnort-suricata-master\n\nsnort-"
