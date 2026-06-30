@@ -87,6 +87,12 @@ _filevantage_endpoints = [
         "name": "id",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "string",
+        "description": "Providing the value of gzip compresses the response, otherwise the content is returned uncompressed.",
+        "name": "Accept-Encoding",
+        "in": "header"
       }
     ]
   ],
