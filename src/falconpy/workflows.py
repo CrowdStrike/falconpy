@@ -82,6 +82,9 @@ class Workflows(ServiceClass):
         limit -- Maximum number of records to return. Integer.
         sort -- FQL formatted sort (ex: name.desc,time.asc). String.
                 If direction is omitted, defaults to descending.
+        skip_artifact_resolution -- When true, skip Foundry artifact resolution and return the latest version of the activity,
+                                    regardless of whether the associated Foundry app is
+                                    installed. Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
