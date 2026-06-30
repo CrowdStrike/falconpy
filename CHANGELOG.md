@@ -1,3 +1,66 @@
+# Version 1.6.4
+## Added features and functionality
++ Added: Added [PEP 561](https://peps.python.org/pep-0561/) type stub (`.pyi`) files for every service collection, along with a `py.typed` marker, so type checkers and IDEs can surface method signatures, keyword arguments, and return types. Deprecated and decommissioned methods are annotated with `@deprecated` so editors flag them at call sites.
+    - `py.typed`
+    - `*.pyi` (one stub per service collection)
+
++ Added: Added `cloud_registration_gcp_post_terraform_script` operation to the __Cloud Google Cloud Registration__ service collection.
+    - _cloud_registration_gcp_post_terraform_script_
+    - `_endpoint/_cloud_google_cloud_registration.py`
+    - `cloud_google_cloud_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_google_cloud_registration.py`
+
++ Added: New __Falcon Id__ service collection with four operations.
+    - _get_third_party_passkey_registry_
+    - _delete_third_party_passkey_registry_
+    - _update_third_party_passkey_registry_
+    - _query_third_party_passkey_registry_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_falcon_id.py`
+    - `_payload/__init__.py`
+    - `_payload/_falcon_id.py`
+    - `__init__.py`
+    - `falcon_id.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_falcon_id.py`
+
++ Added: Added `DevicesActionsDeleteV1` operation to the __Hosts__ service collection.
+    - _devices_actions_delete_v1_
+    - `_endpoint/_hosts.py`
+    - `hosts.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_hosts.py`
+
++ Added: Added `indicator_sdmf_query_v1` operation to the __Ioc__ service collection.
+    - _indicator_sdmf_query_v1_
+    - `_endpoint/_ioc.py`
+    - `ioc.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ioc.py`
+
++ Added: Added `CombinedKnowledgeBasesV1` operation to the __Knowledge Bases__ service collection.
+    - _combined_knowledge_bases_v1_
+    - `_endpoint/_knowledge_bases.py`
+    - `knowledge_bases.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_knowledge_bases.py`
+
++ Added: Added `UpdateParserExtension` operation to the __Ngsiem__ service collection.
+    - _update_parser_extension_
+    - `_endpoint/_ngsiem.py`
+    - `ngsiem.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ngsiem.py`
+
++ Updated: Added `accessed_classified_file`, `classified_file_accessed_by` as allowed `edge_type` values in the _combined_edges_get_ operation, removed `edge_type` value `runs_session` from the _combined_edges_get_ operation, added `fdp-classified-files`, `fdp_classified_files` as allowed `vertex_type` values in the _combined_summary_get_ operation, added `fdp-classified-files`, `fdp_classified_files` as allowed `vertex_type` values in the _entities_vertices_get_ operation, and added `fdp-classified-files`, `fdp_classified_files` as allowed `vertex_type` values in the _entities_vertices_getv2_ operation within the __Threatgraph__ service collection.
+    - `_endpoint/_threatgraph.py`
+    - `threatgraph.py`
+
++ Updated: Added `skip_artifact_resolution` as an allowed parameter in the _WorkflowActivitiesCombined_ operation within the __Workflows__ service collection.
+    - `_endpoint/_workflows.py`
+    - `workflows.py`
+
 # Version 1.6.3
 ## Added features and functionality
 + Added: New __Access Scopes__ service collection with two operations.
