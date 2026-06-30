@@ -184,21 +184,22 @@ from ._network_scan_zones import (
     network_scan_zone_update_payload
     )
 from ._ngsiem import (
-    ngsiem_search_payload,
-    ngsiem_parser_payload,
-    ngsiem_auto_update_policy_payload,
-    ngsiem_install_parser_payload,
-    ngsiem_bulk_install_parsers_payload,
-    ngsiem_connector_config_payload,
-    ngsiem_data_connection_payload,
-    ngsiem_clone_parser_payload,
     bulk_create_dashboards_from_template_payload,
     bulk_create_lookup_files_payload,
     bulk_create_saved_queries_from_template_payload,
     bulk_update_dashboards_from_template_payload,
     bulk_update_lookup_files_payload,
     bulk_update_saved_queries_from_template_payload,
-    create_parser_extension_payload
+    create_parser_extension_payload,
+    ngsiem_auto_update_policy_payload,
+    ngsiem_bulk_install_parsers_payload,
+    ngsiem_clone_parser_payload,
+    ngsiem_connector_config_payload,
+    ngsiem_data_connection_payload,
+    ngsiem_install_parser_payload,
+    ngsiem_parser_payload,
+    ngsiem_search_payload,
+    update_parser_extension_payload,
     )
 from ._prevention_policy import prevention_policy_payload
 from ._sensor_update_policy import sensor_policy_payload, maintenance_token_payload
@@ -355,5 +356,6 @@ __all__ = [
     "bulk_update_dashboards_from_template_payload", "bulk_update_lookup_files_payload",
     "bulk_update_saved_queries_from_template_payload", "create_parser_extension_payload",
     "cloud_registration_gcp_post_terraform_script_payload", "update_third_party_passkey_registry_payload",
-    "devices_actions_delete_v1_payload", "indicator_sdmf_query_v1_payload"
+    "devices_actions_delete_v1_payload", "indicator_sdmf_query_v1_payload",
+    "update_parser_extension_payload"
 ]

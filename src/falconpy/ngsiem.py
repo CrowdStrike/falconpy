@@ -60,6 +60,7 @@ from ._payload import (
     bulk_update_lookup_files_payload,
     bulk_update_saved_queries_from_template_payload,
     create_parser_extension_payload,
+    update_parser_extension_payload,
     )
 from ._result import Result
 from ._service_class import ServiceClass
@@ -2456,6 +2457,67 @@ class NGSIEM(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_parser_extension(self: object,
+                                body: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update an existing Parser extension in NGSIEM.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "extension_id": "string",
+                    "post_processing_script": "string",
+                    "pre_processing_script": "string",
+                    "test_cases": [
+                        {
+                            "event": {
+                                "raw_string": "string"
+                            },
+                            "output_assertions": [
+                                {
+                                    "assertions": {
+                                        "fields_have_values": [
+                                            {
+                                                "expected_value": "string",
+                                                "field_name": "string"
+                                            }
+                                        ],
+                                        "fields_not_present": [
+                                            "string"
+                                        ]
+                                    },
+                                    "output_event_index": 0
+                                }
+                            ]
+                        }
+                    ]
+                }
+        extension_id -- The unique identifier of the parser extension to update. String.
+        post_processing_script -- Optional - update postprocessing logic. String.
+        pre_processing_script -- Optional - update preprocessing logic. String.
+        test_cases -- Optional - update test cases. List.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateParserExtension
+        """
+        if not body:
+            body = update_parser_extension_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateParserExtension",
+            body=body
+            )
+
     BulkCreateDashboardsFromTemplate = bulk_create_dashboards_from_template
     BulkCreateLookupFiles = bulk_create_lookup_files
     BulkCreateSavedQueriesFromTemplate = bulk_create_saved_queries_from_template
@@ -2464,6 +2526,7 @@ class NGSIEM(ServiceClass):
     BulkUpdateLookupFiles = bulk_update_lookup_files
     BulkUpdateSavedQueriesFromTemplate = bulk_update_saved_queries_from_template
     CreateParserExtension = create_parser_extension
+    UpdateParserExtension = update_parser_extension
     UploadLookupV1 = upload_file
     GetLookupV1 = get_file
     GetLookupFromPackageWithNamespaceV1 = get_file_from_package_with_namespace

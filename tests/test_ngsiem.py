@@ -65,6 +65,8 @@ class TestNGSIEM:
             "CreateParserExtension": falcon.create_parser_extension(base_parser_id="string", extension_name="string",
                 parser_id="string", post_processing_script="string",
                 pre_processing_script="string", test_cases="string"),
+            "UpdateParserExtension": falcon.update_parser_extension(extension_id="string", post_processing_script="string",
+                pre_processing_script="string", test_cases="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
