@@ -69,6 +69,14 @@ _workflows_endpoints = [
         "name.desc,time.asc). If direction is omitted, defaults to descending.",
         "name": "sort",
         "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "When true, skip Foundry artifact resolution and return the latest version of the "
+        "activity, regardless of whether the associated Foundry app is installed",
+        "name": "skip_artifact_resolution",
+        "in": "query"
       }
     ]
   ],
