@@ -66,45 +66,46 @@ class ThreatGraph(ServiceClass):
                      accessed_ad_computer                             accessed_adfs_application
                      accessed_azure_application                       accessed_by_kerberos_ticket
                      accessed_by_process                              accessed_by_session
-                     accessed_okta_application                        accessed_ping_fed_application
-                     accessed_service_account                         accessed_web
-                     agent_process                                    agent_to_self_diagnostic
-                     ai_agent_used_by                                 ai_runs_on
-                     allowed_by_process                               allowed_firewall_rule
-                     app_uninstalled_from_host                        assigned_ipv4_address
-                     assigned_ipv6_address                            assigned_to_sensor
-                     associated_by_ad_computer                        associated_by_ad_group
-                     associated_by_ad_user                            associated_by_aggregate_indicator
-                     associated_by_app                                associated_by_azure_ad_user
-                     associated_by_azure_app                          associated_by_certificate
-                     associated_by_control_graph                      associated_by_domain
-                     associated_by_host                               associated_by_host_name
-                     associated_by_idp_session                        associated_by_incident
-                     associated_by_indicator                          associated_by_ip
-                     associated_by_ip4                                associated_by_ip6
-                     associated_by_okta_user                          associated_by_service_ticket
-                     associated_control_graph                         associated_firewall_rule
-                     associated_idp_indicator                         associated_incident
-                     associated_indicator                             associated_k8s_cluster
-                     associated_k8s_sensor                            associated_mobile_forensics_report
-                     associated_mobile_indicator                      associated_module
-                     associated_primary_module                        associated_quarantined_file
-                     associated_quarantined_module                    associated_root_process
-                     associated_to_ad_computer                        associated_to_sensor
-                     associated_user_session                          associated_vmware_cluster
-                     associated_vmware_sensor                         associated_with_process
-                     associated_with_sensor                           attributed_by_process
-                     attributed_from_domain                           attributed_from_module
-                     attributed_on                                    attributed_on_domain
-                     attributed_on_module                             attributed_to
-                     attributed_to_actor                              authenticated_from_incident
-                     authenticated_host                               blocked_by_app
-                     blocked_by_process                               blocked_by_sensor
-                     blocked_dns                                      blocked_ip4
-                     blocked_ip6                                      blocked_module
-                     bundled_in_app                                   bundles_module
-                     cert_is_presented_by                             cert_presented
-                     child_process                                    child_session
+                     accessed_classified_file                         accessed_okta_application
+                     accessed_ping_fed_application                    accessed_service_account
+                     accessed_web                                     agent_process
+                     agent_to_self_diagnostic                         ai_agent_used_by
+                     ai_runs_on                                       allowed_by_process
+                     allowed_firewall_rule                            app_uninstalled_from_host
+                     assigned_ipv4_address                            assigned_ipv6_address
+                     assigned_to_sensor                               associated_by_ad_computer
+                     associated_by_ad_group                           associated_by_ad_user
+                     associated_by_aggregate_indicator                associated_by_app
+                     associated_by_azure_ad_user                      associated_by_azure_app
+                     associated_by_certificate                        associated_by_control_graph
+                     associated_by_domain                             associated_by_host
+                     associated_by_host_name                          associated_by_idp_session
+                     associated_by_incident                           associated_by_indicator
+                     associated_by_ip                                 associated_by_ip4
+                     associated_by_ip6                                associated_by_okta_user
+                     associated_by_service_ticket                     associated_control_graph
+                     associated_firewall_rule                         associated_idp_indicator
+                     associated_incident                              associated_indicator
+                     associated_k8s_cluster                           associated_k8s_sensor
+                     associated_mobile_forensics_report               associated_mobile_indicator
+                     associated_module                                associated_primary_module
+                     associated_quarantined_file                      associated_quarantined_module
+                     associated_root_process                          associated_to_ad_computer
+                     associated_to_sensor                             associated_user_session
+                     associated_vmware_cluster                        associated_vmware_sensor
+                     associated_with_process                          associated_with_sensor
+                     attributed_by_process                            attributed_from_domain
+                     attributed_from_module                           attributed_on
+                     attributed_on_domain                             attributed_on_module
+                     attributed_to                                    attributed_to_actor
+                     authenticated_from_incident                      authenticated_host
+                     blocked_by_app                                   blocked_by_process
+                     blocked_by_sensor                                blocked_dns
+                     blocked_ip4                                      blocked_ip6
+                     blocked_module                                   bundled_in_app
+                     bundles_module                                   cert_is_presented_by
+                     cert_presented                                   child_process
+                     child_session                                    classified_file_accessed_by
                      closed_ip4_socket                                closed_ip6_socket
                      command_line_parent_process                      connected_from_app
                      connected_from_host                              connected_from_process
@@ -300,6 +301,62 @@ class ThreatGraph(ServiceClass):
                        detection_index                detections
                        devices                        domain
                        domains                        extracted-files
+                       extracted_file                 fdp-classified-files
+                       fdp_classified_files           firewall
+                       firewall_rule_match            firewall_rule_matches
+                       firewalls                      firmware
+                       firmwares                      host-names
+                       host_name                      idp-indicators
+                       idp-sessions                   idp_indicator
+                       idp_session                    incident
+                       incidents                      indicator
+                       indicators                     ipv4
+                       ipv6                           k8s_cluster
+                       k8s_clusters                   kerberos-tickets
+                       kerberos_ticket                legacy-detections
+                       legacy_detection               macro_script
+                       macro_scripts                  mcp-servers
+                       mcp_server                     mobile-apps
+                       mobile-fs-volumes              mobile-indicators
+                       mobile_app                     mobile_fs_volume
+                       mobile_indicator               mobile_os_forensics_report
+                       mobile_os_forensics_reports    module
+                       modules                        okta-applications
+                       okta-users                     okta_application
+                       okta_user                      ping-fed-applications
+                       ping_fed_application           process
+                       processes                      quarantined-files
+                       quarantined_file               script
+                       scripts                        sensor
+                       sensor-self-diagnostics        sensor_self_diagnostic
+                       shield                         shields
+                       user-sessions                  user_id
+                       user_session                   users
+                       vmware_cluster                 vmware_clusters
+                       web_access                     wifi-access-points
+                       wifi_access_point              xdr
+                       actor                          ad-computers
+                       ad-groups                      ad_computer
+                       ad_group                       adfs-applications
+                       adfs_application               aggregate-indicators
+                       aggregate_indicator            ai-agents
+                       ai-models                      ai-prompts
+                       ai-sessions                    ai-skills
+                       ai-tools                       ai_agent
+                       ai_model                       ai_prompt
+                       ai_session                     ai_skill
+                       ai_tool                        any-vertex
+                       azure-ad-users                 azure-applications
+                       azure_ad_user                  azure_application
+                       certificate                    certificates
+                       command-lines                  command_line
+                       containerized-apps             containerized_app
+                       control-graphs                 control_graph
+                       custom_ioa                     custom_ioas
+                       detection                      detection-indices
+                       detection_index                detections
+                       devices                        domain
+                       domains                        extracted-files
                        extracted_file                 firewall
                        firewall_rule_match            firewall_rule_matches
                        firewalls                      firmware
@@ -444,6 +501,62 @@ class ThreatGraph(ServiceClass):
                        detection_index                detections
                        devices                        domain
                        domains                        extracted-files
+                       extracted_file                 fdp-classified-files
+                       fdp_classified_files           firewall
+                       firewall_rule_match            firewall_rule_matches
+                       firewalls                      firmware
+                       firmwares                      host-names
+                       host_name                      idp-indicators
+                       idp-sessions                   idp_indicator
+                       idp_session                    incident
+                       incidents                      indicator
+                       indicators                     ipv4
+                       ipv6                           k8s_cluster
+                       k8s_clusters                   kerberos-tickets
+                       kerberos_ticket                legacy-detections
+                       legacy_detection               macro_script
+                       macro_scripts                  mcp-servers
+                       mcp_server                     mobile-apps
+                       mobile-fs-volumes              mobile-indicators
+                       mobile_app                     mobile_fs_volume
+                       mobile_indicator               mobile_os_forensics_report
+                       mobile_os_forensics_reports    module
+                       modules                        okta-applications
+                       okta-users                     okta_application
+                       okta_user                      ping-fed-applications
+                       ping_fed_application           process
+                       processes                      quarantined-files
+                       quarantined_file               script
+                       scripts                        sensor
+                       sensor-self-diagnostics        sensor_self_diagnostic
+                       shield                         shields
+                       user-sessions                  user_id
+                       user_session                   users
+                       vmware_cluster                 vmware_clusters
+                       web_access                     wifi-access-points
+                       wifi_access_point              xdr
+                       actor                          ad-computers
+                       ad-groups                      ad_computer
+                       ad_group                       adfs-applications
+                       adfs_application               aggregate-indicators
+                       aggregate_indicator            ai-agents
+                       ai-models                      ai-prompts
+                       ai-sessions                    ai-skills
+                       ai-tools                       ai_agent
+                       ai_model                       ai_prompt
+                       ai_session                     ai_skill
+                       ai_tool                        any-vertex
+                       azure-ad-users                 azure-applications
+                       azure_ad_user                  azure_application
+                       certificate                    certificates
+                       command-lines                  command_line
+                       containerized-apps             containerized_app
+                       control-graphs                 control_graph
+                       custom_ioa                     custom_ioas
+                       detection                      detection-indices
+                       detection_index                detections
+                       devices                        domain
+                       domains                        extracted-files
                        extracted_file                 firewall
                        firewall_rule_match            firewall_rule_matches
                        firewalls                      firmware
@@ -562,6 +675,62 @@ class ThreatGraph(ServiceClass):
         vertex_type -- Type of vertex to get properties for. String.
                        Allowed values:
                        accessories                    accessory
+                       actor                          ad-computers
+                       ad-groups                      ad_computer
+                       ad_group                       adfs-applications
+                       adfs_application               aggregate-indicators
+                       aggregate_indicator            ai-agents
+                       ai-models                      ai-prompts
+                       ai-sessions                    ai-skills
+                       ai-tools                       ai_agent
+                       ai_model                       ai_prompt
+                       ai_session                     ai_skill
+                       ai_tool                        any-vertex
+                       azure-ad-users                 azure-applications
+                       azure_ad_user                  azure_application
+                       certificate                    certificates
+                       command-lines                  command_line
+                       containerized-apps             containerized_app
+                       control-graphs                 control_graph
+                       custom_ioa                     custom_ioas
+                       detection                      detection-indices
+                       detection_index                detections
+                       devices                        domain
+                       domains                        extracted-files
+                       extracted_file                 fdp-classified-files
+                       fdp_classified_files           firewall
+                       firewall_rule_match            firewall_rule_matches
+                       firewalls                      firmware
+                       firmwares                      host-names
+                       host_name                      idp-indicators
+                       idp-sessions                   idp_indicator
+                       idp_session                    incident
+                       incidents                      indicator
+                       indicators                     ipv4
+                       ipv6                           k8s_cluster
+                       k8s_clusters                   kerberos-tickets
+                       kerberos_ticket                legacy-detections
+                       legacy_detection               macro_script
+                       macro_scripts                  mcp-servers
+                       mcp_server                     mobile-apps
+                       mobile-fs-volumes              mobile-indicators
+                       mobile_app                     mobile_fs_volume
+                       mobile_indicator               mobile_os_forensics_report
+                       mobile_os_forensics_reports    module
+                       modules                        okta-applications
+                       okta-users                     okta_application
+                       okta_user                      ping-fed-applications
+                       ping_fed_application           process
+                       processes                      quarantined-files
+                       quarantined_file               script
+                       scripts                        sensor
+                       sensor-self-diagnostics        sensor_self_diagnostic
+                       shield                         shields
+                       user-sessions                  user_id
+                       user_session                   users
+                       vmware_cluster                 vmware_clusters
+                       web_access                     wifi-access-points
+                       wifi_access_point              xdr
                        actor                          ad-computers
                        ad-groups                      ad_computer
                        ad_group                       adfs-applications
