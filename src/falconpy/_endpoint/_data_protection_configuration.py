@@ -759,10 +759,10 @@ _data_protection_configuration_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter results by specific attributes , allowed attributes are [name created_at "
-        "modified_by modified_at properties.content_patterns properties.evidence_duplication_enabled "
-        "properties.protection_mode properties.web_sources created_by properties.content_patterns_operator "
-        "properties.file_types properties.sensitivity_labels]",
+        "description": "Filter results by specific attributes , allowed attributes are [modified_by "
+        "modified_at properties.evidence_duplication_enabled properties.sensitivity_labels properties.web_sources name "
+        "created_at properties.content_patterns properties.content_patterns_operator properties.file_types "
+        "properties.protection_mode created_by]",
         "name": "filter",
         "in": "query"
       },
@@ -785,7 +785,7 @@ _data_protection_configuration_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort by, allowed fields are :[created_at modified_at name]",
+        "description": "The property to sort by, allowed fields are :[name created_at modified_at]",
         "name": "sort",
         "in": "query"
       }
@@ -1060,24 +1060,25 @@ _data_protection_configuration_endpoints = [
       {
         "type": "string",
         "description": "Filter results by specific attributes , allowed attributes are "
-        "[properties.evidence_storage_free_disk_perc properties.max_file_size_to_inspect properties.euj_dialog_timeout "
-        "created_by properties.classifications properties.be_exclude_domains properties.besplash_message_source "
-        "properties.be_paste_timeout_response properties.screen_capture_duration_post_event "
-        "properties.enable_screen_capture name properties.min_confidence_level properties.evidence_encrypted_enabled "
-        "properties.be_upload_timeout_response properties.be_paste_timeout_duration_milliseconds "
-        "properties.be_paste_clipboard_max_size_unit properties.screen_capture_duration_pre_event is_default "
-        "properties.max_file_size_to_inspect_unit properties.similarity_threshold properties.inspection_depth "
-        "properties.network_inspection_files_exceeding_size_limit precedence is_enabled modified_by "
-        "properties.enable_content_inspection properties.block_all_data_access properties.custom_block_notification "
-        "properties.enable_network_inspection properties.besplash_enabled description "
-        "properties.enable_context_inspection properties.browsers_without_active_extension "
-        "properties.enable_end_user_notifications_unsupported_browser properties.be_paste_clipboard_max_size "
-        "properties.be_paste_clipboard_over_size_behaviour_block properties.evidence_storage_max_size created_at "
-        "properties.similarity_detection properties.enable_clipboard_inspection properties.allow_notifications "
-        "properties.block_notifications properties.evidence_download_enabled "
-        "properties.be_upload_timeout_duration_seconds properties.be_paste_clipboard_min_size modified_at "
-        "properties.custom_allow_notification properties.evidence_duplication_enabled_default "
-        "properties.besplash_custom_message properties.be_paste_clipboard_min_size_unit]",
+        "[properties.evidence_duplication_enabled_default properties.network_inspection_files_exceeding_size_limit "
+        "properties.be_paste_timeout_duration_milliseconds properties.be_paste_timeout_response "
+        "properties.be_paste_clipboard_min_size properties.evidence_storage_free_disk_perc description "
+        "properties.min_confidence_level properties.evidence_encrypted_enabled properties.classifications "
+        "properties.besplash_custom_message properties.be_paste_clipboard_max_size "
+        "properties.be_paste_clipboard_max_size_unit properties.be_paste_clipboard_over_size_behaviour_block created_by "
+        " modified_by properties.block_notifications properties.be_exclude_domains properties.euj_dialog_timeout "
+        "properties.screen_capture_duration_pre_event properties.custom_block_notification "
+        "properties.enable_network_inspection properties.enable_screen_capture is_enabled "
+        "properties.besplash_message_source name properties.enable_content_inspection "
+        "properties.max_file_size_to_inspect_unit properties.enable_clipboard_inspection "
+        "properties.evidence_download_enabled properties.be_upload_timeout_response "
+        "properties.be_paste_clipboard_min_size_unit properties.evidence_storage_max_size precedence modified_at "
+        "properties.browsers_without_active_extension properties.allow_notifications "
+        "properties.be_upload_timeout_duration_seconds properties.max_file_size_to_inspect "
+        "properties.screen_capture_duration_post_event is_default properties.enable_context_inspection "
+        "properties.inspection_depth properties.block_all_data_access properties.similarity_detection "
+        "properties.enable_end_user_notifications_unsupported_browser properties.custom_allow_notification "
+        "properties.besplash_enabled created_at properties.similarity_threshold]",
         "name": "filter",
         "in": "query"
       },
@@ -1100,7 +1101,7 @@ _data_protection_configuration_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort by, allowed fields are :[created_at modified_at name precedence]",
+        "description": "The property to sort by, allowed fields are :[name precedence created_at modified_at]",
         "name": "sort",
         "in": "query"
       }
