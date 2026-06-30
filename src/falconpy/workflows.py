@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0302,R0904
+# pylint: disable=C0302,R0904,R0912
 import re
 from os.path import exists
 from typing import Dict, Union
