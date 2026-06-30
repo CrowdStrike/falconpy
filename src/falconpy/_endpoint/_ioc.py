@@ -546,5 +546,20 @@ _ioc_endpoints = [
         "in": "query"
       }
     ]
+  ],
+  [
+    "indicator_sdmf_query_v1",
+    "POST",
+    "/iocs/sdmf/query/v1",
+    "Executes an SDMF data frame query against IOC indicators",
+    "ioc",
+    [
+      {
+        "description": "SDMF DataFrame query",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
   ]
 ]
