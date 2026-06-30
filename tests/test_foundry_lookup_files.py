@@ -24,6 +24,7 @@ class TestFoundryLookupFiles:
                                                   file_name="testfile.csv",
                                                   name="unittestfile",
                                                   description="FalconPy unit test",
+                                                  id="123456NOTAREALID",
                                                   repo="unittest"
                                                   ),
             "CreateFileV1_fail": falcon.create_file_v1(),
