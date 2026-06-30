@@ -160,7 +160,9 @@ class TestHosts:
                                                                    value="larry"
                                                                    )["status_code"],
             "CombinedDevicesByFilter": falcon.query_devices_by_filter_combined(limit=1)["status_code"],
-            "CombinedHiddenDevicesByFilter": falcon.query_hidden_devices_combined(limit=1)["status_code"]
+            "CombinedHiddenDevicesByFilter": falcon.query_hidden_devices_combined(limit=1)["status_code"],
+            "DevicesActionsDeleteV1": falcon.devices_actions_delete_v1(action_parameters="string", filter="string",
+                ids="string")["status_code"],
         }
         for key in tests:
             if tests[key] not in [400, 500]:

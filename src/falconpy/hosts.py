@@ -39,7 +39,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, List, Union
 from ._util import generate_error_result, force_default, args_to_params
 from ._util import process_service_request, handle_single_argument
-from ._payload import generic_payload_list, simple_action_parameter
+from ._payload import generic_payload_list, simple_action_parameter, devices_actions_delete_v1_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._hosts import _hosts_endpoints as Endpoints
@@ -1158,10 +1158,55 @@ class Hosts(ServiceClass):
             body_required=["ids"] if self.validate_payloads else None
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def devices_actions_delete_v1(self: object,
+                                  body: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Permanently delete hosts from the system.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "action_parameters": [
+                        {
+                            "name": "string",
+                            "value": "string"
+                        }
+                    ],
+                    "filter": "string",
+                    "ids": [
+                        "string"
+                    ]
+                }
+        action_parameters -- The action_parameters value. List.
+        filter -- The filter value. String.
+        ids -- The ids value. List.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/DevicesActionsDeleteV1
+        """
+        if not body:
+            body = devices_actions_delete_v1_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DevicesActionsDeleteV1",
+            body=body
+            )
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
     CombinedHiddenDevicesByFilter = query_hidden_devices_combined
+    DevicesActionsDeleteV1 = devices_actions_delete_v1
     PerformActionV2 = perform_action
     entities_perform_action = perform_group_action
     PerformGroupAction = perform_group_action
