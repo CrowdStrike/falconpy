@@ -41,11 +41,12 @@ _intel_endpoints = [
     "cao_incidents_aggregates_v1",
     "POST",
     "/intel/aggregates/incidents/v1",
-    "Perform statistical aggregations over incident data. Available aggregation properties: Id, "
-    "TargetIndustries.Slug, MitreAttack.TechniqueName, Objectives.Slug, Motivations.Slug, "
-    "InvolvesAdversaries.AnimalClassifier, MitreAttack.TacticName, PublishDate, InvolvesAdversaries.Slug, "
-    "TargetIndustries.Name, TargetRegions.Slug, MitreAttack.TacticId, MitreAttack.TechniqueId, ActivityStart, "
-    "ActivityEnd, InvolvesThreats.FamilyName, TargetCountries.Slug, TargetCountries.Name, TargetRegions.Name.",
+    "Perform statistical aggregations over incident data. Available aggregation properties: "
+    "MitreAttack.TechniqueId, ActivityStart, ActivityEnd, Objectives.Slug, TargetCountries.Slug, "
+    "TargetIndustries.Name, TargetRegions.Slug, MitreAttack.TechniqueName, Id, Motivations.Slug, "
+    "InvolvesAdversaries.AnimalClassifier, TargetIndustries.Slug, MitreAttack.TacticName, PublishDate, "
+    "InvolvesAdversaries.Slug, InvolvesThreats.FamilyName, TargetRegions.Name, MitreAttack.TacticId, "
+    "TargetCountries.Name.",
     "intel",
     [
       {
@@ -486,12 +487,6 @@ _intel_endpoints = [
     "intel",
     [
       {
-        "type": "string",
-        "description": "Choose the format you want the rule set in.",
-        "name": "Accept",
-        "in": "header"
-      },
-      {
         "type": "integer",
         "description": "The ID of the rule set.",
         "name": "id",
@@ -513,25 +508,6 @@ _intel_endpoints = [
     "Download the latest rule set.",
     "intel",
     [
-      {
-        "type": "string",
-        "description": "Choose the format you want the rule set in.",
-        "name": "Accept",
-        "in": "header"
-      },
-      {
-        "type": "string",
-        "description": "Download the latest rule set only if it doesn't have an ETag matching the given ones.",
-        "name": "If-None-Match",
-        "in": "header"
-      },
-      {
-        "type": "string",
-        "description": "Download the latest rule set only if the rule was modified after this date. http, "
-        "ANSIC and RFC850 formats accepted",
-        "name": "If-Modified-Since",
-        "in": "header"
-      },
       {
         "type": "string",
         "description": "The rule news report type. Accepted values:\n\nsnort-suricata-master\n\nsnort-"
@@ -657,12 +633,13 @@ _intel_endpoints = [
         "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
         "about FQL queries, see [our FQL documentation in "
         "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide). \n "
-        "Available filters: InvolvesAdversaries.Name, Objectives.Slug, TargetingProfile.Slug, TargetRegions.Slug, "
-        "InvolvesIndicators.Value, ActivityStart, InvolvesAdversaries.Id, InvolvesAdversaries.Slug, MitreAttack.Id, "
-        "MitreAttack.TechniqueName, ReferencesNotableEvents.Title, TargetCountries.Slug, TargetIndustries.Slug, "
-        "ActivityEnd, InvolvesThreats.FamilyName, MitreAttack.TacticId, All, InvolvesAdversaries.AnimalClassifier, "
-        "TargetsVulnerabilities.CVE, Motivations.Slug, MitreAttack.TacticName, MitreAttack.TechniqueId, LastModifiedAt, "
-        "Id, Title, PublishDate. 'All' can be used for text queries on all attributes.",
+        "Available filters: TargetIndustries.Slug, InvolvesAdversaries.Name, MitreAttack.Id, Id, Title, "
+        "InvolvesAdversaries.Slug, Motivations.Slug, MitreAttack.TacticId, TargetCountries.Slug, TargetRegions.Slug, "
+        "InvolvesIndicators.Value, ActivityEnd, InvolvesAdversaries.Id, InvolvesThreats.FamilyName, "
+        "TargetsVulnerabilities.CVE, Objectives.Slug, TargetingProfile.Slug, MitreAttack.TacticName, LastModifiedAt, "
+        "All, ActivityStart, PublishDate, InvolvesAdversaries.AnimalClassifier, MitreAttack.TechniqueId, "
+        "MitreAttack.TechniqueName, ReferencesNotableEvents.Title. 'All' can be used for text queries on all "
+        "attributes.",
         "name": "filter",
         "in": "query"
       },
