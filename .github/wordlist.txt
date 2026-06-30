@@ -1942,3 +1942,6 @@ checkboxes
 pipelined
 cancelling
 visualise
+IDEs
+terraform
+sdmf
