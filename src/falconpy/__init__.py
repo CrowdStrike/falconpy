@@ -157,6 +157,7 @@ from .exposure_management import ExposureManagement
 from .faas_execution import FaaSExecution
 from .falcon_complete_dashboard import CompleteDashboard
 from .falcon_container import FalconContainer
+from .falcon_id import FalconId
 from .falconx_sandbox import FalconXSandbox
 from .fdr import FDR
 from .federated_connections import FederatedConnections
@@ -291,7 +292,8 @@ __all__ = [
     "CloudSecurityRegistrationCombined", "CloudSecurityRisks",
     "FederatedConnections", "FoundryLookupFiles",
     "KnowledgeBaseAuditEvents", "KnowledgeBaseFiles",
-    "KnowledgeBases", "ProfileGroups"
+    "KnowledgeBases", "ProfileGroups",
+    "FalconId"
     ]
 """
 This is free and unencumbered software released into the public domain.
