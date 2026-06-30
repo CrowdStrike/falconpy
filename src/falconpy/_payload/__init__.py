@@ -206,7 +206,12 @@ from ._response_policy import response_policy_payload
 from ._real_time_response import command_payload, data_payload
 from ._certificate_based_exclusions import certificate_based_exclusions_payload
 from ._cloud_connect_aws import aws_registration_payload
-from ._ioc import indicator_payload, indicator_update_payload, indicator_report_payload
+from ._ioc import (
+    indicator_payload,
+    indicator_report_payload,
+    indicator_sdmf_query_v1_payload,
+    indicator_update_payload,
+    )
 from ._d4c_registration import (
     azure_registration_payload,
     aws_d4c_registration_payload,
@@ -350,5 +355,5 @@ __all__ = [
     "bulk_update_dashboards_from_template_payload", "bulk_update_lookup_files_payload",
     "bulk_update_saved_queries_from_template_payload", "create_parser_extension_payload",
     "cloud_registration_gcp_post_terraform_script_payload", "update_third_party_passkey_registry_payload",
-    "devices_actions_delete_v1_payload"
+    "devices_actions_delete_v1_payload", "indicator_sdmf_query_v1_payload"
 ]

@@ -35,13 +35,15 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import (
     aggregate_payload,
     indicator_payload,
     indicator_update_payload,
-    indicator_report_payload
+    indicator_report_payload,
+    indicator_sdmf_query_v1_payload,
     )
 from ._result import Result
 from ._service_class import ServiceClass
@@ -943,6 +945,105 @@ class IOC(ServiceClass):
     ioc_type_query_v1 = ioc_type_query
     platform_query_v1 = platform_query
     severity_query_v1 = severity_query
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def indicator_sdmf_query_v1(self: object,
+                                body: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Execute an SDMF data frame query against IOC indicators.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "control_info": {
+                        "deadline": "string",
+                        "duration": "string",
+                        "execution_context": {
+                            "catalog_version": "string",
+                            "execution_options": "string",
+                            "extensions": "string",
+                            "queried_cids": [
+                                "string"
+                            ]
+                        },
+                        "execution_details": {
+                            "driver_calls": "string"
+                        },
+                        "is_export_request": true,
+                        "pagination_info": {
+                            "limit": 0,
+                            "offset": "string"
+                        },
+                        "partial_results": true,
+                        "query_stats": {
+                            "execution_stats": {
+                                "visited_entities": 0,
+                                "visited_relationships": 0
+                            },
+                            "total_hits": {
+                                "relation": "string",
+                                "total": 0
+                            }
+                        },
+                        "store_headers": "string"
+                    },
+                    "id": "string",
+                    "nodes": [
+                        {
+                            "alias": "string",
+                            "id": "string",
+                            "operator": "string",
+                            "res_id": "string",
+                            "schema": {
+                                "base": [
+                                    "string"
+                                ],
+                                "facets": [
+                                    "string"
+                                ],
+                                "fields": [
+                                    {
+                                        "facets": [
+                                            "string"
+                                        ],
+                                        "is_relationship": true,
+                                        "is_required": true,
+                                        "multiplicity": "string",
+                                        "name": "string",
+                                        "scope": "string",
+                                        "type": "string"
+                                    }
+                                ],
+                                "res_id": "string"
+                            }
+                        }
+                    ],
+                    "res_id": "string"
+                }
+        control_info -- The control_info value. Dictionary.
+        id -- The id value. String.
+        nodes -- The nodes value. List.
+        res_id -- The res_id value. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator_sdmf_query_v1
+        """
+        if not body:
+            body = indicator_sdmf_query_v1_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="indicator_sdmf_query_v1",
+            body=body
+            )
     # Legacy operation IDs are ported from IOCS.py
     #                - jshcodes@CrowdStrike, see Discussion #319
     DevicesCount = devices_count_legacy

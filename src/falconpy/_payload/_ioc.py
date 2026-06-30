@@ -229,3 +229,72 @@ def indicator_report_payload(passed_keywords: dict) -> dict:
         returned_payload["from_parent"] = passed_keywords.get("from_parent", None)
 
     return returned_payload
+
+
+def indicator_sdmf_query_v1_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a indicator_sdmf_query_v1 request.
+
+    {
+        "control_info": {
+            "deadline": "string",
+            "duration": "string",
+            "execution_context": {
+                "catalog_version": "string",
+                "execution_options": "string",
+                "extensions": "string",
+                "queried_cids": [
+                    "string"
+                ]
+            },
+            "execution_details": {
+                "driver_calls": "string"
+            },
+            "is_export_request": true,
+            "pagination_info": {
+                "limit": 0,
+                "offset": "string"
+            },
+            "partial_results": true,
+            "query_stats": {
+                "execution_stats": {
+                    "visited_entities": 0,
+                    "visited_relationships": 0
+                },
+                "total_hits": {
+                    "relation": "string",
+                    "total": 0
+                }
+            },
+            "store_headers": "string"
+        },
+        "id": "string",
+        "nodes": [
+            "string"
+        ],
+        "res_id": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["control_info", "id", "nodes", "res_id"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    control_info_keys = [
+        "deadline",
+        "duration",
+        "execution_context",
+        "execution_details",
+        "is_export_request",
+        "pagination_info",
+        "partial_results",
+        "query_stats",
+        "store_headers"
+    ]
+    if "control_info" not in returned_payload:
+        returned_payload["control_info"] = {}
+    for key in control_info_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["control_info"][key] = passed_keywords.get(key)
+
+    return returned_payload
