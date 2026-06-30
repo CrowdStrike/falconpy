@@ -21,6 +21,7 @@
 """
 from ._api_clients import create_api_client_payload, update_api_client_payload
 from ._cloud_security_assets import cloud_security_assets_entities_post_payload
+from ._falcon_id import update_third_party_passkey_registry_payload
 from ._federated_connections import patch_federated_connections_config_payload, post_federated_connections_config_payload
 from ._generic import (
     generic_payload_list,
@@ -347,5 +348,5 @@ __all__ = [
     "bulk_create_saved_queries_from_template_payload",
     "bulk_update_dashboards_from_template_payload", "bulk_update_lookup_files_payload",
     "bulk_update_saved_queries_from_template_payload", "create_parser_extension_payload",
-    "cloud_registration_gcp_post_terraform_script_payload"
+    "cloud_registration_gcp_post_terraform_script_payload", "update_third_party_passkey_registry_payload"
 ]
