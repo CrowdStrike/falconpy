@@ -356,7 +356,40 @@ class KnowledgeBases(ServiceClass):
             keywords=kwargs,
             params=parameters
             )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def combined_knowledge_bases_v1(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Search for knowledge bases with filtering and return full entity details in a single response.
+
+        Keyword arguments:
+        offset -- Starting index of overall result set from which to return ids. Integer.
+        limit -- Number of ids to return. Offset + limit should NOT be above 10K. Integer.
+        sort -- Possible order by fields: name, created_at. Ex: 'created_at|desc' or 'name|asc'. String.
+        filter -- FQL query specifying the filter parameters. String.
+        include_deleted -- Include deleted knowledge bases in the result. Defaults to false. Boolean.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-bases/CombinedKnowledgeBasesV1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CombinedKnowledgeBasesV1",
+            keywords=kwargs,
+            params=parameters
+            )
     AggregatesKnowledgeBasesV1 = aggregates_knowledge_bases_v1
+    CombinedKnowledgeBasesV1 = combined_knowledge_bases_v1
     EntitiesKnowledgeBasesV1 = entities_knowledge_bases_v1
     EntitiesKnowledgeBasesCreateV1 = entities_knowledge_bases_create_v1
     EntitiesKnowledgeBasesUpdateV1 = entities_knowledge_bases_update_v1
