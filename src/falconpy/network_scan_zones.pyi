@@ -53,7 +53,7 @@ class NetworkScanZones(ServiceClass):
         self,
         *,
         name: Optional[str] = None,
-        scanners: Optional[list] = None,
+        scanners: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -62,8 +62,8 @@ class NetworkScanZones(ServiceClass):
         *,
         id: Optional[str] = None,
         name: Optional[str] = None,
-        scanners_to_add: Optional[list] = None,
-        scanners_to_remove: Optional[list] = None,
+        scanners_to_add: Optional[Union[str, List[str]]] = None,
+        scanners_to_remove: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

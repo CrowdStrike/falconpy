@@ -36,14 +36,14 @@ class Deployments(ServiceClass):
     def get_release_notes_v1(
         self,
         *,
-        IDs: Optional[list] = None,
+        IDs: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
     def get_release_notes(
         self,
         *,
-        IDs: Optional[list] = None,
+        IDs: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

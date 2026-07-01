@@ -54,7 +54,7 @@ class Intel(ServiceClass):
     def get_indicator_entities(
         self,
         *args: Union[str, List[str]],
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -69,7 +69,7 @@ class Intel(ServiceClass):
     def mitre_attacks(
         self,
         *args: Union[str, List[str]],
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -219,7 +219,7 @@ class Intel(ServiceClass):
     def get_vulnerabilities(
         self,
         *args: Union[str, List[str]],
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -263,7 +263,7 @@ class Intel(ServiceClass):
     def cao_incidents_entities_v1(
         self,
         *,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -277,9 +277,6 @@ class Intel(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
-    cao_incidents_aggregates_v1 = cao_incidents_aggregates_v1
-    cao_incidents_entities_v1 = cao_incidents_entities_v1
-    cao_incidents_queries_v1 = cao_incidents_queries_v1
     QueryIntelActorEntities = query_actor_entities
     QueryIntelIndicatorEntities = query_indicator_entities
     QueryIntelReportEntities = query_report_entities

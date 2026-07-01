@@ -16,7 +16,7 @@ class TailoredIntelligence(ServiceClass):
     def get_event_entities(
         self,
         *args: Union[str, List[str]],
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -34,7 +34,7 @@ class TailoredIntelligence(ServiceClass):
     def get_rule_entities(
         self,
         *args: Union[str, List[str]],
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

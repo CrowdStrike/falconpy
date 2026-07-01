@@ -15,7 +15,7 @@ class RealTimeResponseAdmin(ServiceClass):
         base_command: Optional[str] = None,
         batch_id: Optional[str] = None,
         command_string: Optional[str] = None,
-        optional_hosts: Optional[list] = None,
+        optional_hosts: Optional[Union[str, List[str]]] = None,
         persist_all: Optional[bool] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,

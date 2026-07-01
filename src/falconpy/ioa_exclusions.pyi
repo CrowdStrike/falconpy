@@ -86,7 +86,7 @@ class IOAExclusions(ServiceClass):
         image_file_name: Optional[str] = None,
         parent_command_line: Optional[str] = None,
         parent_image_file_name: Optional[str] = None,
-        pattern_ids: Optional[list] = None,
+        pattern_ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -133,7 +133,7 @@ class IOAExclusions(ServiceClass):
         comment: Optional[str] = None,
         description: Optional[str] = None,
         detection_json: Optional[str] = None,
-        groups: Optional[list] = None,
+        groups: Optional[Union[str, List[str]]] = None,
         ifn_regex: Optional[str] = None,
         name: Optional[str] = None,
         pattern_id: Optional[str] = None,
@@ -156,7 +156,7 @@ class IOAExclusions(ServiceClass):
         comment: Optional[str] = None,
         description: Optional[str] = None,
         detection_json: Optional[str] = None,
-        groups: Optional[list] = None,
+        groups: Optional[Union[str, List[str]]] = None,
         id: Optional[str] = None,
         ifn_regex: Optional[str] = None,
         name: Optional[str] = None,

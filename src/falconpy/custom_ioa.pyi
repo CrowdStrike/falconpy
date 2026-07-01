@@ -67,7 +67,7 @@ class CustomIOA(ServiceClass):
     def get_rules_get(
         self,
         *,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

@@ -31,5 +31,3 @@ class CloudSecurityRegistrationCombined(ServiceClass):
         type: Optional[str] = None,
         body: Optional[list] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
-
-    cloud_registration_cross_provider_get_account_aggregates = cloud_registration_cross_provider_get_account_aggregates

@@ -37,8 +37,8 @@ class Detects(ServiceClass):
         *args: Union[str, List[str]],
         assigned_to_uuid: Optional[str] = None,
         comment: Optional[str] = None,
-        ids: Optional[list] = None,
-        new_behaviors_processed: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
+        new_behaviors_processed: Optional[Union[str, List[str]]] = None,
         show_in_ui: Optional[bool] = None,
         status: Optional[str] = None,
         body: Optional[dict] = None,
@@ -47,7 +47,7 @@ class Detects(ServiceClass):
     def get_detect_summaries(
         self,
         *args: Union[str, List[str]],
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

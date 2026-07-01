@@ -83,7 +83,7 @@ class ImageAssessmentPolicies(ServiceClass):
     def update_policy_precedence(
         self,
         *,
-        precedence: Optional[list] = None,
+        precedence: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

@@ -74,7 +74,7 @@ class SensorUpdatePolicy(ServiceClass):
         *,
         action_name: Optional[str] = None,
         action_parameters: Optional[list] = None,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -82,7 +82,7 @@ class SensorUpdatePolicy(ServiceClass):
     def set_policies_precedence(
         self,
         *,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         platform_name: Optional[str] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...

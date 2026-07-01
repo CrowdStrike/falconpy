@@ -20,7 +20,7 @@ class IntelligenceIndicatorGraph(ServiceClass):
     def lookup(
         self,
         *args: Union[str, List[str]],
-        values: Optional[list] = None,
+        values: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

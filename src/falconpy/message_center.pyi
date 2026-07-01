@@ -35,7 +35,7 @@ class MessageCenter(ServiceClass):
     def get_case_activity(
         self,
         *args: Union[str, List[str]],
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -78,7 +78,7 @@ class MessageCenter(ServiceClass):
     def get_cases(
         self,
         *args: Union[str, List[str]],
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

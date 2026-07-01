@@ -12,5 +12,3 @@ class CloudSecurityRisks(ServiceClass):
         id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
-
-    cloud_security_timeline_risks_enriched = cloud_security_timeline_risks_enriched

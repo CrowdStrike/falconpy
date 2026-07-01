@@ -58,7 +58,7 @@ class Alerts(ServiceClass):
         self,
         *args: Union[str, List[str]],
         action_parameters: Optional[list] = None,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -67,7 +67,7 @@ class Alerts(ServiceClass):
         *args: Union[str, List[str]],
         include_hidden: Optional[bool] = None,
         action_parameters: Optional[list] = None,
-        composite_ids: Optional[list] = None,
+        composite_ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -85,7 +85,7 @@ class Alerts(ServiceClass):
     def get_alerts_v1(
         self,
         *args: Union[str, List[str]],
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -93,7 +93,7 @@ class Alerts(ServiceClass):
         self,
         *args: Union[str, List[str]],
         include_hidden: Optional[bool] = None,
-        composite_ids: Optional[list] = None,
+        composite_ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...

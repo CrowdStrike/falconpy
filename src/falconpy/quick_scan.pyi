@@ -42,7 +42,7 @@ class QuickScan(ServiceClass):
     def scan_samples(
         self,
         *args: Union[str, List[str]],
-        samples: Optional[list] = None,
+        samples: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

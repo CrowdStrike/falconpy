@@ -42,7 +42,7 @@ class IdentityProtection(ServiceClass):
     def get_sensor_details(
         self,
         *,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

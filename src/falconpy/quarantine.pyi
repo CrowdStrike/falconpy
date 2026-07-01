@@ -42,7 +42,7 @@ class Quarantine(ServiceClass):
     def get_quarantine_files(
         self,
         *,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -51,7 +51,7 @@ class Quarantine(ServiceClass):
         *,
         action: Optional[str] = None,
         comment: Optional[str] = None,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

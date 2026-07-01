@@ -16,7 +16,7 @@ class FlightControl(ServiceClass):
     def get_children_v2(
         self,
         *args: Union[str, List[str]],
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -38,7 +38,7 @@ class FlightControl(ServiceClass):
         self,
         *,
         cid_group_id: Optional[str] = None,
-        cids: Optional[list] = None,
+        cids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -46,7 +46,7 @@ class FlightControl(ServiceClass):
         self,
         *,
         cid_group_id: Optional[str] = None,
-        cids: Optional[list] = None,
+        cids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -54,7 +54,7 @@ class FlightControl(ServiceClass):
         self,
         *,
         cid_group_id: Optional[str] = None,
-        cids: Optional[list] = None,
+        cids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -113,7 +113,7 @@ class FlightControl(ServiceClass):
         *,
         cid_group_id: Optional[str] = None,
         id: Optional[str] = None,
-        role_ids: Optional[list] = None,
+        role_ids: Optional[Union[str, List[str]]] = None,
         user_group_id: Optional[str] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -123,7 +123,7 @@ class FlightControl(ServiceClass):
         *,
         cid_group_id: Optional[str] = None,
         id: Optional[str] = None,
-        role_ids: Optional[list] = None,
+        role_ids: Optional[Union[str, List[str]]] = None,
         user_group_id: Optional[str] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -146,7 +146,7 @@ class FlightControl(ServiceClass):
         self,
         *,
         user_group_id: Optional[str] = None,
-        user_uuids: Optional[list] = None,
+        user_uuids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -154,7 +154,7 @@ class FlightControl(ServiceClass):
         self,
         *,
         user_group_id: Optional[str] = None,
-        user_uuids: Optional[list] = None,
+        user_uuids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
