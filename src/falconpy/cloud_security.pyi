@@ -41,7 +41,7 @@ class CloudSecurity(ServiceClass):
         description: Optional[str] = None,
         environment: Optional[str] = None,
         name: Optional[str] = None,
-        owners: Optional[list] = None,
+        owners: Optional[Union[str, List[str]]] = None,
         selectors: Optional[dict] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -55,7 +55,7 @@ class CloudSecurity(ServiceClass):
         environment: Optional[str] = None,
         id: Optional[str] = None,
         name: Optional[str] = None,
-        owners: Optional[list] = None,
+        owners: Optional[Union[str, List[str]]] = None,
         selectors: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -76,7 +76,6 @@ class CloudSecurity(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
-    combined_cloud_risks = combined_cloud_risks
     ListCloudGroupsExternal = list_cloud_groups
     ListCloudGroupsByIDExternal = list_cloud_groups_by_id
     CreateCloudGroupExternal = create_cloud_group

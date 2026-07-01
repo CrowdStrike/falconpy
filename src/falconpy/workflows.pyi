@@ -136,7 +136,7 @@ class Workflows(ServiceClass):
         self,
         *,
         action_name: Optional[str] = None,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -203,7 +203,7 @@ class Workflows(ServiceClass):
         self,
         *,
         action_name: Optional[str] = None,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...

@@ -41,7 +41,7 @@ class CaseManagement(ServiceClass):
     def bulk_download_files(
         self,
         *,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -428,7 +428,7 @@ class CaseManagement(ServiceClass):
         self,
         *,
         id: Optional[str] = None,
-        tags: Optional[list] = None,
+        tags: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -447,13 +447,13 @@ class CaseManagement(ServiceClass):
         assigned_to_user_uuid: Optional[str] = None,
         description: Optional[str] = None,
         description_format: Optional[str] = None,
-        description_tagged_users: Optional[list] = None,
+        description_tagged_users: Optional[Union[str, List[str]]] = None,
         evidence: Optional[dict] = None,
         name: Optional[str] = None,
         severity: Optional[int] = None,
         severity_info: Optional[dict] = None,
         status: Optional[str] = None,
-        tags: Optional[list] = None,
+        tags: Optional[Union[str, List[str]]] = None,
         template: Optional[dict] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -461,7 +461,7 @@ class CaseManagement(ServiceClass):
     def get_cases(
         self,
         *,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -494,7 +494,6 @@ class CaseManagement(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
-    aggregates_file_details_post_v1 = aggregates_file_details_post_v1
     combined_file_details_get_v1 = query_file_details
     entities_file_details_get_v1 = get_file_details
     entities_file_details_patch_v1 = update_file_details

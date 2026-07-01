@@ -33,7 +33,7 @@ class HostGroup(ServiceClass):
         action_name: Optional[str] = None,
         disable_hostname_check: Optional[bool] = None,
         action_parameters: Optional[list] = None,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...

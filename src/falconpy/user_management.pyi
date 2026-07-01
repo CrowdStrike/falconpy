@@ -62,7 +62,7 @@ class UserManagement(ServiceClass):
         self,
         *args: Union[str, List[str]],
         cid: Optional[str] = None,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -79,7 +79,7 @@ class UserManagement(ServiceClass):
         self,
         *,
         action: Optional[dict] = None,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -89,7 +89,7 @@ class UserManagement(ServiceClass):
         action: Optional[str] = None,
         cid: Optional[str] = None,
         expires_at: Optional[str] = None,
-        role_ids: Optional[list] = None,
+        role_ids: Optional[Union[str, List[str]]] = None,
         uuid: Optional[str] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -97,7 +97,7 @@ class UserManagement(ServiceClass):
     def retrieve_users(
         self,
         *args: Union[str, List[str]],
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -160,7 +160,7 @@ class UserManagement(ServiceClass):
         self,
         *,
         user_uuid: Optional[str] = None,
-        roleIds: Optional[list] = None,
+        roleIds: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...

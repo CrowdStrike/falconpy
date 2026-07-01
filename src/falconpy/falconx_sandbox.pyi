@@ -59,7 +59,7 @@ class FalconXSandbox(ServiceClass):
         auto_detect_environment: Optional[bool] = None,
         sandbox: Optional[list] = None,
         send_email_notification: Optional[bool] = None,
-        user_tags: Optional[list] = None,
+        user_tags: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -123,7 +123,7 @@ class FalconXSandbox(ServiceClass):
     def query_sample(
         self,
         *,
-        sha256s: Optional[list] = None,
+        sha256s: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

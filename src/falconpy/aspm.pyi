@@ -103,7 +103,7 @@ class ASPM(ServiceClass):
         self,
         *,
         name: Optional[str] = None,
-        persistentSignatures: Optional[list] = None,
+        persistentSignatures: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -366,7 +366,7 @@ class ASPM(ServiceClass):
         *,
         ID: Optional[int] = None,
         integration: Optional[dict] = None,
-        overwriteFields: Optional[list] = None,
+        overwriteFields: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -415,13 +415,13 @@ class ASPM(ServiceClass):
     def get_services_count(
         self,
         *,
-        cids: Optional[list] = None,
+        cids: Optional[Union[str, List[str]]] = None,
         deploymentTupleFilters: Optional[list] = None,
         nestingLevel: Optional[int] = None,
         onlyCount: Optional[bool] = None,
         optionalTime: Optional[int] = None,
         pagination: Optional[dict] = None,
-        persistentSignatures: Optional[list] = None,
+        persistentSignatures: Optional[Union[str, List[str]]] = None,
         qlFilters: Optional[str] = None,
         relatedEntities: Optional[list] = None,
         revisionId: Optional[int] = None,

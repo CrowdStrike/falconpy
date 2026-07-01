@@ -41,7 +41,7 @@ class RealTimeResponse(ServiceClass):
         base_command: Optional[str] = None,
         batch_id: Optional[str] = None,
         command_string: Optional[str] = None,
-        optional_hosts: Optional[list] = None,
+        optional_hosts: Optional[Union[str, List[str]]] = None,
         persist_all: Optional[bool] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
@@ -56,7 +56,7 @@ class RealTimeResponse(ServiceClass):
         base_command: Optional[str] = None,
         batch_id: Optional[str] = None,
         command_string: Optional[str] = None,
-        optional_hosts: Optional[list] = None,
+        optional_hosts: Optional[Union[str, List[str]]] = None,
         persist_all: Optional[bool] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
@@ -79,7 +79,7 @@ class RealTimeResponse(ServiceClass):
         host_timeout_duration: Optional[str] = None,
         batch_id: Optional[str] = None,
         file_path: Optional[str] = None,
-        optional_hosts: Optional[list] = None,
+        optional_hosts: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -91,7 +91,7 @@ class RealTimeResponse(ServiceClass):
         timeout_duration: Optional[str] = None,
         host_timeout_duration: Optional[str] = None,
         existing_batch_id: Optional[str] = None,
-        host_ids: Optional[list] = None,
+        host_ids: Optional[Union[str, List[str]]] = None,
         queue_offline: Optional[bool] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
@@ -103,7 +103,7 @@ class RealTimeResponse(ServiceClass):
         timeout: Optional[int] = None,
         timeout_duration: Optional[str] = None,
         batch_id: Optional[str] = None,
-        hosts_to_remove: Optional[list] = None,
+        hosts_to_remove: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -199,14 +199,14 @@ class RealTimeResponse(ServiceClass):
     def list_sessions(
         self,
         *,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
     def list_queued_sessions(
         self,
         *,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

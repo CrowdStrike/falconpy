@@ -42,7 +42,7 @@ class AdmissionControlPolicies(ServiceClass):
     def add_host_groups(
         self,
         *,
-        host_groups: Optional[list] = None,
+        host_groups: Optional[Union[str, List[str]]] = None,
         id: Optional[str] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...

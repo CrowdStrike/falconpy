@@ -43,7 +43,7 @@ class NetworkScanScanners(ServiceClass):
         self,
         *,
         action: Optional[str] = None,
-        aids: Optional[list] = None,
+        aids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

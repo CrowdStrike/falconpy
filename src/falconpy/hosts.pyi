@@ -22,7 +22,7 @@ class Hosts(ServiceClass):
         *,
         action_name: Optional[str] = None,
         action_parameters: Optional[list] = None,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -42,8 +42,8 @@ class Hosts(ServiceClass):
         self,
         *,
         action: Optional[str] = None,
-        device_ids: Optional[list] = None,
-        tags: Optional[list] = None,
+        device_ids: Optional[Union[str, List[str]]] = None,
+        tags: Optional[Union[str, List[str]]] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
     def get_device_details_v1(
@@ -63,7 +63,7 @@ class Hosts(ServiceClass):
     def get_device_details(
         self,
         *args: Union[str, List[str]],
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -119,7 +119,7 @@ class Hosts(ServiceClass):
     def query_device_login_history_v1(
         self,
         *args: Union[str, List[str]],
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -128,7 +128,7 @@ class Hosts(ServiceClass):
         *args: Union[str, List[str]],
         limit: Optional[int] = None,
         to: Optional[str] = None,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -136,7 +136,7 @@ class Hosts(ServiceClass):
     def query_network_address_history(
         self,
         *args: Union[str, List[str]],
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -145,7 +145,7 @@ class Hosts(ServiceClass):
         *,
         action_parameters: Optional[list] = None,
         filter: Optional[str] = None,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

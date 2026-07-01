@@ -51,12 +51,11 @@ class CloudSecurityAssets(ServiceClass):
     def cloud_security_assets_entities_post(
         self,
         *,
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
     cloud_security_assets_combined_application_findings = combined_application_findings
     cloud_security_assets_combined_compliance_by_account = get_combined_compliance_by_account
     cloud_security_assets_entities_get = get_assets
-    cloud_security_assets_entities_post = cloud_security_assets_entities_post
     cloud_security_assets_queries = query_assets

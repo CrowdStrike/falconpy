@@ -37,8 +37,8 @@ class CloudGoogleCloudRegistration(ServiceClass):
         additional_properties: Optional[dict] = None,
         deployment_method: Optional[str] = None,
         dspm_settings: Optional[dict] = None,
-        entity_id: Optional[list] = None,
-        excluded_project_patterns: Optional[list] = None,
+        entity_id: Optional[Union[str, List[str]]] = None,
+        excluded_project_patterns: Optional[Union[str, List[str]]] = None,
         falcon_client_key_id: Optional[str] = None,
         falcon_client_key_type: Optional[str] = None,
         infra_manager_region: Optional[str] = None,
@@ -63,8 +63,8 @@ class CloudGoogleCloudRegistration(ServiceClass):
         additional_properties: Optional[dict] = None,
         deployment_method: Optional[str] = None,
         dspm_settings: Optional[dict] = None,
-        entity_id: Optional[list] = None,
-        excluded_project_patterns: Optional[list] = None,
+        entity_id: Optional[Union[str, List[str]]] = None,
+        excluded_project_patterns: Optional[Union[str, List[str]]] = None,
         falcon_client_key_id: Optional[str] = None,
         falcon_client_key_type: Optional[str] = None,
         infra_manager_region: Optional[str] = None,
@@ -90,8 +90,8 @@ class CloudGoogleCloudRegistration(ServiceClass):
         additional_properties: Optional[dict] = None,
         deployment_method: Optional[str] = None,
         dspm_settings: Optional[dict] = None,
-        entity_id: Optional[list] = None,
-        excluded_project_patterns: Optional[list] = None,
+        entity_id: Optional[Union[str, List[str]]] = None,
+        excluded_project_patterns: Optional[Union[str, List[str]]] = None,
         falcon_client_key_id: Optional[str] = None,
         falcon_client_key_type: Optional[str] = None,
         infra_manager_region: Optional[str] = None,
@@ -126,8 +126,8 @@ class CloudGoogleCloudRegistration(ServiceClass):
     def cloud_registration_gcp_post_terraform_script(
         self,
         *,
-        entity_id: Optional[list] = None,
-        excluded_project_patterns: Optional[list] = None,
+        entity_id: Optional[Union[str, List[str]]] = None,
+        excluded_project_patterns: Optional[Union[str, List[str]]] = None,
         falcon_client_key_id: Optional[str] = None,
         falcon_client_key_type: Optional[str] = None,
         infra_project_id: Optional[str] = None,
@@ -148,5 +148,4 @@ class CloudGoogleCloudRegistration(ServiceClass):
     cloud_registration_gcp_get_registration = get_registration
     cloud_registration_gcp_put_registration = update_registration
     cloud_registration_gcp_create_registration = create_registration
-    cloud_registration_gcp_update_registration = cloud_registration_gcp_update_registration
     cloud_registration_gcp_delete_registration = delete_registration

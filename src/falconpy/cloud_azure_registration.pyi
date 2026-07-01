@@ -88,7 +88,7 @@ class CloudAzureRegistration(ServiceClass):
     def cloud_registration_azure_delete_suppressions(
         self,
         *,
-        suppression_ids: Optional[list] = None,
+        suppression_ids: Optional[Union[str, List[str]]] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -157,21 +157,12 @@ class CloudAzureRegistration(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
-    cloud_registration_azure_create_suppressions = cloud_registration_azure_create_suppressions
     cloud_registration_azure_delete_legacy_subscription = delete_legacy_subscription
-    cloud_registration_azure_delete_suppressions = cloud_registration_azure_delete_suppressions
-    cloud_registration_azure_get_issue_suppression_values_by_field = cloud_registration_azure_get_issue_suppression_values_by_field
-    cloud_registration_azure_get_issue_values_by_field = cloud_registration_azure_get_issue_values_by_field
-    cloud_registration_azure_get_issues = cloud_registration_azure_get_issues
-    cloud_registration_azure_get_script = cloud_registration_azure_get_script
-    cloud_registration_azure_get_script_versions = cloud_registration_azure_get_script_versions
-    cloud_registration_azure_get_suppressions = cloud_registration_azure_get_suppressions
     cloud_registration_azure_trigger_health_check = health_check
     cloud_registration_azure_get_registration = get_registration
     cloud_registration_azure_create_registration = create_registration
     cloud_registration_azure_update_registration = update_registration
     cloud_registration_azure_delete_registration = delete_registration
-    cloud_registration_azure_update_suppressions = cloud_registration_azure_update_suppressions
     download_azure_script = deployment_script
     cloud_registration_azure_download_script = download_script
     cloud_registration_azure_validate_registration = validate_registration

@@ -16,7 +16,7 @@ class FileVantage(ServiceClass):
     def start_actions(
         self,
         *,
-        change_ids: Optional[list] = None,
+        change_ids: Optional[Union[str, List[str]]] = None,
         comment: Optional[str] = None,
         operation: Optional[str] = None,
         body: Optional[dict] = None,
@@ -165,8 +165,8 @@ class FileVantage(ServiceClass):
     def create_rule(
         self,
         *,
-        content_files: Optional[list] = None,
-        content_registry_values: Optional[list] = None,
+        content_files: Optional[Union[str, List[str]]] = None,
+        content_registry_values: Optional[Union[str, List[str]]] = None,
         created_timestamp: Optional[str] = None,
         depth: Optional[str] = None,
         description: Optional[str] = None,
@@ -216,8 +216,8 @@ class FileVantage(ServiceClass):
     def update_rule(
         self,
         *,
-        content_files: Optional[list] = None,
-        content_registry_values: Optional[list] = None,
+        content_files: Optional[Union[str, List[str]]] = None,
+        content_registry_values: Optional[Union[str, List[str]]] = None,
         created_timestamp: Optional[str] = None,
         depth: Optional[str] = None,
         description: Optional[str] = None,
@@ -291,7 +291,7 @@ class FileVantage(ServiceClass):
     def signal_changes(
         self,
         *args: Union[str, List[str]],
-        ids: Optional[list] = None,
+        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
