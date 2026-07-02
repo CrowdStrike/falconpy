@@ -46,6 +46,7 @@ class ContainerBaseURL(Enum):
 
     US1 = "container-upload.us-1.crowdstrike.com"
     US2 = "container-upload.us-2.crowdstrike.com"
+    US3 = "container-upload.us-3.crowdstrike.com"
     EU1 = "container-upload.eu-1.crowdstrike.com"
     USGOV1 = "container-upload.laggar.gcw.crowdstrike.com"
     USGOV2 = "container-upload.us-gov-2.crowdstrike.mil"
