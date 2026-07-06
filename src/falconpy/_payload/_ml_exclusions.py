@@ -115,7 +115,7 @@ def ml_exclusions_update_payload(passed_keywords: dict) -> Dict[str, Union[str, 
                 provided = passed_keywords.get(key, None)
                 if isinstance(provided, str):
                     provided = provided.split(",")
-                    returned_payload[key] = provided
+                returned_payload[key] = provided
             else:
                 returned_payload[key] = passed_keywords.get(key, None)
 
