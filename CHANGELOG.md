@@ -61,6 +61,10 @@
     - `_endpoint/_workflows.py`
     - `workflows.py`
 
+# Issues Resolved
++ Fixed: `excluded_from` and `groups` keyword arguments silently dropped from request body in `update_exclusions_v2` when passed as lists. Closes #1482.
+    - `_payload/_ml_exclusions.py`
+
 # Version 1.6.3
 ## Added features and functionality
 + Added: New __Access Scopes__ service collection with two operations.
