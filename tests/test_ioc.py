@@ -14,7 +14,7 @@ auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = IOC(auth_object=config)
 AllowedResponses = [200, 201, 400, 404, 429]
-Allowed403 = ["indicator_aggregate", "GetIndicatorsReport"]
+Allowed403 = ["indicator_aggregate", "GetIndicatorsReport", "indicator_sdmf_query_v1"]
 
 
 class TestIOC:
