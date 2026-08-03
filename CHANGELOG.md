@@ -1,5 +1,24 @@
 # Version 1.6.4
 ## Added features and functionality
++ Added: Optional `session` keyword argument (a `requests.Session` instance) accepted by `OAuth2`, `APIHarnessV2`,
+  the legacy `APIHarness`, and every Service Class, allowing callers to reuse a single HTTP connection across
+  login, every API call, token renewal, and logout. FalconPy never closes a session provided this way; the
+  caller retains ownership of its lifecycle. Behavior is unchanged when this keyword is omitted.
+    - `_util/_functions.py`
+    - `_api_request/_request.py`
+    - `_api_request/_request_connection.py`
+    - `_auth_object/_interface_config.py`
+    - `_auth_object/_falcon_interface.py`
+    - `_auth_object/_uber_interface.py`
+    - `oauth2.py`
+    - `_util/_service.py`
+    - `_util/_uber.py`
+    - `_service_class/_base_service_class.py`
+    - `api_complete/_legacy.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_session_support.py`
+    - `tests/test_session_connection_reuse.py`
+
 + Added: Added [PEP 561](https://peps.python.org/pep-0561/) type stub (`.pyi`) files for every service collection, along with a `py.typed` marker, so type checkers and IDEs can surface method signatures, keyword arguments, and return types. Deprecated and decommissioned methods are annotated with `@deprecated` so editors flag them at call sites.
     - `py.typed`
     - `*.pyi` (one stub per service collection)

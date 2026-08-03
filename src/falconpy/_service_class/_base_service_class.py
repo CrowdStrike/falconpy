@@ -39,6 +39,7 @@ import inspect
 from abc import ABC, abstractmethod
 from logging import Logger, getLogger
 from typing import Dict, Type, Union, Optional
+import requests
 from .._constant import MAX_DEBUG_RECORDS
 from .._auth_object import FalconInterface, UberInterface
 from .._error import FunctionalityNotImplemented
@@ -241,6 +242,16 @@ class BaseServiceClass(ABC):
     @user_agent.setter
     def user_agent(self, _):
         raise FunctionalityNotImplemented
+
+    @property
+    def session(self) -> Optional[requests.Session]:
+        """Provide the requests.Session from the auth_object.
+
+        Not independently overridable per Service Class instance: session identity must
+        stay in lock-step with the shared auth_object so authentication and API calls
+        always use the same session.
+        """
+        return self.auth_object.session
 
     # Mutable
     @property

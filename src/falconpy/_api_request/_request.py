@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Union, Dict, Optional, List, Any
 from logging import Logger
+import requests
 from ._request_behavior import RequestBehavior
 from ._request_connection import RequestConnection
 from ._request_meta import RequestMeta
@@ -69,7 +70,8 @@ class APIRequest:
             self._connection = RequestConnection(user_agent=initializer.get("user_agent", None),
                                                  proxy=initializer.get("proxy", {}),
                                                  timeout=initializer.get("timeout", None),
-                                                 verify=initializer.get("verify", True)
+                                                 verify=initializer.get("verify", True),
+                                                 session=initializer.get("session", None)
                                                  )
             # Behavioral flags that alter the behavior of request processing
             self._behavior = RequestBehavior(expand_result=initializer.get("expand_result", False),
@@ -264,6 +266,11 @@ class APIRequest:
     def proxy(self) -> Optional[Dict[str, str]]:
         """Return the proxy dictionary."""
         return self.connection.proxy
+
+    @property
+    def session(self) -> Optional[requests.Session]:
+        """Return the requests.Session to use for this request, if one was provided."""
+        return self.connection.session
 
     @property
     def timeout(self) -> Optional[Union[int, tuple]]:

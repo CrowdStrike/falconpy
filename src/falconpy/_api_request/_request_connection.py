@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from dataclasses import dataclass
 from typing import Optional, Dict, Union
+import requests
 
 
 @dataclass
@@ -51,3 +52,4 @@ class RequestConnection:
     verify: bool = True
     timeout: Optional[Union[int, tuple]] = None
     proxy: Optional[Dict[str, str]] = None
+    session: Optional[requests.Session] = None

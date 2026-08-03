@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union, Optional
+import requests
 
 
 class InterfaceConfiguration:
@@ -50,13 +51,15 @@ class InterfaceConfiguration:
                  proxy: Optional[Dict[str, str]] = None,
                  timeout: Optional[Union[int, tuple]] = None,
                  user_agent: Optional[str] = None,
-                 ssl_verify: Optional[bool] = True
+                 ssl_verify: Optional[bool] = True,
+                 session: Optional[requests.Session] = None
                  ):
         """Construct an instance of the InterfaceConfiguration class."""
         self._base_url: Optional[str] = base_url
         self._proxy: Optional[Dict[str, str]] = proxy
         self._timeout: Optional[Union[int, tuple]] = timeout
         self._user_agent: Optional[str] = user_agent
+        self._session: Optional[requests.Session] = session
 
         self._ssl_verify: bool = True
         if isinstance(ssl_verify, bool):
@@ -116,3 +119,13 @@ class InterfaceConfiguration:
     def ssl_verify(self, value: bool):
         """Change the SSL verification setting."""
         self._ssl_verify = value
+
+    @property
+    def session(self) -> Optional[requests.Session]:
+        """Return the requests.Session in use, if one was provided."""
+        return self._session
+
+    @session.setter
+    def session(self, value: Optional[requests.Session]):
+        """Update or replace the requests.Session reference. Never closes the outgoing session."""
+        self._session = value

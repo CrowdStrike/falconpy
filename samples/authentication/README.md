@@ -11,6 +11,7 @@ The examples in this folder focus on authentication to CrowdStrike's APIs.
 - [AES File Crypt](#aes-file-crypt) - Encrypt arbitrary files with AES/CBC
 - [AWS Parameter Store](#aws-parameter-store) - CrowdStrike API authentication leveraging AWS Parameter Store for credential storage
 - [Token Authentication](#token-authentication) - Token Authentication is the original solution for authenticating to a Service Class, and is still fully supported. This example demonstrates how to use Token Authentication to interact with multiple Service Classes.
+- [Session Reuse](#session-reuse) - Reuse a single `requests.Session` for connection pooling across login, every API call, token renewal, and logout.
 
 ## Azure Key Vault Authentication
 This application demonstrates storing CrowdStrike API credentials within the
@@ -577,3 +578,29 @@ This sample does not implement command line assistance.
 
 ### Example source code
 Source code for this example can be found [here](token_authentication_example.py).
+
+---
+## Session Reuse
+Every FalconPy client accepts an optional `session` keyword argument: an existing
+`requests.Session` to reuse for connection pooling across login, every API call,
+token renewal, and logout. This avoids repeating the TCP/TLS handshake for each
+request. FalconPy never closes a session provided this way; the caller retains
+full ownership of its lifecycle.
+
+### Running the program
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__ |
+
+Credentials are provided via the `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` environment variables.
+
+### Execution syntax
+This application does not accept command line arguments.
+
+```shell
+python3 session_reuse.py
+```
+
+### Example source code
+Source code for this example can be found [here](session_reuse.py).

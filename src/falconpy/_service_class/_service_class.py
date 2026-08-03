@@ -123,6 +123,13 @@ class ServiceClass(BaseServiceClass):
             Amount of time (in seconds) between now and the token expiration before
             a refresh of the token is performed. Default: 120, Max: 1200
             Values over 1200 will be reset to the maximum.
+        session : requests.Session
+            Existing HTTP session to reuse for connection pooling. Forwarded to the
+            auth_object when one is constructed automatically from credentials; ignored
+            if an explicit auth_object is supplied (that object's own session is used
+            instead, and is not independently overridable per Service Class instance).
+            FalconPy never closes a session provided this way; the caller retains
+            ownership of its lifecycle. When omitted (default), behavior is unchanged.
 
         Arguments
         ----

@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from traceback import extract_tb
 from typing import Dict, List, Optional, Union
+import requests
 from ._falcon_interface import FalconInterface
 from .._constant import MAX_DEBUG_RECORDS
 from .._endpoint import api_endpoints
@@ -79,7 +80,8 @@ class UberInterface(FalconInterface):
                  debug_record_count: Optional[int] = MAX_DEBUG_RECORDS,
                  sanitize_log: Optional[bool] = None,
                  pythonic: Optional[bool] = None,
-                 environment: Optional[Dict[str, str]] = None
+                 environment: Optional[Dict[str, str]] = None,
+                 session: Optional[requests.Session] = None
                  ):
         """Construct an instance of the UberInterface class.
 
@@ -112,6 +114,12 @@ class UberInterface(FalconInterface):
                             Max: 5000
         sanitize_log: Enable / Disable log sanitization of client IDs, secrets and tokens.
                       Boolean. Defaults to enabled.
+        session: Existing requests.Session to reuse for connection pooling across login, every
+                 API call, token renewal and logout. FalconPy never closes a session provided
+                 this way; the caller retains ownership of its lifecycle (for example, by using
+                 it as a context manager). A single Session is not guaranteed safe for
+                 concurrent use across threads without external synchronization. When omitted
+                 (default), behavior is unchanged and a new connection is used for each request.
         This method only accepts keywords to specify arguments.
         """
         super().__init__(base_url=confirm_base_url(base_url),
@@ -129,7 +137,8 @@ class UberInterface(FalconInterface):
                          debug_record_count=debug_record_count,
                          sanitize_log=sanitize_log,
                          pythonic=pythonic,
-                         environment=environment
+                         environment=environment,
+                         session=session
                          )
 
         # Complete list of available API operations.

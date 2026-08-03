@@ -232,6 +232,11 @@ def service_request(caller: ServiceClass = None, **kwargs) -> Union[Dict[str, Un
             user_agent = None
 
         try:
+            session: Optional[requests.Session] = caller.session
+        except AttributeError:
+            session = None
+
+        try:
             log_utility: Optional[Logger] = caller.log
         except AttributeError:
             log_utility = None
@@ -256,6 +261,7 @@ def service_request(caller: ServiceClass = None, **kwargs) -> Union[Dict[str, Un
     return perform_request(proxy=proxy,
                            timeout=timeout,
                            user_agent=user_agent,
+                           session=session,
                            log_util=log_utility,
                            debug_record_count=debug_count,
                            sanitize=do_sanitize,
@@ -378,6 +384,9 @@ def perform_request(endpoint: str = "",  # noqa: C901
     debug_record_count: int - Maximum number of records to log in debug logs
     authenticating: bool - This request is driving a token request
     stream: bool - Enabling streaming download.
+    session: requests.Session - Existing HTTP session to reuse for connection pooling.
+        FalconPy never closes a session provided this way; the caller retains ownership.
+        - Example: requests.Session()
     """
     # Shortcut for now
     pythonic = kwargs.get("pythonic", False)
@@ -420,11 +429,12 @@ def perform_request(endpoint: str = "",  # noqa: C901
                         allow_redirects = True
                 # Log our payloads if debugging is enabled
                 log_api_payloads(api, headers)
-                response = requests.request(api.method.upper(), endpoint, params=api.param_payload,
-                                            headers=headers, json=api.body_payload, data=api.data_payload,
-                                            files=api.files, verify=api.verify, allow_redirects=allow_redirects,
-                                            proxies=api.proxy, timeout=api.timeout, stream=api.stream
-                                            )
+                requester = api.session.request if api.session is not None else requests.request
+                response = requester(api.method.upper(), endpoint, params=api.param_payload,
+                                     headers=headers, json=api.body_payload, data=api.data_payload,
+                                     files=api.files, verify=api.verify, allow_redirects=allow_redirects,
+                                     proxies=api.proxy, timeout=api.timeout, stream=api.stream
+                                     )
 
                 api.debug_headers = response.headers
 

@@ -44,6 +44,7 @@ import warnings
 from contextvars import copy_context
 from logging import Logger, getLogger
 from typing import Dict, Optional, Union
+import requests
 from ._base_falcon_auth import BaseFalconAuth
 from ._bearer_token import BearerToken
 from .._log import LogFacility
@@ -89,7 +90,8 @@ class FalconInterface(BaseFalconAuth):
                  debug_record_count: Optional[int] = None,
                  sanitize_log: Optional[bool] = None,
                  pythonic: Optional[bool] = False,
-                 environment: Optional[Dict[str, str]] = None
+                 environment: Optional[Dict[str, str]] = None,
+                 session: Optional[requests.Session] = None
                  ) -> "FalconInterface":
         """Construct an instance of the FalconInterface class."""
         # Set the pythonic behavior mode.
@@ -102,7 +104,8 @@ class FalconInterface(BaseFalconAuth):
                                                                       proxy=proxy,
                                                                       timeout=timeout,
                                                                       user_agent=user_agent,
-                                                                      ssl_verify=ssl_verify
+                                                                      ssl_verify=ssl_verify,
+                                                                      session=session
                                                                       )            # \ o /
         # ____ _  _ ___ _  _ ____ _  _ ___ _ ____ ____ ___ _ ____ _  _                 |
         # |__| |  |  |  |__| |___ |\ |  |  | |    |__|  |  | |  | |\ |                / \
@@ -307,7 +310,7 @@ class FalconInterface(BaseFalconAuth):
                 returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
                                            headers={}, verify=self.ssl_verify, proxy=self.proxy,
                                            timeout=self.timeout, user_agent=self.user_agent,
-                                           log_util=self.log, authenticating=True,
+                                           session=self.session, log_util=self.log, authenticating=True,
                                            sanitize=self.sanitize_log
                                            )
                 _returned_headers = returned["headers"]
@@ -363,8 +366,8 @@ class FalconInterface(BaseFalconAuth):
                 returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
                                            headers=header_payload, verify=self.ssl_verify,
                                            proxy=self.proxy, timeout=self.timeout,
-                                           user_agent=self.user_agent, log_util=self.log,
-                                           sanitize=self.sanitize_log
+                                           user_agent=self.user_agent, session=self.session,
+                                           log_util=self.log, sanitize=self.sanitize_log
                                            )
                 if stateful:
                     self.bearer_token: BearerToken = BearerToken()
@@ -428,6 +431,15 @@ class FalconInterface(BaseFalconAuth):
     @proxy.setter
     def proxy(self, value: Dict[str, str]):
         self.config.proxy = value
+
+    @property
+    def session(self) -> Optional[requests.Session]:
+        """Return the requests.Session in use, if one was provided."""
+        return self.config.session
+
+    @session.setter
+    def session(self, value: Optional[requests.Session]):
+        self.config.session = value
 
     @property
     def user_agent(self) -> str:

@@ -104,6 +104,15 @@ class APIHarnessV2(UberInterface):
     Uber Class usage scenarios.
 
     This one does it all. It's like the One Ring with significantly fewer orcs.
+
+    Provide a `session` keyword to reuse an existing `requests.Session` for connection
+    pooling across login, every command and token revocation. FalconPy never closes a
+    session provided this way; the caller retains ownership of its lifecycle. Example:
+
+        with requests.Session() as session:
+            falcon = APIHarnessV2(client_id=client_id, client_secret=client_secret, session=session)
+            response = falcon.command("query_devices_by_filter")
+        # session is closed here by the caller's `with` block, not by FalconPy
     """
 
     #                                 `-.

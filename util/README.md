@@ -19,6 +19,7 @@ All of these utilities are designed to be executed from within the repository ro
 | `lint.sh` | Lints the package source with `flake8` and `pylint` and returns the result. Execute from the root of the repository or pass the location you wish to lint as the first argument: `util/lint.sh /path/to/folder` |
 | `public-modules.sh` | Returns a list of all public FalconPy modules and the count of their available methods. Execute from the root of the repository folder or pass this location as the first argument.<BR/>`public-modules.sh /path/to/repo/home`
 | `run-tests.sh` | Runs a complete unit test series, reports code coverage and runs a bandit analysis.<BR/>Should be executed from the repository root: `util/run-tests.sh` |
+| `session_benchmark.py` | Local loopback benchmark comparing per-request latency with and without a reused `requests.Session`, demonstrating the connection-reuse mechanism without requiring API credentials or internet access. Execute from the repository root: `util/session_benchmark.py` |
 | `unit-test.sh` | Runs a single unit test series and reports code coverage. Execute individual tests by specifying their module name. Example: `util/unit-test.sh real_time_response` |
 | `vcheck.sh` | Checks your installed version of FalconPy against the latest release version.<BR/>Will attempt to detect `Pipenv` / `Poetry`.<BR/>Can be executed locally (`util/vcheck.sh`) or online with:<BR/>`curl https://falconpy.io/vcheck --silent \| bash` |
 

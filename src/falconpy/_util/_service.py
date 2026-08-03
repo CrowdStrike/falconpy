@@ -60,6 +60,7 @@ def service_override_payload(caller: object,
         "proxy": caller.proxy,
         "timeout": caller.timeout,
         "user_agent": caller.user_agent,
+        "session": caller.session,
         "expand_result": exp,
         "container": False,     # Does not currently support container operations
         "log_util": caller.log,
