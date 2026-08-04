@@ -231,6 +231,7 @@ from .spans import Spans
 from .spotlight_vulnerabilities import SpotlightVulnerabilities
 from .spotlight_vulnerability_metadata import SpotlightVulnerabilityMetadata
 from .spotlight_evaluation_logic import SpotlightEvaluationLogic
+from .stream import Stream
 from .tailored_intelligence import TailoredIntelligence
 from .threatgraph import ThreatGraph
 from .unidentified_containers import UnidentifiedContainers
@@ -302,7 +303,7 @@ __all__ = [
     "FalconId", "AgentInvocation",
     "AgentTemplates", "AgentVersions",
     "Models", "ScanningOrchestrator",
-    "Spans"
+    "Spans", "Stream"
     ]
 """
 This is free and unencumbered software released into the public domain.

@@ -197,6 +197,7 @@ from ._spans import _spans_endpoints
 from ._spotlight_evaluation_logic import _spotlight_evaluation_logic_endpoints
 from ._spotlight_vulnerability_metadata import _spotlight_vulnerability_metadata_endpoints
 from ._spotlight_vulnerabilities import _spotlight_vulnerabilities_endpoints
+from ._stream import _stream_endpoints
 from ._threatgraph import _threatgraph_endpoints
 from ._tailored_intelligence import _tailored_intelligence_endpoints
 from ._unidentified_containers import _unidentified_containers_endpoints
@@ -329,6 +330,7 @@ api_endpoints.extend(_spans_endpoints)
 api_endpoints.extend(_spotlight_evaluation_logic_endpoints)
 api_endpoints.extend(_spotlight_vulnerability_metadata_endpoints)
 api_endpoints.extend(_spotlight_vulnerabilities_endpoints)
+api_endpoints.extend(_stream_endpoints)
 api_endpoints.extend(_threatgraph_endpoints)
 api_endpoints.extend(_tailored_intelligence_endpoints)
 api_endpoints.extend(_unidentified_containers_endpoints)
