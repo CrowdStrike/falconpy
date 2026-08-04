@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 # pylint: disable=C0302
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
+from ._payload import entities_web_location_group_create_payload, entities_web_location_group_patch_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._data_protection_configuration import _data_protection_configuration_endpoints as Endpoints
@@ -2501,6 +2502,232 @@ class DataProtectionConfiguration(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="queries_web_location_get_v2",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def entities_web_location_group_create(self: object,
+                                           body: dict = None,
+                                           **kwargs
+                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create a web location group.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities_web_location_group_create
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "description": "string",
+                    "name": "string",
+                    "web_location_ids": [
+                        "string"
+                    ]
+                }
+        description : str
+            The description value.
+        name : str
+            The name value.
+        web_location_ids : list
+            The web_location_ids value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = entities_web_location_group_create_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_web_location_group_create",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def entities_web_location_group_delete(self: object,
+                                           *args,
+                                           parameters: dict = None,
+                                           **kwargs
+                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Soft delete web location groups.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities_web_location_group_delete
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The id(s) of the web location group to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_web_location_group_delete",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def entities_web_location_group_get(self: object,
+                                        *args,
+                                        parameters: dict = None,
+                                        **kwargs
+                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get specific web location groups.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities_web_location_group_get
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The web location group id(s) to get.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_web_location_group_get",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def entities_web_location_group_patch(self: object,
+                                          body: dict = None,
+                                          parameters: dict = None,
+                                          **kwargs
+                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update a web location group.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities_web_location_group_patch
+
+        Keyword arguments
+        -----------------
+        id : str
+            The web location group id to update.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "description": "string",
+                    "name": "string",
+                    "web_location_ids": [
+                        "string"
+                    ]
+                }
+        description : str
+            The description value.
+        name : str
+            The name value.
+        web_location_ids : list
+            The web_location_ids value.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = entities_web_location_group_patch_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_web_location_group_patch",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def queries_web_location_group_get(self: object,
+                                       parameters: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get all web location group IDs matching the query with filter.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/queries_web_location_group_get
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Optional filter for searching web location groups. Allowed filters are 'name' (string), 'deleted' (boolean),
+            'type' (string: 'predefined' or 'custom'), 'created' and 'last_updated'
+        type : str
+            The type of entity to query. Allowed values are 'predefined' and 'custom'
+        sort : str
+            The sort instructions to order by on. Allowed values are 'name', 'created' and 'last_updated'
+        limit : int
+            The number of items to return in this response (default: 100, max: 500). Use with the offset parameter to
+            manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queries_web_location_group_get",
             keywords=kwargs,
             params=parameters
             )

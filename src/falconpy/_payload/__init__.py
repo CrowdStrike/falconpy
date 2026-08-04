@@ -139,12 +139,14 @@ from ._data_protection_configuration import (
     data_protection_cloud_app_payload,
     data_protection_content_pattern_payload,
     data_protection_enterprise_account_payload,
-    data_protection_sensitivity_label_payload,
-    data_protection_policy_payload,
-    data_protection_web_locations_payload,
-    data_protection_policy_precedence_payload,
+    data_protection_local_application_group_payload,
     data_protection_local_application_payload,
-    data_protection_local_application_group_payload
+    data_protection_policy_payload,
+    data_protection_policy_precedence_payload,
+    data_protection_sensitivity_label_payload,
+    data_protection_web_locations_payload,
+    entities_web_location_group_create_payload,
+    entities_web_location_group_patch_payload,
     )
 from ._delivery_settings import delivery_settings_payload
 from ._detects import update_detects_payload
@@ -365,5 +367,6 @@ __all__ = [
     "devices_actions_delete_v1_payload", "indicator_sdmf_query_v1_payload",
     "update_parser_extension_payload", "invoke_agent_version_external_v1_payload",
     "invoke_published_agent_external_v1_payload", "entities_merge_post_v1_payload",
-    "cspm_evaluations_iom_entities_post_payload", "entities_rules_ownership_put_v2_payload"
+    "cspm_evaluations_iom_entities_post_payload", "entities_rules_ownership_put_v2_payload",
+    "entities_web_location_group_create_payload", "entities_web_location_group_patch_payload"
 ]

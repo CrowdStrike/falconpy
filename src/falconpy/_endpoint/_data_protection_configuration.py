@@ -674,6 +674,83 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
+    "entities_web_location_group_get",
+    "GET",
+    "/data-protection/entities/web-location-groups/v2",
+    "Get specific web location groups",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The web location group id(s) to get.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_web_location_group_create",
+    "POST",
+    "/data-protection/entities/web-location-groups/v2",
+    "Create a web location group",
+    "data_protection_configuration",
+    [
+      {
+        "description": "The web location group definition to create",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_web_location_group_delete",
+    "DELETE",
+    "/data-protection/entities/web-location-groups/v2",
+    "Soft delete web location groups",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The id(s) of the web location group to delete.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_web_location_group_patch",
+    "PATCH",
+    "/data-protection/entities/web-location-groups/v2",
+    "Update a web location group",
+    "data_protection_configuration",
+    [
+      {
+        "type": "string",
+        "description": "The web location group id to update.",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "description": "The new web location group definition",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_web_location_get_v2",
     "GET",
     "/data-protection/entities/web-locations/v2",
@@ -759,10 +836,10 @@ _data_protection_configuration_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter results by specific attributes , allowed attributes are [modified_by "
-        "modified_at properties.evidence_duplication_enabled properties.sensitivity_labels properties.web_sources name "
-        "created_at properties.content_patterns properties.content_patterns_operator properties.file_types "
-        "properties.protection_mode created_by]",
+        "description": "Filter results by specific attributes , allowed attributes are [created_by "
+        "properties.content_patterns_operator properties.protection_mode properties.sensitivity_labels created_at "
+        "modified_by modified_at properties.content_patterns properties.evidence_duplication_enabled "
+        "properties.file_types properties.web_sources name]",
         "name": "filter",
         "in": "query"
       },
@@ -1059,26 +1136,26 @@ _data_protection_configuration_endpoints = [
       },
       {
         "type": "string",
-        "description": "Filter results by specific attributes , allowed attributes are "
-        "[properties.evidence_duplication_enabled_default properties.network_inspection_files_exceeding_size_limit "
-        "properties.be_paste_timeout_duration_milliseconds properties.be_paste_timeout_response "
-        "properties.be_paste_clipboard_min_size properties.evidence_storage_free_disk_perc description "
-        "properties.min_confidence_level properties.evidence_encrypted_enabled properties.classifications "
-        "properties.besplash_custom_message properties.be_paste_clipboard_max_size "
-        "properties.be_paste_clipboard_max_size_unit properties.be_paste_clipboard_over_size_behaviour_block created_by "
-        " modified_by properties.block_notifications properties.be_exclude_domains properties.euj_dialog_timeout "
-        "properties.screen_capture_duration_pre_event properties.custom_block_notification "
-        "properties.enable_network_inspection properties.enable_screen_capture is_enabled "
-        "properties.besplash_message_source name properties.enable_content_inspection "
-        "properties.max_file_size_to_inspect_unit properties.enable_clipboard_inspection "
-        "properties.evidence_download_enabled properties.be_upload_timeout_response "
-        "properties.be_paste_clipboard_min_size_unit properties.evidence_storage_max_size precedence modified_at "
-        "properties.browsers_without_active_extension properties.allow_notifications "
-        "properties.be_upload_timeout_duration_seconds properties.max_file_size_to_inspect "
-        "properties.screen_capture_duration_post_event is_default properties.enable_context_inspection "
-        "properties.inspection_depth properties.block_all_data_access properties.similarity_detection "
-        "properties.enable_end_user_notifications_unsupported_browser properties.custom_allow_notification "
-        "properties.besplash_enabled created_at properties.similarity_threshold]",
+        "description": "Filter results by specific attributes , allowed attributes are [precedence is_default "
+        "properties.evidence_encrypted_enabled properties.be_upload_timeout_duration_seconds "
+        "properties.enable_screen_capture description modified_by properties.evidence_download_enabled "
+        "properties.classifications properties.be_paste_timeout_response name is_enabled created_at modified_at "
+        "properties.inspection_depth properties.enable_clipboard_web_origin properties.besplash_custom_message "
+        "properties.be_paste_clipboard_over_size_behaviour_block properties.min_confidence_level "
+        "properties.enable_clipboard_inspection properties.allow_notifications properties.block_notifications "
+        "properties.be_upload_timeout_response properties.be_paste_clipboard_min_size_unit "
+        "properties.be_paste_clipboard_max_size properties.screen_capture_duration_pre_event "
+        "properties.max_file_size_to_inspect_unit properties.browsers_without_active_extension "
+        "properties.evidence_duplication_enabled_default properties.enable_network_inspection "
+        "properties.be_exclude_domains properties.be_paste_timeout_duration_milliseconds "
+        "properties.be_paste_clipboard_min_size properties.be_paste_clipboard_max_size_unit created_by "
+        "properties.enable_content_inspection properties.enable_context_inspection properties.custom_allow_notification "
+        " properties.custom_block_notification properties.besplash_enabled properties.besplash_message_source "
+        "properties.max_file_size_to_inspect properties.block_all_data_access properties.similarity_detection "
+        "properties.evidence_storage_free_disk_perc properties.evidence_storage_max_size properties.euj_dialog_timeout "
+        "properties.screen_capture_duration_post_event properties.enable_ocr properties.similarity_threshold "
+        "properties.enable_end_user_notifications_unsupported_browser "
+        "properties.network_inspection_files_exceeding_size_limit]",
         "name": "filter",
         "in": "query"
       },
@@ -1103,6 +1180,49 @@ _data_protection_configuration_endpoints = [
         "type": "string",
         "description": "The property to sort by, allowed fields are :[name precedence created_at modified_at]",
         "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "queries_web_location_group_get",
+    "GET",
+    "/data-protection/queries/web-location-groups/v2",
+    "Get all web location group IDs matching the query with filter",
+    "data_protection_configuration",
+    [
+      {
+        "type": "string",
+        "description": "Optional filter for searching web location groups. Allowed filters are 'name' "
+        "(string), 'deleted' (boolean), 'type' (string: 'predefined' or 'custom'), 'created' and 'last_updated'",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The type of entity to query. Allowed values are 'predefined' and 'custom'",
+        "name": "type",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The sort instructions to order by on. Allowed values are 'name', 'created' and 'last_updated'",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "The number of items to return in this response (default: 100, max: 500). Use with the "
+        "offset parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset to start retrieving records from. Use with the limit parameter to manage "
+        "pagination of results.",
+        "name": "offset",
         "in": "query"
       }
     ]

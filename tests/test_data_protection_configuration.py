@@ -190,7 +190,17 @@ class TestDataProtectionConfiguration:
                 filter="name:'test'",
                 limit=50,
                 offset=0
-            )
+            ),
+            "entities_web_location_group_create": falcon.entities_web_location_group_create(description="string",
+                name="string",
+                web_location_ids="string"),
+            "entities_web_location_group_delete": falcon.entities_web_location_group_delete(ids="12345678"),
+            "entities_web_location_group_get": falcon.entities_web_location_group_get(ids="12345678"),
+            "entities_web_location_group_patch": falcon.entities_web_location_group_patch(id="string", description="string",
+                name="string",
+                web_location_ids="string"),
+            "queries_web_location_group_get": falcon.queries_web_location_group_get(filter="string", type="string",
+                sort="string", limit=1, offset=1),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

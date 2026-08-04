@@ -434,3 +434,43 @@ def data_protection_policy_precedence_payload(
     returned_payload["resources"] = resources
 
     return returned_payload
+
+
+def entities_web_location_group_create_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a entities_web_location_group_create request.
+
+    {
+        "description": "string",
+        "name": "string",
+        "web_location_ids": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["description", "name", "web_location_ids"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def entities_web_location_group_patch_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a entities_web_location_group_patch request.
+
+    {
+        "description": "string",
+        "name": "string",
+        "web_location_ids": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["description", "name", "web_location_ids"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
