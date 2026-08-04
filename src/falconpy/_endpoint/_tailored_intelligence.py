@@ -46,6 +46,12 @@ _tailored_intelligence_endpoints = [
     [
       {
         "type": "string",
+        "description": "Bearer Token",
+        "name": "Authorization",
+        "in": "header"
+      },
+      {
+        "type": "string",
         "description": "Return the event body for event id.",
         "name": "id",
         "in": "query",
@@ -64,6 +70,12 @@ _tailored_intelligence_endpoints = [
         "name": "body",
         "in": "body",
         "required": True
+      },
+      {
+        "type": "string",
+        "description": "Bearer Token",
+        "name": "Authorization",
+        "in": "header"
       }
     ]
   ],
@@ -74,6 +86,12 @@ _tailored_intelligence_endpoints = [
     "Get events ids that match the provided filter criteria.",
     "tailored_intelligence",
     [
+      {
+        "type": "string",
+        "description": "Bearer Token",
+        "name": "Authorization",
+        "in": "header"
+      },
       {
         "type": "string",
         "description": "Starting index of overall result set from which to return ids.",
@@ -114,6 +132,12 @@ _tailored_intelligence_endpoints = [
     "tailored_intelligence",
     [
       {
+        "type": "string",
+        "description": "Bearer Token",
+        "name": "Authorization",
+        "in": "header"
+      },
+      {
         "name": "body",
         "in": "body",
         "required": True
@@ -127,6 +151,12 @@ _tailored_intelligence_endpoints = [
     "Get rules ids that match the provided filter criteria.",
     "tailored_intelligence",
     [
+      {
+        "type": "string",
+        "description": "Bearer Token",
+        "name": "Authorization",
+        "in": "header"
+      },
       {
         "type": "string",
         "description": "Starting index of overall result set from which to return ids.",

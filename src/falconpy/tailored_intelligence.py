@@ -70,6 +70,8 @@ class TailoredIntelligence(ServiceClass):
         -----------------
         id : str (required)
             Event ID to retrieve the body for.
+        Authorization : str
+            Bearer Token.
         parameters : dict
             full parameters payload, not required if 'id' keyword is provided.
 
@@ -104,6 +106,8 @@ class TailoredIntelligence(ServiceClass):
         -----------------
         ids : str or list[str]
             Event ID to retrieve.
+        Authorization : str
+            Bearer Token.
         parameters : dict
             full parameters payload, not required if 'id' keyword is provided.
 
@@ -154,6 +158,8 @@ class TailoredIntelligence(ServiceClass):
             The maximum number of records to return.
         offset : str
             Starting index of overall result set from which to return IDs.
+        Authorization : str
+            Bearer Token.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
         q : str
@@ -191,6 +197,8 @@ class TailoredIntelligence(ServiceClass):
         -----------------
         ids : str or list[str]
             Rule ID to retrieve.
+        Authorization : str
+            Bearer Token.
         parameters : dict
             full parameters payload, not required if 'id' keyword is provided.
 
@@ -241,6 +249,8 @@ class TailoredIntelligence(ServiceClass):
             The maximum number of records to return.
         offset : str
             Starting index of overall result set from which to return IDs.
+        Authorization : str
+            Bearer Token.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
         q : str
