@@ -730,6 +730,20 @@ _kubernetes_protection_endpoints = [
     ]
   ],
   [
+    "PostAggregatesPods",
+    "POST",
+    "/container-security/aggregates/pods/v1",
+    "Get aggregate query result for pods",
+    "kubernetes_protection",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ReadClusterCombined",
     "GET",
     "/container-security/combined/clusters/v1",
@@ -936,9 +950,9 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Search Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported filter "
-        "fields:  cid  cis_id  cluster_id  cluster_name  containers_impacted_ai_related  containers_impacted_count  "
-        "containers_impacted_ids  detection_type  name  namespace  prevented  resource_id  resource_name  resource_type"
-        "severity",
+        "fields:  cid  cis_id  cloud_service  cluster_id  cluster_name  containers_impacted_ai_related  "
+        "containers_impacted_count  containers_impacted_ids  detection_type  name  namespace  prevented  resource_id  "
+        "resource_name  resource_type  severity",
         "name": "filter",
         "in": "query"
       },
@@ -973,9 +987,9 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Search Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported filter "
-        "fields:  cid  cis_id  cluster_id  cluster_name  containers_impacted_ai_related  containers_impacted_count  "
-        "containers_impacted_ids  detection_type  name  namespace  prevented  resource_id  resource_name  resource_type"
-        "severity",
+        "fields:  cid  cis_id  cloud_service  cluster_id  cluster_name  containers_impacted_ai_related  "
+        "containers_impacted_count  containers_impacted_ids  detection_type  name  namespace  prevented  resource_id  "
+        "resource_name  resource_type  severity",
         "name": "filter",
         "in": "query"
       },
@@ -1105,9 +1119,9 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Search Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported filter "
-        "fields:  cid  cis_id  cluster_id  cluster_name  containers_impacted_ai_related  containers_impacted_count  "
-        "containers_impacted_ids  detection_type  name  namespace  prevented  resource_id  resource_name  resource_type"
-        "severity",
+        "fields:  cid  cis_id  cloud_service  cluster_id  cluster_name  containers_impacted_ai_related  "
+        "containers_impacted_count  containers_impacted_ids  detection_type  name  namespace  prevented  resource_id  "
+        "resource_name  resource_type  severity",
         "name": "filter",
         "in": "query"
       },
@@ -1150,38 +1164,38 @@ _kubernetes_protection_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^(true|false)$",
+        "type": "string",
         "enum": [
           "false",
           "true"
         ],
-        "type": "string",
+        "pattern": "^(true|false)$",
         "description": "Filter by whether an account originates from Horizon or not",
         "name": "is_horizon_acct",
         "in": "query"
       },
       {
-        "pattern": "^(provisioned|operational)$",
+        "type": "string",
         "enum": [
           "operational",
           "provisioned"
         ],
-        "type": "string",
+        "pattern": "^(provisioned|operational)$",
         "description": "Filter by account status",
         "name": "status",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 1000,
         "minimum": 0,
-        "type": "integer",
         "description": "Limit returned accounts",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Offset returned accounts",
         "name": "offset",
         "in": "query"
@@ -1198,6 +1212,26 @@ _kubernetes_protection_endpoints = [
       {
         "name": "body",
         "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DeleteAWSAccountsMixin0",
+    "DELETE",
+    "/kubernetes-protection/entities/accounts/aws/v1",
+    "Delete AWS accounts.",
+    "kubernetes_protection",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "AWS Account IDs",
+        "name": "ids",
+        "in": "query",
         "required": True
       }
     ]
@@ -1221,31 +1255,11 @@ _kubernetes_protection_endpoints = [
         "required": True
       },
       {
-        "pattern": "^[a-z\\d-]+$",
         "type": "string",
+        "pattern": "^[a-z\\d-]+$",
         "description": "Default Region for Account Automation",
         "name": "region",
         "in": "query"
-      }
-    ]
-  ],
-  [
-    "DeleteAWSAccountsMixin0",
-    "DELETE",
-    "/kubernetes-protection/entities/accounts/aws/v1",
-    "Delete AWS accounts.",
-    "kubernetes_protection",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "csv",
-        "description": "AWS Account IDs",
-        "name": "ids",
-        "in": "query",
-        "required": True
       }
     ]
   ],
@@ -1277,38 +1291,38 @@ _kubernetes_protection_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^(provisioned|operational)$",
+        "type": "string",
         "enum": [
           "operational",
           "provisioned"
         ],
-        "type": "string",
+        "pattern": "^(provisioned|operational)$",
         "description": "Filter by account status",
         "name": "status",
         "in": "query"
       },
       {
-        "pattern": "^(true|false)$",
+        "type": "string",
         "enum": [
           "false",
           "true"
         ],
-        "type": "string",
+        "pattern": "^(true|false)$",
         "description": "Filter by whether an account originates from Horizon or not",
         "name": "is_horizon_acct",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 1000,
         "minimum": 0,
-        "type": "integer",
         "description": "Limit returned accounts",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Offset returned accounts",
         "name": "offset",
         "in": "query"
@@ -1356,16 +1370,16 @@ _kubernetes_protection_endpoints = [
     "kubernetes_protection",
     [
       {
-        "enum": [
-          "aws",
-          "azure",
-          "gcp"
-        ],
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "csv",
+        "enum": [
+          "aws",
+          "azure",
+          "gcp"
+        ],
         "description": "Cloud Provider",
         "name": "clouds",
         "in": "query"
@@ -1400,45 +1414,45 @@ _kubernetes_protection_endpoints = [
         "in": "query"
       },
       {
-        "enum": [
-          "aks",
-          "eks"
-        ],
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "csv",
+        "enum": [
+          "aks",
+          "eks"
+        ],
         "description": "Cluster Service",
         "name": "cluster_service",
         "in": "query"
       },
       {
-        "enum": [
-          "Not Installed",
-          "Running",
-          "Stopped"
-        ],
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "csv",
+        "enum": [
+          "Not Installed",
+          "Running",
+          "Stopped"
+        ],
         "description": "Cluster Status",
         "name": "cluster_status",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 1000,
         "minimum": 0,
-        "type": "integer",
         "description": "Limit returned accounts",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Offset returned accounts",
         "name": "offset",
         "in": "query"
@@ -1463,16 +1477,16 @@ _kubernetes_protection_endpoints = [
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 1000,
         "minimum": 0,
-        "type": "integer",
         "description": "Limit returned accounts",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Offset returned accounts",
         "name": "offset",
         "in": "query"
@@ -1535,16 +1549,16 @@ _kubernetes_protection_endpoints = [
         "in": "query"
       },
       {
-        "enum": [
-          "Not Installed",
-          "Running",
-          "Stopped"
-        ],
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "csv",
+        "enum": [
+          "Not Installed",
+          "Running",
+          "Stopped"
+        ],
         "description": "Cluster Status",
         "name": "status",
         "in": "query"
@@ -1570,26 +1584,26 @@ _kubernetes_protection_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "aks",
           "eks"
         ],
-        "type": "string",
         "description": "Cluster Service",
         "name": "cluster_service",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 1000,
         "minimum": 0,
-        "type": "integer",
         "description": "Limit returned accounts",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Offset returned accounts",
         "name": "offset",
         "in": "query"
@@ -1604,14 +1618,14 @@ _kubernetes_protection_endpoints = [
     "kubernetes_protection",
     [
       {
-        "pattern": "^(dry-run|full|cluster-refresh)$",
+        "type": "string",
+        "default": "dry-run",
         "enum": [
           "cluster-refresh",
           "dry-run",
           "full"
         ],
-        "type": "string",
-        "default": "dry-run",
+        "pattern": "^(dry-run|full|cluster-refresh)$",
         "description": "Scan Type to do",
         "name": "scan_type",
         "in": "query",
@@ -1627,20 +1641,20 @@ _kubernetes_protection_endpoints = [
     "kubernetes_protection",
     [
       {
+        "type": "string",
         "maxLength": 36,
         "minLength": 36,
         "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$",
-        "type": "string",
         "description": "Azure Tenant ID",
         "name": "id",
         "in": "query",
         "required": True
       },
       {
+        "type": "string",
         "maxLength": 36,
         "minLength": 36,
         "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$",
-        "type": "string",
         "description": "Azure Client ID",
         "name": "client_id",
         "in": "query",
@@ -1666,27 +1680,27 @@ _kubernetes_protection_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "Not Installed",
           "Running",
           "Stopped"
         ],
-        "type": "string",
         "description": "Cluster Status",
         "name": "status",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 1000,
         "minimum": 0,
-        "type": "integer",
         "description": "Limit returned accounts",
         "name": "limit",
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "Offset returned accounts",
         "name": "offset",
         "in": "query"
@@ -1701,10 +1715,10 @@ _kubernetes_protection_endpoints = [
     "kubernetes_protection",
     [
       {
+        "type": "string",
         "maxLength": 36,
         "minLength": 36,
         "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$",
-        "type": "string",
         "description": "Azure Tenant ID",
         "name": "id",
         "in": "query"

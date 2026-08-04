@@ -87,7 +87,12 @@ class TestKubeProtect:
             "ReadNamespaceCount": falcon.read_namespace_count(filter="something"),
             "ReadClusterCombinedV2": falcon.read_clusters_combined_v2(filter="whatever"),
             "PostSearchKubernetesIOMEntities": falcon.search_kubernetes_ioms(limit=1),
-            "PostSearchKubernetesIOMEntitiesWithParams": falcon.search_kubernetes_ioms(pit="whatever", search_after="whatever")
+            "PostSearchKubernetesIOMEntitiesWithParams": falcon.search_kubernetes_ioms(pit="whatever", search_after="whatever"),
+            "PostAggregatesPods": falcon.post_aggregates_pods(date_ranges=[{"from": "string", "to": "string"}],
+                field="string", filter="string", interval="string",
+                min_doc_count=0, missing="string", name="string", q="string",
+                ranges=[{"From": 0, "To": 0}], size=0, sort="string",
+                sub_aggregates=["string"], time_zone="string", type="string"),
         }
 
         for key in tests:

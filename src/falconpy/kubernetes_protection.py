@@ -2965,9 +2965,107 @@ class KubernetesProtection(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
+    @force_default(defaults=["body"], default_types=["list"])
+    def post_aggregates_pods(self: object,
+                             body: list = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get aggregate query result for pods.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/PostAggregatesPods
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted list. Not required if using other keywords.
+                [
+                    {
+                        "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                        ],
+                        "exclude": "string",
+                        "field": "string",
+                        "filter": "string",
+                        "from": 0,
+                        "include": "string",
+                        "interval": "string",
+                        "max_doc_count": 0,
+                        "min_doc_count": 0,
+                        "missing": "string",
+                        "name": "string",
+                        "q": "string",
+                        "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                        ],
+                        "size": 0,
+                        "sort": "string",
+                        "sub_aggregates": [
+                            null
+                        ],
+                        "time_zone": "string",
+                        "type": "string"
+                    }
+                ]
+        date_ranges : list[dict]
+            List of date range objects.
+        field : str
+            The field to aggregate on.
+        filter : str
+            FQL filter expression.
+        interval : str
+            Time interval for aggregation.
+        min_doc_count : int
+            Minimum document count threshold.
+        missing : str
+            Missing value handling.
+        name : str
+            Name of the aggregation.
+        q : str
+            Full text search across all metadata fields.
+        ranges : list[dict]
+            List of range objects.
+        size : int
+            Maximum number of results.
+        sort : str
+            Sort expression.
+        sub_aggregates : list[str]
+            List of sub-aggregate expressions.
+        time_zone : str
+            Time zone for date operations.
+        type : str
+            Type of aggregation (terms, date_histogram, etc.)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="PostAggregatesPods",
+            body=body
+            )
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
+    PostAggregatesPods = post_aggregates_pods
     ReadClustersByDateRangeCount = read_clusters_by_date_range
     ReadClustersByKubernetesVersionCount = read_clusters_by_version
     ReadClustersByStatusCount = read_clusters_by_status
