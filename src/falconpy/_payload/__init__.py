@@ -22,6 +22,7 @@
 from ._agent_invocation import invoke_agent_version_external_v1_payload, invoke_published_agent_external_v1_payload
 from ._api_clients import create_api_client_payload, update_api_client_payload
 from ._cloud_security_assets import cloud_security_assets_entities_post_payload
+from ._cloud_security_detections import cspm_evaluations_iom_entities_post_payload
 from ._falcon_id import update_third_party_passkey_registry_payload
 from ._federated_connections import patch_federated_connections_config_payload, post_federated_connections_config_payload
 from ._generic import (
@@ -360,5 +361,6 @@ __all__ = [
     "cloud_registration_gcp_post_terraform_script_payload", "update_third_party_passkey_registry_payload",
     "devices_actions_delete_v1_payload", "indicator_sdmf_query_v1_payload",
     "update_parser_extension_payload", "invoke_agent_version_external_v1_payload",
-    "invoke_published_agent_external_v1_payload", "entities_merge_post_v1_payload"
+    "invoke_published_agent_external_v1_payload", "entities_merge_post_v1_payload",
+    "cspm_evaluations_iom_entities_post_payload"
 ]

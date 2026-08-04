@@ -103,6 +103,21 @@ _cloud_security_detections_endpoints = [
     ]
   ],
   [
+    "cspm_evaluations_iom_entities_post",
+    "POST",
+    "/cloud-security-evaluations/entities/ioms/v1",
+    "Gets IOMs based on IDs in the request body. Maximum of 500 resources can be requested.",
+    "cloud_security_detections",
+    [
+      {
+        "description": "Body with array of 'ids' (maximum 500 IDs).",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "cspm_evaluations_iom_queries",
     "GET",
     "/cloud-security-evaluations/queries/ioms/v1",

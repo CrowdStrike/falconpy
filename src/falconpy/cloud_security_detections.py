@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
+from ._payload import cspm_evaluations_iom_entities_post_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._cloud_security_detections import _cloud_security_detections_endpoints as Endpoints
@@ -261,6 +262,48 @@ class CloudSecurityDetections(ServiceClass):
             operation_id="cspm_evaluations_iom_queries",
             keywords=kwargs,
             params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def cspm_evaluations_iom_entities_post(self: object,
+                                           body: dict = None,
+                                           **kwargs
+                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get IOMs based on IDs in the request body.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-detections/cspm_evaluations_iom_entities_post
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids : list
+            The ids value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = cspm_evaluations_iom_entities_post_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cspm_evaluations_iom_entities_post",
+            body=body
             )
 
     cspm_evaluations_combined_iom_by_rule = get_combined_iom_by_rule

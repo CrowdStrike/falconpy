@@ -25,7 +25,8 @@ class TestCloudSecurityAssets:
         tests = {
             "cspm_evaluations_iom_entities": falcon.get_iom_entities(ids = "1234567"),
             "cspm_evaluations_iom_queries": falcon.query_iom_entities(),
-            "cspm_evaluations_combined_iom_by_rule": falcon.cspm_evaluations_combined_iom_by_rule()
+            "cspm_evaluations_combined_iom_by_rule": falcon.cspm_evaluations_combined_iom_by_rule(),
+            "cspm_evaluations_iom_entities_post": falcon.cspm_evaluations_iom_entities_post(ids="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
