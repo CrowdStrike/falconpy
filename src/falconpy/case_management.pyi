@@ -494,6 +494,14 @@ class CaseManagement(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def entities_merge_post_v1(
+        self,
+        *,
+        destination_id: Optional[str] = None,
+        source_id: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
     combined_file_details_get_v1 = query_file_details
     entities_file_details_get_v1 = get_file_details
     entities_file_details_patch_v1 = update_file_details

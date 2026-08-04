@@ -126,6 +126,7 @@ class CloudGoogleCloudRegistration(ServiceClass):
     def cloud_registration_gcp_post_terraform_script(
         self,
         *,
+        dspm_settings: Optional[dict] = None,
         entity_id: Optional[Union[str, List[str]]] = None,
         excluded_project_patterns: Optional[Union[str, List[str]]] = None,
         falcon_client_key_id: Optional[str] = None,
@@ -139,6 +140,7 @@ class CloudGoogleCloudRegistration(ServiceClass):
         resource_name_suffix: Optional[str] = None,
         tags: Optional[str] = None,
         vars_only: Optional[bool] = None,
+        vulnerability_scanning_settings: Optional[dict] = None,
         wif_project_id: Optional[str] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...

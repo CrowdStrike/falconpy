@@ -34,6 +34,13 @@ class CloudSecurityDetections(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def cspm_evaluations_iom_entities_post(
+        self,
+        *,
+        ids: Optional[Union[str, List[str]]] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
     cspm_evaluations_combined_iom_by_rule = get_combined_iom_by_rule
     cspm_evaluations_iom_entities = get_iom_entities
     cspm_evaluations_iom_queries = query_iom_entities

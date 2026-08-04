@@ -439,6 +439,51 @@ class DataProtectionConfiguration(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def entities_web_location_group_create(
+        self,
+        *,
+        description: Optional[str] = None,
+        name: Optional[str] = None,
+        web_location_ids: Optional[Union[str, List[str]]] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def entities_web_location_group_delete(
+        self,
+        *args: Union[str, List[str]],
+        ids: Optional[Union[str, List[str]]] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def entities_web_location_group_get(
+        self,
+        *args: Union[str, List[str]],
+        ids: Optional[Union[str, List[str]]] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def entities_web_location_group_patch(
+        self,
+        *,
+        id: Optional[str] = None,
+        description: Optional[str] = None,
+        name: Optional[str] = None,
+        web_location_ids: Optional[Union[str, List[str]]] = None,
+        body: Optional[dict] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def queries_web_location_group_get(
+        self,
+        *,
+        filter: Optional[str] = None,
+        type: Optional[str] = None,
+        sort: Optional[str] = None,
+        limit: Optional[int] = None,
+        offset: Optional[int] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
     entities_classification_get_v2 = get_classification
     entities_classification_post_v2 = create_classification
     entities_classification_patch_v2 = update_classifications

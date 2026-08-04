@@ -16,4 +16,14 @@ class CorrelationRulesAdmin(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def entities_rules_ownership_put_v2(
+        self,
+        *,
+        api_client_id: Optional[str] = None,
+        ids: Optional[Union[str, List[str]]] = None,
+        user_id: Optional[str] = None,
+        user_uuid: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
     entities_rules_ownership_put_v1 = change_correlation_rule_owner

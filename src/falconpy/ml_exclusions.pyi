@@ -179,6 +179,16 @@ class MLExclusions(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def exclusions_sdmf_query_v1(
+        self,
+        *,
+        control_info: Optional[dict] = None,
+        id: Optional[str] = None,
+        nodes: Optional[list] = None,
+        res_id: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
     getMLExclusionsV1 = get_exclusions
     createMLExclusionsV1 = create_exclusions
     deleteMLExclusionsV1 = delete_exclusions

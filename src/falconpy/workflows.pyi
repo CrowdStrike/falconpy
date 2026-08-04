@@ -61,6 +61,8 @@ class Workflows(ServiceClass):
         *args: Union[str, List[str]],
         id: Optional[str] = None,
         sanitize: Optional[bool] = None,
+        include_mocks: Optional[bool] = None,
+        version: Optional[int] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

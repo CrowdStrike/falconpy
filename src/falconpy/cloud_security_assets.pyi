@@ -15,6 +15,7 @@ class CloudSecurityAssets(ServiceClass):
         filter: Optional[str] = None,
         offset: Optional[int] = None,
         limit: Optional[int] = None,
+        sort: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

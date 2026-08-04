@@ -505,6 +505,13 @@ class KubernetesProtection(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def post_aggregates_pods(
+        self,
+        *,
+        body: Optional[list] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    PostAggregatesPods = post_aggregates_pods
     ReadClustersByDateRangeCount = read_clusters_by_date_range
     ReadClustersByKubernetesVersionCount = read_clusters_by_version
     ReadClustersByStatusCount = read_clusters_by_status

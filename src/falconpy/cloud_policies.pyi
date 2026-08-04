@@ -13,6 +13,7 @@ class CloudPolicies(ServiceClass):
         subdomain: Optional[str] = None,
         cloud_provider: Optional[str] = None,
         resource_type: Optional[str] = None,
+        enriched: Optional[bool] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

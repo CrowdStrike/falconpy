@@ -1,11 +1,13 @@
 """Type stubs for incidents."""
 from typing import Dict, List, Optional, Union
+from typing_extensions import deprecated
 from ._service_class import ServiceClass
 from ._result import Result
 
 
 class Incidents(ServiceClass):
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def crowdscore(
         self,
         *,
@@ -16,10 +18,10 @@ class Incidents(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def get_behaviors(
         self,
         *,
-        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -28,19 +30,18 @@ class Incidents(ServiceClass):
         *,
         update_detects: Optional[bool] = None,
         overwrite_detects: Optional[bool] = None,
-        action_parameters: Optional[list] = None,
-        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def get_incidents(
         self,
         *,
-        ids: Optional[Union[str, List[str]]] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def query_behaviors(
         self,
         *,
@@ -51,6 +52,7 @@ class Incidents(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def query_incidents(
         self,
         *,

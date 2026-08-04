@@ -517,15 +517,186 @@ class NGSIEM(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def add_dashboard_labels(
+        self,
+        *,
+        id: Optional[str] = None,
+        labels: Optional[Union[str, List[str]]] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def add_file_labels(
+        self,
+        *,
+        filename: Optional[str] = None,
+        labels: Optional[Union[str, List[str]]] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def add_saved_query_labels(
+        self,
+        *,
+        id: Optional[str] = None,
+        labels: Optional[Union[str, List[str]]] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def bulk_add_dashboard_labels(
+        self,
+        *,
+        items: Optional[list] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def bulk_add_lookup_file_labels(
+        self,
+        *,
+        items: Optional[list] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def bulk_add_saved_query_labels(
+        self,
+        *,
+        items: Optional[list] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def bulk_remove_dashboard_labels(
+        self,
+        *,
+        items: Optional[list] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def bulk_remove_lookup_file_labels(
+        self,
+        *,
+        items: Optional[list] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def bulk_remove_saved_query_labels(
+        self,
+        *,
+        items: Optional[list] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def bulk_update_dashboard_labels(
+        self,
+        *,
+        items: Optional[list] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def bulk_update_lookup_file_labels(
+        self,
+        *,
+        items: Optional[list] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def bulk_update_saved_query_labels(
+        self,
+        *,
+        items: Optional[list] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def remove_dashboard_labels(
+        self,
+        *,
+        id: Optional[str] = None,
+        labels: Optional[Union[str, List[str]]] = None,
+        search_domain: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def remove_file_labels(
+        self,
+        *,
+        filename: Optional[str] = None,
+        labels: Optional[Union[str, List[str]]] = None,
+        search_domain: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def remove_saved_query_labels(
+        self,
+        *,
+        id: Optional[str] = None,
+        labels: Optional[Union[str, List[str]]] = None,
+        search_domain: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def update_dashboard_labels(
+        self,
+        *,
+        id: Optional[str] = None,
+        labels: Optional[Union[str, List[str]]] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def update_file_labels(
+        self,
+        *,
+        filename: Optional[str] = None,
+        labels: Optional[Union[str, List[str]]] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def update_saved_query_labels(
+        self,
+        *,
+        id: Optional[str] = None,
+        labels: Optional[Union[str, List[str]]] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    addDashboardLabels = add_dashboard_labels
+    addFileLabels = add_file_labels
+    addSavedQueryLabels = add_saved_query_labels
+    bulkAddDashboardLabels = bulk_add_dashboard_labels
+    bulkAddLookupFileLabels = bulk_add_lookup_file_labels
+    bulkAddSavedQueryLabels = bulk_add_saved_query_labels
     BulkCreateDashboardsFromTemplate = bulk_create_dashboards_from_template
     BulkCreateLookupFiles = bulk_create_lookup_files
     BulkCreateSavedQueriesFromTemplate = bulk_create_saved_queries_from_template
     BulkGetLookupFiles = bulk_get_lookup_files
+    bulkRemoveDashboardLabels = bulk_remove_dashboard_labels
+    bulkRemoveLookupFileLabels = bulk_remove_lookup_file_labels
+    bulkRemoveSavedQueryLabels = bulk_remove_saved_query_labels
+    bulkUpdateDashboardLabels = bulk_update_dashboard_labels
     BulkUpdateDashboardsFromTemplate = bulk_update_dashboards_from_template
+    bulkUpdateLookupFileLabels = bulk_update_lookup_file_labels
     BulkUpdateLookupFiles = bulk_update_lookup_files
     BulkUpdateSavedQueriesFromTemplate = bulk_update_saved_queries_from_template
+    bulkUpdateSavedQueryLabels = bulk_update_saved_query_labels
     CreateParserExtension = create_parser_extension
+    removeDashboardLabels = remove_dashboard_labels
+    removeFileLabels = remove_file_labels
+    removeSavedQueryLabels = remove_saved_query_labels
+    updateDashboardLabels = update_dashboard_labels
+    updateFileLabels = update_file_labels
     UpdateParserExtension = update_parser_extension
+    updateSavedQueryLabels = update_saved_query_labels
     UploadLookupV1 = upload_file
     GetLookupV1 = get_file
     GetLookupFromPackageWithNamespaceV1 = get_file_from_package_with_namespace

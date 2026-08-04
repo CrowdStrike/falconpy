@@ -198,6 +198,7 @@ class Recon(ServiceClass):
         *,
         breach_monitor_only: Optional[bool] = None,
         breach_monitoring_enabled: Optional[bool] = None,
+        exposed_data_match_type: Optional[str] = None,
         filter: Optional[str] = None,
         lookback_period: Optional[int] = None,
         match_on_tsq_result_types: Optional[Union[str, List[str]]] = None,
@@ -207,6 +208,7 @@ class Recon(ServiceClass):
         priority: Optional[str] = None,
         substring_matching_enabled: Optional[bool] = None,
         topic: Optional[str] = None,
+        tsq_match_edit_distance: Optional[str] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -223,6 +225,7 @@ class Recon(ServiceClass):
         *,
         breach_monitor_only: Optional[bool] = None,
         breach_monitoring_enabled: Optional[bool] = None,
+        exposed_data_match_type: Optional[str] = None,
         filter: Optional[str] = None,
         id: Optional[str] = None,
         match_on_tsq_result_types: Optional[Union[str, List[str]]] = None,
@@ -230,6 +233,7 @@ class Recon(ServiceClass):
         permissions: Optional[str] = None,
         priority: Optional[str] = None,
         substring_matching_enabled: Optional[bool] = None,
+        tsq_match_edit_distance: Optional[str] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
