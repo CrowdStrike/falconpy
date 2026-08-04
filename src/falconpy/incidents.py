@@ -60,6 +60,10 @@ class Incidents(ServiceClass):
     def crowdscore(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query environment wide CrowdScore and return the entity data.
 
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
+
         DEPRECATED: the Incidents API will be removed in March 2026.
 
         HTTP Method: GET
@@ -101,6 +105,10 @@ class Incidents(ServiceClass):
     @force_default(defaults=["body"], default_types=["dict"])
     def get_behaviors(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on behaviors by providing behavior IDs.
+
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
 
         DEPRECATED: the Incidents API will be removed in March 2026.
 
@@ -247,6 +255,10 @@ class Incidents(ServiceClass):
     def get_incidents(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on incidents by providing incident IDs.
 
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
+
         DEPRECATED: the Incidents API will be removed in March 2026.
 
         HTTP Method: POST
@@ -287,6 +299,10 @@ class Incidents(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_behaviors(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for behaviors by providing an FQL filter, sorting, and paging details.
+
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
 
         DEPRECATED: the Incidents API will be removed in March 2026.
 
@@ -329,6 +345,10 @@ class Incidents(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_incidents(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for incidents by providing an FQL filter, sorting, and paging details.
+
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
 
         DEPRECATED: the Incidents API will be removed in March 2026.
 
