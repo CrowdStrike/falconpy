@@ -200,6 +200,7 @@ from ._spotlight_vulnerabilities import _spotlight_vulnerabilities_endpoints
 from ._stream import _stream_endpoints
 from ._threatgraph import _threatgraph_endpoints
 from ._tailored_intelligence import _tailored_intelligence_endpoints
+from ._tools import _tools_endpoints
 from ._unidentified_containers import _unidentified_containers_endpoints
 from ._user_management import _user_management_endpoints
 from ._workflows import _workflows_endpoints
@@ -333,6 +334,7 @@ api_endpoints.extend(_spotlight_vulnerabilities_endpoints)
 api_endpoints.extend(_stream_endpoints)
 api_endpoints.extend(_threatgraph_endpoints)
 api_endpoints.extend(_tailored_intelligence_endpoints)
+api_endpoints.extend(_tools_endpoints)
 api_endpoints.extend(_unidentified_containers_endpoints)
 api_endpoints.extend(_user_management_endpoints)
 api_endpoints.extend(_workflows_endpoints)

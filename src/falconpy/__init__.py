@@ -234,6 +234,7 @@ from .spotlight_evaluation_logic import SpotlightEvaluationLogic
 from .stream import Stream
 from .tailored_intelligence import TailoredIntelligence
 from .threatgraph import ThreatGraph
+from .tools import Tools
 from .unidentified_containers import UnidentifiedContainers
 from .user_management import UserManagement
 from .workflows import Workflows
@@ -303,7 +304,8 @@ __all__ = [
     "FalconId", "AgentInvocation",
     "AgentTemplates", "AgentVersions",
     "Models", "ScanningOrchestrator",
-    "Spans", "Stream"
+    "Spans", "Stream",
+    "Tools"
     ]
 """
 This is free and unencumbered software released into the public domain.
