@@ -1154,6 +1154,20 @@ _case_management_endpoints = [
     ]
   ],
   [
+    "entities_merge_post_v1",
+    "POST",
+    "/cases/entities/merge/v1",
+    "Merges a source case into a destination case.",
+    "case_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "queries_cases_get_v1",
     "GET",
     "/cases/queries/cases/v1",

@@ -53,18 +53,19 @@ from ._correlation_rules import (
     correlation_rules_template_payload
 )
 from ._case_management import (
-    case_management_notification_groups_payload,
+    case_evidence_payload,
+    case_manage_payload,
     case_management_create_notification_payload,
-    case_management_sla_payload,
-    case_management_template_payload,
     case_management_file_ids_payload,
+    case_management_notification_groups_payload,
     case_management_rtr_file_metadata_payload,
     case_management_rtr_file_payload,
     case_management_rtr_recent_file_payload,
+    case_management_sla_payload,
+    case_management_template_payload,
+    entities_merge_post_v1_payload,
     specified_case_payload,
-    case_manage_payload,
-    case_evidence_payload,
-    update_case_payload
+    update_case_payload,
     )
 from ._host_group import host_group_create_payload, host_group_update_payload
 from ._hosts import devices_actions_delete_v1_payload
@@ -359,5 +360,5 @@ __all__ = [
     "cloud_registration_gcp_post_terraform_script_payload", "update_third_party_passkey_registry_payload",
     "devices_actions_delete_v1_payload", "indicator_sdmf_query_v1_payload",
     "update_parser_extension_payload", "invoke_agent_version_external_v1_payload",
-    "invoke_published_agent_external_v1_payload"
+    "invoke_published_agent_external_v1_payload", "entities_merge_post_v1_payload"
 ]

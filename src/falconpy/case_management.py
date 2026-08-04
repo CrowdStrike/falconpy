@@ -40,6 +40,7 @@ from typing import Dict, Union
 from ._result import Result
 from ._service_class import ServiceClass
 from ._util import force_default, process_service_request, generate_error_result, handle_single_argument
+from ._payload import entities_merge_post_v1_payload
 from ._endpoint._case_management import _case_management_endpoints as Endpoints
 from ._payload._case_management import (
     case_management_notification_groups_payload,
@@ -2505,6 +2506,49 @@ class CaseManagement(ServiceClass):
             operation_id="queries_cases_get_v1",
             keywords=kwargs,
             params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def entities_merge_post_v1(self: object,
+                               body: dict = None,
+                               **kwargs
+                               ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Merges a source case into a destination case.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities_merge_post_v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "destination_id": "string",
+                    "source_id": "string"
+                }
+        destination_id : str
+            The destination_id value.
+        source_id : str
+            The source_id value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = entities_merge_post_v1_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_merge_post_v1",
+            body=body
             )
 
     aggregates_file_details_post_v1 = aggregates_file_details_post_v1

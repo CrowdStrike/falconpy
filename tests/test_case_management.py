@@ -126,7 +126,8 @@ class TestCaseManagement:
                                                                           "multivalued": True,
                                                                           "default_value": "1234567",
                                                                           "options": [{"id": "1234567", "value": "whatever"}],
-                                                                          "required": True
+                                                                          "required": True,
+            "entities_merge_post_v1": falcon.entities_merge_post_v1(destination_id="string", source_id="string"),
                                                                           }
                                                                    ),
             "entities_templates_delete_v1": falcon.delete_templates(ids="1234567890"),

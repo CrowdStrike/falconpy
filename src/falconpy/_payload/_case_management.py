@@ -402,3 +402,20 @@ def case_evidence_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Uni
             returned_payload[key] = provided
 
     return returned_payload
+
+
+def entities_merge_post_v1_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a entities_merge_post_v1 request.
+
+    {
+        "destination_id": "string",
+        "source_id": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["destination_id", "source_id"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
