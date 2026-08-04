@@ -68,29 +68,45 @@ class CSPMRegistration(ServiceClass):
     def get_aws_account(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return information about the current status of an AWS account.
 
-        Keyword arguments:
-        scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts
-        cspm_lite -- Only return CSPM lite accounts. Boolean.
-        ids -- AWS account IDs. String or list of strings.
-        iam_role_arns -- AWS IAM role ARNs. String or list of strings.
-        organization_ids -- AWS organization IDs. String or list of strings.
-        limit -- The maximum number of records to return in this response. [Integer, 1-1000]
-                 Use with the offset parameter to manage pagination of results. Defaults to 100.
-        migrated -- Only return migrated d4c accounts. (true / false) String.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        status -- Account status to filter results by. String.
-        group_by -- Field to group by. String. (Only acceptable value: `organization`)
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAwsAccount
+
+        Keyword arguments
+        -----------------
+        scan_type : str
+            Type of scan, `dry` or `full`, to perform on selected accounts
+        cspm_lite : str
+            Only return CSPM lite accounts.
+        ids : str or list[str]
+            AWS account IDs.
+        iam_role_arns : str or list[str]
+            AWS IAM role ARNs.
+        organization_ids : str or list[str]
+            AWS organization IDs.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-1000]
+            Use with the offset parameter to manage pagination of results. Defaults to 100.
+        migrated : str
+            Only return migrated d4c accounts. (true / false)
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        status : str
+            Account status to filter results by.
+        group_by : str
+            Field to group by. String. (Only acceptable value: `organization`)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("scan_type", None):
             kwargs["scan-type"] = kwargs.get("scan_type", None)
@@ -113,8 +129,16 @@ class CSPMRegistration(ServiceClass):
         Creates a new account in our system for a customer and generates a script
         to run in their AWS cloud environment to grant CrowdStrike Horizon access.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/CreateCSPMAwsAccount
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "resources": [
                         {
@@ -138,30 +162,43 @@ class CSPMRegistration(ServiceClass):
                         }
                     ]
                 }
-        account_id -- AWS Account ID. String.
-        account_type -- AWS account type. String.
-        behavior_assessment_enabled -- Indicate if behavior assessment should be enabled. Boolean.
-        cloudtrail_region -- AWS Cloudtrail Region. String.
-        deployment_method -- Deployment method. String.
-        dspm_enabled -- Flag indicating if DSPM should be enabled. Boolean.
-        dspm_role -- DSPM role. String.
-        falcon_client_id -- Falcon Client ID. String.
-        iam_role_arn -- IAM role ARN to use. String.
-        is_master -- Indicate if this is the primary account. Boolean.
-        organization_id -- AWS Organization ID. String.
-        root_stack_id -- Root stack ID. String.
-        sensor_management_enabled -- Indicate if sensor management should be enabled. Boolean.
-        target_ous -- List of target OUs. String or list of strings.
-        use_existing_cloudtrail -- Indicate if the existing CloudTrail should be used. Boolean.
+        account_id : str
+            AWS Account ID.
+        account_type : str
+            AWS account type.
+        behavior_assessment_enabled : bool
+            Indicate if behavior assessment should be enabled.
+        cloudtrail_region : str
+            AWS Cloudtrail Region.
+        deployment_method : str
+            Deployment method.
+        dspm_enabled : bool
+            Flag indicating if DSPM should be enabled.
+        dspm_role : str
+            DSPM role.
+        falcon_client_id : str
+            Falcon Client ID.
+        iam_role_arn : str
+            IAM role ARN to use.
+        is_master : bool
+            Indicate if this is the primary account.
+        organization_id : str
+            AWS Organization ID.
+        root_stack_id : str
+            Root stack ID.
+        sensor_management_enabled : bool
+            Indicate if sensor management should be enabled.
+        target_ous : str or list[str]
+            List of target OUs.
+        use_existing_cloudtrail : bool
+            Indicate if the existing CloudTrail should be used.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/CreateCSPMAwsAccount
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cspm_registration_payload(passed_keywords=kwargs)
@@ -177,19 +214,29 @@ class CSPMRegistration(ServiceClass):
     def delete_aws_account(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an existing AWS Account or Organization by specifying their IDs.
 
-        Keyword arguments:
-        ids -- AWS Account IDs to remove. String or list of strings.
-        organization_ids -- AWS Organization IDs to be removed. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/DeleteCSPMAwsAccount
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            AWS Account IDs to remove.
+        organization_ids : str or list[str]
+            AWS Organization IDs to be removed.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("organization_ids", None):
             kwargs["organization-ids"] = kwargs.get("organization_ids", None)
@@ -206,8 +253,16 @@ class CSPMRegistration(ServiceClass):
     def update_aws_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Patches a existing account in our system for a customer.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/PatchCSPMAwsAccount
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "resources": [
                         {
@@ -221,22 +276,27 @@ class CSPMRegistration(ServiceClass):
                         }
                     ]
                 }
-        account_id -- AWS Account ID. String.
-        behavior_assessment_enabled -- Indicate if behavior assessment should be enabled. Boolean.
-        cloudtrail_region -- AWS Cloudtrail Region. String.
-        iam_role_arn -- IAM role ARN to use. String.
-        remediation_region -- AWS region to remediation. String.
-        remediation_tou_accepted -- Timestamp formatted string.
-        cloudtrail_region -- AWS Cloudtrail Region. String.
+        account_id : str
+            AWS Account ID.
+        behavior_assessment_enabled : bool
+            Indicate if behavior assessment should be enabled.
+        cloudtrail_region : str
+            AWS Cloudtrail Region.
+        iam_role_arn : str
+            IAM role ARN to use.
+        remediation_region : str
+            AWS region to remediation.
+        remediation_tou_accepted : str
+            Timestamp formatted.
+        cloudtrail_region : str
+            AWS Cloudtrail Region.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/PatchCSPMAwsAccount
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cspm_registration_payload(passed_keywords=kwargs)
@@ -258,28 +318,39 @@ class CSPMRegistration(ServiceClass):
         Returns a URL for customers to visit in their cloud environment
         to grant access to CrowdStrike.
 
-        Keyword arguments:
-        ids -- AWS Account IDs to retrieve setup URLs for. String or list of strings.
-        use_existing_cloudtrail -- Use the existing AWS cloudtrail. (true / false) String.
-        parameters -- full parameters payload, not required if using other keywords.
-        region -- AWS Region. String.
-        tags -- Base64 encoded JSON string to be used as AWS tags. String.
-        template -- Template to be rendered. String.
-                    Allowed values:
-                    aws-url         aws-sensor-management-url
-                    aws-iom-url     aws-dspm-url
-                    aws-ioa-url     aws-idp-ur
-                    aws-modular-cft-url
-                    aws-modular-cft-gov-commercial-url
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAwsConsoleSetupURLs
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            AWS Account IDs to retrieve setup URLs for.
+        use_existing_cloudtrail : str
+            Use the existing AWS cloudtrail. (true / false)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        region : str
+            AWS Region.
+        tags : str
+            Base64 encoded JSON string to be used as AWS tags.
+        template : str
+            Template to be rendered. String.
+            Allowed values:
+            aws-url         aws-sensor-management-url
+            aws-iom-url     aws-dspm-url
+            aws-ioa-url     aws-idp-ur
+            aws-modular-cft-url
+            aws-modular-cft-gov-commercial-url
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -299,30 +370,49 @@ class CSPMRegistration(ServiceClass):
         Return a script for customers to run in their cloud environment
         to grant access to CrowdStrike for their AWS environment.
 
-        Keyword arguments:
-        account_type -- CSPM account type. String. Allowed values: gov, commercial
-        accounts -- List of accounts to register. String or list of strings. Format: account,profile
-        aws_profile -- The AWS profile to be used during registration. String.
-        behavior_assessment_enabled -- Enable behavior assessment. String. Allowed values: true, false
-        custom_role_name -- The custom IAM role to be used during registration. String.
-        dspm_enabled -- Flag indicating if DSPM is enabled. String. Allowed values: true, false
-        dspm_regions -- List of DSPM regions. Comma delimited string.
-        dspm_role -- DSPM role. String.
-        ids -- List of AWS Account IDs to retrieve the script for. String or list of strings.
-        organization_id -- The AWS organization ID to be registered. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-        sensor_management_enabled -- Enable sensor management. String. Allowed values: true, false
-        template -- Template to be rendered. String. Allowed values: aws-bash, aws-terraform
-        use_existing_cloudtrail -- Use the existing cloudtrail log. String. Allowed values: true, false
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAwsAccountScriptsAttachment
+
+        Keyword arguments
+        -----------------
+        account_type : str
+            CSPM account type. String. Allowed values: gov, commercial
+        accounts : str or list[str]
+            List of accounts to register. String or list of strings. Format: account,profile
+        aws_profile : str
+            The AWS profile to be used during registration.
+        behavior_assessment_enabled : str
+            Enable behavior assessment. String. Allowed values: true, false
+        custom_role_name : str
+            The custom IAM role to be used during registration.
+        dspm_enabled : str
+            Flag indicating if DSPM is enabled. String. Allowed values: true, false
+        dspm_regions : str or list[str]
+            List of DSPM regions. Comma delimited.
+        dspm_role : str
+            DSPM role.
+        ids : str or list[str]
+            List of AWS Account IDs to retrieve the script for.
+        organization_id : str
+            The AWS organization ID to be registered.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+        sensor_management_enabled : str
+            Enable sensor management. String. Allowed values: true, false
+        template : str
+            Template to be rendered. String. Allowed values: aws-bash, aws-terraform
+        use_existing_cloudtrail : str
+            Use the existing cloudtrail log. String. Allowed values: true, false
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -336,26 +426,39 @@ class CSPMRegistration(ServiceClass):
     def get_azure_account(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return information about Azure account registration.
 
-        Keyword arguments:
-        scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts
-        cspm_lite -- Only return CSPM lite accounts. Boolean.
-        ids -- Azure account IDs. String or list of strings.
-        limit -- The maximum number of records to return in this response. [Integer, 1-1000]
-                 Use with the offset parameter to manage pagination of results. Defaults to 100.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        status -- Account status to filter results by. String.
-        tenant_ids -- Azure tenant IDs to filter results. String or list of strings.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAzureAccount
+
+        Keyword arguments
+        -----------------
+        scan_type : str
+            Type of scan, `dry` or `full`, to perform on selected accounts
+        cspm_lite : str
+            Only return CSPM lite accounts.
+        ids : str or list[str]
+            Azure account IDs.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-1000]
+            Use with the offset parameter to manage pagination of results. Defaults to 100.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        status : str
+            Account status to filter results by.
+        tenant_ids : str or list[str]
+            Azure tenant IDs to filter results.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("scan_type", None):
             kwargs["scan-type"] = kwargs.get("scan_type", None)
@@ -375,8 +478,16 @@ class CSPMRegistration(ServiceClass):
         Creates a new account in our system for a customer and generates a script
         to run in their cloud environment to grant CrowdStrike Horizon access.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/CreateCSPMAzureAccount
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "resources": [
                         {
@@ -389,21 +500,25 @@ class CSPMRegistration(ServiceClass):
                         }
                     ]
                 }
-        account_type -- Azure account type. String.
-        client_id -- Azure Client ID. String.
-        default_subscription -- Indicate if this is the default subscription. Boolean.
-        subscription_id -- Azure Subscription ID. String.
-        tenant_id -- Azure Tenant ID. String.
-        years_valid -- Number of years this account is valid. Integer.
+        account_type : str
+            Azure account type.
+        client_id : str
+            Azure Client ID.
+        default_subscription : bool
+            Indicate if this is the default subscription.
+        subscription_id : str
+            Azure Subscription ID.
+        tenant_id : str
+            Azure Tenant ID.
+        years_valid : int
+            Number of years this account is valid.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/CreateCSPMAzureAccount
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cspm_registration_payload(passed_keywords=kwargs)
@@ -419,8 +534,16 @@ class CSPMRegistration(ServiceClass):
     def update_azure_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Azure account.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/UpdateCSPMAzureAccount
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "resources": [
                         {
@@ -429,21 +552,25 @@ class CSPMRegistration(ServiceClass):
                         }
                     ]
                 }
-        account_type -- Azure account type. String.
-        client_id -- Azure Client ID. String.
-        default_subscription -- Indicate if this is the default subscription. Boolean.
-        subscription_id -- Azure Subscription ID. String.
-        tenant_id -- Azure Tenant ID. String.
-        years_valid -- Number of years this account is valid. Integer.
+        account_type : str
+            Azure account type.
+        client_id : str
+            Azure Client ID.
+        default_subscription : bool
+            Indicate if this is the default subscription.
+        subscription_id : str
+            Azure Subscription ID.
+        tenant_id : str
+            Azure Tenant ID.
+        years_valid : int
+            Number of years this account is valid.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/UpdateCSPMAzureAccount
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cspm_registration_payload(passed_keywords=kwargs)
@@ -463,21 +590,32 @@ class CSPMRegistration(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an existing Azure Subscription by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of Azure Subscription IDs to delete. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-        retain_tenant -- Should the tenant be retainined. (true / false) String.
-        tenant_ids -- Azure tenant IDs to remove. String or list of strings.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/DeleteCSPMAzureAccount
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Azure Subscription IDs to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+        retain_tenant : str
+            Should the tenant be retainined. (true / false)
+        tenant_ids : str or list[str]
+            Azure tenant IDs to remove.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -498,21 +636,30 @@ class CSPMRegistration(ServiceClass):
         Update an Azure service account in our system with the
         user-created client_id created with the public key we've provided.
 
-        Keyword arguments:
-        body -- There are no body payload parameters. This field is not used. Ignore.
-        id -- List of Azure Subscription IDs to delete. String or list of strings.
-        tenant_id -- Azure Tenant ID to update client ID for.
-                     Required if multiple tenants are registered.
-        parameters -- full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/UpdateCSPMAzureAccountClientID
+
+        Keyword arguments
+        -----------------
+        body : dict
+            There are no body payload parameters. This field is not used. Ignore.
+        id : str
+            List of Azure Subscription IDs to delete.
+        tenant_id : str
+            Azure Tenant ID to update client ID for.
+            Required if multiple tenants are registered.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("tenant_id", None):
             kwargs["tenant-id"] = kwargs.get("tenant_id", None)
@@ -537,23 +684,32 @@ class CSPMRegistration(ServiceClass):
         Update an Azure service account in our system with the
         user-created client_id created with the public key we've provided.
 
-        Keyword arguments:
-        body -- There are no body payload parameters. This field is not used. Ignore.
-        subscription_id -- Default Subscription ID to patch for all subscriptions
-                           belonging to the tenant. String.
-        tenant_id -- Azure Tenant ID to update client ID for.
-                     Required if multiple tenants are registered.
-        parameters -- full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                /cspm-registration/UpdateCSPMAzureTenantDefaultSubscriptionID
+        /cspm-registration/UpdateCSPMAzureTenantDefaultSubscriptionID
+
+        Keyword arguments
+        -----------------
+        body : dict
+            There are no body payload parameters. This field is not used. Ignore.
+        subscription_id : str
+            Default Subscription ID to patch for all subscriptions
+            belonging to the tenant.
+        tenant_id : str
+            Azure Tenant ID to update client ID for.
+            Required if multiple tenants are registered.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("tenant_id", None):
             kwargs["tenant-id"] = kwargs.get("tenant_id", None)
@@ -577,20 +733,29 @@ class CSPMRegistration(ServiceClass):
 
         Returns JSON object(s) that contain the base64 encoded certificate for a service principal.
 
-        Keyword arguments:
-        tenant_id -- Azure Tenant ID to generate script for.
-                     Defaults to the most recently registered tenant.
-        parameters -- full parameters payload, not required if tenant_id keyword is used.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'tenant_id'. All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/AzureDownloadCertificate
+
+        Keyword arguments
+        -----------------
+        tenant_id : str or list[str]
+            Azure Tenant ID to generate script for.
+            Defaults to the most recently registered tenant.
+        parameters : dict
+            full parameters payload, not required if tenant_id keyword is used.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'tenant_id'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -606,24 +771,34 @@ class CSPMRegistration(ServiceClass):
                                    parameters: dict = None,
                                    **kwargs
                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
-        """
-        Return information about Azure management group registration.
-
-        Keyword arguments:
-        limit -- The maximum number of records to return. Defaults to 100. Integer.
-        offset -- The offset to start retrieving records from. Integer.
-        parameters -- full parameters payload, not required if tenant_id keyword is used.
-        tenant_ids -- Azure Tenant ID to filter by. String or list of strings.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'tenant_ids'. All others are ignored.
-
-        Returns: dict object containing API response.
+        """Return information about Azure management group registration.
 
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAzureManagementGroup
+
+        Keyword arguments
+        -----------------
+        limit : int
+            The maximum number of records to return. Defaults to 100.
+        offset : int
+            The offset to start retrieving records from.
+        parameters : dict
+            full parameters payload, not required if tenant_id keyword is used.
+        tenant_ids : str or list[str]
+            Azure Tenant ID to filter by.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'tenant_ids'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -643,8 +818,16 @@ class CSPMRegistration(ServiceClass):
         Creates a new account in our system for a customer and generates a script
         to run in their cloud environment to grant CrowdStrike Horizon access.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/CreateCSPMAzureManagementGroup
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "resources": [
                         {
@@ -653,17 +836,17 @@ class CSPMRegistration(ServiceClass):
                         }
                     ]
                 }
-        default_subscription_id -- ID of the default azure subscription. String.
-        tenant_id -- Azure Tenant ID. String.
+        default_subscription_id : str
+            ID of the default azure subscription.
+        tenant_id : str
+            Azure Tenant ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/CreateCSPMAzureManagementGroup
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cspm_registration_payload(passed_keywords=kwargs)
@@ -683,19 +866,28 @@ class CSPMRegistration(ServiceClass):
                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an existing Azure Managment Group by specifying their IDs.
 
-        Keyword arguments:
-        tenant_ids -- AWS Organization IDs to be removed. String or list of strings.
-        parameters -- full parameters payload, not required if tenant_ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'tenant_ids'. All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/DeleteCSPMAzureManagementGroup
+
+        Keyword arguments
+        -----------------
+        tenant_ids : str or list[str]
+            AWS Organization IDs to be removed.
+        parameters : dict
+            full parameters payload, not required if tenant_ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'tenant_ids'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -715,20 +907,30 @@ class CSPMRegistration(ServiceClass):
 
         Returns JSON object(s) that contain the base64 encoded certificate for a service principal.
 
-        Keyword arguments:
-        tenant_id -- Azure Tenant ID to refresh. String.
-        parameters -- full parameters payload, not required if tenant_id keyword is used.
-        years_valid -- Years the certificate should be valid. Integer. Max: 2
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'tenant_id'. All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/AzureRefreshCertificate
+
+        Keyword arguments
+        -----------------
+        tenant_id : str or list[str]
+            Azure Tenant ID to refresh.
+        parameters : dict
+            full parameters payload, not required if tenant_id keyword is used.
+        years_valid : str
+            Years the certificate should be valid. Integer. Max: 2
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'tenant_id'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -744,30 +946,42 @@ class CSPMRegistration(ServiceClass):
                                           parameters: dict = None,
                                           **kwargs
                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
-        """
-        Retrieve Azure user script.
+        """Retrieve Azure user script.
 
         Return a script for customers to run in their cloud environment
         to grant access to CrowdStrike for their Azure environment.
 
-        Keyword arguments:
-        account_type -- Account type. ('commercial' or 'gov') String.
-        azure_management_group -- Use Azure Management Group. Boolean.
-        tenant_id -- Azure Tenant ID to generate script for.
-                     Defaults to the most recently registered tenant.
-        parameters -- full parameters payload, not required if tenant_id keyword is used.
-        subscription_ids -- Subscription IDs to generate script for. Defaults to all. String or list of strings.
-        template -- Template to be rendered. String.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'tenant_id'. All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAzureUserScriptsAttachment
+
+        Keyword arguments
+        -----------------
+        account_type : str
+            Account type. ('commercial' or 'gov')
+        azure_management_group : bool
+            Use Azure Management Group.
+        tenant_id : str
+            Azure Tenant ID to generate script for.
+            Defaults to the most recently registered tenant.
+        parameters : dict
+            full parameters payload, not required if tenant_id keyword is used.
+        subscription_ids : str or list[str]
+            Subscription IDs to generate script for. Defaults to all.
+        template : str
+            Template to be rendered.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'tenant_id'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("tenant_id", None):
             kwargs["tenant-id"] = kwargs.get("tenant_id", None)
@@ -784,24 +998,36 @@ class CSPMRegistration(ServiceClass):
     def get_gcp_account(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return information about the current status of an GCP account.
 
-        Keyword arguments:
-        ids -- Hierarchical Resource IDs of accounts. String or list of strings.
-        limit -- The maximum records to return. Defaults to 100. Integer.
-        offset -- The offset to start retrieving records from. Integer.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-        parent_type -- GCP Hierarchy Parent Type, organization/folder/project. String.
-        scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts.
-        sort -- Order fields in ascending or descending order. Ex: parent_type|asc.
-        status -- Account status to filter results by, 'operational' or 'provisioned'. String.
-
-        This method does not accept arguments or keywords.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMGCPAccount
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Hierarchical Resource IDs of accounts.
+        limit : int
+            The maximum records to return. Defaults to 100.
+        offset : int
+            The offset to start retrieving records from.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+        parent_type : str
+            GCP Hierarchy Parent Type, organization/folder/project.
+        scan_type : str
+            Type of scan, `dry` or `full`, to perform on selected accounts.
+        sort : str
+            Order fields in ascending or descending order. Ex: parent_type|asc.
+        status : str
+            Account status to filter results by, 'operational' or 'provisioned'. String.
+            This method does not accept arguments or keywords.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("scan_type", None):
             kwargs["scan-type"] = kwargs.get("scan_type", None)
@@ -821,8 +1047,16 @@ class CSPMRegistration(ServiceClass):
         Creates a new account in our system for a customer and generates a new service
         account for them to add access to in their GCP environment to grant us access.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/CreateCSPMGCPAccount
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -831,17 +1065,17 @@ class CSPMRegistration(ServiceClass):
                         }
                     ]
                 }
-        parent_id -- GCP parent ID. String.
-        parent_type -- GCP parent type. String.
+        parent_id : str
+            GCP parent ID.
+        parent_type : str
+            GCP parent type.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/CreateCSPMGCPAccount
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = gcp_registration_payload(passed_keywords=kwargs)
@@ -861,19 +1095,28 @@ class CSPMRegistration(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a GCP account from the system.
 
-        Keyword arguments:
-        ids -- Hierarchical Resource IDs of accounts. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/DeleteCSPMGCPAccount
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Hierarchical Resource IDs of accounts.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -887,8 +1130,16 @@ class CSPMRegistration(ServiceClass):
     def update_gcp_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a GCP account.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/UpdateCSPMGCPAccount
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -897,17 +1148,17 @@ class CSPMRegistration(ServiceClass):
                         }
                     ]
                 }
-        environment -- GCP environment. String.
-        parent_id -- GCP parent ID. String.
+        environment : str
+            GCP environment.
+        parent_id : str
+            GCP parent ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/UpdateCSPMGCPAccount
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = gcp_registration_payload(passed_keywords=kwargs)
@@ -926,8 +1177,16 @@ class CSPMRegistration(ServiceClass):
         Creates a new account in our system for a customer and generates a new service
         account for them to add access to in their GCP environment to grant us access.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/ConnectCSPMGCPAccount
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -942,23 +1201,29 @@ class CSPMRegistration(ServiceClass):
                         }
                     ]
                 }
-        client_email -- GCP account email. String.
-        client_id -- GCP account client ID. String.
-        parent_id -- GCP parent ID. String.
-        parent_type -- GCP parent type. String.
-        private_key -- GCP private key. String.
-        private_key_id -- GCP private key ID. String.
-        project_id -- GCP project ID. String.
-        service_account_id -- GCP service account ID. Integer.
+        client_email : str
+            GCP account email.
+        client_id : str
+            GCP account client ID.
+        parent_id : str
+            GCP parent ID.
+        parent_type : str
+            GCP parent type.
+        private_key : str
+            GCP private key.
+        private_key_id : str
+            GCP private key ID.
+        project_id : str
+            GCP project ID.
+        service_account_id : int
+            GCP service account ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/ConnectCSPMGCPAccount
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = gcp_registration_payload(passed_keywords=kwargs)
@@ -974,24 +1239,33 @@ class CSPMRegistration(ServiceClass):
     def validate_gcp_account(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Run a synchronous health check.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMGCPValidateAccountsExt
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                         "string"
                     ]
                 }
-        resources -- GCP Account IDs to validate. String or list of strings.
+        resources : str or list[str]
+            GCP Account IDs to validate.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'resources'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'resources'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMGCPValidateAccountsExt
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs,
@@ -1010,8 +1284,16 @@ class CSPMRegistration(ServiceClass):
     def validate_gcp_service_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Validate credentials for a GCP service account.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/ValidateCSPMGCPServiceAccountExt
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -1033,24 +1315,30 @@ class CSPMRegistration(ServiceClass):
                         }
                     ]
                 }
-        client_email -- Client email associated with the service account. String.
-        client_id -- GCP Client ID. String.
-        private_key -- GCP private key. String.
-        private_key_id -- GCP private key ID. String.
-        project_id -- GCP project ID. String.
-        resources -- List of GCP service accounts to validate. List of dictionaries.
-                     Overrides other keywords except for body.
-        service_account_conditions -- GCP service account conditions. List of dictionaries.
-        service_account_id -- GCP service account ID. Integer.
+        client_email : str
+            Client email associated with the service account.
+        client_id : str
+            GCP Client ID.
+        private_key : str
+            GCP private key.
+        private_key_id : str
+            GCP private key ID.
+        project_id : str
+            GCP project ID.
+        resources : str
+            List of GCP service accounts to validate. List of dictionaries.
+            Overrides other keywords except for body.
+        service_account_conditions : list[dict]
+            GCP service account conditions.
+        service_account_id : int
+            GCP service account ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/ValidateCSPMGCPServiceAccountExt
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cspm_service_account_validate_payload(passed_keywords=kwargs)
@@ -1070,19 +1358,28 @@ class CSPMRegistration(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the service account id and client email for external clients.
 
-        Keyword arguments:
-        id -- Service Account ID. String.
-        parameters -- full parameters payload, not required if id is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMGCPServiceAccountsExt
+
+        Keyword arguments
+        -----------------
+        id : str
+            Service Account ID.
+        parameters : dict
+            full parameters payload, not required if id is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1096,8 +1393,16 @@ class CSPMRegistration(ServiceClass):
     def update_gcp_service_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a GCP service account.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/UpdateCSPMGCPServiceAccountsExt
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -1121,24 +1426,30 @@ class CSPMRegistration(ServiceClass):
                         }
                     ]
                 }
-        client_email -- Client email associated with the service account. String.
-        client_id -- GCP Client ID. String.
-        private_key -- GCP private key. String.
-        private_key_id -- GCP private key ID. String.
-        project_id -- GCP project ID. String.
-        resources -- List of GCP service accounts to validate. List of dictionaries.
-                     Overrides other keywords except for body.
-        service_account_conditions -- GCP service account conditions. List of dictionaries.
-        service_account_id -- GCP service account ID. Integer.
+        client_email : str
+            Client email associated with the service account.
+        client_id : str
+            GCP Client ID.
+        private_key : str
+            GCP private key.
+        private_key_id : str
+            GCP private key ID.
+        project_id : str
+            GCP project ID.
+        resources : str
+            List of GCP service accounts to validate. List of dictionaries.
+            Overrides other keywords except for body.
+        service_account_conditions : list[dict]
+            GCP service account conditions.
+        service_account_id : int
+            GCP service account ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/UpdateCSPMGCPServiceAccountsExt
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cspm_service_account_validate_payload(passed_keywords=kwargs)
@@ -1161,21 +1472,31 @@ class CSPMRegistration(ServiceClass):
         Return a script for customer to run in their cloud environment to
         grants access to the GCP environment as a downloadable attachment.
 
-        Keyword arguments:
-        ids -- Hierarchical Resource IDs of accounts. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-        parent_type -- GCP Hierarchy Parent Type. String.
-                       Allowed values: organization, folder, project
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMGCPUserScriptsAttachment
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Hierarchical Resource IDs of accounts.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+        parent_type : str
+            GCP Hierarchy Parent Type. String.
+            Allowed values: organization, folder, project
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1192,61 +1513,81 @@ class CSPMRegistration(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve list of detected behaviors.
 
-        Keyword arguments:
-        account_id -- Cloud Account ID (AWS account ID, Azure Subscription ID, etc.)
-        aws_account_id -- AWS account ID. String.
-        azure_subscription_id -- Azure subscription ID. String.
-        azure_tenant_id -- Azure tenant ID. String.
-        cloud_provider -- Cloud provider. Allowed values: `azure`, `aws`, `gcp`. String.
-        date_time_since -- Filter to retrieve all events after this date. RFC3339 formatted string.
-                           Example: 2006-01-01T12:00:01Z07:00
-        limit -- The maximum number of records to return in this response. [Integer, 1-500]
-        next_token -- String to get next page of results, associated with the previous
-                      execution. Must include all filters from previous execution. String.
-        resource_id -- Resource ID. String.
-        resource_uuid - Resource UUID. String.
-        service -- Cloud Service (Example: `EC2` or `S3`). String.
-                   Available options
-                   ACM                      Identity
-                   ACR                      KMS
-                   Any                      KeyVault
-                   App Engine               Kinesis
-                   BigQuery                 Kubernetes
-                   Cloud Load Balancing     Lambda
-                   Cloud Logging            LoadBalancer
-                   Cloud SQL                Monitor
-                   Cloud Storage            NLB/ALB
-                   CloudFormation           NetworkSecurityGroup
-                   CloudTrail               PostgreSQL
-                   CloudWatch Logs          RDS
-                   Cloudfront               Redshift
-                   Compute Engine           S3
-                   Config                   SES
-                   Disk                     SNS
-                   DynamoDB                 SQLDatabase
-                   EBS                      SQLServer
-                   EC2                      SQS
-                   ECR                      SSM
-                   EFS                      Serverless Application Repository
-                   EKS                      StorageAccount
-                   ELB                      Subscriptions
-                   EMR                      VPC
-                   Elasticache              VirtualMachine
-                   GuardDuty                VirtualNetwork
-                   IAM
-        severity -- Severity (e.g. `High`, `Medium` or `Informational`). String.
-        since -- Filter events using a duration string (e.g. 24h). String. Default: 24h
-        state -- State. (e.g. `open` or `closed`). String.
-        parameters - full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetBehaviorDetections
+
+        Keyword arguments
+        -----------------
+        account_id : str
+            Cloud Account ID (AWS account ID, Azure Subscription ID, etc.)
+        aws_account_id : str
+            AWS account ID.
+        azure_subscription_id : str
+            Azure subscription ID.
+        azure_tenant_id : str
+            Azure tenant ID.
+        cloud_provider : str
+            Cloud provider. Allowed values: `azure`, `aws`, `gcp`
+        date_time_since : str
+            Filter to retrieve all events after this date. RFC3339 formatted string.
+            Example: 2006-01-01T12:00:01Z07:00
+        limit : int (1-500)
+            The maximum number of records to return in this response.
+        next_token : str
+            String to get next page of results, associated with the previous
+            execution. Must include all filters from previous execution.
+        resource_id : str or list[str]
+            Resource ID.
+        resource_uuid : str or list[str]
+            Resource UUID.
+        service : str
+            Cloud Service (Example: `EC2` or `S3`). String.
+            Available options
+            ACM                      Identity
+            ACR                      KMS
+            Any                      KeyVault
+            App Engine               Kinesis
+            BigQuery                 Kubernetes
+            Cloud Load Balancing     Lambda
+            Cloud Logging            LoadBalancer
+            Cloud SQL                Monitor
+            Cloud Storage            NLB/ALB
+            CloudFormation           NetworkSecurityGroup
+            CloudTrail               PostgreSQL
+            CloudWatch Logs          RDS
+            Cloudfront               Redshift
+            Compute Engine           S3
+            Config                   SES
+            Disk                     SNS
+            DynamoDB                 SQLDatabase
+            EBS                      SQLServer
+            EC2                      SQS
+            ECR                      SSM
+            EFS                      Serverless Application Repository
+            EKS                      StorageAccount
+            ELB                      Subscriptions
+            EMR                      VPC
+            Elasticache              VirtualMachine
+            GuardDuty                VirtualNetwork
+            IAM
+        severity : str
+            Severity (e.g. `High`, `Medium` or `Informational`)
+        since : str
+            Filter events using a duration string (e.g. 24h). String. Default: 24h
+        state : str
+            State. (e.g. `open` or `closed`)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1263,57 +1604,74 @@ class CSPMRegistration(ServiceClass):
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve list of active misconfigurations.
 
-        Keyword arguments:
-        account_id -- Cloud Account ID (AWS account ID, Azure Subscription ID, etc.)
-        aws_account_id -- AWS account ID. String.
-        azure_subscription_id -- Azure subscription ID. String.
-        azure_tenant_id -- Azure tenant ID. String.
-        cloud_provider -- Cloud provider. Allowed values: `azure`, `aws`, `gcp`. String.
-        limit -- The maximum number of records to return in this response. [Integer, 1-500]
-        next_token -- String to get next page of results, associated with the previous
-                      execution. Cannot be combined with any filter except `limit`. String.
-        region -- Cloud Provider Region (Example: `us-east-1`). String.
-        service -- Cloud Service (Example: `EC2` or `S3`). String.
-                   Available options
-                   ACM                      Identity
-                   ACR                      KMS
-                   Any                      KeyVault
-                   App Engine               Kinesis
-                   BigQuery                 Kubernetes
-                   Cloud Load Balancing     Lambda
-                   Cloud Logging            LoadBalancer
-                   Cloud SQL                Monitor
-                   Cloud Storage            NLB/ALB
-                   CloudFormation           NetworkSecurityGroup
-                   CloudTrail               PostgreSQL
-                   CloudWatch Logs          RDS
-                   Cloudfront               Redshift
-                   Compute Engine           S3
-                   Config                   SES
-                   Disk                     SNS
-                   DynamoDB                 SQLDatabase
-                   EBS                      SQLServer
-                   EC2                      SQS
-                   ECR                      SSM
-                   EFS                      Serverless Application Repository
-                   EKS                      StorageAccount
-                   ELB                      Subscriptions
-                   EMR                      VPC
-                   Elasticache              VirtualMachine
-                   GuardDuty                VirtualNetwork
-                   IAM
-        severity -- Severity (e.g. `High`, `Medium` or `Informational`). String.
-        status -- Status (e.g. `new`, `reoccurring`, or `all`). String.
-        parameters - full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetConfigurationDetections
+
+        Keyword arguments
+        -----------------
+        account_id : str
+            Cloud Account ID (AWS account ID, Azure Subscription ID, etc.)
+        aws_account_id : str
+            AWS account ID.
+        azure_subscription_id : str
+            Azure subscription ID.
+        azure_tenant_id : str
+            Azure tenant ID.
+        cloud_provider : str
+            Cloud provider. Allowed values: `azure`, `aws`, `gcp`
+        limit : int (1-500)
+            The maximum number of records to return in this response.
+        next_token : str
+            String to get next page of results, associated with the previous
+            execution. Cannot be combined with any filter except `limit`
+        region : str
+            Cloud Provider Region (Example: `us-east-1`)
+        service : str
+            Cloud Service (Example: `EC2` or `S3`). String.
+            Available options
+            ACM                      Identity
+            ACR                      KMS
+            Any                      KeyVault
+            App Engine               Kinesis
+            BigQuery                 Kubernetes
+            Cloud Load Balancing     Lambda
+            Cloud Logging            LoadBalancer
+            Cloud SQL                Monitor
+            Cloud Storage            NLB/ALB
+            CloudFormation           NetworkSecurityGroup
+            CloudTrail               PostgreSQL
+            CloudWatch Logs          RDS
+            Cloudfront               Redshift
+            Compute Engine           S3
+            Config                   SES
+            Disk                     SNS
+            DynamoDB                 SQLDatabase
+            EBS                      SQLServer
+            EC2                      SQS
+            ECR                      SSM
+            EFS                      Serverless Application Repository
+            EKS                      StorageAccount
+            ELB                      Subscriptions
+            EMR                      VPC
+            Elasticache              VirtualMachine
+            GuardDuty                VirtualNetwork
+            IAM
+        severity : str
+            Severity (e.g. `High`, `Medium` or `Informational`)
+        status : str
+            Status (e.g. `new`, `reoccurring`, or `all`)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1329,21 +1687,29 @@ class CSPMRegistration(ServiceClass):
                                              parameters: dict = None,
                                              **kwargs
                                              ) -> dict:
-        """
-        Get misconfigurations based on the ID - including custom policy detections in addition to default policy detections.
-
-        Keyword arguments:
-        ids -- Detection IDs to retrieve. String or List of Strings.
-        parameters -- full parameters payload, not required ids keyword is used.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'. All others are ignored.
-
-        Returns: dict object containing API response.
+        """Get misconfigurations based on the ID - including custom policy detections in addition to default policy detections.
 
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetConfigurationDetectionEntities
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Detection IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required ids keyword is used.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1357,18 +1723,25 @@ class CSPMRegistration(ServiceClass):
     def get_cloud_event_ids(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get list of related cloud event LogScale IDs for a given IOA.
 
-        Keyword arguments:
-        id -- IOA Aggregate Event ID. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/getCloudEventIDs
+
+        Keyword arguments
+        -----------------
+        id : str
+            IOA Aggregate Event ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1383,46 +1756,56 @@ class CSPMRegistration(ServiceClass):
                                            parameters: dict = None,
                                            **kwargs
                                            ) -> dict:
-        """
-        Get list of active misconfiguration ids - including custom policy detections in addition to default policy detections.
-
-        Keyword arguments:
-        filter -- FQL formatted string to filter result. String.
-                  Allowed filters
-                  account_name              policy_id
-                  account_id                policy_type
-                  agent_id                  resource_id
-                  attack_types              region
-                  azure_subscription_id     status
-                  cloud_provider            scan_time
-                  cloud_service_keyword     severity
-                  custom_policy_id          severity_string
-                  is_managed                use_current_scan_ids (*)
-                  (*) Use this to retrieve records for the latest scans
-        limit -- Maximum number of detections to return. Integer. (Default: 500)
-        next_token -- Token to use to retrieve the next page of results.
-                      Cannot be combined with any filter except limit. String.
-        offset -- Starting offset for returned detections. Integer.
-        sort -- FQL formatted sort. String. Default: timestamp|desc
-                Allowed values
-                account_name            policy_id
-                accoud_id               policy_type
-                attack_types            resource_id
-                azure_subscription_id   region
-                cloud_provider          scan_name
-                cloud_service_keyword   severity
-                status                  severity_string
-                is_managed              timestamp
-        parameters -- full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
+        """Get list of active misconfiguration ids - including custom and default policy detections.
 
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetConfigurationDetectionIDsV2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL formatted string to filter result. String.
+            Allowed filters
+            account_name              policy_id
+            account_id                policy_type
+            agent_id                  resource_id
+            attack_types              region
+            azure_subscription_id     status
+            cloud_provider            scan_time
+            cloud_service_keyword     severity
+            custom_policy_id          severity_string
+            is_managed                use_current_scan_ids (*)
+            (*) Use this to retrieve records for the latest scans
+        limit : int
+            Maximum number of detections to return. Integer. (Default: 500)
+        next_token : str
+            Token to use to retrieve the next page of results.
+            Cannot be combined with any filter except limit.
+        offset : int
+            Starting offset for returned detections.
+        sort : str
+            FQL formatted sort. String. Default: timestamp|desc
+            Allowed values
+            account_name            policy_id
+            accoud_id               policy_type
+            attack_types            resource_id
+            azure_subscription_id   region
+            cloud_provider          scan_name
+            cloud_service_keyword   severity
+            status                  severity_string
+            is_managed              timestamp
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1436,29 +1819,45 @@ class CSPMRegistration(ServiceClass):
     def get_ioa_events(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """For CSPM IOA events, gets list of IOA events.
 
-        Keyword arguments:
-        policy_id -- Policy ID. String.
-        cloud_provider -- Cloud provider. Allowed values: `azure`, `aws`, `gcp`. String.
-        account_id -- Cloud Account ID (AWS account ID, Azure Subscription ID, etc.)
-        aws_account_id -- AWS account ID. String.
-        azure_subscription_id -- Azure subscription ID. String.
-        azure_tenant_id -- Azure tenant ID. String.
-        user_ids -- User IDs. String or list of strings.
-        state -- State. String.
-        limit -- The maximum number of records to return in this response. [Integer, 1-500]
-                 Use with the offset parameter to manage pagination of results. Defaults to 100.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetIOAEvents
+
+        Keyword arguments
+        -----------------
+        policy_id : str
+            Policy ID.
+        cloud_provider : str
+            Cloud provider. Allowed values: `azure`, `aws`, `gcp`
+        account_id : str
+            Cloud Account ID (AWS account ID, Azure Subscription ID, etc.)
+        aws_account_id : str
+            AWS account ID.
+        azure_subscription_id : str
+            Azure subscription ID.
+        azure_tenant_id : str
+            Azure tenant ID.
+        user_ids : str or list[str]
+            User IDs.
+        state : str
+            State.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-500]
+            Use with the offset parameter to manage pagination of results. Defaults to 100.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1472,24 +1871,37 @@ class CSPMRegistration(ServiceClass):
     def get_ioa_users(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """For CSPM IOA users, gets list of IOA users.
 
-        Keyword arguments:
-        policy_id -- Policy ID. String.
-        cloud_provider -- Cloud provider. Allowed values: `azure`, `aws`, `gcp`. String.
-        account_id -- Cloud Account ID (AWS account ID, Azure Subscription ID, etc.)
-        aws_account_id -- AWS account ID. String.
-        azure_subscription_id -- Azure subscription ID. String.
-        azure_tenant_id -- Azure tenant ID. String.
-        state -- State. String.
-        parameters - full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetIOAUsers
+
+        Keyword arguments
+        -----------------
+        policy_id : str
+            Policy ID.
+        cloud_provider : str
+            Cloud provider. Allowed values: `azure`, `aws`, `gcp`
+        account_id : str
+            Cloud Account ID (AWS account ID, Azure Subscription ID, etc.)
+        aws_account_id : str
+            AWS account ID.
+        azure_subscription_id : str
+            Azure subscription ID.
+        azure_tenant_id : str
+            Azure tenant ID.
+        state : str
+            State.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1503,19 +1915,28 @@ class CSPMRegistration(ServiceClass):
     def get_policy(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Given a policy ID, returns detailed policy information.
 
-        Keyword arguments:
-        ids -- Policy IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMPolicy
+
+        Keyword arguments
+        -----------------
+        ids : int
+            Policy IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1529,19 +1950,28 @@ class CSPMRegistration(ServiceClass):
     def get_policy_details(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Given an array of policy IDs, returns detailed policies information.
 
-        Keyword arguments:
-        ids -- Policy IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMPoliciesDetails
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Policy IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1555,44 +1985,53 @@ class CSPMRegistration(ServiceClass):
     def get_policy_settings(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return information about current policy settings.
 
-        Keyword arguments:
-        policy_id -- Policy ID. String.
-        cloud_platform -- Cloud platform. Allowed values: `azure`, `aws`, `gcp`. String.
-        service -- Service type to filter policy settings by.
-                   Available values:
-                   ACM                          Kinesis
-                   ACR                          Kubernetes
-                   AppService                   Lambda
-                   CloudFormation               LoadBalancer
-                   CloudTrail                   Monitor
-                   CloudWatch Logs              NLB/ALB
-                   Cloudfront                   NetworkSecurityGroup
-                   Config                       PostgreSQL
-                   Disk                         RDS
-                   DynamoDB                     Redshift
-                   EBS                          S3
-                   EC2                          SES
-                   ECR                          SNS
-                   EFS                          SQLDatabase
-                   EKS                          SQLServer
-                   ELB                          SQS
-                   EMR                          SSM
-                   Elasticache                  Serverless Application Repository
-                   GuardDuty                    StorageAccount
-                   IAM                          Subscriptions
-                   Identity                     VirtualMachine
-                   KMS                          VirtualNetwork
-                   KeyVault
-        parameters - full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMPolicySettings
+
+        Keyword arguments
+        -----------------
+        policy_id : str
+            Policy ID.
+        cloud_platform : str
+            Cloud platform. Allowed values: `azure`, `aws`, `gcp`
+        service : str
+            Service type to filter policy settings by.
+            Available values:
+            ACM                          Kinesis
+            ACR                          Kubernetes
+            AppService                   Lambda
+            CloudFormation               LoadBalancer
+            CloudTrail                   Monitor
+            CloudWatch Logs              NLB/ALB
+            Cloudfront                   NetworkSecurityGroup
+            Config                       PostgreSQL
+            Disk                         RDS
+            DynamoDB                     Redshift
+            EBS                          S3
+            EC2                          SES
+            ECR                          SNS
+            EFS                          SQLDatabase
+            EKS                          SQLServer
+            ELB                          SQS
+            EMR                          SSM
+            Elasticache                  Serverless Application Repository
+            GuardDuty                    StorageAccount
+            IAM                          Subscriptions
+            Identity                     VirtualMachine
+            KMS                          VirtualNetwork
+            KeyVault
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("cloud_platform", None):
             kwargs["cloud-platform"] = kwargs.get("cloud_platform", None)
@@ -1613,8 +2052,16 @@ class CSPMRegistration(ServiceClass):
 
         Can be used to override policy severity or to disable a policy entirely.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/UpdateCSPMPolicySettings
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "resources": [
                         {
@@ -1632,22 +2079,27 @@ class CSPMRegistration(ServiceClass):
                         }
                     ]
                 }
-        account_id -- Account ID to update. String.
-        account_ids -- Account IDs to update. List of strings.
-        enabled -- Enabled / Disable flag. Boolean.
-        policy_id -- Policy ID to be updated. Integer.
-        region -- List of regions. String or list of strings.
-        severity -- Severity value to set for policy. String.
-        tag_excluded -- Exclude tags flag. Boolean.
+        account_id : str
+            Account ID to update.
+        account_ids : str or list[str]
+            Account IDs to update.
+        enabled : bool
+            Enabled / Disable flag.
+        policy_id : int
+            Policy ID to be updated.
+        region : str or list[str]
+            List of regions.
+        severity : str
+            Severity value to set for policy.
+        tag_excluded : bool
+            Exclude tags flag.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/UpdateCSPMPolicySettings
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cspm_policy_payload(passed_keywords=kwargs)
@@ -1667,19 +2119,28 @@ class CSPMRegistration(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return scan schedule configuration for one or more cloud platforms.
 
-        Keyword arguments:
-        cloud_platform -- Cloud Platform. String. Allowed Values: `azure`, `aws`, `gcp`
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMScanSchedule
+
+        Keyword arguments
+        -----------------
+        cloud_platform : str
+            Cloud Platform. String. Allowed Values: `azure`, `aws`, `gcp`
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("cloud_platform", None):
             kwargs["cloud-platform"] = kwargs.get("cloud_platform", None)
@@ -1696,8 +2157,16 @@ class CSPMRegistration(ServiceClass):
     def update_scan_schedule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update scan schedule configuration for one or more cloud platforms.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/UpdateCSPMScanSchedule
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "resources": [
                         {
@@ -1708,19 +2177,21 @@ class CSPMRegistration(ServiceClass):
                         }
                     ]
                 }
-        cloud_platform -- Cloud platform. String.
-        next_scan_timestamp -- Time to schedule scan. UTC date formatted string.
-        scan_interval -- Scan interval. String.
-        scan_schedule -- Scan schedule type. String.
+        cloud_platform : str
+            Cloud platform.
+        next_scan_timestamp : str
+            Time to schedule scan. UTC date formatted.
+        scan_interval : str
+            Scan interval.
+        scan_schedule : str
+            Scan schedule type.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/UpdateCSPMScanSchedule
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cspm_scan_payload(passed_keywords=kwargs)

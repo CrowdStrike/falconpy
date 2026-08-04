@@ -65,23 +65,34 @@ class ContentUpdatePolicies(ServiceClass):
 
         Returns a set of host details which match the filter criteria.
 
-        Keyword arguments:
-        id -- The ID of the Content Update Policy to search for members of. String.
-        filter -- The filter expression that should be used to limit the results. String.
-        offset -- The offset to start retrieving records from. Integer.
-        limit -- The maximum records to return. Integer. [1-5000]
-        sort -- The property to sort by. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /content-update-policies/queryCombinedContentUpdatePolicyMembers
+        /content-update-policies/queryCombinedContentUpdatePolicyMembers
+
+        Keyword arguments
+        -----------------
+        id : str
+            The ID of the Content Update Policy to search for members of.
+        filter : str
+            The filter expression that should be used to limit the results.
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return. Integer. [1-5000]
+        sort : str
+            The property to sort by.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -100,22 +111,32 @@ class ContentUpdatePolicies(ServiceClass):
 
         Returns a set of Content Update Policies which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-        offset -- The offset to start retrieving records from. Integer.
-        limit -- The maximum records to return. Integer. [1-5000]
-        sort -- The property to sort by. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /content-update-policies/queryCombinedContentUpdatePolicies
+        /content-update-policies/queryCombinedContentUpdatePolicies
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results.
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return. Integer. [1-5000]
+        sort : str
+            The property to sort by.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -133,20 +154,31 @@ class ContentUpdatePolicies(ServiceClass):
                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform the specified action on the Content Update Policies specified in the request.
 
-        Keyword arguments:
-        action_name -- The action to perform. String.
-                       Allowed actions:
-                        add-host-group      override-revert
-                        disable             remove-host-group
-                        enable              remove-pinned-content-version
-                        override-allow      set-pinned-content-version
-                        override-pause
-        action_parameters -- Action specific parameter options. Dictionary or list of dictionaries.
-                             {
-                                 "name": "string",
-                                 "value": "string"
-                             }
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        /content-update-policies/performContentUpdatePoliciesAction
+
+        Keyword arguments
+        -----------------
+        action_name : str
+            The action to perform. String.
+            Allowed actions:
+             add-host-group      override-revert
+             disable             remove-host-group
+             enable              remove-pinned-content-version
+             override-allow      set-pinned-content-version
+             override-pause
+        action_parameters : list
+            Action specific parameter options. Dictionary or list of dictionaries.
+            {
+                "name": "string",
+                "value": "string"
+            }
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "action_parameters": [
                         {
@@ -158,18 +190,17 @@ class ContentUpdatePolicies(ServiceClass):
                         "string"
                     ]
                 }
-        ids -- Content Update policy IDs to perform action against. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        ids : str or list[str]
+            Content Update policy IDs to perform action against.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /content-update-policies/performContentUpdatePoliciesAction
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = content_update_policy_action_payload(kwargs)
@@ -190,19 +221,26 @@ class ContentUpdatePolicies(ServiceClass):
         The first ID specified will have the highest precedence and the last ID specified will have the lowest.
         You must specify all non-Default Policies when updating precedence.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
-        ids -- ID list in precedence order. String or list of strings.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /content-update-policies/setContentUpdatePoliciesPrecedence
+        /content-update-policies/setContentUpdatePoliciesPrecedence
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        ids : str or list[str]
+            ID list in precedence order.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -218,18 +256,25 @@ class ContentUpdatePolicies(ServiceClass):
     def get_policies(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a set of Content Update Policies by specifying their IDs.
 
-        Keyword arguments:
-        ids -- The IDs of the Content Update Policies to return. String or list of dictionaries.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/content-update-policies/getContentUpdatePolicies
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs of the Content Update Policies to return.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -243,8 +288,16 @@ class ContentUpdatePolicies(ServiceClass):
     def create_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Content Update Policies by specifying details about the policy to create.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/content-update-policies/createContentUpdatePolicies
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -262,18 +315,19 @@ class ContentUpdatePolicies(ServiceClass):
                         }
                     ]
                 }
-        description -- Content update policy description. String.
-        name -- Content update policy name. String.
-        settings -- Content update policy settings. Dictionary.
+        description : str
+            Content update policy description.
+        name : str
+            Content update policy name.
+        settings : dict
+            Content update policy settings.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/content-update-policies/createContentUpdatePolicies
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = content_update_policy_payload(kwargs)
@@ -289,8 +343,16 @@ class ContentUpdatePolicies(ServiceClass):
     def update_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Content Update Policies by specifying the ID of the policy and details to update.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/content-update-policies/updateContentUpdatePolicies
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -309,16 +371,15 @@ class ContentUpdatePolicies(ServiceClass):
                         }
                     ]
                 }
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/content-update-policies/updateContentUpdatePolicies
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = content_update_policy_payload(kwargs)
@@ -334,18 +395,25 @@ class ContentUpdatePolicies(ServiceClass):
     def delete_policies(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a set of Content Update Policies by specifying their IDs.
 
-        Keyword arguments:
-        ids -- The IDs of the Content Update Policies to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/content-update-policies/deleteContentUpdatePolicies
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs of the Content Update Policies to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -361,23 +429,34 @@ class ContentUpdatePolicies(ServiceClass):
 
         Returns a set of Agent IDs which match the filter criteria.
 
-        Keyword arguments:
-        id -- The ID of the Content Update Policy to search for members of. String.
-        filter -- The filter expression that should be used to limit the results. String.
-        offset -- The offset to start retrieving records from. Integer.
-        limit -- The maximum records to return. Integer. [1-5000]
-        sort -- The property to sort by. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /content-update-policies/queryContentUpdatePolicyMembers
+        /content-update-policies/queryContentUpdatePolicyMembers
+
+        Keyword arguments
+        -----------------
+        id : str
+            The ID of the Content Update Policy to search for members of.
+        filter : str
+            The filter expression that should be used to limit the results.
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return. Integer. [1-5000]
+        sort : str
+            The property to sort by.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -394,24 +473,32 @@ class ContentUpdatePolicies(ServiceClass):
                                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for content versions available for pinning given the category.
 
-        Keyword arguments:
-        category -- Content category. String.
-                    Allowed values:
-                        rapid_response_al_bl_listing    system_critical
-                        sensor_operations               vulnerability_management
-        sort -- Value to sort returned content versions by.
-                Allowed values: deployed_timestamp
-                Default: deployed_timestamp.desc
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/content-update-policies/queryPinnableContentVersions
+
+        Keyword arguments
+        -----------------
+        category : str
+            Content category. String.
+            Allowed values:
+                rapid_response_al_bl_listing    system_critical
+                sensor_operations               vulnerability_management
+        sort : str
+            Value to sort returned content versions by.
+            Allowed values: deployed_timestamp
+            Default: deployed_timestamp.desc
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -427,21 +514,31 @@ class ContentUpdatePolicies(ServiceClass):
 
         Returns a set of Content Update Policy IDs which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-        offset -- The offset to start retrieving records from. Integer.
-        limit -- The maximum records to return. Integer. [1-5000]
-        sort -- The property to sort by. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/content-update-policies/queryContentUpdatePolicies
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results.
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return. Integer. [1-5000]
+        sort : str
+            The property to sort by.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

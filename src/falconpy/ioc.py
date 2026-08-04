@@ -72,9 +72,18 @@ class IOC(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get indicator aggregates as specified via json in request body.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
-                body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.aggregate.v1
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
+        body : list
+            full body payload, not required when using other keywords.
                 {
                     "date_ranges": [
                     {
@@ -108,38 +117,44 @@ class IOC(ServiceClass):
                     "type": "string"
                 }
 
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.aggregate.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             # IOC aggregate payload does NOT expect a list
@@ -157,43 +172,55 @@ class IOC(ServiceClass):
     def indicator_combined(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Combined for Indicators.
 
-        Keyword arguments:
-        after -- A pagination token used with the limit parameter to manage pagination of results.
-                 On your first request, don't provide an `after` token. On subsequent requests,
-                 provide the `after` token from the previous response to continue from that place
-                 in the results. To access more than 10k indicators, use the `after` parameter
-                 instead of `offset`.
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        from_parent -- The filter for returning either only indicators for the request customer
-                       or its MSSP parents. Boolean.
-        limit -- The maximum records to return. [1-500]. Defaults to 100.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from.
-                  Offset and After params are mutually exclusive.
-                  If none provided then scrolling will be used by default.
-                  To access more than 10K IOCs, use the `after` parameter instead of `offset`.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by (e.g. alias.desc or state.asc). FQL syntax.
-                Available values
-                action                          modified_by
-                applied_globally                modified_on
-                metadata.av_hits                metadata.original_filename.raw
-                metadata.company_name.raw       metadata.product_name.raw
-                created_by                      metadata.product_version
-                created_on                      severity_number
-                expiration                      source
-                expired                         type
-                metadata.filename.raw           value
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.combined.v1
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the limit parameter to manage pagination of results.
+            On your first request, don't provide an `after` token. On subsequent requests,
+            provide the `after` token from the previous response to continue from that place
+            in the results. To access more than 10k indicators, use the `after` parameter
+            instead of `offset`.
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        from_parent : bool
+            The filter for returning either only indicators for the request customer
+            or its MSSP parents.
+        limit : int
+            The maximum records to return. [1-500]. Defaults to 100.
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from.
+            Offset and After params are mutually exclusive.
+            If none provided then scrolling will be used by default.
+            To access more than 10K IOCs, use the `after` parameter instead of `offset`.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by (e.g. alias.desc or state.asc). FQL syntax.
+            Available values
+            action                          modified_by
+            applied_globally                modified_on
+            metadata.av_hits                metadata.original_filename.raw
+            metadata.company_name.raw       metadata.product_name.raw
+            created_by                      metadata.product_version
+            created_on                      severity_number
+            expiration                      source
+            expired                         type
+            metadata.filename.raw           value
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -207,19 +234,28 @@ class IOC(ServiceClass):
     def action_get(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Actions by IDs.
 
-        Keyword arguments:
-        ids -- List of Indicator ID(s) you wish to lookup. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/action.get.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Indicator ID(s) you wish to lookup.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -233,8 +269,16 @@ class IOC(ServiceClass):
     def get_indicators_report(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Launch an indicators report creation job.
 
-        Keyword arguments:
-        body -- full parameters payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/GetIndicatorsReport
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full parameters payload, not required if using other keywords.
                 {
                     "from_parent": true,
                     "report_format": "string",
@@ -244,29 +288,33 @@ class IOC(ServiceClass):
                         "sort": "string"
                     }
                 }
-        filter -- FQL formatted string specifying the search filter.
-                  Overridden if 'search' keyword is provided.
-        from_parent -- Flag indicating if this indicator is defined in the parent. Boolean.
-        query -- FQL formatted string specifying the search query.
-                 Overridden if 'search' keyword is provided.
-        report_format -- Format of the report. String.
-        search -- Search parameters. Strings are in FQL format. Dictionary.
-                  {
-                      "filter": "string",
-                      "query": "string",
-                      "sort": "string"
-                  }
-        sort -- FQL formatted string specifying the search sort.
-                Overridden if 'search' keyword is provided.
+        filter : str
+            FQL formatted string specifying the search filter.
+            Overridden if 'search' keyword is provided.
+        from_parent : bool
+            Flag indicating if this indicator is defined in the parent.
+        query : str
+            FQL formatted string specifying the search query.
+            Overridden if 'search' keyword is provided.
+        report_format : str
+            Format of the report.
+        search : dict
+            Search parameters. Strings are in FQL format. Dictionary.
+            {
+                "filter": "string",
+                "query": "string",
+                "sort": "string"
+            }
+        sort : str
+            FQL formatted string specifying the search sort.
+            Overridden if 'search' keyword is provided.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/GetIndicatorsReport
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = indicator_report_payload(passed_keywords=kwargs)
@@ -283,19 +331,28 @@ class IOC(ServiceClass):
     def indicator_get(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Indicators by IDs.
 
-        Keyword arguments:
-        ids -- List of Indicator ID(s) you wish to lookup. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.get.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Indicator ID(s) you wish to lookup.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -313,10 +370,20 @@ class IOC(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Indicators.
 
-        Keyword arguments:
-        action -- Default action for the IOC. String.
-        applied_globally -- Is this IOC applied globally? Boolean.
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.create.v1
+
+        Keyword arguments
+        -----------------
+        action : str
+            Default action for the IOC.
+        applied_globally : bool
+            Is this IOC applied globally?
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "comment": "string",
                     "indicators": [
@@ -345,36 +412,51 @@ class IOC(ServiceClass):
                         }
                     ]
                 }
-        comment -- Audit log comment for the update. String.
-        description -- Description for the IOC. String.
-        expiration -- UTC formatted date string. String.
-        filename -- Filename to use in the metadata dictionary. String.
-        host_groups -- List of host groups to apply this IOC to. List of strings.
-        ignore_warnings -- Set to true to ignore warnings and add all IOCs. Boolean. Default: False
-        indicators -- List of indicators to create. List of dictionaries.
-        metadata -- Dictionary containing the filename for the IOC.
-                    Not required if filename is used.
-                    {
-                        "filename": "string"
-                    }
-        mobile_action -- Action to perform for mobile. String.
-        parameters -- full parameters payload in JSON format. Not required if using other keywords.
-        platforms -- Platforms this IOC applies to. String.
-        retrodetects -- Whether to submit to retrodetects. Boolean.
-        severity -- Severity this IOC generates. String.
-        source -- Source of the IOC. String.
-        tags -- List of Falcon Grouping Tags to apply this IOC to. List of strings.
-        type -- Type of indicator. String.
-        value -- Value of the indicator. String.
+        comment : str
+            Audit log comment for the update.
+        description : str
+            Description for the IOC.
+        expiration : str
+            UTC formatted date.
+        filename : str
+            Filename to use in the metadata.
+        host_groups : list[str]
+            List of host groups to apply this IOC to.
+        ignore_warnings : bool
+            Set to true to ignore warnings and add all IOCs. Boolean. Default: False
+        indicators : list[dict]
+            List of indicators to create.
+        metadata : str
+            Dictionary containing the filename for the IOC.
+            Not required if filename is used.
+            {
+                "filename": "string"
+            }
+        mobile_action : str
+            Action to perform for mobile.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        platforms : str
+            Platforms this IOC applies to.
+        retrodetects : bool
+            Whether to submit to retrodetects.
+        severity : str
+            Severity this IOC generates.
+        source : str
+            Source of the IOC.
+        tags : list[str]
+            List of Falcon Grouping Tags to apply this IOC to.
+        type : str
+            Type of indicator.
+        value : str
+            Value of the indicator.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.create.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = indicator_payload(passed_keywords=kwargs)
@@ -396,20 +478,30 @@ class IOC(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete Indicators by IDs.
 
-        Keyword arguments:
-        ids -- List of Indicator ID(s) you wish to delete. String or list of strings.
-        from_parent -- Limit action to IOCs originating from the MSSP parent.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.delete.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Indicator ID(s) you wish to delete.
+        from_parent : bool
+            Limit action to IOCs originating from the MSSP parent.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -427,10 +519,20 @@ class IOC(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Indicators.
 
-        Keyword arguments:
-        action -- Default action for the IOC. String.
-        applied_globally -- Is this IOC applied globally? Boolean.
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.update.v1
+
+        Keyword arguments
+        -----------------
+        action : str
+            Default action for the IOC.
+        applied_globally : bool
+            Is this IOC applied globally?
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "bulk_update": {
                         "action": "string",
@@ -478,40 +580,58 @@ class IOC(ServiceClass):
                         }
                     ]
                 }
-        bulk_update -- Dictionary representing the indicator values to update in bulk.
-        comment -- Audit log comment for the update. String.
-        description -- Description for the IOC. String.
-        expiration -- UTC formatted date string. String.
-        filename -- Filename to use in the metadata dictionary. String.
-        from_parent -- Flag indicating if this indicator originates from the parent. Boolean.
-        host_groups -- List of host groups to apply this IOC to. List of strings.
-        id -- ID of the indicator to be updated. At least one ID must be specified using this
-              keyword, or as part of the indicators list using the indicators keyword.
-        indicators -- List of indicators to update. List of dictionaries.
-        ignore_warnings -- Set to true to ignore warnings and add all IOCs. Boolean. Default: False
-        metadata -- Dictionary containing the filename for the IOC.
-                    Not required if filename is used.
-                    {
-                        "filename": "string"
-                    }
-        mobile_action -- Action to perform for mobile. String.
-        parameters -- full parameters payload in JSON format. Not required if using other keywords.
-        platforms -- Platforms this IOC applies to. String.
-        retrodetects -- Whether to submit to retrodetects. Boolean.
-        severity -- Severity this IOC generates. String.
-        source -- Source of the IOC. String.
-        tags -- List of Falcon Grouping Tags to apply this IOC to. List of strings.
-        type -- Type of indicator. String.
-        value -- Value of the indicator. String.
+        bulk_update : dict
+            Dictionary representing the indicator values to update in bulk.
+        comment : str
+            Audit log comment for the update.
+        description : str
+            Description for the IOC.
+        expiration : str
+            UTC formatted date.
+        filename : str
+            Filename to use in the metadata.
+        from_parent : bool
+            Flag indicating if this indicator originates from the parent.
+        host_groups : list[str]
+            List of host groups to apply this IOC to.
+        id : str
+            ID of the indicator to be updated. At least one ID must be specified using this
+            keyword, or as part of the indicators list using the indicators keyword.
+        indicators : list[dict]
+            List of indicators to update.
+        ignore_warnings : bool
+            Set to true to ignore warnings and add all IOCs. Boolean. Default: False
+        metadata : str
+            Dictionary containing the filename for the IOC.
+            Not required if filename is used.
+            {
+                "filename": "string"
+            }
+        mobile_action : str
+            Action to perform for mobile.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        platforms : str
+            Platforms this IOC applies to.
+        retrodetects : bool
+            Whether to submit to retrodetects.
+        severity : str
+            Severity this IOC generates.
+        source : str
+            Source of the IOC.
+        tags : list[str]
+            List of Falcon Grouping Tags to apply this IOC to.
+        type : str
+            Type of indicator.
+        value : str
+            Value of the indicator.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.update.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = indicator_update_payload(passed_keywords=kwargs)
@@ -529,19 +649,27 @@ class IOC(ServiceClass):
     def action_query(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query Actions.
 
-        Keyword arguments:
-        limit -- Number of IDs to return. Integer.
-        offset -- Starting index of overall result set from which to return IDs. String.
-        parameters -- full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/action.query.v1
+
+        Keyword arguments
+        -----------------
+        limit : int
+            Number of IDs to return.
+        offset : str
+            Starting index of overall result set from which to return IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -555,43 +683,55 @@ class IOC(ServiceClass):
     def indicator_search(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for Indicators.
 
-        Keyword arguments:
-        after -- A pagination token used with the limit parameter to manage pagination of results.
-                 On your first request, don't provide an `after` token. On subsequent requests,
-                 provide the `after` token from the previous response to continue from that place
-                 in the results. To access more than 10k indicators, use the `after` parameter
-                 instead of `offset`.
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        from_parent -- The filter for returning either only indicators for the request customer
-                       or its MSSP parents. String.
-        limit -- The maximum records to return. [1-500]. Defaults to 100.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from.
-                  Offset and After params are mutually exclusive.
-                  If none provided then scrolling will be used by default.
-                  To access more than 10K IOCs, use the `after` parameter instead of `offset`.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by (e.g. alias.desc or state.asc). FQL syntax.
-                Available values
-                action                          modified_by
-                applied_globally                modified_on
-                metadata.av_hits                metadata.original_filename.raw
-                metadata.company_name.raw       metadata.product_name.raw
-                created_by                      metadata.product_version
-                created_on                      severity_number
-                expiration                      source
-                expired                         type
-                metadata.filename.raw           value
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.search.v1
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the limit parameter to manage pagination of results.
+            On your first request, don't provide an `after` token. On subsequent requests,
+            provide the `after` token from the previous response to continue from that place
+            in the results. To access more than 10k indicators, use the `after` parameter
+            instead of `offset`.
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        from_parent : bool
+            The filter for returning either only indicators for the request customer
+            or its MSSP parents.
+        limit : int
+            The maximum records to return. [1-500]. Defaults to 100.
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from.
+            Offset and After params are mutually exclusive.
+            If none provided then scrolling will be used by default.
+            To access more than 10K IOCs, use the `after` parameter instead of `offset`.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by (e.g. alias.desc or state.asc). FQL syntax.
+            Available values
+            action                          modified_by
+            applied_globally                modified_on
+            metadata.av_hits                metadata.original_filename.raw
+            metadata.company_name.raw       metadata.product_name.raw
+            created_by                      metadata.product_version
+            created_on                      severity_number
+            expiration                      source
+            expired                         type
+            metadata.filename.raw           value
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -605,19 +745,27 @@ class IOC(ServiceClass):
     def ioc_type_query(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query IOC types.
 
-        Keyword arguments:
-        limit -- Number of IDs to return. Integer.
-        offset -- Starting index of overall result set from which to return IDs. String.
-        parameters -- full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/ioc_type.query.v1
+
+        Keyword arguments
+        -----------------
+        limit : int
+            Number of IDs to return.
+        offset : str
+            Starting index of overall result set from which to return IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -631,19 +779,27 @@ class IOC(ServiceClass):
     def platform_query(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query platforms.
 
-        Keyword arguments:
-        limit -- Number of IDs to return. Integer.
-        offset -- Starting index of overall result set from which to return IDs. String.
-        parameters -- full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/platform.query.v1
+
+        Keyword arguments
+        -----------------
+        limit : int
+            Number of IDs to return.
+        offset : str
+            Starting index of overall result set from which to return IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -657,19 +813,27 @@ class IOC(ServiceClass):
     def severity_query(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query severities.
 
-        Keyword arguments:
-        limit -- Number of IDs to return. Integer.
-        offset -- Starting index of overall result set from which to return IDs. String.
-        parameters -- full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/severity.query.v1
+
+        Keyword arguments
+        -----------------
+        limit : int
+            Number of IDs to return.
+        offset : str
+            Starting index of overall result set from which to return IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -683,25 +847,33 @@ class IOC(ServiceClass):
     def devices_count_legacy(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the number of hosts in your customer account that have observed a given custom IOC.
 
-        Keyword arguments:
-        type -- The type of indicator. String. Required.
-                Valid types include:
-                `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
-                `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
-                `domain`: A domain name. Length - min: 1, max: 200.
-                `ipv4`: An IPv4 address. Must be a valid IP address.
-                `ipv6`: An IPv6 address. Must be a valid IP address.
-        parameters -- full parameters payload, not required if using other keywords.
-        value -- The string representation of the indicator.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DevicesCount
+
+        Keyword arguments
+        -----------------
+        type : str
+            The type of indicator. String. Required.
+            Valid types include:
+            `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
+            `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
+            `domain`: A domain name. Length - min: 1, max: 200.
+            `ipv4`: An IPv4 address. Must be a valid IP address.
+            `ipv6`: An IPv6 address. Must be a valid IP address.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        value : str
+            The string representation of the indicator.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -715,25 +887,33 @@ class IOC(ServiceClass):
     def devices_count(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the number of hosts in your customer account that have observed a given custom IOC.
 
-        Keyword arguments:
-        type -- The type of indicator. String. Required.
-                Valid types include:
-                `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
-                `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
-                `domain`: A domain name. Length - min: 1, max: 200.
-                `ipv4`: An IPv4 address. Must be a valid IP address.
-                `ipv6`: An IPv6 address. Must be a valid IP address.
-        parameters -- full parameters payload, not required if using other keywords.
-        value -- The string representation of the indicator.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.get.device.count.v1
+
+        Keyword arguments
+        -----------------
+        type : str
+            The type of indicator. String. Required.
+            Valid types include:
+            `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
+            `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
+            `domain`: A domain name. Length - min: 1, max: 200.
+            `ipv4`: An IPv4 address. Must be a valid IP address.
+            `ipv6`: An IPv6 address. Must be a valid IP address.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        value : str
+            The string representation of the indicator.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -749,29 +929,39 @@ class IOC(ServiceClass):
 
         For details about those hosts, use the hosts API interface.
 
-        Keyword arguments:
-        type -- The type of indicator. String. Required.
-                Valid types include:
-                `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
-                `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
-                `domain`: A domain name. Length - min: 1, max: 200.
-                `ipv4`: An IPv4 address. Must be a valid IP address.
-                `ipv6`: An IPv6 address. Must be a valid IP address.
-        limit -- The first process to return, where 0 is the latest offset.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The first process to return, where 0 is the latest offset.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- full parameters payload, not required if using other keywords.
-        value -- The string representation of the indicator.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DevicesRanOn
+
+        Keyword arguments
+        -----------------
+        type : str
+            The type of indicator. String. Required.
+            Valid types include:
+            `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
+            `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
+            `domain`: A domain name. Length - min: 1, max: 200.
+            `ipv4`: An IPv4 address. Must be a valid IP address.
+            `ipv6`: An IPv6 address. Must be a valid IP address.
+        limit : str
+            The first process to return, where 0 is the latest offset.
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The first process to return, where 0 is the latest offset.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        value : str
+            The string representation of the indicator.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -787,29 +977,39 @@ class IOC(ServiceClass):
 
         For details about those hosts, use the hosts API interface.
 
-        Keyword arguments:
-        type -- The type of indicator. String. Required.
-                Valid types include:
-                `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
-                `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
-                `domain`: A domain name. Length - min: 1, max: 200.
-                `ipv4`: An IPv4 address. Must be a valid IP address.
-                `ipv6`: An IPv6 address. Must be a valid IP address.
-        limit -- The first process to return, where 0 is the latest offset.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The first process to return, where 0 is the latest offset.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- full parameters payload, not required if using other keywords.
-        value -- The string representation of the indicator.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.get.devices.ran.on.v1
+
+        Keyword arguments
+        -----------------
+        type : str
+            The type of indicator. String. Required.
+            Valid types include:
+            `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
+            `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
+            `domain`: A domain name. Length - min: 1, max: 200.
+            `ipv4`: An IPv4 address. Must be a valid IP address.
+            `ipv6`: An IPv6 address. Must be a valid IP address.
+        limit : str
+            The first process to return, where 0 is the latest offset.
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The first process to return, where 0 is the latest offset.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        value : str
+            The string representation of the indicator.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -826,32 +1026,43 @@ class IOC(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for processes associated with a custom IOC.
 
-        Keyword arguments:
-        type -- The type of indicator. String. Required.
-                Valid types include:
-                `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
-                `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
-                `domain`: A domain name. Length - min: 1, max: 200.
-                `ipv4`: An IPv4 address. Must be a valid IP address.
-                `ipv6`: An IPv6 address. Must be a valid IP address.
-        limit -- The first process to return, where 0 is the latest offset.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The first process to return, where 0 is the latest offset.
-                  Use with the limit parameter to manage pagination of results.
-        device_id -- Specify a host's ID to return only processes from that host.
-                     Get a host's ID from get_device_details, the Falcon console,
-                     or the Streaming API.
-        parameters -- full parameters payload, not required if using other keywords.
-        value -- The string representation of the indicator.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/ProcessesRanOn
+
+        Keyword arguments
+        -----------------
+        type : str
+            The type of indicator. String. Required.
+            Valid types include:
+            `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
+            `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
+            `domain`: A domain name. Length - min: 1, max: 200.
+            `ipv4`: An IPv4 address. Must be a valid IP address.
+            `ipv6`: An IPv6 address. Must be a valid IP address.
+        limit : str
+            The first process to return, where 0 is the latest offset.
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The first process to return, where 0 is the latest offset.
+            Use with the limit parameter to manage pagination of results.
+        device_id : str
+            Specify a host's ID to return only processes from that host.
+            Get a host's ID from get_device_details, the Falcon console,
+            or the Streaming API.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        value : str
+            The string representation of the indicator.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -865,31 +1076,42 @@ class IOC(ServiceClass):
     def processes_ran_on(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for processes associated with a custom IOC.
 
-        Keyword arguments:
-        type -- The type of indicator. String. Required.
-                Valid types include:
-                `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
-                `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
-                `domain`: A domain name. Length - min: 1, max: 200.
-                `ipv4`: An IPv4 address. Must be a valid IP address.
-                `ipv6`: An IPv6 address. Must be a valid IP address.
-        limit -- The first process to return, where 0 is the latest offset.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The first process to return, where 0 is the latest offset.
-                  Use with the limit parameter to manage pagination of results.
-        device_id -- Specify a host's ID to return only processes from that host. Get a host's ID from QueryDevicesByFilter,
-                     the Falcon console, or the Streaming API.
-        parameters -- full parameters payload, not required if using other keywords.
-        value -- The string representation of the indicator.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.get.processes_ran_on.v1
+
+        Keyword arguments
+        -----------------
+        type : str
+            The type of indicator. String. Required.
+            Valid types include:
+            `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
+            `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
+            `domain`: A domain name. Length - min: 1, max: 200.
+            `ipv4`: An IPv4 address. Must be a valid IP address.
+            `ipv6`: An IPv6 address. Must be a valid IP address.
+        limit : str
+            The first process to return, where 0 is the latest offset.
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The first process to return, where 0 is the latest offset.
+            Use with the limit parameter to manage pagination of results.
+        device_id : str
+            Specify a host's ID to return only processes from that host. Get a host's ID from QueryDevicesByFilter,
+            the Falcon console, or the Streaming API.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        value : str
+            The string representation of the indicator.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -907,20 +1129,28 @@ class IOC(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """For the provided ProcessID retrieve the process details.
 
-        Keyword arguments:
-        ids -- List of Process ID(s) for the running process you want to lookup.
-               String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/entities.processes
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Process ID(s) for the running process you want to lookup.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -953,8 +1183,16 @@ class IOC(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Execute an SDMF data frame query against IOC indicators.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator_sdmf_query_v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "control_info": {
                         "deadline": "string",
@@ -1021,19 +1259,21 @@ class IOC(ServiceClass):
                     ],
                     "res_id": "string"
                 }
-        control_info -- The control_info value. Dictionary.
-        id -- The id value. String.
-        nodes -- The nodes value. List.
-        res_id -- The res_id value. String.
+        control_info : dict
+            The control_info value.
+        id : str
+            The id value.
+        nodes : list
+            The nodes value.
+        res_id : str
+            The res_id value.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator_sdmf_query_v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = indicator_sdmf_query_v1_payload(passed_keywords=kwargs)

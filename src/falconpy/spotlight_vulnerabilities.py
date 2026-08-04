@@ -65,32 +65,43 @@ class SpotlightVulnerabilities(ServiceClass):
 
         Returns a set of Vulnerability IDs which match the filter criteria.
 
-        Keyword arguments:
-        after -- A pagination token used with the limit parameter to manage pagination of results.
-                 On your first request, don't provide an after token. On subsequent requests,
-                 provide the after token from the previous response to continue from that place in
-                 the results.
-        facet -- Select various details blocks to be returned for each vulnerability entry.
-                 Supported values:
-                 cve_details            host_info
-                 remediation_details    evaluation_logic
-        filter -- Filter items using a query in Falcon Query Language (FQL).
-                  Wildcards '*' are unsupported.
-        limit -- The number of items to return in this response (default: 100, max: 5000).
-                 Use with the after parameter to manage pagination of results. Integer.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by.
-                FQL syntax (e.g. created_timestamp|desc, closed_timestamp|asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /spotlight-vulnerabilities/combinedQueryVulnerabilities
+        /spotlight-vulnerabilities/combinedQueryVulnerabilities
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the limit parameter to manage pagination of results.
+            On your first request, don't provide an after token. On subsequent requests,
+            provide the after token from the previous response to continue from that place in
+            the results.
+        facet : str or list[str]
+            Select various details blocks to be returned for each vulnerability entry.
+            Supported values:
+            cve_details            host_info
+            remediation_details    evaluation_logic
+        filter : str
+            Filter items using a query in Falcon Query Language (FQL).
+            Wildcards '*' are unsupported.
+        limit : int
+            The number of items to return in this response (default: 100, max: 5000).
+            Use with the after parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by.
+            FQL syntax (e.g. created_timestamp|desc, closed_timestamp|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not kwargs.get("filter", None) and not parameters.get("filter", None):
             fail_msg = [
@@ -125,28 +136,38 @@ class SpotlightVulnerabilities(ServiceClass):
 
         Returns a set of host entities containing installed patch details.
 
-        Keyword arguments:
-        after -- A pagination token used with the limit parameter to manage pagination of results.
-                 On your first request, don't provide an after token. On subsequent requests,
-                 provide the after token from the previous response to continue from that place in
-                 the results.
-        filter -- Filter items using a query in Falcon Query Language (FQL).
-                  Wildcards '*' are unsupported.
-        limit -- The number of items to return in this response.
-                 Use with the after parameter to manage pagination of results. Integer.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by.
-                FQL syntax (e.g. published_date|desc, hostname|asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /spotlight-vulnerabilities/combinedQueryInstalledPatches
+        /spotlight-vulnerabilities/combinedQueryInstalledPatches
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the limit parameter to manage pagination of results.
+            On your first request, don't provide an after token. On subsequent requests,
+            provide the after token from the previous response to continue from that place in
+            the results.
+        filter : str
+            Filter items using a query in Falcon Query Language (FQL).
+            Wildcards '*' are unsupported.
+        limit : int
+            The number of items to return in this response.
+            Use with the after parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by.
+            FQL syntax (e.g. published_date|desc, hostname|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not kwargs.get("filter", None) and not parameters.get("filter", None):
             fail_msg = [
@@ -176,19 +197,28 @@ class SpotlightVulnerabilities(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on vulnerabilities by providing one or more IDs.
 
-        Keyword arguments:
-        ids -- One or more vulnerability IDs (max: 400). String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/getVulnerabilities
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more vulnerability IDs (max: 400)
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -204,38 +234,48 @@ class SpotlightVulnerabilities(ServiceClass):
 
         Returns a set of Vulnerability IDs which match the filter criteria.
 
-        Keyword arguments:
-        after -- A pagination token used with the limit parameter to manage pagination of results.
-                 On your first request, don't provide an after token. On subsequent requests,
-                 provide the after token from the previous response to continue from that place in
-                 the results.
-        filter -- Filter items using a query in Falcon Query Language (FQL). Wildcards * and empty filter values are
-                  unsupported.
-                  Available filter fields that supports match (~): N/A
-                  Available filter fields that supports exact match: aid, cid, last_seen_within, status, cve.id,
-                  cve.is_cisa_kev, cve.remediation_level,
-                  cve.cps_rating, cve.exprt_rating, cve.exploit_status_to_include, cve.severity, cve.base_score, cve.types,
-                  host_info.asset_criticality,
-                  host_info.asset_roles, host_info.internet_exposure, host_info.tags, host_info.groups,
-                  host_info.product_type_desc, host_info.platform_name,
-                  suppression_info.is_suppressed, suppression_info.reason, host_info.instance_state
-                  Available filter fields that supports wildcard (*): N/A
-                  Available filter fields that supports range comparisons (>, <, >=, <=): created_timestamp, closed_timestamp,
-                  updated_timestamp, cve.base_score
-        limit -- The number of items to return in this response (default: 100, max: 400).
-                 Use with the after parameter to manage pagination of results. Integer.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by.
-                FQL syntax (e.g. created_timestamp|desc, closed_timestamp|asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/queryVulnerabilities
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the limit parameter to manage pagination of results.
+            On your first request, don't provide an after token. On subsequent requests,
+            provide the after token from the previous response to continue from that place in
+            the results.
+        filter : str
+            Filter items using a query in Falcon Query Language (FQL). Wildcards * and empty filter values are
+            unsupported.
+            Available filter fields that supports match (~): N/A
+            Available filter fields that supports exact match: aid, cid, last_seen_within, status, cve.id,
+            cve.is_cisa_kev, cve.remediation_level,
+            cve.cps_rating, cve.exprt_rating, cve.exploit_status_to_include, cve.severity, cve.base_score, cve.types,
+            host_info.asset_criticality,
+            host_info.asset_roles, host_info.internet_exposure, host_info.tags, host_info.groups,
+            host_info.product_type_desc, host_info.platform_name,
+            suppression_info.is_suppressed, suppression_info.reason, host_info.instance_state
+            Available filter fields that supports wildcard (*): N/A
+            Available filter fields that supports range comparisons (>, <, >=, <=): created_timestamp, closed_timestamp,
+            updated_timestamp, cve.base_score
+        limit : int
+            The number of items to return in this response (default: 100, max: 400).
+            Use with the after parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by.
+            FQL syntax (e.g. created_timestamp|desc, closed_timestamp|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -253,19 +293,28 @@ class SpotlightVulnerabilities(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on remediations by providing one or more IDs.
 
-        Keyword arguments:
-        ids -- One or more remediation IDs. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         This endpoint is not published in swagger.
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more remediation IDs.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -283,19 +332,28 @@ class SpotlightVulnerabilities(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on remediations by providing one or more IDs.
 
-        Keyword arguments:
-        ids -- One or more remediation IDs. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/getRemediationsV2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more remediation IDs.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

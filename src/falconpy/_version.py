@@ -52,7 +52,7 @@ def version(compare: str = None, agent_string: bool = None):
     """Provide a callable method for checking and comparing the current FalconPy version.
 
     Keyword arguments
-    ----
+    -----------------
     agent_string: bool
         Boolean flag indicating that the default User-Agent string should
         be returned instead.
@@ -62,7 +62,7 @@ def version(compare: str = None, agent_string: bool = None):
         Examples: "1", "1.3" or "1.3.0"
 
     Returns
-    ----
+    -------
     str or bool
         A string containing the requested version detail or a boolean indicating the status
         of the requested version comparison.

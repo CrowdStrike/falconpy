@@ -65,22 +65,32 @@ class SensorDownload(ServiceClass):
                                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve all metadata for installers from provided query.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return. [integer, 1-5000]
-        offset -- The first item to return, where 0 is the latest item. (Integer)
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetCombinedSensorInstallersByQuery
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int (1-5000)
+            The maximum number of records to return.
+        offset : int
+            The first item to return, where 0 is the latest item. (Integer)
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -99,22 +109,32 @@ class SensorDownload(ServiceClass):
 
         Also provides architectural details.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return. [integer, 1-5000]
-        offset -- The first item to return, where 0 is the latest item. (Integer)
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetCombinedSensorInstallersByQueryV2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int (1-5000)
+            The maximum number of records to return.
+        offset : int
+            The first item to return, where 0 is the latest item. (Integer)
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -135,23 +155,34 @@ class SensorDownload(ServiceClass):
 
         The path will be created for the user if it does not already exist.
 
-        Keyword arguments:
-        download_path -- Path to the folder to save installer file.
-                         Must be present to cause a file download.
-        id -- SHA256 of the installer to download.
-        file_name -- Name to use for saved file. Must be present to cause a file download.
-        parameters - Full parameters payload, not required if id is provided as a keyword.
-        stream -- Enable streaming download of the file. Boolean.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/DownloadSensorInstallerById
+
+        Keyword arguments
+        -----------------
+        download_path : str
+            Path to the folder to save installer file.
+            Must be present to cause a file download.
+        id : str
+            SHA256 of the installer to download.
+        file_name : str
+            Name to use for saved file. Must be present to cause a file download.
+        parameters : dict
+            Full parameters payload, not required if id is provided as a keyword.
+        stream : bool
+            Enable streaming download of the file.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        binary object on SUCCESS, dict object containing API response on FAILURE.
         """
         returned = process_service_request(
                         calling_object=self,
@@ -182,23 +213,34 @@ class SensorDownload(ServiceClass):
 
         The path will be created for the user if it does not already exist.
 
-        Keyword arguments:
-        download_path -- Path to the folder to save installer file.
-                         Must be present to cause a file download.
-        id -- SHA256 of the installer to download.
-        file_name -- Name to use for saved file. Must be present to cause a file download.
-        parameters -- Full parameters payload, not required if id is provided as a keyword.
-        stream -- Enable streaming download of the file. Boolean.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/DownloadSensorInstallerByIdV2
+
+        Keyword arguments
+        -----------------
+        download_path : str
+            Path to the folder to save installer file.
+            Must be present to cause a file download.
+        id : str
+            SHA256 of the installer to download.
+        file_name : str
+            Name to use for saved file. Must be present to cause a file download.
+        parameters : dict
+            Full parameters payload, not required if id is provided as a keyword.
+        stream : bool
+            Enable streaming download of the file.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        binary object on SUCCESS, dict object containing API response on FAILURE.
         """
         returned = process_service_request(
                         calling_object=self,
@@ -228,19 +270,28 @@ class SensorDownload(ServiceClass):
 
         (Examples: release_date, version).
 
-        Keyword arguments:
-        ids -- List of SHA256s for installers to retrieve details for. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersEntities
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of SHA256s for installers to retrieve details for.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -260,19 +311,28 @@ class SensorDownload(ServiceClass):
 
         (Examples: release_date, version).
 
-        Keyword arguments:
-        ids -- List of SHA256s for installers to retrieve details for. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersEntitiesV2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of SHA256s for installers to retrieve details for.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -287,12 +347,20 @@ class SensorDownload(ServiceClass):
 
         This method does not accept arguments.
 
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersCCIDByQuery
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -307,22 +375,32 @@ class SensorDownload(ServiceClass):
                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a list of SHA256 for installers based on the filter.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return. [integer, 1-500]
-        offset -- The first item to return, where 0 is the latest item. (Integer)
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. version|ASC, release_date|DESC).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersByQuery
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int (1-500)
+            The maximum number of records to return.
+        offset : int
+            The first item to return, where 0 is the latest item. (Integer)
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. version|ASC, release_date|DESC).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -339,22 +417,32 @@ class SensorDownload(ServiceClass):
                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a list of SHA256 for installers based on the filter.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return. [integer, 1-500]
-        offset -- The first item to return, where 0 is the latest item. (Integer)
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. version|ASC, release_date|DESC).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersByQueryV2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int (1-500)
+            The maximum number of records to return.
+        offset : int
+            The first item to return, where 0 is the latest item. (Integer)
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. version|ASC, release_date|DESC).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -371,21 +459,31 @@ class SensorDownload(ServiceClass):
                                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get sensor installer details by provided query.
 
-        Keyword arguments:
-        offset -- The first item to return, where 0 is the latest item. Integer.
-        limit -- The number of items to return in this response (default: 100, max: 500). Integer.
-        sort -- Sort items using their properties. String.
-        filter -- Filter items using a query in Falcon Query Language (FQL). String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetCombinedSensorInstallersByQueryV3
+
+        Keyword arguments
+        -----------------
+        offset : int
+            The first item to return, where 0 is the latest item.
+        limit : int
+            The number of items to return in this response (default: 100, max: 500)
+        sort : str
+            Sort items using their properties.
+        filter : str
+            Filter items using a query in Falcon Query Language (FQL)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -403,19 +501,28 @@ class SensorDownload(ServiceClass):
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download sensor installer by SHA256 ID.
 
-        Keyword arguments:
-        id -- SHA256 of the installer to download. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/DownloadSensorInstallerByIdV3
+
+        Keyword arguments
+        -----------------
+        id : str
+            SHA256 of the installer to download.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -433,19 +540,28 @@ class SensorDownload(ServiceClass):
                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get sensor installer details by provided SHA256 IDs.
 
-        Keyword arguments:
-        ids -- The IDs of the installers. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersEntitiesV3
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs of the installers.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -463,22 +579,34 @@ class SensorDownload(ServiceClass):
                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get sensor installer IDs by provided query.
 
-        Keyword arguments:
-        offset -- The first item to return, where 0 is the latest item. Integer.
-        limit -- The number of items to return in this response (default: 100, max: 500). Integer.
-        sort -- Sort items using their properties. String.
-        filter -- Filter items using a query in Falcon Query Language (FQL). String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersByQueryV3
+
+        Keyword arguments
+        -----------------
+        offset : int
+            The first item to return, where 0 is the latest item.
+        limit : int
+            The number of items to return in this response (default: 100, max: 500)
+        sort : str
+            Sort items using their properties.
+        filter : str
+            Filter items using a query in Falcon Query Language (FQL)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

@@ -63,31 +63,40 @@ class UnidentifiedContainers(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the count of Unidentified Containers over the last 7 days.
 
-        Keyword arguments:
-        filter -- Filter Unidentified Containers using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    assessed_images_count               last_seen
-                    cid                                 namespace
-                    cloud_account_id                    node_name
-                    cloud_name                          severity
-                    cloud_region                        unassessed_images_count
-                    cluster_id                          visible_to_k8s
-                    cluster_name
-                    containers_impacted_count
-                    detections_count
-                    image_assessment_detections_count
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                /unidentified-containers/ReadUnidentifiedContainersByDateRangeCount
+        /unidentified-containers/ReadUnidentifiedContainersByDateRangeCount
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter Unidentified Containers using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              assessed_images_count               last_seen
+              cid                                 namespace
+              cloud_account_id                    node_name
+              cloud_name                          severity
+              cloud_region                        unassessed_images_count
+              cluster_id                          visible_to_k8s
+              cluster_name
+              containers_impacted_count
+              detections_count
+              image_assessment_detections_count
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'filter'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -101,31 +110,40 @@ class UnidentifiedContainers(ServiceClass):
     def read_count(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the total count of Unidentified Containers over a time period.
 
-        Keyword arguments:
-        filter -- Filter Unidentified Containers using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    assessed_images_count               last_seen
-                    cid                                 namespace
-                    cloud_account_id                    node_name
-                    cloud_name                          severity
-                    cloud_region                        unassessed_images_count
-                    cluster_id                          visible_to_k8s
-                    cluster_name
-                    containers_impacted_count
-                    detections_count
-                    image_assessment_detections_count
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                /unidentified-containers/ReadUnidentifiedContainersCount
+        /unidentified-containers/ReadUnidentifiedContainersCount
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter Unidentified Containers using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              assessed_images_count               last_seen
+              cid                                 namespace
+              cloud_account_id                    node_name
+              cloud_name                          severity
+              cloud_region                        unassessed_images_count
+              cluster_id                          visible_to_k8s
+              cluster_name
+              containers_impacted_count
+              detections_count
+              image_assessment_detections_count
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'filter'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -139,33 +157,43 @@ class UnidentifiedContainers(ServiceClass):
     def search_and_read(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search Unidentified Containers by the provided search criteria.
 
-        Keyword arguments:
-        filter -- Search Unidentified Containers using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    assessed_images_count               last_seen
-                    cid                                 namespace
-                    cloud_account_id                    node_name
-                    cloud_name                          severity
-                    cloud_region                        unassessed_images_count
-                    cluster_id                          visible_to_k8s
-                    cluster_name
-                    containers_impacted_count
-                    detections_count
-                    image_assessment_detections_count
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        sort -- The fields to sort the records on. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                /unidentified-containers/SearchAndReadUnidentifiedContainers
+        /unidentified-containers/SearchAndReadUnidentifiedContainers
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Search Unidentified Containers using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              assessed_images_count               last_seen
+              cid                                 namespace
+              cloud_account_id                    node_name
+              cloud_name                          severity
+              cloud_region                        unassessed_images_count
+              cluster_id                          visible_to_k8s
+              cluster_name
+              containers_impacted_count
+              detections_count
+              image_assessment_detections_count
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        sort : str
+            The fields to sort the records on.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

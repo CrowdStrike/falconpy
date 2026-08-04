@@ -72,10 +72,19 @@ class ProfileGroups(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform actions on profile groups (add/remove roles, user groups, FGA objects).
 
-        Keyword arguments:
-        action_name -- Action to perform. Available values: add_roles, remove_roles, add_user_groups, remove_user_groups,
-                       add_fga_objects, remove_fga_objects. String.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/GroupActionsV1Mixin0
+
+        Keyword arguments
+        -----------------
+        action_name : str
+            Action to perform. Available values: add_roles, remove_roles, add_user_groups, remove_user_groups,
+            add_fga_objects, remove_fga_objects.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "action_parameters": [
                         {
@@ -88,19 +97,21 @@ class ProfileGroups(ServiceClass):
                         "string"
                     ]
                 }
-        action_parameters -- The action_parameters value. List.
-        filter -- The filter value. String.
-        ids -- The ids value. List.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        action_parameters : list
+            The action_parameters value.
+        filter : str
+            The filter value.
+        ids : str or list[str]
+            The ids value.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/GroupActionsV1Mixin0
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = group_actions_v1_mixin0_payload(passed_keywords=kwargs)
@@ -122,9 +133,18 @@ class ProfileGroups(ServiceClass):
                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Add or remove users from profile groups.
 
-        Keyword arguments:
-        action_name -- Action to perform. Available values: add_users, remove_users. String.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/GroupUsersActionsV1Mixin0
+
+        Keyword arguments
+        -----------------
+        action_name : str
+            Action to perform. Available values: add_users, remove_users.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "action_parameters": [
                         {
@@ -137,19 +157,21 @@ class ProfileGroups(ServiceClass):
                         "string"
                     ]
                 }
-        action_parameters -- The action_parameters value. List.
-        filter -- The filter value. String.
-        ids -- The ids value. List.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        action_parameters : list
+            The action_parameters value.
+        filter : str
+            The filter value.
+        ids : str or list[str]
+            The ids value.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/GroupUsersActionsV1Mixin0
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = group_users_actions_v1_mixin0_payload(passed_keywords=kwargs)
@@ -170,23 +192,30 @@ class ProfileGroups(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of groups with users that belong to them.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/GetGroupUsersV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- Profile Group IDs to get users for. List.
+        ids : str or list[str]
+            Profile Group IDs to get users for.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/GetGroupUsersV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = get_group_users_v1_payload(passed_keywords=kwargs)
@@ -205,23 +234,30 @@ class ProfileGroups(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get profile groups by IDs with full details.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/GetGroupsV1Mixin0
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- Profile Group IDs to retrieve. List.
+        ids : str or list[str]
+            Profile Group IDs to retrieve.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/GetGroupsV1Mixin0
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = get_groups_v1_mixin0_payload(passed_keywords=kwargs)
@@ -240,25 +276,34 @@ class ProfileGroups(ServiceClass):
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new profile group.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/CreateGroupV1Mixin0
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "cid": "string",
                     "description": "string",
                     "name": "string"
                 }
-        cid -- CID for the new profile group in a Flight Control environment. String.
-        description -- Optional description for the group. String.
-        name -- Name for the new profile group. String.
+        cid : str
+            CID for the new profile group in a Flight Control environment.
+        description : str
+            Optional description for the group.
+        name : str
+            Name for the new profile group.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/CreateGroupV1Mixin0
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = create_group_v1_mixin0_payload(passed_keywords=kwargs)
@@ -278,19 +323,28 @@ class ProfileGroups(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete profile groups by IDs.
 
-        Keyword arguments:
-        ids -- Group IDs to delete String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/DeleteGroupsV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Group IDs to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -308,25 +362,35 @@ class ProfileGroups(ServiceClass):
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update profile group metadata (name, description).
 
-        Keyword arguments:
-        id -- ID of the group to update. String.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/UpdateGroupV1Mixin0
+
+        Keyword arguments
+        -----------------
+        id : str
+            ID of the group to update.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "description": "string",
                     "name": "string"
                 }
-        description -- New description for the group. String.
-        name -- New name for the group. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        description : str
+            New description for the group.
+        name : str
+            New name for the group.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/UpdateGroupV1Mixin0
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = update_group_v1_mixin0_payload(passed_keywords=kwargs)
@@ -347,23 +411,30 @@ class ProfileGroups(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of users with the groups that they belong to.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/GetUserGroupsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- User UUIDs to get groups for. List.
+        ids : str or list[str]
+            User UUIDs to get groups for.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/GetUserGroupsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = get_user_groups_v1_payload(passed_keywords=kwargs)
@@ -382,21 +453,31 @@ class ProfileGroups(ServiceClass):
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query profile group IDs with FQL filtering, pagination, and sorting.
 
-        Keyword arguments:
-        filter -- FQL filter expression to filter groups by name or cid. String.
-        sort -- Sort by field|direction (name, updated_at, member_count). String.
-        offset -- Number of groups to skip. Integer.
-        limit -- Maximum groups to return [1-500]. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/profile-groups/QueryGroupsV1Mixin0
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression to filter groups by name or cid.
+        sort : str
+            Sort by field|direction (name, updated_at, member_count)
+        offset : int
+            Number of groups to skip.
+        limit : int
+            Maximum groups to return [1-500]
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

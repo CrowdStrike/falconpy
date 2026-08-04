@@ -62,23 +62,35 @@ class FoundryLookupFiles(ServiceClass):
                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a lookup file within a foundry app.
 
-        Keyword arguments:
-        file_name -- Name to use for the uploaded file. String.
-        file -- File to be uploaded. String.
-        name -- Name used to identify the file. String.
-        description -- File description. String.
-        id -- Unique identifier of the file being updated. String.
-        repo -- Name of repository or view to save the file. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-lookup-files/CreateFileV1
+
+        Keyword arguments
+        -----------------
+        file_name : str
+            Name to use for the uploaded file.
+        file : str
+            File to be uploaded.
+        name : str
+            Name used to identify the file.
+        description : str
+            File description.
+        id : str
+            Unique identifier of the file being updated.
+        repo : str
+            Name of repository or view to save the file.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         kwargs = params_to_keywords(["file", "name", "description", "id", "repo"],
                                     parameters,
@@ -112,21 +124,31 @@ class FoundryLookupFiles(ServiceClass):
                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a lookup file within a Foundry app.
 
-        Keyword arguments:
-        file_name -- Name to use for the uploaded file. String.
-        id -- Unique identifier of the file being updated. String.
-        description -- File description. String.
-        file -- File to be uploaded. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-lookup-files/UpdateFileV1
+
+        Keyword arguments
+        -----------------
+        file_name : str
+            Name to use for the uploaded file.
+        id : str
+            Unique identifier of the file being updated.
+        description : str
+            File description.
+        file : str
+            File to be uploaded.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         kwargs = params_to_keywords(["id", "description", "file"],
                                     parameters,

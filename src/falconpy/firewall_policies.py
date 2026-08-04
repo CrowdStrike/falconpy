@@ -66,24 +66,35 @@ class FirewallPolicies(ServiceClass):
 
         Returns a set of host details which match the filter criteria.
 
-        Keyword arguments:
-        id -- The ID of the Firewall Policy to search for members of
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/queryCombinedFirewallPolicyMembers
+
+        Keyword arguments
+        -----------------
+        id : str
+            The ID of the Firewall Policy to search for members of
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -102,28 +113,38 @@ class FirewallPolicies(ServiceClass):
 
         Returns a set of Firewall Policies which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax. (value.asc, value.desc)
-                Available values:
-                created_by              modified_timestamp
-                created_timestamp       name
-                enabled                 platform_name
-                modified_by             precedence
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/queryCombinedFirewallPolicies
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax. (value.asc, value.desc)
+            Available values:
+            created_by              modified_timestamp
+            created_timestamp       name
+            enabled                 platform_name
+            modified_by             precedence
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -141,15 +162,25 @@ class FirewallPolicies(ServiceClass):
                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform the specified action on the Firewall Policies specified in the request.
 
-        Keyword arguments:
-        action_name -- action to perform: 'add-host-group', 'disable', 'enable',
-                       'add-rule-group', 'remove-rule-group' or 'remove-host-group'.
-        action_parameters -- Action specific parameter options. List of dictionaries.
-                             {
-                                 "name": "string",
-                                 "value": "string"
-                             }
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/performFirewallPoliciesAction
+
+        Keyword arguments
+        -----------------
+        action_name : str
+            action to perform: 'add-host-group', 'disable', 'enable',
+            'add-rule-group', 'remove-rule-group' or 'remove-host-group'.
+        action_parameters : list
+            Action specific parameter options. List of dictionaries.
+            {
+                "name": "string",
+                "value": "string"
+            }
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "action_parameters": [
                         {
@@ -161,19 +192,20 @@ class FirewallPolicies(ServiceClass):
                         "string"
                     ]
                 }
-        group_id -- Host Group ID to apply the policy to. String.
-                    Overridden if action_parameters is specified.
-        ids -- Firewall policy ID(s) to perform actions against. String or list of strings.
-        parameters - full parameters payload, not required if action_name is provided as a keyword.
+        group_id : str
+            Host Group ID to apply the policy to. String.
+            Overridden if action_parameters is specified.
+        ids : str or list[str]
+            Firewall policy ID(s) to perform actions against.
+        parameters : dict
+            full parameters payload, not required if action_name is provided as a keyword.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/performFirewallPoliciesAction
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         _allowed_actions = ['add-host-group', 'disable', 'enable', 'remove-host-group',
                             'add-rule-group', 'remove-rule-group'
@@ -214,25 +246,33 @@ class FirewallPolicies(ServiceClass):
         will have the lowest. You must specify all non-Default Policies for a platform when
         updating precedence.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/setFirewallPoliciesPrecedence
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "ids": [
                         "string"
                     ],
                     "platform_name": "Windows"
                 }
-        ids -- Firewall policy ID(s) to perform actions against. String or list of strings.
-        platform_name -- OS platform name.
+        ids : str or list[str]
+            Firewall policy ID(s) to perform actions against.
+        platform_name : str
+            OS platform name.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/setFirewallPoliciesPrecedence
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -250,19 +290,28 @@ class FirewallPolicies(ServiceClass):
     def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a set of Firewall Policies by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of Firewall Policy IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/getFirewallPolicies
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Firewall Policy IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -280,8 +329,16 @@ class FirewallPolicies(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Firewall Policies by specifying details about the policy to create.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/createFirewallPolicies
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "resources": [
                         {
@@ -292,19 +349,21 @@ class FirewallPolicies(ServiceClass):
                         }
                     ]
                 }
-        clone_id -- ID of the Firewall Policy to clone. String.
-        description -- Firewall Policy description. String.
-        name -- Firewall Policy name. String.
-        platform_name -- Name of the operating system platform. String.
+        clone_id : str
+            ID of the Firewall Policy to clone.
+        description : str
+            Firewall Policy description.
+        name : str
+            Firewall Policy name.
+        platform_name : str
+            Name of the operating system platform.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/createFirewallPolicies
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = firewall_policy_payload(passed_keywords=kwargs)
@@ -322,19 +381,28 @@ class FirewallPolicies(ServiceClass):
     def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a set of Firewall Policies by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of Firewall Policy IDs to delete. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/deleteFirewallPolicies
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Firewall Policy IDs to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -348,29 +416,38 @@ class FirewallPolicies(ServiceClass):
     def update_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Firewall Policies by specifying the ID of the policy and details to update.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
-                {
-                "resources": [
-                    {
-                        "id": "string",
-                        "description": "string",
-                        "name": "string"
-                    }
-                ]
-            }
-        id -- ID of the Device Control Policy to update. String.
-        description -- Device Control Policy description. String.
-        name -- Device Control Policy name. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/updateFirewallPolicies
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
+                    {
+                    "resources": [
+                        {
+                            "id": "string",
+                            "description": "string",
+                            "name": "string"
+                        }
+                    ]
+                }
+        id : str
+            ID of the Device Control Policy to update.
+        description : str
+            Device Control Policy description.
+        name : str
+            Device Control Policy name.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = firewall_policy_payload(passed_keywords=kwargs)
@@ -388,24 +465,35 @@ class FirewallPolicies(ServiceClass):
 
         Returns a set of Agent IDs which match the filter criteria.
 
-        Keyword arguments:
-        id -- The ID of the Device Control Policy to search for members of
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/queryFirewallPolicyMembers
+
+        Keyword arguments
+        -----------------
+        id : str
+            The ID of the Device Control Policy to search for members of
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -421,27 +509,37 @@ class FirewallPolicies(ServiceClass):
 
         Returns a set of Firewall Policy IDs which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-                created_by                      modified_timestamp
-                created_timestamp               name
-                enabled                         platform_name
-                modified_by                     precedence
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/queryFirewallPolicies
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+            created_by                      modified_timestamp
+            created_timestamp               name
+            enabled                         platform_name
+            modified_by                     precedence
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

@@ -60,8 +60,16 @@ class CAOHunting(ServiceClass):
     def aggregate_guides(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate Hunting Guides.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cao-hunting/AggregateHuntingGuides
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -113,14 +121,14 @@ class CAOHunting(ServiceClass):
                     }
                 ]
 
+
+
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cao-hunting/AggregateHuntingGuides
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -139,8 +147,16 @@ class CAOHunting(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate intelligence queries.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cao-hunting/AggregateIntelligenceQueries
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -179,39 +195,46 @@ class CAOHunting(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        extended_bounds -- Extended bounds. Dictionary containing "min" and "max" as strings.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        extended_bounds : dict
+            Extended bounds. Dictionary containing "min" and "max" as strings.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cao-hunting/AggregateIntelligenceQueries
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -230,25 +253,34 @@ class CAOHunting(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create an Archive Export.
 
-        Keyword arguments:
-        archive_type -- The Archive Type. String. Can be one of 'zip' and 'gzip'. Defaults to 'zip'.
-        filter -- The FQL Filter used to limit results. String.
-        language -- The Query Language used. String.
-                    Accepted Values:
-                      cql           SPL
-                      snort         AI translated
-                      suricata      __all__
-                      yara
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cao-hunting/GetArchiveExport
+
+        Keyword arguments
+        -----------------
+        archive_type : str
+            The Archive Type. String. Can be one of 'zip' and 'gzip'. Defaults to 'zip'.
+        filter : str
+            The FQL Filter used to limit results.
+        language : str
+            The Query Language used. String.
+            Accepted Values:
+              cql           SPL
+              snort         AI translated
+              suricata      __all__
+              yara
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -262,19 +294,28 @@ class CAOHunting(ServiceClass):
     def get_guides(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a list of Hunting Guides.
 
-        Keyword arguments:
-        ids -- Hunting Guides IDs. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cao-hunting/GetHuntingGuides
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Hunting Guides IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -291,20 +332,28 @@ class CAOHunting(ServiceClass):
                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a list of Intelligence queries.
 
-        Keyword arguments:
-        ids -- Intelligence queries IDs. String or list of strings.
-        include_translated_content -- The AI translated language that should be returned if it exists.
-                                      Allowed values: SPL, __all__
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cao-hunting/GetIntelligenceQueries
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Intelligence queries IDs.
+        include_translated_content : str or list[str]
+            The AI translated language that should be returned if it exists.
+            Allowed values: SPL, __all__
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -318,22 +367,33 @@ class CAOHunting(ServiceClass):
     def search_queries(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search intelligence queries that match the provided conditions.
 
-        Keyword arguments:
-        filter -- FQL query specifying the filter parameters. String.
-        limit -- Number of IDs to return. Integer.
-        sort -- Order by fields. FQL formatted string.
-        offset -- Starting index of result set from which to return IDs. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        q -- Match phrase_prefix query criteria; included fields: _all (all filter string fields indexed).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cao-hunting/SearchIntelligenceQueries
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying the filter parameters.
+        limit : int
+            Number of IDs to return.
+        sort : str
+            Order by fields.
+        offset : str
+            Starting index of result set from which to return IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Match phrase_prefix query criteria; included fields: _all (all filter string fields indexed).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -347,22 +407,33 @@ class CAOHunting(ServiceClass):
     def search_guides(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for Hunting Guides that match the provided conditions.
 
-        Keyword arguments:
-        offset -- Starting index of result set from which to return IDs. Integer.
-        limit -- Number of IDs to return. Integer.
-        sort -- Order by fields. String.
-        filter -- FQL query specifying the filter parameters. String.
-        q -- Match phrase_prefix query criteria; included fields: _all (all filter string fields indexed). String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cao-hunting/SearchHuntingGuides
+
+        Keyword arguments
+        -----------------
+        offset : str
+            Starting index of result set from which to return IDs.
+        limit : int
+            Number of IDs to return.
+        sort : str
+            Order by fields.
+        filter : str
+            FQL query specifying the filter parameters.
+        q : str
+            Match phrase_prefix query criteria; included fields: _all (all filter string fields indexed)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

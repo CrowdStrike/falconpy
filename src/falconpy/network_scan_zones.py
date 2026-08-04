@@ -63,8 +63,16 @@ class NetworkScanZones(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return zone aggregations.
 
-        Keyword arguments:
-        body -- Full body payload as a list of dictionaries in JSON format. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/aggregate_zones
+
+        Keyword arguments
+        -----------------
+        body : list
+            Full body payload as a list of dictionaries in JSON format. Not required if using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -99,33 +107,49 @@ class NetworkScanZones(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- Array of date range specifications for date-based aggregations. List of dictionaries.
-        exclude -- Fields to exclude from the aggregation. String.
-        field -- The field to aggregate on. String.
-        filter -- FQL query to filter the data before aggregating. String.
-        from -- Starting index for the aggregation. Integer.
-        include -- Fields to include in the aggregation. String.
-        interval -- Time interval for date histogram aggregations (e.g., day, week, month). String.
-        max_doc_count -- Maximum document count for bucket inclusion. Integer.
-        min_doc_count -- Minimum document count for bucket inclusion. Integer.
-        missing -- The value to use for documents missing the aggregation field. String.
-        name -- The name of the aggregation query. String.
-        q -- Full-text search query string. String.
-        ranges -- Numeric range specifications for range aggregations. List of dictionaries.
-        size -- The maximum number of results to return per aggregate. Integer.
-        sort -- The field to sort aggregate results on. String.
-        sub_aggregates -- Nested sub-aggregation specifications. List of dictionaries.
-        time_zone -- The time zone to use for date aggregations. String.
-        type -- The type of aggregate query to perform. String.
+        date_ranges : list[dict]
+            Array of date range specifications for date-based aggregations.
+        exclude : str
+            Fields to exclude from the aggregation.
+        field : str
+            The field to aggregate on.
+        filter : str
+            FQL query to filter the data before aggregating.
+        from : int
+            Starting index for the aggregation.
+        include : str
+            Fields to include in the aggregation.
+        interval : str
+            Time interval for date histogram aggregations (e.g., day, week, month)
+        max_doc_count : int
+            Maximum document count for bucket inclusion.
+        min_doc_count : int
+            Minimum document count for bucket inclusion.
+        missing : str
+            The value to use for documents missing the aggregation field.
+        name : str
+            The name of the aggregation query.
+        q : str
+            Full-text search query.
+        ranges : list[dict]
+            Numeric range specifications for range aggregations.
+        size : int
+            The maximum number of results to return per aggregate.
+        sort : str
+            The field to sort aggregate results on.
+        sub_aggregates : list[dict]
+            Nested sub-aggregation specifications.
+        time_zone : str
+            The time zone to use for date aggregations.
+        type : str
+            The type of aggregate query to perform.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/aggregate_zones
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -144,23 +168,33 @@ class NetworkScanZones(ServiceClass):
                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get zones by filter.
 
-        Keyword arguments:
-        offset -- An offset used with the limit parameter to manage pagination of results. On your first request, don’t provide
-                  an offset. On subsequent requests, add previous offset with the previous limit to continue from that place in
-                  the results Integer.
-        limit -- The number of zones to return in this response (Min: 1, Max: 100, Default: 100). Integer.
-        sort -- Sort zones by their properties. A single sort field is allowed. String.
-        filter -- Search for zones by providing an FQL filter. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/combined_zones
+
+        Keyword arguments
+        -----------------
+        offset : int
+            An offset used with the limit parameter to manage pagination of results. On your first request, don’t provide
+            an offset. On subsequent requests, add previous offset with the previous limit to continue from that place in
+            the results.
+        limit : int
+            The number of zones to return in this response (Min: 1, Max: 100, Default: 100)
+        sort : str
+            Sort zones by their properties. A single sort field is allowed.
+        filter : str
+            Search for zones by providing an FQL filter.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -178,19 +212,28 @@ class NetworkScanZones(ServiceClass):
                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get zones by their IDs.
 
-        Keyword arguments:
-        ids -- IDs of zones to be retrieved (Min: 1, Max: 100). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/get_zones
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of zones to be retrieved (Min: 1, Max: 100)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -207,8 +250,16 @@ class NetworkScanZones(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create zones using provided specifications.
 
-        Keyword arguments:
-        body -- Full body payload as a list of dictionaries in JSON format. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/create_zones
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a list of dictionaries in JSON format. Not required if using other keywords.
                 [
                     {
                         "name": "string",
@@ -217,17 +268,17 @@ class NetworkScanZones(ServiceClass):
                         ]
                     }
                 ]
-        name -- The name given to the zone. Required. String.
-        scanners -- The set of scanner AIDs assigned to the zone. List of strings.
+        name : str (required)
+            The name given to the zone.
+        scanners : str or list[str]
+            The set of scanner AIDs assigned to the zone.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/create_zones
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [network_scan_zone_create_payload(passed_keywords=kwargs)]
@@ -246,8 +297,16 @@ class NetworkScanZones(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update zones using provided specifications.
 
-        Keyword arguments:
-        body -- Full body payload as a list of dictionaries in JSON format. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/update_zones
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a list of dictionaries in JSON format. Not required if using other keywords.
                 [
                     {
                         "id": "string",
@@ -260,19 +319,21 @@ class NetworkScanZones(ServiceClass):
                         ]
                     }
                 ]
-        id -- The unique identifier of the zone to update. Required. String.
-        name -- The name given to the zone. String.
-        scanners_to_add -- The scanner AIDs to be added to the zone. List of strings.
-        scanners_to_remove -- The scanner AIDs to be removed from the zone. List of strings.
+        id : str (required)
+            The unique identifier of the zone to update.
+        name : str
+            The name given to the zone.
+        scanners_to_add : str or list[str]
+            The scanner AIDs to be added to the zone.
+        scanners_to_remove : str or list[str]
+            The scanner AIDs to be removed from the zone.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/update_zones
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [network_scan_zone_update_payload(passed_keywords=kwargs)]
@@ -292,19 +353,28 @@ class NetworkScanZones(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete zones by their IDs.
 
-        Keyword arguments:
-        ids -- IDs of zones to be deleted (Min: 1, Max: 100). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/delete_zones
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of zones to be deleted (Min: 1, Max: 100)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -321,23 +391,33 @@ class NetworkScanZones(ServiceClass):
                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get zone IDs by filter.
 
-        Keyword arguments:
-        offset -- An offset used with the limit parameter to manage pagination of results. On your first request, don’t provide
-                  an offset. On subsequent requests, add previous offset with the previous limit to continue from that place in
-                  the results Integer.
-        limit -- The number of zone IDs to return in this response (Min: 1, Max: 100, Default: 100). Integer.
-        sort -- Sort zones by their properties. A single sort field is allowed. String.
-        filter -- Search for zones by providing an FQL filter. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/query_zones
+
+        Keyword arguments
+        -----------------
+        offset : int
+            An offset used with the limit parameter to manage pagination of results. On your first request, don’t provide
+            an offset. On subsequent requests, add previous offset with the previous limit to continue from that place in
+            the results.
+        limit : int
+            The number of zone IDs to return in this response (Min: 1, Max: 100, Default: 100)
+        sort : str
+            Sort zones by their properties. A single sort field is allowed.
+        filter : str
+            Search for zones by providing an FQL filter.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

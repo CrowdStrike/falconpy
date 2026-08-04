@@ -62,29 +62,40 @@ class CloudGoogleCloudRegistration(ServiceClass):
 
         Supports FQL filtering, sorting, and pagination.
 
-        Keyword arguments:
-        ids -- Google Cloud Registration IDs to filter by. String or list of strings.
-        filter -- FQL (Falcon Query Language) string for filtering results. String.
-                  Allowed filters:
-                    entity_type           entity_id             entity_name
-                    registration_id       registration_name     registration_scope
-                    parent_id             ioa_status            iom_status
-                    created               updated
-        sort -- Field and direction for sorting results (e.g., 'created|desc'). String.
-                Sorting applies across all entity types before grouping.
-        limit -- Maximum number of records to return (default: 100, max: 500). Integer.
-                 Limit applies across all entity types.
-        offset -- Starting index of result. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud-registration-gcp-get-entities
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Google Cloud Registration IDs to filter by.
+        filter : str
+            FQL (Falcon Query Language) string for filtering results. String.
+            Allowed filters:
+              entity_type           entity_id             entity_name
+              registration_id       registration_name     registration_scope
+              parent_id             ioa_status            iom_status
+              created               updated
+        sort : str
+            Field and direction for sorting results (e.g., 'created|desc'). String.
+            Sorting applies across all entity types before grouping.
+        limit : int
+            Maximum number of records to return (default: 100, max: 500). Integer.
+            Limit applies across all entity types.
+        offset : int
+            Starting index of result.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -102,19 +113,28 @@ class CloudGoogleCloudRegistration(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Trigger health check scan for GCP registrations.
 
-        Keyword arguments:
-        ids -- GCP Registration IDs. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud-registration-gcp-trigger-health-check
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            GCP Registration IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -128,19 +148,28 @@ class CloudGoogleCloudRegistration(ServiceClass):
     def get_registration(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a Google Cloud Registration.
 
-        Keyword arguments:
-        ids -- Google Cloud Registration ID. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud-registration-gcp-get-registration
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Google Cloud Registration ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -154,8 +183,16 @@ class CloudGoogleCloudRegistration(ServiceClass):
     def update_registration(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new Google Cloud Registration if one doesnt exist or update the existing Google Cloud Registration.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud-registration-gcp-put-registration
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -196,26 +233,35 @@ class CloudGoogleCloudRegistration(ServiceClass):
                         }
                     ]
                 }
-        deployment_method -- The method of deployment. String.
-        entity_id -- The ID of the entity. String.
-        excluded_project_patterns -- Project patterns that should be excluded. List of Strings.
-        falcon_client_key_id -- API client key ID. String.
-        falcon_client_key_type -- API client key type. String.
-        infra_project_id -- Infrastructure project ID. String.
-        labels -- Prop labels. Dictionary.
-        products -- Products. List of dictionaries.
-        registration_name -- Registration name. String.
-        registration_scope -- Registration scope. String.
-        resource_name_prefix -- Resource name prefix. String.
+        deployment_method : str
+            The method of deployment.
+        entity_id : str or list[str]
+            The ID of the entity.
+        excluded_project_patterns : str or list[str]
+            Project patterns that should be excluded.
+        falcon_client_key_id : str
+            API client key ID.
+        falcon_client_key_type : str
+            API client key type.
+        infra_project_id : str
+            Infrastructure project ID.
+        labels : dict
+            Prop labels.
+        products : list[dict]
+            Products.
+        registration_name : str
+            Registration name.
+        registration_scope : str
+            Registration scope.
+        resource_name_prefix : str
+            Resource name prefix.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PUT
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud-registration-gcp-put-registration
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_google_registration_create_payload(passed_keywords=kwargs)
@@ -234,8 +280,16 @@ class CloudGoogleCloudRegistration(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:  # noqa: E501, pylint: disable=C0301
         """Create a Google Cloud Registration.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud-registration-gcp-create-registration
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -276,26 +330,35 @@ class CloudGoogleCloudRegistration(ServiceClass):
                         }
                     ]
                 }
-        deployment_method -- The method of deployment. String.
-        entity_id -- The ID of the entity. String.
-        excluded_project_patterns -- Project patterns that should be excluded. List of Strings.
-        falcon_client_key_id -- API client key ID. String.
-        falcon_client_key_type -- API client key type. String.
-        infra_project_id -- Infrastructure project ID. String.
-        labels -- Prop labels. Dictionary.
-        products -- Products. List of dictionaries.
-        registration_name -- Registration name. String.
-        registration_scope -- Registration scope. String.
-        resource_name_prefix -- Resource name prefix. String.
+        deployment_method : str
+            The method of deployment.
+        entity_id : str or list[str]
+            The ID of the entity.
+        excluded_project_patterns : str or list[str]
+            Project patterns that should be excluded.
+        falcon_client_key_id : str
+            API client key ID.
+        falcon_client_key_type : str
+            API client key type.
+        infra_project_id : str
+            Infrastructure project ID.
+        labels : dict
+            Prop labels.
+        products : list[dict]
+            Products.
+        registration_name : str
+            Registration name.
+        registration_scope : str
+            Registration scope.
+        resource_name_prefix : str
+            Resource name prefix.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud-registration-gcp-create-registration
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_google_registration_create_payload(passed_keywords=kwargs)
@@ -315,9 +378,18 @@ class CloudGoogleCloudRegistration(ServiceClass):
                                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a Google Cloud Registration.
 
-        Keyword arguments:
-        ids -- Google Cloud Registration ID. String.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud-registration-gcp-update-registration
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Google Cloud Registration ID.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -358,27 +430,37 @@ class CloudGoogleCloudRegistration(ServiceClass):
                         }
                     ]
                 }
-        deployment_method -- The method of deployment. String.
-        entity_id -- The ID of the entity. String.
-        excluded_project_patterns -- Project patterns that should be excluded. List of Strings.
-        falcon_client_key_id -- API client key ID. String.
-        falcon_client_key_type -- API client key type. String.
-        infra_project_id -- Infrastructure project ID. String.
-        labels -- Prop labels. Dictionary.
-        products -- Products. List of dictionaries.
-        registration_name -- Registration name. String.
-        registration_scope -- Registration scope. String.
-        resource_name_prefix -- Resource name prefix. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        deployment_method : str
+            The method of deployment.
+        entity_id : str or list[str]
+            The ID of the entity.
+        excluded_project_patterns : str or list[str]
+            Project patterns that should be excluded.
+        falcon_client_key_id : str
+            API client key ID.
+        falcon_client_key_type : str
+            API client key type.
+        infra_project_id : str
+            Infrastructure project ID.
+        labels : dict
+            Prop labels.
+        products : list[dict]
+            Products.
+        registration_name : str
+            Registration name.
+        registration_scope : str
+            Registration scope.
+        resource_name_prefix : str
+            Resource name prefix.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud-registration-gcp-update-registration
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_google_registration_create_payload(passed_keywords=kwargs)
@@ -396,18 +478,24 @@ class CloudGoogleCloudRegistration(ServiceClass):
     def delete_registration(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a Google Cloud Registration and return the deleted registration in the response body.
 
-        Keyword arguments:
-        ids -- Google Cloud Registration ID. String
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
 
+        Keyword arguments
+        -----------------
+        ids : str
+            Google Cloud Registration ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -424,8 +512,16 @@ class CloudGoogleCloudRegistration(ServiceClass):
                                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Generate Google Cloud Terraform deployment scripts (zip files).
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud_registration_gcp_post_terraform_script
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -450,16 +546,15 @@ class CloudGoogleCloudRegistration(ServiceClass):
                         }
                     ]
                 }
-        resources -- The resources value. List.
+        resources : list
+            The resources value.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud_registration_gcp_post_terraform_script
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_registration_gcp_post_terraform_script_payload(passed_keywords=kwargs)

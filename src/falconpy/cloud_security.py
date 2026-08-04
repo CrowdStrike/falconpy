@@ -60,8 +60,16 @@ class CloudSecurity(ServiceClass):
     def combined_cloud_risks(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get cloud risks with full details based on filters and sort criteria.
 
-        Keyword arguments:
-        filter -- FQL string to filter results in Falcon Query Language (FQL). String.
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/%2Fcloud-security-risks/combined-cloud-risks
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL string to filter results in Falcon Query Language (FQL). String.
             Supported fields:
                     account_id                account_name
                     adversary                 asset_gcrn
@@ -77,27 +85,28 @@ class CloudSecurity(ServiceClass):
                     status                    suppressed_by
                     suppressed_reason         tags
                     threat_actors
-
-        sort -- The field to sort on. Use |asc or |desc suffix to specify sort direction. String.
+        sort : str
+            The field to sort on. Use |asc or |desc suffix to specify sort direction. String.
             Supported fields:
                 account_id          account_name            asset_id
                 asset_name          asset_region            asset_type
                 cloud_provider      first_seen              last_seen
                 resolved_at         rule_name               service_category
                 severity            status
-        limit -- The maximum number of items to return. When not specified or 0, 500 is used.
-        When larger than 1000, 1000 is used. Integer.
-        offset -- Offset returned risks. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        limit : int
+            The maximum number of items to return. When not specified or 0, 500 is used.
+            When larger than 1000, 1000 is used.
+        offset : int
+            Offset returned risks.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: GET
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/%2Fcloud-security-risks/combined-cloud-risks
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -111,36 +120,44 @@ class CloudSecurity(ServiceClass):
     def list_cloud_groups(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query Cloud Groups and returns entities.
 
-        Keyword arguments:
-        filter -- A valid FQL filter. String. Supports filtering groups by:
-                  Group properties:
-                    name            description
-                    created_at      updated_at
-
-                  Selector properties:
-                    cloud_provider      account_id
-                    region              cloud_provider_tag
-                    image_registry      image_repository
-                    image_tag
-                    selector.kubernetes_resource.cluster
-                    selector.kubernetes_resource.namespace
-
-                  Group tags:
-                    business_unit       business_impact
-                    environment
-        sort -- A valid sort string. String.
-        offset -- The starting position of the list operation. Integer.
-        limit -- The maximum number of cloud groups to retrieve. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security/ListCloudGroupsExternal
+
+        Keyword arguments
+        -----------------
+        filter : str
+            A valid FQL filter. String. Supports filtering groups by:
+            Group properties:
+              name            description
+              created_at      updated_at
+            Selector properties:
+              cloud_provider      account_id
+              region              cloud_provider_tag
+              image_registry      image_repository
+              image_tag
+              selector.kubernetes_resource.cluster
+              selector.kubernetes_resource.namespace
+            Group tags:
+              business_unit       business_impact
+              environment
+        sort : str
+            A valid sort.
+        offset : str
+            The starting position of the list operation.
+        limit : str
+            The maximum number of cloud groups to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -158,19 +175,28 @@ class CloudSecurity(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """List Cloud Groups By ID.
 
-        Keyword arguments:
-        ids -- Cloud Groups UUIDs. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security/ListCloudGroupsByIDExternal
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Cloud Groups UUIDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -187,65 +213,71 @@ class CloudSecurity(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a Cloud Group. The created_by field will be set to the API client ID.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
-             {
-                    "business_impact": "high",
-                    "business_unit": "string",
-                    "description": "string",
-                    "environment": "dev",
-                    "name": "string",
-                    "owners": [
-                        "string"
-                    ],
-                    "selectors": {
-                        "cloud_resources": [
-                        {
-                            "account_ids": [
-                            "string"
-                            ],
-                            "cloud_provider": "aws",
-                            "filters": {
-                                "region": [
-                                    "string"
-                                ],
-                                "tags": [
-                                    "string"
-                                ]
-                            }
-                        }
-                        ],
-                        "images": [
-                        {
-                            "filters": {
-                                "repository": [
-                                    "string"
-                                ],
-                                "tag": [
-                                    "string"
-                                ]
-                            },
-                            "registry": "string"
-                        }
-                        ]
-                    }
-                }
-        business_impact -- String.
-        business_unit -- String.
-        description -- String.
-        environment -- String.
-        name -- String.
-        owners -- List of strings.
-        selectors -- Dictionary.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security/CreateCloudGroupExternal
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                       "business_impact": "high",
+                       "business_unit": "string",
+                       "description": "string",
+                       "environment": "dev",
+                       "name": "string",
+                       "owners": [
+                           "string"
+                       ],
+                       "selectors": {
+                           "cloud_resources": [
+                           {
+                               "account_ids": [
+                               "string"
+                               ],
+                               "cloud_provider": "aws",
+                               "filters": {
+                                   "region": [
+                                       "string"
+                                   ],
+                                   "tags": [
+                                       "string"
+                                   ]
+                               }
+                           }
+                           ],
+                           "images": [
+                           {
+                               "filters": {
+                                   "repository": [
+                                       "string"
+                                   ],
+                                   "tag": [
+                                       "string"
+                                   ]
+                               },
+                               "registry": "string"
+                           }
+                           ]
+                       }
+                   }
+        business_impact : str
+        business_unit : str
+        description : str
+        environment : str
+        name : str
+        owners : str or list[str]
+        selectors : dict
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_security_create_group_payload(passed_keywords=kwargs)
@@ -264,65 +296,71 @@ class CloudSecurity(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Cloud Group.
 
-        Keyword arguments:
-        group -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
-                {
-                    "business_impact": "high",
-                    "business_unit": "string",
-                    "description": "string",
-                    "environment": "dev",
-                    "name": "string",
-                    "owners": [
-                        "string"
-                    ],
-                    "selectors": {
-                        "cloud_resources": [
-                        {
-                            "account_ids": [
-                            "string"
-                            ],
-                            "cloud_provider": "aws",
-                            "filters": {
-                                "region": [
-                                    "string"
-                                ],
-                                "tags": [
-                                    "string"
-                                ]
-                            }
-                        }
-                        ],
-                        "images": [
-                        {
-                            "filters": {
-                                "repository": [
-                                    "string"
-                                ],
-                                "tag": [
-                                    "string"
-                                ]
-                            },
-                            "registry": "string"
-                        }
-                        ]
-                    }
-                }
-        business_impact -- String.
-        business_unit -- String.
-        description -- String.
-        environment -- String.
-        name -- String.
-        owners -- List of strings.
-        selectors -- Dictionary.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security/UpdateCloudGroupExternal
+
+        Keyword arguments
+        -----------------
+        group : str
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+            {
+                "business_impact": "high",
+                "business_unit": "string",
+                "description": "string",
+                "environment": "dev",
+                "name": "string",
+                "owners": [
+                    "string"
+                ],
+                "selectors": {
+                    "cloud_resources": [
+                    {
+                        "account_ids": [
+                        "string"
+                        ],
+                        "cloud_provider": "aws",
+                        "filters": {
+                            "region": [
+                                "string"
+                            ],
+                            "tags": [
+                                "string"
+                            ]
+                        }
+                    }
+                    ],
+                    "images": [
+                    {
+                        "filters": {
+                            "repository": [
+                                "string"
+                            ],
+                            "tag": [
+                                "string"
+                            ]
+                        },
+                        "registry": "string"
+                    }
+                    ]
+                }
+            }
+        business_impact : str
+        business_unit : str
+        description : str
+        environment : str
+        name : str
+        owners : str or list[str]
+        selectors : dict
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not group:
             group = cloud_security_create_group_payload(passed_keywords=kwargs)
@@ -342,19 +380,28 @@ class CloudSecurity(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete Cloud Groups in batch.
 
-        Keyword arguments:
-        ids -- Cloud Groups UUIDs to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security/DeleteCloudGroupsExternal
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Cloud Groups UUIDs to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -368,36 +415,44 @@ class CloudSecurity(ServiceClass):
     def list_group_ids(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query Cloud Groups and returns IDs.
 
-        Keyword arguments:
-        filter -- A valid FQL filter. String. Supports filtering groups by:
-                  Group properties:
-                    name            description
-                    created_at      updated_at
-
-                  Selector properties:
-                    cloud_provider      account_id
-                    region              cloud_provider_tag
-                    image_registry      image_repository
-                    image_tag
-                    selector.kubernetes_resource.cluster
-                    selector.kubernetes_resource.namespace
-
-                  Group tags:
-                    business_unit       business_impact
-                    environment
-        sort -- A valid sort string. String.
-        offset -- The starting position of the list operation. Integer.
-        limit -- The maximum number of cloud groups to retrieve. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security/ListCloudGroupIDsExternal
+
+        Keyword arguments
+        -----------------
+        filter : str
+            A valid FQL filter. String. Supports filtering groups by:
+            Group properties:
+              name            description
+              created_at      updated_at
+            Selector properties:
+              cloud_provider      account_id
+              region              cloud_provider_tag
+              image_registry      image_repository
+              image_tag
+              selector.kubernetes_resource.cluster
+              selector.kubernetes_resource.namespace
+            Group tags:
+              business_unit       business_impact
+              environment
+        sort : str
+            A valid sort.
+        offset : str
+            The starting position of the list operation.
+        limit : str
+            The maximum number of cloud groups to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

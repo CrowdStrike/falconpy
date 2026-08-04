@@ -43,7 +43,7 @@ class ExpandedResult:
     """Callable subsclass to handle parsing of expanded result client output.
 
     DEPRECATED
-    ---
+    ----------
     This class is deprecated and maintained for backwards compatibility purposes only.
 
     Please move all code over to use Result.tupled.

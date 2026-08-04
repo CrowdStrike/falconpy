@@ -61,33 +61,40 @@ class SensorUsage(ServiceClass):
 
         Each data point represents the average of how many unique AIDs were seen per week for the previous 28 days.
 
-        Keyword arguments:
-        filter -- The FQL search filter.
-                  Allowed fields:
-                    event_date - A specified date that will be final date of the results returned.
-                                 Specified date cannot be after the default.
-                                 Format: '2024-06-11'
-                                 Default: the current date, minus 2 days, in UTC
-                    period - An integer surrounded by single quotes representing the number of days to return.
-                             Format: '30'
-                             Default: '28'
-                             Minimum: '1'
-                             Maximum: '395'
-                    selected_cids - A comma delimited list of CIDs to return data for.
-                                    Caller must be a parent CID or have special access enabled.
-                                    Format: 'cid_1,cid_2,cid_3'
-                                    Default: for parent CIDs the default is the parent and all children,
-                                             otherwise the current CID
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-usage-api/GetSensorUsageWeekly
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The FQL search filter.
+            Allowed fields:
+              event_date - A specified date that will be final date of the results returned.
+                           Specified date cannot be after the default.
+                           Format: '2024-06-11'
+                           Default: the current date, minus 2 days, in UTC
+              period - An integer surrounded by single quotes representing the number of days to return.
+                       Format: '30'
+                       Default: '28'
+                       Minimum: '1'
+                       Maximum: '395'
+              selected_cids - A comma delimited list of CIDs to return data for.
+                              Caller must be a parent CID or have special access enabled.
+                              Format: 'cid_1,cid_2,cid_3'
+                              Default: for parent CIDs the default is the parent and all children,
+                                       otherwise the current CID
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -103,34 +110,41 @@ class SensorUsage(ServiceClass):
 
         Each data point represents the average of how many unique AIDs were seen per week for the previous 28 days.
 
-        Keyword arguments:
-        filter -- The FQL search filter.
-                  Allowed fields:
-                    event_date - A specified date that will be final date of the results returned.
-                                 Specified date cannot be after the default.
-                                 Format: '2024-06-11'
-                                 Default: the current date, minus 2 days, in UTC
-                    period - An integer surrounded by single quotes representing the number of days to return.
-                             Format: '30'
-                             Default: '28'
-                             Minimum: '1'
-                             Maximum: '395'
-                    selected_cids - A comma delimited list of CIDs to return data for.
-                                    Caller must be a parent CID or have special access enabled.
-                                    Format: 'cid_1,cid_2,cid_3'
-                                    Default: for parent CIDs the default is the parent and all children,
-                                             otherwise the current CID
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-usage-api/GetSensorUsageWeekly
         Endpoint is not in Swagger file, but allows you to pull `hourly` usage which is used to determine cloud usage
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The FQL search filter.
+            Allowed fields:
+              event_date - A specified date that will be final date of the results returned.
+                           Specified date cannot be after the default.
+                           Format: '2024-06-11'
+                           Default: the current date, minus 2 days, in UTC
+              period - An integer surrounded by single quotes representing the number of days to return.
+                       Format: '30'
+                       Default: '28'
+                       Minimum: '1'
+                       Maximum: '395'
+              selected_cids - A comma delimited list of CIDs to return data for.
+                              Caller must be a parent CID or have special access enabled.
+                              Format: 'cid_1,cid_2,cid_3'
+                              Default: for parent CIDs the default is the parent and all children,
+                                       otherwise the current CID
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

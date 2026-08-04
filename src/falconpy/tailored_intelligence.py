@@ -60,19 +60,27 @@ class TailoredIntelligence(ServiceClass):
     def get_event_body(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the event body for the provided event ID.
 
-        Keyword arguments:
-        id -- Event ID to retrieve the body for. String. Required.
-        parameters - full parameters payload, not required if 'id' keyword is provided.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: binary object containing the body content.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/tailored-intelligence/GetEventsBody
+
+        Keyword arguments
+        -----------------
+        id : str (required)
+            Event ID to retrieve the body for.
+        parameters : dict
+            full parameters payload, not required if 'id' keyword is provided.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        binary object containing the body content.
         """
         return process_service_request(
             calling_object=self,
@@ -86,19 +94,28 @@ class TailoredIntelligence(ServiceClass):
     def get_event_entities(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get events entities for specified IDs.
 
-        Keyword arguments:
-        ids -- Event ID to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if 'id' keyword is provided.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/tailored-intelligence/GetEventsEntities
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Event ID to retrieve.
+        parameters : dict
+            full parameters payload, not required if 'id' keyword is provided.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         body = handle_single_argument(args, body, "ids")
 
@@ -122,24 +139,35 @@ class TailoredIntelligence(ServiceClass):
     def query_events(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for event IDs that match the provided filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Providing just a wildcard will return all results.
-        limit -- The maximum number of records to return. [integer]
-        offset -- Starting index of overall result set from which to return IDs. String.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Match phrase_prefix query criteria; included fields: _all (all filter string fields indexed)
-        sort -- The property to sort by. FQL syntax (e.g. updated_date|desc).
-                Available fields: created_date, source_type, updated_date
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/tailored-intelligence/QueryEvents
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Providing just a wildcard will return all results.
+        limit : int
+            The maximum number of records to return.
+        offset : str
+            Starting index of overall result set from which to return IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Match phrase_prefix query criteria; included fields: _all (all filter string fields indexed)
+        sort : str
+            The property to sort by. FQL syntax (e.g. updated_date|desc).
+            Available fields: created_date, source_type, updated_date
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -153,19 +181,28 @@ class TailoredIntelligence(ServiceClass):
     def get_rule_entities(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get rule entities for specified IDs.
 
-        Keyword arguments:
-        ids -- Rule ID to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if 'id' keyword is provided.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/tailored-intelligence/GetRulesEntities
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Rule ID to retrieve.
+        parameters : dict
+            full parameters payload, not required if 'id' keyword is provided.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         body = handle_single_argument(args, body, "ids")
 
@@ -189,28 +226,39 @@ class TailoredIntelligence(ServiceClass):
     def query_rules(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for rule IDs that match the provided filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Providing just a wildcard will return all results.
-        limit -- The maximum number of records to return. [integer]
-        offset -- Starting index of overall result set from which to return IDs. String.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Match phrase_prefix query criteria; included fields: _all (all filter string fields indexed)
-        sort -- The property to sort by. FQL syntax (e.g. updated_date|desc).
-                Available fields
-                created_date    source_type
-                customer_id     updated_date
-                name            value
-                rule_type
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/tailored-intelligence/QueryRules
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Providing just a wildcard will return all results.
+        limit : int
+            The maximum number of records to return.
+        offset : str
+            Starting index of overall result set from which to return IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Match phrase_prefix query criteria; included fields: _all (all filter string fields indexed)
+        sort : str
+            The property to sort by. FQL syntax (e.g. updated_date|desc).
+            Available fields
+            created_date    source_type
+            customer_id     updated_date
+            name            value
+            rule_type
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

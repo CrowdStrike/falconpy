@@ -62,19 +62,27 @@ class KnowledgeBaseFiles(ServiceClass):
                                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download knowledge base file entities for the provided id.
 
-        Keyword arguments:
-        knowledge_base_id -- ID of the knowledge base. String.
-        id -- ID of entities to retrieve. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-base-files/EntitiesKnowledgeBaseFilesDownloadV1
+
+        Keyword arguments
+        -----------------
+        knowledge_base_id : str
+            ID of the knowledge base.
+        id : str
+            ID of entities to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -91,20 +99,29 @@ class KnowledgeBaseFiles(ServiceClass):
                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve knowledge base file entities for the provided id.
 
-        Keyword arguments:
-        knowledge_base_id -- ID of the knowledge base. String.
-        ids -- IDs of entities to retrieve. List.
-        include_deleted -- Include deleted knowledge base files in the result. Defaults to false. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-base-files/EntitiesKnowledgeBaseFilesV1
+
+        Keyword arguments
+        -----------------
+        knowledge_base_id : str
+            ID of the knowledge base.
+        ids : str or list[str]
+            IDs of entities to retrieve.
+        include_deleted : bool
+            Include deleted knowledge base files in the result. Defaults to false.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -121,21 +138,31 @@ class KnowledgeBaseFiles(ServiceClass):
                                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an existing file in a knowledge base.
 
-        Keyword arguments:
-        file_name -- Name to use for the uploaded file. String.
-        id -- ID of the document to update. String.
-        file -- New file content to replace the existing document. String.
-        file_description -- New description for the document. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PUT
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-base-files/EntitiesKnowledgeBaseFilesUpdateV1
+
+        Keyword arguments
+        -----------------
+        file_name : str
+            Name to use for the uploaded file.
+        id : str
+            ID of the document to update.
+        file : str
+            New file content to replace the existing document.
+        file_description : str
+            New description for the document.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         kwargs = params_to_keywords(["id", "file", "file_description"],
                                     parameters,
@@ -165,21 +192,31 @@ class KnowledgeBaseFiles(ServiceClass):
                                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload a file to a knowledge base.
 
-        Keyword arguments:
-        file_name -- Name to use for the uploaded file. String.
-        knowledge_base_id -- ID of the knowledge base. String.
-        file -- File to be uploaded. String.
-        file_description -- Description for the uploaded file. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-base-files/EntitiesKnowledgeBaseFilesCreateV1
+
+        Keyword arguments
+        -----------------
+        file_name : str
+            Name to use for the uploaded file.
+        knowledge_base_id : str
+            ID of the knowledge base.
+        file : str
+            File to be uploaded.
+        file_description : str
+            Description for the uploaded file.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         kwargs = params_to_keywords(["knowledge_base_id", "file", "file_description"],
                                     parameters,
@@ -209,19 +246,27 @@ class KnowledgeBaseFiles(ServiceClass):
                                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete document from knowledge base.
 
-        Keyword arguments:
-        knowledge_base_id -- ID of the knowledge base. String.
-        id -- ID of the document to delete. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-base-files/EntitiesKnowledgeBaseFilesDeleteV1
+
+        Keyword arguments
+        -----------------
+        knowledge_base_id : str
+            ID of the knowledge base.
+        id : str
+            ID of the document to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -238,22 +283,33 @@ class KnowledgeBaseFiles(ServiceClass):
                                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query knowledge base files based on the provided filters.
 
-        Keyword arguments:
-        knowledge_base_id -- ID of the knowledge base. String.
-        offset -- Starting index of overall result set from which to return ids. Integer.
-        limit -- Number of IDs to return. Offset + limit should NOT be above 10K. Integer.
-        filter -- FQL query specifying the filter parameters. String.
-        include_deleted -- Include deleted knowledge base files in the result. Defaults to false. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-base-files/QueriesKnowledgeBaseFilesV1
+
+        Keyword arguments
+        -----------------
+        knowledge_base_id : str
+            ID of the knowledge base.
+        offset : int
+            Starting index of overall result set from which to return ids.
+        limit : int
+            Number of IDs to return. Offset + limit should NOT be above 10K.
+        filter : str
+            FQL query specifying the filter parameters.
+        include_deleted : bool
+            Include deleted knowledge base files in the result. Defaults to false.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

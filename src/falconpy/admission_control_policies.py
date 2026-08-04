@@ -64,19 +64,28 @@ class AdmissionControlPolicies(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get admission control policies.
 
-        Keyword arguments:
-        ids -- The list of policies to return (maximum 100 IDs allowed). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-get-policies
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The list of policies to return (maximum 100 IDs allowed)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -90,23 +99,31 @@ class AdmissionControlPolicies(ServiceClass):
     def create_policy(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create an admission control policy.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-create-policy
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "description": "string",
                     "name": "string"
                 }
-        description -- Description for the new policy. String.
-        name -- Name of the new policy. String.
+        description : str
+            Description for the new policy.
+        name : str
+            Name of the new policy.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-create-policy
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = {}
@@ -131,27 +148,38 @@ class AdmissionControlPolicies(ServiceClass):
                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an admission control policy.
 
-        Keyword arguments:
-        ids -- The id of the admission control policy to update. String.
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-update-policy
+
+        Keyword arguments
+        -----------------
+        ids : str
+            The id of the admission control policy to update.
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "description": "string",
                     "is_enabled": true,
                     "name": "string"
                 }
-        description -- Description for the policy. String.
-        is_enabled -- Flag indicating if the policy is enabled. Boolean.
-        name -- Name of the policy. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        description : str
+            Description for the policy.
+        is_enabled : bool
+            Flag indicating if the policy is enabled.
+        name : str
+            Name of the policy.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-update-policy
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = {}
@@ -178,19 +206,28 @@ class AdmissionControlPolicies(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an admission control policy.
 
-        Keyword arguments:
-        ids -- The ids of the policies to delete (maximum 100 IDs allowed). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-delete-policies
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The ids of the policies to delete (maximum 100 IDs allowed)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -204,25 +241,33 @@ class AdmissionControlPolicies(ServiceClass):
     def add_host_groups(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Add one or more host groups to an admission control policy.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-add-host-groups
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "host_groups": [
                         "string"
                     ],
                     "id": "string"
                 }
-        host_groups -- List of host group IDs to add to the policy. String or list of strings.
-        id -- The ID of the admission control policy to modify. String.
+        host_groups : str or list[str]
+            List of host group IDs to add to the policy.
+        id : str
+            The ID of the admission control policy to modify.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-add-host-groups
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = {}
@@ -245,19 +290,27 @@ class AdmissionControlPolicies(ServiceClass):
     def remove_host_groups(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Remove one or more host groups from an admission control policy.
 
-        Keyword arguments:
-        policy_id -- The id of the policy to modify. String.
-        host_group_ids -- The ids of the host groups to remove (maximum 100 IDs allowed). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-remove-host-groups
+
+        Keyword arguments
+        -----------------
+        policy_id : str
+            The id of the policy to modify.
+        host_group_ids : str or list[str]
+            The ids of the host groups to remove (maximum 100 IDs allowed)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -271,24 +324,33 @@ class AdmissionControlPolicies(ServiceClass):
     def update_policy_precedence(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update admission control policy precedence.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-update-policy-precedence
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "id": "string",
                     "precedence": 0
                 }
-        id -- The ID of the admission control policy. String.
-        precedence -- Policy precedence value. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        id : str
+            The ID of the admission control policy.
+        precedence : int
+            Policy precedence value.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-update-policy-precedence
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = {}
@@ -311,8 +373,16 @@ class AdmissionControlPolicies(ServiceClass):
 
         The requested custom rules are also added to all other unspecified rule groups in the policy with action 'Disabled'.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-add-rule-group-custom-rule
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "id": "string",
                     "rule_groups": [
@@ -327,17 +397,17 @@ class AdmissionControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        id -- The ID of the admission control policy. String.
-        rule_groups -- List of rule group definitions containing custom rules to add. List of dictionaries.
+        id : str
+            The ID of the admission control policy.
+        rule_groups : list[dict]
+            List of rule group definitions containing custom rules to add.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-add-rule-group-custom-rule
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = acp_custom_rules_policy_payload(passed_keywords=kwargs)
@@ -356,19 +426,27 @@ class AdmissionControlPolicies(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete one or more custom Rego rules from all rule groups in an admission control policy.
 
-        Keyword arguments:
-        policy_id -- The id of the policy to modify. String.
-        custom_rule_ids -- The ids of the custom Rego rules to delete (maximum 100 IDs allowed). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-remove-rule-group-custom-rule
+
+        Keyword arguments
+        -----------------
+        policy_id : str
+            The id of the policy to modify.
+        custom_rule_ids : str or list[str]
+            The ids of the custom Rego rules to delete (maximum 100 IDs allowed)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -382,8 +460,16 @@ class AdmissionControlPolicies(ServiceClass):
     def set_rule_group_precedence(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Change precedence of rule groups within an admission control policy.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-set-rule-group-precedence
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "id": "string",
                     "rule_groups": [
@@ -392,17 +478,17 @@ class AdmissionControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        id -- The ID of the admission control policy. String.
-        rule_groups -- List of rule group definitions specifying the new precedence order. List of dictionaries.
+        id : str
+            The ID of the admission control policy.
+        rule_groups : list[dict]
+            List of rule group definitions specifying the new precedence order.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PUT
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-set-rule-group-precedence
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = acp_custom_rules_policy_payload(passed_keywords=kwargs)
@@ -421,8 +507,16 @@ class AdmissionControlPolicies(ServiceClass):
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Replace labels and/or namespaces of a rule group within an admission control policy.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-replace-rule-group-selectors
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "id": "string",
                     "rule_groups": [
@@ -443,17 +537,17 @@ class AdmissionControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        id -- The ID of the admission control policy. String.
-        rule_groups -- List of rule group definitions with replacement labels and namespaces. List of dictionaries.
+        id : str
+            The ID of the admission control policy.
+        rule_groups : list[dict]
+            List of rule group definitions with replacement labels and namespaces.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PUT
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-replace-rule-group-selectors
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = acp_custom_rules_policy_payload(passed_keywords=kwargs)
@@ -472,8 +566,16 @@ class AdmissionControlPolicies(ServiceClass):
         The list of new rule groups will be created with the last rule group having highest precedence,
         second to last with second highest precedence, and so on.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-create-rule-groups
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "id": "string",
                     "rule_groups": [
@@ -483,17 +585,17 @@ class AdmissionControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        id -- The ID of the admission control policy. String.
-        rule_groups -- List of rule group definitions to create. List of dictionaries.
+        id : str
+            The ID of the admission control policy.
+        rule_groups : list[dict]
+            List of rule group definitions to create.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-create-rule-groups
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = acp_custom_rules_policy_payload(passed_keywords=kwargs)
@@ -509,8 +611,16 @@ class AdmissionControlPolicies(ServiceClass):
     def update_rule_groups(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a rule group.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-update-rule-groups
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "id": "string",
                     "rule_groups": [
@@ -540,17 +650,17 @@ class AdmissionControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        id -- The ID of the admission control policy. String.
-        rule_groups -- List of rule group definitions to update. List of dictionaries.
+        id : str
+            The ID of the admission control policy.
+        rule_groups : list[dict]
+            List of rule group definitions to update.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-update-rule-groups
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = acp_custom_rules_policy_payload(passed_keywords=kwargs)
@@ -566,19 +676,27 @@ class AdmissionControlPolicies(ServiceClass):
     def delete_rule_groups(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete rule groups.
 
-        Keyword arguments:
-        policy_id -- The id of the policy to modify. String.
-        rule_group_ids -- The ids of the rule groups to delete (maximum 100 IDs allowed). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-delete-rule-groups
+
+        Keyword arguments
+        -----------------
+        policy_id : str
+            The id of the policy to modify.
+        rule_group_ids : str or list[str]
+            The ids of the rule groups to delete (maximum 100 IDs allowed)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -592,28 +710,38 @@ class AdmissionControlPolicies(ServiceClass):
     def query_policies(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search admission control policies.
 
-        Keyword arguments:
-        filter -- FQL filter. String.
-                  Allowed properties:
-                    precedence          created_timestamp
-                    modified_timestamp  name
-                    description
-        limit -- The maximum number of resources to return. The maximum allowed is 500. Integer.
-        offset -- The number of results to skip before starting to return results. Integer.
-        sort -- Field to sort on.
-                Sortable fields:
-                    precedence          created_timestamp
-                    modified_timestamp
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-query-policies
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter. String.
+            Allowed properties:
+              precedence          created_timestamp
+              modified_timestamp  name
+              description
+        limit : int
+            The maximum number of resources to return. The maximum allowed is 500.
+        offset : int
+            The number of results to skip before starting to return results.
+        sort : str
+            Field to sort on.
+            Sortable fields:
+                precedence          created_timestamp
+                modified_timestamp
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

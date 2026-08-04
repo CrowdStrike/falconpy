@@ -60,24 +60,33 @@ class ScheduledReports(ServiceClass):
     def launch(self: object, *args, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Launch scheduled report executions for the provided ID(s).
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scheduled-reports/scheduled-reports.launch
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 [
                     {
                         "id": "string"
                     }
                 ]
-        ids -- ID of the report to launch. String or list of strings.
+        ids : str or list[str]
+            ID of the report to launch.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scheduled-reports/scheduled-reports.launch
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = reports_payload(passed_arguments=args, passed_keywords=kwargs)
@@ -93,19 +102,28 @@ class ScheduledReports(ServiceClass):
     def get_reports(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve scheduled reports for the provided report IDs.
 
-        Keyword arguments:
-        ids -- ID(s) of the reports to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scheduled-reports/scheduled-reports.get
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            ID(s) of the reports to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -119,28 +137,39 @@ class ScheduledReports(ServiceClass):
     def query_reports(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all report IDs matching the query with filter.
 
-        Keyword arguments:
-        filter -- FQL query specifying the filter parameters.
-                  Filter term criteria: type, trigger_reference, recipients, user_uuid,
-                                        cid, trigger_params.metadata.
-                  Filter range criteria: created_on, modified_on;
-                    use any common date format, such as '2010-05-15T14:55:21.892315096Z'.
-        limit -- The maximum number of ids to return.
-        offset -- Starting integer index of overall result set from which to return ids.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Match query criteria, which includes all the filter string fields.
-        sort -- The property to sort by. FQL syntax. (e.g. created_on.asc, last_updated_on.desc)
-                Possible sort fields: created_on, last_updated_on, last_execution_on,
-                                      next_execution_on
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scheduled-reports/scheduled-reports.query
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying the filter parameters.
+            Filter term criteria: type, trigger_reference, recipients, user_uuid,
+                                  cid, trigger_params.metadata.
+            Filter range criteria: created_on, modified_on;
+              use any common date format, such as '2010-05-15T14:55:21.892315096Z'.
+        limit : int
+            The maximum number of ids to return.
+        offset : str
+            Starting integer index of overall result set from which to return ids.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Match query criteria, which includes all the filter string fields.
+        sort : str
+            The property to sort by. FQL syntax. (e.g. created_on.asc, last_updated_on.desc)
+            Possible sort fields: created_on, last_updated_on, last_execution_on,
+                                  next_execution_on
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

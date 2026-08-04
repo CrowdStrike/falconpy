@@ -64,9 +64,18 @@ class KnowledgeBases(ServiceClass):
                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate knowledge bases based on the provided msa criteria.
 
-        Keyword arguments:
-        include_deleted -- Include deleted knowledge bases in the result. Defaults to false. Boolean.
-        body -- Full body payload as a JSON formatted list. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-bases/AggregatesKnowledgeBasesV1
+
+        Keyword arguments
+        -----------------
+        include_deleted : bool
+            Include deleted knowledge bases in the result. Defaults to false.
+        body : list
+            Full body payload as a JSON formatted list. Not required if using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -101,30 +110,43 @@ class KnowledgeBases(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- List of date range objects. List of dictionaries.
-        field -- The field to aggregate on. String.
-        filter -- FQL filter expression. String.
-        interval -- Time interval for aggregation. String.
-        min_doc_count -- Minimum document count threshold. Integer.
-        missing -- Missing value handling. String.
-        name -- Name of the aggregation. String.
-        q -- Full text search across all metadata fields. String.
-        ranges -- List of range objects. List of dictionaries.
-        size -- Maximum number of results. Integer.
-        sort -- Sort expression. String.
-        sub_aggregates -- List of sub-aggregate expressions. List of strings.
-        time_zone -- Time zone for date operations. String.
-        type -- Type of aggregation (terms, date_histogram, etc.). String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        date_ranges : list[dict]
+            List of date range objects.
+        field : str
+            The field to aggregate on.
+        filter : str
+            FQL filter expression.
+        interval : str
+            Time interval for aggregation.
+        min_doc_count : int
+            Minimum document count threshold.
+        missing : str
+            Missing value handling.
+        name : str
+            Name of the aggregation.
+        q : str
+            Full text search across all metadata fields.
+        ranges : list[dict]
+            List of range objects.
+        size : int
+            Maximum number of results.
+        sort : str
+            Sort expression.
+        sub_aggregates : list[str]
+            List of sub-aggregate expressions.
+        time_zone : str
+            Time zone for date operations.
+        type : str
+            Type of aggregation (terms, date_histogram, etc.)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-bases/AggregatesKnowledgeBasesV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -145,19 +167,27 @@ class KnowledgeBases(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve knowledge base entities for the provided id.
 
-        Keyword arguments:
-        ids -- IDs of entities to retrieve. List.
-        include_deleted -- Include deleted knowledge bases in the result. Defaults to false. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-bases/EntitiesKnowledgeBasesV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of entities to retrieve.
+        include_deleted : bool
+            Include deleted knowledge bases in the result. Defaults to false.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -174,8 +204,16 @@ class KnowledgeBases(ServiceClass):
                                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create or update a knowledge base.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-bases/EntitiesKnowledgeBasesCreateV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "created_at": "string",
                     "created_by": {
@@ -216,25 +254,33 @@ class KnowledgeBases(ServiceClass):
                         "uuid": "string"
                     }
                 }
-        created_at -- The created_at value. String.
-        created_by -- The created_by value. Dictionary.
-        description -- The description value. String.
-        embedding_model -- The embedding_model value. String.
-        files_count -- The files_count value. Integer.
-        id -- The id value. String.
-        is_deleted -- The is_deleted value. Boolean.
-        name -- The name value. String.
-        updated_at -- The updated_at value. String.
-        updated_by -- The updated_by value. Dictionary.
+        created_at : str
+            The created_at value.
+        created_by : dict
+            The created_by value.
+        description : str
+            The description value.
+        embedding_model : str
+            The embedding_model value.
+        files_count : int
+            The files_count value.
+        id : str
+            The id value.
+        is_deleted : bool
+            The is_deleted value.
+        name : str
+            The name value.
+        updated_at : str
+            The updated_at value.
+        updated_by : dict
+            The updated_by value.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-bases/EntitiesKnowledgeBasesCreateV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = entities_knowledge_bases_create_v1_payload(passed_keywords=kwargs)
@@ -253,8 +299,16 @@ class KnowledgeBases(ServiceClass):
                                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an existing knowledge base.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-bases/EntitiesKnowledgeBasesUpdateV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "created_at": "string",
                     "created_by": {
@@ -295,25 +349,33 @@ class KnowledgeBases(ServiceClass):
                         "uuid": "string"
                     }
                 }
-        created_at -- The created_at value. String.
-        created_by -- The created_by value. Dictionary.
-        description -- The description value. String.
-        embedding_model -- The embedding_model value. String.
-        files_count -- The files_count value. Integer.
-        id -- The id value. String.
-        is_deleted -- The is_deleted value. Boolean.
-        name -- The name value. String.
-        updated_at -- The updated_at value. String.
-        updated_by -- The updated_by value. Dictionary.
+        created_at : str
+            The created_at value.
+        created_by : dict
+            The created_by value.
+        description : str
+            The description value.
+        embedding_model : str
+            The embedding_model value.
+        files_count : int
+            The files_count value.
+        id : str
+            The id value.
+        is_deleted : bool
+            The is_deleted value.
+        name : str
+            The name value.
+        updated_at : str
+            The updated_at value.
+        updated_by : dict
+            The updated_by value.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-bases/EntitiesKnowledgeBasesUpdateV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = entities_knowledge_bases_update_v1_payload(passed_keywords=kwargs)
@@ -332,22 +394,33 @@ class KnowledgeBases(ServiceClass):
                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query knowledge bases based on the provided filters.
 
-        Keyword arguments:
-        offset -- Starting index of overall result set from which to return ids. Integer.
-        limit -- Number of IDs to return. Offset + limit should NOT be above 10K. Integer.
-        sort -- Possible order by fields: name, created_at. Ex: 'created_at|desc' or 'name|asc'. String.
-        filter -- FQL query specifying the filter parameters. String.
-        include_deleted -- Include deleted knowledge bases in the result. Defaults to false. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-bases/QueriesKnowledgeBasesV1
+
+        Keyword arguments
+        -----------------
+        offset : int
+            Starting index of overall result set from which to return ids.
+        limit : int
+            Number of IDs to return. Offset + limit should NOT be above 10K.
+        sort : str
+            Possible order by fields: name, created_at. Ex: 'created_at|desc' or 'name|asc'
+        filter : str
+            FQL query specifying the filter parameters.
+        include_deleted : bool
+            Include deleted knowledge bases in the result. Defaults to false.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -364,22 +437,33 @@ class KnowledgeBases(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for knowledge bases with filtering and return full entity details in a single response.
 
-        Keyword arguments:
-        offset -- Starting index of overall result set from which to return ids. Integer.
-        limit -- Number of ids to return. Offset + limit should NOT be above 10K. Integer.
-        sort -- Possible order by fields: name, created_at. Ex: 'created_at|desc' or 'name|asc'. String.
-        filter -- FQL query specifying the filter parameters. String.
-        include_deleted -- Include deleted knowledge bases in the result. Defaults to false. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-bases/CombinedKnowledgeBasesV1
+
+        Keyword arguments
+        -----------------
+        offset : int
+            Starting index of overall result set from which to return ids.
+        limit : int
+            Number of ids to return. Offset + limit should NOT be above 10K.
+        sort : str
+            Possible order by fields: name, created_at. Ex: 'created_at|desc' or 'name|asc'
+        filter : str
+            FQL query specifying the filter parameters.
+        include_deleted : bool
+            Include deleted knowledge bases in the result. Defaults to false.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

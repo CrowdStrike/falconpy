@@ -66,25 +66,33 @@ class Iocs(ServiceClass):
     def devices_count(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the number of hosts in your customer account that have observed a given custom IOC.
 
-        Keyword arguments:
-        type -- The type of indicator. String. Required.
-                Valid types include:
-                `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
-                `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
-                `domain`: A domain name. Length - min: 1, max: 200.
-                `ipv4`: An IPv4 address. Must be a valid IP address.
-                `ipv6`: An IPv6 address. Must be a valid IP address.
-        parameters -- full parameters payload, not required if using other keywords.
-        value -- The string representation of the indicator.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DevicesCount
+
+        Keyword arguments
+        -----------------
+        type : str
+            The type of indicator. String. Required.
+            Valid types include:
+            `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
+            `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
+            `domain`: A domain name. Length - min: 1, max: 200.
+            `ipv4`: An IPv4 address. Must be a valid IP address.
+            `ipv6`: An IPv6 address. Must be a valid IP address.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        value : str
+            The string representation of the indicator.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -107,7 +115,17 @@ class Iocs(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/GetIOC
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return generate_error_result(
             "This method has been deprecated. Please use the new IOC Service Class method "
@@ -126,7 +144,17 @@ class Iocs(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/CreateIOC
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return generate_error_result(
             "This method has been deprecated. Please use the new IOC Service Class method "
@@ -146,7 +174,17 @@ class Iocs(ServiceClass):
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DeleteIOC
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return generate_error_result(
             "This method has been deprecated. Please use the new IOC Service Class method "
@@ -166,7 +204,17 @@ class Iocs(ServiceClass):
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/UpdateIOC
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return generate_error_result(
             "This method has been deprecated. Please use the new IOC Service Class method "
@@ -179,29 +227,39 @@ class Iocs(ServiceClass):
 
         For details about those hosts, use the hosts API interface.
 
-        Keyword arguments:
-        type -- The type of indicator. String. Required.
-                Valid types include:
-                `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
-                `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
-                `domain`: A domain name. Length - min: 1, max: 200.
-                `ipv4`: An IPv4 address. Must be a valid IP address.
-                `ipv6`: An IPv6 address. Must be a valid IP address.
-        limit -- The first process to return, where 0 is the latest offset.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The first process to return, where 0 is the latest offset.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- full parameters payload, not required if using other keywords.
-        value -- The string representation of the indicator.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DevicesRanOn
+
+        Keyword arguments
+        -----------------
+        type : str
+            The type of indicator. String. Required.
+            Valid types include:
+            `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
+            `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
+            `domain`: A domain name. Length - min: 1, max: 200.
+            `ipv4`: An IPv4 address. Must be a valid IP address.
+            `ipv6`: An IPv6 address. Must be a valid IP address.
+        limit : str
+            The first process to return, where 0 is the latest offset.
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The first process to return, where 0 is the latest offset.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        value : str
+            The string representation of the indicator.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -224,7 +282,17 @@ class Iocs(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/QueryIOCs
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return generate_error_result(
             "This method has been deprecated. Please use the new IOC Service Class method "
@@ -235,31 +303,42 @@ class Iocs(ServiceClass):
     def processes_ran_on(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for processes associated with a custom IOC.
 
-        Keyword arguments:
-        type -- The type of indicator. String. Required.
-                Valid types include:
-                `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
-                `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
-                `domain`: A domain name. Length - min: 1, max: 200.
-                `ipv4`: An IPv4 address. Must be a valid IP address.
-                `ipv6`: An IPv6 address. Must be a valid IP address.
-        limit -- The first process to return, where 0 is the latest offset.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The first process to return, where 0 is the latest offset.
-                  Use with the limit parameter to manage pagination of results.
-        device_id -- Specify a host's ID to return only processes from that host. Get a host's ID from QueryDevicesByFilter,
-                     the Falcon console, or the Streaming API.
-        parameters -- full parameters payload, not required if using other keywords.
-        value -- The string representation of the indicator.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/ProcessesRanOn
+
+        Keyword arguments
+        -----------------
+        type : str
+            The type of indicator. String. Required.
+            Valid types include:
+            `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
+            `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
+            `domain`: A domain name. Length - min: 1, max: 200.
+            `ipv4`: An IPv4 address. Must be a valid IP address.
+            `ipv6`: An IPv6 address. Must be a valid IP address.
+        limit : str
+            The first process to return, where 0 is the latest offset.
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The first process to return, where 0 is the latest offset.
+            Use with the limit parameter to manage pagination of results.
+        device_id : str
+            Specify a host's ID to return only processes from that host. Get a host's ID from QueryDevicesByFilter,
+            the Falcon console, or the Streaming API.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        value : str
+            The string representation of the indicator.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -277,20 +356,28 @@ class Iocs(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """For the provided ProcessID retrieve the process details.
 
-        Keyword arguments:
-        ids -- List of Process ID(s) for the running process you want to lookup.
-               String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/entities.processes
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Process ID(s) for the running process you want to lookup.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

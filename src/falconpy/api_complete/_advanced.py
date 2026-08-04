@@ -143,11 +143,11 @@ class APIHarnessV2(UberInterface):
         HTTP Method: Any
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html
 
         Keyword arguments
-        ----
+        -----------------
         api_operation : str (Default: None)
             API Operation ID to perform
             Please note: The keyword "action" will also be accepted but
@@ -184,11 +184,11 @@ class APIHarnessV2(UberInterface):
             Enable streaming download
 
         Arguments
-        ----
+        ---------
         The first argument passed to this method is assumed to be 'api_operation'. All others are ignored.
 
         Returns
-        ----
+        -------
         dict or bytes
             Dictionary or binary object containing API response depending on requested operation.
         """

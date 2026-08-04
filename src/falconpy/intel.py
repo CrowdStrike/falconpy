@@ -61,46 +61,58 @@ class Intel(ServiceClass):
     def query_actor_entities(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get info about actors that match provided FQL filters.
 
-        Keyword arguments:
-        fields -- The fields to return, or a predefined set of fields in the form of the collection
-                  name surround by two underscores: __<collection_name>__. e.g. slug __full__.
-                  Defaults to __basic__.
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Available filter parameters:
-                  actors                sub_type.name
-                  actors.id             sub_type.slug
-                  actors.name           tags
-                  actors.slug           tags.id
-                  actors.url            tags.slug
-                  created_date          tags.value
-                  description           target_countries
-                  id                    target_countries.id
-                  last_modified_date    target_countries.slug
-                  motivations           target_countries.value
-                  motivations.id        target_industries
-                  motivations.slug      target_industries.id
-                  motivations.value     target_industries.slug
-                  name                  target_industries.value
-                  name.raw              type
-                  short_description     type.id
-                  slug                  type.name
-                  sub_type              type.slug
-                  sub_type.id           url
-                  animal_classifier
-        limit -- The maximum number of actors to return. [integer, 1-5000]
-        offset -- The integer offset to start retrieving records from.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Perform a generic substring search across all fields.
-        sort -- The property to sort by. FQL syntax (e.g. created_date.desc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelActorEntities
+
+        Keyword arguments
+        -----------------
+        fields : str or list[str]
+            The fields to return, or a predefined set of fields in the form of the collection
+            name surround by two underscores: __<collection_name>__. e.g. slug __full__.
+            Defaults to __basic__.
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Available filter parameters:
+            actors                sub_type.name
+            actors.id             sub_type.slug
+            actors.name           tags
+            actors.slug           tags.id
+            actors.url            tags.slug
+            created_date          tags.value
+            description           target_countries
+            id                    target_countries.id
+            last_modified_date    target_countries.slug
+            motivations           target_countries.value
+            motivations.id        target_industries
+            motivations.slug      target_industries.id
+            motivations.value     target_industries.slug
+            name                  target_industries.value
+            name.raw              type
+            short_description     type.id
+            slug                  type.name
+            sub_type              type.slug
+            sub_type.id           url
+            animal_classifier
+        limit : int (1-5000)
+            The maximum number of actors to return.
+        offset : int
+            The integer offset to start retrieving records from.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Perform a generic substring search across all fields.
+        sort : str
+            The property to sort by. FQL syntax (e.g. created_date.desc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -117,40 +129,54 @@ class Intel(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get info about indicators that match provided FQL filters.
 
-        Keyword arguments:
-        fields -- The fields to return, or a predefined set of fields in the form of the collection
-                  name surround by two underscores: __<collection_name>__. e.g. slug __full__.
-                  Defaults to __basic__.
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Available filter parameters:
-                  _marker               labels.name
-                  actors                last_updated
-                  deleted               malicious_confidence
-                  domain_types          malware_families
-                  id                    published_date
-                  indicator             reports
-                  ip_address_types      targets
-                  kill_chains           threat_types
-                  labels                type
-                  labels.created_on     vulnerabilities
-                  labels.last_valid_on  reports.slug
-        include_deleted -- include both published and deleted indicators.
-                           Boolean, defaults to False.
-        include_relations -- include related indicators. Boolean, defaults to True.
-        limit -- The maximum number of indicators to return. [integer, 1-50000]
-        offset -- The integer offset to start retrieving records from.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Perform a generic substring search across all fields.
-        sort -- The property to sort by. FQL syntax (e.g. published_date|asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelIndicatorEntities
+
+        Keyword arguments
+        -----------------
+        fields : str
+            The fields to return, or a predefined set of fields in the form of the collection
+            name surround by two underscores: __<collection_name>__. e.g. slug __full__.
+            Defaults to __basic__.
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Available filter parameters:
+            _marker               labels.name
+            actors                last_updated
+            deleted               malicious_confidence
+            domain_types          malware_families
+            id                    published_date
+            indicator             reports
+            ip_address_types      targets
+            kill_chains           threat_types
+            labels                type
+            labels.created_on     vulnerabilities
+            labels.last_valid_on  reports.slug
+        include_deleted : bool
+            include both published and deleted indicators.
+            Boolean, defaults to False.
+        include_relations : bool
+            include related indicators. Boolean, defaults to True.
+        limit : int (1-50000)
+            The maximum number of indicators to return.
+        offset : int
+            The integer offset to start retrieving records from.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Perform a generic substring search across all fields.
+        sort : str
+            The property to sort by. FQL syntax (e.g. published_date|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -164,48 +190,60 @@ class Intel(ServiceClass):
     def query_report_entities(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get info about reports that match provided FQL filters.
 
-        Keyword arguments:
-        fields -- The fields to return, or a predefined set of fields in the form of the collection
-                  name surround by two underscores: __<collection_name>__. e.g. slug __full__.
-                  Defaults to __basic__.
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Available filter parameters:
-                  actors                              sub_type
-                  actors.animal_classifier            sub_type.id
-                  actors.id                           sub_type.name
-                  actors.name                         sub_type.slug
-                  actors.slug                         tags
-                  actors.url                          tags.id
-                  created_date                        tags.slug
-                  description                         tags.value
-                  id                                  target_countries
-                  last_modified_date                  target_countries.id
-                  malware                             target_countries.slug
-                  malware.community_identifiers       target_countries.value
-                  malware.family_name                 target_industries
-                  malware.slug                        target_industries.id
-                  motivations                         target_industries.slug
-                  motivations.id                      target_industries.value
-                  motivations.slug                    type
-                  motivations.value                   type.id
-                  name                                type.name
-                  name.raw                            type.slug
-                  short_description                   url
-                  slug                                summary
-        limit -- The maximum number of reports to return. [integer, 1-5000]
-        offset -- The integer offset to start retrieving records from.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Perform a generic substring search across all fields.
-        sort -- The property to sort by. FQL syntax (e.g. created_date|asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelReportEntities
+
+        Keyword arguments
+        -----------------
+        fields : str or list[str]
+            The fields to return, or a predefined set of fields in the form of the collection
+            name surround by two underscores: __<collection_name>__. e.g. slug __full__.
+            Defaults to __basic__.
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Available filter parameters:
+            actors                              sub_type
+            actors.animal_classifier            sub_type.id
+            actors.id                           sub_type.name
+            actors.name                         sub_type.slug
+            actors.slug                         tags
+            actors.url                          tags.id
+            created_date                        tags.slug
+            description                         tags.value
+            id                                  target_countries
+            last_modified_date                  target_countries.id
+            malware                             target_countries.slug
+            malware.community_identifiers       target_countries.value
+            malware.family_name                 target_industries
+            malware.slug                        target_industries.id
+            motivations                         target_industries.slug
+            motivations.id                      target_industries.value
+            motivations.slug                    type
+            motivations.value                   type.id
+            name                                type.name
+            name.raw                            type.slug
+            short_description                   url
+            slug                                summary
+        limit : int (1-5000)
+            The maximum number of reports to return.
+        offset : int
+            The integer offset to start retrieving records from.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Perform a generic substring search across all fields.
+        sort : str
+            The property to sort by. FQL syntax (e.g. created_date|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -223,22 +261,32 @@ class Intel(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve specific actors using their actor IDs.
 
-        Keyword arguments:
-        fields -- The fields to return, or a predefined set of fields in the form of the collection
-                  name surround by two underscores: __<collection_name>__. e.g. slug __full__.
-                  Defaults to __basic__.
-        ids -- One or more actor IDs. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelActorEntities
+
+        Keyword arguments
+        -----------------
+        fields : str or list[str]
+            The fields to return, or a predefined set of fields in the form of the collection
+            name surround by two underscores: __<collection_name>__. e.g. slug __full__.
+            Defaults to __basic__.
+        ids : str or list[str]
+            One or more actor IDs.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -256,24 +304,33 @@ class Intel(ServiceClass):
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve specific indicators using their indicator IDs.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelIndicatorEntities
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- ID(s) of the indicator entities to retrieve. String or list of strings.
+        ids : str or list[str]
+            ID(s) of the indicator entities to retrieve.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelIndicatorEntities
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_arguments=args,
@@ -297,19 +354,27 @@ class Intel(ServiceClass):
                          ) -> Union[Union[Dict[str, Union[int, dict]], bytes], Result]:
         """Export Mitre ATT&CK information for a given actor.
 
-        Keyword arguments:
-        actor_id -- Actor ID, derived from the actor name. String.
-        format -- Report format. Accepted options: 'CSV' or 'JSON'. String
-        parameters - full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetMitreReport
+
+        Keyword arguments
+        -----------------
+        actor_id : str
+            Actor ID, derived from the actor name.
+        format : str
+            Report format. Accepted options: 'CSV' or 'JSON'
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -323,24 +388,33 @@ class Intel(ServiceClass):
     def mitre_attacks(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve reports and observable IDs associated with the given actor and attacks.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/PostMitreAttacks
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- ID(s) of the indicator entities to retrieve. String or list of strings.
+        ids : str or list[str]
+            ID(s) of the indicator entities to retrieve.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/PostMitreAttacks
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_arguments=args,
@@ -364,22 +438,32 @@ class Intel(ServiceClass):
                            **kwargs) -> Union[Dict[str, Union[int, dict]], bytes]:
         """Export Mitre ATT&CK information for a given malware family.
 
-        Keyword arguments:
-        id -- Malware family name. String.
-              Malware family names should be in lower case with spaces, dots and
-              slashes replaced with dashes.
-        format -- Report format. String.  Supported values: CSV, JSON or JSON_NAVIGATOR.
-        parameters - full parameters payload, not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetMalwareMitreReport
+
+        Keyword arguments
+        -----------------
+        id : str
+            Malware family name. String.
+            Malware family names should be in lower case with spaces, dots and
+            slashes replaced with dashes.
+        format : str
+            Report format. String.  Supported values: CSV, JSON or JSON_NAVIGATOR.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         # If not specified, default to JSON.
         if not kwargs.get("format", None):
@@ -400,21 +484,30 @@ class Intel(ServiceClass):
                              **kwargs) -> Union[Dict[str, Union[int, dict]], bytes]:
         """Get malware entities for specified ids.
 
-        Keyword arguments:
-        ids -- Malware family entities to retrieve. String or list of strings.
-               Malware family names should be in lower case with spaces, dots and
-               slashes replaced with dashes.
-        parameters - full parameters payload, not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetMalwareEntities
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Malware family entities to retrieve. String or list of strings.
+            Malware family names should be in lower case with spaces, dots and
+            slashes replaced with dashes.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -428,21 +521,30 @@ class Intel(ServiceClass):
     def get_report_pdf(self: object, *args, parameters: dict = None, **kwargs) -> object:
         """Return a Report PDF attachment.
 
-        Keyword arguments:
-        id -- One or more actor IDs. String or list of strings.
-        ids -- The ID of the report you want to download as a PDF.
-               This parameter is used only if no id parameter given. String.
-        parameters - full parameters payload, not required if id is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelReportPDF
+
+        Keyword arguments
+        -----------------
+        id : str
+            One or more actor IDs.
+        ids : str
+            The ID of the report you want to download as a PDF.
+            This parameter is used only if no id parameter given.
+        parameters : dict
+            full parameters payload, not required if id is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        binary object on SUCCESS, dict object containing API response on FAILURE.
         """
         return process_service_request(
             calling_object=self,
@@ -456,24 +558,36 @@ class Intel(ServiceClass):
     def query_malware_entities(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get malware entities that match provided FQL filters.
 
-        Keyword arguments:
-        offset -- Set the starting row number to return malware IDs from. Defaults to 0. Integer.
-        limit -- Set the number of malware IDs to return. The value must be between 1 and 5000. Integer.
-        sort -- Order fields in ascending or descending order. String.
-                Ex: created_date|asc.
-        filter -- Filter your query by specifying FQL filter parameters. String.
-        q -- Perform a generic substring search across all fields. String.
-        fields -- The fields to return. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryMalwareEntities
+
+        Keyword arguments
+        -----------------
+        offset : int
+            Set the starting row number to return malware IDs from. Defaults to 0.
+        limit : int
+            Set the number of malware IDs to return. The value must be between 1 and 5000.
+        sort : str
+            Order fields in ascending or descending order. String.
+            Ex: created_date|asc.
+        filter : str
+            Filter your query by specifying FQL filter parameters.
+        q : str
+            Perform a generic substring search across all fields.
+        fields : str or list[str]
+            The fields to return.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -491,22 +605,32 @@ class Intel(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve specific reports using their report IDs.
 
-        Keyword arguments:
-        fields -- The fields to return, or a predefined set of fields in the form of the collection
-                  name surround by two underscores: __<collection_name>__. e.g. slug __full__.
-                  Defaults to __basic__.
-        ids -- One or more actor IDs. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelReportEntities
+
+        Keyword arguments
+        -----------------
+        fields : str or list[str]
+            The fields to return, or a predefined set of fields in the form of the collection
+            name surround by two underscores: __<collection_name>__. e.g. slug __full__.
+            Defaults to __basic__.
+        ids : str or list[str]
+            One or more actor IDs.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -520,20 +644,29 @@ class Intel(ServiceClass):
     def get_rule_file(self: object, *args, parameters: dict = None, **kwargs) -> object:
         """Download earlier rule sets.
 
-        Keyword arguments:
-        format -- Choose the format you want the rule set in. Either zip or gzip. Defaults to zip.
-        id -- One or more actor IDs. String or list of strings.
-        parameters - full parameters payload, not required if id is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelRuleFile
+
+        Keyword arguments
+        -----------------
+        format : str
+            Choose the format you want the rule set in. Either zip or gzip. Defaults to zip.
+        id : int
+            One or more actor IDs.
+        parameters : dict
+            full parameters payload, not required if id is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        binary object on SUCCESS, dict object containing API response on FAILURE.
         """
         return process_service_request(
             calling_object=self,
@@ -547,30 +680,41 @@ class Intel(ServiceClass):
     def get_latest_rule_file(self: object, *args, parameters: dict = None, **kwargs) -> object:
         """Download the latest rule set.
 
-        Keyword arguments:
-        if_none_match -- Download the latest rule set only if it doesn't have an ETag
-                             matching the given ones. String.
-        if_modified_since -- Download the latest rule set only if the rule was modified after this date.
-                             http, ANSIC and RFC850 formats accepted. String.
-        format -- Choose the format you want the rule set in. Either zip or gzip. Defaults to zip.
-        parameters - full parameters payload, not required if other keywords are used.
-        type -- The rule news report type. The following values are accepted:
-                common-event-format         snort-suricata-update
-                netwitness                  yara-changelog
-                snort-suricata-changelog    yara-master
-                snort-suricata-master       yara-update
-                cql-master                  cql-changelog
-                cql-update
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'type'.
-                   All others are ignored.
-
-        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetLatestIntelRuleFile
+
+        Keyword arguments
+        -----------------
+        if_none_match : str
+            Download the latest rule set only if it doesn't have an ETag
+            matching the given ones.
+        if_modified_since : str
+            Download the latest rule set only if the rule was modified after this date.
+            http, ANSIC and RFC850 formats accepted.
+        format : str
+            Choose the format you want the rule set in. Either zip or gzip. Defaults to zip.
+        parameters : dict
+            full parameters payload, not required if other keywords are used.
+        type : str
+            The rule news report type. The following values are accepted:
+            common-event-format         snort-suricata-update
+            netwitness                  yara-changelog
+            snort-suricata-changelog    yara-master
+            snort-suricata-master       yara-update
+            cql-master                  cql-changelog
+            cql-update
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'type'.
+        All others are ignored.
+
+        Returns
+        -------
+        binary object on SUCCESS, dict object containing API response on FAILURE.
         """
         headers = {}
         if kwargs.get("if_none_match", None):
@@ -595,19 +739,28 @@ class Intel(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve details for rule sets for the specified ids.
 
-        Keyword arguments:
-        ids -- One or more actor IDs. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelRuleEntities
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more actor IDs.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -621,43 +774,54 @@ class Intel(ServiceClass):
     def query_actor_ids(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get actor IDs that match provided FQL filters.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Available filter parameters:
-                  actors                sub_type.name
-                  actors.id             sub_type.slug
-                  actors.name           tags
-                  actors.slug           tags.id
-                  actors.url            tags.slug
-                  created_date          tags.value
-                  description           target_countries
-                  id                    target_countries.id
-                  last_modified_date    target_countries.slug
-                  motivations           target_countries.value
-                  motivations.id        target_industries
-                  motivations.slug      target_industries.id
-                  motivations.value     target_industries.slug
-                  name                  target_industries.value
-                  name.raw              type
-                  short_description     type.id
-                  slug                  type.name
-                  sub_type              type.slug
-                  sub_type.id           url
-                  animal_classifier
-        limit -- The maximum number of actors to return. [integer, 1-5000]
-        offset -- The integer offset to start retrieving records from.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Perform a generic substring search across all fields.
-        sort -- The property to sort by. FQL syntax (e.g. created_date|asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelActorIds
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Available filter parameters:
+            actors                sub_type.name
+            actors.id             sub_type.slug
+            actors.name           tags
+            actors.slug           tags.id
+            actors.url            tags.slug
+            created_date          tags.value
+            description           target_countries
+            id                    target_countries.id
+            last_modified_date    target_countries.slug
+            motivations           target_countries.value
+            motivations.id        target_industries
+            motivations.slug      target_industries.id
+            motivations.value     target_industries.slug
+            name                  target_industries.value
+            name.raw              type
+            short_description     type.id
+            slug                  type.name
+            sub_type              type.slug
+            sub_type.id           url
+            animal_classifier
+        limit : int (1-5000)
+            The maximum number of actors to return.
+        offset : int
+            The integer offset to start retrieving records from.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Perform a generic substring search across all fields.
+        sort : str
+            The property to sort by. FQL syntax (e.g. created_date|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -671,37 +835,50 @@ class Intel(ServiceClass):
     def query_indicator_ids(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get indicators IDs that match provided FQL filters.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Available filter parameters:
-                  _marker               labels.name
-                  actors                last_updated
-                  deleted               malicious_confidence
-                  domain_types          malware_families
-                  id                    published_date
-                  indicator             reports
-                  ip_address_types      targets
-                  kill_chains           threat_types
-                  labels                type
-                  labels.created_on     vulnerabilities
-                  labels.last_valid_on  reports.slug
-        include_deleted -- include both published and deleted indicators.
-                           Boolean, defaults to False.
-        include_relations -- include related indicators. Boolean, defaults to True.
-        limit -- The maximum number of indicators to return. [integer, 1-50000]
-        offset -- The integer offset to start retrieving records from.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Perform a generic substring search across all fields.
-        sort -- The property to sort by. FQL syntax (e.g. published_date|asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelIndicatorIds
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Available filter parameters:
+            _marker               labels.name
+            actors                last_updated
+            deleted               malicious_confidence
+            domain_types          malware_families
+            id                    published_date
+            indicator             reports
+            ip_address_types      targets
+            kill_chains           threat_types
+            labels                type
+            labels.created_on     vulnerabilities
+            labels.last_valid_on  reports.slug
+        include_deleted : bool
+            include both published and deleted indicators.
+            Boolean, defaults to False.
+        include_relations : bool
+            include related indicators. Boolean, defaults to True.
+        limit : int (1-50000)
+            The maximum number of indicators to return.
+        offset : int
+            The integer offset to start retrieving records from.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Perform a generic substring search across all fields.
+        sort : str
+            The property to sort by. FQL syntax (e.g. published_date|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -719,21 +896,31 @@ class Intel(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get MITRE tactics and techniques for the given actor.
 
-        Keyword arguments:
-        id -- Actor ID, derived from the actor name. (Example: fancy-bear). String.
-        ids -- The actor ID(derived from the actor's name) for which to retrieve a list of attacks.
-               Example: fancy-bear. Multiple values are allowed. List of strings.
-        parameters - full parameters payload, not required if using `id` keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryMitreAttacks
+
+        Keyword arguments
+        -----------------
+        id : str
+            Actor ID, derived from the actor name. (Example: fancy-bear)
+        ids : str or list[str]
+            The actor ID(derived from the actor's name) for which to retrieve a list of attacks.
+            Example: fancy-bear. Multiple values are allowed.
+        parameters : dict
+            full parameters payload, not required if using `id` keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -750,21 +937,30 @@ class Intel(ServiceClass):
                                         **kwargs) -> Union[Dict[str, Union[int, dict]], bytes]:
         """Get MITRE tactics and techniques for the given malware.
 
-        Keyword arguments:
-        ids -- Malware family entities to retrieve. String or list of strings.
-               Malware family names should be in lower case with spaces, dots and
-               slashes replaced with dashes.
-        parameters - full parameters payload, not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryMitreAttacksForMalware
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Malware family entities to retrieve. String or list of strings.
+            Malware family names should be in lower case with spaces, dots and
+            slashes replaced with dashes.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -778,45 +974,56 @@ class Intel(ServiceClass):
     def query_report_ids(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get report IDs that match provided FQL filters.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Available filter parameters:
-                  actors                              sub_type
-                  actors.animal_classifier            sub_type.id
-                  actors.id                           sub_type.name
-                  actors.name                         sub_type.slug
-                  actors.slug                         tags
-                  actors.url                          tags.id
-                  created_date                        tags.slug
-                  description                         tags.value
-                  id                                  target_countries
-                  last_modified_date                  target_countries.id
-                  malware                             target_countries.slug
-                  malware.community_identifiers       target_countries.value
-                  malware.family_name                 target_industries
-                  malware.slug                        target_industries.id
-                  motivations                         target_industries.slug
-                  motivations.id                      target_industries.value
-                  motivations.slug                    type
-                  motivations.value                   type.id
-                  name                                type.name
-                  name.raw                            type.slug
-                  short_description                   url
-                  slug                                summary
-        limit -- The maximum number of reports to return. [integer, 1-5000]
-        offset -- The integer offset to start retrieving records from.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Perform a generic substring search across all fields.
-        sort -- The property to sort by. FQL syntax (e.g. created_date|asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelReportIds
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Available filter parameters:
+            actors                              sub_type
+            actors.animal_classifier            sub_type.id
+            actors.id                           sub_type.name
+            actors.name                         sub_type.slug
+            actors.slug                         tags
+            actors.url                          tags.id
+            created_date                        tags.slug
+            description                         tags.value
+            id                                  target_countries
+            last_modified_date                  target_countries.id
+            malware                             target_countries.slug
+            malware.community_identifiers       target_countries.value
+            malware.family_name                 target_industries
+            malware.slug                        target_industries.id
+            motivations                         target_industries.slug
+            motivations.id                      target_industries.value
+            motivations.slug                    type
+            motivations.value                   type.id
+            name                                type.name
+            name.raw                            type.slug
+            short_description                   url
+            slug                                summary
+        limit : int (1-5000)
+            The maximum number of reports to return.
+        offset : int
+            The integer offset to start retrieving records from.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Perform a generic substring search across all fields.
+        sort : str
+            The property to sort by. FQL syntax (e.g. created_date|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -830,34 +1037,50 @@ class Intel(ServiceClass):
     def query_rule_ids(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for rule IDs that match provided filter criteria.
 
-        Keyword arguments:
-        description -- substring match on the description field. List of strings.
-        limit -- The maximum number of rule IDs to return. [integer, 1-5000] Defaults to 10.
-        max_created_date -- Filter results to those created on or before a certain date. String.
-        min_created_date -- Filter results to those created on or after a certain date. String.
-        name -- search by rule title. List of strings.
-        offset -- The integer offset to start retrieving records from. Defaults to 0.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Perform a generic substring search across all fields.
-        sort -- The property to sort by. FQL syntax (e.g. created_date|asc).
-        tags -- search for rule tags. List of strings.
-        type -- The rule news report type. Required.
-                The following values are accepted:
-                common-event-format         snort-suricata-update
-                netwitness                  yara-changelog
-                snort-suricata-changelog    yara-master
-                snort-suricata-master       yara-update
-                cql-master                  cql-changelog
-                cql-update
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelReportIds
+
+        Keyword arguments
+        -----------------
+        description : str or list[str]
+            substring match on the description field.
+        limit : int
+            The maximum number of rule IDs to return. [integer, 1-5000] Defaults to 10.
+        max_created_date : str
+            Filter results to those created on or before a certain date.
+        min_created_date : int
+            Filter results to those created on or after a certain date.
+        name : str or list[str]
+            search by rule title.
+        offset : int
+            The integer offset to start retrieving records from. Defaults to 0.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Perform a generic substring search across all fields.
+        sort : str
+            The property to sort by. FQL syntax (e.g. created_date|asc).
+        tags : str or list[str]
+            search for rule tags.
+        type : str
+            The rule news report type. Required.
+            The following values are accepted:
+            common-event-format         snort-suricata-update
+            netwitness                  yara-changelog
+            snort-suricata-changelog    yara-master
+            snort-suricata-master       yara-update
+            cql-master                  cql-changelog
+            cql-update
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -871,22 +1094,33 @@ class Intel(ServiceClass):
     def query_malware(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get malware family names that match provided FQL filters.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of actors to return. [integer, 1-5000]
-        offset -- The integer offset to start retrieving records from.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Perform a generic substring search across all fields.
-        sort -- The property to sort by. FQL syntax (e.g. created_date|asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryMalware
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int (1-5000)
+            The maximum number of actors to return.
+        offset : int
+            The integer offset to start retrieving records from.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Perform a generic substring search across all fields.
+        sort : str
+            The property to sort by. FQL syntax (e.g. created_date|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -900,24 +1134,33 @@ class Intel(ServiceClass):
     def get_vulnerabilities(self: object, *args, body: dict = None, **kwargs) -> dict:
         """Retrieve specific vulnerabilities using their indicator IDs.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetVulnerabilities
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- ID(s) of the indicator entities to retrieve. String or list of strings.
+        ids : str or list[str]
+            ID(s) of the indicator entities to retrieve.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetVulnerabilities
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_arguments=args,
@@ -938,34 +1181,45 @@ class Intel(ServiceClass):
     def query_vulnerabilities(self: object, parameters: dict = None, **kwargs) -> dict:
         """Search for rule IDs that match provided filter criteria.
 
-        Keyword arguments:
-        filter -- FQL query specifying the filter parameters. String.
-                  Filter parameters include:
-                    _all                            related_actors
-                    affected_products.product       related_actors.animal_classifier
-                    affected_products.vendor        related_actors.name
-                    community_identifiers           related_reports.serial_id
-                    cve                             related_reports.title
-                    cvss_v3_base                    related_threats
-                    cvss_v3_base.score              related_threats.name
-                    cvss_v3_base.severity           severity
-                    exploit_status                  updated_timestamp
-                    publish_date
-        limit -- The maximum number of IDs to return. Integer.
-        offset -- The integer offset to start retrieving records from. Defaults to 0.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Match phrase_prefix query criteria; included fields:
-             _all (all filter string fields indexed).
-        sort -- The property to sort by. FQL syntax.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryVulnerabilities
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying the filter parameters. String.
+            Filter parameters include:
+              _all                            related_actors
+              affected_products.product       related_actors.animal_classifier
+              affected_products.vendor        related_actors.name
+              community_identifiers           related_reports.serial_id
+              cve                             related_reports.title
+              cvss_v3_base                    related_threats
+              cvss_v3_base.score              related_threats.name
+              cvss_v3_base.severity           severity
+              exploit_status                  updated_timestamp
+              publish_date
+        limit : int
+            The maximum number of IDs to return.
+        offset : str
+            The integer offset to start retrieving records from. Defaults to 0.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Match phrase_prefix query criteria; included fields:
+            _all (all filter string fields indexed).
+        sort : str
+            The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -982,8 +1236,16 @@ class Intel(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform statistical aggregations over incident data.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/cao_incidents_aggregates_v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "date_ranges": [
                         {
@@ -1028,36 +1290,55 @@ class Intel(ServiceClass):
                     "time_zone": "string",
                     "type": "string"
                 }
-        date_ranges -- The date_ranges value. List.
-        exclude -- The exclude value. String.
-        extended_bounds -- The extended_bounds value. Dictionary.
-        field -- The field value. String.
-        filter -- The filter value. String.
-        filters_spec -- The filters_spec value. Dictionary.
-        from -- The from value. Integer.
-        include -- The include value. String.
-        interval -- The interval value. String.
-        max_doc_count -- The max_doc_count value. Integer.
-        min_doc_count -- The min_doc_count value. Integer.
-        missing -- The missing value. String.
-        name -- The name value. String.
-        percents -- The percents value. List.
-        q -- The q value. String.
-        ranges -- The ranges value. List.
-        size -- The size value. Integer.
-        sort -- The sort value. String.
-        sub_aggregates -- The sub_aggregates value. List.
-        time_zone -- The time_zone value. String.
-        type -- The type value. String.
+        date_ranges : list
+            The date_ranges value.
+        exclude : str
+            The exclude value.
+        extended_bounds : dict
+            The extended_bounds value.
+        field : str
+            The field value.
+        filter : str
+            The filter value.
+        filters_spec : dict
+            The filters_spec value.
+        from : int
+            The from value.
+        include : str
+            The include value.
+        interval : str
+            The interval value.
+        max_doc_count : int
+            The max_doc_count value.
+        min_doc_count : int
+            The min_doc_count value.
+        missing : str
+            The missing value.
+        name : str
+            The name value.
+        percents : list
+            The percents value.
+        q : str
+            The q value.
+        ranges : list
+            The ranges value.
+        size : int
+            The size value.
+        sort : str
+            The sort value.
+        sub_aggregates : list
+            The sub_aggregates value.
+        time_zone : str
+            The time_zone value.
+        type : str
+            The type value.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/cao_incidents_aggregates_v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cao_incidents_aggregates_v1_payload(passed_keywords=kwargs)
@@ -1076,23 +1357,30 @@ class Intel(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve full details for one or more adversary incidents by their IDs.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/cao_incidents_entities_v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- The ids value. List.
+        ids : str or list[str]
+            The ids value.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/cao_incidents_entities_v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cao_incidents_entities_v1_payload(passed_keywords=kwargs)
@@ -1111,37 +1399,47 @@ class Intel(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for adversary incidents using FQL criteria and return a paginated list of matching incident IDs.
 
-        Keyword arguments:
-        sort -- The property to sort on, followed by a dot (.), followed by the sort direction, either "asc" or "desc".
-                Available sort properties: ActivityStart, ActivityEnd, PublishDate, InvolvesAdversaries.Name,
-                InvolvesAdversaries.Slug, LastModifiedAt. String.
-        filter -- Optional filter and sort criteria in the form of an FQL query. String.
-              Available filters:
-                    ActivityEnd                             ActivityStart
-                    All                                     Id
-                    InvolvesAdversaries.AnimalClassifier    InvolvesAdversaries.Id
-                    InvolvesAdversaries.Name                InvolvesAdversaries.Slug
-                    InvolvesIndicators.Value                InvolvesThreats.FamilyName
-                    LastModifiedAt                          MitreAttack.Id
-                    MitreAttack.TacticId                    MitreAttack.TacticName
-                    MitreAttack.TechniqueId                 MitreAttack.TechniqueName
-                    Motivations.Slug                        Objectives.Slug
-                    PublishDate                             ReferencesNotableEvents.Title
-                    TargetCountries.Slug                    TargetIndustries.Slug
-                    TargetRegions.Slug                      TargetingProfile.Slug
-                    TargetsVulnerabilities.CVE              Title
-        limit -- The maximum records to return. Cannot be higher than 200. Integer.
-        offset -- Starting index of overall result set from which to return ids. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/cao_incidents_queries_v1
+
+        Keyword arguments
+        -----------------
+        sort : str
+            The property to sort on, followed by a dot (.), followed by the sort direction, either "asc" or "desc".
+            Available sort properties: ActivityStart, ActivityEnd, PublishDate, InvolvesAdversaries.Name,
+            InvolvesAdversaries.Slug, LastModifiedAt.
+        filter : str
+            Optional filter and sort criteria in the form of an FQL query. String.
+            Available filters:
+                  ActivityEnd                             ActivityStart
+                  All                                     Id
+                  InvolvesAdversaries.AnimalClassifier    InvolvesAdversaries.Id
+                  InvolvesAdversaries.Name                InvolvesAdversaries.Slug
+                  InvolvesIndicators.Value                InvolvesThreats.FamilyName
+                  LastModifiedAt                          MitreAttack.Id
+                  MitreAttack.TacticId                    MitreAttack.TacticName
+                  MitreAttack.TechniqueId                 MitreAttack.TechniqueName
+                  Motivations.Slug                        Objectives.Slug
+                  PublishDate                             ReferencesNotableEvents.Title
+                  TargetCountries.Slug                    TargetIndustries.Slug
+                  TargetRegions.Slug                      TargetingProfile.Slug
+                  TargetsVulnerabilities.CVE              Title
+        limit : int
+            The maximum records to return. Cannot be higher than 200.
+        offset : str
+            Starting index of overall result set from which to return ids.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

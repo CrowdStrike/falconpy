@@ -61,76 +61,83 @@ class HostMigration(ServiceClass):
     def aggregate_host_migration(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get host migration aggregates as specified via json in request body.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
-                {
-                    "resources": [
-                                    {
-                                        "date_ranges": [
-                                        {
-                                            "from": "string",
-                                            "to": "string"
-                                            }
-                                        ],
-                                        "exclude": "string",
-                                        "extended_bounds": {
-                                            "max": "string",
-                                            "min": "string"
-                                        },
-                                        "field": "string",
-                                        "filter": "string",
-                                        "from": 0,
-                                        "include": "string",
-                                        "interval": "string",
-                                        "max_doc_count": 0,
-                                        "min_doc_count": 0,
-                                        "missing": "string",
-                                        "name": "string",
-                                        "q": "string",
-                                        "ranges": [
-                                        {
-                                            "From": 0,
-                                            "To": 0
-                                        }
-                                        ],
-                                        "size": 0,
-                                        "sort": "string",
-                                        "sub_aggregates": [
-                                        null
-                                        ],
-                                        "time_zone": "string",
-                                        "type": "string"
-                                    }
-                                ]
-                            }
-
-        Supported Types:
-            Both types support the following FQL filter properties:
-                groups, hostgroups, static_host_groups, hostname, status,
-                target_cid, source_cid, migration_id, id, host_migration_id, created_time.
-            The values groups and hostgroups are aliases for static_host_groups.
-            The value host_migration_id is an alias for id
-
-            Type 1 - Terms
-                "type": "terms"
-                Supported field values:
-                    groups, hostgroups, static_host_groups, hostname,
-                    status, target_cid, source_cid, migration_id, id, host_migration_id.
-                sort must be done on the same value as field and include a direction (asc or desc).
-                Supports all FQL fields except for groups, hostgroups, or static_host_groups.
-                Examples sort value: status|asc or created_by|desc
-
-            Type 2 - Date Range
-                "type": "date_range"
-                Supported field fields: created_time.
-                Does not support sort, size, or from.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/HostMigrationAggregatesV1
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required if using other keywords.
+                        {
+                            "resources": [
+                                            {
+                                                "date_ranges": [
+                                                {
+                                                    "from": "string",
+                                                    "to": "string"
+                                                    }
+                                                ],
+                                                "exclude": "string",
+                                                "extended_bounds": {
+                                                    "max": "string",
+                                                    "min": "string"
+                                                },
+                                                "field": "string",
+                                                "filter": "string",
+                                                "from": 0,
+                                                "include": "string",
+                                                "interval": "string",
+                                                "max_doc_count": 0,
+                                                "min_doc_count": 0,
+                                                "missing": "string",
+                                                "name": "string",
+                                                "q": "string",
+                                                "ranges": [
+                                                {
+                                                    "From": 0,
+                                                    "To": 0
+                                                }
+                                                ],
+                                                "size": 0,
+                                                "sort": "string",
+                                                "sub_aggregates": [
+                                                null
+                                                ],
+                                                "time_zone": "string",
+                                                "type": "string"
+                                            }
+                                        ]
+                                    }
+
+                Supported Types:
+                    Both types support the following FQL filter properties:
+                        groups, hostgroups, static_host_groups, hostname, status,
+                        target_cid, source_cid, migration_id, id, host_migration_id, created_time.
+                    The values groups and hostgroups are aliases for static_host_groups.
+                    The value host_migration_id is an alias for id
+
+                    Type 1 - Terms
+                        "type": "terms"
+                        Supported field values:
+                            groups, hostgroups, static_host_groups, hostname,
+                            status, target_cid, source_cid, migration_id, id, host_migration_id.
+                        sort must be done on the same value as field and include a direction (asc or desc).
+                        Supports all FQL fields except for groups, hostgroups, or static_host_groups.
+                        Examples sort value: status|asc or created_by|desc
+
+                    Type 2 - Date Range
+                        "type": "date_range"
+                        Supported field fields: created_time.
+                        Does not support sort, size, or from.
+
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -146,74 +153,81 @@ class HostMigration(ServiceClass):
     def aggregate_migration(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get migration aggregates as specified via json in request body.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
-                {
-                    "resources": [
-                                    {
-                                        "date_ranges": [
-                                        {
-                                            "from": "string",
-                                            "to": "string"
-                                            }
-                                        ],
-                                        "exclude": "string",
-                                        "extended_bounds": {
-                                            "max": "string",
-                                            "min": "string"
-                                        },
-                                        "field": "string",
-                                        "filter": "string",
-                                        "from": 0,
-                                        "include": "string",
-                                        "interval": "string",
-                                        "max_doc_count": 0,
-                                        "min_doc_count": 0,
-                                        "missing": "string",
-                                        "name": "string",
-                                        "q": "string",
-                                        "ranges": [
-                                        {
-                                            "From": 0,
-                                            "To": 0
-                                        }
-                                        ],
-                                        "size": 0,
-                                        "sort": "string",
-                                        "sub_aggregates": [
-                                        null
-                                        ],
-                                        "time_zone": "string",
-                                        "type": "string"
-                                    }
-                                ]
-                            }
-
-        Supported Types:
-            Both types support the following FQL filter props:
-                name, id, migration_id, target_cid, status, migration_status, created_by, created_time.
-            The value migration_status is an alias for status.
-            The value migration_id is an alias for id.
-
-
-            Type 1 - Terms
-                "type": "terms"
-                Supported field values: name, id, migration_id, target_cid, status, migration_status, created_by.
-                sort on terms type must be done on the same value as field and include a direction (asc or desc).
-                Supports all supported FQL fields.
-                Examples sort value: status|asc or created_by|desc.
-
-            Type 2 - Date Range
-                "type": "date_range"
-                Supported field fields: created_time.
-                Does not support sort, size, or from.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/MigrationAggregatesV1
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required if using other keywords.
+                        {
+                            "resources": [
+                                            {
+                                                "date_ranges": [
+                                                {
+                                                    "from": "string",
+                                                    "to": "string"
+                                                    }
+                                                ],
+                                                "exclude": "string",
+                                                "extended_bounds": {
+                                                    "max": "string",
+                                                    "min": "string"
+                                                },
+                                                "field": "string",
+                                                "filter": "string",
+                                                "from": 0,
+                                                "include": "string",
+                                                "interval": "string",
+                                                "max_doc_count": 0,
+                                                "min_doc_count": 0,
+                                                "missing": "string",
+                                                "name": "string",
+                                                "q": "string",
+                                                "ranges": [
+                                                {
+                                                    "From": 0,
+                                                    "To": 0
+                                                }
+                                                ],
+                                                "size": 0,
+                                                "sort": "string",
+                                                "sub_aggregates": [
+                                                null
+                                                ],
+                                                "time_zone": "string",
+                                                "type": "string"
+                                            }
+                                        ]
+                                    }
+
+                Supported Types:
+                    Both types support the following FQL filter props:
+                        name, id, migration_id, target_cid, status, migration_status, created_by, created_time.
+                    The value migration_status is an alias for status.
+                    The value migration_id is an alias for id.
+
+
+                    Type 1 - Terms
+                        "type": "terms"
+                        Supported field values: name, id, migration_id, target_cid, status, migration_status, created_by.
+                        sort on terms type must be done on the same value as field and include a direction (asc or desc).
+                        Supports all supported FQL fields.
+                        Examples sort value: status|asc or created_by|desc.
+
+                    Type 2 - Date Range
+                        "type": "date_range"
+                        Supported field fields: created_time.
+                        Does not support sort, size, or from.
+
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -232,55 +246,62 @@ class HostMigration(ServiceClass):
                                       **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform an action on host migrations.
 
-        Keyword arguments:
-        id -- The migration job to perform actions on. String.
-
-        action_name -- The action to perform
-            Available values: remove_hosts, remove_host_groups, add_host_groups
-
-        body -- full body payload, not required if using other keywords.
-                {
-                    "resources": [
-                       {
-                        "action_parameters": [
-                            {
-                            "name": "string",
-                            "value": "string"
-                            }
-                        ],
-                        "filter": "string",
-                        "ids": [
-                            "string"
-                        ]
-                        }
-                    ]
-                }
-
-        Available Actions:
-        These actions only works if the migration has not started.
-
-            add_host_groups adds static host groups to the selected hosts in a migration.
-            This action accepts the following action parameter: { "name": "host_group": "value": "$host_group_id" }.
-            Action parameters can be repeated to add multiple static host groups in a single request.
-
-            remove_host_groups removes static host groups from the selected hosts in a migration.
-            This action accepts the following action parameter: { "name": "host_group": "value": "$host_group_id" }.
-            Action parameters can be repeated to remove multiple static host groups in a single request.
-
-            remove_hosts removes the selected hosts from a migration.
-            This action does not accept any action parameters.
-
-        FQL Filter supports the following fields:
-            groups, hostgroups, static_host_groups,
-            hostname, status, target_cid, source_cid,
-            migration_id, id, host_migration_id, created_time.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/HostMigrationsActionsV1
+
+        Keyword arguments
+        -----------------
+        id : str
+            The migration job to perform actions on.
+        action_name : str
+            The action to perform
+            Available values: remove_hosts, remove_host_groups, add_host_groups
+        body : dict
+            full body payload, not required if using other keywords.
+                        {
+                            "resources": [
+                               {
+                                "action_parameters": [
+                                    {
+                                    "name": "string",
+                                    "value": "string"
+                                    }
+                                ],
+                                "filter": "string",
+                                "ids": [
+                                    "string"
+                                ]
+                                }
+                            ]
+                        }
+
+                Available Actions:
+                These actions only works if the migration has not started.
+
+                    add_host_groups adds static host groups to the selected hosts in a migration.
+                    This action accepts the following action parameter: { "name": "host_group": "value": "$host_group_id" }.
+                    Action parameters can be repeated to add multiple static host groups in a single request.
+
+                    remove_host_groups removes static host groups from the selected hosts in a migration.
+                    This action accepts the following action parameter: { "name": "host_group": "value": "$host_group_id" }.
+                    Action parameters can be repeated to remove multiple static host groups in a single request.
+
+                    remove_hosts removes the selected hosts from a migration.
+                    This action does not accept any action parameters.
+
+                FQL Filter supports the following fields:
+                    groups, hostgroups, static_host_groups,
+                    hostname, status, target_cid, source_cid,
+                    migration_id, id, host_migration_id, created_time.
+
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs,
@@ -312,8 +333,16 @@ class HostMigration(ServiceClass):
     def get_host_migration_details(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get migration aggregates as specified via json in request body.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/GetHostMigrationsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                 "resources":[
                                 {
@@ -324,7 +353,10 @@ class HostMigration(ServiceClass):
                             ]
                 }
 
-        Returns: dict object containing API response.
+
+        Returns
+        -------
+        dict object containing API response.
 
             Events
                 The events field describes actions that have occurred to the host migration entity.
@@ -335,13 +367,6 @@ class HostMigration(ServiceClass):
                 The status_details field is an optional field that
                 provides some more details about the status of a failed host migration.
                 It may be omitted or empty from a response.
-
-
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/GetHostMigrationsV1
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs,
@@ -359,8 +384,16 @@ class HostMigration(ServiceClass):
     def get_migration_destination(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get destinations for a migration.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/GetMigrationDestinationsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                                     {
@@ -372,12 +405,11 @@ class HostMigration(ServiceClass):
                                 ]
                             }
 
-        Returns: dict object containing API response.
 
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/GetMigrationDestinationsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             if kwargs.get("device_ids", None):
@@ -400,52 +432,60 @@ class HostMigration(ServiceClass):
                                      **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform an action on host migrations.
 
-        Keyword arguments:
-        action_name -- The action to perform
-            Available values: remove_hosts, remove_host_groups, add_host_groups
-        body -- full body payload, not required if using other keywords.
-                {
-                    "resources": [
-                       {
-                        "action_parameters": [
-                            {
-                            "name": "string",
-                            "value": "string"
-                            }
-                        ],
-                        "filter": "string",
-                        "ids": [
-                            "string"
-                        ]
-                        }
-                    ]
-                }
-
-        Available Actions:
-        These actions only works if the migration has not started.
-
-            add_host_groups adds static host groups to the selected hosts in a migration.
-            This action accepts the following action parameter: { "name": "host_group": "value": "$host_group_id" }.
-            Action parameters can be repeated to add multiple static host groups in a single request.
-
-            remove_host_groups removes static host groups from the selected hosts in a migration.
-            This action accepts the following action parameter: { "name": "host_group": "value": "$host_group_id" }.
-            Action parameters can be repeated to remove multiple static host groups in a single request.
-
-            remove_hosts removes the selected hosts from a migration.
-            This action does not accept any action parameters.
-
-        FQL Filter supports the following fields:
-            groups, hostgroups, static_host_groups,
-            hostname, status, target_cid, source_cid,
-            migration_id, id, host_migration_id, created_time.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/MigrationsActionsV1
+
+        Keyword arguments
+        -----------------
+        action_name : str
+            The action to perform
+            Available values: remove_hosts, remove_host_groups, add_host_groups
+        body : dict
+            full body payload, not required if using other keywords.
+                        {
+                            "resources": [
+                               {
+                                "action_parameters": [
+                                    {
+                                    "name": "string",
+                                    "value": "string"
+                                    }
+                                ],
+                                "filter": "string",
+                                "ids": [
+                                    "string"
+                                ]
+                                }
+                            ]
+                        }
+
+                Available Actions:
+                These actions only works if the migration has not started.
+
+                    add_host_groups adds static host groups to the selected hosts in a migration.
+                    This action accepts the following action parameter: { "name": "host_group": "value": "$host_group_id" }.
+                    Action parameters can be repeated to add multiple static host groups in a single request.
+
+                    remove_host_groups removes static host groups from the selected hosts in a migration.
+                    This action accepts the following action parameter: { "name": "host_group": "value": "$host_group_id" }.
+                    Action parameters can be repeated to remove multiple static host groups in a single request.
+
+                    remove_hosts removes the selected hosts from a migration.
+                    This action does not accept any action parameters.
+
+                FQL Filter supports the following fields:
+                    groups, hostgroups, static_host_groups,
+                    hostname, status, target_cid, source_cid,
+                    migration_id, id, host_migration_id, created_time.
+
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs,
@@ -481,19 +521,28 @@ class HostMigration(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get migration job details.
 
-        Keyword arguments:
-        ids -- The migration jobs of interest.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/GetMigrationsV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The migration jobs of interest.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -507,8 +556,16 @@ class HostMigration(ServiceClass):
     def create_migration(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a device migration job.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/CreateMigrationV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                        {
@@ -522,12 +579,11 @@ class HostMigration(ServiceClass):
                     ]
                 }
 
-        Returns: dict object containing API response.
 
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/CreateMigrationV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs,
@@ -562,33 +618,44 @@ class HostMigration(ServiceClass):
 
         Returns a set of Agent IDs which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. Valid fields: groups, hostgroups, target_cid,
-                  migration_id, host_migration_id, static_host_groups, hostname, status, source_cid, id, created_time
-        id -- The migration job to query. String.
-        limit -- The maximum records to return. [1-10000]
-        offset -- The offset to start retrieving records from
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. name|asc).
-                Available values :
-                    hostname|asc, hostname|desc, hostname,
-                    status|asc, status|desc, status, migration_id|asc,
-                    migration_id|desc, migration_id, created_time|asc,
-                    created_time|desc, created_time, host_migration_id|asc,
-                    host_migration_id|desc, host_migration_id, groups|asc,
-                    groups|desc, groups, hostgroups|asc, hostgroups|desc,
-                    hostgroups, source_cid|asc, source_cid|desc, source_cid,
-                    id|asc, id|desc, id, static_host_groups|asc, static_host_groups|desc,
-                    static_host_groups, target_cid|asc, target_cid|desc, target_cid
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/GetHostMigrationIDsV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. Valid fields: groups, hostgroups, target_cid,
+            migration_id, host_migration_id, static_host_groups, hostname, status, source_cid, id, created_time
+        id : str
+            The migration job to query.
+        limit : int
+            The maximum records to return. [1-10000]
+        offset : int
+            The offset to start retrieving records from
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. name|asc).
+            Available values :
+                hostname|asc, hostname|desc, hostname,
+                status|asc, status|desc, status, migration_id|asc,
+                migration_id|desc, migration_id, created_time|asc,
+                created_time|desc, created_time, host_migration_id|asc,
+                host_migration_id|desc, host_migration_id, groups|asc,
+                groups|desc, groups, hostgroups|asc, hostgroups|desc,
+                hostgroups, source_cid|asc, source_cid|desc, source_cid,
+                id|asc, id|desc, id, static_host_groups|asc, static_host_groups|desc,
+                static_host_groups, target_cid|asc, target_cid|desc, target_cid
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -606,33 +673,41 @@ class HostMigration(ServiceClass):
 
         Returns a set of Agent IDs which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. Valid fields: name, id, migration_id,
-                  target_cid, status, migration_status, created_by, created_time
-        limit -- The maximum records to return. [1-10000]
-        offset -- The offset to start retrieving records from
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. name|asc).
-                Available values :
-                    target_cid|asc, target_cid|desc, target_cid,
-                    status|asc, status|desc, status,
-                    migration_status|asc, migration_status|desc, migration_status,
-                    created_by|asc, created_by|desc, created_by,
-                    created_time|asc, created_time|desc, created_time,
-                    name|asc, name|desc, name,
-                    id|asc, id|desc, id, migration_id|asc,
-                    migration_id|desc, migration_id
-
-
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/GetMigrationIDsV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. Valid fields: name, id, migration_id,
+            target_cid, status, migration_status, created_by, created_time
+        limit : int
+            The maximum records to return. [1-10000]
+        offset : int
+            The offset to start retrieving records from
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. name|asc).
+            Available values :
+                target_cid|asc, target_cid|desc, target_cid,
+                status|asc, status|desc, status,
+                migration_status|asc, migration_status|desc, migration_status,
+                created_by|asc, created_by|desc, created_by,
+                created_time|asc, created_time|desc, created_time,
+                name|asc, name|desc, name,
+                id|asc, id|desc, id, migration_id|asc,
+                migration_id|desc, migration_id
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

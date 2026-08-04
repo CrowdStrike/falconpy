@@ -66,8 +66,16 @@ class MessageCenter(ServiceClass):
     def aggregate_cases(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregate case values based on the matched filter.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/AggregateCases
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [{
                     "date_ranges": [
                         {
@@ -96,31 +104,34 @@ class MessageCenter(ServiceClass):
                     "time_zone": "string",
                     "type": "string"
                 }]
-        date_ranges -- List of dictionaries.
-        field -- String.
-        filter -- FQL syntax. String.
-        interval -- String.
-        min_doc_count -- Minimum number of documents required to match. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+        field : str
+        filter : str
+            FQL syntax.
+        interval : str
+        min_doc_count : int
+            Minimum number of documents required to match.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
+            String.
+            This method does not support body payload validation.
 
         This method only supports keywords for providing arguments.
 
-        This method does not support body payload validation.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/AggregateCases
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             # Similar to 664: This aggregate payload must be a list
@@ -137,24 +148,33 @@ class MessageCenter(ServiceClass):
     def get_case_activity(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve activities for given case IDs.
 
-        Keyword arguments:
-        body -- full body payload, not required if ids is provided as a keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/GetCaseActivityByIds
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if ids is provided as a keyword.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- One or more case IDs. String or list of strings.
+        ids : str or list[str]
+            One or more case IDs.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/GetCaseActivityByIds
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_arguments=args,
@@ -173,32 +193,42 @@ class MessageCenter(ServiceClass):
     def add_case_activity(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Add an activity to case. Only activities of type comment are allowed via API.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
-                NOTICE: This particular body payload contains a field named `body`, which
-                        impacts body payload abstraction functionality. This field can be
-                        set using the keyword `content` if you do not wish to specify a
-                        full body payload using the `body` keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/CaseAddActivity
+
+        Keyword arguments
+        -----------------
+        body : str
+            full body payload, not required when using other keywords.
+            NOTICE: This particular body payload contains a field named `body`, which
+                    impacts body payload abstraction functionality. This field can be
+                    set using the keyword `content` if you do not wish to specify a
+                    full body payload using the `body` keyword.
                 {
                     "body": "string",
                     "case_id": "string",
                     "type": "string",
                     "user_uuid": "string"
                 }
-        content -- Comment content. Used for the `body` field within the body payload. String.
-        case_id -- Case ID. String.
-        type -- Activity type. String. Only activities of type comment can be added via the API.
-                The keyword `activity_type` can also be used to specify this value.
-        user_uuid -- UUID of the user related to the activity. String.
+        content : str
+            Comment content. Used for the `body` field within the body payload.
+        case_id : str
+            Case ID.
+        type : str
+            Activity type. String. Only activities of type comment can be added via the API.
+            The keyword `activity_type` can also be used to specify this value.
+        user_uuid : str
+            UUID of the user related to the activity.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/CaseAddActivity
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = activity_payload(passed_keywords=kwargs)
@@ -215,19 +245,28 @@ class MessageCenter(ServiceClass):
     def download_case_attachment(self: object, *args, parameters: dict = None, **kwargs) -> object:
         """Retrieve an attachment for the case, given the Attachment ID.
 
-        Keyword arguments:
-        ids -- Attachment ID to retrieve. String.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/CaseDownloadAttachment
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Attachment ID to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -246,30 +285,39 @@ class MessageCenter(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload an attachment for the case.
 
-        Keyword arguments:
-        case_id -- Case ID to attach to. String.
-        file_data -- Content of the attachment in binary format. Max file size is 15 MB.
-                     'sample' and 'upfile' are also accepted as this parameter.
-                     Filename must start with [a-zA-Z0-9_-] and has a maximum of 255 characters.
-                     Allowed characters in file name are [a-zA-Z0-9-_.].
-
-                     Accepted attachment formats:
-                     Images: .png, .bmp, .jpg, .jpeg, .gif
-                     Adobe PDF: .pdf
-                     Office documents: .doc, .docx, .xls, .xlsx, .pptx
-                     Text: .txt, .csv
-        file_name -- File name for the attached file. String.
-        parameters -- full parameters payload, not required if using other keywords.
-        user_uuid -- User UUID performing the attachment. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/CaseAddAttachment
+
+        Keyword arguments
+        -----------------
+        case_id : str
+            Case ID to attach to.
+        file_data : str
+            Content of the attachment in binary format. Max file size is 15 MB.
+            'sample' and 'upfile' are also accepted as this parameter.
+            Filename must start with [a-zA-Z0-9_-] and has a maximum of 255 characters.
+            Allowed characters in file name are [a-zA-Z0-9-_.].
+            Accepted attachment formats:
+            Images: .png, .bmp, .jpg, .jpeg, .gif
+            Adobe PDF: .pdf
+            Office documents: .doc, .docx, .xls, .xlsx, .pptx
+            Text: .txt, .csv
+        file_name : str
+            File name for the attached file.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        user_uuid : str
+            User UUID performing the attachment.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         method_args = ["case_id", "file_data", "user_uuid"]
         kwargs = params_to_keywords(method_args,
@@ -310,12 +358,20 @@ class MessageCenter(ServiceClass):
     def create_case_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new case.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
-                NOTICE: This particular body payload contains a field named `body`, which
-                        impacts body payload abstraction functionality. This field can be
-                        set using the keyword `content` if you do not wish to specify a
-                        full body payload using the `body` keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/CreateCaseV2
+
+        Keyword arguments
+        -----------------
+        body : str
+            full body payload, not required when using other keywords.
+            NOTICE: This particular body payload contains a field named `body`, which
+                    impacts body payload abstraction functionality. This field can be
+                    set using the keyword `content` if you do not wish to specify a
+                    full body payload using the `body` keyword.
                 {
                     "body": "string",
                     "detections": [
@@ -335,21 +391,25 @@ class MessageCenter(ServiceClass):
                     "type": "string",
                     "user_uuid": "string"
                 }
-        content -- Case content. Used for the `body` field within the body payload. String.
-        detections -- List of detections to attach to the case. List of dictionaries.
-        incidents -- List of incidents to attach to the case. List of dictionaries.
-        title -- Case title. String.
-        type -- Case type. String. The keyword `case_type` can also be used to specify this value.
-        user_uuid -- UUID of the user related to the case. String.
+        content : str
+            Case content. Used for the `body` field within the body payload.
+        detections : list[dict]
+            List of detections to attach to the case.
+        incidents : list[dict]
+            List of incidents to attach to the case.
+        title : str
+            Case title.
+        type : str
+            Case type. String. The keyword `case_type` can also be used to specify this value.
+        user_uuid : str
+            UUID of the user related to the case.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/CreateCaseV2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_payload(passed_keywords=kwargs)
@@ -366,24 +426,33 @@ class MessageCenter(ServiceClass):
     def get_cases(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve message center cases.
 
-        Keyword arguments:
-        body -- full body payload, not required if ids is provided as a keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/GetCaseEntitiesByIDs
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if ids is provided as a keyword.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- One or more case IDs. String or list of strings.
+        ids : str or list[str]
+            One or more case IDs.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/GetCaseEntitiesByIDs
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_arguments=args,
@@ -403,26 +472,36 @@ class MessageCenter(ServiceClass):
     def query_activities(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve activities IDs for a case.
 
-        Keyword arguments:
-        case_id -- Case ID to search for activities. String.
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  String.
-        limit -- The maximum number of records to return. [integer, 1-500]
-        offset -- The integer offset to start retrieving records from. Integer.
-        parameters - full parameters payload, not required if using other keywords. Dictionary.
-        sort -- The property to sort on. FQL syntax. String.
-                Available properties
-                activity.created_time
-                activity.type
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/QueryActivityByCaseID
+
+        Keyword arguments
+        -----------------
+        case_id : str
+            Case ID to search for activities.
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int (1-500)
+            The maximum number of records to return.
+        offset : int
+            The integer offset to start retrieving records from.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort on. FQL syntax. String.
+            Available properties
+            activity.created_time
+            activity.type
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -436,28 +515,37 @@ class MessageCenter(ServiceClass):
     def query_cases(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve case IDs that match the provided filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  String.
-        limit -- The maximum number of records to return. [integer, 1-500]
-        offset -- The integer offset to start retrieving records from. Integer.
-        parameters - full parameters payload, not required if using other keywords. Dictionary.
-        sort -- The property to sort on. FQL syntax. String.
-                Available properties
-                case.created_time
-                case.id
-                case.last_modified_time
-                case.status
-                case.type
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/QueryCasesIdsByFilter
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int (1-500)
+            The maximum number of records to return.
+        offset : int
+            The integer offset to start retrieving records from.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort on. FQL syntax. String.
+            Available properties
+            case.created_time
+            case.id
+            case.last_modified_time
+            case.status
+            case.type
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

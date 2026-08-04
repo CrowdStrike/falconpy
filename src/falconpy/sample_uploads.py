@@ -67,21 +67,32 @@ class SampleUploads(ServiceClass):
     def list_archive(self: object, *args, parameters: dict = None, **kwargs) -> object:
         """Retrieve the archive files in chunks.
 
-        Keyword arguments:
-        id -- The SHA256 of the archive. String.
-        limit -- Maximum number of files to retrieve. Integer. Default: 100.
-        offset -- Starting offset from which to retrieve files.
-        parameters -- Full parameters payload, not required if id is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ArchiveListV1
+
+        Keyword arguments
+        -----------------
+        id : str
+            The SHA256 of the archive.
+        limit : int
+            Maximum number of files to retrieve. Integer. Default: 100.
+        offset : str
+            Starting offset from which to retrieve files.
+        parameters : dict
+            Full parameters payload, not required if id is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -98,20 +109,30 @@ class SampleUploads(ServiceClass):
         Status `done` means that archive was processed successfully.
         Status `error` means that archive was not processed successfully.
 
-        Keyword arguments:
-        id -- The SHA256 of the archive. String.
-        include_files -- Flag indicating if processed archives should also be returned. Boolean.
-        parameters -- Full parameters payload, not required if id is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ArchiveGetV1
+
+        Keyword arguments
+        -----------------
+        id : str
+            The SHA256 of the archive.
+        include_files : bool
+            Flag indicating if processed archives should also be returned.
+        parameters : dict
+            Full parameters payload, not required if id is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -125,19 +146,28 @@ class SampleUploads(ServiceClass):
     def delete_archive(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Remove an archive that was uploaded previously.
 
-        Keyword arguments:
-        id -- The archive SHA256. String.
-        parameters -- full parameters payload, not required if id is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ArchiveDeleteV1
+
+        Keyword arguments
+        -----------------
+        id : str
+            The archive SHA256.
+        parameters : dict
+            full parameters payload, not required if id is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -161,27 +191,39 @@ class SampleUploads(ServiceClass):
 
         ** DEPRECATED ** - Leverage the ArchiveUploadV2 operation instead.
 
-        Keyword arguments:
-        body -- Content of the uploaded archive in binary format. 7zip / zip only.
-        comment -- A descriptive comment to identify the file for other users. String.
-        name -- Name of the archive. String.
-        file_type -- Archive file format. String. "zip", "7zip". Defaults to "zip".
-        is_confidential -- Defines the visibility of this file in Falcon MalQuery, either
-                           via the  API or the Falcon console.
-                           True = File is only shown to users within your customer account.
-                           False = File can be seen by other CrowdStrike customers.
-                           Defaults to True.
-        parameters -- full parameters payload, not required if using other keywords.
-        password -- Archive password. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ArchiveUploadV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Content of the uploaded archive in binary format. 7zip / zip only.
+        comment : str
+            A descriptive comment to identify the file for other users.
+        name : str
+            Name of the archive.
+        file_type : str
+            Archive file format. String. "zip", "7zip". Defaults to "zip".
+        is_confidential : bool
+            Defines the visibility of this file in Falcon MalQuery, either
+            via the  API or the Falcon console.
+            True = File is only shown to users within your customer account.
+            False = File can be seen by other CrowdStrike customers.
+            Defaults to True.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        password : str
+            Archive password.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         # Try to find the binary object they provided us
         if not body:
@@ -211,28 +253,40 @@ class SampleUploads(ServiceClass):
         After uploading, use ExtractionCreateV1 to copy the file to internal storage
         making it available for content analysis.
 
-        Keyword arguments:
-        comment -- A descriptive comment to identify the file for other users. String.
-        file_data -- Content of the uploaded archive in binary format.
-                     'archive' and 'file' are also accepted as this parameter.
-        name -- Name of the archive. String. Required.
-        file_type -- Archive file format. String. "zip", "7zip". Defaults to "zip".
-        is_confidential -- Defines the visibility of this file in Falcon MalQuery, either
-                           via the  API or the Falcon console.
-                           True = File is only shown to users within your customer account.
-                           False = File can be seen by other CrowdStrike customers.
-                           Defaults to True.
-        parameters -- full parameters payload, not required if using other keywords.
-        password -- Archive password. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ArchiveUploadV2
+
+        Keyword arguments
+        -----------------
+        comment : str
+            A descriptive comment to identify the file for other users.
+        file_data : str
+            Content of the uploaded archive in binary format.
+            'archive' and 'file' are also accepted as this parameter.
+        name : str (required)
+            Name of the archive.
+        file_type : str
+            Archive file format. String. "zip", "7zip". Defaults to "zip".
+        is_confidential : str
+            Defines the visibility of this file in Falcon MalQuery, either
+            via the  API or the Falcon console.
+            True = File is only shown to users within your customer account.
+            False = File can be seen by other CrowdStrike customers.
+            Defaults to True.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        password : str
+            Archive password.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         method_args = ["name", "archive", "file", "file_data", "is_confidential", "comment", "password"]
         kwargs = params_to_keywords(method_args,
@@ -282,21 +336,32 @@ class SampleUploads(ServiceClass):
         Status `done` means that all files were processed successfully.
         Status `error` means that at least one of the files could not be processed.
 
-        Keyword arguments:
-        id -- The extraction operation ID. String.
-        limit -- Maximum number of file extractions to retrieve. Integer. Default: 0.
-        offset -- Starting offset from where to retrieve extractions.
-        parameters -- Full parameters payload, not required if id is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ExtractionListV1
+
+        Keyword arguments
+        -----------------
+        id : str
+            The extraction operation ID.
+        limit : int
+            Maximum number of file extractions to retrieve. Integer. Default: 0.
+        offset : str
+            Starting offset from where to retrieve extractions.
+        parameters : dict
+            Full parameters payload, not required if id is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -313,20 +378,30 @@ class SampleUploads(ServiceClass):
         Status `done` means that all files were processed successfully.
         Status `error` means that at least one of the files could not be processed.
 
-        Keyword arguments:
-        id -- The extraction operation ID. String.
-        include_files -- Flag indicating if processed archives should also be returned. Boolean.
-        parameters -- Full parameters payload, not required if id is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ExtractionGetV1
+
+        Keyword arguments
+        -----------------
+        id : str
+            The extraction operation ID.
+        include_files : bool
+            Flag indicating if processed archives should also be returned.
+        parameters : dict
+            Full parameters payload, not required if id is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -344,8 +419,16 @@ class SampleUploads(ServiceClass):
                           ) -> dict:
         """Extract files from an uploaded archive and copy them to internal storage for analysis.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format. Not required if using other keywords. Dictionary.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ExtractionCreateV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format. Not required if using other keywords.
                 {
                     "extract_all": true,
                     "files": [
@@ -357,18 +440,19 @@ class SampleUploads(ServiceClass):
                     ],
                     "sha256": "string"
                 }
-        extract_all -- Flag indicating if all files should be extracted. Boolean.
-        files -- List of files to be extracted from the archive. List of dictionaries.
-        sha256 -- SHA256 Archive ID of the archive. String.
+        extract_all : bool
+            Flag indicating if all files should be extracted.
+        files : list[dict]
+            List of files to be extracted from the archive.
+        sha256 : str
+            SHA256 Archive ID of the archive.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ExtractionCreateV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = extraction_payload(passed_keywords=kwargs)
@@ -390,22 +474,33 @@ class SampleUploads(ServiceClass):
                    ) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Retrieve the file associated with the given ID (SHA256).
 
-        Keyword arguments:
-        ids -- List of SHA256s to retrieve. String or list of strings.
-        parameters -- Full parameters payload, not required if ids is provided as a keyword.
-        password_protected -- Flag whether the sample should be zipped and password protected
-                              with the pass of 'infected'. Defaults to False.
-        stream -- Enable streaming download of the file. Boolean.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/GetSampleV3
+
+        Keyword arguments
+        -----------------
+        ids : str
+            List of SHA256s to retrieve.
+        parameters : dict
+            Full parameters payload, not required if ids is provided as a keyword.
+        password_protected : bool
+            Flag whether the sample should be zipped and password protected
+            with the pass of 'infected'. Defaults to False.
+        stream : bool
+            Enable streaming download of the file.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -427,49 +522,57 @@ class SampleUploads(ServiceClass):
 
         After uploading, call the specific analysis API endpoint.
 
-        Keyword arguments:
-        comment -- A descriptive comment to identify the file for other users. String.
-        file_data -- Content of the uploaded sample in binary format. Max file size is 256 MB.
-                     'sample' and 'upfile' are also accepted as this parameter.
-
-                     Accepted File Formats:
-                     Portable executables: .exe, .scr, .pif, .dll, .com, .cpl, etc.
-                     Office documents: .doc, .docx, .ppt, .pps, .pptx, .ppsx, .xls,
-                                       .xlsx, .rtf, .pub
-                     PDF
-                     APK
-                     Executable JAR
-                     Windows script component: .sct
-                     Windows shortcut: .lnk
-                     Windows help: .chm
-                     HTML application: .hta
-                     Windows script file: .wsf
-                     Javascript: .js
-                     Visual Basic: .vbs, .vbe
-                     Shockwave Flash: .swf
-                     Perl: .pl
-                     Powershell: .ps1, .psd1, .psm1
-                     Scalable vector graphics: .svg
-                     Python: .py
-                     Linux ELF executables
-                     Email files: MIME RFC 822 .eml, Outlook .msg
-        file_name -- Name of the file. String.
-        is_confidential -- Defines the visibility of this file in Falcon MalQuery, either
-                           via the  API or the Falcon console.
-                           True = File is only shown to users within your customer account.
-                           False = File can be seen by other CrowdStrike customers.
-                           Defaults to True.
-        parameters -- full parameters payload, not required if using other keywords.
-
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/UploadSampleV3
+
+        Keyword arguments
+        -----------------
+        comment : str
+            A descriptive comment to identify the file for other users.
+        file_data : str
+            Content of the uploaded sample in binary format. Max file size is 256 MB.
+            'sample' and 'upfile' are also accepted as this parameter.
+            Accepted File Formats:
+            Portable executables: .exe, .scr, .pif, .dll, .com, .cpl, etc.
+            Office documents: .doc, .docx, .ppt, .pps, .pptx, .ppsx, .xls,
+                              .xlsx, .rtf, .pub
+            PDF
+            APK
+            Executable JAR
+            Windows script component: .sct
+            Windows shortcut: .lnk
+            Windows help: .chm
+            HTML application: .hta
+            Windows script file: .wsf
+            Javascript: .js
+            Visual Basic: .vbs, .vbe
+            Shockwave Flash: .swf
+            Perl: .pl
+            Powershell: .ps1, .psd1, .psm1
+            Scalable vector graphics: .svg
+            Python: .py
+            Linux ELF executables
+            Email files: MIME RFC 822 .eml, Outlook .msg
+        file_name : str
+            Name of the file.
+        is_confidential : str
+            Defines the visibility of this file in Falcon MalQuery, either
+            via the  API or the Falcon console.
+            True = File is only shown to users within your customer account.
+            False = File can be seen by other CrowdStrike customers.
+            Defaults to True.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         # Check for raw parameters dictionary and convert it's contents to keywords
         method_args = ["file_name", "sample", "upfile", "file_data", "is_confidential", "comment"]
@@ -511,19 +614,28 @@ class SampleUploads(ServiceClass):
     def delete_sample(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Remove a sample, including file, meta and submissions from the collection.
 
-        Keyword arguments:
-        ids -- List of SHA256s to delete. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/DeleteSampleV3
+
+        Keyword arguments
+        -----------------
+        ids : str
+            List of SHA256s to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

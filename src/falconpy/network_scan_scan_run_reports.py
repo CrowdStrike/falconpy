@@ -63,19 +63,28 @@ class NetworkScanScanRunReports(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download the scan run report in CSV format for the specified scan run ID.
 
-        Keyword arguments:
-        id -- Scan run ID for which report is to be fetched. Required. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scan-run-reports/get_scan_run_reports
+
+        Keyword arguments
+        -----------------
+        id : str (required)
+            Scan run ID for which report is to be fetched.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

@@ -63,12 +63,20 @@ class MalQuery(ServiceClass):
 
         This method does not accept arguments or keywords.
 
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery/GetMalQueryQuotasV1
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -83,8 +91,16 @@ class MalQuery(ServiceClass):
         Search for a combination of hex patterns and strings in order to identify
         samples based upon file content at byte level granularity.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery/PostMalQueryFuzzySearchV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "options": {
                         "filter_meta": [
@@ -99,22 +115,22 @@ class MalQuery(ServiceClass):
                         }
                     ]
                 }
-        filter_meta -- List of strings.
-        limit -- Integer representing maximum number of matches to return.
-        patterns -- List of dictionaries containing patterns to match.
-                    {
-                        "type": "string",
-                        "value": "string
-                    }
+        filter_meta : list[str]
+        limit : str
+            Integer representing maximum number of matches to return.
+        patterns : list
+            List of dictionaries containing patterns to match.
+            {
+                "type": "string",
+                "value": "string
+            }
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery/PostMalQueryFuzzySearchV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = malquery_fuzzy_payload(passed_keywords=kwargs)
@@ -137,20 +153,29 @@ class MalQuery(ServiceClass):
         Specify the file using its SHA256.
         Only one file is supported at this time.
 
-        Keyword arguments:
-        ids -- List of SHA256s to retrieve. String or list of strings.
-        parameters -- Full parameters payload, not required if ids is provided as a keyword.
-        stream -- Enable streaming download of the returned file. Boolean.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery/GetMalQueryDownloadV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of SHA256s to retrieve.
+        parameters : dict
+            Full parameters payload, not required if ids is provided as a keyword.
+        stream : bool
+            Enable streaming download of the returned file.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        binary object on SUCCESS, dict object containing API response on FAILURE.
         """
         return process_service_request(
             calling_object=self,
@@ -165,19 +190,28 @@ class MalQuery(ServiceClass):
     def get_metadata(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve indexed files metadata by their hash.
 
-        Keyword arguments:
-        ids -- List of SHA256s to retrieve metadata for. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery/GetMalQueryMetadataV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of SHA256s to retrieve metadata for.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -193,19 +227,28 @@ class MalQuery(ServiceClass):
 
         Supports a single request id at this time.
 
-        Keyword arguments:
-        ids -- List of MalQuery identifiers to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery/GetMalQueryRequestV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of MalQuery identifiers to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -225,20 +268,29 @@ class MalQuery(ServiceClass):
 
         Call this once the samples-multidownload request has finished processing
 
-        Keyword arguments:
-        ids -- Multi-download job ID. String.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-        stream -- Enable streaming download of the returned file. Boolean.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery/GetMalQueryEntitiesSamplesFetchV1
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Multi-download job ID.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+        stream : bool
+            Enable streaming download of the returned file.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        binary object on SUCCESS, dict object containing API response on FAILURE.
         """
         return process_service_request(
             calling_object=self,
@@ -256,24 +308,33 @@ class MalQuery(ServiceClass):
         Use the result id with the /request endpoint to check if the download is ready
         after which you can call get_samples to get the zip.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery/PostMalQueryEntitiesSamplesMultidownloadV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "samples": [
                         "string"
                     ]
                 }
-        samples -- SHA256(s) of the samples to retrieve. String or list of strings.
+        samples : str or list[str]
+            SHA256(s) of the samples to retrieve.
 
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'samples'. All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'samples'. All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery/PostMalQueryEntitiesSamplesMultidownloadV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_arguments=args,
@@ -299,8 +360,16 @@ class MalQuery(ServiceClass):
 
         Returns a request id which can be used with the /request endpoint.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery/PostMalQueryExactSearchV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "options": {
                         "filter_filetypes": [
@@ -322,27 +391,33 @@ class MalQuery(ServiceClass):
                         }
                     ]
                 }
-        filter_filetypes -- File types to filter on. List of strings.
-        filter_meta -- File metadata to filter on. List of strings.
-        limit -- Integer representing maximum number of matches to return.
-        max_date -- Maximum date to match. UTC formatted string.
-        min_date -- Minimum date to match. UTC formatted string.
-        max_size -- Maximum size in bytes to match. String.
-        min_size -- Minumum size in bytes to match. String.
-        patterns -- List of dictionaries containing patterns to match.
-                    {
-                        "type": "string",
-                        "value": "string
-                    }
+        filter_filetypes : list[str]
+            File types to filter on.
+        filter_meta : list[str]
+            File metadata to filter on.
+        limit : str
+            Integer representing maximum number of matches to return.
+        max_date : str
+            Maximum date to match. UTC formatted.
+        min_date : str
+            Minimum date to match. UTC formatted.
+        max_size : str
+            Maximum size in bytes to match.
+        min_size : str
+            Minumum size in bytes to match.
+        patterns : list
+            List of dictionaries containing patterns to match.
+            {
+                "type": "string",
+                "value": "string
+            }
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery/PostMalQueryExactSearchV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = malquery_exact_search_payload(passed_keywords=kwargs)
@@ -360,8 +435,16 @@ class MalQuery(ServiceClass):
 
         Returns a request id which can be used with the /request endpoint.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery/PostMalQueryHuntV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "options": {
                         "filter_filetypes": [
@@ -378,23 +461,29 @@ class MalQuery(ServiceClass):
                     },
                     "yara_rule": "string"
                 }
-        filter_filetypes -- File types to filter on. List of strings.
-        filter_meta -- File metadata to filter on. List of strings.
-        limit -- Integer representing maximum number of matches to return.
-        max_date -- Maximum date to match. UTC formatted string.
-        min_date -- Minimum date to match. UTC formatted string.
-        max_size -- Maximum size in bytes to match. String.
-        min_size -- Minumum size in bytes to match. String.
-        yara_rule -- Yara rule to use for matching. String.
+        filter_filetypes : list[str]
+            File types to filter on.
+        filter_meta : list[str]
+            File metadata to filter on.
+        limit : str
+            Integer representing maximum number of matches to return.
+        max_date : str
+            Maximum date to match. UTC formatted.
+        min_date : str
+            Minimum date to match. UTC formatted.
+        max_size : str
+            Maximum size in bytes to match.
+        min_size : str
+            Minumum size in bytes to match.
+        yara_rule : str
+            Yara rule to use for matching.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery/PostMalQueryHuntV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = malquery_hunt_payload(passed_keywords=kwargs)

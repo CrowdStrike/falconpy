@@ -60,27 +60,37 @@ class CorrelationRulesAdmin(ServiceClass):
     def change_correlation_rule_owner(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Change the owner of an existing Correlation Rule.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules-admin/entities.rules_ownership.put.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "api_client_id": "string",
                     "id": "string",
                     "user_id": "string",
                     "user_uuid": "string"
                 }
-        api_client_id -- The API client ID. String.
-        id -- The rule ID. String.
-        user_id -- The user ID. String.
-        user_uuid -- The user UUID. String.
+        api_client_id : str
+            The API client ID.
+        id : str
+            The rule ID.
+        user_id : str
+            The user ID.
+        user_uuid : str
+            The user UUID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PUT
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules-admin/entities.rules_ownership.put.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = correlation_rules_admin_payload(passed_keywords=kwargs)

@@ -86,19 +86,27 @@ class NGSIEM(ServiceClass):
                     **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload file to NGSIEM.
 
-        Keyword arguments:
-        lookup_file -- File to be uploaded. Binary data.  (CSV format)
-        repository -- Name of the repository. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UploadLookupV1
+
+        Keyword arguments
+        -----------------
+        lookup_file : str
+            File to be uploaded. Binary data.  (CSV format)
+        repository : str
+            Name of the repository.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("lookup_file", None):
             lookup_file = kwargs.get("lookup_file", None)
@@ -153,20 +161,28 @@ class NGSIEM(ServiceClass):
                  **kwargs) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Download lookup file from NGSIEM.
 
-        Keyword arguments:
-        repository -- Name of the repository. String.
-        filename -- Name of the lookup file. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        stream -- Enable streaming download of the returned file. Boolean.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/humio-auth-proxy/GetLookupV1
+
+        Keyword arguments
+        -----------------
+        repository : str
+            Name of the repository.
+        filename : str
+            Name of the lookup file.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        stream : bool
+            Enable streaming download of the returned file.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        binary object on SUCCESS, dict object containing API response on FAILURE.
         """
         repository = kwargs.get("repository", None)
         filename = kwargs.get("filename", None)
@@ -198,23 +214,33 @@ class NGSIEM(ServiceClass):
                                              ) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Download lookup file in namespaced package from NGSIEM.
 
-        Keyword arguments:
-        repository -- Name of repository. String.
-        namespace -- Name of namespace. String.
-        package -- Name of package. String.
-        filename -- Name of lookup file. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        stream -- Enable streaming download of the returned file. Boolean.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /humio-auth-proxy/GetLookupFromPackageWithNamespaceV1
+        /humio-auth-proxy/GetLookupFromPackageWithNamespaceV1
+
+        Keyword arguments
+        -----------------
+        repository : str
+            Name of repository.
+        namespace : str
+            Name of namespace.
+        package : str
+            Name of package.
+        filename : str
+            Name of lookup file.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        stream : bool
+            Enable streaming download of the returned file.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        binary object on SUCCESS, dict object containing API response on FAILURE.
         """
         repository = kwargs.get("repository", False)
         filename = kwargs.get("filename", False)
@@ -251,21 +277,30 @@ class NGSIEM(ServiceClass):
                               **kwargs) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Download lookup file in package from NGSIEM.
 
-        Keyword arguments:
-        repository -- Name of repository. String.
-        package -- Name of package. String.
-        filename -- Name of lookup file. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        stream -- Enable streaming download of the returned response. Boolean.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/humio-auth-proxy/GetLookupFromPackageV1
+
+        Keyword arguments
+        -----------------
+        repository : str
+            Name of repository.
+        package : str
+            Name of package.
+        filename : str
+            Name of lookup file.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        stream : bool
+            Enable streaming download of the returned response.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        binary object on SUCCESS, dict object containing API response on FAILURE.
         """
         repository = kwargs.get("repository", None)
         filename = kwargs.get("filename", None)
@@ -300,13 +335,25 @@ class NGSIEM(ServiceClass):
                      **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Initiate search.
 
-        Keyword arguments:
-        allow_event_skipping -- Flag indicating if event skipping is allowed. Boolean.
-        arguments -- Search arguments in JSON format. Dictionary.
-        around -- Search proximity arguments. Dictionary.
-        autobucket_count -- Number of events per bucket. Integer.
-        body -- Full body payload as a JSON dictionary.
-                Not required if using the search argument or other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/humio-auth-proxy/StartSearchV1
+
+        Keyword arguments
+        -----------------
+        allow_event_skipping : bool
+            Flag indicating if event skipping is allowed.
+        arguments : dict
+            Search arguments in JSON format.
+        around : dict
+            Search proximity arguments.
+        autobucket_count : int
+            Number of events per bucket.
+        body : dict
+            Full body payload as a JSON dictionary.
+            Not required if using the search argument or other keywords.
                 {
                     "allowEventSkipping": boolean,
                     "arguments": {},
@@ -327,47 +374,56 @@ class NGSIEM(ServiceClass):
                     "timeZoneOffsetMinutes": integer,
                     "useIngestTime": boolean
                 }
-        end -- Last event limit. String.
-        ingest_end -- Ingest maximum. Integer.
-        ingest_start -- Ingest start. Integer.
-        is_live -- Flag indicating if this is a live search. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using repository keyword.
-        query_string -- Search query string. String.
-        repository -- Name of repository. Required. String.
-        search -- Search to perform. JSON formatted string. Can be used instead of body.
-                  Not required if using other keywords.
-                  {
-                    "allowEventSkipping": boolean,
-                    "arguments": {},
-                    "around": {
-                        "eventId": "string",
-                        "numberOfEventsAfter": integer,
-                        "numberOfEventsBefore": integer,
-                        "timestamp": integer
-                    },
-                    "autobucketCount": integer,
-                    "end": "string",
-                    "ingestEnd": "string",
-                    "ingestStart": "string",
-                    "isLive": boolean,
-                    "queryString": "string",
-                    "start": "string",
-                    "timeZone": "string",
-                    "timeZoneOffsetMinutes": integer,
-                    "useIngestTime": boolean
-                  }
-        start -- Search starting time range. Start.
-        timezone -- Timezone applied to the search. String.
-        timezone_offset_minutes -- Timezone offset. Integer.
+        end : str
+            Last event limit.
+        ingest_end : int
+            Ingest maximum.
+        ingest_start : int
+            Ingest start.
+        is_live : bool
+            Flag indicating if this is a live search.
+        parameters : dict
+            Full parameters payload dictionary. Not required if using repository keyword.
+        query_string : str
+            Search query.
+        repository : str (required)
+            Name of repository.
+        search : str
+            Search to perform. JSON formatted string. Can be used instead of body.
+            Not required if using other keywords.
+            {
+              "allowEventSkipping": boolean,
+              "arguments": {},
+              "around": {
+                  "eventId": "string",
+                  "numberOfEventsAfter": integer,
+                  "numberOfEventsBefore": integer,
+                  "timestamp": integer
+              },
+              "autobucketCount": integer,
+              "end": "string",
+              "ingestEnd": "string",
+              "ingestStart": "string",
+              "isLive": boolean,
+              "queryString": "string",
+              "start": "string",
+              "timeZone": "string",
+              "timeZoneOffsetMinutes": integer,
+              "useIngestTime": boolean
+            }
+        start : str
+            Search starting time range. Start.
+        timezone : str
+            Timezone applied to the search.
+        timezone_offset_minutes : int
+            Timezone offset.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/humio-auth-proxy/StartSearchV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         repository = kwargs.get("repository", None)
         search = kwargs.get("search", None)
@@ -403,24 +459,37 @@ class NGSIEM(ServiceClass):
                           **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get status of search.
 
-        Keyword arguments:
-        repository -- Name of repository. String.
-        id -- ID of the query. String. Can be used instead of search_id keyword.
-        search_id -- ID of the query. String. Can be used instead of id keyword.
-        paginationLimit -- Optional pagination limit. Integer.
-        paginationOffset -- Optional pagination offset. Integer.
-        pagination_limit -- Optional pagination limit (alias for paginationLimit). Integer.
-        pagination_offset -- Optional pagination offset (alias for paginationOffset). Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/humio-auth-proxy/GetSearchStatusV1
+
+        Keyword arguments
+        -----------------
+        repository : str
+            Name of repository.
+        id : str
+            ID of the query. String. Can be used instead of search_id keyword.
+        search_id : str
+            ID of the query. String. Can be used instead of id keyword.
+        paginationLimit : int
+            Optional pagination limit.
+        paginationOffset : int
+            Optional pagination offset.
+        pagination_limit : int
+            Optional pagination limit (alias for paginationLimit)
+        pagination_offset : int
+            Optional pagination offset (alias for paginationOffset)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         repository = kwargs.get("repository", None)
         search_id = kwargs.get("id", kwargs.get("search_id", None))
@@ -459,20 +528,29 @@ class NGSIEM(ServiceClass):
                     **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Stop search.
 
-        Keyword arguments:
-        repository -- Name of repository. String.
-        id -- ID of the query. String. Can be used instead of search_id keyword.
-        search_id -- ID of the query. String. Can be used instead of id keyword.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/humio-auth-proxy/StopSearchV1
+
+        Keyword arguments
+        -----------------
+        repository : str
+            Name of repository.
+        id : str
+            ID of the query. String. Can be used instead of search_id keyword.
+        search_id : str
+            ID of the query. String. Can be used instead of id keyword.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         repository = kwargs.get("repository", None)
         search_id = kwargs.get("id", kwargs.get("search_id", None))
@@ -503,22 +581,30 @@ class NGSIEM(ServiceClass):
     def get_dashboard_template(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Dashboard in NGSIEM as LogScale YAML Template.
 
-        Keyword arguments:
-        ids -- Dashboard ID value. String.
-        search_domain -- Name of search domain (view or repo). String.
-                         Allowed options:
-                           all              falcon
-                           third-party      dashboards
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetDashboardTemplate
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Dashboard ID value.
+        search_domain : str
+            Name of search domain (view or repo). String.
+            Allowed options:
+              all              falcon
+              third-party      dashboards
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -535,24 +621,33 @@ class NGSIEM(ServiceClass):
                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Dashboard from LogScale YAML Template in NGSIEM.
 
-        Keyword arguments:
-        search_domain -- Name of search domain (view or repo). String.
-                         Allowed options:
-                           all
-                           falcon
-                           third-party
-        name -- Name of the dashboard. String.
-        yaml_template -- LogScale dashboard YAML template content, see schema at https://schemas.humio.com/. Binary data.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreateDashboardFromTemplate
+
+        Keyword arguments
+        -----------------
+        search_domain : str
+            Name of search domain (view or repo). String.
+            Allowed options:
+              all
+              falcon
+              third-party
+        name : str
+            Name of the dashboard.
+        yaml_template : bytes
+            LogScale dashboard YAML template content, see schema at https://schemas.humio.com/
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         yaml_data = kwargs.get("yaml_template", None)
         file_extended = {}
@@ -585,24 +680,33 @@ class NGSIEM(ServiceClass):
 
         Please note a successful update will result in a new ID value being returned.
 
-        Keyword arguments:
-        search_domain -- Name of search domain (view or repo). String.
-                         Allowed options:
-                           all
-                           falcon
-                           third-party
-        name -- Name of the dashboard. String.
-        yaml_template -- LogScale dashboard YAML template content, see schema at https://schemas.humio.com/. Binary data.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateDashboardFromTemplate
+
+        Keyword arguments
+        -----------------
+        search_domain : str
+            Name of search domain (view or repo). String.
+            Allowed options:
+              all
+              falcon
+              third-party
+        name : str
+            Name of the dashboard.
+        yaml_template : bytes
+            LogScale dashboard YAML template content, see schema at https://schemas.humio.com/
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         yaml_data = kwargs.get("yaml_template", None)
         file_extended = {}
@@ -630,23 +734,31 @@ class NGSIEM(ServiceClass):
     def delete_dashboard(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete Dashboard in NGSIEM.
 
-        Keyword arguments:
-        ids -- Dashboard ID to be removed. String.
-        search_domain -- name of search domain (view or repo). String.
-                         Allowed options:
-                           all
-                           falcon
-                           third-party
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/DeleteDashboard
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Dashboard ID to be removed.
+        search_domain : str
+            name of search domain (view or repo). String.
+            Allowed options:
+              all
+              falcon
+              third-party
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -660,23 +772,31 @@ class NGSIEM(ServiceClass):
     def get_lookup_file(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Lookup File in NGSIEM.
 
-        Keyword arguments:
-        filename -- Lookup file filename. String.
-        search_domain -- Name of search domain (view or repo). String.
-                         Allowed options:
-                           all                  falcon
-                           third-party          dashboards
-                           parsers-repository
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetLookupFile
+
+        Keyword arguments
+        -----------------
+        filename : str
+            Lookup file filename.
+        search_domain : str
+            Name of search domain (view or repo). String.
+            Allowed options:
+              all                  falcon
+              third-party          dashboards
+              parsers-repository
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -690,23 +810,32 @@ class NGSIEM(ServiceClass):
     def create_lookup_file(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Lookup File in NGSIEM.
 
-        Keyword arguments:
-        search_domain -- Name of search domain (view or repo). String.
-                         Allowed options:
-                           all              falcon
-                           third-party      parsers-repository
-        filename -- Filename of the lookup file to create. String.
-        file -- File content to upload. Binary data.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreateLookupFile
+
+        Keyword arguments
+        -----------------
+        search_domain : str
+            Name of search domain (view or repo). String.
+            Allowed options:
+              all              falcon
+              third-party      parsers-repository
+        filename : str
+            Filename of the lookup file to create.
+        file : bytes
+            File content to upload.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         file_name = kwargs.get("filename", None)
         file_data = kwargs.get("file", None)
@@ -731,23 +860,32 @@ class NGSIEM(ServiceClass):
     def update_lookup_file(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Lookup File in NGSIEM.
 
-        Keyword arguments:
-        search_domain -- Name of search domain (view or repo). String.
-                         Allowed options:
-                           all              falcon
-                           third-party      parsers-repository
-        filename -- Filename of the lookup file to create. String.
-        file -- File content to upload. Binary data.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateLookupFile
+
+        Keyword arguments
+        -----------------
+        search_domain : str
+            Name of search domain (view or repo). String.
+            Allowed options:
+              all              falcon
+              third-party      parsers-repository
+        filename : str
+            Filename of the lookup file to create.
+        file : bytes
+            File content to upload.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         file_name = kwargs.get("filename", None)
         file_data = kwargs.get("file", None)
@@ -772,23 +910,31 @@ class NGSIEM(ServiceClass):
     def delete_lookup_file(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete Lookup File in NGSIEM.
 
-        Keyword arguments:
-        filename -- Lookup file filename. String.
-        search_domain -- Name of search domain (view or repo). String.
-                         Allowed options:
-                           all                  falcon
-                           third-party          dashboards
-                           parsers-repository
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/DeleteLookupFile
+
+        Keyword arguments
+        -----------------
+        filename : str or list[str]
+            Lookup file filename.
+        search_domain : str
+            Name of search domain (view or repo). String.
+            Allowed options:
+              all                  falcon
+              third-party          dashboards
+              parsers-repository
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -802,23 +948,31 @@ class NGSIEM(ServiceClass):
     def clone_parser(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Clone an existing parser with a new name.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CloneParser
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "new_name": "string",
                     "source_id": "string"
                 }
-        new_name -- The name for the cloned parser. String. Required.
-        source_id -- The ID of the source parser to clone. String. Required.
+        new_name : str (required)
+            The name for the cloned parser.
+        source_id : str (required)
+            The ID of the source parser to clone.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CloneParser
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ngsiem_clone_parser_payload(passed_keywords=kwargs)
@@ -837,20 +991,28 @@ class NGSIEM(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Test Parser from LogScale YAML Template in NGSIEM.
 
-        Keyword arguments:
-        yaml_template -- LogScale Parser YAML template content, see schema at https://schemas.humio.com/. Binary data.
-        schema_validation_enabled -- When true, schema validation is enforced (CPS) and validates against Crowdstrike Parsing
-                                     Standard. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/TestParserFromTemplate
+
+        Keyword arguments
+        -----------------
+        yaml_template : bytes
+            LogScale Parser YAML template content, see schema at https://schemas.humio.com/
+        schema_validation_enabled : bool
+            When true, schema validation is enforced (CPS) and validates against Crowdstrike Parsing
+            Standard.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         yaml_data = kwargs.get("yaml_template", None)
         if yaml_data:
@@ -872,20 +1034,28 @@ class NGSIEM(ServiceClass):
     def get_parser_template(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Parser in NGSIEM as LogScale YAML Template.
 
-        Keyword arguments:
-        ids -- Parser ID to retrieve. String.
-        repository -- Name of repository. String.
-                      Allowed options: parsers-repository
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetParserTemplate
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Parser ID to retrieve.
+        repository : str
+            Name of repository. String.
+            Allowed options: parsers-repository
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -902,21 +1072,30 @@ class NGSIEM(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Parser from LogScale YAML Template in NGSIEM.
 
-        Keyword arguments:
-        repository -- Name of repository. String.
-                      Allowed options: parsers-repository
-        name -- Name of the parser. String.
-        yaml_template -- LogScale dashboard YAML template content, see schema at https://schemas.humio.com/. Binary data.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreateParserFromTemplate
+
+        Keyword arguments
+        -----------------
+        repository : str
+            Name of repository. String.
+            Allowed options: parsers-repository
+        name : str
+            Name of the parser.
+        yaml_template : bytes
+            LogScale dashboard YAML template content, see schema at https://schemas.humio.com/
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         yaml_data = kwargs.get("yaml_template", None)
         file_extended = {}
@@ -944,20 +1123,28 @@ class NGSIEM(ServiceClass):
     def get_parser(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Parser in NGSIEM.
 
-        Keyword arguments:
-        ids -- Parser ID to retrieve. String.
-        repository -- Name of repository. String.
-                      Allowed options: parsers-repository
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetParser
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Parser ID to retrieve.
+        repository : str
+            Name of repository. String.
+            Allowed options: parsers-repository
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -971,8 +1158,16 @@ class NGSIEM(ServiceClass):
     def create_parser(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Parser in NGSIEM.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreateParser
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "fields_to_be_removed_before_parsing": [
                         "string"
@@ -1007,21 +1202,25 @@ class NGSIEM(ServiceClass):
                         }
                     ]
                 }
-        fields_to_be_removed_before_parsing -- List of fields to remove before parsing. String or list of strings.
-        fields_to_tag -- List of fields to tag. String or list of strings.
-        name -- Parser name. String.
-        repository -- Parser repository. String.
-        script -- Parser script. String.
-        test_cases -- List of test cases to apply to the parser. List of dictionaries.
+        fields_to_be_removed_before_parsing : str or list[str]
+            List of fields to remove before parsing.
+        fields_to_tag : str or list[str]
+            List of fields to tag.
+        name : str
+            Parser name.
+        repository : str
+            Parser repository.
+        script : str
+            Parser script.
+        test_cases : list[dict]
+            List of test cases to apply to the parser.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreateParser
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ngsiem_parser_payload(passed_keywords=kwargs)
@@ -1039,8 +1238,16 @@ class NGSIEM(ServiceClass):
 
         Please note that name changes are not supported, but rather should be created as a new parser.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateParser
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "fields_to_be_removed_before_parsing": [
                         "string"
@@ -1075,22 +1282,27 @@ class NGSIEM(ServiceClass):
                         }
                     ]
                 }
-        fields_to_be_removed_before_parsing -- List of fields to remove before parsing. String or list of strings.
-        fields_to_tag -- List of fields to tag. String or list of strings.
-        id -- ID of the parser to be updated. String.
-        name -- Parser name. String.
-        repository -- Parser repository. String.
-        script -- Parser script. String.
-        test_cases -- List of test cases to apply to the parser. List of dictionaries.
+        fields_to_be_removed_before_parsing : str or list[str]
+            List of fields to remove before parsing.
+        fields_to_tag : str or list[str]
+            List of fields to tag.
+        id : str
+            ID of the parser to be updated.
+        name : str
+            Parser name.
+        repository : str
+            Parser repository.
+        script : str
+            Parser script.
+        test_cases : list[dict]
+            List of test cases to apply to the parser.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateParser
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ngsiem_parser_payload(passed_keywords=kwargs)
@@ -1112,21 +1324,30 @@ class NGSIEM(ServiceClass):
         Please note that name changes are not supported, but rather should be
         created as a new parser.
 
-        Keyword arguments:
-        repository -- Name of repository. String.
-                      Allowed options: parsers-repository
-        ids -- ID of the parser. String.
-        yaml_template -- LogScale Parser YAML template content, see schema at https://schemas.humio.com/. Binary data.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateParserFromTemplate
+
+        Keyword arguments
+        -----------------
+        repository : str
+            Name of repository. String.
+            Allowed options: parsers-repository
+        ids : str
+            ID of the parser.
+        yaml_template : bytes
+            LogScale Parser YAML template content, see schema at https://schemas.humio.com/
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         yaml_data = kwargs.get("yaml_template", None)
         file_extended = {}
@@ -1154,20 +1375,28 @@ class NGSIEM(ServiceClass):
     def delete_parser(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete Parser in NGSIEM.
 
-        Keyword arguments:
-        ids -- Parser ID to be removed. String.
-        repository -- Name of repository.
-                      Allowed options: parsers-repository
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/DeleteParser
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Parser ID to be removed.
+        repository : str
+            Name of repository.
+            Allowed options: parsers-repository
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1186,23 +1415,31 @@ class NGSIEM(ServiceClass):
 
         Enables or disables auto-updates for parsers.
 
-        Keyword arguments:
-        autoupdate_policy -- The auto update policy setting ('on' or 'off'). String.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateParserAutoUpdatePolicy
+
+        Keyword arguments
+        -----------------
+        autoupdate_policy : str
+            The auto update policy setting ('on' or 'off')
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "autoupdate_policy": "string",
                     "reason": "string"
                 }
-        reason -- Reason for changing the auto update policy. String.
+        reason : str
+            Reason for changing the auto update policy.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PUT
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateParserAutoUpdatePolicy
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ngsiem_auto_update_policy_payload(passed_keywords=kwargs)
@@ -1221,23 +1458,31 @@ class NGSIEM(ServiceClass):
         Provisions a pre-built parser with a specific version for the requesting customer ID (CID).
         The parser is installed as-is and cannot be modified by the customer.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/InstallParser
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "parser_id": "string",
                     "version": "string"
                 }
-        parser_id -- The unique identifier of the parser to install. String.
-        version -- The version of the parser to install. String.
+        parser_id : str
+            The unique identifier of the parser to install.
+        version : str
+            The version of the parser to install.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/InstallParser
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ngsiem_install_parser_payload(passed_keywords=kwargs)
@@ -1257,8 +1502,16 @@ class NGSIEM(ServiceClass):
         customer ID (CID). The parsers are installed as-is and cannot be modified by the customer.
         Maximum 100 parsers per request.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkInstallParsers
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "parsers": [
                         {
@@ -1267,16 +1520,15 @@ class NGSIEM(ServiceClass):
                         }
                     ]
                 }
-        parsers -- List of parser objects containing parser_id and version. List of dictionaries.
+        parsers : list[dict]
+            List of parser objects containing parser_id and version.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkInstallParsers
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ngsiem_bulk_install_parsers_payload(passed_keywords=kwargs)
@@ -1295,22 +1547,30 @@ class NGSIEM(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Saved Query in NGSIEM as LogScale YAML Template.
 
-        Keyword arguments:
-        ids -- Saved query ID to retrieve. String.
-        search_domain -- Name of search domain (view or repo).
-                         Allowed options:
-                           all              falcon
-                           third-party      dashboards
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetSavedQueryTemplate
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Saved query ID to retrieve.
+        search_domain : str
+            Name of search domain (view or repo).
+            Allowed options:
+              all              falcon
+              third-party      dashboards
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1324,23 +1584,31 @@ class NGSIEM(ServiceClass):
     def create_saved_query(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a Saved Query from LogScale YAML Template in NGSIEM.
 
-        Keyword arguments:
-        search_domain -- Name of search domain (view or repo). String.
-                         Allowed options:
-                           all
-                           falcon
-                           third-party
-        yaml_template -- LogScale saved query YAML template content, see schema at https://schemas.humio.com/. Binary data.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreateSavedQuery
+
+        Keyword arguments
+        -----------------
+        search_domain : str
+            Name of search domain (view or repo). String.
+            Allowed options:
+              all
+              falcon
+              third-party
+        yaml_template : bytes
+            LogScale saved query YAML template content, see schema at https://schemas.humio.com/
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         yaml_data = kwargs.get("yaml_template", None)
         file_extended = {}
@@ -1371,24 +1639,33 @@ class NGSIEM(ServiceClass):
 
         Please note a successful update will result in a new ID value being returned.
 
-        Keyword arguments:
-        ids -- ID of the saved query to update. String.
-        search_domain -- Name of search domain (view or repo). String.
-                         Allowed options:
-                           all
-                           falcon
-                           third-party
-        yaml_template -- LogScale saved query YAML template content, see schema at https://schemas.humio.com/. Binary data.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateSavedQueryFromTemplate
+
+        Keyword arguments
+        -----------------
+        ids : str
+            ID of the saved query to update.
+        search_domain : str
+            Name of search domain (view or repo). String.
+            Allowed options:
+              all
+              falcon
+              third-party
+        yaml_template : bytes
+            LogScale saved query YAML template content, see schema at https://schemas.humio.com/
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         yaml_data = kwargs.get("yaml_template", None)
         file_extended = {}
@@ -1414,23 +1691,31 @@ class NGSIEM(ServiceClass):
     def delete_saved_query(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete Saved Query in NGSIEM.
 
-        Keyword arguments:
-        ids -- Saved query ID to retrieve. String.
-        search_domain -- Name of search domain (view or repo).
-                         Allowed options:
-                           all
-                           falcon
-                           third-party
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/DeleteSavedQuery
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Saved query ID to retrieve.
+        search_domain : str
+            Name of search domain (view or repo).
+            Allowed options:
+              all
+              falcon
+              third-party
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1444,25 +1729,35 @@ class NGSIEM(ServiceClass):
     def list_dashboards(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """List Dashboards in NGSIEM.
 
-        Keyword arguments:
-        limit -- Maximum number of results to return. Integer string. Default value: 50
-        offset -- Number of results to offset the returned results by. Integer string. Default value: 0
-        filter -- FQL filter to apply to the name of the content. String.
-                  Only currently support text match on name field: name:~'value'
-        search_domain -- Name of search domain (view or repo).
-                         Allowed options:
-                           all              falcon
-                           third-party      dashboards
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ListDashboards
+
+        Keyword arguments
+        -----------------
+        limit : str
+            Maximum number of results to return. Integer string. Default value: 50
+        offset : str
+            Number of results to offset the returned results by. Integer string. Default value: 0
+        filter : str
+            FQL filter to apply to the name of the content. String.
+            Only currently support text match on name field: name:~'value'
+        search_domain : str
+            Name of search domain (view or repo).
+            Allowed options:
+              all              falcon
+              third-party      dashboards
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1476,26 +1771,36 @@ class NGSIEM(ServiceClass):
     def list_lookup_files(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """List Lookup Files in NGSIEM.
 
-        Keyword arguments:
-        limit -- Maximum number of results to return. Integer string. Default value: 50
-        offset -- Number of results to offset the returned results by. Integer string. Default value: 0
-        filter -- FQL filter to apply to the name of the content. String.
-                  Only currently support text match on name field: name:~'value'
-        search_domain -- Name of search domain (view or repo).
-                         Allowed options:
-                           all              falcon
-                           third-party      dashboards
-                           parsers-repository
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ListLookupFiles
+
+        Keyword arguments
+        -----------------
+        limit : str
+            Maximum number of results to return. Integer string. Default value: 50
+        offset : str
+            Number of results to offset the returned results by. Integer string. Default value: 0
+        filter : str
+            FQL filter to apply to the name of the content. String.
+            Only currently support text match on name field: name:~'value'
+        search_domain : str
+            Name of search domain (view or repo).
+            Allowed options:
+              all              falcon
+              third-party      dashboards
+              parsers-repository
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1509,27 +1814,39 @@ class NGSIEM(ServiceClass):
     def list_parsers(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """List Parsers in NGSIEM.
 
-        Keyword arguments:
-        limit -- Maximum number of results to return. Integer string. Default value: 50
-        offset -- Number of results to offset the returned results by. Integer string. Default value: 0
-        filter -- FQL filter to apply to the name of the content. String.
-                  Only currently support text match on name field: name:~'value'
-        repository -- Name of repository.
-                      Allowed options: parsers-repository
-        update_available -- Filter parsers by update availability. String.
-                           Allowed values: true, false
-        parser_type -- Filter parsers by type. String.
-                       Allowed values: ootb, custom
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ListParsers
+
+        Keyword arguments
+        -----------------
+        limit : str
+            Maximum number of results to return. Integer string. Default value: 50
+        offset : str
+            Number of results to offset the returned results by. Integer string. Default value: 0
+        filter : str
+            FQL filter to apply to the name of the content. String.
+            Only currently support text match on name field: name:~'value'
+        repository : str
+            Name of repository.
+            Allowed options: parsers-repository
+        update_available : str
+            Filter parsers by update availability. String.
+            Allowed values: true, false
+        parser_type : str
+            Filter parsers by type. String.
+            Allowed values: ootb, custom
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1543,25 +1860,35 @@ class NGSIEM(ServiceClass):
     def list_saved_queries(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Saved Queries in NGSIEM.
 
-        Keyword arguments:
-        limit -- Maximum number of results to return. Integer string. Default value: 50
-        offset -- Number of results to offset the returned results by. Integer string. Default value: 0
-        filter -- FQL filter to apply to the name of the content. String.
-                  Only currently support text match on name field: name:~'value'
-        search_domain -- name of search domain (view or repo).
-                         Allowed options:
-                           all              falcon
-                           third-party      dashboards
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ListSavedQueries
+
+        Keyword arguments
+        -----------------
+        limit : str
+            Maximum number of results to return. Integer string. Default value: 50
+        offset : str
+            Number of results to offset the returned results by. Integer string. Default value: 0
+        filter : str
+            FQL filter to apply to the name of the content. String.
+            Only currently support text match on name field: name:~'value'
+        search_domain : str
+            name of search domain (view or repo).
+            Allowed options:
+              all              falcon
+              third-party      dashboards
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1578,29 +1905,41 @@ class NGSIEM(ServiceClass):
                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update entries in an existing Lookup File in NGSIEM.
 
-        Keyword arguments:
-        search_domain -- name of search domain (view or repo). String.
-        filename -- Filename of the lookup file to update. String.
-        file -- The file content for updating or appending the entries. Binary data.
-        update_mode -- How to update the file entries. String.
-                       Available values:
-                            append      update
-        key_columns -- For update mode, the comma separated list of key columns to use when matching entries. String.
-        (REQUIRED when update_mode=update)
-        ignore_case -- For update mode, whether to ignore case when matching keys. String.
-                       Available values:
-                            true    false
-        (REQUIRED when update_mode=update)
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateLookupFileEntries
+
+        Keyword arguments
+        -----------------
+        search_domain : str
+            name of search domain (view or repo)
+        filename : str
+            Filename of the lookup file to update.
+        file : bytes
+            The file content for updating or appending the entries.
+        update_mode : str
+            How to update the file entries. String.
+            Available values:
+                 append      update
+        key_columns : str
+            For update mode, the comma separated list of key columns to use when matching entries. String.
+            (REQUIRED when update_mode=update)
+        ignore_case : str
+            For update mode, whether to ignore case when matching keys. String.
+                           Available values:
+                                true    false
+            (REQUIRED when update_mode=update)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         file_name = kwargs.get("filename", None)
         file_data = kwargs.get("file", None)
@@ -1628,21 +1967,31 @@ class NGSIEM(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """List and search data connections.
 
-        Keyword arguments:
-        filter -- Optional filter criteria in FQL format. String.
-        offset -- Starting position for pagination. Integer.
-        limit -- Maximum number of items to return. Integer.
-        sort -- Sort field and direction. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalListDataConnections
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Optional filter criteria in FQL format.
+        offset : int
+            Starting position for pagination.
+        limit : int
+            Maximum number of items to return.
+        sort : str
+            Sort field and direction.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1656,21 +2005,31 @@ class NGSIEM(ServiceClass):
     def list_data_connectors(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """List available data connectors.
 
-        Keyword arguments:
-        filter -- Optional filter criteria in FQL format. String.
-        offset -- Starting position for pagination. Integer.
-        limit -- Maximum number of items to return. Integer.
-        sort -- Sort field and direction. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalListDataConnectors
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Optional filter criteria in FQL format.
+        offset : int
+            Starting position for pagination.
+        limit : int
+            Maximum number of items to return.
+        sort : str
+            Sort field and direction.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1688,19 +2047,28 @@ class NGSIEM(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get data connection provisioning status.
 
-        Keyword arguments:
-        ids -- Unique identifier of the data connection. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalGetDataConnectionStatus
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Unique identifier of the data connection.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1718,23 +2086,32 @@ class NGSIEM(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update data connection status.
 
-        Keyword arguments:
-        ids -- Unique identifier of the data connection. String or list of strings.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
-                {
-                    "status": "string"
-                }
-        status -- The status of the data connection. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalUpdateDataConnectionStatus
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Unique identifier of the data connection.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "status": "string"
+                }
+        status : str
+            The status of the data connection.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body["status"] = kwargs.get("status", None)
@@ -1756,19 +2133,28 @@ class NGSIEM(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Ingest token for data connection.
 
-        Keyword arguments:
-        ids -- Unique identifier of the data connection. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalGetDataConnectionToken
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Unique identifier of the data connection.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1786,19 +2172,28 @@ class NGSIEM(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Regenerate Ingest token for data connection.
 
-        Keyword arguments:
-        ids -- Unique identifier of the data connection. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalRegenerateDataConnectionToken
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Unique identifier of the data connection.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1816,19 +2211,28 @@ class NGSIEM(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get data connection by ID.
 
-        Keyword arguments:
-        ids -- Unique identifier of the data connection. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalGetDataConnectionByID
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Unique identifier of the data connection.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1842,8 +2246,16 @@ class NGSIEM(ServiceClass):
     def create_data_connection(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new data connection.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalCreateDataConnection
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "config": {
                         "auth": {},
@@ -1867,29 +2279,40 @@ class NGSIEM(ServiceClass):
                     "vendor_name": "string",
                     "vendor_product_name": "string"
                 }
-        config -- Configuration settings for the data connection, including auth and params. Dictionary.
-        config_id -- Identifier of the connector configuration to use. String.
-        connector_id -- Identifier of the connector for this data connection. String.
-        connector_type -- Type of the connector. String.
-        custom -- Custom properties for the data connection, such as connector-specific configuration
-                  keys (e.g., PluginConfigID). Dictionary of string key/value pairs.
-        description -- Description of the data connection. String.
-        enable_host_enrichment -- Flag to enable host enrichment on ingested data. Boolean.
-        enable_user_enrichment -- Flag to enable user enrichment on ingested data. Boolean.
-        log_sources -- Log sources associated with this data connection. String or list of strings.
-        name -- Name of the data connection. String.
-        parser -- Parser to use for processing ingested data. String.
-        vendor_name -- Name of the vendor providing the data. String.
-        vendor_product_name -- Name of the vendor product providing the data. String.
+        config : dict
+            Configuration settings for the data connection, including auth and params.
+        config_id : str
+            Identifier of the connector configuration to use.
+        connector_id : str
+            Identifier of the connector for this data connection.
+        connector_type : str
+            Type of the connector.
+        custom : dict
+            Custom properties for the data connection, such as connector-specific configuration
+            keys (e.g., PluginConfigID). Dictionary of string key/value pairs.
+        description : str
+            Description of the data connection.
+        enable_host_enrichment : bool
+            Flag to enable host enrichment on ingested data.
+        enable_user_enrichment : bool
+            Flag to enable user enrichment on ingested data.
+        log_sources : str or list[str]
+            Log sources associated with this data connection.
+        name : str
+            Name of the data connection.
+        parser : str
+            Parser to use for processing ingested data.
+        vendor_name : str
+            Name of the vendor providing the data.
+        vendor_product_name : str
+            Name of the vendor product providing the data.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalCreateDataConnection
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ngsiem_data_connection_payload(passed_keywords=kwargs)
@@ -1909,9 +2332,18 @@ class NGSIEM(ServiceClass):
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a data connection.
 
-        Keyword arguments:
-        ids -- Unique identifier of the data connection. String.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalUpdateDataConnection
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Unique identifier of the data connection.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "config": {
                         "auth": {},
@@ -1925,23 +2357,29 @@ class NGSIEM(ServiceClass):
                     "name": "string",
                     "parser": "string"
                 }
-        config -- Configuration settings for the data connection, including auth and params. Dictionary.
-        config_id -- Identifier of the connector configuration to use. String.
-        description -- Description of the data connection. String.
-        enable_host_enrichment -- Flag to enable host enrichment on ingested data. Boolean.
-        enable_user_enrichment -- Flag to enable user enrichment on ingested data. Boolean.
-        name -- Name of the data connection. String.
-        parser -- Parser to use for processing ingested data. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        config : dict
+            Configuration settings for the data connection, including auth and params.
+        config_id : str
+            Identifier of the connector configuration to use.
+        description : str
+            Description of the data connection.
+        enable_host_enrichment : bool
+            Flag to enable host enrichment on ingested data.
+        enable_user_enrichment : bool
+            Flag to enable user enrichment on ingested data.
+        name : str
+            Name of the data connection.
+        parser : str
+            Parser to use for processing ingested data.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalUpdateDataConnection
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ngsiem_data_connection_payload(passed_keywords=kwargs)
@@ -1962,19 +2400,28 @@ class NGSIEM(ServiceClass):
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a data connection.
 
-        Keyword arguments:
-        ids -- Unique identifier of the data connection. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalDeleteDataConnection
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Unique identifier of the data connection.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1992,19 +2439,28 @@ class NGSIEM(ServiceClass):
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """List configurations for a data connector.
 
-        Keyword arguments:
-        ids -- Unique identifier of the data connector. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalListConnectorConfigs
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Unique identifier of the data connector.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -2018,8 +2474,16 @@ class NGSIEM(ServiceClass):
     def create_connector_config(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new configuration for a data connector.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalCreateConnectorConfig
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "config": {
                         "auth": {},
@@ -2028,17 +2492,17 @@ class NGSIEM(ServiceClass):
                     },
                     "connector_id": "string"
                 }
-        config -- Configuration details for the connector including authentication and parameters. Dictionary.
-        connector_id -- Unique identifier of the data connector. String.
+        config : dict
+            Configuration details for the connector including authentication and parameters.
+        connector_id : str
+            Unique identifier of the data connector.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalCreateConnectorConfig
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ngsiem_connector_config_payload(passed_keywords=kwargs)
@@ -2058,9 +2522,18 @@ class NGSIEM(ServiceClass):
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Patch configurations for a data connector.
 
-        Keyword arguments:
-        ids -- Unique id of the config to update. String.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalPatchConnectorConfig
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Unique id of the config to update.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "config": {
                         "auth": {},
@@ -2069,18 +2542,19 @@ class NGSIEM(ServiceClass):
                     },
                     "connector_id": "string"
                 }
-        config -- Configuration details for the connector including authentication and parameters. Dictionary.
-        connector_id -- Unique identifier of the data connector. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        config : dict
+            Configuration details for the connector including authentication and parameters.
+        connector_id : str
+            Unique identifier of the data connector.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalPatchConnectorConfig
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ngsiem_connector_config_payload(passed_keywords=kwargs)
@@ -2101,19 +2575,27 @@ class NGSIEM(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete data connection config.
 
-        Keyword arguments:
-        connector_id -- Unique identifier of the connector. String.
-        ids -- Unique identifiers of the config(s) to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalDeleteConnectorConfigs
+
+        Keyword arguments
+        -----------------
+        connector_id : str
+            Unique identifier of the connector.
+        ids : str or list[str]
+            Unique identifiers of the config(s) to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -2130,8 +2612,16 @@ class NGSIEM(ServiceClass):
                                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Multiple Dashboards from YAML Templates.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkCreateDashboardsFromTemplate
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "dashboard_items": [
                         {
@@ -2141,17 +2631,17 @@ class NGSIEM(ServiceClass):
                     ],
                     "search_domain": "string"
                 }
-        dashboard_items -- List of dashboards to create. List.
-        search_domain -- The name of the search domain where the dashboards will be created. String.
+        dashboard_items : list
+            List of dashboards to create.
+        search_domain : str
+            The name of the search domain where the dashboards will be created.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkCreateDashboardsFromTemplate
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = bulk_create_dashboards_from_template_payload(passed_keywords=kwargs)
@@ -2170,8 +2660,16 @@ class NGSIEM(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Multiple Lookup Files.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkCreateLookupFiles
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "lookup_files": [
                         {
@@ -2181,17 +2679,17 @@ class NGSIEM(ServiceClass):
                     ],
                     "search_domain": "string"
                 }
-        lookup_files -- List of lookup files to create. List.
-        search_domain -- The name of the search domain where the lookup files will be created. String.
+        lookup_files : list
+            List of lookup files to create.
+        search_domain : str
+            The name of the search domain where the lookup files will be created.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkCreateLookupFiles
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = bulk_create_lookup_files_payload(passed_keywords=kwargs)
@@ -2210,8 +2708,16 @@ class NGSIEM(ServiceClass):
                                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Multiple Saved Queries from LogScale YAML Templates.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkCreateSavedQueriesFromTemplate
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "saved_query_items": [
                         {
@@ -2220,17 +2726,17 @@ class NGSIEM(ServiceClass):
                     ],
                     "search_domain": "string"
                 }
-        saved_query_items -- List of saved queries to create. List.
-        search_domain -- The name of the search domain where saved queries will be created. String.
+        saved_query_items : list
+            List of saved queries to create.
+        search_domain : str
+            The name of the search domain where saved queries will be created.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkCreateSavedQueriesFromTemplate
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = bulk_create_saved_queries_from_template_payload(passed_keywords=kwargs)
@@ -2249,20 +2755,28 @@ class NGSIEM(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Multiple Lookup Files by Filenames in NGSIEM.
 
-        Keyword arguments:
-        filename -- Lookup file filename(s) (required, multiple allowed). List.
-        search_domain -- name of search domain (view or repo). Available values: all, falcon, third-party, dashboards,
-                         parsers-repository. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkGetLookupFiles
+
+        Keyword arguments
+        -----------------
+        filename : str or list[str]
+            Lookup file filename(s) (required, multiple allowed)
+        search_domain : str
+            name of search domain (view or repo). Available values: all, falcon, third-party, dashboards,
+            parsers-repository.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -2279,8 +2793,16 @@ class NGSIEM(ServiceClass):
                                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Multiple Dashboards from YAML Templates.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkUpdateDashboardsFromTemplate
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "dashboard_items": [
                         {
@@ -2290,17 +2812,17 @@ class NGSIEM(ServiceClass):
                     ],
                     "search_domain": "string"
                 }
-        dashboard_items -- Array of dashboards to update with their IDs and YAML templates. List.
-        search_domain -- The name of the search domain containing the dashboards. String.
+        dashboard_items : list
+            Array of dashboards to update with their IDs and YAML templates.
+        search_domain : str
+            The name of the search domain containing the dashboards.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkUpdateDashboardsFromTemplate
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = bulk_update_dashboards_from_template_payload(passed_keywords=kwargs)
@@ -2319,8 +2841,16 @@ class NGSIEM(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Multiple Lookup Files.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkUpdateLookupFiles
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "lookup_files": [
                         {
@@ -2330,17 +2860,17 @@ class NGSIEM(ServiceClass):
                     ],
                     "search_domain": "string"
                 }
-        lookup_files -- List of lookup files to update. List.
-        search_domain -- The name of the search domain containing the lookup files. String.
+        lookup_files : list
+            List of lookup files to update.
+        search_domain : str
+            The name of the search domain containing the lookup files.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkUpdateLookupFiles
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = bulk_update_lookup_files_payload(passed_keywords=kwargs)
@@ -2359,8 +2889,16 @@ class NGSIEM(ServiceClass):
                                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Multiple Saved Queries from LogScale YAML Templates.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkUpdateSavedQueriesFromTemplate
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "saved_query_items": [
                         {
@@ -2370,17 +2908,17 @@ class NGSIEM(ServiceClass):
                     ],
                     "search_domain": "string"
                 }
-        saved_query_items -- Array of saved queries to update with their IDs and YAML templates. List.
-        search_domain -- The name of the search domain containing the saved queries. String.
+        saved_query_items : list
+            Array of saved queries to update with their IDs and YAML templates.
+        search_domain : str
+            The name of the search domain containing the saved queries.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkUpdateSavedQueriesFromTemplate
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = bulk_update_saved_queries_from_template_payload(passed_keywords=kwargs)
@@ -2399,8 +2937,16 @@ class NGSIEM(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a Parser extension in NGSIEM for the provided base parser.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreateParserExtension
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "base_parser_id": "string",
                     "extension_name": "string",
@@ -2431,21 +2977,25 @@ class NGSIEM(ServiceClass):
                         }
                     ]
                 }
-        base_parser_id -- The base_parser_id value. String.
-        extension_name -- The extension_name value. String.
-        parser_id -- The parser_id value. String.
-        post_processing_script -- The post_processing_script value. String.
-        pre_processing_script -- The pre_processing_script value. String.
-        test_cases -- The test_cases value. List.
+        base_parser_id : str
+            The base_parser_id value.
+        extension_name : str
+            The extension_name value.
+        parser_id : str
+            The parser_id value.
+        post_processing_script : str
+            The post_processing_script value.
+        pre_processing_script : str
+            The pre_processing_script value.
+        test_cases : list
+            The test_cases value.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreateParserExtension
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = create_parser_extension_payload(passed_keywords=kwargs)
@@ -2464,8 +3014,16 @@ class NGSIEM(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an existing Parser extension in NGSIEM.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateParserExtension
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "extension_id": "string",
                     "post_processing_script": "string",
@@ -2494,19 +3052,21 @@ class NGSIEM(ServiceClass):
                         }
                     ]
                 }
-        extension_id -- The unique identifier of the parser extension to update. String.
-        post_processing_script -- Optional - update postprocessing logic. String.
-        pre_processing_script -- Optional - update preprocessing logic. String.
-        test_cases -- Optional - update test cases. List.
+        extension_id : str
+            The unique identifier of the parser extension to update.
+        post_processing_script : str
+            Optional - update postprocessing logic.
+        pre_processing_script : str
+            Optional - update preprocessing logic.
+        test_cases : list
+            Optional - update test cases.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateParserExtension
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = update_parser_extension_payload(passed_keywords=kwargs)

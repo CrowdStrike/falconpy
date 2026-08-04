@@ -67,23 +67,23 @@ class FalconContainer(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/DownloadExportFile
 
         Keyword arguments
-        ----
+        -----------------
         id : str (required)
             Export job ID.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed
         to be 'id'. All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -106,23 +106,23 @@ class FalconContainer(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/ReadExportJobs
 
         Keyword arguments
-        ----
+        -----------------
         ids : str or List of str (required)
             Export Job IDs to read. Allowed up to 100 IDs per request.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed
         to be 'ids'. All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -143,11 +143,11 @@ class FalconContainer(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/LaunchExportJob
 
         Keyword arguments
-        ----
+        -----------------
         body : dict
             Full body payload, not required when using other keywords.
             {
@@ -179,7 +179,7 @@ class FalconContainer(ServiceClass):
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -199,19 +199,19 @@ class FalconContainer(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container/GetCredentials
 
         Keyword arguments
-        ----
+        -----------------
         This method does not accept keyword arguments.
 
         Arguments
-        ----
+        ---------
         This method does not accept arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -228,11 +228,11 @@ class FalconContainer(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-cli/ReadImageVulnerabilities
 
         Keyword arguments
-        ----
+        -----------------
         applicationPackages : list[dict]
             List of application packages.
         body : dict
@@ -278,7 +278,7 @@ class FalconContainer(ServiceClass):
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -303,11 +303,11 @@ class FalconContainer(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        ----
+        -----------
         This operation does not exist in swagger.
 
         Keyword arguments
-        ----
+        -----------------
         digest: str (must be paired with image_id)
             Hash digest for the image.
         image_id: str (must be paired with digest)
@@ -322,7 +322,7 @@ class FalconContainer(ServiceClass):
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -340,21 +340,21 @@ class FalconContainer(ServiceClass):
         HTTP Method: DELETE
 
         Swagger URL
-        ----
+        -----------
         This operation does not exist in swagger.
 
         Keyword arguments
-        ----
+        -----------------
         image_id : str (required)
             ID of the image to delete details for.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed
         to be 'image_id'. All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -375,11 +375,11 @@ class FalconContainer(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        ----
+        -----------
         This operation does not exist in swagger.
 
         Keyword arguments
-        ----
+        -----------------
         repository : str (required)
             Repository where the image resides.
         parameters : dict
@@ -390,7 +390,7 @@ class FalconContainer(ServiceClass):
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -410,11 +410,11 @@ class FalconContainer(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/ReadRegistryEntities
 
         Keyword arguments
-        ----
+        -----------------
         limit : int
             The maximum number of records to return in this response. [1-500]
             Use with the offset parameter to manage pagination of results.
@@ -429,7 +429,7 @@ class FalconContainer(ServiceClass):
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -452,23 +452,23 @@ class FalconContainer(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/ReadRegistryEntitiesByUUID
 
         Keyword arguments
-        ----
+        -----------------
         ids : str
             Registry entity UUID.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be 'ids'.
         All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -491,23 +491,23 @@ class FalconContainer(ServiceClass):
         HTTP Method: DELETE
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/DeleteRegistryEntities
 
         Keyword arguments
-        ----
+        -----------------
         ids : str
             List of Prevention Policy IDs to delete.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be 'ids'.
         All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -530,11 +530,11 @@ class FalconContainer(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/QueryExportJobs
 
         Keyword arguments
-        ----
+        -----------------
         filter : str (required)
             Filter exports using a query in Falcon Query Language (FQL). Only the last 100 jobs are returned.
             Supported filter fields:  resource, status
@@ -542,12 +542,12 @@ class FalconContainer(ServiceClass):
             Full parameters payload. Not required if using other keywords.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed
         to be 'filter'. All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -566,11 +566,11 @@ class FalconContainer(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/CreateRegistryEntities
 
         Keyword arguments
-        ----
+        -----------------
         body : dict
             Full body payload, not required if keywords are used.
                 {
@@ -586,7 +586,7 @@ class FalconContainer(ServiceClass):
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -607,11 +607,11 @@ class FalconContainer(ServiceClass):
         HTTP Method: PATCH
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/UpdateRegistryEntities
 
         Keyword arguments
-        ----
+        -----------------
         body : dict
             Full body payload, not required if keywords are used.
                 {
@@ -621,7 +621,7 @@ class FalconContainer(ServiceClass):
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -642,11 +642,11 @@ class FalconContainer(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/UpdateRegistryEntities
 
         Keyword arguments
-        ----
+        -----------------
         agent_uuid : str
             Agent UUID
         agent_version : str
@@ -720,7 +720,7 @@ class FalconContainer(ServiceClass):
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -740,19 +740,19 @@ class FalconContainer(ServiceClass):
         HTTP Method: HEAD
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/HeadImageScanInventory
 
         Keyword arguments
-        ----
+        -----------------
         This method does not accept keyword arguments.
 
         Arguments
-        ----
+        ---------
         This method does not accept arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response. Body payload will be empty.
         """
@@ -769,21 +769,31 @@ class FalconContainer(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Check image prevention policies.
 
-        Keyword arguments:
-        registry -- Image registry. String.
-        repository -- Image repository. String.
-        tag -- Image tag. String.
-        architecture -- Architecture e.g. 'amd64', 'arm64'... String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/PolicyChecks
+
+        Keyword arguments
+        -----------------
+        registry : str
+            Image registry.
+        repository : str
+            Image repository.
+        tag : str
+            Image tag.
+        architecture : str
+            Architecture e.g. 'amd64', 'arm64'
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -800,28 +810,41 @@ class FalconContainer(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get image assessment scan report by image reference (v2).
 
-        Keyword arguments:
-        registry -- Image registry. String.
-        repository -- Image repository. String.
-        tag -- Image tag. String.
-        image_id -- Image ID. String.
-        digest -- Image digest. String.
-        report_format -- Specify image-assessment scan report format.
-                         Supported formats:
-                           cyclonedx-json
-                           json
-                           sarif
-        architecture -- Platform architecture to filter multi-arch images (e.g. amd64, arm64). String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/GetReportByReference
+
+        Keyword arguments
+        -----------------
+        registry : str
+            Image registry.
+        repository : str
+            Image repository.
+        tag : str
+            Image tag.
+        image_id : str
+            Image ID.
+        digest : str
+            Image digest.
+        report_format : str
+            Specify image-assessment scan report format.
+            Supported formats:
+              cyclonedx-json
+              json
+              sarif
+        architecture : str
+            Platform architecture to filter multi-arch images (e.g. amd64, arm64)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -835,23 +858,31 @@ class FalconContainer(ServiceClass):
     def get_report_by_id(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get image assessment scan report by scan UUID (v2).
 
-        Keyword arguments:
-        uuid -- Scan UUID. String.
-        report_format -- Specify image-assessment scan report format. String.
-                         Supported formats:
-                           cyclonedx-json
-                           json
-                           sarif
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/GetReportByScanID
+
+        Keyword arguments
+        -----------------
+        uuid : str
+            Scan UUID.
+        report_format : str
+            Specify image-assessment scan report format. String.
+            Supported formats:
+              cyclonedx-json
+              json
+              sarif
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         uuid = kwargs.get("uuid", None)
         if uuid:

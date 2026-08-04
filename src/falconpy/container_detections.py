@@ -63,26 +63,35 @@ class ContainerDetections(ServiceClass):
                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate counts of detections by severity.
 
-        Keyword arguments:
-        filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    cid             image_registry
-                    container_id    image_repository
-                    detection_type  image_tag
-                    id              name
-                    image_digest    severity
-                    image_id
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-detections/ReadDetectionsCountBySeverity
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              cid             image_registry
+              container_id    image_repository
+              detection_type  image_tag
+              id              name
+              image_digest    severity
+              image_id
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'filter'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -100,26 +109,35 @@ class ContainerDetections(ServiceClass):
                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate counts of detections by detection type.
 
-        Keyword arguments:
-        filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    cid             image_registry
-                    container_id    image_repository
-                    detection_type  image_tag
-                    id              name
-                    image_digest    severity
-                    image_id
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-detections/ReadDetectionsCountByType
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              cid             image_registry
+              container_id    image_repository
+              detection_type  image_tag
+              id              name
+              image_digest    severity
+              image_id
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'filter'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -137,26 +155,35 @@ class ContainerDetections(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of detections.
 
-        Keyword arguments:
-        filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    cid             image_registry
-                    container_id    image_repository
-                    detection_type  image_tag
-                    id              name
-                    image_digest    severity
-                    image_id
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-detections/ReadDetectionsCount
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              cid             image_registry
+              container_id    image_repository
+              detection_type  image_tag
+              id              name
+              image_digest    severity
+              image_id
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'filter'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -173,32 +200,42 @@ class ContainerDetections(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve image assessment detections identified by the provided filter criteria.
 
-        Keyword arguments:
-        filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    cid             image_registry
-                    container_id    image_repository
-                    detection_type  image_tag
-                    id              name
-                    image_digest    severity
-                    image_id
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        sort -- The fields to sort the records on. String.
-                Supported columns:
-                  containers_impacted   detection_type
-                  detection_name        images_impacted
-                  detection_severity    last_detected
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-detections/ReadCombinedDetections
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              cid             image_registry
+              container_id    image_repository
+              detection_type  image_tag
+              id              name
+              image_digest    severity
+              image_id
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        sort : str
+            The fields to sort the records on. String.
+            Supported columns:
+              containers_impacted   detection_type
+              detection_name        images_impacted
+              detection_severity    last_detected
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -215,38 +252,47 @@ class ContainerDetections(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve image assessment detections identified by the provided filter criteria.
 
-        Keyword arguments:
-        filter -- Filter Container Runtime Detections using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    action_taken            file_name
-                    aid                     file_path
-                    cid                     host_id
-                    cloud                   host_type
-                    cluster_name            image_id
-                    command_line            name
-                    computer_name           namespace
-                    container_id            pod_name
-                    detect_timestamp        severity
-                    detection_description   tactic
-                    detection_id
-
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        sort -- The fields to sort the records on. String.
-                Supported columns:
-                  containers_impacted   detection_type
-                  detection_name        images_impacted
-                  detection_severity    last_detected
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-detections/GetRuntimeDetectionsCombinedV2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter Container Runtime Detections using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              action_taken            file_name
+              aid                     file_path
+              cid                     host_id
+              cloud                   host_type
+              cluster_name            image_id
+              command_line            name
+              computer_name           namespace
+              container_id            pod_name
+              detect_timestamp        severity
+              detection_description   tactic
+              detection_id
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        sort : str
+            The fields to sort the records on. String.
+            Supported columns:
+              containers_impacted   detection_type
+              detection_name        images_impacted
+              detection_severity    last_detected
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -260,21 +306,30 @@ class ContainerDetections(ServiceClass):
     def read_detections(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve image assessment detection entities identified by the provided filter criteria.
 
-        Keyword arguments:
-        filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:  cid, detection_type, image_registry, image_repository, image_tag
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-detections/ReadDetections
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL). String.
+            Supported filters:  cid, detection_type, image_registry, image_repository, image_tag
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -288,27 +343,36 @@ class ContainerDetections(ServiceClass):
     def search_detections(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve image assessment detection entities identified by the provided filter criteria.
 
-        Keyword arguments:
-        filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    cid             image_registry
-                    container_id    image_repository
-                    detection_type  image_tag
-                    id              name
-                    image_digest    severity
-                    image_id
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-detections/SearchDetections
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              cid             image_registry
+              container_id    image_repository
+              detection_type  image_tag
+              id              name
+              image_digest    severity
+              image_id
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

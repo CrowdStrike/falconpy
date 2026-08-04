@@ -72,8 +72,16 @@ class Recon(ServiceClass):
                                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get notification aggregates as specified via JSON in request body.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/AggregateNotificationsExposedDataRecordsV1
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -108,38 +116,44 @@ class Recon(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/AggregateNotificationsExposedDataRecordsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             # Issue 664: Recon aggregate requires a list.
@@ -156,8 +170,16 @@ class Recon(ServiceClass):
     def aggregate_notifications(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get notification aggregates as specified via JSON in request body.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/AggregateNotificationsV1
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -192,38 +214,44 @@ class Recon(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/AggregateNotificationsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             # Issue 664: Recon aggregate requires a list.
@@ -240,23 +268,31 @@ class Recon(ServiceClass):
     def preview_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get notification aggregates as specified via JSON in request body.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/PreviewRuleV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "filter": "string",
                     "topic": "string"
                 }
-        filter -- Rule filter. String.
-        topic -- Rule topic. String.
+        filter : str
+            Rule filter.
+        topic : str
+            Rule topic.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/PreviewRuleV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = recon_rule_preview_payload(passed_keywords=kwargs)
@@ -272,19 +308,28 @@ class Recon(ServiceClass):
     def get_actions(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get actions based on their IDs. IDs can be retrieved using the GET query_actions.
 
-        Keyword arguments:
-        ids -- List of action IDs to retrieve details for. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetActionsV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of action IDs to retrieve details for.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -300,19 +345,29 @@ class Recon(ServiceClass):
 
         Accepts a list of actions that will be attached to the monitoring rule.
 
-        Keyword arguments:
-        actions -- List of actions to attach to the monitoring rule.
-                   When provided, actions overrides other passed keywords excluding body.
-                   List of dictionaries in the following format:
-                   {
-                       "frequency": "string",
-                       "recipients": [
-                           "string"
-                       ],
-                       "type": "string"
-                   }
-        content_format -- Content format. String.
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/CreateActionsV1
+
+        Keyword arguments
+        -----------------
+        actions : list
+            List of actions to attach to the monitoring rule.
+            When provided, actions overrides other passed keywords excluding body.
+            List of dictionaries in the following format:
+            {
+                "frequency": "string",
+                "recipients": [
+                    "string"
+                ],
+                "type": "string"
+            }
+        content_format : str
+            Content format.
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "actions": [
                         {
@@ -327,22 +382,25 @@ class Recon(ServiceClass):
                     ],
                     "rule_id": "string"
                 }
-        frequency - Frequency of the action. String. Used when only one
-                    action is being handled.
-        recipients -- UUIDs of the recipients. List of strings. Used when
-                      only one action is being handled.
-        rule_id -- Rule ID to attach the action to. Always required.
-        trigger_matchless -- Trigger on no matches. Boolean.
-        type -- Action type, used when only one action is being handled.
+        frequency : str
+            Frequency of the action. String. Used when only one
+            action is being handled.
+        recipients : str
+            UUIDs of the recipients. List of strings. Used when
+            only one action is being handled.
+        rule_id : str (required)
+            Rule ID to attach the action to. Always.
+        trigger_matchless : bool
+            Trigger on no matches.
+        type : str
+            Action type, used when only one action is being handled.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/CreateActionsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = recon_action_payload(passed_keywords=kwargs)
@@ -358,19 +416,28 @@ class Recon(ServiceClass):
     def delete_action(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an action from a monitoring rule based on the action ID.
 
-        Keyword arguments:
-        ids -- List of action IDs to delete. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/DeleteActionV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of action IDs to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -384,8 +451,16 @@ class Recon(ServiceClass):
     def update_action(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an action for a monitoring rule.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/UpdateActionV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "content_format": "string",
                     "frequency": "string",
@@ -396,21 +471,25 @@ class Recon(ServiceClass):
                     "status": "string",
                     "trigger_matchless": "string"
                 }
-        content_format -- Content format. String.
-        frequency - Frequency of the action. String.
-        id -- Action ID. String.
-        recipients -- UUIDs of the recipients. List of strings.
-        status -- Action status. String.
-        trigger_matchless -- Trigger on no match. Boolean.
+        content_format : str
+            Content format.
+        frequency : str
+            Frequency of the action.
+        id : str
+            Action ID.
+        recipients : str or list[str]
+            UUIDs of the recipients.
+        status : str
+            Action status.
+        trigger_matchless : bool
+            Trigger on no match.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/UpdateActionV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = recon_action_update_payload(passed_keywords=kwargs)
@@ -437,19 +516,27 @@ class Recon(ServiceClass):
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download the file associated with a job ID.
 
-        Keyword arguments:
-        ids -- Export job ID to retrieve details for. String.
-        parameters - full parameters payload, not required if id is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: binary object or dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetFileContentForExportJobsV1
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Export job ID to retrieve details for.
+        parameters : dict
+            full parameters payload, not required if id is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        binary object or dict object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -466,19 +553,28 @@ class Recon(ServiceClass):
         Export jobs can be launched by calling CreateExportJobsV1.
         When a job is complete, use the job ID to download the file(s) associated with it using GetFileContentForExportJobsV1.
 
-        Keyword arguments:
-        ids -- Export job IDs. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetExportJobsV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Export job IDs.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -492,8 +588,16 @@ class Recon(ServiceClass):
     def create_export_jobs(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Launch asynchronous export job. Use the job ID to poll the status of the job using GetExportJobsV1.
 
-        Keyword arguments:
-        body -- List of dictionaries.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/CreateExportJobsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload. Not required if using other keywords.
                 [
                     {
                         "entity": "string",
@@ -503,21 +607,24 @@ class Recon(ServiceClass):
                         "sort": "string"
                     }
                 ]
-        entity -- String. Only launches a single job when used.
-        export_type -- Type of export. String. Only launches a single job when used.
-        filter -- FQL filter. String. Only launches a single job when used.
-        human_readable -- Should the content be in human readable format. String.
-                          Only launches a single job when used.
-        sort -- FQL formatted sort string. Only launches a single job when used.
+        entity : str
+            String. Only launches a single job when used.
+        export_type : str
+            Type of export. String. Only launches a single job when used.
+        filter : str
+            FQL filter. String. Only launches a single job when used.
+        human_readable : bool
+            Should the content be in human readable format. String.
+            Only launches a single job when used.
+        sort : str
+            FQL formatted sort string. Only launches a single job when used.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/CreateExportJobsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = recon_export_job_payload(passed_keywords=kwargs)
@@ -538,19 +645,28 @@ class Recon(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete export jobs based on IDs.
 
-        Keyword arguments:
-        ids -- List of export job IDs to delete. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/DeleteExportJobsV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of export job IDs to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -571,19 +687,28 @@ class Recon(ServiceClass):
         Get detailed notifications based on their IDs. These include the translated raw
         intelligence content that generated the match or part of it.
 
-        Keyword arguments:
-        ids -- List of notification IDs to retrieve details for. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetNotificationsDetailedTranslatedV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of notification IDs to retrieve details for.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -604,19 +729,28 @@ class Recon(ServiceClass):
         Get detailed notifications based on their IDs. These include the raw intelligence
         content that generated the match or part of it.
 
-        Keyword arguments:
-        ids -- List of notification IDs to retrieve details for. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetNotificationsDetailedV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of notification IDs to retrieve details for.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -634,19 +768,28 @@ class Recon(ServiceClass):
                                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get monitoring rules rules by provided IDs.
 
-        Keyword arguments:
-        ids -- List of notification IDs to retrieve details for. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetNotificationsExposedDataRecordsV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of notification IDs to retrieve details for.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -668,19 +811,28 @@ class Recon(ServiceClass):
         This endpoint will return translated notification content.
         The only target language available is English.
 
-        Keyword arguments:
-        ids -- List of notification IDs to retrieve details for. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetNotificationsTranslatedV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of notification IDs to retrieve details for.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -700,19 +852,28 @@ class Recon(ServiceClass):
 
         IDs can be retrieved using get_notifications.
 
-        Keyword arguments:
-        ids -- List of notification IDs to retrieve details for. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetNotificationsV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of notification IDs to retrieve details for.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -732,19 +893,28 @@ class Recon(ServiceClass):
 
         Notifications cannot be recovered after they are deleted.
 
-        Keyword arguments:
-        ids -- List of notification IDs to retrieve details for. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/DeleteNotificationsV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of notification IDs to retrieve details for.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -758,9 +928,18 @@ class Recon(ServiceClass):
     def update_notifications(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update notification status or assignee. Accepts bulk requests.
 
-        Keyword arguments:
-        assigned_to_uuid - UUID of the assigned user. String.
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/UpdateNotificationsV1
+
+        Keyword arguments
+        -----------------
+        assigned_to_uuid : str
+            UUID of the assigned user.
+        body : dict
+            full body payload, not required when using other keywords.
                 [
                     {
                         "assigned_to_uuid": "string",
@@ -768,19 +947,18 @@ class Recon(ServiceClass):
                         "status": "string"
                     }
                 ]
-        id -- Notification ID. String.
-        status -- Notification status. String.
+        id : str
+            Notification ID.
+        status : str
+            Notification status. String.
+            This method does not support body payload validation.
 
         This method only supports keywords for providing arguments.
 
-        This method does not support body payload validation.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/UpdateNotificationsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = recon_notifications_payload(passed_keywords=kwargs)
@@ -796,19 +974,28 @@ class Recon(ServiceClass):
     def get_rules(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get monitoring rules rules by provided IDs.
 
-        Keyword arguments:
-        ids -- List of rule IDs to retrieve details for. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetRulesV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of rule IDs to retrieve details for.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -822,8 +1009,16 @@ class Recon(ServiceClass):
     def create_rules(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create monitoring rules.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/CreateRulesV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 [
                     {
                         "breach_monitoring_enabled": true,
@@ -835,24 +1030,28 @@ class Recon(ServiceClass):
                         "topic": "string"
                     }
                 ]
-        breach_monitoring_enabled -- Enable breach monitoring. Boolean.
-        filter -- Rule filter. String.
-        name -- Rule name. String.
-        permissions -- String. (private / public)
-        priority -- String. (high / medium / low)
-        substring_matching_enabled -- Enable substring matching. Boolean.
-        topic -- Rule topic. String.
+        breach_monitoring_enabled : bool
+            Enable breach monitoring.
+        filter : str
+            Rule filter.
+        name : str
+            Rule name.
+        permissions : str
+            String. (private / public)
+        priority : str
+            String. (high / medium / low)
+        substring_matching_enabled : bool
+            Enable substring matching.
+        topic : str
+            Rule topic. String.
+            This method does not support body payload validation.
 
         This method only supports keywords for providing arguments.
 
-        This method does not support body payload validation.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/CreateRulesV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = recon_rules_payload(passed_keywords=kwargs)
@@ -868,20 +1067,30 @@ class Recon(ServiceClass):
     def delete_rules(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete monitoring rules.
 
-        Keyword arguments:
-        ids -- List of rule IDs to delete. String or list of strings.
-        notificationsDeletionRequested -- Should notifications generated by this rule be deleted. Boolean.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/DeleteRulesV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of rule IDs to delete.
+        notificationsDeletionRequested : bool
+            Should notifications generated by this rule be deleted.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -895,8 +1104,16 @@ class Recon(ServiceClass):
     def update_rules(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update monitoring rules.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/UpdateRulesV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 [
                     {
                         "breach_monitoring_enabled": true,
@@ -908,24 +1125,28 @@ class Recon(ServiceClass):
                         "substring_matching_enabled": true
                     }
                 ]
-        breach_monitoring_enabled -- Enable breach monitoring. Boolean.
-        filter -- Rule filter. String.
-        name -- Rule name. String.
-        permissions -- String. (private / public)
-        priority -- String. (high / medium / low)
-        id -- Rule ID. String.
-        substring_matching_enabled -- Enable substring matching. Boolean.
+        breach_monitoring_enabled : bool
+            Enable breach monitoring.
+        filter : str
+            Rule filter.
+        name : str
+            Rule name.
+        permissions : str
+            String. (private / public)
+        priority : str
+            String. (high / medium / low)
+        id : str
+            Rule ID.
+        substring_matching_enabled : bool
+            Enable substring matching. Boolean.
+            This method does not support body payload validation.
 
         This method only supports keywords for providing arguments.
 
-        This method does not support body payload validation.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/UpdateRulesV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = recon_rules_payload(passed_keywords=kwargs)
@@ -943,30 +1164,41 @@ class Recon(ServiceClass):
 
         Use the IDs from this response to get the action entities with get_actions.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Available filters
-                  cid                   rule_id
-                  created_timestamp     status
-                  frequency             type
-                  id                    updated_timestamp
-                  recipients            user_uuid
-        limit -- The maximum number of IDs to return. [integer, 1-500]
-        offset -- The first item to return, where 0 is the latest item. (Integer)
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Free text search across all indexed fields.
-        sort -- The property to sort by. FQL syntax.
-                (e.g. created_timestamp|asc, updated_timestamp|desc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/QueryActionsV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Available filters
+            cid                   rule_id
+            created_timestamp     status
+            frequency             type
+            id                    updated_timestamp
+            recipients            user_uuid
+        limit : int (1-500)
+            The maximum number of IDs to return.
+        offset : int
+            The first item to return, where 0 is the latest item. (Integer)
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Free text search across all indexed fields.
+        sort : str
+            The property to sort by. FQL syntax.
+            (e.g. created_timestamp|asc, updated_timestamp|desc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -986,53 +1218,64 @@ class Recon(ServiceClass):
         Use the IDs from this response to get the notification
         entities with get_notifications_exposed_data_records.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Available filters
-                  id                  phone_number
-                  cid                 company
-                  user_uuid           job_position
-                  created_date        file.name
-                  exposure_date       file.complete_data_set
-                  rule.id             file.download_urls
-                  rule.name           location.postal_code
-                  rule.topic          location.city
-                  notification_id     location.state
-                  notification_group_id  location.federal_district
-                  source_category     location.federal_admin_region
-                  site                location.country_code
-                  site_id             social.twitter_id
-                  author              social.facebook_id
-                  author_id           social.vk_id
-                  user_id             social.vk_token
-                  user_name           social.aim_id
-                  credentials_url     social.icq_id
-                  credentials_domain  social.msn_id
-                  credentials_ip      social.instagram_id
-                  email               social.skype_id
-                  domain              financial.credit_card
-                  hash_type           financial.bank_account
-                  display_name        financial.crypto_currency_addresses
-                  full_name           login_id
-                  user_ip             credential_status
-                  bot.operating_system.hardware_id
-                  bot.bot_id
-                  _all
-        limit -- The maximum number of IDs to return. [integer, 1-500]
-        offset -- The first item to return, where 0 is the latest item. (Integer)
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Free text search across all indexed fields.
-        sort -- The property to sort by. FQL syntax. (e.g. created_date|asc, updated_date|desc)
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/QueryNotificationsExposedDataRecordsV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Available filters
+            id                  phone_number
+            cid                 company
+            user_uuid           job_position
+            created_date        file.name
+            exposure_date       file.complete_data_set
+            rule.id             file.download_urls
+            rule.name           location.postal_code
+            rule.topic          location.city
+            notification_id     location.state
+            notification_group_id  location.federal_district
+            source_category     location.federal_admin_region
+            site                location.country_code
+            site_id             social.twitter_id
+            author              social.facebook_id
+            author_id           social.vk_id
+            user_id             social.vk_token
+            user_name           social.aim_id
+            credentials_url     social.icq_id
+            credentials_domain  social.msn_id
+            credentials_ip      social.instagram_id
+            email               social.skype_id
+            domain              financial.credit_card
+            hash_type           financial.bank_account
+            display_name        financial.crypto_currency_addresses
+            full_name           login_id
+            user_ip             credential_status
+            bot.operating_system.hardware_id
+            bot.bot_id
+            _all
+        limit : int (1-500)
+            The maximum number of IDs to return.
+        offset : int
+            The first item to return, where 0 is the latest item. (Integer)
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Free text search across all indexed fields.
+        sort : str
+            The property to sort by. FQL syntax. (e.g. created_date|asc, updated_date|desc)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1049,30 +1292,41 @@ class Recon(ServiceClass):
         Use the IDs from this response to get the notification
         entities with get_notifications or get_notifications detailed.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Available filters
-                  cid               rule_topic
-                  created_date      rule_priority
-                  id                status
-                  item_type         type
-                  rule_name         updated_date
-                  rule_id           user_uuid
-        limit -- The maximum number of IDs to return. [integer, 1-500]
-        offset -- The first item to return, where 0 is the latest item. (Integer)
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Free text search across all indexed fields.
-        sort -- The property to sort by. FQL syntax. (e.g. created_date|asc, updated_date|desc)
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/QueryNotificationsV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Available filters
+            cid               rule_topic
+            created_date      rule_priority
+            id                status
+            item_type         type
+            rule_name         updated_date
+            rule_id           user_uuid
+        limit : int (1-500)
+            The maximum number of IDs to return.
+        offset : int
+            The first item to return, where 0 is the latest item. (Integer)
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Free text search across all indexed fields.
+        sort : str
+            The property to sort by. FQL syntax. (e.g. created_date|asc, updated_date|desc)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1088,40 +1342,52 @@ class Recon(ServiceClass):
 
         Use the IDs from this response to fetch the rules with get_rules.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Available filters
-                  cid                         priority
-                  created_timestamp           permissions
-                  filter                      status
-                  id                          topic
-                  last_updated_timestamp      user_uuid
-        limit -- The maximum number of IDs to return. [integer, 1-500]
-        offset -- The first item to return, where 0 is the latest item. (Integer)
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Free text search across all indexed fields.
-        secondary_sort -- Possible order by fields:
-                            created_timestamp       last_updated_timestamp,
-                            permissions             priority
-                            template_priority       topic
-                          Ex: last_updated_timestamp|desc
-                          The keyword "secondarySort" will also be accepted for this value.
-        sort -- The property to sort by. FQL syntax.
-                Possible order by fields:
-                    created_timestamp       last_updated_timestamp,
-                    permissions             priority
-                    template_priority       topic
-                (e.g. created_timestamp|asc, last_updated_timestamp|desc)
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/QueryRulesV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Available filters
+            cid                         priority
+            created_timestamp           permissions
+            filter                      status
+            id                          topic
+            last_updated_timestamp      user_uuid
+        limit : int (1-500)
+            The maximum number of IDs to return.
+        offset : int
+            The first item to return, where 0 is the latest item. (Integer)
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Free text search across all indexed fields.
+        secondary_sort : str
+            Possible order by fields:
+              created_timestamp       last_updated_timestamp,
+              permissions             priority
+              template_priority       topic
+            Ex: last_updated_timestamp|desc
+            The keyword "secondarySort" will also be accepted for this value.
+        sort : str
+            The property to sort by. FQL syntax.
+            Possible order by fields:
+                created_timestamp       last_updated_timestamp,
+                permissions             priority
+                template_priority       topic
+            (e.g. created_timestamp|asc, last_updated_timestamp|desc)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         kwargs["secondarySort"] = kwargs.get("secondarySort", kwargs.get("secondary-sort", None))
         return process_service_request(

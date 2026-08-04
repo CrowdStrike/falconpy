@@ -72,7 +72,7 @@ class MobileEnrollment(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mobile-enrollment/RequestDeviceEnrollmentV3
 
         Keyword arguments
-        ----
+        -----------------
         action_name : str
             Action to perform. Allowed values: enroll, re-enroll.
         body : dict
@@ -93,11 +93,11 @@ class MobileEnrollment(ServiceClass):
             Full parameters payload, not required if using `action_name` keyword.
 
         Arguments
-        ----
+        ---------
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -127,7 +127,7 @@ class MobileEnrollment(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mobile-enrollment/RequestDeviceEnrollmentV4
 
         Keyword arguments
-        ----
+        -----------------
         action_name : str
             Action to perform. Allowed values: enroll, re-enroll.
         body : dict
@@ -151,11 +151,11 @@ class MobileEnrollment(ServiceClass):
             Full parameters payload, not required if using `action_name` keyword.
 
         Arguments
-        ----
+        ---------
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """

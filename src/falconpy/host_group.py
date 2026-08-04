@@ -69,26 +69,36 @@ class HostGroup(ServiceClass):
 
         Returns a set of host details which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  An asterisk wildcard '*' includes all results.
-
-        id -- The ID of the Host Group to search for members of. String
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. name|asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/queryCombinedGroupMembers
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            An asterisk wildcard '*' includes all results.
+        id : str
+            The ID of the Host Group to search for members of.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. name|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -107,32 +117,42 @@ class HostGroup(ServiceClass):
 
         Returns a set of Host Groups which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  An asterisk wildcard '*' includes all results.
-                  Available filter fields:
-                  created_by                      modified_by
-                  created_timestamp               modified_timestamp
-                  group_type                      name
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. created_timestamp|asc).
-                Available sort fields:
-                created_by                      modified_by
-                created_timestamp               modified_timestamp
-                group_type                      name
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/queryCombinedHostGroups
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            An asterisk wildcard '*' includes all results.
+            Available filter fields:
+            created_by                      modified_by
+            created_timestamp               modified_timestamp
+            group_type                      name
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. created_timestamp|asc).
+            Available sort fields:
+            created_by                      modified_by
+            created_timestamp               modified_timestamp
+            group_type                      name
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -150,11 +170,21 @@ class HostGroup(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform the specified action on the Host Groups specified in the request.
 
-        Keyword arguments:
-        action_name -- Action to perform on the host group. String.
-                       Allowed values: 'add-hosts' or 'remove-hosts'.
-        action_parameters - List of dictionaries containing action specific parameter settings.
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/performGroupAction
+
+        Keyword arguments
+        -----------------
+        action_name : str
+            Action to perform on the host group. String.
+            Allowed values: 'add-hosts' or 'remove-hosts'.
+        action_parameters : list
+            List of dictionaries containing action specific parameter settings.
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "action_parameters": [
                         {
@@ -166,19 +196,20 @@ class HostGroup(ServiceClass):
                         "string"
                     ]
                 }
-        disable_hostname_check -- Disables hostname checking before the action. Boolean.
-        filter -- Filter to use to specify hosts to apply this action to. FQL formatted string.
-                  Overridden if action_parameters is specified.
-        ids -- List of host group IDs to perform an action against. String or list of strings.
+        disable_hostname_check : bool
+            Disables hostname checking before the action.
+        filter : str
+            Filter to use to specify hosts to apply this action to. FQL formatted string.
+            Overridden if action_parameters is specified.
+        ids : str or list[str]
+            List of host group IDs to perform an action against.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/performGroupAction
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs,
@@ -214,19 +245,28 @@ class HostGroup(ServiceClass):
     def get_host_groups(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a set of Host Groups by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of host group IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/getHostGroups
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of host group IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -240,9 +280,18 @@ class HostGroup(ServiceClass):
     def create_host_groups(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Host Groups by specifying details about the group to create.
 
-        Keyword arguments:
-        assignment_rule -- Assignment rule to apply. String.
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/createHostGroups
+
+        Keyword arguments
+        -----------------
+        assignment_rule : str
+            Assignment rule to apply.
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "resources": [
                         {
@@ -253,18 +302,19 @@ class HostGroup(ServiceClass):
                         }
                     ]
                 }
-        description -- Description of the host group. String.
-        group_type -- Type of Host Group to create. String.
-        name -- The Host Group name. String.
+        description : str
+            Description of the host group.
+        group_type : str
+            Type of Host Group to create.
+        name : str
+            The Host Group name.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/createHostGroups
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = host_group_create_payload(passed_keywords=kwargs)
@@ -284,19 +334,28 @@ class HostGroup(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a set of Host Groups by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of host group IDs to delete. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/deleteHostGroups
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of host group IDs to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -310,9 +369,18 @@ class HostGroup(ServiceClass):
     def update_host_groups(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Host Groups by specifying the ID of the group and details to update.
 
-        Keyword arguments:
-        assignment_rule -- Assignment rule to apply. String.
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/updateHostGroups
+
+        Keyword arguments
+        -----------------
+        assignment_rule : str
+            Assignment rule to apply.
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "resources": [
                         {
@@ -323,18 +391,19 @@ class HostGroup(ServiceClass):
                         }
                     ]
                 }
-        description -- Description of the host group. String.
-        id -- Host Group ID to be updated. String.
-        name -- The Host Group name. String.
+        description : str
+            Description of the host group.
+        id : str
+            Host Group ID to be updated.
+        name : str
+            The Host Group name.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/updateHostGroups
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = host_group_update_payload(passed_keywords=kwargs)
@@ -354,25 +423,36 @@ class HostGroup(ServiceClass):
 
         Returns a set of Agent IDs which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  An asterisk wildcard '*' includes all results.
-        id -- The ID of the Host Group to search for members of. String.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. name|asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/queryGroupMembers
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            An asterisk wildcard '*' includes all results.
+        id : str
+            The ID of the Host Group to search for members of.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. name|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -388,32 +468,42 @@ class HostGroup(ServiceClass):
 
         Returns a set of Host Group IDs which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  An asterisk wildcard '*' includes all results.
-                  Available filter fields:
-                  created_by                      modified_by
-                  created_timestamp               modified_timestamp
-                  group_type                      name
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. created_timestamp|asc).
-                Available sort fields:
-                created_by                      modified_by
-                created_timestamp               modified_timestamp
-                group_type                      name
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/queryHostGroups
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            An asterisk wildcard '*' includes all results.
+            Available filter fields:
+            created_by                      modified_by
+            created_timestamp               modified_timestamp
+            group_type                      name
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. created_timestamp|asc).
+            Available sort fields:
+            created_by                      modified_by
+            created_timestamp               modified_timestamp
+            group_type                      name
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

@@ -61,19 +61,28 @@ class CertificateBasedExclusions(ServiceClass):
     def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all exclusion IDs matching the query with filter.
 
-        Keyword arguments:
-        ids -- One or more exclusion IDs . String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/certificate-based-exclusions/cb-exclusions.get.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more exclusion IDs.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -87,8 +96,16 @@ class CertificateBasedExclusions(ServiceClass):
     def create_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create new Certificate Based Exclusions.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/certificate-based-exclusions/cb-exclusions.create.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "exclusions": [
                         {
@@ -119,12 +136,11 @@ class CertificateBasedExclusions(ServiceClass):
                     ]
                 }
 
-        Returns: dict object containing API response.
 
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/certificate-based-exclusions/cb-exclusions.create.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = certificate_based_exclusions_payload(passed_keywords=kwargs)
@@ -145,20 +161,30 @@ class CertificateBasedExclusions(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a set of exclusions by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of exclusion IDs to delete. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-        comment - The comment why these exclusions were deleted. String.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/certificate-based-exclusions/cb-exclusions.delete.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of exclusion IDs to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+        comment : str
+            The comment why these exclusions were deleted.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -172,8 +198,16 @@ class CertificateBasedExclusions(ServiceClass):
     def update_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Certificate Based Exclusions.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/certificate-based-exclusions/cb-exclusions.update.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "exclusions": [
                         {
@@ -204,12 +238,11 @@ class CertificateBasedExclusions(ServiceClass):
                     ]
                 }
 
-        Returns: dict object containing API response.
 
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/certificate-based-exclusions/cb-exclusions.update.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = certificate_based_exclusions_payload(passed_keywords=kwargs)
@@ -225,18 +258,25 @@ class CertificateBasedExclusions(ServiceClass):
     def get_certificates(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve vulnerability and package related info for this customer.
 
-        Keyword arguments:
-        ids - The SHA256 Hash of the file to retrieve certificate signing info for. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/certificate-based-exclusions/certificates.get.v1
+
+        Keyword arguments
+        -----------------
+        ids : str
+            The SHA256 Hash of the file to retrieve certificate signing info for.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -250,23 +290,33 @@ class CertificateBasedExclusions(ServiceClass):
     def query_certificates(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for cert-based exclusions.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum records to return. [1-500]. Defaults to 100.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by (e.g. alias.desc or state.asc). FQL syntax.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/certificate-based-exclusions/cb-exclusions.query.v1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum records to return. [1-500]. Defaults to 100.
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by (e.g. alias.desc or state.asc). FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

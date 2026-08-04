@@ -63,17 +63,23 @@ class NetworkScanTemplates(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on the network scan template configurations.
 
-        Keyword arguments:
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/get_template_configs
+
+        Keyword arguments
+        -----------------
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -91,19 +97,28 @@ class NetworkScanTemplates(ServiceClass):
                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get templates by their IDs.
 
-        Keyword arguments:
-        ids -- IDs of templates to be retrieved (Min: 1, Max: 100). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/get_templates
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of templates to be retrieved (Min: 1, Max: 100)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -120,8 +135,16 @@ class NetworkScanTemplates(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create templates using provided specifications.
 
-        Keyword arguments:
-        body -- Full body payload as a list of dictionaries in JSON format. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/create_templates
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a list of dictionaries in JSON format. Not required if using other keywords.
                 [
                     {
                         "active_check_level": "string",
@@ -142,28 +165,36 @@ class NetworkScanTemplates(ServiceClass):
                         "type": "string"
                     }
                 ]
-        active_check_level -- The active check level associated with the template.
-                              Allowed values: active_check_safe_only, active_check_all. Required. String.
-        additional_tcp_ports -- Additional TCP ports associated with the template. List of strings.
-        additional_udp_ports -- Additional UDP ports associated with the template. List of strings.
-        auto_include_new_detections -- Automatically include new detections in the template. Boolean.
-        detections -- Detections associated with the template. List of strings.
-        ignore_tcp_resets -- Ignore TCP resets associated with the template. Boolean.
-        name -- The name given to the template. Required. String.
-        ports_scan_level -- The port scan level associated with the template.
-                            Allowed values: default, all_ports, custom. Required. String.
-        scan_intensity -- The scan intensity at which scans will run from this template.
-                          Allowed values: basic, standard, cautious, maximum. Required. String.
-        type -- The type of the template. Allowed values: discovery, assessment. Required. String.
+        active_check_level : str (required)
+            The active check level associated with the template.
+            Allowed values: active_check_safe_only, active_check_all.
+        additional_tcp_ports : str or list[str]
+            Additional TCP ports associated with the template.
+        additional_udp_ports : str or list[str]
+            Additional UDP ports associated with the template.
+        auto_include_new_detections : bool
+            Automatically include new detections in the template.
+        detections : str or list[str]
+            Detections associated with the template.
+        ignore_tcp_resets : bool
+            Ignore TCP resets associated with the template.
+        name : str (required)
+            The name given to the template.
+        ports_scan_level : str (required)
+            The port scan level associated with the template.
+            Allowed values: default, all_ports, custom.
+        scan_intensity : str (required)
+            The scan intensity at which scans will run from this template.
+            Allowed values: basic, standard, cautious, maximum.
+        type : str (required)
+            The type of the template. Allowed values: discovery, assessment.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/create_templates
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = network_scan_template_create_payload(passed_keywords=kwargs)
@@ -182,8 +213,16 @@ class NetworkScanTemplates(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update templates using provided specifications.
 
-        Keyword arguments:
-        body -- Full body payload as a list of dictionaries in JSON format. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/update_templates
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a list of dictionaries in JSON format. Not required if using other keywords.
                 [
                     {
                         "active_check_level": "string",
@@ -204,28 +243,36 @@ class NetworkScanTemplates(ServiceClass):
                         "scan_intensity": "string"
                     }
                 ]
-        active_check_level -- The active check level associated with the template.
-                              Allowed values: active_check_safe_only, active_check_all. String.
-        additional_tcp_ports -- Additional TCP ports associated with the template. List of strings.
-        additional_udp_ports -- Additional UDP ports associated with the template. List of strings.
-        auto_include_new_detections -- Automatically include new detections in the template. Boolean.
-        detections -- Detections associated with the template. List of strings.
-        id -- The unique identifier of the template to update. Required. String.
-        ignore_tcp_resets -- Ignore TCP resets associated with the template. Boolean.
-        name -- The name given to the template. String.
-        ports_scan_level -- The port scan level associated with the template.
-                            Allowed values: default, all_ports, custom. String.
-        scan_intensity -- The scan intensity at which scans will run from this template.
-                          Allowed values: basic, standard, cautious, maximum. String.
+        active_check_level : str
+            The active check level associated with the template.
+            Allowed values: active_check_safe_only, active_check_all.
+        additional_tcp_ports : str or list[str]
+            Additional TCP ports associated with the template.
+        additional_udp_ports : str or list[str]
+            Additional UDP ports associated with the template.
+        auto_include_new_detections : bool
+            Automatically include new detections in the template.
+        detections : str or list[str]
+            Detections associated with the template.
+        id : str (required)
+            The unique identifier of the template to update.
+        ignore_tcp_resets : bool
+            Ignore TCP resets associated with the template.
+        name : str
+            The name given to the template.
+        ports_scan_level : str
+            The port scan level associated with the template.
+            Allowed values: default, all_ports, custom.
+        scan_intensity : str
+            The scan intensity at which scans will run from this template.
+            Allowed values: basic, standard, cautious, maximum.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/update_templates
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = network_scan_template_update_payload(passed_keywords=kwargs)
@@ -245,19 +292,28 @@ class NetworkScanTemplates(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete templates by their IDs.
 
-        Keyword arguments:
-        ids -- IDs of templates to be deleted (Min: 1, Max: 100). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/delete_templates
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of templates to be deleted (Min: 1, Max: 100)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -274,24 +330,34 @@ class NetworkScanTemplates(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get template IDs by filter.
 
-        Keyword arguments:
-        offset -- An offset used with the limit parameter to manage pagination of results. On your first request, don’t provide
-                  an offset. On subsequent requests, add previous offset with the previous limit to continue from that place in
-                  the results Integer.
-        limit -- The number of template IDs to return in this response
-                 (Min: 1, Max: 100, Default: 100). Integer.
-        sort -- Sort templates by their properties. A single sort field is allowed. String.
-        filter -- Search for templates by providing an FQL filter. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/query_templates
+
+        Keyword arguments
+        -----------------
+        offset : int
+            An offset used with the limit parameter to manage pagination of results. On your first request, don’t provide
+            an offset. On subsequent requests, add previous offset with the previous limit to continue from that place in
+            the results.
+        limit : int
+            The number of template IDs to return in this response
+            (Min: 1, Max: 100, Default: 100)
+        sort : str
+            Sort templates by their properties. A single sort field is allowed.
+        filter : str
+            Search for templates by providing an FQL filter.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

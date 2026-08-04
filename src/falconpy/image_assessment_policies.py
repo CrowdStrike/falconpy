@@ -63,12 +63,20 @@ class ImageAssessmentPolicies(ServiceClass):
 
         This method does not accept arguments.
 
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/image-assessment-policies/ReadPolicies
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -80,23 +88,31 @@ class ImageAssessmentPolicies(ServiceClass):
     def create_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Image Assessment policies.
 
-        Keyword arguments:
-        body -- Full body payload, not required when using other arguments.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/image-assessment-policies/CreatePolicies
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload, not required when using other arguments.
                 {
                     "description": "string",
                     "name": "string"
                 }
-        description -- Policy description. String.
-        name -- Policy name. String.
+        description : str
+            Policy description.
+        name : str
+            Policy name.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/image-assessment-policies/CreatePolicies
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = image_policy_payload(passed_keywords=kwargs)
@@ -116,41 +132,53 @@ class ImageAssessmentPolicies(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Image Assessment Policy entities.
 
-        Keyword arguments:
-        id -- Image Assessment Policy entity UUID
-        body -- Full body payload in JSON format. Not required when using other keywords.
-        {
-            "description": "string",
-            "is_enabled": boolean,
-            "name": "string",
-            "policy_data": {
-                "rules": [
-                    {
-                        "action": "string",
-                        "policy_rules_data": {
-                            "conditions": [
-                                {}
-                            ]
-                        }
-                    }
-                ]
-            }
-        }
-        description -- Policy description. String.
-        is_enabled -- Flag indicating if the policy is enabled. Boolean.
-        name -- Policy name. String.
-        policy_data -- Policy detail in JSON format. Dictionary.
-        rules -- List of rules for the policy. List of dictionaries or a single dictionary.
-                 Overridden if policy_data is supplied.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/image-assessment-policies/UpdatePolicies
+
+        Keyword arguments
+        -----------------
+        id : str
+            Image Assessment Policy entity UUID
+        body : dict
+            Full body payload in JSON format. Not required when using other keywords.
+                {
+                    "description": "string",
+                    "is_enabled": boolean,
+                    "name": "string",
+                    "policy_data": {
+                        "rules": [
+                            {
+                                "action": "string",
+                                "policy_rules_data": {
+                                    "conditions": [
+                                        {}
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+        description : str
+            Policy description.
+        is_enabled : bool
+            Flag indicating if the policy is enabled.
+        name : str
+            Policy name.
+        policy_data : dict
+            Policy detail in JSON format.
+        rules : str
+            List of rules for the policy. List of dictionaries or a single dictionary.
+            Overridden if policy_data is supplied.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = image_policy_payload(passed_keywords=kwargs)
@@ -168,19 +196,28 @@ class ImageAssessmentPolicies(ServiceClass):
     def delete_policy(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete Image Assessment Policy by policy UUID.
 
-        Keyword arguments:
-        id -- Image Assessment Policy entity UUID. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/image-assessment-policies/DeletePolicy
+
+        Keyword arguments
+        -----------------
+        id : str
+            Image Assessment Policy entity UUID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -197,12 +234,20 @@ class ImageAssessmentPolicies(ServiceClass):
 
         This method does not accept arguments.
 
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/image-assessment-policies/ReadPolicyExclusions
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -214,34 +259,45 @@ class ImageAssessmentPolicies(ServiceClass):
     def update_policy_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Image Assessment Policy Exclusion entities.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format, not required if using other keywords.
-        {
-            "conditions": [
-                {
-                    "description": "string",
-                    "prop": "string",
-                    "ttl": 0,
-                    "value": [
-                        "string"
-                    ]
-                }
-            ]
-        }
-        conditions -- List of conditions to apply to the exclusion policy. List of dictionaries.
-        description -- Condition description. Ignored if conditions list is provided. String.
-        prop -- Condition property. Ignored if conditions list is provided. String.
-        ttl -- Condition time to live. Ignored if conditions list is provided. Integer.
-        value -- Condition values. Ignored if conditions list is provided. List of strings.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/image-assessment-policies/UpdatePolicyExclusions
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format, not required if using other keywords.
+                {
+                    "conditions": [
+                        {
+                            "description": "string",
+                            "prop": "string",
+                            "ttl": 0,
+                            "value": [
+                                "string"
+                            ]
+                        }
+                    ]
+                }
+        conditions : list[dict]
+            List of conditions to apply to the exclusion policy.
+        description : str
+            Condition description. Ignored if conditions list is provided.
+        prop : str
+            Condition property. Ignored if conditions list is provided.
+        ttl : int
+            Condition time to live. Ignored if conditions list is provided.
+        value : list[str]
+            Condition values. Ignored if conditions list is provided.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = image_exclusions_payload(passed_keywords=kwargs)
@@ -260,12 +316,20 @@ class ImageAssessmentPolicies(ServiceClass):
 
         This method does not accept arguments.
 
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/image-assessment-policies/ReadPolicyGroups
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -277,8 +341,16 @@ class ImageAssessmentPolicies(ServiceClass):
     def create_policy_groups(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Image Assessment Policy Group entities.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format, not required whe using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/image-assessment-policies/CreatePolicyGroups
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format, not required whe using other keywords.
                 {
                     "description": "string",
                     "name": "string",
@@ -289,21 +361,24 @@ class ImageAssessmentPolicies(ServiceClass):
                     },
                     "policy_id": "string"
                 }
-        conditions -- List of policy conditions to apply. Dictionary or list of dictionaries.
-                      Overridden if policy_group_data is supplied.
-        description -- Policy group description. String.
-        name -- Policy group name. String.
-        policy_group_data -- Policy group conditions. Dictionary.
-        policy_id -- Policy ID to update. String.
+        conditions : str
+            List of policy conditions to apply. Dictionary or list of dictionaries.
+            Overridden if policy_group_data is supplied.
+        description : str
+            Policy group description.
+        name : str
+            Policy group name.
+        policy_group_data : dict
+            Policy group conditions.
+        policy_id : str
+            Policy ID to update.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/image-assessment-policies/CreatePolicyGroups
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = image_group_payload(passed_keywords=kwargs)
@@ -323,8 +398,16 @@ class ImageAssessmentPolicies(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Image Assessment Policy Group entities.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/image-assessment-policies/UpdatePolicyGroups
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format, not required when using other keywords.
                 {
                     "description": "string",
                     "name": "string",
@@ -334,22 +417,26 @@ class ImageAssessmentPolicies(ServiceClass):
                         ]
                     }
                 }
-        conditions -- List of policy conditions to apply. Dictionary or list of dictionaries.
-                      Overridden if policy_group_data is supplied.
-        description -- Policy group description. String.
-        id -- Policy Image Group entity UUID. String.
-        name -- Policy group name. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        policy_group_data -- List of policy conditions. Dictionary.
+        conditions : str
+            List of policy conditions to apply. Dictionary or list of dictionaries.
+            Overridden if policy_group_data is supplied.
+        description : str
+            Policy group description.
+        id : str
+            Policy Image Group entity UUID.
+        name : str
+            Policy group name.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        policy_group_data : dict
+            List of policy conditions.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/image-assessment-policies/UpdatePolicyGroups
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = image_group_payload(passed_keywords=kwargs)
@@ -371,19 +458,28 @@ class ImageAssessmentPolicies(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete Image Assessment Policy Group entities.
 
-        Keyword arguments:
-        id -- Policy Image Group entity UUID
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/image-assessment-policies/DeletePolicyGroup
+
+        Keyword arguments
+        -----------------
+        id : str
+            Policy Image Group entity UUID
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -397,23 +493,30 @@ class ImageAssessmentPolicies(ServiceClass):
     def update_policy_precedence(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Image Assessment Policy precedence.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/image-assessment-policies/UpdatePolicyPrecedence
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format, not required when using other keywords.
                 {
                     "precedence": [
                         "string"
                     ]
                 }
-        precedence -- List of policy IDs in precedence order. String or List of strings.
+        precedence : str or list[str]
+            List of policy IDs in precedence order.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/image-assessment-policies/UpdatePolicyPrecedence
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             prec = kwargs.get("precedence", None)

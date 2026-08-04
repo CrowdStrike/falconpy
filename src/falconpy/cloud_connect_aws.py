@@ -62,23 +62,33 @@ class CloudConnectAWS(ServiceClass):
 
         Returns a set of AWS accounts which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum records to return. [1-500]. Defaults to 100.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by (e.g. alias.desc or state.asc). FQL syntax.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/QueryAWSAccounts
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum records to return. [1-500]. Defaults to 100.
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by (e.g. alias.desc or state.asc). FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -93,12 +103,20 @@ class CloudConnectAWS(ServiceClass):
 
         This method does not accept arguments or keywords.
 
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/GetAWSSettings
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -114,19 +132,28 @@ class CloudConnectAWS(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a set of AWS Accounts by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of AWS Account IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/GetAWSAccounts
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of AWS Account IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -144,8 +171,16 @@ class CloudConnectAWS(ServiceClass):
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Provision AWS Accounts by specifying details about the accounts to provision.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/ProvisionAWSAccounts
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                             {
@@ -159,25 +194,30 @@ class CloudConnectAWS(ServiceClass):
                             }
                         ]
                     }
-        cloudtrail_bucket_owner_id -- AWS IAM ID for bucket owner. String.
-        cloudtrail_bucket_region -- AWS region for bucket. String.
-        external_id -- AWS cross-account role secret. String.
-        iam_role_arn -- ARN used for cross-account role. String.
-        id -- AWS account ID. String.
-        mode -- Mode for provisioning. Allowed values are `manual` or `cloudformation`.
-                Defaults to `manual` if not defined.
-        parameters -- full parameters payload, not required if mode is provided as a keyword.
-        rate_limit_reqs -- Integer.
-        rate_limit_time -- Integer.
+        cloudtrail_bucket_owner_id : str
+            AWS IAM ID for bucket owner.
+        cloudtrail_bucket_region : str
+            AWS region for bucket.
+        external_id : str
+            AWS cross-account role secret.
+        iam_role_arn : str
+            ARN used for cross-account role.
+        id : str
+            AWS account ID.
+        mode : str
+            Mode for provisioning. Allowed values are `manual` or `cloudformation`.
+            Defaults to `manual` if not defined.
+        parameters : dict
+            full parameters payload, not required if mode is provided as a keyword.
+        rate_limit_reqs : int
+        rate_limit_time : int
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/ProvisionAWSAccounts
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aws_registration_payload(passed_keywords=kwargs)
@@ -199,19 +239,28 @@ class CloudConnectAWS(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a set of AWS Accounts by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of AWS Account IDs to delete. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/DeleteAWSAccounts
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of AWS Account IDs to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -225,8 +274,16 @@ class CloudConnectAWS(ServiceClass):
     def update_aws_accounts(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update AWS Accounts by specifying the ID of the account and details to update.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/UpdateAWSAccounts
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                             {
@@ -240,22 +297,25 @@ class CloudConnectAWS(ServiceClass):
                             }
                     ]
                 }
-        cloudtrail_bucket_owner_id -- AWS IAM ID for bucket owner. String.
-        cloudtrail_bucket_region -- AWS region for bucket. String.
-        external_id -- AWS cross-account role secret. String.
-        iam_role_arn -- ARN used for cross-account role. String.
-        id -- AWS account ID. String.
-        rate_limit_reqs -- Integer.
-        rate_limit_time -- Integer.
+        cloudtrail_bucket_owner_id : str
+            AWS IAM ID for bucket owner.
+        cloudtrail_bucket_region : str
+            AWS region for bucket.
+        external_id : str
+            AWS cross-account role secret.
+        iam_role_arn : str
+            ARN used for cross-account role.
+        id : str
+            AWS account ID.
+        rate_limit_reqs : int
+        rate_limit_time : int
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/UpdateAWSAccounts
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aws_registration_payload(passed_keywords=kwargs)
@@ -274,8 +334,16 @@ class CloudConnectAWS(ServiceClass):
                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create or update Global Settings which are applicable to all provisioned AWS accounts.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/CreateOrUpdateAWSSettings
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -284,17 +352,17 @@ class CloudConnectAWS(ServiceClass):
                         }
                     ]
                 }
-        cloudtrail_bucket_owner_id -- AWS IAM ID for bucket owner. String.
-        static_external_id -- AWS cross-account role secret. String.
+        cloudtrail_bucket_owner_id : str
+            AWS IAM ID for bucket owner.
+        static_external_id : str
+            AWS cross-account role secret.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/CreateOrUpdateAWSSettings
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aws_registration_payload(passed_keywords=kwargs)
@@ -315,20 +383,30 @@ class CloudConnectAWS(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform an Access Verification check on the specified AWS Account IDs.
 
-        Keyword arguments:
-        body -- full body payload, ignored by API.
-        ids -- List of AWS Account IDs to delete. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/VerifyAWSAccountAccess
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, ignored by API.
+        ids : str or list[str]
+            List of AWS Account IDs to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -348,23 +426,33 @@ class CloudConnectAWS(ServiceClass):
 
         Returns a set of AWS account IDs which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum records to return. [1-500]. Defaults to 100.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by (e.g. alias.desc or state.asc). FQL syntax.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/QueryAWSAccountsForIDs
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum records to return. [1-500]. Defaults to 100.
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by (e.g. alias.desc or state.asc). FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

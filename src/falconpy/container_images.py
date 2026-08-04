@@ -64,20 +64,29 @@ class ContainerImages(ServiceClass):
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Image assessment history.
 
-        Keyword arguments:
-        filter -- Filter using a query in Falcon Query Language (FQL). String.
-                  Supported filters:  cid, registry, repository
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/AggregateImageAssessmentHistory
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter using a query in Falcon Query Language (FQL). String.
+            Supported filters:  cid, registry, repository
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'filter'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -95,24 +104,33 @@ class ContainerImages(ServiceClass):
                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of images grouped by Base OS distribution.
 
-        Keyword arguments:
-        filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    arch            image_digest    registry
-                    base_os         image_id        repository
-                    cid             index_digest    source
-                    first_seen      multi_arch      tag
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/AggregateImageCountByBaseOS
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              arch            image_digest    registry
+              base_os         image_id        repository
+              cid             index_digest    source
+              first_seen      multi_arch      tag
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'filter'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -130,24 +148,33 @@ class ContainerImages(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of images grouped by state.
 
-        Keyword arguments:
-        filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    arch            image_digest    registry
-                    base_os         image_id        repository
-                    cid             index_digest    source
-                    first_seen      multi_arch      tag
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/AggregateImageCountByState
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              arch            image_digest    registry
+              base_os         image_id        repository
+              cid             index_digest    source
+              first_seen      multi_arch      tag
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'filter'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -165,34 +192,43 @@ class ContainerImages(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of images.
 
-        Keyword arguments:
-        filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    ai_related                  first_seen
-                    ai_vulnerability_count      image_digest
-                    arch                        image_id
-                    base_os                     include_base_image_vuln
-                    cid                         index_digest
-                    container_id                layer_digest
-                    container_running_status    multi_arch
-                    cps_rating                  package_name_version
-                    crowdstrike_user            registry
-                    cve_id                      repository
-                    detection_count             source
-                    detection_name              tag
-                    detection_severity          vulnerability_count
-                    vulnerability_severity
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/AggregateImageCount
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              ai_related                  first_seen
+              ai_vulnerability_count      image_digest
+              arch                        image_id
+              base_os                     include_base_image_vuln
+              cid                         index_digest
+              container_id                layer_digest
+              container_running_status    multi_arch
+              cps_rating                  package_name_version
+              crowdstrike_user            registry
+              cve_id                      repository
+              detection_count             source
+              detection_name              tag
+              detection_severity          vulnerability_count
+              vulnerability_severity
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'filter'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -209,19 +245,26 @@ class ContainerImages(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve base images for provided filter.
 
-        Keyword arguments:
-        filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters: image_digest, image_id, registry, repository, tag
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/CombinedBaseImages
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL). String.
+            Supported filters: image_digest, image_id, registry, repository, tag
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -235,36 +278,46 @@ class ContainerImages(ServiceClass):
     def get_combined_images(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get image assessment results by providing an FQL filter and paging details.
 
-        Keyword arguments:
-        filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    ai_related                  architecture
-                    container_id                container_running_status
-                    cve_id                      detection_name
-                    detection_severity          first_seen
-                    image_digest                image_id
-                    index_digest                multi_arch
-                    registry                    repository
-                    tag                         vulnerability_severity
-        limit -- The upper-bound on the number of records to retrieve [1-100]. Integer.
-        offset -- The offset from where to begin. Integer.
-        sort -- The fields to sort the records on. String.
-                Supported columns:
-                  first_seen                        image_id
-                  highest_detection_severity        registry
-                  highest_vulnerability_severity    repository
-                  image_digest                      tag
-                  source
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/GetCombinedImages
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              ai_related                  architecture
+              container_id                container_running_status
+              cve_id                      detection_name
+              detection_severity          first_seen
+              image_digest                image_id
+              index_digest                multi_arch
+              registry                    repository
+              tag                         vulnerability_severity
+        limit : int
+            The upper-bound on the number of records to retrieve [1-100]
+        offset : int
+            The offset from where to begin.
+        sort : str
+            The fields to sort the records on. String.
+            Supported columns:
+              first_seen                        image_id
+              highest_detection_severity        registry
+              highest_vulnerability_severity    repository
+              image_digest                      tag
+              source
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -281,26 +334,35 @@ class ContainerImages(ServiceClass):
                                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve top x images with the most vulnerabilities.
 
-        Keyword arguments:
-        filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    arch            image_digest    registry
-                    base_os         image_id        repository
-                    cid             index_digest    source
-                    first_seen      multi_arch      tag
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- This is not used in the backend but is added here for compatibility
-                  purposes as some clients expects this i.e UI widgets. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/CombinedImageByVulnerabilityCount
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              arch            image_digest    registry
+              base_os         image_id        repository
+              cid             index_digest    source
+              first_seen      multi_arch      tag
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            This is not used in the backend but is added here for compatibility
+            purposes as some clients expects this i.e UI widgets.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -314,27 +376,38 @@ class ContainerImages(ServiceClass):
     def get_combined_detail(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve image entities identified by the provided filter criteria.
 
-        Keyword arguments:
-        filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    arch            image_digest    registry
-                    base_os         image_id        repository
-                    cid             index_digest    source
-                    first_seen      multi_arch      tag
-        with_config -- Include image config. Boolean. Defaults true false.
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        sort -- The fields to sort the records on. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/CombinedImageDetail
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              arch            image_digest    registry
+              base_os         image_id        repository
+              cid             index_digest    source
+              first_seen      multi_arch      tag
+        with_config : bool
+            Include image config. Boolean. Defaults true false.
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        sort : str
+            The fields to sort the records on.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -348,49 +421,61 @@ class ContainerImages(ServiceClass):
     def read_combined_export(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve images with an option to expand aggregated vulnerabilities/detections.
 
-        Keyword arguments:
-        filter -- Filter images using a query in Falcon Query Language (FQL).
-                  Supported filters:
-                    ai_related                  first_seen
-                    ai_vulnerability_count      image_digest
-                    arch                        image_id
-                    base_os                     include_base_image_vuln
-                    cid                         index_digest
-                    container_id                layer_digest
-                    container_running_status    multi_arch
-                    cps_rating                  package_name_version
-                    crowdstrike_user            registry
-                    cve_id                      repository
-                    detection_count             source
-                    detection_name              tag
-                    detection_severity          vulnerability_count
-                    vulnerability_severity
-        expand_vulnerabilities -- Expand vulnerabilities. Boolean.
-        expand_detections -- Expand detections. Boolean.
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        sort -- The fields to sort the records on. String.
-                Supported columns:
-                ai_vulnerabilities              image_id
-                base_os                         last_seen
-                cid                             layers_with_vulnerabilities
-                detections                      packages
-                firstScanned                    registry
-                first_seen                      repository
-                highest_cps_current_rating      source
-                highest_detection_severity      tag
-                highest_vulnerability_severity  vulnerabilities
-                image_digest
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/ReadCombinedImagesExport
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL).
+            Supported filters:
+              ai_related                  first_seen
+              ai_vulnerability_count      image_digest
+              arch                        image_id
+              base_os                     include_base_image_vuln
+              cid                         index_digest
+              container_id                layer_digest
+              container_running_status    multi_arch
+              cps_rating                  package_name_version
+              crowdstrike_user            registry
+              cve_id                      repository
+              detection_count             source
+              detection_name              tag
+              detection_severity          vulnerability_count
+              vulnerability_severity
+        expand_vulnerabilities : bool
+            Expand vulnerabilities.
+        expand_detections : bool
+            Expand detections.
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        sort : str
+            The fields to sort the records on. String.
+            Supported columns:
+            ai_vulnerabilities              image_id
+            base_os                         last_seen
+            cid                             layers_with_vulnerabilities
+            detections                      packages
+            firstScanned                    registry
+            first_seen                      repository
+            highest_cps_current_rating      source
+            highest_detection_severity      tag
+            highest_vulnerability_severity  vulnerabilities
+            image_digest
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -407,23 +492,35 @@ class ContainerImages(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve image issues summary such as Image detections, Runtime detections, Policies, Vulnerabilities.
 
-        Keyword arguments:
-        cid -- CID. String.
-        image_digest -- Image digest. String.
-        registry -- Registry name. String.
-        repository -- Repository name. String.
-        tag -- Tag name. String.
-        include_base_image_vuln -- Include the base image vulnerability within the summary. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/CombinedImageIssuesSummary
+
+        Keyword arguments
+        -----------------
+        cid : str
+            CID.
+        image_digest : str
+            Image digest.
+        registry : str
+            Registry name.
+        repository : str
+            Repository name.
+        tag : str
+            Tag name.
+        include_base_image_vuln : bool
+            Include the base image vulnerability within the summary.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -440,23 +537,35 @@ class ContainerImages(ServiceClass):
                                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate information about vulnerabilities for an image.
 
-        Keyword arguments:
-        cid -- CID. String.
-        image_digest -- Image digest. String.
-        registry -- Registry name. String.
-        repository -- Repository name. String.
-        tag -- Tag name. String.
-        include_base_image_vuln -- Include the base image vulnerability within the summary. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/CombinedImageVulnerabilitySummary
+
+        Keyword arguments
+        -----------------
+        cid : str
+            CID.
+        image_digest : str
+            Image digest.
+        registry : str
+            Registry name.
+        repository : str
+            Repository name.
+        tag : str
+            Tag name.
+        include_base_image_vuln : bool
+            Include the base image vulnerability within the summary.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -470,8 +579,16 @@ class ContainerImages(ServiceClass):
     def create_base_images(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete base images by base image UUID.
 
-        Keyword arguments:
-        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/CreateBaseImagesEntities
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload dictionary in JSON format. Not required if using other keywords.
                 {
                     "base_images": [
                         {
@@ -483,20 +600,23 @@ class ContainerImages(ServiceClass):
                         }
                     ]
                 }
-        image_digest -- Image digest. String.
-        image_id -- UUID for the image. String.
-        registry -- Image registry. String.
-        repository -- Image repository. String.
-        tag -- Image tag. String.
+        image_digest : str
+            Image digest.
+        image_id : str
+            UUID for the image.
+        registry : str
+            Image registry.
+        repository : str
+            Image repository.
+        tag : str
+            Image tag.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/CreateBaseImagesEntities
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = base_image_payload(passed_keywords=kwargs)
@@ -517,19 +637,28 @@ class ContainerImages(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete base images by base image UUID.
 
-        Keyword arguments:
-        ids -- UUID of images to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/DeleteBaseImages
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            UUID of images to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

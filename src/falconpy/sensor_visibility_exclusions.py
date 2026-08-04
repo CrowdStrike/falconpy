@@ -60,19 +60,28 @@ class SensorVisibilityExclusions(ServiceClass):
     def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a set of Sensor Visibility Exclusions by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of exclusion IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         /sensor-visibility-exclusions/getSensorVisibilityExclusionsV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of exclusion IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -86,8 +95,16 @@ class SensorVisibilityExclusions(ServiceClass):
     def create_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create the Sensor Visibility exclusions.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        /sensor-visibility-exclusions/createSVExclusionsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "comment": "string",
                     "groups": [
@@ -95,18 +112,19 @@ class SensorVisibilityExclusions(ServiceClass):
                     ],
                     "value": "string"
                 }
-        comment -- String comment describing why the exclusion is entered.
-        groups -- Group IDs to exclude. List of strings.
-        value -- Value to exclude. String
+        comment : str
+            String comment describing why the exclusion is entered.
+        groups : str or list[str]
+            Group IDs to exclude.
+        value : str
+            Value to exclude.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        /sensor-visibility-exclusions/createSVExclusionsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = exclusion_payload(passed_keywords=kwargs)
@@ -126,20 +144,30 @@ class SensorVisibilityExclusions(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete the Sensor Visibility exclusions by ID.
 
-        Keyword arguments:
-        comment -- Explains why this exclusions was deleted. String.
-        ids -- List of exclusion IDs to delete. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         /sensor-visibility-exclusions/deleteSensorVisibilityExclusionsV1
+
+        Keyword arguments
+        -----------------
+        comment : str
+            Explains why this exclusions was deleted.
+        ids : str or list[str]
+            List of exclusion IDs to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -153,8 +181,16 @@ class SensorVisibilityExclusions(ServiceClass):
     def update_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the Sensor Visibility Exclusions.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        /sensor-visibility-exclusions/updateSensorVisibilityExclusionsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "comment": "string",
                     "groups": [
@@ -164,21 +200,24 @@ class SensorVisibilityExclusions(ServiceClass):
                     "is_descendant_process": boolean,
                     "value": "string"
                 }
-        comment -- String comment describing why the exclusion is entered.
-        groups -- Group IDs to exclude. List of strings.
-        id -- Exclusion ID to update. String.
-        is_descendant_process -- Flag to determine if an exclusion should
-                                 apply to all descendant processes. Boolean.
-        value -- Value to exclude. String
+        comment : str
+            String comment describing why the exclusion is entered.
+        groups : str or list[str]
+            Group IDs to exclude.
+        id : str
+            Exclusion ID to update.
+        is_descendant_process : bool
+            Flag to determine if an exclusion should
+            apply to all descendant processes.
+        value : str
+            Value to exclude.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        /sensor-visibility-exclusions/updateSensorVisibilityExclusionsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = exclusion_payload(passed_keywords=kwargs)
@@ -194,33 +233,43 @@ class SensorVisibilityExclusions(ServiceClass):
     def query_exclusions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for Sensor Visibility Exclusions.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  An asterisk wildcard '*' includes all results.
-                  AVAILABLE FILTERS
-                  applied_globally            last_modified
-                  created_by                  modified_by
-                  created_on                  value
-        limit -- The maximum number of detections to return in this response.
-                 [Integer, default: 100; max: 500]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The first detection to return, where 0 is the latest detection.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. last_behavior|asc).
-                Available sort fields:
-                applied_globally            last_modified
-                created_by                  modified_by
-                created_on                  value
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         /sensor-visibility-exclusions/querySensorVisibilityExclusionsV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            An asterisk wildcard '*' includes all results.
+            AVAILABLE FILTERS
+            applied_globally            last_modified
+            created_by                  modified_by
+            created_on                  value
+        limit : int
+            The maximum number of detections to return in this response.
+            [Integer, default: 100; max: 500]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The first detection to return, where 0 is the latest detection.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. last_behavior|asc).
+            Available sort fields:
+            applied_globally            last_modified
+            created_by                  modified_by
+            created_on                  value
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

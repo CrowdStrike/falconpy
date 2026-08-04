@@ -63,8 +63,16 @@ class NetworkScanScans(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return scans aggregations.
 
-        Keyword arguments:
-        body -- Full body payload as a list of dictionaries in JSON format. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/aggregate_scansMixin0
+
+        Keyword arguments
+        -----------------
+        body : list
+            Full body payload as a list of dictionaries in JSON format. Not required if using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -99,33 +107,49 @@ class NetworkScanScans(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- Array of date range specifications for date-based aggregations. List of dictionaries.
-        exclude -- Fields to exclude from the aggregation. String.
-        field -- The field to aggregate on. String.
-        filter -- FQL query to filter the data before aggregating. String.
-        from -- Starting index for the aggregation. Integer.
-        include -- Fields to include in the aggregation. String.
-        interval -- Time interval for date histogram aggregations (e.g., day, week, month). String.
-        max_doc_count -- Maximum document count for bucket inclusion. Integer.
-        min_doc_count -- Minimum document count for bucket inclusion. Integer.
-        missing -- The value to use for documents missing the aggregation field. String.
-        name -- The name of the aggregation query. String.
-        q -- Full-text search query string. String.
-        ranges -- Numeric range specifications for range aggregations. List of dictionaries.
-        size -- The maximum number of results to return per aggregate. Integer.
-        sort -- The field to sort aggregate results on. String.
-        sub_aggregates -- Nested sub-aggregation specifications. List of dictionaries.
-        time_zone -- The time zone to use for date aggregations. String.
-        type -- The type of aggregate query to perform. String.
+        date_ranges : list[dict]
+            Array of date range specifications for date-based aggregations.
+        exclude : str
+            Fields to exclude from the aggregation.
+        field : str
+            The field to aggregate on.
+        filter : str
+            FQL query to filter the data before aggregating.
+        from : int
+            Starting index for the aggregation.
+        include : str
+            Fields to include in the aggregation.
+        interval : str
+            Time interval for date histogram aggregations (e.g., day, week, month)
+        max_doc_count : int
+            Maximum document count for bucket inclusion.
+        min_doc_count : int
+            Minimum document count for bucket inclusion.
+        missing : str
+            The value to use for documents missing the aggregation field.
+        name : str
+            The name of the aggregation query.
+        q : str
+            Full-text search query.
+        ranges : list[dict]
+            Numeric range specifications for range aggregations.
+        size : int
+            The maximum number of results to return per aggregate.
+        sort : str
+            The field to sort aggregate results on.
+        sub_aggregates : list[dict]
+            Nested sub-aggregation specifications.
+        time_zone : str
+            The time zone to use for date aggregations.
+        type : str
+            The type of aggregate query to perform.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/aggregate_scansMixin0
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -145,19 +169,28 @@ class NetworkScanScans(ServiceClass):
                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scans by their IDs.
 
-        Keyword arguments:
-        ids -- IDs of scans to be retrieved (Min: 1, Max: 100). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/get_scans
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of scans to be retrieved (Min: 1, Max: 100)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -174,8 +207,16 @@ class NetworkScanScans(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create scans using provided specifications.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/create_scans
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "block_windows": {
                         "intervals": [
@@ -233,29 +274,40 @@ class NetworkScanScans(ServiceClass):
                     "target_type": "string",
                     "template_id": "string"
                 }
-        block_windows -- Block Windows configuration attached to the scan. Dictionary.
-        credentialed -- Indicates if the scan is credentialed. Boolean.
-        credentials -- The credentials for this scan. Dictionary.
-        description -- Description of the scan. String.
-        fragile_device_detection -- Indicates if the scan includes fragile-device detection. Required. Boolean.
-        name -- Name of the scan. Required. String.
-        scheduling -- Scheduling configuration attached to the scan. Dictionary.
-        target_asset -- The target asset for this scan (AIDs to be targeted). Dictionary.
-        target_asset_filter -- The target asset filter for this scan (FQL-based filter). Dictionary.
-        target_external_ip -- The target external IP for this scan. Dictionary.
-        target_ip -- The target IP for this scan. Dictionary.
-        target_type -- The type of the target for this scan. Required. String.
-                       Allowed values: ip, asset, asset_filter, asset_vuln, external_ip.
-        template_id -- Template identifier for the scan. Required. String.
+        block_windows : dict
+            Block Windows configuration attached to the scan.
+        credentialed : bool
+            Indicates if the scan is credentialed.
+        credentials : dict
+            The credentials for this scan.
+        description : str
+            Description of the scan.
+        fragile_device_detection : bool (required)
+            Indicates if the scan includes fragile-device detection.
+        name : str (required)
+            Name of the scan.
+        scheduling : dict
+            Scheduling configuration attached to the scan.
+        target_asset : dict
+            The target asset for this scan (AIDs to be targeted)
+        target_asset_filter : dict
+            The target asset filter for this scan (FQL-based filter)
+        target_external_ip : dict
+            The target external IP for this scan.
+        target_ip : dict
+            The target IP for this scan.
+        target_type : str
+            The type of the target for this scan. Required. String.
+            Allowed values: ip, asset, asset_filter, asset_vuln, external_ip.
+        template_id : str (required)
+            Template identifier for the scan.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/create_scans
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = network_scan_scan_create_payload(passed_keywords=kwargs)
@@ -274,8 +326,16 @@ class NetworkScanScans(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update scans using provided specifications.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/update_scans
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "block_windows": {
                         "intervals": [
@@ -334,30 +394,42 @@ class NetworkScanScans(ServiceClass):
                     "target_type": "string",
                     "template_id": "string"
                 }
-        block_windows -- Block Windows configuration attached to the scan. Dictionary.
-        credentialed -- Indicates if the scan is credentialed. Required. Boolean.
-        credentials -- The credentials for this scan. Dictionary.
-        description -- Description of the scan. String.
-        fragile_device_detection -- Indicates if the scan includes fragile device detection. Boolean.
-        id -- ID of the scan to update. Required. String.
-        name -- Name of the scan. String.
-        scheduling -- Scheduling configuration attached to the scan. Dictionary.
-        target_asset -- The target asset associated with this scan (AIDs to be targeted). Dictionary.
-        target_asset_filter -- The target asset filter associated with this scan (FQL-based filter). Dictionary.
-        target_external_ip -- The target external IP associated with this scan. Dictionary.
-        target_ip -- The target IP associated with this scan. Dictionary.
-        target_type -- The type of the target scan. String.
-                       Allowed values: ip, asset, asset_filter, asset_vuln, external_ip.
-        template_id -- Template ID of the scan. String.
+        block_windows : dict
+            Block Windows configuration attached to the scan.
+        credentialed : bool (required)
+            Indicates if the scan is credentialed.
+        credentials : dict
+            The credentials for this scan.
+        description : str
+            Description of the scan.
+        fragile_device_detection : bool
+            Indicates if the scan includes fragile device detection.
+        id : str (required)
+            ID of the scan to update.
+        name : str
+            Name of the scan.
+        scheduling : dict
+            Scheduling configuration attached to the scan.
+        target_asset : dict
+            The target asset associated with this scan (AIDs to be targeted)
+        target_asset_filter : dict
+            The target asset filter associated with this scan (FQL-based filter)
+        target_external_ip : dict
+            The target external IP associated with this scan.
+        target_ip : dict
+            The target IP associated with this scan.
+        target_type : str
+            The type of the target scan. String.
+            Allowed values: ip, asset, asset_filter, asset_vuln, external_ip.
+        template_id : str
+            Template ID of the scan.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/update_scans
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = network_scan_scan_update_payload(passed_keywords=kwargs)
@@ -377,19 +449,28 @@ class NetworkScanScans(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete scans by their IDs.
 
-        Keyword arguments:
-        ids -- IDs of scans to be deleted (Min: 1, Max: 100). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/delete_scans
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of scans to be deleted (Min: 1, Max: 100)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -406,24 +487,34 @@ class NetworkScanScans(ServiceClass):
                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scan IDs by filter.
 
-        Keyword arguments:
-        offset -- An offset used with the limit parameter to manage pagination of results. On your first request, don’t provide
-                  an offset. On subsequent requests, add previous offset with the previous limit to continue from that place in
-                  the results Integer.
-        limit -- The number of scan IDs to return in this response
-                 (Min: 1, Max: 100, Default: 100). Integer.
-        sort -- Sort scans by their properties. A single sort field is allowed. String.
-        filter -- Search for scans by providing an FQL filter. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/query_scansMixin0
+
+        Keyword arguments
+        -----------------
+        offset : int
+            An offset used with the limit parameter to manage pagination of results. On your first request, don’t provide
+            an offset. On subsequent requests, add previous offset with the previous limit to continue from that place in
+            the results.
+        limit : int
+            The number of scan IDs to return in this response
+            (Min: 1, Max: 100, Default: 100)
+        sort : str
+            Sort scans by their properties. A single sort field is allowed.
+        filter : str
+            Search for scans by providing an FQL filter.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

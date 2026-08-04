@@ -64,20 +64,29 @@ class Quarantine(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the count of potentially affected quarantined files for each action.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  An asterisk wildcard '*' includes all results.
-        parameters - full parameters payload, not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quarantine/ActionUpdateCount
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            An asterisk wildcard '*' includes all results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'filter'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -91,8 +100,16 @@ class Quarantine(ServiceClass):
     def get_aggregate_files(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get quarantine file aggregates as specified via json in request body.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quarantine/GetAggregateFiles
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 {
                     "date_ranges": [
                     {
@@ -125,38 +142,44 @@ class Quarantine(ServiceClass):
                     "time_zone": "string",
                     "type": "string"
                 }
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quarantine/GetAggregateFiles
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aggregate_payload(submitted_keywords=kwargs)
@@ -172,24 +195,33 @@ class Quarantine(ServiceClass):
     def get_quarantine_files(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get quarantine file metadata for specified ids.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quarantine/GetQuarantineFiles
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- List of quarantine IDs to retrieve metadata for. String or list of strings.
+        ids : str or list[str]
+            List of quarantine IDs to retrieve metadata for.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quarantine/GetQuarantineFiles
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs,
@@ -210,11 +242,21 @@ class Quarantine(ServiceClass):
                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Apply action by quarantine file ids.
 
-        Keyword arguments:
-        action -- Action to perform against the quarantined file. String.
-                  Allowed values: 'release', 'unrelease', 'delete'
-        comment -- Comment to list along with action taken. String.
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quarantine/UpdateQuarantinedDetectsByIds
+
+        Keyword arguments
+        -----------------
+        action : str
+            Action to perform against the quarantined file. String.
+            Allowed values: 'release', 'unrelease', 'delete'
+        comment : str
+            Comment to list along with action taken.
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "action": "string",
                     "comment": "string",
@@ -222,16 +264,15 @@ class Quarantine(ServiceClass):
                         "string"
                     ]
                 }
-        ids -- List of quarantine IDs to perform an action on. String or list of strings.
+        ids : str or list[str]
+            List of quarantine IDs to perform an action on.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quarantine/UpdateQuarantinedDetectsByIds
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs,
@@ -253,49 +294,54 @@ class Quarantine(ServiceClass):
     def query_quarantine_files(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get quarantine file ids that match the provided filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Special value '*' means to not filter on anything.
-                  Available filters
-                  adversary_id                  behaviors.username
-                  behaviors.behavior_id         device.country
-                  behaviors.ioc_type            device.device_id
-                  behaviors.ioc_value           device.hostname
-                  behaviors.tree_root_hash      status
-
-                  Available range filters
-                  first_behavior                max_confidence
-                  last_behavior                 max_severity
-
-        q -- Match phrase_prefix query criteria, searches all filter string fields.
-             sha256                 hostname
-             state                  username
-             paths.path             date_updated
-             paths.state            date_created
-
-        limit -- The maximum number of records to return in this response. Integer.
-                 Use with the offset parameter to manage pagination of results.
-
-        offset -- Starting index of overall result set from which to return ids.
-                  Use with the limit parameter to manage pagination of results.
-
-        parameters - full parameters payload, not required if using other keywords.
-
-        sort -- The property to sort by. FQL syntax (e.g. date_created|asc).
-                Available sort fields
-                date_created                    paths.state
-                date_updated                    state
-                hostname                        username
-                paths.path
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quarantine/QueryQuarantineFiles
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Special value '*' means to not filter on anything.
+            Available filters
+            adversary_id                  behaviors.username
+            behaviors.behavior_id         device.country
+            behaviors.ioc_type            device.device_id
+            behaviors.ioc_value           device.hostname
+            behaviors.tree_root_hash      status
+            Available range filters
+            first_behavior                max_confidence
+            last_behavior                 max_severity
+        q : str
+            Match phrase_prefix query criteria, searches all filter string fields.
+            sha256                 hostname
+            state                  username
+            paths.path             date_updated
+            paths.state            date_created
+        limit : int
+            The maximum number of records to return in this response. Integer.
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            Starting index of overall result set from which to return ids.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. date_created|asc).
+            Available sort fields
+            date_created                    paths.state
+            date_updated                    state
+            hostname                        username
+            paths.path
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -312,27 +358,36 @@ class Quarantine(ServiceClass):
                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Apply quarantine file actions by query.
 
-        Keyword arguments:
-        action -- Action to perform against the quarantined file. String.
-                  Allowed values: 'release', 'unrelease', 'delete'
-        comment -- Comment to list along with action taken. String.
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quarantine/UpdateQfByQuery
+
+        Keyword arguments
+        -----------------
+        action : str
+            Action to perform against the quarantined file. String.
+            Allowed values: 'release', 'unrelease', 'delete'
+        comment : str
+            Comment to list along with action taken.
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "action": "string",
                     "comment": "string",
                     "filter": "string",
                     "q": "string"
                 }
-        ids -- List of quarantine IDs to perform an action on. String or list of strings.
+        ids : str or list[str]
+            List of quarantine IDs to perform an action on.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quarantine/UpdateQfByQuery
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = {}

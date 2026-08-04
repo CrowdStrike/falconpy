@@ -79,29 +79,42 @@ class ASPM(ServiceClass):
 
         Request and response are in MSA format.
 
-        Keyword arguments:
-        aws_lambda_arn -- ARN for the lambda. Required when using the aws cloud provider. String.
-        azure_function_app_name -- Azure function name. Required when using the azure cloud provider. String.
-        azure_site_resource_group -- Azure resource group ID. Required when using the azure cloud provider. String.
-        azure_site_subscription_id -- Azure site ID. Required when using the azure cloud provider. String.
-        cloud_provider -- Cloud provider name. String. Available values: aws, azure, gcp
-        gcp_cloud_function_url -- GCP cloud function URL. Required when using the gcp cloud provider. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        query_name -- Query name. String.
-                      Available values:
-                        sensitive_data          vulnerable_libraries
-                        reachable               risk_severity
-                        sensitive_datasources   sensitive_data_tags
-                        dependencies
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionDataCount
+
+        Keyword arguments
+        -----------------
+        aws_lambda_arn : str
+            ARN for the lambda. Required when using the aws cloud provider.
+        azure_function_app_name : str
+            Azure function name. Required when using the azure cloud provider.
+        azure_site_resource_group : str
+            Azure resource group ID. Required when using the azure cloud provider.
+        azure_site_subscription_id : str
+            Azure site ID. Required when using the azure cloud provider.
+        cloud_provider : str
+            Cloud provider name. String. Available values: aws, azure, gcp
+        gcp_cloud_function_url : str
+            GCP cloud function URL. Required when using the gcp cloud provider.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        query_name : str
+            Query name. String.
+            Available values:
+              sensitive_data          vulnerable_libraries
+              reachable               risk_severity
+              sensitive_datasources   sensitive_data_tags
+              dependencies
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -120,27 +133,38 @@ class ASPM(ServiceClass):
 
         Request and response are in MSA format.
 
-        Keyword arguments:
-        cid -- Customer ID. String or list of strings. Required when using the azure cloud provider.
-        cloud_account_id -- AWS cloud account ID. String or list of strings.
-                            Required when using the aws cloud provider.
-        cloud_provider -- Cloud provider name. String or list of strings. Available values: aws, azure, gcp
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        query_name -- Query name. String.
-                      Available values:
-                        sensitive_data          dependencies
-                        reachable               vulnerable_libraries
-                        sensitive_datasources
-        region -- GCP region. String or list of string. Required when using the gcp cloud provider.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionsCount
+
+        Keyword arguments
+        -----------------
+        cid : str or list[str]
+            Customer ID. String or list of strings. Required when using the azure cloud provider.
+        cloud_account_id : str or list[str]
+            AWS cloud account ID. String or list of strings.
+            Required when using the aws cloud provider.
+        cloud_provider : str or list[str]
+            Cloud provider name. String or list of strings. Available values: aws, azure, gcp
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        query_name : str
+            Query name. String.
+            Available values:
+              sensitive_data          dependencies
+              reachable               vulnerable_libraries
+              sensitive_datasources
+        region : str or list[str]
+            GCP region. String or list of string. Required when using the gcp cloud provider.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -159,18 +183,25 @@ class ASPM(ServiceClass):
 
         Request and response are in MSA format.
 
-        Keyword arguments:
-        field -- Field to retrieve. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionDataQueryCount
+
+        Keyword arguments
+        -----------------
+        field : str
+            Field to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -189,18 +220,25 @@ class ASPM(ServiceClass):
 
         Request and response are in MSA format.
 
-        Keyword arguments:
-        field -- Field to retrieve. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionsQueryCount
+
+        Keyword arguments
+        -----------------
+        field : str
+            Field to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -216,18 +254,25 @@ class ASPM(ServiceClass):
 
         Request and response are in MSA format.
 
-        Keyword arguments:
-        field -- Field to retrieve. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionData
+
+        Keyword arguments
+        -----------------
+        field : str
+            Field to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -246,18 +291,25 @@ class ASPM(ServiceClass):
 
         Request and response are in MSA format.
 
-        Keyword arguments:
-        field -- Field to retrieve. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionsOvertime
+
+        Keyword arguments
+        -----------------
+        field : str
+            Field to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -273,18 +325,25 @@ class ASPM(ServiceClass):
 
         Request and response are in MSA format.
 
-        Keyword arguments:
-        field -- Field to retrieve. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctions
+
+        Keyword arguments
+        -----------------
+        field : str
+            Field to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -303,18 +362,25 @@ class ASPM(ServiceClass):
 
         Request and response are in MSA format.
 
-        Keyword arguments:
-        field -- Field to retrieve. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionDataQuery
+
+        Keyword arguments
+        -----------------
+        field : str
+            Field to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -333,18 +399,25 @@ class ASPM(ServiceClass):
 
         Request and response are in MSA format.
 
-        Keyword arguments:
-        field -- Field to retrieve. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionsQueryOvertime
+
+        Keyword arguments
+        -----------------
+        field : str
+            Field to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -363,18 +436,25 @@ class ASPM(ServiceClass):
 
         Request and response are in MSA format.
 
-        Keyword arguments:
-        field -- Field to retrieve. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionsQuery
+
+        Keyword arguments
+        -----------------
+        field : str
+            Field to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -388,24 +468,37 @@ class ASPM(ServiceClass):
     def get_service_artifacts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve service artifacts.
 
-        Keyword arguments:
-        persistent_signature -- Persistent signature. String.
-        optional_time -- Optional time. String.
-        revision_id -- Revision ID. String.
-        limit -- Upper bound for records returned. Integer.
-        offset -- Starting position for records returned. Integer.
-        order_by -- Sort order field. String or list of strings.
-        direction -- Sort order direction. String. Available values: asc, desc
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/getServiceArtifacts
+
+        Keyword arguments
+        -----------------
+        persistent_signature : str
+            Persistent signature.
+        optional_time : str
+            Optional time.
+        revision_id : str
+            Revision ID.
+        limit : int
+            Upper bound for records returned.
+        offset : int
+            Starting position for records returned.
+        order_by : str or list[str]
+            Sort order field.
+        direction : str
+            Sort order direction. String. Available values: asc, desc
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("persistent_signature", None):
             kwargs["persistentSignature"] = kwargs.get("persistent_signature", None)
@@ -437,25 +530,33 @@ class ASPM(ServiceClass):
     def update_business_applications(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create or Update Business Applications.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/UpsertBusinessApplications
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "name": "string",
                     "persistentSignatures": [
                         "string"
                     ]
                 }
-        name -- Application name. String.
-        persistent_signatures -- Signatures. List of strings.
+        name : str
+            Application name.
+        persistent_signatures : list[str]
+            Signatures.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PUT
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/UpsertBusinessApplications
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aspm_application_payload(passed_keywords=kwargs)
@@ -475,17 +576,21 @@ class ASPM(ServiceClass):
                                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Cloud Security integration state.
 
-        Keyword arguments:
-        This method does not support keyword arguments.
-
-        This method does not support positional arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetCloudSecurityIntegrationState
+
+        Keyword arguments
+        -----------------
+        This method does not support keyword arguments.
+        This method does not support positional arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -502,18 +607,25 @@ class ASPM(ServiceClass):
                                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Set Cloud Security integration state.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format. Not required if using other keywords.
-        is_enabled -- Flag indicating if the state should be enabled. Boolean
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/SetCloudSecurityIntegrationState
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format. Not required if using other keywords.
+        is_enabled : bool
+            Flag indicating if the state should be enabled.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("is_enabled", None) is not None:
             body["isEnabled"] = kwargs.get("is_enabled", None)
@@ -534,27 +646,43 @@ class ASPM(ServiceClass):
     def get_executor_nodes(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all the relay nodes.
 
-        Keyword arguments:
-        direction -- Sort order direction. String. Allowed values: asc, desc
-        executor_node_ids -- Executor node IDs. String or list of strings.
-        executor_node_names -- Executor node names. String or list of strings.
-        executor_node_states -- Executor node states. String or list of strings.
-        executor_node_types -- Executor node types. String or list of strings.
-        node_type -- Node type. String.
-        integration_type -- Integration type. String.
-        limit -- Maximum number of records to return. Integer.
-        offset -- Starting position for records returned. Integer.
-        order_by -- Field to use for sorting results. String. Allowed values: name, id, state, type
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetExecutorNodes
+
+        Keyword arguments
+        -----------------
+        direction : str
+            Sort order direction. String. Allowed values: asc, desc
+        executor_node_ids : str or list[str]
+            Executor node IDs.
+        executor_node_names : str or list[str]
+            Executor node names.
+        executor_node_states : str or list[str]
+            Executor node states.
+        executor_node_types : str or list[str]
+            Executor node types.
+        node_type : str
+            Node type.
+        integration_type : int
+            Integration type.
+        limit : int
+            Maximum number of records to return.
+        offset : int
+            Starting position for records returned.
+        order_by : str
+            Field to use for sorting results. String. Allowed values: name, id, state, type
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -568,8 +696,16 @@ class ASPM(ServiceClass):
     def update_executor_node(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an existing relay node.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/UpdateExecutorNode
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "additional_header": "string",
                     "current_aws_arn": "string",
@@ -596,27 +732,25 @@ class ASPM(ServiceClass):
                     "useJobs": boolean,
                     "username": "string"
                 }
-        current_aws_arn --
-        dashboard_url --
-        id --
-        last_health_check --
-        name --
-        node_type --
-        password --
-        pod_settings --
-        proxy_address --
-        type --
-        use_jobs --
-        username --
+        current_aws_arn : str
+        dashboard_url : str
+        id : str
+        last_health_check : int
+        name : str
+        node_type : str
+        password : str
+        pod_settings : dict
+        proxy_address : str
+        type : str
+        use_jobs : str
+        username : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PUT
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/UpdateExecutorNode
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aspm_node_payload(passed_keywords=kwargs)
@@ -633,9 +767,17 @@ class ASPM(ServiceClass):
     def create_executor_node(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new relay node.
 
-        Keyword arguments:
-        additional_header --
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/CreateExecutorNode
+
+        Keyword arguments
+        -----------------
+        additional_header : str
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "additional_header": "string",
                     "current_aws_arn": "string",
@@ -662,27 +804,25 @@ class ASPM(ServiceClass):
                     "useJobs": boolean,
                     "username": "string"
                 }
-        current_aws_arn --
-        dashboard_url --
-        id --
-        last_health_check --
-        name --
-        node_type --
-        password --
-        pod_settings --
-        proxy_address --
-        type --
-        use_jobs --
-        username --
+        current_aws_arn : str
+        dashboard_url : str
+        id : str
+        last_health_check : int
+        name : str
+        node_type : str
+        password : str
+        pod_settings : dict
+        proxy_address : str
+        type : str
+        use_jobs : str
+        username : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/CreateExecutorNode
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aspm_node_payload(passed_keywords=kwargs)
@@ -702,21 +842,31 @@ class ASPM(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get metadata about all executor nodes.
 
-        Keyword arguments:
-        executor_node_ids -- Executor node ids. String or list of strings.
-        executor_node_names -- Executor node names. String or list of strings.
-        executor_node_states -- Executor node states. Integer or list of integers.
-        executor_node_types -- Executor node types. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetExecutorNodesMetadata
+
+        Keyword arguments
+        -----------------
+        executor_node_ids : str or list[str]
+            Executor node ids.
+        executor_node_names : str or list[str]
+            Executor node names.
+        executor_node_states : str or list[str]
+            Executor node states.
+        executor_node_types : str or list[str]
+            Executor node types.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -730,18 +880,25 @@ class ASPM(ServiceClass):
     def delete_node(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a relay node.
 
-        Keyword arguments:
-        id -- ID of the node to remove. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/DeleteExecutorNode
+
+        Keyword arguments
+        -----------------
+        id : int
+            ID of the node to remove.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         target_id = kwargs.get("id", parameters.get("id", None))
         if not target_id:
@@ -761,9 +918,18 @@ class ASPM(ServiceClass):
     def retrieve_relay_instances(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the relay instance in CSV format.
 
-        Keyword arguments:
-        additional_header -- Additional header to provide. String.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        Swagger unavailable
+
+        Keyword arguments
+        -----------------
+        additional_header : str
+            Additional header to provide.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "additional_header": "string",
                     "current_aws_arn": "string",
@@ -795,27 +961,37 @@ class ASPM(ServiceClass):
                     "useJobs": true,
                     "username": "string"
                 }
-        current_aws_arn -- Current AWS ARN. String.
-        dashboard_url -- URL for the related dashboard. String.
-        id -- ID of the node to remove. Integer.
-        last_health_check -- Last health check. Integer.
-        name -- Name. String.
-        node_type -- Node type. String.
-        pod_settings -- Related pod settings. Dictionary.
-        proxy_address -- Address of the proxy. String.
-        status -- Current status. Dictionary.
-        type -- Relay type. String.
-        use_jobs -- Flag indicating if jobs should be used. Boolean.
-        username -- Account username. String.
+        current_aws_arn : str
+            Current AWS ARN.
+        dashboard_url : str
+            URL for the related dashboard.
+        id : str
+            ID of the node to remove.
+        last_health_check : int
+            Last health check.
+        name : str
+            Name.
+        node_type : str
+            Node type.
+        pod_settings : dict
+            Related pod settings.
+        proxy_address : str
+            Address of the proxy.
+        status : dict
+            Current status.
+        type : str
+            Relay type.
+        use_jobs : bool
+            Flag indicating if jobs should be used.
+        username : str
+            Account username.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: DELETE
-
-        Swagger URL
-        Swagger unavailable
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = retrieve_relay_node_payload(kwargs)
@@ -838,26 +1014,41 @@ class ASPM(ServiceClass):
     def get_integration_tasks(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all integration tasks.
 
-        Keyword arguments:
-        integration_task_type -- Integration task type. Integer.
-        category -- Integration category. String.
-        offset -- Starting position to returned records. Integer.
-        limit -- Total number of records to return. Integer.
-        order_by -- Field to use for sort order. String. Available values: name, id, integrationTask
-        direction -- Sort direction. String. Allowed values: asc, desc
-        integration_task_types -- Integration task types. Integer.
-        ids -- Integration IDs. Integer.
-        names -- Integration names. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetIntegrationTasks
+
+        Keyword arguments
+        -----------------
+        integration_task_type : int
+            Integration task type.
+        category : str
+            Integration category.
+        offset : int
+            Starting position to returned records.
+        limit : int
+            Total number of records to return.
+        order_by : str
+            Field to use for sort order. String. Available values: name, id, integrationTask
+        direction : str
+            Sort direction. String. Allowed values: asc, desc
+        integration_task_types : int
+            Integration task types.
+        ids : int
+            Integration IDs.
+        names : str
+            Integration names.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("order_by", None):
             kwargs["orderBy"] = kwargs.get("order_by", None)
@@ -877,8 +1068,16 @@ class ASPM(ServiceClass):
     def create_integration_task(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create new integration task.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/CreateIntegrationTask
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "integration_task": {
                         "access_token": "string",
@@ -1226,14 +1425,14 @@ class ASPM(ServiceClass):
                     }
                 }
 
+
+
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/CreateIntegrationTask
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aspm_integration_task_payload(passed_keywords=kwargs)
@@ -1253,26 +1452,41 @@ class ASPM(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all the integration tasks, requires admin scope.
 
-        Keyword arguments:
-        integration_task_type -- Integration task type. Integer.
-        category -- Integration task category. String.
-        offset -- Offset from which to start returning records. Integer.
-        limit -- Maximum number of records to return. Integer.
-        order_by -- Fields to use for sort order. String.
-        direction -- Sort order direction. String. Allowed values: asc or desc
-        integration_task_types -- Integration task types. Integer.
-        ids -- Integration task ID. Integer.
-        names -- Integration task name. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetIntegrationTasksAdmin
+
+        Keyword arguments
+        -----------------
+        integration_task_type : int
+            Integration task type.
+        category : str
+            Integration task category.
+        offset : int
+            Offset from which to start returning records.
+        limit : int
+            Maximum number of records to return.
+        order_by : str
+            Fields to use for sort order.
+        direction : str
+            Sort order direction. String. Allowed values: asc or desc
+        integration_task_types : int
+            Integration task types.
+        ids : int
+            Integration task ID.
+        names : str
+            Integration task name.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("order_by", None):
             kwargs["orderBy"] = kwargs.get("order_by", None)
@@ -1295,21 +1509,31 @@ class ASPM(ServiceClass):
                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get metadata about all integration tasks.
 
-        Keyword arguments:
-        category -- Integration category. String. Allowed values: collection, exporting
-        integration_task_types -- Integration task types. Integer.
-        ids -- Integration IDs. Integer.
-        names -- Integration names. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetIntegrationTasksMetadata
+
+        Keyword arguments
+        -----------------
+        category : str
+            Integration category. String. Allowed values: collection, exporting
+        integration_task_types : int
+            Integration task types.
+        ids : int
+            Integration IDs.
+        names : str
+            Integration names.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1326,26 +1550,41 @@ class ASPM(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all the integration tasks.
 
-        Keyword arguments:
-        integration_task_type -- Integration task type. Integer.
-        category -- Integration category. String.
-        offset -- Starting position to returned records. Integer.
-        limit -- Total number of records to return. Integer.
-        order_by -- Field to use for sort order. String. Available values: name, id, integrationTask
-        direction -- Sort direction. String. Allowed values: asc, desc
-        integration_task_types -- Integration task types. Integer.
-        ids -- Integration IDs. Integer.
-        names -- Integration names. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetIntegrationTasksV2
+
+        Keyword arguments
+        -----------------
+        integration_task_type : int
+            Integration task type.
+        category : str
+            Integration category.
+        offset : int
+            Starting position to returned records.
+        limit : int
+            Total number of records to return.
+        order_by : str
+            Field to use for sort order. String. Available values: name, id, integrationTask
+        direction : str
+            Sort direction. String. Allowed values: asc, desc
+        integration_task_types : int
+            Integration task types.
+        ids : int
+            Integration IDs.
+        names : str
+            Integration names.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("order_by", None):
             kwargs["orderBy"] = kwargs.get("order_by", None)
@@ -1369,9 +1608,18 @@ class ASPM(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an existing integration task by its ID.
 
-        Keyword arguments:
-        ID -- ID of the integration task to update. Integer.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/UpdateIntegrationTask
+
+        Keyword arguments
+        -----------------
+        ID : int
+            ID of the integration task to update.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                 "integration_task": {
                     "access_token": "string",
@@ -1718,16 +1966,15 @@ class ASPM(ServiceClass):
                     }
                 }
                 }
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PUT
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/UpdateIntegrationTask
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         target_id = kwargs.get("id", parameters.get("id", None))
         if not target_id:
@@ -1756,18 +2003,25 @@ class ASPM(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an existing integration task by its ID.
 
-        Keyword arguments:
-        ID -- ID of the integration task to remove. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/DeleteIntegrationTask
+
+        Keyword arguments
+        -----------------
+        ID : int
+            ID of the integration task to remove.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         target_id = kwargs.get("id", parameters.get("id", None))
         if not target_id:
@@ -1791,9 +2045,18 @@ class ASPM(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Run an integration task by its ID.
 
-        Keyword arguments:
-        access_token -- Integration access token. String.
-        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/RunIntegrationTask
+
+        Keyword arguments
+        -----------------
+        access_token : str
+            Integration access token.
+        body : dict
+            Full body payload dictionary in JSON format. Not required if using other keywords.
                 {
                     "access_token": "string",
                     "category": "string",
@@ -1802,22 +2065,27 @@ class ASPM(ServiceClass):
                     "scheduled": boolean,
                     "task_id": integer
                 }
-        category -- Integration task category. String.
-        data -- Integration task data. String.
-        ID -- ID of the integration task to execute. Integer.
-        override -- Override previous task. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        scheduled -- Schedule task. Boolean.
-        task_id -- Integration task ID. Integer.
+        category : str
+            Integration task category.
+        data : str
+            Integration task data.
+        ID : int
+            ID of the integration task to execute.
+        override : bool
+            Override previous task.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        scheduled : bool
+            Schedule task.
+        task_id : int
+            Integration task ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/RunIntegrationTask
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         target_id = kwargs.get("id", parameters.get("id", None))
         if not target_id:
@@ -1847,10 +2115,20 @@ class ASPM(ServiceClass):
                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Run an integration task by its ID - for admin scope.
 
-        Keyword arguments:
-        ID -- Integration task ID. Integer.
-        category -- Integration task category. String.
-        body -- Full body payload in JSON format. Not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/RunIntegrationTaskAdmin
+
+        Keyword arguments
+        -----------------
+        ID : int
+            Integration task ID.
+        category : str
+            Integration task category.
+        body : dict
+            Full body payload in JSON format. Not required when using other keywords.
                 {
                     "access_token": "string",
                     "category": "string",
@@ -1859,16 +2137,15 @@ class ASPM(ServiceClass):
                     "scheduled": boolean,
                     "task_id": integer
                 }
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/RunIntegrationTaskAdmin
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aspm_integration_task_payload(kwargs)
@@ -1890,10 +2167,20 @@ class ASPM(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Run an integration task by its ID.
 
-        Keyword arguments:
-        ID -- Integration task ID. Integer.
-        category -- Integration task category. String.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/RunIntegrationTaskV2
+
+        Keyword arguments
+        -----------------
+        ID : int
+            Integration task ID.
+        category : str
+            Integration task category.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "access_token": "string",
                     "category": "string",
@@ -1902,16 +2189,15 @@ class ASPM(ServiceClass):
                     "scheduled": bolean,
                     "task_id": integer
                 }
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/RunIntegrationTaskV2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aspm_integration_task_payload(kwargs)
@@ -1927,18 +2213,24 @@ class ASPM(ServiceClass):
     def get_integration_types(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all the integration types.
 
-        Keyword arguments:
-        This operation does not accept keyword arguments.
-
-        Arguments:
-        This operation does not accept arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetIntegrationTypes
+
+        Keyword arguments
+        -----------------
+        This operation does not accept keyword arguments.
+
+        Arguments
+        ---------
+        This operation does not accept arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1950,19 +2242,27 @@ class ASPM(ServiceClass):
     def get_integrations(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of all the integrations.
 
-        Keyword arguments:
-        integration_type -- Type of integration. String.
-        category -- Integration category. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetIntegrations
+
+        Keyword arguments
+        -----------------
+        integration_type : int
+            Type of integration.
+        category : str
+            Integration category.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1976,8 +2276,16 @@ class ASPM(ServiceClass):
     def create_integration(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new integration.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/CreateIntegration
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "integration": {
                         "data": "string",
@@ -2027,16 +2335,15 @@ class ASPM(ServiceClass):
                         "update_time": integer
                     }
                 }
-        integration -- Integration details. Dictionary.
+        integration : dict
+            Integration details.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/CreateIntegration
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aspm_integration_payload(passed_keywords=kwargs)
@@ -2053,19 +2360,27 @@ class ASPM(ServiceClass):
     def get_integrations_v2(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of all the integrations.
 
-        Keyword arguments:
-        integration_type -- Integration type. Integer.
-        category -- Integration category. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetIntegrationsV2
+
+        Keyword arguments
+        -----------------
+        integration_type : int
+            Integration type.
+        category : str
+            Integration category.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -2083,9 +2398,18 @@ class ASPM(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an existing integration by its ID.
 
-        Keyword arguments:
-        id -- ID of the integration to update. Integer.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/UpdateIntegration
+
+        Keyword arguments
+        -----------------
+        id : int
+            ID of the integration to update.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "integration": {
                         "data": "string",
@@ -2138,18 +2462,19 @@ class ASPM(ServiceClass):
                         "string"
                     ]
                 }
-        integration -- Integration details. Dictionary.
-        overwrite_fields -- Fields to overwrite. List of strings.
-        parameters -- Full parameters payload dictionary. Not required if using the 'id' keyword.
+        integration : dict
+            Integration details.
+        overwrite_fields : list[str]
+            Fields to overwrite.
+        parameters : dict
+            Full parameters payload dictionary. Not required if using the 'id' keyword.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PUT
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/UpdateIntegration
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         target_id = kwargs.get("id", parameters.get("id", None))
         if not target_id:
@@ -2173,18 +2498,25 @@ class ASPM(ServiceClass):
     def delete_integration(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an existing integration by its ID.
 
-        Keyword arguments:
-        id -- ID of the integration to remove. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/DeleteIntegration
+
+        Keyword arguments
+        -----------------
+        id : int
+            ID of the integration to remove.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         target_id = kwargs.get("id", parameters.get("id", None))
         if not target_id:
@@ -2204,8 +2536,16 @@ class ASPM(ServiceClass):
     def execute_query(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Execute a query. The syntax used is identical to that of the query page.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteQuery
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "paginate": {
                         "direction": "string",
@@ -2227,27 +2567,30 @@ class ASPM(ServiceClass):
                     },
                     "timestamp": integer
                 }
-        paginate -- Pagination detail. Dictionary.
-        query -- Query to perform. String.
-        select_fields -- Field selection detail. Dictionary.
-                         Dictionary contents:
-                         fields - For filtering relevant fields only.
-                         withoutServices - Default is set to True,
-                            you will not receive information about the services.
-                            If you want to get the relevant service, set to False.
-                         serviceFields - For filtering relevant fields of the service
-                                         (if you chose to get it)
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        timestamp -- Timestamp. Integer.
+        paginate : dict
+            Pagination detail.
+        query : str
+            Query to perform.
+        select_fields : str
+            Field selection detail. Dictionary.
+            Dictionary contents:
+            fields - For filtering relevant fields only.
+            withoutServices - Default is set to True,
+               you will not receive information about the services.
+               If you want to get the relevant service, set to False.
+            serviceFields - For filtering relevant fields of the service
+                            (if you chose to get it)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        timestamp : int
+            Timestamp.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteQuery
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aspm_query_payload(passed_keywords=kwargs)
@@ -2267,22 +2610,33 @@ class ASPM(ServiceClass):
                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve ServiceNow deployments.
 
-        Keyword arguments:
-        ql_filters -- Query filter. String.
-        limit -- Maximum number of records to return. Integer.
-        offset -- Starting position of return records. Integer.
-        orderBy -- Sort order field. String.
-        direction -- Sort direction. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ServiceNowGetDeployments
+
+        Keyword arguments
+        -----------------
+        ql_filters : str
+            Query filter.
+        limit : int
+            Maximum number of records to return.
+        offset : int
+            Starting position of return records.
+        orderBy : str
+            Sort order field.
+        direction : str
+            Sort direction.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -2299,23 +2653,35 @@ class ASPM(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve ServiceNow services.
 
-        Keyword arguments:
-        exclude_artifacts -- Flag indicating if artifacts should be excluded. Boolean.
-        ql_filters -- Query filter. String.
-        limit -- Maximum number of records to return. Integer.
-        offset -- Starting position of return records. Integer.
-        orderBy -- Sort order field. String.
-        direction -- Sort direction. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ServiceNowGetServices
+
+        Keyword arguments
+        -----------------
+        exclude_artifacts : bool
+            Flag indicating if artifacts should be excluded.
+        ql_filters : str
+            Query filter.
+        limit : int
+            Maximum number of records to return.
+        offset : int
+            Starting position of return records.
+        orderBy : str
+            Sort order field.
+        direction : str
+            Sort direction.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("order_by", None):
             kwargs["orderBy"] = kwargs.get("order_by")
@@ -2332,8 +2698,16 @@ class ASPM(ServiceClass):
     def get_services_count(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the total amount of existing services.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetServicesCount
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "deploymentTupleFilters": [
                         {
@@ -2385,25 +2759,24 @@ class ASPM(ServiceClass):
                     "revisionId": integer,
                     "rolesSignature": "string"
                 }
-        deployment_tuple_filters --
-        nesting-level --
-        only_count --
-        optional_time --
-        pagination --
-        persistent_signatures --
-        ql_filters --
-        related_entities --
-        revision_id --
-        roles_signatures --
+        deployment_tuple_filters : str
+        nesting : str
+            level --
+        only_count : str
+        optional_time : str
+        pagination : dict
+        persistent_signatures : str
+        ql_filters : str
+        related_entities : str
+        revision_id : str
+        roles_signatures : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetServicesCount
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aspm_get_services_count_payload(passed_keywords=kwargs)
@@ -2420,8 +2793,16 @@ class ASPM(ServiceClass):
     def get_service_violation_types(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the different types of violation.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetServiceViolationTypes
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "filter": {
                         "order_by": {
@@ -2440,18 +2821,18 @@ class ASPM(ServiceClass):
                     "optionalTime": integer,
                     "revisionId": integer
                 }
-        filter -- Query filter. Dictionary.
-        optional_time -- Integer.
-        revision_id -- Revision ID. Integer.
+        filter : dict
+            Query filter.
+        optional_time : int
+        revision_id : int
+            Revision ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: GET
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetServiceViolationTypes
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aspm_violations_search_payload(passed_keywords=kwargs)
@@ -2468,22 +2849,32 @@ class ASPM(ServiceClass):
     def get_tags(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all the tags.
 
-        Keyword arguments:
-        is_unique -- Flag indicating if the tag is unique. Boolean.
-        tag_name -- Tag name. String.
-        limit -- Total number of tags to return. Integer.
-        offset -- Starting position from which to return records. Integer.
-        name -- String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetTags
+
+        Keyword arguments
+        -----------------
+        is_unique : bool
+            Flag indicating if the tag is unique.
+        tag_name : str
+            Tag name.
+        limit : int
+            Total number of tags to return.
+        offset : int
+            Starting position from which to return records.
+        name : str or list[str]
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         keymap = {"is_unique": "isUnique", "tag_name": "tagName"}
         for key, camelkey in keymap.items():
@@ -2502,8 +2893,16 @@ class ASPM(ServiceClass):
     def update_tags(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create new or update existing tag. You can update unique tags table or regular tags table.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/UpsertTags
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "entries": [
                         {
@@ -2514,21 +2913,24 @@ class ASPM(ServiceClass):
                         }
                     ]
                 }
-        entries -- Tag entries. List of dictionaries.
-                   Overrides the is_sensitive, persistent_signature, and value keywords.
-        is_sensitive -- Sensitive. Boolean.
-        name -- Tag name. String.
-        tag_type -- Tag type. String.
-        value -- Tag value. String.
+        entries : list
+            Tag entries. List of dictionaries.
+            Overrides the is_sensitive, persistent_signature, and value keywords.
+        is_sensitive : bool
+            Sensitive.
+        name : str
+            Tag name.
+        tag_type : str
+            Tag type.
+        value : str
+            Tag value.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PUT
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/UpsertTags
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aspm_update_tag_payload(passed_keywords=kwargs)
@@ -2545,8 +2947,16 @@ class ASPM(ServiceClass):
     def delete_tags(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Remove existing tags.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/DeleteTags
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "entries": [
                         {
@@ -2557,21 +2967,24 @@ class ASPM(ServiceClass):
                     ],
                     "name": "string"
                 }
-        entries -- Tag entries. List of dictionaries.
-                   Overrides the is_sensitive, persistent_signature, and value keywords.
-        is_sensitive -- Sensitive. Boolean.
-        name -- Tag name. String.
-        persistent_signature -- Persistent signature. String.
-        value -- Tag value. String.
+        entries : list
+            Tag entries. List of dictionaries.
+            Overrides the is_sensitive, persistent_signature, and value keywords.
+        is_sensitive : bool
+            Sensitive.
+        name : str
+            Tag name.
+        persistent_signature : str
+            Persistent signature.
+        value : str
+            Tag value.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/DeleteTags
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aspm_delete_tag_payload(passed_keywords=kwargs)
@@ -2591,18 +3004,25 @@ class ASPM(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """List users.
 
-        Keyword arguments:
-        pagination -- URL encoded pagination JSON - limit, offset, direction, orderBy. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/get_%2Fusers%2Fv2
+
+        Keyword arguments
+        -----------------
+        pagination : str
+            URL encoded pagination JSON - limit, offset, direction, orderBy.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -2616,8 +3036,16 @@ class ASPM(ServiceClass):
     def post_group_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create group.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/post_%2Fgroup%2Fv2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "children": [
                         0
@@ -2629,20 +3057,25 @@ class ASPM(ServiceClass):
                     "parentId": 0,
                     "scope": "string"
                 }
-        children -- IDs of child groups. List of Integers.
-        description -- Description of the group. String.
-        group_type -- Type of the group. String.
-        is_default -- Flag indicating if this is the default group. Boolean.
-        name -- Name of the group. String.
-        parent_id -- ID of the parent group. Integer.
-        scope -- Scope of the group. String.
+        children : list[int]
+            IDs of child groups.
+        description : str
+            Description of the group.
+        group_type : str
+            Type of the group.
+        is_default : bool
+            Flag indicating if this is the default group.
+        name : str
+            Name of the group.
+        parent_id : int
+            ID of the parent group.
+        scope : str
+            Scope of the group.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/post_%2Fgroup%2Fv2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aspm_group_payload(passed_keywords=kwargs)
@@ -2658,18 +3091,25 @@ class ASPM(ServiceClass):
     def delete_group(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete group.
 
-        Keyword arguments:
-        id -- Group ID. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/delete_%2Fgroup%2F%7BID%3A%5B0-9%5D%2B%7D
+
+        Keyword arguments
+        -----------------
+        id : int
+            Group ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         target_id = kwargs.get("id", parameters.get("id", None))
         if not target_id:
@@ -2689,18 +3129,25 @@ class ASPM(ServiceClass):
     def update_default_group(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update default group.
 
-        Keyword arguments:
-        id -- Group ID. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/post_%2Fgroup%2F%7BID%3A%5B0-9%5D%2B%7D%2Fupdate_default
+
+        Keyword arguments
+        -----------------
+        id : int
+            Group ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         target_id = kwargs.get("id", parameters.get("id", None))
         if not target_id:
@@ -2720,18 +3167,25 @@ class ASPM(ServiceClass):
     def get_group_v2(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get group details.
 
-        Keyword arguments:
-        id -- Group ID. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/get_%2Fgroup%2F%7BID%3A%5B0-9%5D%2B%7D%2Fv2
+
+        Keyword arguments
+        -----------------
+        id : int
+            Group ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         target_id = kwargs.get("id", parameters.get("id", None))
         if not target_id:
@@ -2755,9 +3209,18 @@ class ASPM(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update group.
 
-        Keyword arguments:
-        id -- Group ID. Integer.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/post_%2Fgroup%2F%7BID%3A%5B0-9%5D%2B%7D%2Fv2
+
+        Keyword arguments
+        -----------------
+        id : int
+            Group ID.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "children": [
                         0
@@ -2769,20 +3232,25 @@ class ASPM(ServiceClass):
                     "parentId": 0,
                     "scope": "string"
                 }
-        children -- IDs of child groups. List of Integers.
-        description -- Description of the group. String.
-        group_type -- Type of the group. String.
-        is_default -- Flag indicating if this is the default group. Boolean.
-        name -- Name of the group. String.
-        parent_id -- ID of the parent group. Integer.
-        scope -- Scope of the group. String.
+        children : list[int]
+            IDs of child groups.
+        description : str
+            Description of the group.
+        group_type : str
+            Type of the group.
+        is_default : bool
+            Flag indicating if this is the default group.
+        name : str
+            Name of the group.
+        parent_id : int
+            ID of the parent group.
+        scope : str
+            Scope of the group.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/post_%2Fgroup%2F%7BID%3A%5B0-9%5D%2B%7D%2Fv2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         target_id = kwargs.get("id", parameters.get("id", None))
         if not target_id:
@@ -2806,17 +3274,23 @@ class ASPM(ServiceClass):
     def get_group_hierarchy(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get group hierarchy.
 
-        Keyword arguments:
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/get_%2Fgroups%2Fhier%2Fv2
+
+        Keyword arguments
+        -----------------
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -2830,18 +3304,25 @@ class ASPM(ServiceClass):
     def get_groups_v2(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get groups V2.
 
-        Keyword arguments:
-        type -- Group types to query - can either be empty (all), parents, children. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/get_%2Fgroups%2Flist%2Fv2
+
+        Keyword arguments
+        -----------------
+        type : str
+            Group types to query - can either be empty (all), parents, children.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

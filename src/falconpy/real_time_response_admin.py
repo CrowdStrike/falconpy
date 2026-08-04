@@ -64,8 +64,16 @@ class RealTimeResponseAdmin(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Batch executes a RTR administrator command across the hosts mapped to a given batch ID.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/BatchAdminCmd
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "base_command": "string",
                     "batch_id": "string",
@@ -75,33 +83,39 @@ class RealTimeResponseAdmin(ServiceClass):
                     ],
                     "persist_all": true
                 }
-        base_command -- Active-Responder command type we are going to execute,
-                        for example: `get` or `cp`.  String.
-                        Refer to the RTR documentation for the full list of commands.
-        batch_id -- Batch ID to execute the command on. Received from batch_init_session. String.
-        command_string -- Full command string for the command. For example `get some_file.txt`.
-        host_timeout_duration -- Timeout duration for how long a host has time to complete processing.
-                                 Default value is slightly less than the overall timeout value.
-                                 This value cannot be greater than the overall request timeout. Max < 10 minutes.
-                                 Example: 10s  Valid units: ns, us, ms, s, m, h
-        optional_hosts -- List of a subset of hosts we want to run the command on.
-                          If this list is supplied, only these hosts will receive the command.
-        parameters -- full parameters payload in JSON format. Not required if using other keywords.
-        persist_all -- Boolean.
-        timeout -- Timeout for how long to wait for the request in seconds.
-                   Default timeout: 30 seconds  Max timeout: 10 minutes
-        timeout_duration -- Timeout duration for how long to wait for the request in duration
-                            syntax. Example: `10s`.   Default value: `30s`. Maximum is `10m`.
-                            Valid units: `ns`, `us`, `ms`, `s`, `m`, `h`
+        base_command : str
+            Active-Responder command type we are going to execute,
+            for example: `get` or `cp`.  String.
+            Refer to the RTR documentation for the full list of commands.
+        batch_id : str
+            Batch ID to execute the command on. Received from batch_init_session.
+        command_string : str
+            Full command string for the command. For example `get some_file.txt`.
+        host_timeout_duration : str
+            Timeout duration for how long a host has time to complete processing.
+            Default value is slightly less than the overall timeout value.
+            This value cannot be greater than the overall request timeout. Max < 10 minutes.
+            Example: 10s  Valid units: ns, us, ms, s, m, h
+        optional_hosts : str or list[str]
+            List of a subset of hosts we want to run the command on.
+            If this list is supplied, only these hosts will receive the command.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        persist_all : bool
+        timeout : int
+            Timeout for how long to wait for the request in seconds.
+            Default timeout: 30 seconds  Max timeout: 10 minutes
+        timeout_duration : str
+            Timeout duration for how long to wait for the request in duration
+            syntax. Example: `10s`.   Default value: `30s`. Maximum is `10m`.
+            Valid units: `ns`, `us`, `ms`, `s`, `m`, `h`
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/BatchAdminCmd
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = command_payload(passed_keywords=kwargs)
@@ -123,22 +137,32 @@ class RealTimeResponseAdmin(ServiceClass):
                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get status of an executed RTR administrator command on a single host.
 
-        Keyword arguments:
-        cloud_request_id -- Cloud Request ID of the executed command to query.
-        sequence_id -- Sequence ID that we want to retrieve. Command responses are
-                       chunked across sequences. Default value: 0
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'cloud_request_id'. All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /real-time-response-admin/RTR_CheckAdminCommandStatus
+        /real-time-response-admin/RTR_CheckAdminCommandStatus
+
+        Keyword arguments
+        -----------------
+        cloud_request_id : str
+            Cloud Request ID of the executed command to query.
+        sequence_id : int
+            Sequence ID that we want to retrieve. Command responses are
+            chunked across sequences. Default value: 0
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'cloud_request_id'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not kwargs.get("sequence_id", None) and not parameters.get("sequence_id", None):
             parameters["sequence_id"] = 0
@@ -155,8 +179,17 @@ class RealTimeResponseAdmin(ServiceClass):
     def execute_admin_command(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Execute a RTR administrator command on a single host.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        /real-time-response-admin/RTR_ExecuteAdminCommand
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "base_command": "string",
                     "command_string": "string",
@@ -165,24 +198,27 @@ class RealTimeResponseAdmin(ServiceClass):
                     "persist": boolean,
                     "session_id": "string"
                 }
-        base_command -- Active-Responder command type we are going to execute,
-                        for example: `get` or `cp`.  String.
-                        Refer to the RTR documentation for the full list of commands.
-        command_string -- Full command string for the command. For example `get some_file.txt`.
-        device_id -- ID of the device to execute the command on. String.
-        id -- Command sequence. Integer.
-        persist -- Execute this command when host returns to service. Boolean.
-        session_id -- RTR session ID. String.
+        base_command : str
+            Active-Responder command type we are going to execute,
+            for example: `get` or `cp`.  String.
+            Refer to the RTR documentation for the full list of commands.
+        command_string : str
+            Full command string for the command. For example `get some_file.txt`.
+        device_id : str
+            ID of the device to execute the command on.
+        id : int
+            Command sequence.
+        persist : bool
+            Execute this command when host returns to service.
+        session_id : str
+            RTR session ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /real-time-response-admin/RTR_ExecuteAdminCommand
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = command_payload(passed_keywords=kwargs)
@@ -202,19 +238,28 @@ class RealTimeResponseAdmin(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Falcon scripts with metadata and content of script.
 
-        Keyword arguments:
-        ids -- List of Falcon Script IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_GetFalconScripts
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Falcon Script IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -232,19 +277,28 @@ class RealTimeResponseAdmin(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get put-file contents for a given put file ID.
 
-        Keyword arguments:
-        id -- Put file ID to retrieve. String.
-        parameters -- full parameters payload, not required if id is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-GetPutFileContents
+
+        Keyword arguments
+        -----------------
+        id : str
+            Put file ID to retrieve.
+        parameters : dict
+            full parameters payload, not required if id is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -258,19 +312,28 @@ class RealTimeResponseAdmin(ServiceClass):
     def get_put_files(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get put-files based on the ID's given. These are used for the RTR `put` command.
 
-        Keyword arguments:
-        ids -- List of File IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_GetPut_Files
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of File IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -288,19 +351,28 @@ class RealTimeResponseAdmin(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get put-files based on the ID's given. These are used for the RTR `put` command.
 
-        Keyword arguments:
-        ids -- List of File IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-GetPut-FilesV2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of File IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -318,27 +390,37 @@ class RealTimeResponseAdmin(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload a new put-file to use for the RTR `put` command.
 
-        Keyword arguments:
-        data -- full formData payload, not required if other keywords are used.
-                {
-                    "description": "string",
-                    "name": "string",
-                    "comments_for_audit_log": "string"
-                }
-        files -- File to be uploaded. List of tuples. *REQUIRED*
-                 Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
-        description -- File description. String.
-        name -- File name (if different than actual file name). String.
-        comments_for_audit_log -- Audit log comment. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-CreatePut-Files
+
+        Keyword arguments
+        -----------------
+        data : str
+            full formData payload, not required if other keywords are used.
+            {
+                "description": "string",
+                "name": "string",
+                "comments_for_audit_log": "string"
+            }
+        files : str
+            File to be uploaded. List of tuples. *REQUIRED*
+            Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
+        description : str
+            File description.
+        name : str
+            File name (if different than actual file name)
+        comments_for_audit_log : str
+            Audit log comment.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not data:
             data = data_payload(passed_keywords=kwargs)
@@ -359,19 +441,28 @@ class RealTimeResponseAdmin(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a put-file based on the ID given. Can only delete one file at a time.
 
-        Keyword arguments:
-        ids -- File ID to delete. String. Only one file can be deleted per request.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_DeletePut_Files
+
+        Keyword arguments
+        -----------------
+        ids : str
+            File ID to delete. String. Only one file can be deleted per request.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -389,27 +480,37 @@ class RealTimeResponseAdmin(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload a new put-file to use for the RTR `put` command.
 
-        Keyword arguments:
-        data -- full formData payload, not required if other keywords are used. formData.
-                {
-                    "description": "string",
-                    "name": "string",
-                    "comments_for_audit_log": "string"
-                }
-        files -- File to be uploaded. List of tuples. *REQUIRED*
-                 Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
-        description -- File description. String.
-        name -- File name (if different than actual file name). String.
-        comments_for_audit_log -- Audit log comment. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-CreatePut-FilesV2
+
+        Keyword arguments
+        -----------------
+        data : str
+            full formData payload, not required if other keywords are used. formData.
+            {
+                "description": "string",
+                "name": "string",
+                "comments_for_audit_log": "string"
+            }
+        files : str
+            File to be uploaded. List of tuples. *REQUIRED*
+            Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
+        description : str
+            File description.
+        name : str
+            File name (if different than actual file name)
+        comments_for_audit_log : str
+            Audit log comment.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not data:
             data = data_payload(passed_keywords=kwargs)
@@ -428,19 +529,28 @@ class RealTimeResponseAdmin(ServiceClass):
 
         These are used for the RTR `runscript` command.
 
-        Keyword arguments:
-        ids -- List of Script IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-GetScripts
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Script IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -456,19 +566,28 @@ class RealTimeResponseAdmin(ServiceClass):
 
         These are used for the RTR `runscript` command.
 
-        Keyword arguments:
-        ids -- List of Script IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-GetScriptsV2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Script IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -486,38 +605,51 @@ class RealTimeResponseAdmin(ServiceClass):
                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload a new custom-script to use for the RTR `runscript` command.
 
-        Keyword arguments:
-        data -- full formData payload, not required if other keywords are used.
-                {
-                    "description": "string",
-                    "name": "string",
-                    "comments_for_audit_log": "string",
-                    "content": "string",
-                    "platform": "string",
-                    "permission_type": "string"
-                }
-        files -- File to be uploaded. List of tuples. *REQUIRED*
-                 Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
-        description -- File description. String.
-        name -- File name (if different than actual file name). String.
-        comments_for_audit_log -- Audit log comment. String.
-        permission_type -- Permission for the custom-script.
-                           Valid permission values:
-                             `private` - usable by only the user who uploaded it
-                             `group` - usable by all RTR Admins
-                             `public` - usable by all active-responders and RTR admins
-        content -- The script text that you want to use to upload.
-        platform -- Platforms for the file. Currently supports: windows, mac, linux.
-                    If no platform is provided, it will default to 'windows'.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-CreateScripts
+
+        Keyword arguments
+        -----------------
+        data : str
+            full formData payload, not required if other keywords are used.
+            {
+                "description": "string",
+                "name": "string",
+                "comments_for_audit_log": "string",
+                "content": "string",
+                "platform": "string",
+                "permission_type": "string"
+            }
+        files : str
+            File to be uploaded. List of tuples. *REQUIRED*
+            Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
+        description : str
+            File description.
+        name : str
+            File name (if different than actual file name)
+        comments_for_audit_log : str
+            Audit log comment.
+        permission_type : str
+            Permission for the custom-script.
+            Valid permission values:
+              `private` - usable by only the user who uploaded it
+              `group` - usable by all RTR Admins
+              `public` - usable by all active-responders and RTR admins
+        content : str
+            The script text that you want to use to upload.
+        platform : str
+            Platforms for the file. Currently supports: windows, mac, linux.
+            If no platform is provided, it will default to 'windows'.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not data:
             data = data_payload(passed_keywords=kwargs)
@@ -534,19 +666,28 @@ class RealTimeResponseAdmin(ServiceClass):
     def delete_scripts(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a custom-script based on the ID given. Can only delete one script at a time.
 
-        Keyword arguments:
-        ids -- Script ID to delete. String. Only one file can be deleted per request.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_DeleteScripts
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Script ID to delete. String. Only one file can be deleted per request.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -564,38 +705,51 @@ class RealTimeResponseAdmin(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload a new custom-script to use for the RTR `runscript` command.
 
-        Keyword arguments:
-        data -- full formData payload, not required if other keywords are used. formData.
-                {
-                    "description": "string",
-                    "name": "string",
-                    "comments_for_audit_log": "string",
-                    "content": "string",
-                    "platform": "string",
-                    "permission_type": "string"
-                }
-        files -- File to be uploaded. List of tuples. *REQUIRED*
-                 Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
-        description -- File description. String.
-        name -- File name (if different than actual file name). String.
-        comments_for_audit_log -- Audit log comment. String.
-        permission_type -- Permission for the custom-script. STring.
-                           Valid permission values:
-                             `private` - usable by only the user who uploaded it
-                             `group` - usable by all RTR Admins
-                             `public` - usable by all active-responders and RTR admins
-        content -- The script text that you want to use to upload. String.
-        platform -- Platforms for the file. Currently supports: windows, mac, linux. String.
-                    If no platform is provided, it will default to 'windows'.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-CreateScriptsV2
+
+        Keyword arguments
+        -----------------
+        data : str
+            full formData payload, not required if other keywords are used. formData.
+            {
+                "description": "string",
+                "name": "string",
+                "comments_for_audit_log": "string",
+                "content": "string",
+                "platform": "string",
+                "permission_type": "string"
+            }
+        files : str
+            File to be uploaded. List of tuples. *REQUIRED*
+            Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
+        description : str
+            File description.
+        name : str
+            File name (if different than actual file name)
+        comments_for_audit_log : str
+            Audit log comment.
+        permission_type : str
+            Permission for the custom-script. STring.
+            Valid permission values:
+              `private` - usable by only the user who uploaded it
+              `group` - usable by all RTR Admins
+              `public` - usable by all active-responders and RTR admins
+        content : str
+            The script text that you want to use to upload.
+        platform : str
+            Platforms for the file. Currently supports: windows, mac, linux. String.
+            If no platform is provided, it will default to 'windows'.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not data:
             data = data_payload(passed_keywords=kwargs)
@@ -616,40 +770,54 @@ class RealTimeResponseAdmin(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload a new scripts to replace an existing one.
 
-        Keyword arguments:
-        data -- full formData payload, not required if other keywords are used. formData.
-                {
-                    "id": "string",
-                    "description": "string",
-                    "name": "string",
-                    "comments_for_audit_log": "string",
-                    "content": "string",
-                    "platform": "string",
-                    "permission_type": "string"
-                }
-        files -- File to be uploaded. List of tuples. *REQUIRED*
-                 Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
-        description -- File description. String.
-        id -- Script ID to be updated. String.
-        name -- File name (if different than actual file name). String.
-        comments_for_audit_log -- Audit log comment. String.
-        permission_type -- Permission for the custom-script. String.
-                           Valid permission values:
-                             `private` - usable by only the user who uploaded it
-                             `group` - usable by all RTR Admins
-                             `public` - usable by all active-responders and RTR admins
-        content -- The script text that you want to use to upload. String.
-        platform -- Platforms for the file. Currently supports: windows, mac, linux. String.
-                    If no platform is provided, it will default to 'windows'.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-UpdateScriptsV2
+
+        Keyword arguments
+        -----------------
+        data : str
+            full formData payload, not required if other keywords are used. formData.
+            {
+                "id": "string",
+                "description": "string",
+                "name": "string",
+                "comments_for_audit_log": "string",
+                "content": "string",
+                "platform": "string",
+                "permission_type": "string"
+            }
+        files : str
+            File to be uploaded. List of tuples. *REQUIRED*
+            Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
+        description : str
+            File description.
+        id : str
+            Script ID to be updated.
+        name : str
+            File name (if different than actual file name)
+        comments_for_audit_log : str
+            Audit log comment.
+        permission_type : str
+            Permission for the custom-script. String.
+            Valid permission values:
+              `private` - usable by only the user who uploaded it
+              `group` - usable by all RTR Admins
+              `public` - usable by all active-responders and RTR admins
+        content : str
+            The script text that you want to use to upload.
+        platform : str
+            Platforms for the file. Currently supports: windows, mac, linux. String.
+            If no platform is provided, it will default to 'windows'.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not data:
             data = data_payload(passed_keywords=kwargs)
@@ -670,40 +838,54 @@ class RealTimeResponseAdmin(ServiceClass):
                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload a new scripts to replace an existing one.
 
-        Keyword arguments:
-        data -- full formData payload, not required if other keywords are used.
-                {
-                    "id": "string",
-                    "description": "string",
-                    "name": "string",
-                    "comments_for_audit_log": "string",
-                    "content": "string",
-                    "platform": "string",
-                    "permission_type": "string"
-                }
-        files -- File to be uploaded. List of tuples. *REQUIRED*
-                 Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
-        description -- File description. String.
-        id -- Script ID to be updated. String.
-        name -- File name (if different than actual file name). String.
-        comments_for_audit_log -- Audit log comment. String.
-        permission_type -- Permission for the custom-script.
-                           Valid permission values:
-                             `private` - usable by only the user who uploaded it
-                             `group` - usable by all RTR Admins
-                             `public` - usable by all active-responders and RTR admins
-        content -- The script text that you want to use to upload.
-        platform -- Platforms for the file. Currently supports: windows, mac, linux.
-                    If no platform is provided, it will default to 'windows'.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-UpdateScripts
+
+        Keyword arguments
+        -----------------
+        data : str
+            full formData payload, not required if other keywords are used.
+            {
+                "id": "string",
+                "description": "string",
+                "name": "string",
+                "comments_for_audit_log": "string",
+                "content": "string",
+                "platform": "string",
+                "permission_type": "string"
+            }
+        files : str
+            File to be uploaded. List of tuples. *REQUIRED*
+            Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
+        description : str
+            File description.
+        id : str
+            Script ID to be updated.
+        name : str
+            File name (if different than actual file name)
+        comments_for_audit_log : str
+            Audit log comment.
+        permission_type : str
+            Permission for the custom-script.
+            Valid permission values:
+              `private` - usable by only the user who uploaded it
+              `group` - usable by all RTR Admins
+              `public` - usable by all active-responders and RTR admins
+        content : str
+            The script text that you want to use to upload.
+        platform : str
+            Platforms for the file. Currently supports: windows, mac, linux.
+            If no platform is provided, it will default to 'windows'.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not data:
             data = data_payload(passed_keywords=kwargs)
@@ -720,23 +902,33 @@ class RealTimeResponseAdmin(ServiceClass):
     def list_falcon_scripts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of Falcon script IDs available to the user to run.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of IDs to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving IDs from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax. Ex: `created_at|asc`
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_ListFalconScripts
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of IDs to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving IDs from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax. Ex: `created_at|asc`
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -750,23 +942,33 @@ class RealTimeResponseAdmin(ServiceClass):
     def list_put_files(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of put-file ID's that are available to the user for the `put` command.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax. Ex: `created_at|desc`
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-ListPut-Files
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax. Ex: `created_at|desc`
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -782,23 +984,33 @@ class RealTimeResponseAdmin(ServiceClass):
 
         Only displays scripts the user has permissions to access.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax. Ex: `created_at|desc`
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-ListScripts
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax. Ex: `created_at|desc`
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

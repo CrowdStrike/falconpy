@@ -77,20 +77,29 @@ class DataProtectionConfiguration(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the classifications that match the provided ids.
 
-        Keyword arguments:
-        ids -- IDs of the classifications to get. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /data-protection-configuration/entities.classification.get.v2
+        /data-protection-configuration/entities.classification.get.v2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of the classifications to get.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -104,8 +113,16 @@ class DataProtectionConfiguration(ServiceClass):
     def create_classification(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create classifications.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.classification.post.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -155,17 +172,17 @@ class DataProtectionConfiguration(ServiceClass):
                         }
                     ]
                 }
-        classification_properties -- The properties of the new classification. Dictionary.
-        name -- The name of the new classification. String.
+        classification_properties : dict
+            The properties of the new classification.
+        name : str
+            The name of the new classification.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.classification.post.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_classification_payload(passed_keywords=kwargs)
@@ -181,8 +198,16 @@ class DataProtectionConfiguration(ServiceClass):
     def update_classifications(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update classifications.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.classification.patch.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -233,18 +258,19 @@ class DataProtectionConfiguration(ServiceClass):
                         }
                     ]
                 }
-        id -- The ID of the classification to update. String. Required for update operations.
-        classification_properties -- The properties of the classification. Dictionary.
-        name -- The name of the classification. String.
+        id : str
+            The ID of the classification to update. String. Required for update operations.
+        classification_properties : dict
+            The properties of the classification.
+        name : str
+            The name of the classification.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.classification.patch.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_classification_payload(passed_keywords=kwargs)
@@ -264,20 +290,31 @@ class DataProtectionConfiguration(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete classifications that match the provided ids.
 
-        Keyword arguments:
-        ids -- IDs of the classifications to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /data-protection-configuration/entities.classification.delete.v2
+        /data-protection-configuration/entities.classification.delete.v2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of the classifications to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -295,19 +332,28 @@ class DataProtectionConfiguration(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a particular cloud-application.
 
-        Keyword arguments:
-        ids -- The cloud application id(s) to get. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.cloud-application.get
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The cloud application id(s) to get.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -321,8 +367,16 @@ class DataProtectionConfiguration(ServiceClass):
     def create_cloud_application(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Persist the given cloud application for the provided entity instance.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.cloud-application.create
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "description": "string",
                     "name": "string",
@@ -333,18 +387,19 @@ class DataProtectionConfiguration(ServiceClass):
                         }
                     ]
                 }
-        description -- The description of the cloud application. String.
-        name -- The name of the cloud application. String.
-        urls -- The fields contain the FQDN and the path. List of dictionaries.
+        description : str
+            The description of the cloud application.
+        name : str
+            The name of the cloud application.
+        urls : list[dict]
+            The fields contain the FQDN and the path.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.cloud-application.create
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_cloud_app_payload(passed_keywords=kwargs)
@@ -364,9 +419,18 @@ class DataProtectionConfiguration(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a cloud application.
 
-        Keyword arguments:
-        id -- The cloud app id to update. String.
-        body -- The new cloud-application definition.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.cloud-application.patch
+
+        Keyword arguments
+        -----------------
+        id : str
+            The cloud app id to update.
+        body : dict
+            The new cloud-application definition.
                 {
                     "description": "string",
                     "name": "string",
@@ -377,20 +441,21 @@ class DataProtectionConfiguration(ServiceClass):
                         }
                     ]
                 }
-        description -- The description of the cloud application. String.
-        name -- The name of the cloud application. String.
-        urls -- The fields contain the FQDN and the path. List of dictionaries.
-
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        description : str
+            The description of the cloud application.
+        name : str
+            The name of the cloud application.
+        urls : list[dict]
+            The fields contain the FQDN and the path.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.cloud-application.patch
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_cloud_app_payload(passed_keywords=kwargs)
@@ -412,19 +477,28 @@ class DataProtectionConfiguration(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete cloud application.
 
-        Keyword arguments:
-        ids -- The id of the cloud application to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.cloud-application.delete
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The id of the cloud application to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -442,19 +516,28 @@ class DataProtectionConfiguration(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a particular content-pattern(s).
 
-        Keyword arguments:
-        ids -- The content-pattern id(s) to get. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.content-pattern.get
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The content-pattern id(s) to get.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -468,8 +551,16 @@ class DataProtectionConfiguration(ServiceClass):
     def create_content_pattern(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Persist the given content pattern for the provided entity instance.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.content-pattern.create
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "category": "string",
                     "description": "string",
@@ -481,22 +572,25 @@ class DataProtectionConfiguration(ServiceClass):
                     ],
                     "region": "string"
                 }
-        category -- The content pattern category. String.
-        description -- The description of the content pattern. String.
-        example -- The new content pattern demonstration. String.
-        min_match_threshold -- Integer.
-        name -- The name of the new content pattern. String.
-        regexes -- List of strings.
-        region -- The region for the content pattern. String.
+        category : str
+            The content pattern category.
+        description : str
+            The description of the content pattern.
+        example : str
+            The new content pattern demonstration.
+        min_match_threshold : int
+        name : str
+            The name of the new content pattern.
+        regexes : str or list[str]
+        region : str
+            The region for the content pattern.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.content-pattern.create
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_content_pattern_payload(passed_keywords=kwargs)
@@ -516,9 +610,18 @@ class DataProtectionConfiguration(ServiceClass):
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a content pattern.
 
-        Keyword arguments:
-        id -- The id of the content pattern to patch.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.content-pattern.patch
+
+        Keyword arguments
+        -----------------
+        id : str
+            The id of the content pattern to patch.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "category": "string",
                     "description": "string",
@@ -530,24 +633,27 @@ class DataProtectionConfiguration(ServiceClass):
                     ],
                     "region": "string"
                 }
-        category -- The content pattern category. String.
-        description -- The description of the content pattern. String.
-        example -- The new content pattern demonstration. String.
-        min_match_threshold -- Integer.
-        name -- The name of the new content pattern. String.
-        regexes -- List of strings.
-        region -- The region for the content pattern. String.
-
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        category : str
+            The content pattern category.
+        description : str
+            The description of the content pattern.
+        example : str
+            The new content pattern demonstration.
+        min_match_threshold : int
+        name : str
+            The name of the new content pattern.
+        regexes : str or list[str]
+        region : str
+            The region for the content pattern.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.content-pattern.patch
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_content_pattern_payload(passed_keywords=kwargs)
@@ -569,19 +675,28 @@ class DataProtectionConfiguration(ServiceClass):
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete content pattern.
 
-        Keyword arguments:
-        ids -- The id(s) of the content pattern to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.content-pattern.delete
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The id(s) of the content pattern to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -595,8 +710,16 @@ class DataProtectionConfiguration(ServiceClass):
     def update_policy_precedence(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update policy precedence.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.policy.precedence.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -607,17 +730,17 @@ class DataProtectionConfiguration(ServiceClass):
                         }
                     ]
                 }
-        platform -- The platform for the policy precedence update (e.g., 'win' or 'mac'). String.
-        precedence -- Ordered list of policy IDs defining the precedence order. List of strings.
+        platform : str
+            The platform for the policy precedence update (e.g., 'win' or 'mac')
+        precedence : str or list[str]
+            Ordered list of policy IDs defining the precedence order.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.policy.precedence.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_policy_precedence_payload(passed_keywords=kwargs)
@@ -637,19 +760,28 @@ class DataProtectionConfiguration(ServiceClass):
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a particular enterprise-account(s).
 
-        Keyword arguments:
-        ids -- The enterprise-account id(s) to get. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.enterprise-account.get
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The enterprise-account id(s) to get.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -663,8 +795,16 @@ class DataProtectionConfiguration(ServiceClass):
     def create_enterprise_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Persist the given enterprise account for the provided entity instance.
 
-        Keyword arguments:
-        body -- Definition of enterprise-account to create.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.enterprise-account.create
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Definition of enterprise-account to create.
                 {
                     "application_group_id": "string",
                     "domains": [
@@ -673,19 +813,18 @@ class DataProtectionConfiguration(ServiceClass):
                     "name": "string",
                     "plugin_config_id": "string"
                 }
-        application_group_id -- String.
-        domains -- List of strings.
-        name -- The name of the enterprise account. String.
-        plugin_config_id -- String.
+        application_group_id : str
+        domains : str or list[str]
+        name : str
+            The name of the enterprise account.
+        plugin_config_id : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.enterprise-account.create
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_enterprise_account_payload(passed_keywords=kwargs)
@@ -706,9 +845,18 @@ class DataProtectionConfiguration(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a enterprise account.
 
-        Keyword arguments:
-        id -- The id of the enterprise account to update.
-        body -- Definition of enterprise-account to create.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.enterprise-account.patch
+
+        Keyword arguments
+        -----------------
+        id : str
+            The id of the enterprise account to update.
+        body : dict
+            Definition of enterprise-account to create.
                 {
                     "application_group_id": "string",
                     "domains": [
@@ -718,21 +866,20 @@ class DataProtectionConfiguration(ServiceClass):
                     "name": "string",
                     "plugin_config_id": "string"
                 }
-        application_group_id -- String.
-        domains -- List of strings.
-        name -- The name of the enterprise account. String.
-        plugin_config_id -- String.
-
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        application_group_id : str
+        domains : str or list[str]
+        name : str
+            The name of the enterprise account.
+        plugin_config_id : str
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.enterprise-account.patch
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_enterprise_account_payload(passed_keywords=kwargs)
@@ -754,19 +901,28 @@ class DataProtectionConfiguration(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete enterprise account.
 
-        Keyword arguments:
-        ids -- The id of the enterprise account to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.enterprise-account.delete
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The id of the enterprise account to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -780,19 +936,28 @@ class DataProtectionConfiguration(ServiceClass):
     def get_file_type(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a particular file-type.
 
-        Keyword arguments:
-        ids -- The file-type id(s) to get. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.file-type.get
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The file-type id(s) to get.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -810,19 +975,28 @@ class DataProtectionConfiguration(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get sensitivity label matching the IDs (V2).
 
-        Keyword arguments:
-        ids -- The sensitivity label entity id(s) to get.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.file-type.get
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The sensitivity label entity id(s) to get.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -836,8 +1010,16 @@ class DataProtectionConfiguration(ServiceClass):
     def create_sensitivity_label(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create new sensitivity label (V2).
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.sensitivity-label.create-v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "co_authoring": true,
                     "display_name": "string",
@@ -847,21 +1029,21 @@ class DataProtectionConfiguration(ServiceClass):
                     "plugins_configuration_id": "string",
                     "synced": true
                 }
-        co_authoring -- Boolean.
-        display_name -- String.
-        external_id -- String.
-        label_provider -- String.
-        name -- The name of the new sensitivity label. String.
-        plugins_configuration_id -- String.
-        synced -- Boolean.
+        co_authoring : bool
+        display_name : str
+        external_id : str
+        label_provider : str
+        name : str
+            The name of the new sensitivity label.
+        plugins_configuration_id : str
+        synced : bool
+
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.sensitivity-label.create-v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_sensitivity_label_payload(passed_keywords=kwargs)
@@ -881,19 +1063,28 @@ class DataProtectionConfiguration(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete sensitivity labels matching the IDs (V2).
 
-        Keyword arguments:
-        ids -- The sensitivity label entity id(s) to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.sensitivity-label.delete-v2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The sensitivity label entity id(s) to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -911,19 +1102,28 @@ class DataProtectionConfiguration(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get particular local application groups.
 
-        Keyword arguments:
-        ids -- The local application group id(s) to get. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application-group.get
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The local application group id(s) to get.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -940,8 +1140,16 @@ class DataProtectionConfiguration(ServiceClass):
                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Persist the given local application group for the provided entity instance.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application-group.create
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "description": "string",
                     "local_application_ids": [
@@ -949,19 +1157,19 @@ class DataProtectionConfiguration(ServiceClass):
                     ],
                     "name": "string"
                 }
-        description -- The description of the local application group. String.
-        local_application_ids -- List of local application IDs to include in the group.
-                                 List of strings.
-        name -- The name of the local application group. String.
+        description : str
+            The description of the local application group.
+        local_application_ids : str or list[str]
+            List of local application IDs to include in the group.
+        name : str
+            The name of the local application group.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application-group.create
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_local_application_group_payload(passed_keywords=kwargs)
@@ -981,9 +1189,18 @@ class DataProtectionConfiguration(ServiceClass):
                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a local application group.
 
-        Keyword arguments:
-        id -- The local application group id to update. String.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application-group.patch
+
+        Keyword arguments
+        -----------------
+        id : str
+            The local application group id to update.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "description": "string",
                     "local_application_ids": [
@@ -991,20 +1208,21 @@ class DataProtectionConfiguration(ServiceClass):
                     ],
                     "name": "string"
                 }
-        description -- The description of the local application group. String.
-        local_application_ids -- List of local application IDs to include in the group.
-                                 List of strings.
-        name -- The name of the local application group. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        description : str
+            The description of the local application group.
+        local_application_ids : str or list[str]
+            List of local application IDs to include in the group.
+        name : str
+            The name of the local application group.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application-group.patch
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_local_application_group_payload(passed_keywords=kwargs)
@@ -1028,19 +1246,28 @@ class DataProtectionConfiguration(ServiceClass):
 
         The application group will not be visible anymore, but will still be in the database.
 
-        Keyword arguments:
-        ids -- The id of the local application group to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application-group.delete
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The id of the local application group to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1058,19 +1285,28 @@ class DataProtectionConfiguration(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a particular local application.
 
-        Keyword arguments:
-        ids -- The local application id(s) to get. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application.get
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The local application id(s) to get.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1084,8 +1320,16 @@ class DataProtectionConfiguration(ServiceClass):
     def create_local_application(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Persist the given local application for the provided entity instance.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application.create
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "apply_rules_for_children_processes": true,
                     "executable_name": "string",
@@ -1094,21 +1338,22 @@ class DataProtectionConfiguration(ServiceClass):
                     ],
                     "name": "string"
                 }
-        apply_rules_for_children_processes -- Whether to apply rules for children processes
-                                              of this application. Boolean.
-        executable_name -- The executable name of the local application. String.
-        group_ids -- List of group IDs to associate with this local application.
-                     List of strings.
-        name -- The name of the local application. String.
+        apply_rules_for_children_processes : bool
+            Whether to apply rules for children processes
+            of this application.
+        executable_name : str
+            The executable name of the local application.
+        group_ids : str or list[str]
+            List of group IDs to associate with this local application.
+        name : str
+            The name of the local application.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application.create
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_local_application_payload(passed_keywords=kwargs)
@@ -1128,9 +1373,18 @@ class DataProtectionConfiguration(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a local application.
 
-        Keyword arguments:
-        id -- The local application id to update. String.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application.patch
+
+        Keyword arguments
+        -----------------
+        id : str
+            The local application id to update.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "apply_rules_for_children_processes": true,
                     "executable_name": "string",
@@ -1139,22 +1393,24 @@ class DataProtectionConfiguration(ServiceClass):
                     ],
                     "name": "string"
                 }
-        apply_rules_for_children_processes -- Whether to apply rules for children processes
-                                              of this application. Boolean.
-        executable_name -- The executable name of the local application. String.
-        group_ids -- List of group IDs to associate with this local application.
-                     List of strings.
-        name -- The name of the local application. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        apply_rules_for_children_processes : bool
+            Whether to apply rules for children processes
+            of this application.
+        executable_name : str
+            The executable name of the local application.
+        group_ids : str or list[str]
+            List of group IDs to associate with this local application.
+        name : str
+            The name of the local application.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application.patch
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_local_application_payload(passed_keywords=kwargs)
@@ -1178,19 +1434,28 @@ class DataProtectionConfiguration(ServiceClass):
 
         The application will not be visible anymore, but will still be in the database.
 
-        Keyword arguments:
-        ids -- The id of the local application to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application.delete
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The id of the local application to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1204,19 +1469,28 @@ class DataProtectionConfiguration(ServiceClass):
     def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get policies that match the provided ids.
 
-        Keyword arguments:
-        ids -- IDs of the policies to get. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.policy.get.v2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of the policies to get.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1234,9 +1508,18 @@ class DataProtectionConfiguration(ServiceClass):
                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create policies.
 
-        Keyword arguments:
-        platform_name -- platform name of the policies to update, either 'win' or 'mac'.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.policy.post.v2
+
+        Keyword arguments
+        -----------------
+        platform_name : str
+            platform name of the policies to update, either 'win' or 'mac'.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -1311,20 +1594,23 @@ class DataProtectionConfiguration(ServiceClass):
                         }
                     ]
                 }
-        description -- The description of the new policy. String.
-        name -- The name of the new policy. String.
-        policy_properties -- The properties of the new policy. Dictionary.
-        precedence -- The order of precedence. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        description : str
+            The description of the new policy.
+        name : str
+            The name of the new policy.
+        policy_properties : dict
+            The properties of the new policy.
+        precedence : int
+            The order of precedence.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.policy.post.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_policy_payload(passed_keywords=kwargs)
@@ -1346,9 +1632,18 @@ class DataProtectionConfiguration(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update policies.
 
-        Keyword arguments:
-        platform_name -- platform name of the policies to update, either 'win' or 'mac'.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.policy.patch.v2
+
+        Keyword arguments
+        -----------------
+        platform_name : str
+            platform name of the policies to update, either 'win' or 'mac'.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -1428,23 +1723,29 @@ class DataProtectionConfiguration(ServiceClass):
                         }
                     ]
                 }
-        id -- The ID of the policy to update. String. Required for update operations.
-        is_enabled -- Flag indicating if the policy is enabled. Boolean.
-        host_groups -- List of host group IDs to assign to the policy. List of strings.
-        description -- The description of the policy. String.
-        name -- The name of the policy. String.
-        policy_properties -- The properties of the policy. Dictionary.
-        precedence -- The order of precedence. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        id : str
+            The ID of the policy to update. String. Required for update operations.
+        is_enabled : bool
+            Flag indicating if the policy is enabled.
+        host_groups : str or list[str]
+            List of host group IDs to assign to the policy.
+        description : str
+            The description of the policy.
+        name : str
+            The name of the policy.
+        policy_properties : dict
+            The properties of the policy.
+        precedence : int
+            The order of precedence.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.policy.patch.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_policy_payload(passed_keywords=kwargs)
@@ -1462,20 +1763,30 @@ class DataProtectionConfiguration(ServiceClass):
     def delete_policies(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete policies that match the provided ids.
 
-        Keyword arguments:
-        ids -- IDs of the policies to delete. String or list of strings.
-        platform_name -- platform name of the policies to update, either 'win' or 'mac'. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.policy.delete.v2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of the policies to delete.
+        platform_name : str
+            platform name of the policies to update, either 'win' or 'mac'
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1493,19 +1804,28 @@ class DataProtectionConfiguration(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get web-location entities matching the provided ID(s).
 
-        Keyword arguments:
-        ids -- The web-location entity id(s) to get. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.web-location.get-v2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The web-location entity id(s) to get.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1519,9 +1839,18 @@ class DataProtectionConfiguration(ServiceClass):
     def create_web_location(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Persist the given web-locations.
 
-        Keyword arguments:
-        application_id -- Associated application ID. String.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.web-location.create-v2
+
+        Keyword arguments
+        -----------------
+        application_id : str
+            Associated application ID.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "web_locations": [
                         {
@@ -1536,23 +1865,29 @@ class DataProtectionConfiguration(ServiceClass):
                         }
                     ]
                 }
-        application_id -- The ID of the application. String.
-        deleted -- Flag indicating if this location is deleted. Boolean.
-        enterprise_account_id -- Associated enterprise account ID. String.
-        location_type -- Location type. String.
-        name -- Location name. String.
-        provider_location_id -- Provider location ID. String.
-        provider_location_name -- Provider location name. String.
-        type -- Type. String.
+        application_id : str
+            The ID of the application.
+        deleted : bool
+            Flag indicating if this location is deleted.
+        enterprise_account_id : str
+            Associated enterprise account ID.
+        location_type : str
+            Location type.
+        name : str
+            Location name.
+        provider_location_id : str
+            Provider location ID.
+        provider_location_name : str
+            Provider location name.
+        type : str
+            Type.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.web-location.create-v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_web_locations_payload(passed_keywords=kwargs)
@@ -1572,9 +1907,18 @@ class DataProtectionConfiguration(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a web-location.
 
-        Keyword arguments:
-        application_id -- Application ID for the location. String.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.web-location.patch-v2
+
+        Keyword arguments
+        -----------------
+        application_id : str
+            Application ID for the location.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "web_locations": [
                         {
@@ -1589,23 +1933,29 @@ class DataProtectionConfiguration(ServiceClass):
                         }
                     ]
                 }
-        application_id -- The ID of the application. String.
-        deleted -- Flag indicating if this location is deleted. Boolean.
-        enterprise_account_id -- Associated enterprise account ID. String.
-        location_type -- Location type. String.
-        name -- Location name. String.
-        provider_location_id -- Provider location ID. String.
-        provider_location_name -- Provider location name. String.
-        type -- Type. String.
+        application_id : str
+            The ID of the application.
+        deleted : bool
+            Flag indicating if this location is deleted.
+        enterprise_account_id : str
+            Associated enterprise account ID.
+        location_type : str
+            Location type.
+        name : str
+            Location name.
+        provider_location_id : str
+            Provider location ID.
+        provider_location_name : str
+            Provider location name.
+        type : str
+            Type.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.web-location.patch-v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = data_protection_web_locations_payload(passed_keywords=kwargs)
@@ -1627,19 +1977,28 @@ class DataProtectionConfiguration(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete web-location.
 
-        Keyword arguments:
-        ids -- The IDs of the web-location to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.web-location.delete-v2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs of the web-location to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1653,32 +2012,42 @@ class DataProtectionConfiguration(ServiceClass):
     def query_classifications(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for classifications that match the provided criteria.
 
-        Keyword arguments:
-        filter -- Filter results by specific attributes. String.
-                  Allowed attributes are:
-                    created_by                             modified_by
-                    modified_at                            properties.content_patterns
-                    properties.content_patterns_operator   properties.file_types
-                    properties.evidence_duplication_enabled
-                    properties.protection_mode             properties.sensitivity_labels
-                    properties.web_sources                 name
-                    created_at
-        offset -- The offset to start retrieving records from. Integer.
-        limit -- The maximum records to return. Integer.
-        sort -- The property to sort by. String.
-                Allowed fields are:
-                    name        created_at
-                    modified_at
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/queries.classification.get.v2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter results by specific attributes. String.
+            Allowed attributes are:
+              created_by                             modified_by
+              modified_at                            properties.content_patterns
+              properties.content_patterns_operator   properties.file_types
+              properties.evidence_duplication_enabled
+              properties.protection_mode             properties.sensitivity_labels
+              properties.web_sources                 name
+              created_at
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return.
+        sort : str
+            The property to sort by. String.
+            Allowed fields are:
+                name        created_at
+                modified_at
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1695,31 +2064,41 @@ class DataProtectionConfiguration(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all cloud-application IDs matching the query with filter.
 
-        Keyword arguments:
-        filter -- Optional filter for searching cloud applications. String.
-                  Allowed filters are:
-                    name                    type
-                    deleted                 supports_network_inspection
-                    application_group_id
-        sort -- The sort instructions to order by on. String.
-                Allowed values are:
-                    name                    type
-                    deleted                 supports_network_inspection
-                    application_group_id
-        limit -- The number of items to return in this response (default: 100, max: 500). Integer.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/queries.cloud-application.get-v2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Optional filter for searching cloud applications. String.
+            Allowed filters are:
+              name                    type
+              deleted                 supports_network_inspection
+              application_group_id
+        sort : str
+            The sort instructions to order by on. String.
+            Allowed values are:
+                name                    type
+                deleted                 supports_network_inspection
+                application_group_id
+        limit : int
+            The number of items to return in this response (default: 100, max: 500). Integer.
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1733,33 +2112,43 @@ class DataProtectionConfiguration(ServiceClass):
     def query_content_patterns(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all content-pattern IDs matching the query with filter.
 
-        Keyword arguments:
-        filter -- The filter to use when finding content patterns. String.
-                  Allowed filters are:
-                    name          type
-                    category      region
-                    example       created_at
-                    updated_at    deleted'
-        sort -- The sort instructions to order by on. String.
-                Allowed values are:
-                  name          type
-                  category      region
-                  example       created_at
-                  updated_at    deleted'
-        limit -- The number of items to return in this response (default: 100, max: 500). Integer.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/queries.content-pattern.get-v2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter to use when finding content patterns. String.
+            Allowed filters are:
+              name          type
+              category      region
+              example       created_at
+              updated_at    deleted'
+        sort : str
+            The sort instructions to order by on. String.
+            Allowed values are:
+              name          type
+              category      region
+              example       created_at
+              updated_at    deleted'
+        limit : int
+            The number of items to return in this response (default: 100, max: 500). Integer.
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1776,31 +2165,41 @@ class DataProtectionConfiguration(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all enterprise-account IDs matching the query with filter.
 
-        Keyword arguments:
-        filter -- The filter to use when finding enterprise accounts. String.
-                  Allowed filters are:
-                    name          application_group_id
-                    deleted       created_at
-                    updated_at
-        sort -- The sort instructions to order by on. Integer.
-                Allowed values are:
-                  name          application_group_id
-                  deleted       created_at
-                  updated_at
-        limit -- The number of items to return in this response (default: 100, max: 500). Integer.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/queries.enterprise-account.get-v2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter to use when finding enterprise accounts. String.
+            Allowed filters are:
+              name          application_group_id
+              deleted       created_at
+              updated_at
+        sort : str
+            The sort instructions to order by on. Integer.
+            Allowed values are:
+              name          application_group_id
+              deleted       created_at
+              updated_at
+        limit : int
+            The number of items to return in this response (default: 100, max: 500). Integer.
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1814,29 +2213,39 @@ class DataProtectionConfiguration(ServiceClass):
     def query_file_type(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all file-type IDs matching the query with filter.
 
-        Keyword arguments:
-        filter -- The filter to use when finding file types. String.
-                  Allowed filters are:
-                    name          created_at
-                    updated_at
-        sort -- The sort instructions to order by on. String.
-                Allowed values are
-                  name          created_at
-                  updated_at
-        limit -- The number of items to return in this response (default: 100, max: 500). Integer.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/queries.file-type.get-v2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter to use when finding file types. String.
+            Allowed filters are:
+              name          created_at
+              updated_at
+        sort : str
+            The sort instructions to order by on. String.
+            Allowed values are
+              name          created_at
+              updated_at
+        limit : int
+            The number of items to return in this response (default: 100, max: 500). Integer.
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1850,30 +2259,40 @@ class DataProtectionConfiguration(ServiceClass):
     def query_sensitivity_label(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all sensitivity label IDs matching the query with filter.
 
-        Keyword arguments:
-        filter -- The filter to use when finding sensitivity labels. String.
-                  The only allowed filters are:
-                    name          display_name
-                    external_id   deleted
-        sort -- The sort instructions to order by on. String.
-                Allowed values are:
-                  name          display_name
-                  deleted       created_at
-                  updated_at
-        limit -- The number of items to return in this response (default: 100, max: 500). Integer.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/queries.sensitivity-label.get-v2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter to use when finding sensitivity labels. String.
+            The only allowed filters are:
+              name          display_name
+              external_id   deleted
+        sort : str
+            The sort instructions to order by on. String.
+            Allowed values are:
+              name          display_name
+              deleted       created_at
+              updated_at
+        limit : int
+            The number of items to return in this response (default: 100, max: 500). Integer.
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1890,26 +2309,35 @@ class DataProtectionConfiguration(ServiceClass):
                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all local application group IDs matching the query with filter.
 
-        Keyword arguments:
-        filter -- Optional filter for searching local application groups. String.
-                  Allowed filters are:
-                    name          is_deleted
-                    platform      created_at
-                    updated_at
-        limit -- The number of items to return in this response (default: 100, max: 500). Integer.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/queries.local-application-group.get
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Optional filter for searching local application groups. String.
+            Allowed filters are:
+              name          is_deleted
+              platform      created_at
+              updated_at
+        limit : int
+            The number of items to return in this response (default: 100, max: 500). Integer.
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1926,25 +2354,34 @@ class DataProtectionConfiguration(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all local-application IDs matching the query with filter.
 
-        Keyword arguments:
-        filter -- Optional filter for searching local applications. String.
-                  Allowed filters are:
-                    name          is_deleted
-                    created_at    updated_at
-        limit -- The number of items to return in this response (default: 100, max: 500). Integer.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/queries.local-application.get
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Optional filter for searching local applications. String.
+            Allowed filters are:
+              name          is_deleted
+              created_at    updated_at
+        limit : int
+            The number of items to return in this response (default: 100, max: 500). Integer.
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1958,51 +2395,62 @@ class DataProtectionConfiguration(ServiceClass):
     def query_policies(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for policies that match the provided criteria.
 
-        Keyword arguments:
-        platform_name -- platform name of the policies to search, either 'win' or 'mac'. String.
-        filter -- Filter results by specific attributes. String.
-                  Allowed attributes are:
-                    properties.max_file_size_to_inspect                       description
-                    is_default                                                properties.be_upload_timeout_duration_seconds
-                    created_by                                                modified_at
-                    properties.enable_content_inspection                      properties.similarity_threshold
-                    properties.block_notifications                            properties.custom_allow_notification
-                    properties.evidence_duplication_enabled_default           properties.be_paste_timeout_response
-                    properties.inspection_depth                               properties.classifications
-                    properties.be_paste_clipboard_max_size                    properties.min_confidence_level
-                    properties.evidence_storage_free_disk_perc                properties.besplash_enabled
-                    properties.browsers_without_active_extension              modified_by
-                    created_at                                                properties.enable_network_inspection
-                    properties.enable_context_inspection                      properties.besplash_custom_message
-                    properties.besplash_message_source                        properties.be_paste_clipboard_max_size_unit
-                    properties.be_paste_clipboard_min_size_unit               properties.max_file_size_to_inspect_unit
-                    properties.network_inspection_files_exceeding_size_limit  properties.evidence_encrypted_enabled
-                    properties.similarity_detection                           properties.enable_clipboard_inspection
-                    properties.allow_notifications                            properties.evidence_download_enabled
-                    properties.be_exclude_domains                             properties.be_upload_timeout_response
-                    properties.unsupported_browsers_action                    precedence is_enabled
-                    properties.custom_block_notification                      properties.evidence_storage_max_size
-                    properties.be_paste_clipboard_min_size                    name
-                    properties.block_all_data_access
-                    properties.be_paste_clipboard_over_size_behaviour_block
-                    properties.enable_end_user_notifications_unsupported_browser
-                    properties.be_paste_timeout_duration_milliseconds
-        offset -- The offset to start retrieving records from. Integer.
-        limit -- The maximum records to return. Integer.
-        sort -- The property to sort by. String.
-                Allowed fields are:
-                    name        precedence
-                    created_at  modified_at
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/queries.policy.get.v2
+
+        Keyword arguments
+        -----------------
+        platform_name : str
+            platform name of the policies to search, either 'win' or 'mac'
+        filter : str
+            Filter results by specific attributes. String.
+            Allowed attributes are:
+              properties.max_file_size_to_inspect                       description
+              is_default                                                properties.be_upload_timeout_duration_seconds
+              created_by                                                modified_at
+              properties.enable_content_inspection                      properties.similarity_threshold
+              properties.block_notifications                            properties.custom_allow_notification
+              properties.evidence_duplication_enabled_default           properties.be_paste_timeout_response
+              properties.inspection_depth                               properties.classifications
+              properties.be_paste_clipboard_max_size                    properties.min_confidence_level
+              properties.evidence_storage_free_disk_perc                properties.besplash_enabled
+              properties.browsers_without_active_extension              modified_by
+              created_at                                                properties.enable_network_inspection
+              properties.enable_context_inspection                      properties.besplash_custom_message
+              properties.besplash_message_source                        properties.be_paste_clipboard_max_size_unit
+              properties.be_paste_clipboard_min_size_unit               properties.max_file_size_to_inspect_unit
+              properties.network_inspection_files_exceeding_size_limit  properties.evidence_encrypted_enabled
+              properties.similarity_detection                           properties.enable_clipboard_inspection
+              properties.allow_notifications                            properties.evidence_download_enabled
+              properties.be_exclude_domains                             properties.be_upload_timeout_response
+              properties.unsupported_browsers_action                    precedence is_enabled
+              properties.custom_block_notification                      properties.evidence_storage_max_size
+              properties.be_paste_clipboard_min_size                    name
+              properties.block_all_data_access
+              properties.be_paste_clipboard_over_size_behaviour_block
+              properties.enable_end_user_notifications_unsupported_browser
+              properties.be_paste_timeout_duration_milliseconds
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return.
+        sort : str
+            The property to sort by. String.
+            Allowed fields are:
+                name        precedence
+                created_at  modified_at
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -2016,28 +2464,38 @@ class DataProtectionConfiguration(ServiceClass):
     def query_web_locations(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get web-location IDs matching the query with filter.
 
-        Keyword arguments:
-        filter -- The filter to use when finding web locations. String.
-                  Allowed filters:
-                    name                      type
-                    deleted                   application_id
-                    provider_location_id      enterprise_account_id
-        type -- The type of entity to query. String. Allowed values are:
-                predefined  custom
-        limit -- The number of items to return in this response (default: 100, max: 500).
-        Use with the offset parameter to manage pagination of results. Integer.
-        offset -- The offset to start retrieving records from. Integer.
-        Use with the limit parameter to manage pagination of results. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/queries.web-location.get-v2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter to use when finding web locations. String.
+            Allowed filters:
+              name                      type
+              deleted                   application_id
+              provider_location_id      enterprise_account_id
+        type : str
+            The type of entity to query. String. Allowed values are:
+            predefined  custom
+        limit : int
+            The number of items to return in this response (default: 100, max: 500).
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

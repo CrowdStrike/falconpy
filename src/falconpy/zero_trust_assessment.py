@@ -59,20 +59,28 @@ class ZeroTrustAssessment(ServiceClass):
     def get_assessment(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Zero Trust Assessment data for one or more hosts by providing agent IDs (AID).
 
-        Keyword arguments:
-        ids -- One or more agent IDs, which you can find in the data.zta file,
-               or the Falcon console. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment/getAssessmentV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more agent IDs, which you can find in the data.zta file,
+            or the Falcon console.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        binary object on SUCCESS, dict object containing API response on FAILURE.
         """
         return process_service_request(
             calling_object=self,
@@ -87,12 +95,20 @@ class ZeroTrustAssessment(ServiceClass):
 
         This method does not accept arguments.
 
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment/getAuditV1
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -104,24 +120,33 @@ class ZeroTrustAssessment(ServiceClass):
     def get_assessments_by_score(self: object, parameters: dict = None, **kwargs) -> dict:
         """Get Zero Trust Assessment data for one or more hosts by providing a customer ID (CID) and a range of scores.
 
-        Keyword arguments:
-        after - Pagination token used with the limit parameter to manage pagination of results.
-                On your first request, do not provide an after token. On subsequent requests,
-                provide the after token from the previous response to continue from that place
-                in the resultset. String.
-        filter - FQL formatted query specifying the filter to apply to the search. String.
-        limit - The number of scores to return in this response. Integer.
-                Min: 1, Max: 1,000, Default: 100
-        parameters - Full parameters payload provided as a JSON dictionary.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment/getAssessmentsByScoreV1
+
+        Keyword arguments
+        -----------------
+        after : str
+            Pagination token used with the limit parameter to manage pagination of results.
+            On your first request, do not provide an after token. On subsequent requests,
+            provide the after token from the previous response to continue from that place
+            in the resultset.
+        filter : str
+            FQL formatted query specifying the filter to apply to the search.
+        limit : int
+            The number of scores to return in this response. Integer.
+            Min: 1, Max: 1,000, Default: 100
+        parameters : dict
+            Full parameters payload provided as a JSON.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

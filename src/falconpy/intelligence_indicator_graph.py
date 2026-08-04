@@ -64,9 +64,17 @@ class IntelligenceIndicatorGraph(ServiceClass):
                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search indicators based on FQL filter.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
-                DEPRECATED: Please use query string parameters instead of the body payload for these arguments.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intelligence-indicator-graph/SearchIndicators
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+            DEPRECATED: Please use query string parameters instead of the body payload for these arguments.
                 {
                     "filter": "string",
                     "sort": [
@@ -76,33 +84,35 @@ class IntelligenceIndicatorGraph(ServiceClass):
                         }
                     ]
                 }
-        filter -- The filter expression that should be used to limit the results. String. FQL syntax.
-                  Available values:
-                    Type                            LastUpdated
-                    KillChain                       MaliciousConfidence
-                    MaliciousConfidenceValidatedTime
-                    FirstSeen                       LastSeen
-                    Adversaries.Name                Adversaries.Slug
-                    Reports.Title                   Reports.Slug
-                    Threats.FamilyName              Vulnerabilities.CVE
-                    Sectors.Name                    FileDetails.SHA256
-                    FileDetails.SHA1                FileDetails.MD5
-                    DomainDetails.Detail            IPv4Details.IPv4
-                    IPv6Details.IPv6                URLDetails.URL
-        limit -- Returned record limit. Integer.
-        offset -- Offset to start returning results. Integer.
-        sort -- List of sort operations to perform on the returnset. String.
-
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        filter : str
+            The filter expression that should be used to limit the results. String. FQL syntax.
+            Available values:
+              Type                            LastUpdated
+              KillChain                       MaliciousConfidence
+              MaliciousConfidenceValidatedTime
+              FirstSeen                       LastSeen
+              Adversaries.Name                Adversaries.Slug
+              Reports.Title                   Reports.Slug
+              Threats.FamilyName              Vulnerabilities.CVE
+              Sectors.Name                    FileDetails.SHA256
+              FileDetails.SHA1                FileDetails.MD5
+              DomainDetails.Detail            IPv4Details.IPv4
+              IPv6Details.IPv6                URLDetails.URL
+        limit : int
+            Returned record limit.
+        offset : str
+            Offset to start returning results.
+        sort : str
+            List of sort operations to perform on the returnset.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intelligence-indicator-graph/SearchIndicators
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         # Body payload parameters have been deprecated as of version 1.5.4
         # if not body:
@@ -126,8 +136,16 @@ class IntelligenceIndicatorGraph(ServiceClass):
                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search indicators based on FQL filter.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intelligence-indicator-graph/LookupIndicators
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "values": [
                         "example.com",
@@ -137,17 +155,18 @@ class IntelligenceIndicatorGraph(ServiceClass):
                         "86464cd07e4f924e33a5a1d1dcebdae6"
                     ]
                 }
-        values -- Values to look up. String or list of strings.
+        values : str or list[str]
+            Values to look up.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'values'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'values'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intelligence-indicator-graph/LookupIndicators
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not kwargs and args:
             kwargs["values"] = args[0]

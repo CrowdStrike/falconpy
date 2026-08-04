@@ -65,25 +65,40 @@ class D4CRegistration(ServiceClass):
     def get_aws_account(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return information about the current status of an AWS account.
 
-        Keyword arguments:
-        ids -- List of AWS Account IDs to retrieve. String or list of strings.
-        limit -- The maximum records to return. Defaults to 100. Integer.
-        migrated -- Only return migrated D4C accounts. Boolean.
-        offset -- The offset to start retrieving records from. Integer.
-        organization_ids -- List of AWS Organization IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-        scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts.
-        status -- Account status to filter results by. String.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetD4CAwsAccount
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of AWS Account IDs to retrieve.
+        limit : int
+            The maximum records to return. Defaults to 100.
+        migrated : str
+            Only return migrated D4C accounts.
+        offset : int
+            The offset to start retrieving records from.
+        organization_ids : str or list[str]
+            List of AWS Organization IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+        scan_type : str
+            Type of scan, `dry` or `full`, to perform on selected accounts.
+        status : str
+            Account status to filter results by.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("scan_type", None):
             kwargs["scan-type"] = kwargs.get("scan_type", None)
@@ -103,10 +118,20 @@ class D4CRegistration(ServiceClass):
         Creates a new account in our system for a customer and generates a
         script for them to run in their AWS cloud environment to grant us access.
 
-        Keyword arguments:
-        account_id -- AWS account ID. String.
-        account_type -- AWS account type. String.
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateD4CAwsAccount
+
+        Keyword arguments
+        -----------------
+        account_id : str
+            AWS account ID.
+        account_type : str
+            AWS account type.
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -119,19 +144,21 @@ class D4CRegistration(ServiceClass):
                         }
                     ]
                 }
-        cloudtrail_region -- AWS region for CloudTrail log access. String.
-        iam_role_arn -- AWS IAM role ARN. String.
-        is_master -- Flag indicating if this is the master account. Boolean.
-        organization_id -- AWS organization ID. String.
+        cloudtrail_region : str
+            AWS region for CloudTrail log access.
+        iam_role_arn : str
+            AWS IAM role ARN.
+        is_master : bool
+            Flag indicating if this is the master account.
+        organization_id : str
+            AWS organization ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateD4CAwsAccount
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aws_d4c_registration_payload(passed_keywords=kwargs)
@@ -151,20 +178,30 @@ class D4CRegistration(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an existing AWS account or organization from the tenant.
 
-        Keyword arguments:
-        ids -- List of AWS Account IDs to retrieve. String or list of strings.
-        organization_ids -- List of AWS Organization IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/DeleteD4CAwsAccount
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of AWS Account IDs to retrieve.
+        organization_ids : str or list[str]
+            List of AWS Organization IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -182,19 +219,28 @@ class D4CRegistration(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return a URL for customer to visit in their cloud environment to grant CrowdStrike access.
 
-        Keyword arguments:
-        region -- AWS region to generate the URL for. String.
-        parameters -- full parameters payload, not required if region is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'region'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetD4CAwsConsoleSetupURLs
+
+        Keyword arguments
+        -----------------
+        region : str
+            AWS region to generate the URL for.
+        parameters : dict
+            full parameters payload, not required if region is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'region'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -211,44 +257,76 @@ class D4CRegistration(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return a script for customer to run in their cloud environment to grant CrowdStrike access.
 
-        Keyword arguments:
-        ids -- AWS account IDs. String.
-        template -- Template to be rendered. String
-        accounts -- The list of accounts to register. String or list of strings.
-        behavior_assessment_enabled -- Available values: true, false. Boolean.
-        sensor_management_enabled -- Available values: true, false. Boolean.
-        dspm_enabled -- Available values: true, false. Boolean.
-        dspm_regions -- DSPM Regions. String.
-        dspm_host_account_id -- DSPM Host Account ID. String.
-        dspm_host_integration_role_name -- DSPM Host Integration Role Name. String.
-        dspm_host_scanner_role_name -- DSPM Host Scanner Role Name. String.
-        dspm_role -- DSPM Role. String.
-        vulnerability_scanning_enabled -- Enabled. Available values: true, false. Boolean.
-
-        vulnerability_scanning_regions -- Regions. String or list of strings.
-        vulnerability_scanning_host_account_id -- Account ID. String.
-        vulnerability_scanning_host_integration_role_name -- Host Integration Role Name. String.
-        vulnerability_scanning_host_scanner_role_name -- Host Scanner Role Name. String.
-        vulnerability_scanning_role -- Role. String.
-        use_existing_cloudtrail -- Use Existing CloudTrail. Available values: true, false. Boolean.
-        organization_id -- The AWS organization ID to be registered. String.
-        organizational_unit_ids -- The AWS Organizational Unit IDs to be registered. String or list of strings.
-        aws_profile -- The AWS profile to be used during registration. String.
-        aws_region -- The AWS region to be used during registration. String.
-        iam_role_arn -- The custom IAM role to be used during registration. String.
-        falcon_client_id -- The Falcon client ID used during registration. String.
-        idp_enabled -- Set to true to enable Identity Protection feature. String.
-        tags -- Base64 encoded JSON string to be used as AWS tags. String.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetD4CAWSAccountScriptsAttachment
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            AWS account IDs.
+        template : str
+            Template to be rendered.
+        accounts : str or list[str]
+            The list of accounts to register.
+        behavior_assessment_enabled : str
+            Available values: true, false.
+        sensor_management_enabled : str
+            Available values: true, false.
+        dspm_enabled : str
+            Available values: true, false.
+        dspm_regions : str or list[str]
+            DSPM Regions.
+        dspm_host_account_id : str
+            DSPM Host Account ID.
+        dspm_host_integration_role_name : str
+            DSPM Host Integration Role Name.
+        dspm_host_scanner_role_name : str
+            DSPM Host Scanner Role Name.
+        dspm_role : str
+            DSPM Role.
+        vulnerability_scanning_enabled : str
+            Enabled. Available values: true, false.
+        vulnerability_scanning_regions : str or list[str]
+            Regions.
+        vulnerability_scanning_host_account_id : str
+            Account ID.
+        vulnerability_scanning_host_integration_role_name : str
+            Host Integration Role Name.
+        vulnerability_scanning_host_scanner_role_name : str
+            Host Scanner Role Name.
+        vulnerability_scanning_role : str
+            Role.
+        use_existing_cloudtrail : str
+            Use Existing CloudTrail. Available values: true, false.
+        organization_id : str
+            The AWS organization ID to be registered.
+        organizational_unit_ids : str or list[str]
+            The AWS Organizational Unit IDs to be registered.
+        aws_profile : str
+            The AWS profile to be used during registration.
+        aws_region : str
+            The AWS region to be used during registration.
+        iam_role_arn : str
+            The custom IAM role to be used during registration.
+        falcon_client_id : str
+            The Falcon client ID used during registration.
+        idp_enabled : str
+            Set to true to enable Identity Protection feature.
+        tags : str
+            Base64 encoded JSON string to be used as AWS tags.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -266,25 +344,38 @@ class D4CRegistration(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return information about Azure account registration.
 
-        Keyword arguments:
-        ids -- List of Azure Account IDs to retrieve. If this is empty then all accounts are returned.
-               String or list of strings.
-        limit -- The maximum records to return. Defaults to 100. Integer.
-        offset -- The offset to start retrieving records from. Integer.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-        scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts.
-        status -- Account status to filter results by, 'provisioned' or 'operational'. String.
-        tenant_ids -- Tenant ids to filter azure accounts returned. String or list of strings.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetDiscoverCloudAzureAccount
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Azure Account IDs to retrieve. If this is empty then all accounts are returned.
+        limit : int
+            The maximum records to return. Defaults to 100.
+        offset : int
+            The offset to start retrieving records from.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+        scan_type : str
+            Type of scan, `dry` or `full`, to perform on selected accounts.
+        status : str
+            Account status to filter results by, 'provisioned' or 'operational'
+        tenant_ids : str or list[str]
+            Tenant ids to filter azure accounts returned.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("scan_type", None):
             kwargs["scan-type"] = kwargs.get("scan_type", None)
@@ -304,9 +395,18 @@ class D4CRegistration(ServiceClass):
         Creates a new account in our system for a customer and generates a
         script for them to run in their cloud environment to grant us access.
 
-        Keyword arguments:
-        account_type -- Azure Account type. String.
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateDiscoverCloudAzureAccount
+
+        Keyword arguments
+        -----------------
+        account_type : str
+            Azure Account type.
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -319,20 +419,23 @@ class D4CRegistration(ServiceClass):
                         }
                     ]
                 }
-        client_id -- Azure Client ID. String.
-        default_subscription -- Is this the default subscription? Boolean.
-        subscription_id -- Azure subscription ID. String.
-        tenant_id -- Azure tenant ID. String.
-        years_valid -- Years valid. Integer.
+        client_id : str
+            Azure Client ID.
+        default_subscription : bool
+            Is this the default subscription?
+        subscription_id : str
+            Azure subscription ID.
+        tenant_id : str
+            Azure tenant ID.
+        years_valid : int
+            Years valid.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateDiscoverCloudAzureAccount
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = azure_registration_payload(passed_keywords=kwargs)
@@ -355,25 +458,36 @@ class D4CRegistration(ServiceClass):
         Update an Azure service account in our system by with the
         user-created client_id created with the public key we've provided.
 
-        Keyword arguments:
-        id -- ClientID to use for the Service Principal associated
-              with the customer's Azure Account.
-        object_id -- Object ID to use for the Service Principal associated
-                     with the customer's Azure account. String.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-        tenant_id -- Tenant ID to update client ID for.
-                     Required if multiple tenants are registered. String.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /d4c-registration/UpdateDiscoverCloudAzureAccountClientID
+        /d4c-registration/UpdateDiscoverCloudAzureAccountClientID
+
+        Keyword arguments
+        -----------------
+        id : str
+            ClientID to use for the Service Principal associated
+            with the customer's Azure Account.
+        object_id : str
+            Object ID to use for the Service Principal associated
+            with the customer's Azure account.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+        tenant_id : str
+            Tenant ID to update client ID for.
+            Required if multiple tenants are registered.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("tenant_id", None):
             kwargs["tenant-id"] = kwargs.get("tenant_id", None)
@@ -396,22 +510,32 @@ class D4CRegistration(ServiceClass):
         Return a script for customer to run in their cloud environment to
         grant us access to their Azure environment as a downloadable attachment.
 
-        Keyword arguments:
-        parameters -- full parameters payload, not required if using other keywords.
-        azure_management_group - Use Azure Management Group. Boolean.
-        subscription_ids -- Azure subscription IDs. String or list of strings.
-        template -- Template to be rendered. String.
-        tenant_id -- Azure tenant ID. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /d4c-registration/GetDiscoverCloudAzureUserScriptsAttachment
+        /d4c-registration/GetDiscoverCloudAzureUserScriptsAttachment
+
+        Keyword arguments
+        -----------------
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        azure_management_group : bool
+            Use Azure Management Group.
+        subscription_ids : str or list[str]
+            Azure subscription IDs.
+        template : str
+            Template to be rendered.
+        tenant_id : str
+            Azure tenant ID.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("tenant_id", None):
             kwargs["tenant-id"] = kwargs.get("tenant_id", None)
@@ -432,12 +556,20 @@ class D4CRegistration(ServiceClass):
 
         This method does not accept arguments or keywords.
 
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetDiscoverCloudAzureUserScripts
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -449,24 +581,36 @@ class D4CRegistration(ServiceClass):
     def get_gcp_account(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return information about the current status of an GCP account.
 
-        Keyword arguments:
-        ids -- Hierarchical Resource IDs of accounts. String or list of strings.
-        limit -- The maximum records to return. Defaults to 100. Integer.
-        offset -- The offset to start retrieving records from. Integer.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-        parent_type -- GCP Hierarchy Parent Type, organization/folder/project. String.
-        scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts.
-        sort -- Order fields in ascending or descending order. Ex: parent_type|asc.
-        status -- Account status to filter results by, 'operational' or 'provisioned'. String.
-
-        This method does not accept arguments or keywords.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetD4CCGPAccount
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Hierarchical Resource IDs of accounts.
+        limit : int
+            The maximum records to return. Defaults to 100.
+        offset : int
+            The offset to start retrieving records from.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+        parent_type : str
+            GCP Hierarchy Parent Type, organization/folder/project.
+        scan_type : str
+            Type of scan, `dry` or `full`, to perform on selected accounts.
+        sort : str
+            Order fields in ascending or descending order. Ex: parent_type|asc.
+        status : str
+            Account status to filter results by, 'operational' or 'provisioned'. String.
+            This method does not accept arguments or keywords.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -483,8 +627,16 @@ class D4CRegistration(ServiceClass):
         Creates a new account in our system for a customer and generates a new service
         account for them to add access to in their GCP environment to grant us access.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateD4CGCPAccount
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -493,17 +645,17 @@ class D4CRegistration(ServiceClass):
                         }
                     ]
                 }
-        parent_id -- GCP parent ID. String.
-        parent_type -- GCP parent type. String.
+        parent_id : str
+            GCP parent ID.
+        parent_type : str
+            GCP parent type.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateD4CGCPAccount
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = gcp_registration_payload(passed_keywords=kwargs)
@@ -523,19 +675,28 @@ class D4CRegistration(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a GCP account from the system.
 
-        Keyword arguments:
-        ids -- Hierarchical Resource IDs of accounts. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/DeleteD4CGCPAccount
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Hierarchical Resource IDs of accounts.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -552,8 +713,16 @@ class D4CRegistration(ServiceClass):
         Creates a new account in our system for a customer and generates a new service
         account for them to add access to in their GCP environment to grant us access.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/ConnectD4CGCPAccount
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -568,23 +737,29 @@ class D4CRegistration(ServiceClass):
                         }
                     ]
                 }
-        client_email -- GCP account email. String.
-        client_id -- GCP account client ID. String.
-        parent_id -- GCP parent ID. String.
-        parent_type -- GCP parent type. String.
-        private_key -- GCP private key. String.
-        private_key_id -- GCP private key ID. String.
-        project_id -- GCP project ID. String.
-        service_account_id -- GCP service account ID. Integer.
+        client_email : str
+            GCP account email.
+        client_id : str
+            GCP account client ID.
+        parent_id : str
+            GCP parent ID.
+        parent_type : str
+            GCP parent type.
+        private_key : str
+            GCP private key.
+        private_key_id : str
+            GCP private key ID.
+        project_id : str
+            GCP project ID.
+        service_account_id : int
+            GCP service account ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/ConnectD4CGCPAccount
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = gcp_registration_payload(passed_keywords=kwargs)
@@ -604,19 +779,28 @@ class D4CRegistration(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the service account id and client email for external clients.
 
-        Keyword arguments:
-        id -- Service Account ID. String.
-        parameters -- full parameters payload, not required if id is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetD4CGCPServiceAccountsExt
+
+        Keyword arguments
+        -----------------
+        id : str
+            Service Account ID.
+        parameters : dict
+            full parameters payload, not required if id is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -630,8 +814,16 @@ class D4CRegistration(ServiceClass):
     def update_gcp_service_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a GCP service account.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/UpdateD4CGCPServiceAccountsExt
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -655,24 +847,30 @@ class D4CRegistration(ServiceClass):
                         }
                     ]
                 }
-        client_email -- Client email associated with the service account. String.
-        client_id -- GCP Client ID. String.
-        private_key -- GCP private key. String.
-        private_key_id -- GCP private key ID. String.
-        project_id -- GCP project ID. String.
-        resources -- List of GCP service accounts to validate. List of dictionaries.
-                     Overrides other keywords except for body.
-        service_account_conditions -- GCP service account conditions. List of dictionaries.
-        service_account_id -- GCP service account ID. Integer.
+        client_email : str
+            Client email associated with the service account.
+        client_id : str
+            GCP Client ID.
+        private_key : str
+            GCP private key.
+        private_key_id : str
+            GCP private key ID.
+        project_id : str
+            GCP project ID.
+        resources : str
+            List of GCP service accounts to validate. List of dictionaries.
+            Overrides other keywords except for body.
+        service_account_conditions : list[dict]
+            GCP service account conditions.
+        service_account_id : int
+            GCP service account ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/UpdateD4CGCPServiceAccountsExt
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cspm_service_account_validate_payload(passed_keywords=kwargs)
@@ -695,22 +893,33 @@ class D4CRegistration(ServiceClass):
         Return a script for customer to run in their cloud environment to
         grant us access to their GCP environment as a downloadable attachment.
 
-        Keyword arguments:
-        ids -- Hierarchical Resource IDs of accounts. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-        parent_type -- GCP Hierarchy Parent Type. String.
-                       Allowed values: organization, folder, project
-        status -- Account status to filter results by. String.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetD4CGCPUserScriptsAttachment
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Hierarchical Resource IDs of accounts.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+        parent_type : str
+            GCP Hierarchy Parent Type. String.
+            Allowed values: organization, folder, project
+        status : str
+            Account status to filter results by.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -730,22 +939,33 @@ class D4CRegistration(ServiceClass):
 
         Returns JSON object(s) that contain the base64 encoded certificate for a service principal.
 
-        Keyword arguments:
-        tenant_id -- Azure Tenant ID to generate script for.
-                     Defaults to the most recently registered tenant.
-        parameters -- full parameters payload, not required if tenant-id keyword is used.
-        refresh -- Force a refresh of the certificate. Boolean. Defaults to False.
-        years_valid -- Years the certificate should be valid (only used when refresh=true). String.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'tenant_id'. All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/DiscoverCloudAzureDownloadCertificate
+
+        Keyword arguments
+        -----------------
+        tenant_id : str or list[str]
+            Azure Tenant ID to generate script for.
+            Defaults to the most recently registered tenant.
+        parameters : dict
+            full parameters payload, not required if tenant-id keyword is used.
+        refresh : bool
+            Force a refresh of the certificate. Boolean. Defaults to False.
+        years_valid : str
+            Years the certificate should be valid (only used when refresh=true)
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'tenant_id'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -760,12 +980,20 @@ class D4CRegistration(ServiceClass):
 
         This method does not accept keywords or arguments.
 
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetDiscoverCloudAzureTenantIDs
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -784,19 +1012,28 @@ class D4CRegistration(ServiceClass):
         Return a script for customer to run in their cloud
         environment to grant us access to their GCP environment.
 
-        Keyword arguments:
-        parent_type -- GCP Hierarchy Parent Type, organization/folder/project. String.
-        parameters - full parameters payload, not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'parent_type'. All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetD4CGCPUserScripts
+
+        Keyword arguments
+        -----------------
+        parent_type : str
+            GCP Hierarchy Parent Type, organization/folder/project.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'parent_type'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -813,22 +1050,31 @@ class D4CRegistration(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return a script for customer to run in their cloud environment to grant CrowdStrike access.
 
-        Keyword arguments:
-        account_type -- Account type (commercial, gov). Only applicable when registering AWS
-                        commercial accounts in a Gov environment. String.
-        delete -- Generate a delete script. Boolean.
-        organization_id -- AWS organization ID. String.
-        parameters -- full parameters payload, not required if using other keywords.
-        single_account -- Get static script for single account. Boolean.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response or a binary script.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetHorizonD4CScripts
+
+        Keyword arguments
+        -----------------
+        account_type : str
+            Account type (commercial, gov). Only applicable when registering AWS
+            commercial accounts in a Gov environment.
+        delete : str
+            Generate a delete script.
+        organization_id : str
+            AWS organization ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        single_account : str
+            Get static script for single account.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict object containing API response or a binary script.
         """
         return process_service_request(
             calling_object=self,

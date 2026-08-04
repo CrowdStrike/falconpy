@@ -59,21 +59,31 @@ class FaaSExecution(ServiceClass):
     def read_request_body(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a large request body, such as a file, that has spilled into object storage.
 
-        Keyword arguments:
-        id -- Execution ID. String.
-        fn -- Function reference. String. Format: $fn_id:$fn_version
-        filename -- Filename to be retrieved. String.
-        sha256 -- SHA256 checksum for file to be retrieved. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/execution/ReadRequestBody
+
+        Keyword arguments
+        -----------------
+        id : str
+            Execution ID.
+        fn : str
+            Function reference. String. Format: $fn_id:$fn_version
+        filename : str
+            Filename to be retrieved.
+        sha256 : str
+            SHA256 checksum for file to be retrieved.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

@@ -73,38 +73,49 @@ class ITAutomation(ServiceClass):
     def get_associated_tasks(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve tasks associated with the provided file ID.
 
-        Keyword arguments:
-        id -- The ID of the file to fetch associated tasks for. String.
-        filter -- The filter expression that should be used to limit the results. String.
-                  Allowed filter fields:
-                    access_type             modified_time
-                    created_by              name
-                    created_time            runs
-                    last_run_time           task_type
-                    modified_by
-                  Example:
-                    filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
-        sort -- The sort expression that should be used to sort the results. String.
-                Sort either `asc` (ascending) or `desc` (descending).
-                Allowed sort fields: name
-                Example:
-                    sort="name|asc"
-        offset -- Starting index for record retrieval. Integer.
-                  Example:
-                    offset=100
-        limit -- The maximum records to return. Integer.
-                 Example:
-                    limit=50
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationGetAssociatedTasks
+
+        Keyword arguments
+        -----------------
+        id : str
+            The ID of the file to fetch associated tasks for.
+        filter : str
+            The filter expression that should be used to limit the results. String.
+            Allowed filter fields:
+              access_type             modified_time
+              created_by              name
+              created_time            runs
+              last_run_time           task_type
+              modified_by
+            Example:
+              filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
+        sort : str
+            The sort expression that should be used to sort the results. String.
+            Sort either `asc` (ascending) or `desc` (descending).
+            Allowed sort fields: name
+            Example:
+                sort="name|asc"
+        offset : int
+            Starting index for record retrieval. Integer.
+            Example:
+              offset=100
+        limit : int
+            The maximum records to return. Integer.
+            Example:
+               limit=50
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -118,44 +129,54 @@ class ITAutomation(ServiceClass):
     def scheduled_task_details(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return full details of scheduled tasks matching the filter query parameter.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-                  Allowed filter fields:
-                    created_by          modified_time
-                    created_time        start_time
-                    end_time            task_id
-                    is_active           task_name
-                    last_run            task_type
-                    modified_by         group_ids
-                    group_names
-                  Example:
-                    filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
-        sort -- The sort expression that should be used to sort the results. String.
-                Sort either `asc` (ascending) or `desc` (descending).
-                Allowed sort fields:
-                    created_by          modified_time
-                    created_time        start_time
-                    end_time            task_id
-                    last_run            task_name
-                    modified_by         task_type
-                    group_ids           group_names
-                Example: example_field|asc
-        offset -- Starting index for record retrieval. Integer.
-                  Example:
-                    offset=100
-        limit -- The maximum records to return. Integer.
-                 Example:
-                    limit=50
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationCombinedScheduledTasks
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. String.
+            Allowed filter fields:
+              created_by          modified_time
+              created_time        start_time
+              end_time            task_id
+              is_active           task_name
+              last_run            task_type
+              modified_by         group_ids
+              group_names
+            Example:
+              filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
+        sort : str
+            The sort expression that should be used to sort the results. String.
+            Sort either `asc` (ascending) or `desc` (descending).
+            Allowed sort fields:
+                created_by          modified_time
+                created_time        start_time
+                end_time            task_id
+                last_run            task_name
+                modified_by         task_type
+                group_ids           group_names
+            Example: example_field|asc
+        offset : int
+            Starting index for record retrieval. Integer.
+            Example:
+              offset=100
+        limit : int
+            The maximum records to return. Integer.
+            Example:
+               limit=50
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -172,40 +193,50 @@ class ITAutomation(ServiceClass):
         This operation will return the same output as if you ran ITAutomationSearchTaskExecutions
         and ITAutomationGetTaskExecution.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-                  Allowed filter fields:
-                    end_time            status
-                    run_by              task_id
-                    run_type            task_name
-                    start_time          task_type
-                  Example:
-                    filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
-        sort -- The sort expression that should be used to sort the results. String.
-                Sort either `asc` (ascending) or `desc` (descending).
-                Allowed sort fields:
-                    end_time            status
-                    run_by              task_id
-                    run_type            task_name
-                    start_time          task_type
-                 Example:
-                    sort="example_field|asc"
-        offset -- Starting index for record retrieval. Integer.
-                  Example:
-                    offset=100
-        limit -- The maximum records to return.
-                 Example:
-                    limit=50
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationGetTaskExecutionsByQuery
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. String.
+            Allowed filter fields:
+              end_time            status
+              run_by              task_id
+              run_type            task_name
+              start_time          task_type
+            Example:
+              filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
+        sort : str
+            The sort expression that should be used to sort the results. String.
+            Sort either `asc` (ascending) or `desc` (descending).
+            Allowed sort fields:
+                end_time            status
+                run_by              task_id
+                run_type            task_name
+                start_time          task_type
+             Example:
+                sort="example_field|asc"
+        offset : int
+            Starting index for record retrieval. Integer.
+            Example:
+              offset=100
+        limit : int
+            The maximum records to return.
+            Example:
+               limit=50
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -222,38 +253,48 @@ class ITAutomation(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return full details of task groups matching the filter query parameter.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-                  Allowed filter fields:
-                    access_type         modified_by
-                    created_by          modified_time
-                    created_time        name
-                  Example:
-                    filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
-        sort -- The sort expression that should be used to sort the results. String.
-                Sort either `asc` (ascending) or `desc` (descending).
-                Allowed sort fields:
-                    access_type         modified_by
-                    created_by          modified_time
-                    created_time        name
-                 Example:
-                    sort="example_field|asc"
-        offset -- Starting index for record retrieval. Integer.
-                  Example:
-                    offset=100
-        limit -- The maximum records to return. Integer.
-                 Example:
-                    limit=50
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationGetTaskGroupsByQuery
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. String.
+            Allowed filter fields:
+              access_type         modified_by
+              created_by          modified_time
+              created_time        name
+            Example:
+              filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
+        sort : str
+            The sort expression that should be used to sort the results. String.
+            Sort either `asc` (ascending) or `desc` (descending).
+            Allowed sort fields:
+                access_type         modified_by
+                created_by          modified_time
+                created_time        name
+             Example:
+                sort="example_field|asc"
+        offset : int
+            Starting index for record retrieval. Integer.
+            Example:
+              offset=100
+        limit : int
+            The maximum records to return. Integer.
+            Example:
+               limit=50
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -267,42 +308,52 @@ class ITAutomation(ServiceClass):
     def get_tasks_by_query(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return full details of tasks matching the filter query parameter.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-                  Allowed filter fields:
-                    access_type         modified_time
-                    created_by          name
-                    created_time        runs
-                    last_run_time       task_type
-                    modified_by
-                  Example:
-                    filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
-        sort -- The sort expression that should be used to sort the results. String.
-                Sort either `asc` (ascending) or `desc` (descending).
-                Allowed sort fields:
-                    access_type         modified_time
-                    created_by          name
-                    created_time        runs
-                    last_run_time       task_type
-                    modified_by
-                Example:
-                    sort="example_field|asc"
-        offset -- Starting index for record retrieval. Integer.
-                  Example:
-                    offset=100
-        limit -- The maximum records to return. Integer.
-                 Example:
-                    limit=50
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationGetTasksByQuery
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. String.
+            Allowed filter fields:
+              access_type         modified_time
+              created_by          name
+              created_time        runs
+              last_run_time       task_type
+              modified_by
+            Example:
+              filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
+        sort : str
+            The sort expression that should be used to sort the results. String.
+            Sort either `asc` (ascending) or `desc` (descending).
+            Allowed sort fields:
+                access_type         modified_time
+                created_by          name
+                created_time        runs
+                last_run_time       task_type
+                modified_by
+            Example:
+                sort="example_field|asc"
+        offset : int
+            Starting index for record retrieval. Integer.
+            Example:
+              offset=100
+        limit : int
+            The maximum records to return. Integer.
+            Example:
+               limit=50
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -320,19 +371,28 @@ class ITAutomation(ServiceClass):
                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return user groups for each provided ID.
 
-        Keyword arguments:
-        ids -- List of user group IDs to fetch. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationGetUserGroup
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of user group IDs to fetch.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -346,23 +406,31 @@ class ITAutomation(ServiceClass):
     def create_user_group(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a user group from the given request.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationCreateUserGroup
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "description": "string",
                     "name": "string"
                 }
-        description -- Description of the user group. String.
-        name -- Name of the user group. String.
+        description : str
+            Description of the user group.
+        name : str
+            Name of the user group.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationCreateUserGroup
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = automation_user_group_payload(passed_keywords=kwargs)
@@ -381,9 +449,18 @@ class ITAutomation(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a user group for a given ID.
 
-        Keyword arguments:
-        add_user_ids -- List of user IDs to add. String or list of strings.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationUpdateUserGroup
+
+        Keyword arguments
+        -----------------
+        add_user_ids : str or list[str]
+            List of user IDs to add.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "add_user_ids": [
                         "string"
@@ -394,19 +471,21 @@ class ITAutomation(ServiceClass):
                         "string"
                     ]
                 }
-        description -- The updated user group description. String.
-        name -- The updated user group name. String.
-        id -- The ID of the user groups to update. String.
-        remove_user_ids -- List of user IDs to remove. String or list of strings.
+        description : str
+            The updated user group description.
+        name : str
+            The updated user group name.
+        id : str
+            The ID of the user groups to update.
+        remove_user_ids : str or list[str]
+            List of user IDs to remove.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationUpdateUserGroup
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = automation_user_group_payload(passed_keywords=kwargs)
@@ -428,19 +507,28 @@ class ITAutomation(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete user groups for each provided IDs.
 
-        Keyword arguments:
-        ids -- List of user group IDs to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-        All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationDeleteUserGroup
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of user group IDs to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -454,78 +542,93 @@ class ITAutomation(ServiceClass):
     def run_live_query(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Start a new task execution from the provided query data in the request and return the initiated task executions.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
-                    {
-                        "discover_new_hosts": boolean,
-                        "discover_offline_hosts": boolean,
-                        "distribute": boolean,
-                        "expiration_interval": "string",
-                        "guardrails": {
-                            "run_time_limit_millis": 0
-                        },
-                        "osquery": "string",
-                        "output_parser_config": {
-                            "columns": [
-                                {
-                                    "name": "string"
-                                }
-                            ],
-                            "default_group_by": boolean,
-                            "delimiter": "string"
-                        },
-                        "queries": {
-                            "linux": {
-                                "action_type": "script",
-                                "args": "string",
-                                "content": "string",
-                                "file_ids": [
-                                    "string"
-                                ],
-                                "language": "bash",
-                                "script_file_id": "string"
-                            },
-                            "mac": {
-                                "action_type": "script",
-                                "args": "string",
-                                "content": "string",
-                                "file_ids": [
-                                    "string"
-                                ],
-                                "language": "bash",
-                                "script_file_id": "string"
-                            },
-                                "windows": {
-                                "action_type": "script",
-                                "args": "string",
-                                "content": "string",
-                                "file_ids": [
-                                    "string"
-                                ],
-                                "language": "bash",
-                                "script_file_id": "string"
-                            }
-                        },
-                        "target": "string"
-                    }
-        discover_new_hosts -- Flag indicating if this task can discover new hosts. Boolean.
-        discover_offline_hosts -- Flag indicating if this task can discover offline hosts. Boolean.
-        distribute -- Flag indicating if this task is distributed. Boolean.
-        expiration_interval -- Task expiration interval. String.
-        guardrails -- Task guardrails (limiters). Dictionary.
-        osquery -- OS Query content. String.
-        output_parser_config -- Output parser configuration. Dictionary.
-        queries -- Queries to perform. Dictionary.
-        target -- Execution target. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationRunLiveQuery
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "discover_new_hosts": boolean,
+                    "discover_offline_hosts": boolean,
+                    "distribute": boolean,
+                    "expiration_interval": "string",
+                    "guardrails": {
+                        "run_time_limit_millis": 0
+                    },
+                    "osquery": "string",
+                    "output_parser_config": {
+                        "columns": [
+                            {
+                                "name": "string"
+                            }
+                        ],
+                        "default_group_by": boolean,
+                        "delimiter": "string"
+                    },
+                    "queries": {
+                        "linux": {
+                            "action_type": "script",
+                            "args": "string",
+                            "content": "string",
+                            "file_ids": [
+                                "string"
+                            ],
+                            "language": "bash",
+                            "script_file_id": "string"
+                        },
+                        "mac": {
+                            "action_type": "script",
+                            "args": "string",
+                            "content": "string",
+                            "file_ids": [
+                                "string"
+                            ],
+                            "language": "bash",
+                            "script_file_id": "string"
+                        },
+                            "windows": {
+                            "action_type": "script",
+                            "args": "string",
+                            "content": "string",
+                            "file_ids": [
+                                "string"
+                            ],
+                            "language": "bash",
+                            "script_file_id": "string"
+                        }
+                    },
+                    "target": "string"
+                }
+        discover_new_hosts : bool
+            Flag indicating if this task can discover new hosts.
+        discover_offline_hosts : bool
+            Flag indicating if this task can discover offline hosts.
+        distribute : bool
+            Flag indicating if this task is distributed.
+        expiration_interval : str
+            Task expiration interval.
+        guardrails : dict
+            Task guardrails (limiters)
+        osquery : str
+            OS Query content.
+        output_parser_config : dict
+            Output parser configuration.
+        queries : dict
+            Queries to perform.
+        target : str
+            Execution target.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = automation_live_query_payload(passed_keywords=kwargs)
@@ -541,9 +644,18 @@ class ITAutomation(ServiceClass):
     def update_policy_host_groups(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Manage host groups assigned to a policy.
 
-        Keyword arguments:
-        action -- Policy action. String.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationUpdatePolicyHostGroups
+
+        Keyword arguments
+        -----------------
+        action : str
+            Policy action.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "action": "string",
                     "host_group_ids": [
@@ -551,17 +663,17 @@ class ITAutomation(ServiceClass):
                     ],
                     "policy_id": "string"
                 }
-        host_group_ids -- Host group IDs to apply the policy to. String or list of strings.
-        policy_id -- Policy ID to apply. String.
+        host_group_ids : str or list[str]
+            Host group IDs to apply the policy to.
+        policy_id : str
+            Policy ID to apply.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationUpdatePolicyHostGroups
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = policy_host_group_payload(passed_keywords=kwargs)
@@ -581,23 +693,32 @@ class ITAutomation(ServiceClass):
                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the policy precedence for all policies of a specific platform.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        ids -- Precedence of the policies for the provided platform. String or list of strings.
-               Order delineates precedence, if providing a comma-delimited list as a string, the first value will
-               be the beginning of the list.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        platform -- The policy platform for which to set the precedence order. String.
-                    Allowed values: Windows, Linux, Mac
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationUpdatePoliciesPrecedence
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
+        ids : str or list[str]
+            Precedence of the policies for the provided platform. String or list of strings.
+            Order delineates precedence, if providing a comma-delimited list as a string, the first value will
+            be the beginning of the.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        platform : str
+            The policy platform for which to set the precedence order. String.
+            Allowed values: Windows, Linux, Mac
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -615,19 +736,28 @@ class ITAutomation(ServiceClass):
     def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the configuration for 1 or more policies.
 
-        Keyword arguments:
-        ids -- One or more policy IDs. String or list of strings. Max: 500
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationGetPolicies
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more policy IDs. String or list of strings. Max: 500
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -643,8 +773,16 @@ class ITAutomation(ServiceClass):
 
         New policies are always added at the end of the precedence list for the provided policy type.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationCreatePolicy
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "config": {
                         "concurrency": {
@@ -671,32 +809,45 @@ class ITAutomation(ServiceClass):
                     "name": "string",
                     "platform": "string"
                 }
-        name -- Policy name. String. Max: 100 characters
-        description -- Policy description. String. Max: 500 characters
-        platform -- Execution host platform. String. Allowed values: Windows, Linux, Mac
-        enable_script_execution -- Enable or disable script execution. Boolean.
-        enable_python_execution -- Enable or disable Python execution. Boolean.
-        enable_os_query -- Enable or disable OS Query. Boolean.
-        execution_timeout -- Specifies the timeout value for executions. Integer.
-        execution_timeout_unit -- Execution timeout unit. String. Allowed values: Hours, Minutes
-        cpu_throttle -- Specifies the CPU throttle value. Integer.
-        cpu_scheduling -- Sets priority to determine the order in which a query process will run on a host's CPU. String.
-        memory_pressure_level -- Sets memory pressure level to control system resource allocation during task execution.
-                                 String.
-        memory_allocation -- Specifies the memory allocation value. Integer.
-        memory_allocation_unit -- Memory allocation unit. String. Allowed values: MB, GB
-        concurrent_host_limit -- Specifies the maximum number of concurrent hosts. Integer.
-        concurrent_task_limit -- Specifies the maximum number of concurrent tasks. Integer.
-        concurrent_host_file_transfer_limit -- Specifies the maximum number of concurrent file transfers. Integer.
+        name : str
+            Policy name. String. Max: 100 characters
+        description : str
+            Policy description. String. Max: 500 characters
+        platform : str
+            Execution host platform. String. Allowed values: Windows, Linux, Mac
+        enable_script_execution : bool
+            Enable or disable script execution.
+        enable_python_execution : bool
+            Enable or disable Python execution.
+        enable_os_query : bool
+            Enable or disable OS Query.
+        execution_timeout : int
+            Specifies the timeout value for executions.
+        execution_timeout_unit : str
+            Execution timeout unit. String. Allowed values: Hours, Minutes
+        cpu_throttle : int
+            Specifies the CPU throttle value.
+        cpu_scheduling : str
+            Sets priority to determine the order in which a query process will run on a host's CPU.
+        memory_pressure_level : str
+            Sets memory pressure level to control system resource allocation during task execution.
+        memory_allocation : int
+            Specifies the memory allocation value.
+        memory_allocation_unit : str
+            Memory allocation unit. String. Allowed values: MB, GB
+        concurrent_host_limit : int
+            Specifies the maximum number of concurrent hosts.
+        concurrent_task_limit : int
+            Specifies the maximum number of concurrent tasks.
+        concurrent_host_file_transfer_limit : int
+            Specifies the maximum number of concurrent file transfers.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationCreatePolicy
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = automation_policy_payload(passed_keywords=kwargs)
@@ -712,8 +863,16 @@ class ITAutomation(ServiceClass):
     def update_policy(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a new policy of the specified type.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationUpdatePolicies
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "config": {
                         "concurrency": {
@@ -741,33 +900,47 @@ class ITAutomation(ServiceClass):
                     "is_enabled": boolean,
                     "name": "string"
                 }
-        id -- A valid policy ID representing the policy to be updated. String. Required.
-        name -- Policy name. String. Max: 100 characters
-        description -- Policy description. String. Max: 500 characters
-        is_enabled -- Flag controlling whether the policy is active. Boolean.
-        enable_script_execution -- Enable or disable script execution. Boolean.
-        enable_python_execution -- Enable or disable Python execution. Boolean.
-        enable_os_query -- Enable or disable OS Query. Boolean.
-        execution_timeout -- Specifies the timeout value for executions. Integer.
-        execution_timeout_unit -- Execution timeout unit. String. Allowed values: Hours, Minutes
-        cpu_throttle -- Specifies the CPU throttle value. Integer.
-        cpu_scheduling -- Sets priority to determine the order in which a query process will run on a host's CPU. String.
-        memory_pressure_level -- Sets memory pressure level to control system resource allocation during task execution.
-                                 String.
-        memory_allocation -- Specifies the memory allocation value. Integer.
-        memory_allocation_unit -- Memory allocation unit. String. Allowed values: MB, GB
-        concurrent_host_limit -- Specifies the maximum number of concurrent hosts. Integer.
-        concurrent_task_limit -- Specifies the maximum number of concurrent tasks. Integer.
-        concurrent_host_file_transfer_limit -- Specifies the maximum number of concurrent file transfers. Integer.
+        id : str (required)
+            A valid policy ID representing the policy to be updated.
+        name : str
+            Policy name. String. Max: 100 characters
+        description : str
+            Policy description. String. Max: 500 characters
+        is_enabled : bool
+            Flag controlling whether the policy is active.
+        enable_script_execution : bool
+            Enable or disable script execution.
+        enable_python_execution : bool
+            Enable or disable Python execution.
+        enable_os_query : bool
+            Enable or disable OS Query.
+        execution_timeout : int
+            Specifies the timeout value for executions.
+        execution_timeout_unit : str
+            Execution timeout unit. String. Allowed values: Hours, Minutes
+        cpu_throttle : int
+            Specifies the CPU throttle value.
+        cpu_scheduling : str
+            Sets priority to determine the order in which a query process will run on a host's CPU.
+        memory_pressure_level : str
+            Sets memory pressure level to control system resource allocation during task execution.
+        memory_allocation : int
+            Specifies the memory allocation value.
+        memory_allocation_unit : str
+            Memory allocation unit. String. Allowed values: MB, GB
+        concurrent_host_limit : int
+            Specifies the maximum number of concurrent hosts.
+        concurrent_task_limit : int
+            Specifies the maximum number of concurrent tasks.
+        concurrent_host_file_transfer_limit : int
+            Specifies the maximum number of concurrent file transfers.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationUpdatePolicies
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = automation_policy_payload(passed_keywords=kwargs)
@@ -783,19 +956,28 @@ class ITAutomation(ServiceClass):
     def delete_policy(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete one or more policies.
 
-        Keyword arguments:
-        ids -- List of task IDs to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationDeletePolicy
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of task IDs to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -813,20 +995,29 @@ class ITAutomation(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return scheduled tasks for each provided ID.
 
-        Keyword arguments:
-        ids -- Scheduled task IDs to fetch. String or list of strings.
-               Use ITAutomationSearchScheduledTasks to fetch scheduled task IDs
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationGetScheduledTasks
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Scheduled task IDs to fetch. String or list of strings.
+            Use ITAutomationSearchScheduledTasks to fetch scheduled task IDs
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -840,9 +1031,18 @@ class ITAutomation(ServiceClass):
     def create_scheduled_task(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a scheduled task from the given request.
 
-        Keyword arguments:
-        arguments -- Arguments to provide to the task when executed. Dictionary.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationCreateScheduledTask
+
+        Keyword arguments
+        -----------------
+        arguments : dict
+            Arguments to provide to the task when executed.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "arguments": {
                         "additionalProp1": "string",
@@ -889,28 +1089,39 @@ class ITAutomation(ServiceClass):
                         }
                     ]
                 }
-        discover_new_hosts -- Allow the task to discover new hosts. Boolean.
-        discover_offline_hosts -- Allow the task to discover offline hosts. Boolean.
-        distribute -- Distribute the task. Boolean.
-        expiration_interval -- Task expiration interval. String.
-        guardrails -- Task execution guardrails (limiters). Dictionary.
-        id -- The id of the scheduled task to update. String.
-        is_active -- Flag indicating if the task is active. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        schedule -- Task schedule. Dictionary.
-        target -- Task target. String.
-        task_id -- Task ID. String.
-        trigger_condition -- Task trigger conditions. List of dictionaries.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        discover_new_hosts : bool
+            Allow the task to discover new hosts.
+        discover_offline_hosts : bool
+            Allow the task to discover offline hosts.
+        distribute : bool
+            Distribute the task.
+        expiration_interval : str
+            Task expiration interval.
+        guardrails : dict
+            Task execution guardrails (limiters)
+        id : str
+            The id of the scheduled task to update.
+        is_active : bool
+            Flag indicating if the task is active.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        schedule : dict
+            Task schedule.
+        target : str
+            Task target.
+        task_id : str
+            Task ID.
+        trigger_condition : list[dict]
+            Task trigger conditions.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationCreateScheduledTask
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = scheduled_task_payload(passed_keywords=kwargs)
@@ -930,8 +1141,16 @@ class ITAutomation(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an existing scheduled task with the supplied info.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationUpdateScheduledTask
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "discover_new_hosts": boolean,
                     "discover_offline_hosts": boolean,
@@ -978,28 +1197,39 @@ class ITAutomation(ServiceClass):
                         }
                     ]
                 }
-        discover_new_hosts -- Allow the task to discover new hosts. Boolean.
-        discover_offline_hosts -- Allow the task to discover offline hosts. Boolean.
-        distribute -- Distribute the task. Boolean.
-        execution_args -- Arguments to provide to the task when executed. Dictionary.
-        expiration_interval -- Task expiration interval. String.
-        guardrails -- Task execution guardrails (limiters). Dictionary.
-        id -- The id of the scheduled task to update. String.
-        is_active -- Flag indicating if the task is active. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        schedule -- Task schedule. Dictionary.
-        target -- Task target. String.
-        task_id -- Task ID. String.
-        trigger_condition -- Task trigger conditions. List of dictionaries.
+        discover_new_hosts : bool
+            Allow the task to discover new hosts.
+        discover_offline_hosts : bool
+            Allow the task to discover offline hosts.
+        distribute : bool
+            Distribute the task.
+        execution_args : dict
+            Arguments to provide to the task when executed.
+        expiration_interval : str
+            Task expiration interval.
+        guardrails : dict
+            Task execution guardrails (limiters)
+        id : str
+            The id of the scheduled task to update.
+        is_active : bool
+            Flag indicating if the task is active.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        schedule : dict
+            Task schedule.
+        target : str
+            Task target.
+        task_id : str
+            Task ID.
+        trigger_condition : list[dict]
+            Task trigger conditions.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationUpdateScheduledTask
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = scheduled_task_payload(passed_keywords=kwargs)
@@ -1021,19 +1251,28 @@ class ITAutomation(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete one or more scheduled tasks by providing the scheduled tasks IDs.
 
-        Keyword arguments:
-        ids -- Scheduled task IDs to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationDeleteScheduledTasks
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Scheduled task IDs to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1047,22 +1286,31 @@ class ITAutomation(ServiceClass):
     def cancel_execution(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Cancel a task execution specified in the request.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
-                {
-                    "task_execution_id": "string"
-                }
-        task_execution_id -- Task execution ID to cancel. String.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'task_execution_id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationCancelTaskExecution
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "task_execution_id": "string"
+                }
+        task_execution_id : str
+            Task execution ID to cancel.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'task_execution_id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             if not kwargs:
@@ -1083,30 +1331,41 @@ class ITAutomation(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the status of host executions by providing the execution IDs.
 
-        Keyword arguments:
-        ids -- Task execution IDs to get statuses for. String or list of strings.
-               Use ITAutomationSearchTaskExecutions to fetch execution IDs.
-        filter -- The filter expression that should be used to limit the results. String.
-                  Allowed filter fields: end_time, start_time, status, total_results
-                  Example: filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
-        sort -- The sort expression that should be used to sort the results. String.
-                Sort either `asc` (ascending) or `desc` (descending).
-                Allowed sort fields: end_time, start_time, status, total_results
-                Example: sort="example_field|asc"
-        offset -- Starting index for record retrieval. Integer.
-                  Example: offset=100
-        limit -- The maximum records to return. Integer.
-                 Example: limit=50
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationGetTaskExecutionHostStatus
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Task execution IDs to get statuses for. String or list of strings.
+            Use ITAutomationSearchTaskExecutions to fetch execution IDs.
+        filter : str
+            The filter expression that should be used to limit the results. String.
+            Allowed filter fields: end_time, start_time, status, total_results
+            Example: filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
+        sort : str
+            The sort expression that should be used to sort the results. String.
+            Sort either `asc` (ascending) or `desc` (descending).
+            Allowed sort fields: end_time, start_time, status, total_results
+            Example: sort="example_field|asc"
+        offset : int
+            Starting index for record retrieval. Integer.
+            Example: offset=100
+        limit : int
+            The maximum records to return. Integer.
+            Example: limit=50
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1120,23 +1379,31 @@ class ITAutomation(ServiceClass):
     def rerun_execution(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Rerun the task execution specified in the request.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationRerunTaskExecution
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "run_type": "hosts",
                     "task_execution_id": "string"
                 }
-        run_type -- Task run type. String.
-        task_execution_id -- Task execution ID. String.
+        run_type : str
+            Task run type.
+        task_execution_id : str
+            Task execution ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationRerunTaskExecution
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = rerun_payload(passed_keywords=kwargs)
@@ -1158,20 +1425,29 @@ class ITAutomation(ServiceClass):
 
         Look for 'is_pending: false' to know search is complete.
 
-        Keyword arguments:
-        id -- Search Job ID to fetch. UseITAutomationStartExecutionResultsSearch to get the job ID. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /it-automation/ITAutomationGetExecutionResultsSearchStatus
+        /it-automation/ITAutomationGetExecutionResultsSearchStatus
+
+        Keyword arguments
+        -----------------
+        id : str
+            Search Job ID to fetch. UseITAutomationStartExecutionResultsSearch to get the job ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1187,8 +1463,16 @@ class ITAutomation(ServiceClass):
 
         Poll `ITAutomationGetExecutionResultsSearchStatus` to determine when the search is complete.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationStartExecutionResultsSearch
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "end": "string",
                     "filter_expressions": [
@@ -1200,20 +1484,23 @@ class ITAutomation(ServiceClass):
                     "start": "string",
                     "task_execution_id": "string"
                 }
-        end -- Task end. String.
-        filter_expressions -- Filter expressions to apply. String or list of strings.
-        group_by_fields -- Fields to use to group results. String or list of strings.
-        start -- Task start. String.
-        task_execution_id -- Task execution ID. String.
+        end : str
+            Task end.
+        filter_expressions : str or list[str]
+            Filter expressions to apply.
+        group_by_fields : str or list[str]
+            Fields to use to group results.
+        start : str
+            Task start.
+        task_execution_id : str
+            Task execution ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationStartExecutionResultsSearch
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = execution_results_search_payload(passed_keywords=kwargs)
@@ -1231,23 +1518,33 @@ class ITAutomation(ServiceClass):
 
         Use the ITAutomationStartExecutionResultsSearch operation to begin the async search.
 
-        Keyword arguments:
-        id -- The Job ID to fetch. String.
-              Use the value returned from the ITAutomationStartExecutionResultsSearch operation.
-        offset -- The offset to start retrieving records from. Integer.
-        limit -- The maximum number of event results to return. Integer.
-        sort -- Sort results by one of the fields in the event results, either asc (ascending) or desc (descending). String.
-                Example: `hostname.asc` (sort by hostname ascending)
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationGetExecutionResults
+
+        Keyword arguments
+        -----------------
+        id : str
+            The Job ID to fetch. String.
+            Use the value returned from the ITAutomationStartExecutionResultsSearch operation.
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum number of event results to return.
+        sort : str
+            Sort results by one of the fields in the event results, either asc (ascending) or desc (descending). String.
+            Example: `hostname.asc` (sort by hostname ascending)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1265,20 +1562,29 @@ class ITAutomation(ServiceClass):
                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the task execution for the provided task execution IDs.
 
-        Keyword arguments:
-        ids -- Task execution IDs to fetch. String or list of strings.
-               Use ITAutomationSearchTaskExecutions to get the execution ID.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationGetTaskExecution
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Task execution IDs to fetch. String or list of strings.
+            Use ITAutomationSearchTaskExecutions to get the execution ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1292,9 +1598,18 @@ class ITAutomation(ServiceClass):
     def start_execution(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Start a new task execution from an existing task provided in the request and returns the initiated task executions.
 
-        Keyword arguments:
-        arguments -- Arguments to pass to the execution. Dictionary.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationStartTaskExecution
+
+        Keyword arguments
+        -----------------
+        arguments : dict
+            Arguments to pass to the execution.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "arguments": {
                         "additionalProp1": "string",
@@ -1328,23 +1643,29 @@ class ITAutomation(ServiceClass):
                         }
                     ]
                 }
-        discover_new_hosts -- Allow the task execution to discover new hosts. Boolean.
-        discover_offline_hosts -- Allow the task execution to discover offline hosts. Boolean.
-        distribute -- Distribute this task. Boolean.
-        expiration_interval -- Task expiration interval. String.
-        guardrails -- Task execution guardrails (limiters). Dictionary.
-        target -- Task target. String.
-        task_id -- Task ID. String.
-        trigger_conditions -- List of task triggers. List of dictionaries.
+        discover_new_hosts : bool
+            Allow the task execution to discover new hosts.
+        discover_offline_hosts : bool
+            Allow the task execution to discover offline hosts.
+        distribute : bool
+            Distribute this task.
+        expiration_interval : str
+            Task expiration interval.
+        guardrails : dict
+            Task execution guardrails (limiters)
+        target : str
+            Task target.
+        task_id : str
+            Task ID.
+        trigger_conditions : list[dict]
+            List of task triggers.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationStartTaskExecution
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = task_execution_payload(passed_keywords=kwargs)
@@ -1360,19 +1681,28 @@ class ITAutomation(ServiceClass):
     def get_task_group(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return task groups for each provided ID.
 
-        Keyword arguments:
-        ids -- Task group IDs to fetch. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationGetTaskGroups
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Task group IDs to fetch.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1386,11 +1716,22 @@ class ITAutomation(ServiceClass):
     def create_task_group(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a task group from the given request.
 
-        Keyword arguments:
-        access_type -- Task group access type. String.
-        assigned_user_group_ids -- User group IDs to add. String or list of strings.
-        assigned_user_ids -- User IDs to add. String or list of strings.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationCreateTaskGroup
+
+        Keyword arguments
+        -----------------
+        access_type : str
+            Task group access type.
+        assigned_user_group_ids : str or list[str]
+            User group IDs to add.
+        assigned_user_ids : str or list[str]
+            User IDs to add.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "access_type": "Public",
                     "assigned_user_group_ids": [
@@ -1405,18 +1746,19 @@ class ITAutomation(ServiceClass):
                         "string"
                     ]
                 }
-        description -- Task group description. String.
-        name -- Task group name. String.
-        task_ids -- Task IDs to add to the group. String or list of strings.
+        description : str
+            Task group description.
+        name : str
+            Task group name.
+        task_ids : str or list[str]
+            Task IDs to add to the group.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationCreateTaskGroup
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = task_payload(passed_keywords=kwargs)
@@ -1436,12 +1778,24 @@ class ITAutomation(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a task group for a given ID.
 
-        Keyword arguments:
-        access_type -- Task group access type. String.
-        add_assigned_user_group_ids -- User group IDs to add. String or list of strings.
-        add_assigned_user_ids -- User IDs to add. String or list of strings.
-        add_task_ids -- Task IDs to add to the group. String or list of strings.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationUpdateTaskGroup
+
+        Keyword arguments
+        -----------------
+        access_type : str
+            Task group access type.
+        add_assigned_user_group_ids : str or list[str]
+            User group IDs to add.
+        add_assigned_user_ids : str or list[str]
+            User IDs to add.
+        add_task_ids : str or list[str]
+            Task IDs to add to the group.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "access_type": "Public",
                     "add_assigned_user_group_ids": [
@@ -1465,22 +1819,27 @@ class ITAutomation(ServiceClass):
                         "string"
                     ]
                 }
-        description -- Task group description. String.
-        id -- The ID of the task group to update. String.
-        name -- Task group name. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        removed_assigned_user_group_ids -- User group IDs to be removed. String or list of strings.
-        remove_assigned_user_ids -- User IDs to be removed. String or list of strings.
-        remove_task_ids -- Task IDs to be removed. String or list of strings.
+        description : str
+            Task group description.
+        id : str
+            The ID of the task group to update.
+        name : str
+            Task group name.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        removed_assigned_user_group_ids : str or list[str]
+            User group IDs to be removed.
+        remove_assigned_user_ids : str or list[str]
+            User IDs to be removed.
+        remove_task_ids : str or list[str]
+            Task IDs to be removed.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationUpdateTaskGroup
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = task_payload(passed_keywords=kwargs)
@@ -1502,19 +1861,28 @@ class ITAutomation(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete one or more task groups by providing the task group IDs.
 
-        Keyword arguments:
-        ids -- Task group IDs to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationDeleteTaskGroups
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Task group IDs to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1528,19 +1896,28 @@ class ITAutomation(ServiceClass):
     def get_tasks(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return tasks for each provided ID.
 
-        Keyword arguments:
-        ids -- IDs of tasks to fetch. Use ITAutomationSearchTasks to fetch IDs. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationGetTasks
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of tasks to fetch. Use ITAutomationSearchTasks to fetch IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1554,11 +1931,22 @@ class ITAutomation(ServiceClass):
     def create_task(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a task with details from the given request.
 
-        Keyword arguments:
-        access_type -- Task access type. String.
-        add_assigned_user_group_ids -- User group IDs to add. String or list of strings.
-        add_assigned_user_ids -- User IDs to add. String or list of strings.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationCreateTask
+
+        Keyword arguments
+        -----------------
+        access_type : str
+            Task access type.
+        add_assigned_user_group_ids : str or list[str]
+            User group IDs to add.
+        add_assigned_user_ids : str or list[str]
+            User IDs to add.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "access_type": "Public",
                     "add_assigned_user_group_ids": [
@@ -1704,30 +2092,42 @@ class ITAutomation(ServiceClass):
                         }
                     ]
                 }
-        description -- Task description. String.
-        name -- Task name. String.
-        os_query -- OS query detail. String.
-        output_parser_config -- Parser output configuration. Dictionary.
-        queries -- Queries to perform (by OS). Dictionary.
-        remediations -- Remediations to perform (by OS). Dictionary.
-        removed_assigned_user_group_ids -- User group IDs to be removed. String or list of strings.
-        remove_assigned_user_ids -- User IDs to be removed. String or list of strings.
-        target -- Task target. String.
-        task_parameters -- Task parameters. List of dictionaries. (Should be named "parameters" when providing
-                           a raw body payload.)
-        task_group_id -- Task group ID.  String.
-        task_type -- Task type. String.
-        trigger_condition -- Trigger conditions. List of dictionaries.
-        verification_condition -- Verification conditions. List of dictionaries.
+        description : str
+            Task description.
+        name : str
+            Task name.
+        os_query : str
+            OS query detail.
+        output_parser_config : dict
+            Parser output configuration.
+        queries : dict
+            Queries to perform (by OS)
+        remediations : dict
+            Remediations to perform (by OS)
+        removed_assigned_user_group_ids : str or list[str]
+            User group IDs to be removed.
+        remove_assigned_user_ids : str or list[str]
+            User IDs to be removed.
+        target : str
+            Task target.
+        task_parameters : list
+            Task parameters. List of dictionaries. (Should be named "parameters" when providing
+            a raw body payload.)
+        task_group_id : str
+            Task group ID.
+        task_type : str
+            Task type.
+        trigger_condition : list[dict]
+            Trigger conditions.
+        verification_condition : list[dict]
+            Verification conditions.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationCreateTask
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = task_payload(passed_keywords=kwargs)
@@ -1747,11 +2147,22 @@ class ITAutomation(ServiceClass):
                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a task with details from the given request.
 
-        Keyword arguments:
-        access_type -- Task access type. String.
-        add_assigned_user_group_ids -- User group IDs to add. String or list of strings.
-        add_assigned_user_ids -- User IDs to add. String or list of strings.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationUpdateTask
+
+        Keyword arguments
+        -----------------
+        access_type : str
+            Task access type.
+        add_assigned_user_group_ids : str or list[str]
+            User group IDs to add.
+        add_assigned_user_ids : str or list[str]
+            User IDs to add.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "access_type": "Public",
                     "add_assigned_user_group_ids": [
@@ -1897,32 +2308,46 @@ class ITAutomation(ServiceClass):
                         }
                     ]
                 }
-        description -- Task description. String.
-        id -- ID of the task to update. Use ITAutomationSearchTasks to fetch IDs. String.
-        name -- Task name. String.
-        os_query -- OS query detail. String.
-        output_parser_config -- Parser output configuration. Dictionary.
-        parameters -- Full parameters payload dictionary. Not required if ID keyword is used.
-        queries -- Queries to perform (by OS). Dictionary.
-        remediations -- Remediations to perform (by OS). Dictionary.
-        removed_assigned_user_group_ids -- User group IDs to be removed. String or list of strings.
-        remove_assigned_user_ids -- User IDs to be removed. String or list of strings.
-        target -- Task target. String.
-        task_parameters -- Task parameters. List of dictionaries. (Should be named "parameters" when providing
-                           a raw body payload.)
-        task_group_id -- Task group ID.  String.
-        task_type -- Task type. String.
-        trigger_condition -- Trigger conditions. List of dictionaries.
-        verification_condition -- Verification conditions. List of dictionaries.
+        description : str
+            Task description.
+        id : str
+            ID of the task to update. Use ITAutomationSearchTasks to fetch IDs.
+        name : str
+            Task name.
+        os_query : str
+            OS query detail.
+        output_parser_config : dict
+            Parser output configuration.
+        parameters : dict
+            Full parameters payload dictionary. Not required if ID keyword is used.
+        queries : dict
+            Queries to perform (by OS)
+        remediations : dict
+            Remediations to perform (by OS)
+        removed_assigned_user_group_ids : str or list[str]
+            User group IDs to be removed.
+        remove_assigned_user_ids : str or list[str]
+            User IDs to be removed.
+        target : str
+            Task target.
+        task_parameters : list
+            Task parameters. List of dictionaries. (Should be named "parameters" when providing
+            a raw body payload.)
+        task_group_id : str
+            Task group ID.
+        task_type : str
+            Task type.
+        trigger_condition : list[dict]
+            Trigger conditions.
+        verification_condition : list[dict]
+            Verification conditions.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationUpdateTask
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = task_payload(passed_keywords=kwargs)
@@ -1940,19 +2365,28 @@ class ITAutomation(ServiceClass):
     def delete_task(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete tasks for each provided ID.
 
-        Keyword arguments:
-        ids -- ID(s) of tasks to delete. String or list of strings. Comma-delimited lists are supported.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationDeleteTask
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            ID(s) of tasks to delete. String or list of strings. Comma-delimited lists are supported.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1969,34 +2403,44 @@ class ITAutomation(ServiceClass):
         This operation can be used together with the ITAutomationGetUserGroup operation
         to retrieve full information on user groups.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results.
-                  Allowed filter fields:
-                    created_by          created_time
-                    description         modified_by
-                    modified_time       name
-                  Example:
-                    example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'
-        sort -- The sort expression that should be used to sort the results.
-                Sort either `asc` (ascending) or `desc` (descending).
-                Allowed sort fields:
-                  created_by            created_time
-                  modified_by           modified_time
-                  name
-                Example:
-                    example_field|asc
-        offset -- Starting index for record retrieval. Integer. Example: 100
-        limit -- The maximum records to return. Integer. Example: 50
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationSearchUserGroup
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results.
+            Allowed filter fields:
+              created_by          created_time
+              description         modified_by
+              modified_time       name
+            Example:
+              example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'
+        sort : str
+            The sort expression that should be used to sort the results.
+            Sort either `asc` (ascending) or `desc` (descending).
+            Allowed sort fields:
+              created_by            created_time
+              modified_by           modified_time
+              name
+            Example:
+                example_field|asc
+        offset : int
+            Starting index for record retrieval. Integer. Example: 100
+        limit : int
+            The maximum records to return. Integer. Example: 50
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -2010,29 +2454,39 @@ class ITAutomation(ServiceClass):
     def query_policies(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the list of policy ids matching the filter query parameter.
 
-        Keyword arguments:
-        offset -- The offset to start retrieving records from. Integer. Defaults to 0 if not specified.
-        limit -- The maximum number of ids to return. Integer. Defaults to 100 if not specified.
-                 The maximum number of results that can be returned in a single call is 500.
-        sort -- Sort the returned IDs. String.
-                Sort either `asc` (ascending) or `desc` (descending).
-                Allowed values:
-                    precedence
-                    created_timestamp
-                    modified_timestamp
-                Example:
-                    sort="precedence|asc"
-        platform -- The platform of policies to retrieve. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationQueryPolicies
+
+        Keyword arguments
+        -----------------
+        offset : int
+            The offset to start retrieving records from. Integer. Defaults to 0 if not specified.
+        limit : int
+            The maximum number of ids to return. Integer. Defaults to 100 if not specified.
+            The maximum number of results that can be returned in a single call is 500.
+        sort : str
+            Sort the returned IDs. String.
+            Sort either `asc` (ascending) or `desc` (descending).
+            Allowed values:
+                precedence
+                created_timestamp
+                modified_timestamp
+            Example:
+                sort="precedence|asc"
+        platform : str
+            The platform of policies to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -2046,45 +2500,55 @@ class ITAutomation(ServiceClass):
     def search_scheduled_tasks(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the list of scheduled task IDs matching the filter query parameter.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-                  Allowed filter fields:
-                    created_by          modified_time
-                    created_time        start_time
-                    end_time            task_id
-                    is_active           task_name
-                    last_run            task_type
-                    modified_by         group_ids
-                    group_names
-                  Example:
-                    filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
-        sort -- The sort expression that should be used to sort the results. String.
-                Sort either `asc` (ascending) or `desc` (descending).
-                Allowed sort fields:
-                    created_by          modified_time
-                    created_time        start_time
-                    end_time            task_id
-                    last_run            task_name
-                    modified_by         task_type
-                    group_ids           group_names
-                Example:
-                    sort="example_field|asc"
-        offset -- Starting index for record retrieval. Integer.
-                  Example:
-                    offset=100
-        limit -- The maximum records to return. Integer.
-                 Example:
-                    limit=50
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationSearchScheduledTasks
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. String.
+            Allowed filter fields:
+              created_by          modified_time
+              created_time        start_time
+              end_time            task_id
+              is_active           task_name
+              last_run            task_type
+              modified_by         group_ids
+              group_names
+            Example:
+              filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
+        sort : str
+            The sort expression that should be used to sort the results. String.
+            Sort either `asc` (ascending) or `desc` (descending).
+            Allowed sort fields:
+                created_by          modified_time
+                created_time        start_time
+                end_time            task_id
+                last_run            task_name
+                modified_by         task_type
+                group_ids           group_names
+            Example:
+                sort="example_field|asc"
+        offset : int
+            Starting index for record retrieval. Integer.
+            Example:
+              offset=100
+        limit : int
+            The maximum records to return. Integer.
+            Example:
+               limit=50
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -2100,40 +2564,50 @@ class ITAutomation(ServiceClass):
 
         This operation can be used together with the entities operation to retrieve full information on executions.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-                  Allowed filter fields:
-                    end_time            status
-                    run_by              task_id
-                    run_type            task_name
-                    start_time          task_type
-                  Example:
-                    filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
-        sort -- The sort expression that should be used to sort the results. String.
-                Sort either `asc` (ascending) or `desc` (descending).
-                Allowed sort fields:
-                    end_time            status
-                    run_by              task_id
-                    run_type            task_name
-                    start_time          task_type
-                Example:
-                    sort="example_field|asc"
-        offset -- Starting index for record retrieval. Integer.
-                  Example:
-                    offset=100
-        limit -- The maximum records to return. Integer.
-                  Example:
-                    offset=50
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationSearchTaskExecutions
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. String.
+            Allowed filter fields:
+              end_time            status
+              run_by              task_id
+              run_type            task_name
+              start_time          task_type
+            Example:
+              filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
+        sort : str
+            The sort expression that should be used to sort the results. String.
+            Sort either `asc` (ascending) or `desc` (descending).
+            Allowed sort fields:
+                end_time            status
+                run_by              task_id
+                run_type            task_name
+                start_time          task_type
+            Example:
+                sort="example_field|asc"
+        offset : int
+            Starting index for record retrieval. Integer.
+            Example:
+              offset=100
+        limit : int
+            The maximum records to return. Integer.
+            Example:
+              offset=50
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -2147,38 +2621,48 @@ class ITAutomation(ServiceClass):
     def search_task_groups(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the list of task group ids matching the filter query parameter.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-                  Allowed filter fields:
-                    access_type         modified_by
-                    created_by          modified_time
-                    created_time        name
-                  Example:
-                    filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
-        sort -- The sort expression that should be used to sort the results. String.
-                Sort either `asc` (ascending) or `desc` (descending).
-                Allowed sort fields:
-                    access_type         modified_by
-                    created_by          modified_time
-                    created_time        name
-                Example:
-                    sort="example_field|asc"
-        offset -- Starting index for record retrieval. Integer.
-                  Example:
-                    offset=100
-        limit -- The maximum records to return.
-                 Example:
-                    limit=50
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationSearchTaskGroups
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. String.
+            Allowed filter fields:
+              access_type         modified_by
+              created_by          modified_time
+              created_time        name
+            Example:
+              filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
+        sort : str
+            The sort expression that should be used to sort the results. String.
+            Sort either `asc` (ascending) or `desc` (descending).
+            Allowed sort fields:
+                access_type         modified_by
+                created_by          modified_time
+                created_time        name
+            Example:
+                sort="example_field|asc"
+        offset : int
+            Starting index for record retrieval. Integer.
+            Example:
+              offset=100
+        limit : int
+            The maximum records to return.
+            Example:
+               limit=50
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -2192,42 +2676,52 @@ class ITAutomation(ServiceClass):
     def search_tasks(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the list of task IDs matching the filter query parameter.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-                  Allowed filter fields:
-                    access_type         modified_time
-                    created_by          name
-                    created_time        runs
-                    last_run_time       task_type
-                    modified_by
-                  Example:
-                    filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
-        sort -- The sort expression that should be used to sort the results. String.
-                Sort either `asc` (ascending) or `desc` (descending).
-                Allowed sort fields:
-                    access_type         modified_time
-                    created_by          name
-                    created_time        runs
-                    last_run_time       task_type
-                    modified_by
-                Example:
-                    sort="example_field|asc"
-        offset -- Starting index for record retrieval. Integer.
-                  Example:
-                    offset=100
-        limit -- The maximum records to return. Integer.
-                 Example:
-                    limit=50
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationSearchTasks
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. String.
+            Allowed filter fields:
+              access_type         modified_time
+              created_by          name
+              created_time        runs
+              last_run_time       task_type
+              modified_by
+            Example:
+              filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
+        sort : str
+            The sort expression that should be used to sort the results. String.
+            Sort either `asc` (ascending) or `desc` (descending).
+            Allowed sort fields:
+                access_type         modified_time
+                created_by          name
+                created_time        runs
+                last_run_time       task_type
+                modified_by
+            Example:
+                sort="example_field|asc"
+        offset : int
+            Starting index for record retrieval. Integer.
+            Example:
+              offset=100
+        limit : int
+            The maximum records to return. Integer.
+            Example:
+               limit=50
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

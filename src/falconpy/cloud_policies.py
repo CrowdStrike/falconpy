@@ -69,21 +69,31 @@ class CloudPolicies(ServiceClass):
     def get_rule_input_schema(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get rule input schema for given resource type.
 
-        Keyword arguments:
-        domain -- domain. String.
-        subdomain -- subdomain. String.
-        cloud_provider -- Cloud service provider for the resource type. String.
-        resource_type -- Selects the resource type for which to retrieve the rule input schema. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/GetRuleInputSchema
+
+        Keyword arguments
+        -----------------
+        domain : str
+            domain.
+        subdomain : str
+            subdomain.
+        cloud_provider : str
+            Cloud service provider for the resource type.
+        resource_type : str
+            Selects the resource type for which to retrieve the rule input schema.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -101,24 +111,34 @@ class CloudPolicies(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Assign rules to a compliance control (full replace).
 
-        Keyword arguments:
-        ids -- The UUID of the compliance control to assign rules to. String or list of strings.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/ReplaceControlRules
+
+        Keyword arguments
+        -----------------
+        ids : str
+            The UUID of the compliance control to assign rules to.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "rule_ids": [
                         "string"
                     ]
                 }
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        rule_ids -- The ids of the rules to replace. List of strings.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        rule_ids : str or list[str]
+            The ids of the rules to replace.
+
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PUT
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/ReplaceControlRules
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_policies_rule_assign_payload(passed_keywords=kwargs)
@@ -140,19 +160,28 @@ class CloudPolicies(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get compliance controls by ID.
 
-        Keyword arguments:
-        ids -- The uuids of compliance controls to retrieve. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/GetComplianceControls
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The uuids of compliance controls to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -166,27 +195,37 @@ class CloudPolicies(ServiceClass):
     def create_compliance_control(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new custom compliance control.
 
-        Keyword arguments:
-        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/CreateComplianceControl
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload dictionary in JSON format. Not required if using other keywords.
                 {
                     "description": "string",
                     "framework_id": "string",
                     "name": "string",
                     "section_name": "string"
                 }
-        description -- The description of hte custom compliance control. String.
-        framework_id -- The framework ID of the custom compliance control. String.
-        name -- The name of the custom compliance control. String.
-        section_name -- The section name of the custom compliance control. String.
+        description : str
+            The description of hte custom compliance control.
+        framework_id : str
+            The framework ID of the custom compliance control.
+        name : str
+            The name of the custom compliance control.
+        section_name : str
+            The section name of the custom compliance control.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/CreateComplianceControl
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_policies_compliance_control_payload(passed_keywords=kwargs)
@@ -206,25 +245,35 @@ class CloudPolicies(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a custom compliance control.
 
-        Keyword arguments:
-        ids -- The uuid of compliance control to update. String or list of strings.
-        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/UpdateComplianceControl
+
+        Keyword arguments
+        -----------------
+        ids : str
+            The uuid of compliance control to update.
+        body : dict
+            Full body payload dictionary in JSON format. Not required if using other keywords.
                 {
                     "description": "string",
                     "name": "string"
                 }
-        description -- The description of hte custom compliance control. String.
-        name -- The name of the custom compliance control. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        description : str
+            The description of hte custom compliance control.
+        name : str
+            The name of the custom compliance control.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/UpdateComplianceControl
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_policies_compliance_control_payload(passed_keywords=kwargs)
@@ -246,19 +295,28 @@ class CloudPolicies(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete custom compliance controls.
 
-        Keyword arguments:
-        ids -- The uuids of compliance control to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/DeleteComplianceControl
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The uuids of compliance control to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -276,24 +334,34 @@ class CloudPolicies(ServiceClass):
                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Rename a section in a custom compliance framework.
 
-        Keyword arguments:
-        ids -- The uuid of compliance framework containing the section to rename. String or list of strings.
-        sectionName -- The current name of the section to rename. String.
-        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
-                {
-                    "section_name": "string"
-                }
-        section_name -- The new section name of the custom compliance control. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/RenameSectionComplianceFramework
+
+        Keyword arguments
+        -----------------
+        ids : str
+            The uuid of compliance framework containing the section to rename.
+        sectionName : str
+            The current name of the section to rename.
+        body : dict
+            Full body payload dictionary in JSON format. Not required if using other keywords.
+                {
+                    "section_name": "string"
+                }
+        section_name : str
+            The new section name of the custom compliance control.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_policies_compliance_control_payload(passed_keywords=kwargs)
@@ -315,19 +383,28 @@ class CloudPolicies(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get compliance frameworks by ID.
 
-        Keyword arguments:
-        ids -- The uuids of compliance frameworks to retrieve. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/GetComplianceFrameworks
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The uuids of compliance frameworks to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -341,25 +418,34 @@ class CloudPolicies(ServiceClass):
     def create_compliance_framework(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new custom compliance framework.
 
-        Keyword arguments:
-        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/CreateComplianceFramework
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload dictionary in JSON format. Not required if using other keywords.
                 {
                     "active": true,
                     "description": "string",
                     "name": "string"
                 }
-        active -- Value to determine if the compliance framework will be active. Boolean.
-        description -- The description of the new compliance framework. String.
-        name -- The name of the new compliance framework. String.
+        active : bool
+            Value to determine if the compliance framework will be active.
+        description : str
+            The description of the new compliance framework.
+        name : str
+            The name of the new compliance framework.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/CreateComplianceFramework
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_policies_compliance_control_payload(passed_keywords=kwargs)
@@ -379,27 +465,38 @@ class CloudPolicies(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a custom compliance framework.
 
-        Keyword arguments:
-        ids -- The uuids of compliance framework to update. String or list of strings.
-        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/UpdateComplianceFramework
+
+        Keyword arguments
+        -----------------
+        ids : str
+            The uuids of compliance framework to update.
+        body : dict
+            Full body payload dictionary in JSON format. Not required if using other keywords.
                 {
                     "active": true,
                     "description": "string",
                     "name": "string"
                 }
-        active -- Value to determine if the compliance framework will be active. Boolean.
-        description -- The description of the new compliance framework. String.
-        name -- The name of the new compliance framework. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        active : bool
+            Value to determine if the compliance framework will be active.
+        description : str
+            The description of the new compliance framework.
+        name : str
+            The name of the new compliance framework.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/UpdateComplianceFramework
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_policies_compliance_control_payload(passed_keywords=kwargs)
@@ -421,19 +518,28 @@ class CloudPolicies(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a custom compliance framework and all associated controls and rule assignments.
 
-        Keyword arguments:
-        ids -- The uuids of compliance framework to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/DeleteComplianceFramework
+
+        Keyword arguments
+        -----------------
+        ids : str
+            The uuids of compliance framework to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -451,26 +557,38 @@ class CloudPolicies(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get enriched assets that combine a primary resource with all its related resources.
 
-        Keyword arguments:
-        ids -- List of asset IDs (maximum 100 IDs allowed). String or list of strings.
-        domain -- Rule domain (Currently only used for KAC Rego rules). String.
-        subdomain -- Rule subdomain (Currently only used for KAC Rego rules). String.
-        resource_type -- Currently the Resource type field is only used when KAC Rules are specified vai Domain: Runtime &
-                         Subdomain: IOM. For KAC rules, we return static sample data instead of real
-                         assets b/c we don't have KAC payloads stored for customers. This field valued
-                         selects what sample data resource type we return which the UI shows in the
-                         Rego Editor to do test evaluations. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/GetEnrichedAsset
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of asset IDs (maximum 100 IDs allowed)
+        domain : str
+            Rule domain (Currently only used for KAC Rego rules)
+        subdomain : str
+            Rule subdomain (Currently only used for KAC Rego rules)
+        resource_type : str
+            Currently the Resource type field is only used when KAC Rules are specified vai Domain: Runtime &
+            Subdomain: IOM. For KAC rules, we return static sample data instead of real
+            assets b/c we don't have KAC payloads stored for customers. This field valued
+            selects what sample data resource type we return which the UI shows in the
+            Rego Editor to do test evaluations.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -488,27 +606,39 @@ class CloudPolicies(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get evaluation results based on the provided rule.
 
-        Keyword arguments:
-        cloud_provider -- Cloud Service Provider of the provided IDs. String.
-        resource_type -- Resource Type of the provided IDs. String.
-        ids -- List of assets to evaluate (maximum 100 IDs allowed). String or list of strings.
-        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/GetEvaluationResult
+
+        Keyword arguments
+        -----------------
+        cloud_provider : str
+            Cloud Service Provider of the provided IDs.
+        resource_type : str
+            Resource Type of the provided IDs.
+        ids : str or list[str]
+            List of assets to evaluate (maximum 100 IDs allowed)
+        body : dict
+            Full body payload dictionary in JSON format. Not required if using other keywords.
                 {
                     "input": {},
                     "logic": "string"
                 }
-        input -- The input for the provided rule. Dictionary.
-        logic - The logic of the provided rule. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        input : dict
+            The input for the provided rule.
+        logic : str
+            The logic of the provided rule.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/GetEvaluationResult
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_policies_evaluation_payload(passed_keywords=kwargs)
@@ -530,19 +660,28 @@ class CloudPolicies(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a rule override.
 
-        Keyword arguments:
-        ids -- The uuids of rule overrides to retrieve. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/GetRuleOverride
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The uuids of rule overrides to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -556,8 +695,16 @@ class CloudPolicies(ServiceClass):
     def create_rule_override(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new rule override.
 
-        Keyword arguments:
-        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/CreateRuleOverride
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload dictionary in JSON format. Not required if using other keywords.
                 {
                     "overrides": [
                         {
@@ -572,16 +719,15 @@ class CloudPolicies(ServiceClass):
                         }
                     ]
                 }
-        overrides -- The new rule override. List of dictionaries.
+        overrides : list[dict]
+            The new rule override.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/CreateRuleOverride
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_policies_rule_override_payload(passed_keywords=kwargs)
@@ -597,8 +743,16 @@ class CloudPolicies(ServiceClass):
     def update_rule_override(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a rule override.
 
-        Keyword arguments:
-        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/UpdateRuleOverride
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload dictionary in JSON format. Not required if using other keywords.
                 {
                     "overrides": [
                         {
@@ -613,16 +767,15 @@ class CloudPolicies(ServiceClass):
                         }
                     ]
                 }
-        overrides -- The new rule override. List of dictionaries.
+        overrides : list[dict]
+            The new rule override.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/UpdateRuleOverride
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_policies_rule_override_payload(passed_keywords=kwargs)
@@ -642,19 +795,28 @@ class CloudPolicies(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a rule override.
 
-        Keyword arguments:
-        ids -- The uuids of rule overrides to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/DeleteRuleOverride
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The uuids of rule overrides to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -672,19 +834,28 @@ class CloudPolicies(ServiceClass):
                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a rule by id.
 
-        Keyword arguments:
-        ids -- The uuids of rules to retrieve. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/GetRule
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The uuids of rules to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -698,16 +869,24 @@ class CloudPolicies(ServiceClass):
     def create_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new rule.
 
-        Keyword arguments:
-        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
-                Rule severity integer to provide maps to the following:
-                0=Critical, 1=High, 2=Medium and 3=Low.
-                For CSPM IOM Custom Rules, logic is mandatory and
-                parent_rule_id should not be specified.
-                For Runtime IOM Custom Rules (KAC), logic is mandatory.
-                Fields controls, resource_type, and parent_rule_id should not be specified.
-                For Managed Rule duplication, parent_rule_id is mandatory
-                and logic should be not specified.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/CreateRuleMixin0
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload dictionary in JSON format. Not required if using other keywords.
+            Rule severity integer to provide maps to the following:
+            0=Critical, 1=High, 2=Medium and 3=Low.
+            For CSPM IOM Custom Rules, logic is mandatory and
+            parent_rule_id should not be specified.
+            For Runtime IOM Custom Rules (KAC), logic is mandatory.
+            Fields controls, resource_type, and parent_rule_id should not be specified.
+            For Managed Rule duplication, parent_rule_id is mandatory
+            and logic should be not specified.
                 {
                     "alert_info": "string",
                     "attack_types": "string",
@@ -730,30 +909,43 @@ class CloudPolicies(ServiceClass):
                     "severity": 0,
                     "subdomain": "string"
                 }
-        alert_info -- The info of the alert. String.
-        attack_types -- The type of attacks. String.
-        controls -- The authority and code of the rule. List of dictionaries.
-        description -- The description of the rule. String.
-        domain -- The domain of the rule. String.
-        logic -- The logic for the rule. String.
-        name -- The name of the rule. String.
-        parent_rule_id -- The id of the parent. String.
-        platform -- The platform covered by the rule. String.
-        provider -- The provider for the rule. String.
-        remediation_info -- The remediation info provided by the rule. String.
-        remediation_url -- The URL providing the remediation. String.
-        resource_type -- The type of the resource. String.
-        severity -- The severity level. Integer.
-        subdomain -- The subdomain for the rule. String.
+        alert_info : str
+            The info of the alert.
+        attack_types : str
+            The type of attacks.
+        controls : list[dict]
+            The authority and code of the rule.
+        description : str
+            The description of the rule.
+        domain : str
+            The domain of the rule.
+        logic : str
+            The logic for the rule.
+        name : str
+            The name of the rule.
+        parent_rule_id : str
+            The id of the parent.
+        platform : str
+            The platform covered by the rule.
+        provider : str
+            The provider for the rule.
+        remediation_info : str
+            The remediation info provided by the rule.
+        remediation_url : str
+            The URL providing the remediation.
+        resource_type : str
+            The type of the resource.
+        severity : int
+            The severity level.
+        subdomain : str
+            The subdomain for the rule.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/CreateRuleMixin0
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_policies_rule_create_payload(passed_keywords=kwargs)
@@ -769,8 +961,16 @@ class CloudPolicies(ServiceClass):
     def update_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a rule.
 
-        Keyword arguments:
-        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/UpdateRule
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload dictionary in JSON format. Not required if using other keywords.
                 {
                     "alert_info": "string",
                     "attack_types": [
@@ -796,23 +996,29 @@ class CloudPolicies(ServiceClass):
                     "severity": 0,
                     "uuid": "string"
                 }
-        alert_info -- The info of the alert. String.
-        attack_types -- The type of attacks. List of strings.
-        controls -- The authority and code of the rule. List of dictionaries.
-        description -- The description of the rule. String.
-        name -- The name of the rule. String.
-        rule_logic_list -- The logic list data. List of dictionaries.
-        severity -- The severity level. Integer.
-        uuid -- The uuid of the rule to update. String.
+        alert_info : str
+            The info of the alert.
+        attack_types : str or list[str]
+            The type of attacks.
+        controls : list[dict]
+            The authority and code of the rule.
+        description : str
+            The description of the rule.
+        name : str
+            The name of the rule.
+        rule_logic_list : list[dict]
+            The logic list data.
+        severity : int
+            The severity level.
+        uuid : str
+            The uuid of the rule to update.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/UpdateRule
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_policies_rule_update_payload(passed_keywords=kwargs)
@@ -832,19 +1038,28 @@ class CloudPolicies(ServiceClass):
                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a rule.
 
-        Keyword arguments:
-        ids -- The uuids of rules to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/DeleteRuleMixin0
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The uuids of rules to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -861,31 +1076,41 @@ class CloudPolicies(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for compliance controls by various parameters.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-                  Allowed filter fields:
-                    compliance_control_name                 compliance_control_authority
-                    compliance_control_type 	            compliance_control_section
-                    compliance_control_requirement	        compliance_control_benchmark_name
-                    compliance_control_benchmark_version
-        limit -- The maximum number of resources to return. The maximum allowed is 500. Integer.
-        offset -- The number of results to skip before starting to return results. Integer.
-        sort -- The sort expression that should be used to sort the results. String.
-                Use the '|asc' or '|desc' suffix to specify sort direction.
-                Sortable fields:
-                    compliance_control_authority	        compliance_control_type
-                    compliance_control_section              compliance_control_requirement
-                    compliance_control_benchmark_name	    compliance_control_benchmark_version
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/QueryComplianceControls
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. String.
+            Allowed filter fields:
+              compliance_control_name                 compliance_control_authority
+              compliance_control_type 	            compliance_control_section
+              compliance_control_requirement	        compliance_control_benchmark_name
+              compliance_control_benchmark_version
+        limit : int
+            The maximum number of resources to return. The maximum allowed is 500.
+        offset : int
+            The number of results to skip before starting to return results.
+        sort : str
+            The sort expression that should be used to sort the results. String.
+            Use the '|asc' or '|desc' suffix to specify sort direction.
+            Sortable fields:
+                compliance_control_authority	        compliance_control_type
+                compliance_control_section              compliance_control_requirement
+                compliance_control_benchmark_name	    compliance_control_benchmark_version
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -902,28 +1127,38 @@ class CloudPolicies(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for compliance frameworks by various parameters.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-                  Allowed filter fields:
-                    compliance_framework_name       compliance_framework_version
-                    compliance_framework_authority
-        limit -- The maximum number of resources to return. The maximum allowed is 500.
-        offset -- The number of results to skip before starting to return results.
-        sort -- The sort expression that should be used to sort the results. String.
-                Use the '|asc' or '|desc' suffix to specify sort direction.
-                Sortable fields:
-                    compliance_framework_name       compliance_framework_version
-                    compliance_framework_authority
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/QueryComplianceFrameworks
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. String.
+            Allowed filter fields:
+              compliance_framework_name       compliance_framework_version
+              compliance_framework_authority
+        limit : int
+            The maximum number of resources to return. The maximum allowed is 500.
+        offset : int
+            The number of results to skip before starting to return results.
+        sort : str
+            The sort expression that should be used to sort the results. String.
+            Use the '|asc' or '|desc' suffix to specify sort direction.
+            Sortable fields:
+                compliance_framework_name       compliance_framework_version
+                compliance_framework_authority
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -937,52 +1172,62 @@ class CloudPolicies(ServiceClass):
     def query_rule(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for rules by various parameters.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-                  Allowed filter fields:
-                    rule_auto_remediable                rule_mitre_tactic
-                    rule_category                       rule_mitre_technique
-                    rule_cloneable                      rule_name
-                    rule_compliance_benchmark            rule_origin
-                    rule_compliance_benchmark_uuid       rule_parent_uuid
-                    rule_compliance_framework            rule_provider
-                    rule_control_requirement             rule_resource_type
-                    rule_control_section                 rule_resource_type_name
-                    rule_created_at                      rule_risk_factor
-                    rule_description                     rule_service
-                    rule_domain                          rule_severity
-                    rule_short_code                      rule_status
-                    rule_subdomain                       rule_updated_at
-                    rule_updated_by
-        limit -- The maximum number of resources to return. The maximum allowed is 500.
-        offset -- The number of results to skip before starting to return results.
-        sort -- The sort expression that should be used to sort the results. String.
-                Use the '|asc' or '|desc' suffix to specify sort direction.
-                Sortable fields:
-                    rule_auto_remediable                rule_mitre_tactic
-                    rule_category                       rule_mitre_technique
-                    rule_cloneable                      rule_name
-                    rule_compliance_benchmark            rule_origin
-                    rule_compliance_benchmark_uuid       rule_parent_uuid
-                    rule_compliance_framework            rule_provider
-                    rule_control_requirement             rule_resource_type
-                    rule_control_section                 rule_resource_type_name
-                    rule_created_at                      rule_risk_factor
-                    rule_description                     rule_service
-                    rule_domain                          rule_severity
-                    rule_short_code                      rule_status
-                    rule_subdomain                       rule_updated_at
-                    rule_updated_by
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/QueryRule
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. String.
+            Allowed filter fields:
+              rule_auto_remediable                rule_mitre_tactic
+              rule_category                       rule_mitre_technique
+              rule_cloneable                      rule_name
+              rule_compliance_benchmark            rule_origin
+              rule_compliance_benchmark_uuid       rule_parent_uuid
+              rule_compliance_framework            rule_provider
+              rule_control_requirement             rule_resource_type
+              rule_control_section                 rule_resource_type_name
+              rule_created_at                      rule_risk_factor
+              rule_description                     rule_service
+              rule_domain                          rule_severity
+              rule_short_code                      rule_status
+              rule_subdomain                       rule_updated_at
+              rule_updated_by
+        limit : int
+            The maximum number of resources to return. The maximum allowed is 500.
+        offset : int
+            The number of results to skip before starting to return results.
+        sort : str
+            The sort expression that should be used to sort the results. String.
+            Use the '|asc' or '|desc' suffix to specify sort direction.
+            Sortable fields:
+                rule_auto_remediable                rule_mitre_tactic
+                rule_category                       rule_mitre_technique
+                rule_cloneable                      rule_name
+                rule_compliance_benchmark            rule_origin
+                rule_compliance_benchmark_uuid       rule_parent_uuid
+                rule_compliance_framework            rule_provider
+                rule_control_requirement             rule_resource_type
+                rule_control_section                 rule_resource_type_name
+                rule_created_at                      rule_risk_factor
+                rule_description                     rule_service
+                rule_domain                          rule_severity
+                rule_short_code                      rule_status
+                rule_subdomain                       rule_updated_at
+                rule_updated_by
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1000,19 +1245,28 @@ class CloudPolicies(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Suppression Rules by ID.
 
-        Keyword arguments:
-        ids -- The uuids of the suppression rules to retrieve. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/GetSuppressionRules
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The uuids of the suppression rules to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1026,8 +1280,16 @@ class CloudPolicies(ServiceClass):
     def create_suppression_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new suppression rule.
 
-        Keyword arguments:
-        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/CreateSuppressionRule
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload dictionary in JSON format. Not required if using other keywords.
                 {
                     "description": "string",
                     "id": "string",
@@ -1087,24 +1349,33 @@ class CloudPolicies(ServiceClass):
                     "suppression_expiration_date": "string",
                     "suppression_reason": "string"
                 }
-        description -- Description of the suppression rule. String.
-        domain -- Policy domain for the rule. String.
-        name -- Name of the suppression rule. String.
-        rule_selection_filter -- Filter criteria for selecting rules. Dictionary of lists.
-        rule_selection_type -- Type of rule selection. String.
-        scope_asset_filter -- Filter criteria for scoping assets. Dictionary of lists.
-        scope_type -- Type of scope for the rule. String.
-        subdomain -- Policy subdomain for the rule. String.
-        suppression_comment -- Comment explaining the suppression. String.
-        suppression_expiration_date -- Expiration date for the suppression. String.
-        suppression_reason -- Reason for the suppression. String.
+        description : str
+            Description of the suppression rule.
+        domain : str
+            Policy domain for the rule.
+        name : str
+            Name of the suppression rule.
+        rule_selection_filter : dict
+            Filter criteria for selecting rules. Dictionary of lists.
+        rule_selection_type : str
+            Type of rule selection.
+        scope_asset_filter : dict
+            Filter criteria for scoping assets. Dictionary of lists.
+        scope_type : str
+            Type of scope for the rule.
+        subdomain : str
+            Policy subdomain for the rule.
+        suppression_comment : str
+            Comment explaining the suppression.
+        suppression_expiration_date : str
+            Expiration date for the suppression.
+        suppression_reason : str
+            Reason for the suppression.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/CreateSuppressionRule
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_policies_suppression_rule_payload(passed_keywords=kwargs)
@@ -1120,8 +1391,16 @@ class CloudPolicies(ServiceClass):
     def update_suppression_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a suppression rule.
 
-        Keyword arguments:
-        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/UpdateSuppressionRule
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload dictionary in JSON format. Not required if using other keywords.
                 {
                     "description": "string",
                     "id": "string",
@@ -1181,23 +1460,31 @@ class CloudPolicies(ServiceClass):
                     "suppression_expiration_date": "string",
                     "suppression_reason": "string"
                 }
-        description -- Description of the suppression rule. String.
-        id -- Identifier of the suppression rule to update. String.
-        name -- Name of the suppression rule. String.
-        rule_selection_filter -- Filter criteria for selecting rules. Dictionary of lists.
-        rule_selection_type -- Type of rule selection. String.
-        scope_asset_filter -- Filter criteria for scoping assets. Dictionary of lists.
-        scope_type -- Type of scope for the rule. String.
-        suppression_comment -- Comment explaining the suppression. String.
-        suppression_expiration_date -- Expiration date for the suppression. String.
-        suppression_reason -- Reason for the suppression. String.
+        description : str
+            Description of the suppression rule.
+        id : str
+            Identifier of the suppression rule to update.
+        name : str
+            Name of the suppression rule.
+        rule_selection_filter : dict
+            Filter criteria for selecting rules. Dictionary of lists.
+        rule_selection_type : str
+            Type of rule selection.
+        scope_asset_filter : dict
+            Filter criteria for scoping assets. Dictionary of lists.
+        scope_type : str
+            Type of scope for the rule.
+        suppression_comment : str
+            Comment explaining the suppression.
+        suppression_expiration_date : str
+            Expiration date for the suppression.
+        suppression_reason : str
+            Reason for the suppression.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/UpdateSuppressionRule
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_policies_suppression_rule_payload(passed_keywords=kwargs)
@@ -1217,19 +1504,28 @@ class CloudPolicies(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete Suppression Rules by ID.
 
-        Keyword arguments:
-        ids -- The uuids of the suppression rules to delete. A maximum of 10 IDs can be provided. String or array of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/DeleteSuppressionRules
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The uuids of the suppression rules to delete. A maximum of 10 IDs can be provided. String or array of strings.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1243,33 +1539,42 @@ class CloudPolicies(ServiceClass):
     def query_suppression_rules(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query suppression rules with filtering, sorting and pagination.
 
-        Keyword arguments:
-        filter -- FQL expression to filter suppression rules. String.
-                  The allowed properties are:
-                      name        description         domain
-                      subdomain   suppression_reason  suppression_expiration_date
-                      create_by   created_at          last_modified_at
-                      disabled    groups
-
-        limit -- The maximum number of resources to return. The maximum allowed is 50. Integer.
-        offset -- The number of results to skip before starting to return results. Integer.
-        sort -- Field to sort on. String.
-                Sortable fields:
-                    name        description         domain
-                    subdomain   suppression_reason  suppression_expiration_date
-                    create_by   created_at          last_modified_at
-                    disabled    groups
-                Use the `.asc` or `.desc` suffix to specify sort direction.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/QuerySuppressionRules
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL expression to filter suppression rules. String.
+            The allowed properties are:
+                name        description         domain
+                subdomain   suppression_reason  suppression_expiration_date
+                create_by   created_at          last_modified_at
+                disabled    groups
+        limit : int
+            The maximum number of resources to return. The maximum allowed is 50.
+        offset : int
+            The number of results to skip before starting to return results.
+        sort : str
+            Field to sort on. String.
+            Sortable fields:
+                name        description         domain
+                subdomain   suppression_reason  suppression_expiration_date
+                create_by   created_at          last_modified_at
+                disabled    groups
+            Use the `.asc` or `.desc` suffix to specify sort direction.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1286,18 +1591,25 @@ class CloudPolicies(ServiceClass):
                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Clone an existing compliance framework to create a custom copy.
 
-        Keyword arguments:
-        ids -- The uuid of the compliance framework to clone. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/CloneComplianceFramework
+
+        Keyword arguments
+        -----------------
+        ids : str
+            The uuid of the compliance framework to clone.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

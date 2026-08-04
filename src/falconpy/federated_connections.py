@@ -63,25 +63,34 @@ class FederatedConnections(ServiceClass):
                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create configuration for a federated connection.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/federated-connections/PostFederatedConnectionsConfig
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "cluster_url": "string",
                     "connection_id": "string",
                     "view_token": "string"
                 }
-        cluster_url -- URL of the external cluster. String.
-        connection_id -- ID of the federated connection. String.
-        view_token -- token for accessing external cluster. String.
+        cluster_url : str
+            URL of the external cluster.
+        connection_id : str
+            ID of the federated connection.
+        view_token : str
+            token for accessing external cluster.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/federated-connections/PostFederatedConnectionsConfig
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = post_federated_connections_config_payload(passed_keywords=kwargs)
@@ -100,18 +109,25 @@ class FederatedConnections(ServiceClass):
                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete configuration for a federated connection.
 
-        Keyword arguments:
-        connection_id -- Connection ID to delete configuration for. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/federated-connections/DeleteFederatedConnectionsConfig
+
+        Keyword arguments
+        -----------------
+        connection_id : str
+            Connection ID to delete configuration for.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -129,25 +145,35 @@ class FederatedConnections(ServiceClass):
                                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update configuration for a federated connection.
 
-        Keyword arguments:
-        connection_id -- Connection ID to update configuration for. String.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/federated-connections/PatchFederatedConnectionsConfig
+
+        Keyword arguments
+        -----------------
+        connection_id : str
+            Connection ID to update configuration for.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "cluster_url": "string",
                     "view_token": "string"
                 }
-        cluster_url -- URL of the external cluster. String.
-        view_token -- token for accessing external cluster. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        cluster_url : str
+            URL of the external cluster.
+        view_token : str
+            token for accessing external cluster.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/federated-connections/PatchFederatedConnectionsConfig
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = patch_federated_connections_config_payload(passed_keywords=kwargs)

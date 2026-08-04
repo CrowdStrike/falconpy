@@ -64,9 +64,18 @@ class KnowledgeBaseAuditEvents(ServiceClass):
                                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate knowledge base audit events based on the provided msa criteria.
 
-        Keyword arguments:
-        include_deleted -- Include audit events for deleted knowledge bases. Defaults to false. Boolean.
-        body -- Full body payload as a JSON formatted list. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-base-audit-events/AggregatesKnowledgeBaseAuditEventsV1
+
+        Keyword arguments
+        -----------------
+        include_deleted : bool
+            Include audit events for deleted knowledge bases. Defaults to false.
+        body : list
+            Full body payload as a JSON formatted list. Not required if using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -101,30 +110,43 @@ class KnowledgeBaseAuditEvents(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- List of date range objects. List of dictionaries.
-        field -- The field to aggregate on. String.
-        filter -- FQL filter expression. String.
-        interval -- Time interval for aggregation. String.
-        min_doc_count -- Minimum document count threshold. Integer.
-        missing -- Missing value handling. String.
-        name -- Name of the aggregation. String.
-        q -- Full text search across all metadata fields. String.
-        ranges -- List of range objects. List of dictionaries.
-        size -- Maximum number of results. Integer.
-        sort -- Sort expression. String.
-        sub_aggregates -- List of sub-aggregate expressions. List of strings.
-        time_zone -- Time zone for date operations. String.
-        type -- Type of aggregation (terms, date_histogram, etc.). String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        date_ranges : list[dict]
+            List of date range objects.
+        field : str
+            The field to aggregate on.
+        filter : str
+            FQL filter expression.
+        interval : str
+            Time interval for aggregation.
+        min_doc_count : int
+            Minimum document count threshold.
+        missing : str
+            Missing value handling.
+        name : str
+            Name of the aggregation.
+        q : str
+            Full text search across all metadata fields.
+        ranges : list[dict]
+            List of range objects.
+        size : int
+            Maximum number of results.
+        sort : str
+            Sort expression.
+        sub_aggregates : list[str]
+            List of sub-aggregate expressions.
+        time_zone : str
+            Time zone for date operations.
+        type : str
+            Type of aggregation (terms, date_histogram, etc.)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-base-audit-events/AggregatesKnowledgeBaseAuditEventsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -145,23 +167,35 @@ class KnowledgeBaseAuditEvents(ServiceClass):
                                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get knowledge base audit events with full event details and pagination.
 
-        Keyword arguments:
-        knowledge_base_id -- ID of the knowledge base to get audit events for. String.
-        offset -- Starting index of overall result set from which to return events. Integer.
-        limit -- Number of events to return. Integer.
-        sort -- Sort order. Ex: 'created_at|desc'. String.
-        filter -- FQL query specifying the filter parameters. String.
-        include_deleted -- Include audit events for deleted knowledge bases. Defaults to false. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-base-audit-events/CombinedKnowledgeBaseAuditEventsV1
+
+        Keyword arguments
+        -----------------
+        knowledge_base_id : str
+            ID of the knowledge base to get audit events for.
+        offset : int
+            Starting index of overall result set from which to return events.
+        limit : int
+            Number of events to return.
+        sort : str
+            Sort order. Ex: 'created_at|desc'
+        filter : str
+            FQL query specifying the filter parameters.
+        include_deleted : bool
+            Include audit events for deleted knowledge bases. Defaults to false.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -178,20 +212,29 @@ class KnowledgeBaseAuditEvents(ServiceClass):
                                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve knowledge base audit event entities by their IDs.
 
-        Keyword arguments:
-        knowledge_base_id -- ID of the knowledge base. String.
-        ids -- IDs of audit events to retrieve. List.
-        include_deleted -- Include audit events for deleted knowledge bases. Defaults to false. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-base-audit-events/EntitiesKnowledgeBaseAuditEventsV1
+
+        Keyword arguments
+        -----------------
+        knowledge_base_id : str
+            ID of the knowledge base.
+        ids : str or list[str]
+            IDs of audit events to retrieve.
+        include_deleted : bool
+            Include audit events for deleted knowledge bases. Defaults to false.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -208,23 +251,35 @@ class KnowledgeBaseAuditEvents(ServiceClass):
                                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query knowledge base audit event IDs with pagination and filtering.
 
-        Keyword arguments:
-        knowledge_base_id -- ID of the knowledge base to query audit events for. String.
-        offset -- Starting index of overall result set from which to return ids. Integer.
-        limit -- Number of IDs to return. Integer.
-        sort -- Sort order. Ex: 'created_at|desc'. String.
-        filter -- FQL query specifying the filter parameters. String.
-        include_deleted -- Include audit events for deleted knowledge bases. Defaults to false. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-base-audit-events/QueriesKnowledgeBaseAuditEventsV1
+
+        Keyword arguments
+        -----------------
+        knowledge_base_id : str
+            ID of the knowledge base to query audit events for.
+        offset : int
+            Starting index of overall result set from which to return ids.
+        limit : int
+            Number of IDs to return.
+        sort : str
+            Sort order. Ex: 'created_at|desc'
+        filter : str
+            FQL query specifying the filter parameters.
+        include_deleted : bool
+            Include audit events for deleted knowledge bases. Defaults to false.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

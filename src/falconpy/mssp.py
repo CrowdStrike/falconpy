@@ -61,19 +61,28 @@ class FlightControl(ServiceClass):
     def get_children(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get link to child customer by child CID(s).
 
-        Keyword arguments:
-        ids -- CID of a child customer. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getChildren
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            CID of a child customer.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -87,24 +96,33 @@ class FlightControl(ServiceClass):
     def get_children_v2(self: object, *args, body: dict = None, **kwargs) -> dict:
         """Get link to child customer by child CID(s).
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getChildrenV2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- ID(s) of the indicator entities to retrieve. String or list of strings.
+        ids : str or list[str]
+            ID(s) of the indicator entities to retrieve.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getChildrenV2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_arguments=args,
@@ -125,20 +143,29 @@ class FlightControl(ServiceClass):
 
         ** DEPRECATED **
 
-        Keyword arguments:
-        cid_group_ids -- CID group IDs to search for. String or list of strings.
-        parameters -- full parameters payload, not required if `cid_group_ids` is provided
-                      as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'cid_group_ids'. All others are ignored.
-
-        Returns: dict object containing API response
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getCIDGroupMembersBy
+
+        Keyword arguments
+        -----------------
+        cid_group_ids : str or list[str]
+            CID group IDs to search for.
+        parameters : dict
+            full parameters payload, not required if `cid_group_ids` is provided
+            as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'cid_group_ids'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -152,21 +179,30 @@ class FlightControl(ServiceClass):
     def get_cid_group_members_by(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get CID Group members by CID Group IDs.
 
-        Keyword arguments:
-        ids -- CID group IDs to search for. String or list of strings.
-               The keyword `cid_group_ids` will also be accepted for this argument.
-        parameters -- full parameters payload, not required if `cid_group_ids` is provided
-                      as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getCIDGroupMembersByV2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            CID group IDs to search for. String or list of strings.
+            The keyword `cid_group_ids` will also be accepted for this argument.
+        parameters : dict
+            full parameters payload, not required if `cid_group_ids` is provided
+            as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("cid_group_ids", None) and not kwargs.get("ids", None):
             kwargs["ids"] = kwargs.get("cid_group_ids")
@@ -183,8 +219,16 @@ class FlightControl(ServiceClass):
     def add_cid_group_members(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Add new CID Group member.
 
-        Keyword arguments:
-        body -- full body payload, not required if sha256 is provided as a keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/addCIDGroupMembers
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if sha256 is provided as a keyword.
                 {
                     "resources": [
                         {
@@ -195,17 +239,17 @@ class FlightControl(ServiceClass):
                         }
                     ]
                 }
-        cid_group_id -- ID of the CID group to update. String.
-        cids -- CIDs to add to the group. String or list of strings.
+        cid_group_id : str
+            ID of the CID group to update.
+        cids : str or list[str]
+            CIDs to add to the group.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/addCIDGroupMembers
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             item = generic_payload_list(submitted_keywords=kwargs, payload_value="cids")
@@ -227,8 +271,16 @@ class FlightControl(ServiceClass):
         *DEPRECATED*
         Please use delete_cid_group_members.
 
-        Keyword arguments:
-        body -- full body payload, not required if sha256 is provided as a keyword.
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deleteCIDGroupMembers
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if sha256 is provided as a keyword.
                 {
                     "resources": [
                         {
@@ -239,17 +291,17 @@ class FlightControl(ServiceClass):
                         }
                     ]
                 }
-        cid_group_id -- ID of the CID group to update. String.
-        cids -- CIDs to remove from the group. String or list of strings.
+        cid_group_id : str
+            ID of the CID group to update.
+        cids : str or list[str]
+            CIDs to remove from the group.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: DELETE
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deleteCIDGroupMembers
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             item = generic_payload_list(submitted_keywords=kwargs, payload_value="cids")
@@ -268,8 +320,16 @@ class FlightControl(ServiceClass):
     def delete_cid_group_members(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete CID Group members entry.
 
-        Keyword arguments:
-        body -- full body payload, not required if sha256 is provided as a keyword.
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deleteCIDGroupMembers
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if sha256 is provided as a keyword.
                 {
                     "resources": [
                         {
@@ -280,17 +340,17 @@ class FlightControl(ServiceClass):
                         }
                     ]
                 }
-        cid_group_id -- ID of the CID group to update. String.
-        cids -- CIDs to remove from the group. String or list of strings.
+        cid_group_id : str
+            ID of the CID group to update.
+        cids : str or list[str]
+            CIDs to remove from the group.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: DELETE
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deleteCIDGroupMembers
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             item = generic_payload_list(submitted_keywords=kwargs, payload_value="cids")
@@ -311,20 +371,29 @@ class FlightControl(ServiceClass):
 
         ** DEPRECATED **
 
-        Keyword arguments:
-        cid_group_ids -- CID group IDs to search for. String or list of strings.
-        parameters -- full parameters payload, not required if `cid_group_ids` is provided
-                      as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'cid_group_ids'. All others are ignored.
-
-        Returns: dict object containing API response
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getCIDGroupById
+
+        Keyword arguments
+        -----------------
+        cid_group_ids : str or list[str]
+            CID group IDs to search for.
+        parameters : dict
+            full parameters payload, not required if `cid_group_ids` is provided
+            as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'cid_group_ids'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -338,21 +407,30 @@ class FlightControl(ServiceClass):
     def get_cid_group_by_id(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get CID Group(s) by ID(s).
 
-        Keyword arguments:
-        ids -- CID group IDs to search for. String or list of strings.
-               The keyword `cid_group_ids` will also be accepted for this argument.
-        parameters -- full parameters payload, not required if `cid_group_ids` is provided
-                      as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'cid_group_ids'. All others are ignored.
-
-        Returns: dict object containing API response
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getCIDGroupByIdV2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            CID group IDs to search for. String or list of strings.
+            The keyword `cid_group_ids` will also be accepted for this argument.
+        parameters : dict
+            full parameters payload, not required if `cid_group_ids` is provided
+            as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'cid_group_ids'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("cid_group_ids", None) and not kwargs.get("ids", None):
             kwargs["ids"] = kwargs.get("cid_group_ids")
@@ -369,8 +447,16 @@ class FlightControl(ServiceClass):
     def create_cid_groups(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create new CID Group(s). Maximum 500 CID Group(s) allowed.
 
-        Keyword arguments:
-        body -- full body payload, not required if sha256 is provided as a keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/createCIDGroups
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if sha256 is provided as a keyword.
                 {
                     "resources": [
                         {
@@ -381,19 +467,21 @@ class FlightControl(ServiceClass):
                         }
                     ]
                 }
-        cid -- CID to initially add to the group. String.
-        cid_group_id -- CID Group ID. String.
-        description -- Description for the CID group. String.
-        name -- Name of the CID group. String.
+        cid : str
+            CID to initially add to the group.
+        cid_group_id : str
+            CID Group ID.
+        description : str
+            Description for the CID group.
+        name : str
+            Name of the CID group.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/createCIDGroups
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = mssp_payload(passed_keywords=kwargs)
@@ -413,20 +501,29 @@ class FlightControl(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete CID Group(s) by ID(s).
 
-        Keyword arguments:
-        cid_group_ids -- CID group IDs to search for. String or list of strings.
-        parameters -- full parameters payload, not required if `cid_group_ids` is provided
-                      as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'cid_group_ids'. All others are ignored.
-
-        Returns: dict object containing API response
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deleteCIDGroups
+
+        Keyword arguments
+        -----------------
+        cid_group_ids : str or list[str]
+            CID group IDs to search for.
+        parameters : dict
+            full parameters payload, not required if `cid_group_ids` is provided
+            as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'cid_group_ids'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -444,8 +541,16 @@ class FlightControl(ServiceClass):
 
         CID Group member(s) remain unaffected.
 
-        Keyword arguments:
-        body -- full body payload, not required if sha256 is provided as a keyword.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/updateCIDGroups
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if sha256 is provided as a keyword.
                 {
                     "resources": [
                         {
@@ -456,19 +561,21 @@ class FlightControl(ServiceClass):
                         }
                     ]
                 }
-        cid -- CID to initially add to the group. String.
-        cid_group_id -- CID Group ID. String.
-        description -- Description for the CID group. String.
-        name -- Name of the CID group. String.
+        cid : str
+            CID to initially add to the group.
+        cid_group_id : str
+            CID Group ID.
+        description : str
+            Description for the CID group.
+        name : str
+            Name of the CID group.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/updateCIDGroups
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = mssp_payload(passed_keywords=kwargs)
@@ -486,20 +593,28 @@ class FlightControl(ServiceClass):
 
         MSSP Role assignment is of the format <user_group_id>:<cid_group_id>.
 
-        Keyword arguments:
-        ids -- MSSP Role assignment is of the format <user_group_id>:<cid_group_id>.
-               String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getRolesByID
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            MSSP Role assignment is of the format <user_group_id>:<cid_group_id>.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -516,8 +631,16 @@ class FlightControl(ServiceClass):
         It does not revoke existing role(s) between User Group and CID Group.
         User Group ID and CID Group ID have to be specified in request.
 
-        Keyword arguments:
-        body -- full body payload, not required if sha256 is provided as a keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/addRole
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if sha256 is provided as a keyword.
                 {
                     "resources": [
                         {
@@ -530,19 +653,21 @@ class FlightControl(ServiceClass):
                         }
                     ]
                 }
-        cid_group_id -- CID Group ID. String.
-        id -- Role Assignment ID. String.
-        role_ids -- Role IDs to be assigned.
-        user_group_ids -- User Group ID. String.
+        cid_group_id : str
+            CID Group ID.
+        id : str
+            Role Assignment ID.
+        role_ids : str or list[str]
+            Role IDs to be assigned.
+        user_group_ids : str
+            User Group ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/addRole
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = mssp_payload(passed_keywords=kwargs)
@@ -563,8 +688,16 @@ class FlightControl(ServiceClass):
         else association between User Group and CID Group is dissolved completely
         (if there are no roles specified).
 
-        Keyword arguments:
-        body -- full body payload, not required if sha256 is provided as a keyword.
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deletedRoles
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if sha256 is provided as a keyword.
                 {
                     "resources": [
                         {
@@ -577,19 +710,21 @@ class FlightControl(ServiceClass):
                         }
                     ]
                 }
-        cid_group_id -- CID Group ID. String.
-        id -- Role Assignment ID. String.
-        role_ids -- Role IDs to be assigned.
-        user_group_ids -- User Group ID. String.
+        cid_group_id : str
+            CID Group ID.
+        id : str
+            Role Assignment ID.
+        role_ids : str or list[str]
+            Role IDs to be assigned.
+        user_group_ids : str
+            User Group ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: DELETE
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deletedRoles
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = mssp_payload(passed_keywords=kwargs)
@@ -611,20 +746,29 @@ class FlightControl(ServiceClass):
 
         ** DEPRECATED **
 
-        Keyword arguments:
-        user_group_ids -- User group IDs to search for. String or list of strings.
-        parameters -- full parameters payload, not required if `user_group_ids` is provided
-                      as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'user_group_ids'. All others are ignored.
-
-        Returns: dict object containing API response
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getUserGroupMembersByID
+
+        Keyword arguments
+        -----------------
+        user_group_ids : str or list[str]
+            User group IDs to search for.
+        parameters : dict
+            full parameters payload, not required if `user_group_ids` is provided
+            as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'user_group_ids'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -642,21 +786,30 @@ class FlightControl(ServiceClass):
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get User Group members by User Group ID(s).
 
-        Keyword arguments:
-        ids -- User group IDs to search for. String or list of strings.
-               The keyword `user_group_ids` will also be accepted for this argument.
-        parameters -- full parameters payload, not required if `user_group_ids` is provided
-                      as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'user_group_ids'. All others are ignored.
-
-        Returns: dict object containing API response
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getUserGroupMembersByIDV2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            User group IDs to search for. String or list of strings.
+            The keyword `user_group_ids` will also be accepted for this argument.
+        parameters : dict
+            full parameters payload, not required if `user_group_ids` is provided
+            as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'user_group_ids'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("user_group_ids", None) and not kwargs.get("ids", None):
             kwargs["ids"] = kwargs.get("user_group_ids")
@@ -673,8 +826,16 @@ class FlightControl(ServiceClass):
     def add_user_group_members(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Add new User Group member. Maximum 500 members allowed per User Group.
 
-        Keyword arguments:
-        body -- full body payload, not required if sha256 is provided as a keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/addUserGroupMembers
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if sha256 is provided as a keyword.
                 {
                     "resources": [
                         {
@@ -685,17 +846,17 @@ class FlightControl(ServiceClass):
                         }
                     ]
                 }
-        user_group_ids -- User Group ID. String.
-        user_uuids -- User UUIDs to assign to group. String or list of strings.
+        user_group_ids : str
+            User Group ID.
+        user_uuids : str or list[str]
+            User UUIDs to assign to group.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/addUserGroupMembers
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = mssp_payload(passed_keywords=kwargs)
@@ -711,8 +872,16 @@ class FlightControl(ServiceClass):
     def delete_user_group_members(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete User Group members entry.
 
-        Keyword arguments:
-        body -- full body payload, not required if sha256 is provided as a keyword.
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deleteUserGroupMembers
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if sha256 is provided as a keyword.
                 {
                     "resources": [
                         {
@@ -723,17 +892,17 @@ class FlightControl(ServiceClass):
                         }
                     ]
                 }
-        user_group_ids -- User Group ID. String.
-        user_uuids -- User UUIDs to remove from group. String or list of strings.
+        user_group_ids : str
+            User Group ID.
+        user_uuids : str or list[str]
+            User UUIDs to remove from group.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: DELETE
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deleteUserGroupMembers
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = mssp_payload(passed_keywords=kwargs)
@@ -751,20 +920,29 @@ class FlightControl(ServiceClass):
 
         ** DEPRECATED **
 
-        Keyword arguments:
-        user_group_ids -- User group IDs to search for. String or list of strings.
-        parameters -- full parameters payload, not required if `user_group_ids` is provided
-                      as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'user_group_ids'. All others are ignored.
-
-        Returns: dict object containing API response
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getUserGroupsByID
+
+        Keyword arguments
+        -----------------
+        user_group_ids : str or list[str]
+            User group IDs to search for.
+        parameters : dict
+            full parameters payload, not required if `user_group_ids` is provided
+            as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'user_group_ids'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -778,21 +956,30 @@ class FlightControl(ServiceClass):
     def get_user_groups_by_id(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get User Groups by ID(s).
 
-        Keyword arguments:
-        ids -- User group IDs to search for. String or list of strings.
-               The keyword `user_group_ids` will also be accepted for this argument.
-        parameters -- full parameters payload, not required if `user_group_ids` is provided
-                      as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'user_group_ids'. All others are ignored.
-
-        Returns: dict object containing API response
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getUserGroupsByIDV2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            User group IDs to search for. String or list of strings.
+            The keyword `user_group_ids` will also be accepted for this argument.
+        parameters : dict
+            full parameters payload, not required if `user_group_ids` is provided
+            as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'user_group_ids'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("user_group_ids", None) and not kwargs.get("ids", None):
             kwargs["ids"] = kwargs.get("user_group_ids")
@@ -809,8 +996,16 @@ class FlightControl(ServiceClass):
     def create_user_groups(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create new User Group(s). Maximum 500 User Group(s) allowed per customer.
 
-        Keyword arguments:
-        body -- full body payload, not required if sha256 is provided as a keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/createUserGroup
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if sha256 is provided as a keyword.
                 {
                     "resources": [
                         {
@@ -821,19 +1016,21 @@ class FlightControl(ServiceClass):
                         }
                     ]
                 }
-        cid -- CID to initially add to the group. String.
-        description -- Description for the CID group. String.
-        name -- Name of the CID group. String.
-        user_group_id -- User Group ID. String.
+        cid : str
+            CID to initially add to the group.
+        description : str
+            Description for the CID group.
+        name : str
+            Name of the CID group.
+        user_group_id : str
+            User Group ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/createUserGroup
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = mssp_payload(passed_keywords=kwargs)
@@ -853,20 +1050,29 @@ class FlightControl(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete User Group(s) by ID(s).
 
-        Keyword arguments:
-        user_group_ids -- User group IDs to delete. String or list of strings.
-        parameters -- full parameters payload, not required if `user_group_ids` is provided
-                      as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'user_group_ids'. All others are ignored.
-
-        Returns: dict object containing API response
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deleteUserGroups
+
+        Keyword arguments
+        -----------------
+        user_group_ids : str or list[str]
+            User group IDs to delete.
+        parameters : dict
+            full parameters payload, not required if `user_group_ids` is provided
+            as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'user_group_ids'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -884,8 +1090,16 @@ class FlightControl(ServiceClass):
 
         User Group member(s) remain unaffected.
 
-        Keyword arguments:
-        body -- full body payload, not required if sha256 is provided as a keyword.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/updateUserGroups
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if sha256 is provided as a keyword.
                 {
                     "resources": [
                         {
@@ -896,19 +1110,21 @@ class FlightControl(ServiceClass):
                         }
                     ]
                 }
-        cid -- CID to initially add to the group. String.
-        description -- Description for the CID group. String.
-        name -- Name of the CID group. String.
-        user_group_id -- User Group ID to update. String.
+        cid : str
+            CID to initially add to the group.
+        description : str
+            Description for the CID group.
+        name : str
+            Name of the CID group.
+        user_group_id : str
+            User Group ID to update.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/updateUserGroups
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = mssp_payload(passed_keywords=kwargs)
@@ -924,23 +1140,33 @@ class FlightControl(ServiceClass):
     def query_children(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for customers linked as children.
 
-        Keyword arguments:
-        filter -- FQL formatted string used to limit results. String. Supported filter: cid
-        limit -- The maximum number of records to return in this response. [Integer, 1-1000]
-                 Use with the offset parameter to manage pagination of results. Default: 10
-        offset -- The offset to start retrieving records from. String.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax. (Ex: `last_modified_timestamp|desc`)
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/queryChildren
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL formatted string used to limit results. String. Supported filter: cid
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-1000]
+            Use with the offset parameter to manage pagination of results. Default: 10
+        offset : int
+            The offset to start retrieving records from. String.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax. (Ex: `last_modified_timestamp|desc`)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -957,23 +1183,33 @@ class FlightControl(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query a CID Groups members by associated CID.
 
-        Keyword arguments:
-        cid -- CID to lookup associated CID group ID
-        limit -- The maximum number of records to return in this response. [Integer, 1-1000]
-                 Use with the offset parameter to manage pagination of results. Default: 10
-        offset -- The offset to start retrieving records from. String.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax. (Ex: `last_modified_timestamp|desc`)
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/queryCIDGroupMembers
+
+        Keyword arguments
+        -----------------
+        cid : str
+            CID to lookup associated CID group ID
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-1000]
+            Use with the offset parameter to manage pagination of results. Default: 10
+        offset : int
+            The offset to start retrieving records from. String.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax. (Ex: `last_modified_timestamp|desc`)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -987,23 +1223,33 @@ class FlightControl(ServiceClass):
     def query_cid_groups(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query a CID Groups.
 
-        Keyword arguments:
-        name -- Name to lookup groups for
-        limit -- The maximum number of records to return in this response. [Integer, 1-1000]
-                 Use with the offset parameter to manage pagination of results. Default: 10
-        offset -- The offset to start retrieving records from. String.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax. (Ex: `last_modified_timestamp|desc`)
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/queryCIDGroups
+
+        Keyword arguments
+        -----------------
+        name : str
+            Name to lookup groups for
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-1000]
+            Use with the offset parameter to manage pagination of results. Default: 10
+        offset : int
+            The offset to start retrieving records from. String.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax. (Ex: `last_modified_timestamp|desc`)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1019,25 +1265,37 @@ class FlightControl(ServiceClass):
 
         At least one of CID Group ID or User Group ID should also be provided. Role ID is optional.
 
-        Keyword arguments:
-        user_group_id -- User group ID to fetch MSSP role for
-        cid_group_id -- CID group ID to fetch MSSP role for
-        role_id -- Role ID to fetch MSSP role for
-        limit -- The maximum number of records to return in this response. [Integer, 1-1000]
-                 Use with the offset parameter to manage pagination of results. Default: 10
-        offset -- The offset to start retrieving records from. String.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax. (Ex: `last_modified_timestamp|desc`)
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/queryRoles
+
+        Keyword arguments
+        -----------------
+        user_group_id : str
+            User group ID to fetch MSSP role for
+        cid_group_id : str
+            CID group ID to fetch MSSP role for
+        role_id : str
+            Role ID to fetch MSSP role for
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-1000]
+            Use with the offset parameter to manage pagination of results. Default: 10
+        offset : int
+            The offset to start retrieving records from. String.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax. (Ex: `last_modified_timestamp|desc`)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1054,23 +1312,33 @@ class FlightControl(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query User Group member by User UUID.
 
-        Keyword arguments:
-        user_uuid -- User UUID to lookup associated user group ID
-        limit -- The maximum number of records to return in this response. [Integer, 1-1000]
-                 Use with the offset parameter to manage pagination of results. Default: 10
-        offset -- The offset to start retrieving records from. String.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax. (Ex: `last_modified_timestamp|desc`)
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/queryRoles
+
+        Keyword arguments
+        -----------------
+        user_uuid : str
+            User UUID to lookup associated user group ID
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-1000]
+            Use with the offset parameter to manage pagination of results. Default: 10
+        offset : int
+            The offset to start retrieving records from. String.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax. (Ex: `last_modified_timestamp|desc`)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1084,23 +1352,33 @@ class FlightControl(ServiceClass):
     def query_user_groups(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query User Groups.
 
-        Keyword arguments:
-        name -- Name to lookup groups for
-        limit -- The maximum number of records to return in this response. [Integer, 1-1000]
-                 Use with the offset parameter to manage pagination of results. Default: 10
-        offset -- The offset to start retrieving records from. String.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax. (Ex: `last_modified_timestamp|desc`)
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/queryUserGroups
+
+        Keyword arguments
+        -----------------
+        name : str
+            Name to lookup groups for
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-1000]
+            Use with the offset parameter to manage pagination of results. Default: 10
+        offset : int
+            The offset to start retrieving records from. String.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax. (Ex: `last_modified_timestamp|desc`)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

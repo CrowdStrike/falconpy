@@ -59,27 +59,35 @@ class Downloads(ServiceClass):
     def fetch_download_info(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get files info and pre-signed download URLs.
 
-        Keyword arguments:
-        filter -- Search files using various filters using query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                  arch          file_name
-                  category      file_version
-                  os
-        sort -- The fields to sort records on. String.
-                Supported columns:
-                  arch          file_name
-                  category      file_version
-                  os
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/downloads-api/FetchFilesDownloadInfo
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Search files using various filters using query in Falcon Query Language (FQL). String.
+            Supported filters:
+            arch          file_name
+            category      file_version
+            os
+        sort : str
+            The fields to sort records on. String.
+            Supported columns:
+              arch          file_name
+              category      file_version
+              os
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -93,29 +101,39 @@ class Downloads(ServiceClass):
     def fetch_download_info_v2(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get cloud security tools info and pre-signed download URLs.
 
-        Keyword arguments:
-        filter -- Search files using various filters. String.
-                  Supported filters:
-                    arch        category
-                    file_name   file_version
-                    os
-        sort -- The fields to sort records on. String.
-                Supported columns:
-                    arch        category
-                    file_name   file_version
-                    os
-        limit -- The upper-bound on the number of records to retrieve. Maximum limit: 100. String.
-        offset -- The offset from where to begin. Maximum offset = 1000 - limit. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/downloads-api/FetchFilesDownloadInfoV2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Search files using various filters. String.
+            Supported filters:
+              arch        category
+              file_name   file_version
+              os
+        sort : str
+            The fields to sort records on. String.
+            Supported columns:
+                arch        category
+                file_name   file_version
+                os
+        limit : int
+            The upper-bound on the number of records to retrieve. Maximum limit: 100.
+        offset : int
+            The offset from where to begin. Maximum offset = 1000 - limit.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -131,19 +149,27 @@ class Downloads(ServiceClass):
 
         * DEPRECATED *
 
-        Keyword arguments:
-        file_name -- Name of the file to be downloaded
-        file_version -- Version of the file to be downloaded
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/downloads-api/DownloadFile
+
+        Keyword arguments
+        -----------------
+        file_name : str
+            Name of the file to be downloaded
+        file_version : str
+            Version of the file to be downloaded
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -159,23 +185,35 @@ class Downloads(ServiceClass):
 
         * DEPRECATED *
 
-        Keyword arguments:
-        arch -- Apply filtering on system architecture. String.
-        file_name -- Apply filtering on file name. String.
-        file_version -- Apply filtering on file version. String.
-        os -- Apply filtering on operating system. String.
-        platform -- Apply filtering on file platform. String.
-        category -- Apply filtering on file category. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/downloads-api/EnumerateFile
+
+        Keyword arguments
+        -----------------
+        arch : str
+            Apply filtering on system architecture.
+        file_name : str
+            Apply filtering on file name.
+        file_version : str
+            Apply filtering on file version.
+        os : str
+            Apply filtering on operating system.
+        platform : str
+            Apply filtering on file platform.
+        category : str
+            Apply filtering on file category.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

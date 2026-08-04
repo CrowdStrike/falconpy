@@ -63,20 +63,29 @@ class ContainerAlerts(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get container alert counts by severity.
 
-        Keyword arguments:
-        filter -- Search Container Alerts using a query in Falcon Query Language (FQL). String.
-                  Supported filters:  cid, container_id, last_seen
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-alerts/ReadContainerAlertsCountBySeverity
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Search Container Alerts using a query in Falcon Query Language (FQL). String.
+            Supported filters:  cid, container_id, last_seen
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'filter'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -90,20 +99,29 @@ class ContainerAlerts(ServiceClass):
     def read_counts(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search Container Alerts by the provided search criteria.
 
-        Keyword arguments:
-        filter -- Search Container Alerts using a query in Falcon Query Language (FQL). String.
-                  Supported filters:  cid, container_id, last_seen
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-alerts/ReadContainerAlertsCount
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Search Container Alerts using a query in Falcon Query Language (FQL). String.
+            Supported filters:  cid, container_id, last_seen
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'filter'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -117,22 +135,32 @@ class ContainerAlerts(ServiceClass):
     def search_and_read(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search Container Alerts by the provided search criteria.
 
-        Keyword arguments:
-        filter -- Search Container Alerts using a query in Falcon Query Language (FQL). String.
-                  Supported filters:  cid, container_id, last_seen, name, severity
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        sort -- The fields to sort the records on. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-alerts/SearchAndReadContainerAlerts
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Search Container Alerts using a query in Falcon Query Language (FQL). String.
+            Supported filters:  cid, container_id, last_seen, name, severity
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The fields to sort the records on.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

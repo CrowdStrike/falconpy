@@ -60,8 +60,16 @@ class ExposureManagement(ServiceClass):
     def aggregate_assets(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get detect aggregates as specified via json in request body.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/aggregate-external-assets
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -96,38 +104,44 @@ class ExposureManagement(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/aggregate-external-assets
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -146,27 +160,38 @@ class ExposureManagement(ServiceClass):
                                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a list of ecosystem subsidiaries with their detailed information.
 
-        Keyword arguments:
-        offset -- Starting index of result set from which to return IDs. Integer.
-        limit -- Number of IDs to return. Integer.
-        sort -- Order by fields. String.
-        filter -- Filter ecosystem subsidiaries using an FQL query. String.
-        version_id -- The version ID of the ecosystem subsidiaries data, represented as a hash string.
-                      This parameter is required to ensure data consistency and prevent stale data.
-                      If a new version of the ecosystem subsidiaries data is written, the version ID
-                      will be updated. By including this parameter in the request, the client can ensure
-                      that the response will be invalidated if a new version is written.
-                      This is a required field.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/combined-ecosystem-subsidiaries
+
+        Keyword arguments
+        -----------------
+        offset : int
+            Starting index of result set from which to return IDs.
+        limit : int
+            Number of IDs to return.
+        sort : str
+            Order by fields.
+        filter : str
+            Filter ecosystem subsidiaries using an FQL query.
+        version_id : str
+            The version ID of the ecosystem subsidiaries data, represented as a hash string.
+            This parameter is required to ensure data consistency and prevent stale data.
+            If a new version of the ecosystem subsidiaries data is written, the version ID
+            will be updated. By including this parameter in the request, the client can ensure
+            that the response will be invalidated if a new version is written.
+            This is a required field.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -180,19 +205,27 @@ class ExposureManagement(ServiceClass):
     def download_assets(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download the entire contents of the blob. The relative link to this endpoint is returned from query_external_assets.
 
-        Keyword arguments:
-        assetId -- The Asset ID. String.
-        hash -- The File Hash. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/blob-download-external-assets
+
+        Keyword arguments
+        -----------------
+        assetId : str
+            The Asset ID.
+        hash : str
+            The File Hash.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -206,19 +239,27 @@ class ExposureManagement(ServiceClass):
     def preview_assets(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download a preview of the blob. The relative link to this endpoint is returned from query_external_assets.
 
-        Keyword arguments:
-        assetId -- The Asset ID. String.
-        hash -- The File Hash. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/blob-preview-external-assets
+
+        Keyword arguments
+        -----------------
+        assetId : str
+            The Asset ID.
+        hash : str
+            The File Hash.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -235,23 +276,31 @@ class ExposureManagement(ServiceClass):
                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve detailed information about ecosystem subsidiaries by ID.
 
-        Keyword arguments:
-        ids -- One or more ecosystem subsidiary IDs (max: 100). String or list of strings.
-        version_id -- The version ID of the ecosystem subsidiaries data, represented as a hash string.
-                      This parameter is required to ensure data consistency and prevent stale data.
-                      If a new version of the ecosystem subsidiaries data is written, the version ID will
-                      be updated. By including this parameter in the request, the client can ensure that
-                      the response will be invalidated if a new version is written.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/get-ecosystem-subsidiaries
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more ecosystem subsidiary IDs (max: 100)
+        version_id : str
+            The version ID of the ecosystem subsidiaries data, represented as a hash string.
+            This parameter is required to ensure data consistency and prevent stale data.
+            If a new version of the ecosystem subsidiaries data is written, the version ID will
+            be updated. By including this parameter in the request, the client can ensure that
+            the response will be invalidated if a new version is written.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -265,9 +314,18 @@ class ExposureManagement(ServiceClass):
     def add_assets(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the details of external assets.
 
-        Keyword arguments:
-        assets -- List of assets to be added. List of dictionaries.
-        body -- Full body payload as a dictionary. Not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/post-external-assets-inventory-v1
+
+        Keyword arguments
+        -----------------
+        assets : list[dict]
+            List of assets to be added.
+        body : dict
+            Full body payload as a dictionary. Not required when using other keywords.
                 {
                     "data": [
                         {
@@ -281,18 +339,19 @@ class ExposureManagement(ServiceClass):
                         }
                     ]
                 }
-        id -- Asset ID to be added. String.
-        subsidiary_id -- Subsidiary ID of the asset to be added. String.
-        value -- Asset value. String.
+        id : str
+            Asset ID to be added.
+        subsidiary_id : str
+            Subsidiary ID of the asset to be added.
+        value : str
+            Asset value.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/post-external-assets-inventory-v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = fem_add_asset_payload(passed_keywords=kwargs)
@@ -309,19 +368,28 @@ class ExposureManagement(ServiceClass):
     def get_assets(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on external assets by providing one or more IDs.
 
-        Keyword arguments:
-        ids -- One or more asset IDs (max: 100). Find asset IDs with `query_external_assets`.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/get-external-assets
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more asset IDs (max: 100). Find asset IDs with `query_external_assets`.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -340,21 +408,29 @@ class ExposureManagement(ServiceClass):
                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete external assets by providing one or more IDs.
 
-        Keyword arguments:
-        body -- Full body payload as a dictionary. Not required if using other keywords.
-        description -- Delete operation description. String.
-        ids -- One or more asset IDs (max: 100). Find asset IDs with query_external_assets.
-               String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/delete-external-assets
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a dictionary. Not required if using other keywords.
+        description : str
+            Delete operation description.
+        ids : str or list[str]
+            One or more asset IDs (max: 100). Find asset IDs with query_external_assets.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             if kwargs.get("description", None):
@@ -374,25 +450,39 @@ class ExposureManagement(ServiceClass):
     def update_assets(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the details of external assets.
 
-        Keyword arguments:
-        action -- The asset triage action. String.
-        assigned_to -- The user assigned to triage the asset. String.
-        body -- Full body payload as a dictionary. Not required when using other keywords.
-        cid -- Falcon Customer ID. String.
-        criticality -- The criticality level manually assigned to this asset. String.
-        criticality_description -- The criticality description assigned to this asset. String.
-        description -- The asset triage description. String.
-        id -- The unique ID of the asset. String.
-        status -- The asset trriage status. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/patch-external-assets
+
+        Keyword arguments
+        -----------------
+        action : str
+            The asset triage action.
+        assigned_to : str
+            The user assigned to triage the asset.
+        body : dict
+            Full body payload as a dictionary. Not required when using other keywords.
+        cid : str
+            Falcon Customer ID.
+        criticality : str
+            The criticality level manually assigned to this asset.
+        criticality_description : str
+            The criticality description assigned to this asset.
+        description : str
+            The asset triage description.
+        id : str
+            The unique ID of the asset.
+        status : str
+            The asset trriage status.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = fem_asset_payload(passed_keywords=kwargs)
@@ -412,27 +502,38 @@ class ExposureManagement(ServiceClass):
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a list of IDs for ecosystem subsidiaries that match the provided filter conditions.
 
-        Keyword arguments:
-        offset -- Starting index of result set from which to return IDs. Integer.
-        limit -- Number of IDs to return. Integer.
-        sort -- Order by fields. String.
-        filter -- Filter ecosystem subsidiaries using an FQL query. String.
-        version_id -- The version ID of the ecosystem subsidiaries data, represented as a hash string.
-                      This parameter is required to ensure data consistency and prevent stale data.
-                      If a new version of the ecosystem subsidiaries data is written, the version ID
-                      will be updated. By including this parameter in the request, the client can ensure
-                      that the response will be invalidated if a new version is written.
-                      This is a required field.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/query-ecosystem-subsidiaries
+
+        Keyword arguments
+        -----------------
+        offset : int
+            Starting index of result set from which to return IDs.
+        limit : int
+            Number of IDs to return.
+        sort : str
+            Order by fields.
+        filter : str
+            Filter ecosystem subsidiaries using an FQL query.
+        version_id : str
+            The version ID of the ecosystem subsidiaries data, represented as a hash string.
+            This parameter is required to ensure data consistency and prevent stale data.
+            If a new version of the ecosystem subsidiaries data is written, the version ID
+            will be updated. By including this parameter in the request, the client can ensure
+            that the response will be invalidated if a new version is written.
+            This is a required field.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -446,21 +547,31 @@ class ExposureManagement(ServiceClass):
     def query_assets_v1(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of external asset IDs that match the provided filter conditions.
 
-        Keyword arguments:
-        offset -- Starting index of result set from which to return IDs. Integer.
-        limit -- Number of IDs to return. Integer.
-        sort -- Order by fields. String.
-        filter -- Filter assets using an FQL query. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/query-external-assets
+
+        Keyword arguments
+        -----------------
+        offset : str
+            Starting index of result set from which to return IDs.
+        limit : int
+            Number of IDs to return.
+        sort : str
+            Order by fields.
+        filter : str
+            Filter assets using an FQL query.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -474,153 +585,163 @@ class ExposureManagement(ServiceClass):
     def query_assets(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of external asset IDs that match the provided filter conditions.
 
-        Keyword arguments:
-        offset -- Starting index of result set from which to return IDs. Integer.
-        limit -- Number of IDs to return. Integer.
-        sort -- Order by fields. String.
-        filter -- Filter assets using an FQL query. String.
-                  Available filter fields that support exact match:
-                    asset_id                                        ip.cloud_vm.region
-                    asset_type                                      ip.cloud_vm.security_groups
-                    confidence                                      ip.cloud_vm.source
-                    connectivity_status                             ip.cloud_vm.status
-                    criticality                                     ip.fqdns
-                    criticality_description                         ip.ip_address
-                    criticality_timestamp                           ip.isp
-                    criticality_username                            ip.location.area_code
-                    data_providers                                  ip.location.city
-                    discovered_by                                   ip.location.country_code
-                    dns_domain.fqdn                                 ip.location.country_name
-                    dns_domain.isps                                 ip.location.postal_code
-                    dns_domain.parent_domain                        ip.location.region_code
-                    dns_domain.resolved_ips                         ip.location.region_name
-                    dns_domain.services.applications.category       ip.location.timezone
-                    dns_domain.services.applications.cpe            ip.ptr
-                    dns_domain.services.applications.name           ip.aid
-                    dns_domain.services.applications.vendor         ip.services.applications.category
-                    dns_domain.services.applications.version        ip.services.applications.cpe
-                    dns_domain.services.cloud_provider              ip.services.applications.name
-                    dns_domain.services.cpes                        ip.services.applications.vendor
-                    dns_domain.services.hosting_provider            ip.services.applications.version
-                    dns_domain.services.last_seen                   ip.services.cloud_provider
-                    dns_domain.services.platform_name               ip.services.cpes
-                    dns_domain.services.port                        ip.services.first_seen
-                    dns_domain.services.protocol                    ip.services.last_seen
-                    dns_domain.services.protocol_port               ip.services.platform_name
-                    dns_domain.services.status                      ip.services.port
-                    dns_domain.services.status_code                 ip.services.protocol
-                    dns_domain.services.transport                   ip.services.protocol_port
-                    dns_domain.type                                 ip.services.status
-                    first_seen                                      ip.services.status_code
-                    id                                              ip.services.transport
-                    internet_exposure                               last_seen
-                    ip.asn                                          manual
-                    ip.cloud_provider                               perimeter
-                    ip.cloud_vm.description                         subsidiaries.id
-                    ip.cloud_vm.instance_id                         subsidiaries.name
-                    ip.cloud_vm.lifecycle                           triage.action
-                    ip.cloud_vm.mac_address                         triage.assigned_to
-                    ip.cloud_vm.owner_id                            triage.status
-                    ip.cloud_vm.platform                            triage.updated_by
-                    ip.cloud_vm.private_ip                          triage.updated_timestamp
-                    ip.cloud_vm.public_ip
-                  Available filter fields that supports wildcard (*):
-                    asset_id                                        ip.cloud_vm.security_groups
-                    asset_type                                      ip.cloud_vm.source
-                    confidence                                      ip.cloud_vm.status
-                    connectivity_status                             ip.fqdns
-                    criticality                                     ip.ip_address
-                    criticality_username                            ip.isp
-                    data_providers                                  ip.location.area_code
-                    discovered_by                                   ip.location.city
-                    dns_domain.fqdn                                 ip.location.country_code
-                    dns_domain.isps                                 ip.location.country_name
-                    dns_domain.parent_domain                        ip.location.postal_code
-                    dns_domain.resolved_ips                         ip.location.region_code
-                    dns_domain.services.applications.category       ip.location.region_name
-                    dns_domain.services.applications.cpe            ip.location.timezone
-                    dns_domain.services.applications.name           ip.ptr
-                    dns_domain.services.applications.vendor         ip.aid
-                    dns_domain.services.applications.version        ip.services.applications.category
-                    dns_domain.services.cloud_provider              ip.services.applications.cpe
-                    dns_domain.services.cpes                        ip.services.applications.name
-                    dns_domain.services.hosting_provider            ip.services.applications.vendor
-                    dns_domain.services.id                          ip.services.applications.version
-                    dns_domain.services.platform_name               ip.services.cloud_provider
-                    dns_domain.services.port                        ip.services.cpes
-                    dns_domain.services.protocol                    ip.services.platform_name
-                    dns_domain.services.protocol_port               ip.services.port
-                    dns_domain.services.status                      ip.services.protocol
-                    dns_domain.services.status_code                 ip.services.protocol_port
-                    dns_domain.services.transport                   ip.services.status
-                    dns_domain.type                                 ip.services.status_code
-                    id                                              ip.services.transport
-                    internet_exposure                               manual
-                    ip.asn                                          perimeter
-                    ip.cloud_vm.instance_id                         subsidiaries.id
-                    ip.cloud_vm.lifecycle                           subsidiaries.name
-                    ip.cloud_vm.mac_address                         triage.action
-                    ip.cloud_vm.owner_id                            triage.assigned_to
-                    ip.cloud_vm.platform                            triage.status
-                    ip.cloud_vm.private_ip                          triage.updated_by
-                    ip.cloud_vm.public_ip                           ip.cloud_vm.region
-                  Available filter fields that supports in ([v1, v2]):
-                    asset_id                                        ip.cloud_vm.source
-                    asset_type                                      ip.cloud_vm.status
-                    confidence                                      ip.fqdns
-                    connectivity_status                             ip.isp
-                    criticality                                     ip.location.area_code
-                    criticality_username                            ip.location.city
-                    data_providers                                  ip.location.country_code
-                    discovered_by                                   ip.location.country_name
-                    dns_domain.fqdn                                 ip.location.postal_code
-                    dns_domain.isps                                 ip.location.region_code
-                    dns_domain.parent_domain                        ip.location.region_name
-                    dns_domain.services.applications.category       ip.location.timezone
-                    dns_domain.services.applications.cpe            ip.ptr
-                    dns_domain.services.applications.name           ip.aid
-                    dns_domain.services.applications.vendor         ip.services.applications.category
-                    dns_domain.services.applications.version        ip.services.applications.cpe
-                    dns_domain.services.cloud_provider              ip.services.applications.name
-                    dns_domain.services.cpes                        ip.services.applications.vendor
-                    dns_domain.services.id                          ip.services.applications.version
-                    dns_domain.services.platform_name               ip.services.cloud_provider
-                    dns_domain.services.port                        ip.services.cpes
-                    dns_domain.services.protocol                    ip.services.platform_name
-                    dns_domain.services.protocol_port               ip.services.port
-                    dns_domain.services.status                      ip.services.protocol
-                    dns_domain.services.status_code                 ip.services.protocol_port
-                    dns_domain.services.transport                   ip.services.status
-                    dns_domain.type                                 ip.services.status_code
-                    id                                              ip.services.transport
-                    internet_exposure                               manual
-                    ip.asn                                          perimeter
-                    ip.cloud_vm.instance_id                         subsidiaries.id
-                    ip.cloud_vm.lifecycle                           subsidiaries.name
-                    ip.cloud_vm.mac_address                         triage.action
-                    ip.cloud_vm.owner_id                            triage.assigned_to
-                    ip.cloud_vm.platform                            triage.status
-                    ip.cloud_vm.region                              triage.updated_by
-                    ip.cloud_vm.security_groups
-                  Available filter fields that supports range comparisons (>, <, >=, <=):
-                    criticality_timestamp                           ip.cloud_vm.public_ip
-                    dns_domain.resolved_ips                         ip.ip_address
-                    dns_domain.services.first_seen                  ip.services.first_seen
-                    dns_domain.services.last_seen                   ip.services.last_seen
-                    dns_domain.services.port                        ip.services.port
-                    dns_domain.services.status_code                 ip.services.status_code
-                    first_seen                                      last_seen
-                    ip.cloud_vm.private_ip                          triage.updated_timestamp
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/query-external-assets-v2
+
+        Keyword arguments
+        -----------------
+        offset : int
+            Starting index of result set from which to return IDs.
+        limit : int
+            Number of IDs to return.
+        sort : str
+            Order by fields.
+        filter : str
+            Filter assets using an FQL query. String.
+            Available filter fields that support exact match:
+              asset_id                                        ip.cloud_vm.region
+              asset_type                                      ip.cloud_vm.security_groups
+              confidence                                      ip.cloud_vm.source
+              connectivity_status                             ip.cloud_vm.status
+              criticality                                     ip.fqdns
+              criticality_description                         ip.ip_address
+              criticality_timestamp                           ip.isp
+              criticality_username                            ip.location.area_code
+              data_providers                                  ip.location.city
+              discovered_by                                   ip.location.country_code
+              dns_domain.fqdn                                 ip.location.country_name
+              dns_domain.isps                                 ip.location.postal_code
+              dns_domain.parent_domain                        ip.location.region_code
+              dns_domain.resolved_ips                         ip.location.region_name
+              dns_domain.services.applications.category       ip.location.timezone
+              dns_domain.services.applications.cpe            ip.ptr
+              dns_domain.services.applications.name           ip.aid
+              dns_domain.services.applications.vendor         ip.services.applications.category
+              dns_domain.services.applications.version        ip.services.applications.cpe
+              dns_domain.services.cloud_provider              ip.services.applications.name
+              dns_domain.services.cpes                        ip.services.applications.vendor
+              dns_domain.services.hosting_provider            ip.services.applications.version
+              dns_domain.services.last_seen                   ip.services.cloud_provider
+              dns_domain.services.platform_name               ip.services.cpes
+              dns_domain.services.port                        ip.services.first_seen
+              dns_domain.services.protocol                    ip.services.last_seen
+              dns_domain.services.protocol_port               ip.services.platform_name
+              dns_domain.services.status                      ip.services.port
+              dns_domain.services.status_code                 ip.services.protocol
+              dns_domain.services.transport                   ip.services.protocol_port
+              dns_domain.type                                 ip.services.status
+              first_seen                                      ip.services.status_code
+              id                                              ip.services.transport
+              internet_exposure                               last_seen
+              ip.asn                                          manual
+              ip.cloud_provider                               perimeter
+              ip.cloud_vm.description                         subsidiaries.id
+              ip.cloud_vm.instance_id                         subsidiaries.name
+              ip.cloud_vm.lifecycle                           triage.action
+              ip.cloud_vm.mac_address                         triage.assigned_to
+              ip.cloud_vm.owner_id                            triage.status
+              ip.cloud_vm.platform                            triage.updated_by
+              ip.cloud_vm.private_ip                          triage.updated_timestamp
+              ip.cloud_vm.public_ip
+            Available filter fields that supports wildcard (*):
+              asset_id                                        ip.cloud_vm.security_groups
+              asset_type                                      ip.cloud_vm.source
+              confidence                                      ip.cloud_vm.status
+              connectivity_status                             ip.fqdns
+              criticality                                     ip.ip_address
+              criticality_username                            ip.isp
+              data_providers                                  ip.location.area_code
+              discovered_by                                   ip.location.city
+              dns_domain.fqdn                                 ip.location.country_code
+              dns_domain.isps                                 ip.location.country_name
+              dns_domain.parent_domain                        ip.location.postal_code
+              dns_domain.resolved_ips                         ip.location.region_code
+              dns_domain.services.applications.category       ip.location.region_name
+              dns_domain.services.applications.cpe            ip.location.timezone
+              dns_domain.services.applications.name           ip.ptr
+              dns_domain.services.applications.vendor         ip.aid
+              dns_domain.services.applications.version        ip.services.applications.category
+              dns_domain.services.cloud_provider              ip.services.applications.cpe
+              dns_domain.services.cpes                        ip.services.applications.name
+              dns_domain.services.hosting_provider            ip.services.applications.vendor
+              dns_domain.services.id                          ip.services.applications.version
+              dns_domain.services.platform_name               ip.services.cloud_provider
+              dns_domain.services.port                        ip.services.cpes
+              dns_domain.services.protocol                    ip.services.platform_name
+              dns_domain.services.protocol_port               ip.services.port
+              dns_domain.services.status                      ip.services.protocol
+              dns_domain.services.status_code                 ip.services.protocol_port
+              dns_domain.services.transport                   ip.services.status
+              dns_domain.type                                 ip.services.status_code
+              id                                              ip.services.transport
+              internet_exposure                               manual
+              ip.asn                                          perimeter
+              ip.cloud_vm.instance_id                         subsidiaries.id
+              ip.cloud_vm.lifecycle                           subsidiaries.name
+              ip.cloud_vm.mac_address                         triage.action
+              ip.cloud_vm.owner_id                            triage.assigned_to
+              ip.cloud_vm.platform                            triage.status
+              ip.cloud_vm.private_ip                          triage.updated_by
+              ip.cloud_vm.public_ip                           ip.cloud_vm.region
+            Available filter fields that supports in ([v1, v2]):
+              asset_id                                        ip.cloud_vm.source
+              asset_type                                      ip.cloud_vm.status
+              confidence                                      ip.fqdns
+              connectivity_status                             ip.isp
+              criticality                                     ip.location.area_code
+              criticality_username                            ip.location.city
+              data_providers                                  ip.location.country_code
+              discovered_by                                   ip.location.country_name
+              dns_domain.fqdn                                 ip.location.postal_code
+              dns_domain.isps                                 ip.location.region_code
+              dns_domain.parent_domain                        ip.location.region_name
+              dns_domain.services.applications.category       ip.location.timezone
+              dns_domain.services.applications.cpe            ip.ptr
+              dns_domain.services.applications.name           ip.aid
+              dns_domain.services.applications.vendor         ip.services.applications.category
+              dns_domain.services.applications.version        ip.services.applications.cpe
+              dns_domain.services.cloud_provider              ip.services.applications.name
+              dns_domain.services.cpes                        ip.services.applications.vendor
+              dns_domain.services.id                          ip.services.applications.version
+              dns_domain.services.platform_name               ip.services.cloud_provider
+              dns_domain.services.port                        ip.services.cpes
+              dns_domain.services.protocol                    ip.services.platform_name
+              dns_domain.services.protocol_port               ip.services.port
+              dns_domain.services.status                      ip.services.protocol
+              dns_domain.services.status_code                 ip.services.protocol_port
+              dns_domain.services.transport                   ip.services.status
+              dns_domain.type                                 ip.services.status_code
+              id                                              ip.services.transport
+              internet_exposure                               manual
+              ip.asn                                          perimeter
+              ip.cloud_vm.instance_id                         subsidiaries.id
+              ip.cloud_vm.lifecycle                           subsidiaries.name
+              ip.cloud_vm.mac_address                         triage.action
+              ip.cloud_vm.owner_id                            triage.assigned_to
+              ip.cloud_vm.platform                            triage.status
+              ip.cloud_vm.region                              triage.updated_by
+              ip.cloud_vm.security_groups
+            Available filter fields that supports range comparisons (>, <, >=, <=):
+              criticality_timestamp                           ip.cloud_vm.public_ip
+              dns_domain.resolved_ips                         ip.ip_address
+              dns_domain.services.first_seen                  ip.services.first_seen
+              dns_domain.services.last_seen                   ip.services.last_seen
+              dns_domain.services.port                        ip.services.port
+              dns_domain.services.status_code                 ip.services.status_code
+              first_seen                                      last_seen
+              ip.cloud_vm.private_ip                          triage.updated_timestamp
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

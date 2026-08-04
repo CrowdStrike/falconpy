@@ -66,8 +66,16 @@ class MLExclusions(ServiceClass):
     def aggregate_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get exclusion aggregates as specified via json in request body.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.aggregates.v2
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 {
                     "date_ranges": [
                         {
@@ -116,36 +124,55 @@ class MLExclusions(ServiceClass):
                     "time_zone": "string",
                     "type": "string"
                 }
-        date_ranges -- Date range timeframe. List of dictionaries.
-        exclude -- Fields to exclude from results. String.
-        extended_bounds -- Extended bounds for histogram aggregations. Dictionary.
-        field -- Field to aggregate on. String.
-        filter -- Filter criteria in the form of an FQL query. String.
-        filters_spec -- Additional filter specifications. Dictionary.
-        from -- Starting index of overall result set. Integer.
-        include -- Fields to include in results. String.
-        interval -- Time interval for date histogram aggregations. String.
-        max_doc_count -- Maximum number of documents per bucket. Integer.
-        min_doc_count -- Minimum number of documents per bucket. Integer.
-        missing -- Value to use for documents missing the field. String.
-        name -- Name of the aggregation. String.
-        percents -- Percentile values to calculate. List of floats.
-        q -- Full text search query. String.
-        ranges -- Range boundaries for range aggregations. List of dictionaries.
-        size -- Maximum number of records to return. Integer.
-        sort -- The field to sort on. String.
-        sub_aggregates -- Nested aggregation definitions. List of dictionaries.
-        time_zone -- Time zone for date histogram aggregations. String.
-        type -- Type of aggregation to perform. String.
+        date_ranges : list[dict]
+            Date range timeframe.
+        exclude : str
+            Fields to exclude from results.
+        extended_bounds : dict
+            Extended bounds for histogram aggregations.
+        field : str
+            Field to aggregate on.
+        filter : str
+            Filter criteria in the form of an FQL query.
+        filters_spec : dict
+            Additional filter specifications.
+        from : int
+            Starting index of overall result set.
+        include : str
+            Fields to include in results.
+        interval : str
+            Time interval for date histogram aggregations.
+        max_doc_count : int
+            Maximum number of documents per bucket.
+        min_doc_count : int
+            Minimum number of documents per bucket.
+        missing : str
+            Value to use for documents missing the field.
+        name : str
+            Name of the aggregation.
+        percents : list
+            Percentile values to calculate. List of floats.
+        q : str
+            Full text search query.
+        ranges : list[dict]
+            Range boundaries for range aggregations.
+        size : int
+            Maximum number of records to return.
+        sort : str
+            The field to sort on.
+        sub_aggregates : list[dict]
+            Nested aggregation definitions.
+        time_zone : str
+            Time zone for date histogram aggregations.
+        type : str
+            Type of aggregation to perform.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.aggregates.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aggregate_payload(submitted_keywords=kwargs)
@@ -161,12 +188,20 @@ class MLExclusions(ServiceClass):
     def get_all_exclusions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all exclusions.
 
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.get-all.v2
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -184,11 +219,20 @@ class MLExclusions(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Actions used to manipulate the content of exclusions, with ancestor fields.
 
-        Keyword arguments:
-        action_name -- The action to perform. String.
-                       Available values:
-                            add_item    remove_item     validate_filepath
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.perform-action.v2
+
+        Keyword arguments
+        -----------------
+        action_name : str
+            The action to perform. String.
+            Available values:
+                 add_item    remove_item     validate_filepath
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "action_parameters": [
                         {
@@ -202,22 +246,27 @@ class MLExclusions(ServiceClass):
                     "label": "string",
                     "name": "string"
                 }
-        action_parameters -- Action-specific parameters. List of dictionary.
-        available -- Flag indicating if the action is available. Boolean.
-        description -- Description of the exclusion action. String.
-        group -- Group associated with the action. String.
-        label -- Display label for the action. String.
-        name -- Name of the action. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        action_parameters : list[dict]
+            Action-specific parameters.
+        available : bool
+            Flag indicating if the action is available.
+        description : str
+            Description of the exclusion action.
+        group : str
+            Group associated with the action.
+        label : str
+            Display label for the action.
+        name : str
+            Name of the action.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.perform-action.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ml_exclusions_actions_payload(passed_keywords=kwargs)
@@ -235,8 +284,16 @@ class MLExclusions(ServiceClass):
     def get_reports(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a report of ML exclusions scoped by the given filters.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.get-reports.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "report_format": "string",
                     "search": {
@@ -245,14 +302,14 @@ class MLExclusions(ServiceClass):
                     }
                 }
 
+
+
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.get-reports.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ml_exclusions_report_payload(passed_keywords=kwargs)
@@ -272,19 +329,28 @@ class MLExclusions(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the exclusions by id, with ancestor fields.
 
-        Keyword arguments:
-        ids -- The ids of the exclusions to retrieve. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.get.v2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The ids of the exclusions to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -298,8 +364,16 @@ class MLExclusions(ServiceClass):
     def create_exclusions_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create the exclusions, with ancestor fields.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.create.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "exclusions": [
                         {
@@ -316,16 +390,14 @@ class MLExclusions(ServiceClass):
                         }
                     ]
                 }
-        exclusions -- List of dictionary.
+        exclusions : list[dict]
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.create.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = {}
@@ -342,8 +414,16 @@ class MLExclusions(ServiceClass):
     def update_exclusions_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the exclusions by id, with ancestor fields.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.update.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "comment": "string",
                     "excluded_from": [
@@ -357,21 +437,27 @@ class MLExclusions(ServiceClass):
                     "parent_value": "string",
                     "value": "string"
                 }
-        comment -- Comment describing why the exclusion is updated. String.
-        excluded_from -- Exclusion sources. String or list of strings.
-        grandparent_value -- Grandparent process value for the exclusion. String.
-        groups -- Group IDs to associate with the exclusion. String or list of strings.
-        id -- Identifier of the exclusion to update. String.
-        parent_value -- Parent process value for the exclusion. String.
-        value -- Value to exclude. String.
+        comment : str
+            Comment describing why the exclusion is updated.
+        excluded_from : str or list[str]
+            Exclusion sources.
+        grandparent_value : str
+            Grandparent process value for the exclusion.
+        groups : str or list[str]
+            Group IDs to associate with the exclusion.
+        id : str
+            Identifier of the exclusion to update.
+        parent_value : str
+            Parent process value for the exclusion.
+        value : str
+            Value to exclude.
+
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.update.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ml_exclusions_update_payload(passed_keywords=kwargs)
@@ -387,19 +473,27 @@ class MLExclusions(ServiceClass):
     def delete_exclusions_v2(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete the exclusions by id, with ancestor fields.
 
-        Keyword arguments:
-        ids -- The ids of the exclusions to delete. String or list of strings.
-        comment -- The comment why these exclusions were deleted. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.delete.v2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The ids of the exclusions to delete.
+        comment : str
+            The comment why these exclusions were deleted.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -413,21 +507,31 @@ class MLExclusions(ServiceClass):
     def search_exclusions_v2(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for exclusions, with ancestor fields.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-        offset -- The offset to start retrieving records from. Integer.
-        limit -- The maximum records to return. [1-500]. Integer
-        sort -- The sort expression that should be used to sort the results. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.search.v2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results.
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return. [1-500]
+        sort : str
+            The sort expression that should be used to sort the results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -445,19 +549,28 @@ class MLExclusions(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a set of ML Exclusions by specifying their IDs.
 
-        Keyword arguments:
-        ids -- The ids of the exclusions to retrieve. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/getMLExclusionsV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The ids of the exclusions to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -474,8 +587,16 @@ class MLExclusions(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create the ML exclusions.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/createMLExclusionsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "comment": "string",
                     "excluded_from": [
@@ -486,19 +607,20 @@ class MLExclusions(ServiceClass):
                     ],
                     "value": "string"
                 }
-        comment -- Comment describing why the exclusion is entered. String.
-        excluded_from -- String or list of strings.
-        groups -- Group IDs to exclude. List of strings.
-        value -- Value to exclude. String
+        comment : str
+            Comment describing why the exclusion is entered.
+        excluded_from : str or list[str]
+        groups : str or list[str]
+            Group IDs to exclude.
+        value : str
+            Value to exclude.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/createMLExclusionsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = exclusion_payload(passed_keywords=kwargs)
@@ -517,8 +639,16 @@ class MLExclusions(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the ML exclusions.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/updateMLExclusionsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "comment": "string",
                     "groups": [
@@ -528,20 +658,23 @@ class MLExclusions(ServiceClass):
                     "is_descendant_process": true,
                     "value": "string"
                 }
-        comment -- Comment describing why the exclusion is entered. String.
-        groups -- Group IDs to exclude. List of strings.
-        id -- Identifier of the exclusion to update. String.
-        is_descendant_process -- Flag indicating if the exclusion applies to descendant processes. Boolean.
-        value -- Value to exclude. String.
+        comment : str
+            Comment describing why the exclusion is entered.
+        groups : str or list[str]
+            Group IDs to exclude.
+        id : str
+            Identifier of the exclusion to update.
+        is_descendant_process : bool
+            Flag indicating if the exclusion applies to descendant processes.
+        value : str
+            Value to exclude.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/updateMLExclusionsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ml_exclusions_update_payload(passed_keywords=kwargs)
@@ -556,19 +689,28 @@ class MLExclusions(ServiceClass):
     def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a set of ML Exclusions by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of exclusion IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/getMLExclusionsV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of exclusion IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -582,8 +724,16 @@ class MLExclusions(ServiceClass):
     def create_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create the ML exclusions.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/createMLExclusionsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "comment": "string",
                     "excluded_from": [
@@ -594,19 +744,21 @@ class MLExclusions(ServiceClass):
                     ],
                     "value": "string"
                 }
-        comment -- String comment describing why the exclusion is entered.
-        excluded_from -- Exclusion sources to apply. String or list of strings.
-        groups -- Group IDs to exclude. List of strings.
-        value -- Value to exclude. String
+        comment : str
+            String comment describing why the exclusion is entered.
+        excluded_from : str or list[str]
+            Exclusion sources to apply.
+        groups : str or list[str]
+            Group IDs to exclude.
+        value : str
+            Value to exclude.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/createMLExclusionsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = exclusion_payload(passed_keywords=kwargs)
@@ -625,20 +777,30 @@ class MLExclusions(ServiceClass):
     def delete_exclusions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete the ML Exclusions by ID.
 
-        Keyword arguments:
-        comment -- Explains why this exclusions was deleted. String.
-        ids -- List of exclusion IDs to delete. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/deleteMLExclusionsV1
+
+        Keyword arguments
+        -----------------
+        comment : str
+            Explains why this exclusions was deleted.
+        ids : str or list[str]
+            List of exclusion IDs to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -652,8 +814,16 @@ class MLExclusions(ServiceClass):
     def update_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the ML Exclusions.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/updateMLExclusionsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "comment": "string",
                     "groups": [
@@ -663,20 +833,23 @@ class MLExclusions(ServiceClass):
                     "is_descendant_process": boolean,
                     "value": "string"
                 }
-        comment -- String comment describing why the exclusion is entered.
-        groups -- Group IDs to exclude. List of strings.
-        id -- Exclusion ID to update. String.
-        is_descendant_process -- Flag indicating if this is a descendant process. Boolean.
-        value -- Value to exclude. String
+        comment : str
+            String comment describing why the exclusion is entered.
+        groups : str or list[str]
+            Group IDs to exclude.
+        id : str
+            Exclusion ID to update.
+        is_descendant_process : bool
+            Flag indicating if this is a descendant process.
+        value : str
+            Value to exclude.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/updateMLExclusionsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = exclusion_payload(passed_keywords=kwargs)
@@ -694,33 +867,43 @@ class MLExclusions(ServiceClass):
     def query_exclusions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for ML Exclusions.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  An asterisk wildcard '*' includes all results.
-                  AVAILABLE FILTERS
-                  applied_globally            last_modified
-                  created_by                  modified_by
-                  created_on                  value
-        limit -- The maximum number of detections to return in this response.
-                 [Integer, default: 100; max: 500]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The first detection to return, where 0 is the latest detection.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. last_behavior|asc).
-                Available sort fields:
-                applied_globally            last_modified
-                created_by                  modified_by
-                created_on                  value
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/queryMLExclusionsV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            An asterisk wildcard '*' includes all results.
+            AVAILABLE FILTERS
+            applied_globally            last_modified
+            created_by                  modified_by
+            created_on                  value
+        limit : int
+            The maximum number of detections to return in this response.
+            [Integer, default: 100; max: 500]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The first detection to return, where 0 is the latest detection.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. last_behavior|asc).
+            Available sort fields:
+            applied_globally            last_modified
+            created_by                  modified_by
+            created_on                  value
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

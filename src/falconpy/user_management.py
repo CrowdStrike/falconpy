@@ -66,8 +66,16 @@ class UserManagement(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get user aggregates.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/aggregateUsersV1
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -106,39 +114,46 @@ class UserManagement(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        extended_bounds -- Extended bounds. Dictionary containing "min" and "max" as strings.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        extended_bounds : dict
+            Extended bounds. Dictionary containing "min" and "max" as strings.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/aggregateUsersV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -167,7 +182,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/combinedUserRolesV1
 
         Keyword arguments
-        ----
+        -----------------
         cid : str
             Customer ID to get grants for. An empty CID value returns Role IDs for
             the user against the current CID in view.
@@ -191,12 +206,12 @@ class UserManagement(ServiceClass):
             Must be provided as a keyword, argument or part of the `parameters` payload.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be `user_uuid`.
         All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -221,7 +236,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/CombinedUserRolesV2
 
         Keyword arguments
-        ----
+        -----------------
         cid : str
             Customer ID to get grants for. An empty CID value returns Role IDs for
             the user against the current CID in view.
@@ -245,12 +260,12 @@ class UserManagement(ServiceClass):
             Must be provided as a keyword, argument or part of the `parameters` payload.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be `user_uuid`.
         All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -277,7 +292,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/entitiesRolesGETV2
 
         Keyword arguments
-        ----
+        -----------------
         cid : str
             Customer ID to get available roles for.
             Providing no value for `cid` returns results for the current CID.
@@ -288,12 +303,12 @@ class UserManagement(ServiceClass):
             Full parameters payload in JSON format, not required if `ids` is provided as a keyword.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be `ids`.
         All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -337,7 +352,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/entitiesRolesV1
 
         Keyword arguments
-        ----
+        -----------------
         cid : str
             Customer ID to get available roles for.
             Providing no value for `cid` returns results for the current CID.
@@ -348,12 +363,12 @@ class UserManagement(ServiceClass):
             Full parameters payload in JSON format, not required if `ids` is provided as a keyword.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be `ids`.
         All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -375,7 +390,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/userActionV1
 
         Keyword arguments
-        ----
+        -----------------
         action_name : str (required)
             Action to perform. Allowed values: reset_2fa, reset_password.
             Must be provided as a keyword or as part of the `body` payload.
@@ -397,11 +412,11 @@ class UserManagement(ServiceClass):
             Must be provided as a keyword or as part of the `body` payload.
 
         Arguments
-        ----
+        ---------
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -432,7 +447,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/userRolesActionV1
 
         Keyword arguments
-        ----
+        -----------------
         action : str (required)
             Action to perform. Allowed values: grant, revoke.
             Must be provided as a keyword or as part of the `body` payload.
@@ -457,11 +472,11 @@ class UserManagement(ServiceClass):
             Must be provided as a keyword or as part of the `body` payload.
 
         Arguments
-        ----
+        ---------
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -490,7 +505,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/retrieveUsersGETV1
 
         Keyword arguments
-        ----
+        -----------------
         body : str
             Full body payload in JSON format.
             Not required if `ids` is provided as an argument or keyword.
@@ -504,12 +519,12 @@ class UserManagement(ServiceClass):
             Must be provided as an argument, keyword, or part of the `body` payload.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be `ids`.
         All others are ignored. The `ids` keyword takes precedence.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -540,7 +555,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/createUserV1
 
         Keyword arguments
-        ----
+        -----------------
         body : str
             Full body payload in JSON format, not required when using other keywords.
                 {
@@ -569,11 +584,11 @@ class UserManagement(ServiceClass):
             the activation email to set their own password.
 
         Arguments
-        ----
+        ---------
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -608,7 +623,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/deleteUserV1
 
         Keyword arguments
-        ----
+        -----------------
         user_uuid : str (required)
             User ID to delete.
             Must be provided as a keyword or as part of the `parameters` payload.
@@ -616,12 +631,12 @@ class UserManagement(ServiceClass):
             Full parameters payload in JSON format, not required if `user_uuid` keyword is provided.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be `user_uuid`.
         All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -647,7 +662,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/updateUserV1
 
         Keyword arguments
-        ----
+        -----------------
         body : str
             Full body payload in JSON format, not required if `first_name` and `last_name` keywords
             are provided.
@@ -666,11 +681,11 @@ class UserManagement(ServiceClass):
             Must be provided as a keyword or as part of the `parameters` payload.
 
         Arguments
-        ----
+        ---------
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -701,7 +716,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/queriesRolesV1
 
         Keyword arguments
-        ----
+        -----------------
         action : str
             Actionable purpose of the query. Default: grant
         cid : str
@@ -714,12 +729,12 @@ class UserManagement(ServiceClass):
             all role IDs available for the customer.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be `user_uuid`.
         All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -743,7 +758,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/queryUserV1
 
         Keyword arguments
-        ----
+        -----------------
         filter : str
             The filter expression that should be used to limit the results. FQL format.
             Allowed values:
@@ -765,11 +780,11 @@ class UserManagement(ServiceClass):
             last_login_at, last_name, name, status, temporarily_assigned_cids, uid
 
         Arguments
-        ----
+        ---------
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -793,7 +808,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GetRoles
 
         Keyword arguments
-        ----
+        -----------------
         ids : str or list[str] (required)
             List of role IDs to retrieve. Comma-delimited strings accepted.
             Must be provided as a keyword, argument or part of the `parameters` payload.
@@ -801,12 +816,12 @@ class UserManagement(ServiceClass):
             Full parameters payload in JSON format, not required if `ids` is provided as a keyword.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be `ids`.
         All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -834,7 +849,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GrantUserRoleIds
 
         Keyword arguments
-        ----
+        -----------------
         body : str
             Full body payload, not required when `role_ids` keyword is used.
                 {
@@ -852,11 +867,11 @@ class UserManagement(ServiceClass):
             Must be provided as a keyword or as part of the `parameters` payload.
 
         Arguments
-        ----
+        ---------
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -889,7 +904,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RevokeUserRoleIds
 
         Keyword arguments
-        ----
+        -----------------
         ids : str or list[str] (required)
             List of role IDs.
             Must be provided as a keyword or as part of the `parameters` payload.
@@ -899,11 +914,11 @@ class UserManagement(ServiceClass):
             User ID to revoke roles for.
 
         Arguments
-        ----
+        ---------
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -928,15 +943,15 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GetAvailableRoleIds
 
         Keyword arguments
-        ----
+        -----------------
         This method does not accept keywords.
 
         Arguments
-        ----
+        ---------
         This method does not accept arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -964,7 +979,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GetUserRoleIds
 
         Keyword arguments
-        ----
+        -----------------
         user_uuid : str (required)
             User ID to retrieve roles for.
             Must be provided as a keyword or as part of the `parameters` payload.
@@ -972,12 +987,12 @@ class UserManagement(ServiceClass):
             Full parameters payload in JSON format, not required if `user_uuid` keyword is provided.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be `user_uuid`.
         All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -1001,7 +1016,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveUser
 
         Keyword arguments
-        ----
+        -----------------
         ids : str or list[str] (required)
             List of User IDs to retrieve. Comma-delimited strings accepted.
             Must be provided as a keyword or as part of the `parameters` payload.
@@ -1009,12 +1024,12 @@ class UserManagement(ServiceClass):
             Full parameters payload in JSON format, not required if `ids` is provided as a keyword.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be `ids`.
         All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -1040,7 +1055,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/CreateUser
 
         Keyword arguments
-        ----
+        -----------------
         body : str
             Full body payload in JSON format, not required when using other keywords.
                 {
@@ -1065,11 +1080,11 @@ class UserManagement(ServiceClass):
             the activation email to set their own password.
 
         Arguments
-        ----
+        ---------
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -1100,7 +1115,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/DeleteUser
 
         Keyword arguments
-        ----
+        -----------------
         user_uuid : str (required)
             User ID to delete.
             Must be provided as a keyword or as part of the `parameters` payload.
@@ -1108,12 +1123,12 @@ class UserManagement(ServiceClass):
             Full parameters payload in JSON format, not required if `user_uuid` keyword is provided.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be `user_uuid`.
         All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -1141,7 +1156,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/UpdateUser
 
         Keyword arguments
-        ----
+        -----------------
         body : str
             Full body payload in JSON format, not required `first_name` and `last_name` keywords
             are provided.
@@ -1160,11 +1175,11 @@ class UserManagement(ServiceClass):
             Must be provided as a keyword or as part of the `parameters` payload.
 
         Arguments
-        ----
+        ---------
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -1194,15 +1209,15 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveEmailsByCID
 
         Keyword arguments
-        ----
+        -----------------
         This method does not accept keywords.
 
         Arguments
-        ----
+        ---------
         This method does not accept arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -1225,15 +1240,15 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveUserUUIDsByCID
 
         Keyword arguments
-        ----
+        -----------------
         This method does not accept keywords.
 
         Arguments
-        ----
+        ---------
         This method does not accept arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -1259,7 +1274,7 @@ class UserManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveUserUUID
 
         Keyword arguments
-        ----
+        -----------------
         uid : str or list[str] (required)
             List of User IDs to retrieve.
             Must be provided as a keyword or as part of the `parameters` payload.
@@ -1267,12 +1282,12 @@ class UserManagement(ServiceClass):
             Full parameters payload in JSON format, not required if `uid` is provided as a keyword.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be `uid`.
         All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """

@@ -60,8 +60,16 @@ class QuickScan(ServiceClass):
     def get_scans_aggregates(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scans aggregations as specified via json in request body.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/GetScansAggregates
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 {
                     "date_ranges": [
                         {
@@ -90,31 +98,34 @@ class QuickScan(ServiceClass):
                     "time_zone": "string",
                     "type": "string"
                 }
-        date_ranges -- List of dictionaries.
-        field -- String.
-        filter -- FQL syntax. String.
-        interval -- String.
-        min_doc_count -- Minimum number of documents required to match. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+        field : str
+        filter : str
+            FQL syntax.
+        interval : str
+        min_doc_count : int
+            Minimum number of documents required to match.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
+            String.
+            This method does not support body payload validation.
 
         This method only supports keywords for providing arguments.
 
-        This method does not support body payload validation.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/GetScansAggregates
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aggregate_payload(submitted_keywords=kwargs)
@@ -133,19 +144,28 @@ class QuickScan(ServiceClass):
         Time required for analysis increases with the number of samples in a volume
         but usually it should take less than 1 minute.
 
-        Keyword arguments:
-        ids -- One or more remediation IDs. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/GetScans
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more remediation IDs.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -159,25 +179,34 @@ class QuickScan(ServiceClass):
     def scan_samples(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scans aggregations as specified via json in request body.
 
-        Keyword arguments:
-        body -- full body payload, not required when samples keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/ScanSamples
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when samples keyword is provided.
                 {
                     "samples": [
                         "string"
                     ]
                 }
-        samples -- SHA256(s) of the samples to scan. Must have been previously submitted using
-                   SampleUploadV3 (SampleUploads class). String or list of strings.
+        samples : str or list[str]
+            SHA256(s) of the samples to scan. Must have been previously submitted using
+            SampleUploadV3 (SampleUploads class)
 
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'samples'. All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'samples'. All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/ScanSamples
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_arguments=args,
@@ -200,21 +229,31 @@ class QuickScan(ServiceClass):
 
         Returns a set of volume IDs that match your criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return. [integer, 1-5000]
-        offset -- The integer offset to start retrieving records from.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/QuerySubmissionsMixin0
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int (1-5000)
+            The maximum number of records to return.
+        offset : str
+            The integer offset to start retrieving records from.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

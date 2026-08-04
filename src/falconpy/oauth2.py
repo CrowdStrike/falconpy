@@ -104,7 +104,7 @@ class OAuth2(FalconInterface):
         such as the base URL, SSL verification, and timeout.
 
         Keyword arguments
-        ----
+        -----------------
         base_url : str
             CrowdStrike API URL to use for requests. [Default: US-1]
         ssl_verify : bool
@@ -135,11 +135,11 @@ class OAuth2(FalconInterface):
             behavior is unchanged and a new connection is used for each request.
 
         Arguments
-        ----
+        ---------
         This method only supports keywords to specify arguments.
 
         Returns
-        ----
+        -------
         class (OAuth2)
             A constructed instance of the OAuth2 Service Class.
         """
@@ -166,15 +166,15 @@ class OAuth2(FalconInterface):
         """Revoke the current token.
 
         Keyword arguments
-        ----
+        -----------------
         This method does not accept keyword arguments.
 
         Arguments
-        ----
+        ---------
         This method does not accept arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -203,11 +203,11 @@ class OAuth2(FalconInterface):
         HTTP Method: POST
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/oauth2/oauth2RevokeToken
 
         Keyword arguments
-        ----
+        -----------------
         client_id : str
             Client ID of the token to be revoked.
         token : str
@@ -216,11 +216,11 @@ class OAuth2(FalconInterface):
             Flag indicating if the underlying authentication state is changed by this request.
 
         Arguments
-        ----
+        ---------
         When not specified as a keyword, token is assumed as the only accepted argument.
 
         Returns
-        ----
+        -------
         dict
             Dictionary containing API response.
         """
@@ -232,20 +232,20 @@ class OAuth2(FalconInterface):
         HTTP Method: POST
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/oauth2/oauth2AccessToken
 
         Keyword arguments
-        ----
+        -----------------
         alter_state : bool
             Flag indicating if the underlying authentication state is changed by this request.
 
         Arguments
-        ----
+        ---------
         When not specified as a keyword, alter_state is assumed as the only accepted argument.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """

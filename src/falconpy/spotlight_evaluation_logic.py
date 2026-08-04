@@ -65,28 +65,38 @@ class SpotlightEvaluationLogic(ServiceClass):
 
         Returns a set of evaluation logic entities which match the filter criteria.
 
-        Keyword arguments:
-        after -- A pagination token used with the limit parameter to manage pagination of results.
-                 On your first request, don't provide an after token. On subsequent requests,
-                 provide the after token from the previous response to continue from that place in
-                 the results.
-        filter -- Filter items using a query in Falcon Query Language (FQL).
-                  Wildcards '*' are unsupported.
-        limit -- The number of items to return in this response (default: 100, max: 400).
-                 Use with the after parameter to manage pagination of results. Integer.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by.
-                FQL syntax (e.g. created_timestamp|desc, closed_timestamp|asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /spotlight-evaluation-logic/combinedQueryEvaluationLogic
+        /spotlight-evaluation-logic/combinedQueryEvaluationLogic
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the limit parameter to manage pagination of results.
+            On your first request, don't provide an after token. On subsequent requests,
+            provide the after token from the previous response to continue from that place in
+            the results.
+        filter : str
+            Filter items using a query in Falcon Query Language (FQL).
+            Wildcards '*' are unsupported.
+        limit : int
+            The number of items to return in this response (default: 100, max: 400).
+            Use with the after parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by.
+            FQL syntax (e.g. created_timestamp|desc, closed_timestamp|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not kwargs.get("filter", None) and not parameters.get("filter", None):
             fail_msg = [
@@ -116,19 +126,28 @@ class SpotlightEvaluationLogic(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on evaluation logic items by providing one or more IDs.
 
-        Keyword arguments:
-        ids -- One or more evaluation logic IDs (max: 400). String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-evaluation-logic/getEvaluationLogic
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more evaluation logic IDs (max: 400)
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -147,27 +166,37 @@ class SpotlightEvaluationLogic(ServiceClass):
 
         Returns a set of evaluation logic IDs which match the filter criteria.
 
-        Keyword arguments:
-        after -- A pagination token used with the limit parameter to manage pagination of results.
-                 On your first request, don't provide an after token. On subsequent requests,
-                 provide the after token from the previous response to continue from that place in
-                 the results.
-        filter -- Filter items using a query in Falcon Query Language (FQL).
-                  Wildcards '*' are unsupported.
-        limit -- The number of items to return in this response (default: 100, max: 400).
-                 Use with the after parameter to manage pagination of results. Integer.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by.
-                FQL syntax (e.g. created_timestamp|desc, closed_timestamp|asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-evaluation-logic/queryEvaluationLogic
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the limit parameter to manage pagination of results.
+            On your first request, don't provide an after token. On subsequent requests,
+            provide the after token from the previous response to continue from that place in
+            the results.
+        filter : str
+            Filter items using a query in Falcon Query Language (FQL).
+            Wildcards '*' are unsupported.
+        limit : int
+            The number of items to return in this response (default: 100, max: 400).
+            Use with the after parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by.
+            FQL syntax (e.g. created_timestamp|desc, closed_timestamp|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -184,36 +213,48 @@ class SpotlightEvaluationLogic(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform a combined query and get for RiskSupportedEvaluation entities.
 
-        Keyword arguments:
-        after -- A pagination token used with the limit parameter to manage pagination
-                 of results. On your first request, don't provide an after token. On
-                 subsequent requests, provide the after token from the previous response
-                 to continue from that place in the results. String.
-        filter -- Filter items using a query in Falcon Query Language (FQL). String.
-                  Wildcards * and empty filter values are unsupported.
-                  Available filter fields that support exact match:
-                    id                risk_id
-                    risk_provider     finding_provider
-                    platform
-                  Available filter fields that support range comparisons (>, <, >=, <=):
-                    created_timestamp   updated_timestamp
-        limit -- The number of items to return in this response (default: 100, max: 400).
-                 Use with the after parameter to manage pagination of results. Integer.
-        offset -- Starting index of overall result set from which to return ids. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        risk_provider -- Zero or more risk providers. Zero means all. String or list of strings.
-                         Supported values: S (for Falcon sensor).
-        sort -- Sort vulnerabilities by their properties. String.
-                Available sort options: created_timestamp|asc/desc, updated_timestamp|asc/desc.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-supported-evaluation/combinedSupportedEvaluationExt
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the limit parameter to manage pagination
+            of results. On your first request, don't provide an after token. On
+            subsequent requests, provide the after token from the previous response
+            to continue from that place in the results.
+        filter : str
+            Filter items using a query in Falcon Query Language (FQL). String.
+            Wildcards * and empty filter values are unsupported.
+            Available filter fields that support exact match:
+              id                risk_id
+              risk_provider     finding_provider
+              platform
+            Available filter fields that support range comparisons (>, <, >=, <=):
+              created_timestamp   updated_timestamp
+        limit : int
+            The number of items to return in this response (default: 100, max: 400).
+            Use with the after parameter to manage pagination of results.
+        offset : str
+            Starting index of overall result set from which to return ids.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        risk_provider : str or list[str]
+            Zero or more risk providers. Zero means all. String or list of strings.
+            Supported values: S (for Falcon sensor).
+        sort : str
+            Sort vulnerabilities by their properties. String.
+            Available sort options: created_timestamp|asc/desc, updated_timestamp|asc/desc.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

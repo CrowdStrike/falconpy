@@ -65,23 +65,33 @@ class QuickScanPro(ServiceClass):
     def upload_file(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload a file to be further analyzed with QuickScan Pro. The samples expire after 90 days.
 
-        Keyword arguments:
-        file -- Binary file to be uploaded. Max file size: 256 MB.
-        scan -- If true, after upload, it starts scanning immediately. Default scan mode is 'false'
-        file_name -- Name of the file uploaded. Defaults to "UploadedFile".
-        password -- MULTIPART ONLY - Password for encrypted archives (use for multipart/form-data uploads).
-        If 'scan' is true, the value is used for the scan just starting. String.
-        x_file_password -- OCTET-STREAM ONLY - Password for encrypted archives (use for octet-stream uploads).
-        If 'scan' is true, the value is used for the scan just starting. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan-pro/UploadFileQuickScanPro
+
+        Keyword arguments
+        -----------------
+        file : str
+            Binary file to be uploaded. Max file size: 256 MB.
+        scan : str
+            If true, after upload, it starts scanning immediately. Default scan mode is 'false'
+        file_name : str
+            Name of the file uploaded. Defaults to "UploadedFile".
+        password : str
+            MULTIPART ONLY - Password for encrypted archives (use for multipart/form-data uploads).
+            If 'scan' is true, the value is used for the scan just starting.
+        x_file_password : str
+            OCTET-STREAM ONLY - Password for encrypted archives (use for octet-stream uploads).
+            If 'scan' is true, the value is used for the scan just starting.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         header_payload = json.loads(json.dumps(self.headers))
         if kwargs.get("x_file_password"):
@@ -116,19 +126,28 @@ class QuickScanPro(ServiceClass):
     def delete_file(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete file by its sha256 identifier.
 
-        Keyword arguments:
-        ids -- File's SHA256 to be deleted. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan-pro/DeleteFile
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            File's SHA256 to be deleted.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -142,19 +161,28 @@ class QuickScanPro(ServiceClass):
     def get_scan_result(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the result of an QuickScan Pro scan.
 
-        Keyword arguments:
-        ids -- Scan IDs previously created by the LaunchScan operation. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan-pro/GetScanResult
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Scan IDs previously created by the LaunchScan operation.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -168,8 +196,16 @@ class QuickScanPro(ServiceClass):
     def launch_scan(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Start scanning a file uploaded through '/quickscanpro/entities/files/v1'.
 
-        Keyword arguments:
-        body -- Full body payload in dictionary format. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan-pro/LaunchScan
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in dictionary format. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -177,16 +213,15 @@ class QuickScanPro(ServiceClass):
                         }
                     ]
                 }
-        sha256 -- SHA256 hash of the file to be scanned. String.
+        sha256 : str
+            SHA256 hash of the file to be scanned.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan-pro/LaunchScan
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body["resources"] = []
@@ -212,19 +247,28 @@ class QuickScanPro(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete the result of an QuickScan Pro scan.
 
-        Keyword arguments:
-        ids -- Scan IDs previously created by the LaunchScan operation. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan-pro/DeleteScanResult
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Scan IDs previously created by the LaunchScan operation.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -238,22 +282,32 @@ class QuickScanPro(ServiceClass):
     def query_scan_results(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get QuickScan Pro scan jobs for a given FQL filter.
 
-        Keyword arguments:
-        filter -- FQL query which contains the SHA256 field. String.
-        offset -- The offset to start retrieving IDs from. Integer.
-        limit -- Maximum number of IDs to return. Max: 5000. Integer.
-        sort -- Sort order in FQL format: `asc` or `desc`.
-                Supported field: `created_timestamp`. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan-pro/QueryScanResults
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query which contains the SHA256 field.
+        offset : int
+            The offset to start retrieving IDs from.
+        limit : int
+            Maximum number of IDs to return. Max: 5000.
+        sort : str
+            Sort order in FQL format: `asc` or `desc`.
+            Supported field: `created_timestamp`
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

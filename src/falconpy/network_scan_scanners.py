@@ -63,8 +63,16 @@ class NetworkScanScanners(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return scanners aggregations.
 
-        Keyword arguments:
-        body -- Full body payload as a list of dictionaries in JSON format.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scanners/aggregate_scanners
+
+        Keyword arguments
+        -----------------
+        body : list
+            Full body payload as a list of dictionaries in JSON format.
                 [{
                     "date_ranges": [{}],
                     "exclude": "string",
@@ -85,14 +93,14 @@ class NetworkScanScanners(ServiceClass):
                     "type": "string"
                 }]
 
+
+
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scanners/aggregate_scanners
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -112,19 +120,28 @@ class NetworkScanScanners(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scanners by their IDs.
 
-        Keyword arguments:
-        ids -- IDs of scanners to be retrieved (Min: 1, Max: 100). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scanners/get_scanners
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of scanners to be retrieved (Min: 1, Max: 100)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -141,26 +158,34 @@ class NetworkScanScanners(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update scanners using provided specifications.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scanners/update_scanners
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "action": "string",
                     "aids": [
                         "string"
                     ]
                 }
-        action -- The action to take on the provided set of scanners.
-                  Allowed values: add, remove. Required. String.
-        aids -- The AIDs of scanners to act on. Required. List of strings.
+        action : str (required)
+            The action to take on the provided set of scanners.
+            Allowed values: add, remove.
+        aids : str or list[str] (required)
+            The AIDs of scanners to act on.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scanners/update_scanners
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = network_scan_scanners_payload(passed_keywords=kwargs)
@@ -179,24 +204,34 @@ class NetworkScanScanners(ServiceClass):
                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scanner IDs by filter.
 
-        Keyword arguments:
-        offset -- An offset used with the limit parameter to manage pagination of results. On your first request, don’t provide
-                  an offset. On subsequent requests, add previous offset with the previous limit to continue from that place in
-                  the results Integer.
-        limit -- The number of scanner IDs to return in this response (Min: 1, Max: 100,
-                 Default: 100). Integer.
-        sort -- Sort scanners by their properties. A single sort field is allowed. String.
-        filter -- Search for scanners by providing an FQL filter. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scanners/query_scanners
+
+        Keyword arguments
+        -----------------
+        offset : int
+            An offset used with the limit parameter to manage pagination of results. On your first request, don’t provide
+            an offset. On subsequent requests, add previous offset with the previous limit to continue from that place in
+            the results.
+        limit : int
+            The number of scanner IDs to return in this response (Min: 1, Max: 100,
+            Default: 100)
+        sort : str
+            Sort scanners by their properties. A single sort field is allowed.
+        filter : str
+            Search for scanners by providing an FQL filter.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

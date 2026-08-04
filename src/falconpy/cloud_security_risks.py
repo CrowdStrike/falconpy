@@ -63,19 +63,28 @@ class CloudSecurityRisks(ServiceClass):
                                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the enriched asset timeline.
 
-        Keyword arguments:
-        id -- The GCRN (Global Cloud Resource Name) of the asset String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-risks/cloud_security_timeline_risks_enriched
+
+        Keyword arguments
+        -----------------
+        id : str
+            The GCRN (Global Cloud Resource Name) of the asset.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

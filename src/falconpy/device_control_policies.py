@@ -76,25 +76,36 @@ class DeviceControlPolicies(ServiceClass):
         providing an FQL filter and paging details. Returns a set of host details
         which match the filter criteria.
 
-        Keyword arguments:
-        id -- The ID of the Device Control Policy to search for members of
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /device-control-policies/queryCombinedDeviceControlPolicyMembers
+        /device-control-policies/queryCombinedDeviceControlPolicyMembers
+
+        Keyword arguments
+        -----------------
+        id : str
+            The ID of the Device Control Policy to search for members of
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -114,28 +125,38 @@ class DeviceControlPolicies(ServiceClass):
         Search for Device Control Policies in your environment by providing an FQL filter and
         paging details. Returns a set of Device Control Policies which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-                created_by                      modified_timestamp
-                created_timestamp               name
-                enabled                         platform_name
-                modified_by                     precedence
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /device-control-policies/queryCombinedDeviceControlPolicies
+        /device-control-policies/queryCombinedDeviceControlPolicies
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+            created_by                      modified_timestamp
+            created_timestamp               name
+            enabled                         platform_name
+            modified_by                     precedence
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -148,18 +169,25 @@ class DeviceControlPolicies(ServiceClass):
     def get_default_policies(self: object) -> dict:
         """Retrieve the configuration for a Default Device Control Policy.
 
-        Keyword arguments:
-        This method does not accept keyword arguments.
-
-        Arguments: This method does not accept arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /device-control-policies/getDefaultDeviceControlPolicies
+        /device-control-policies/getDefaultDeviceControlPolicies
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Arguments
+        ---------
+        This method does not accept arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -171,17 +199,27 @@ class DeviceControlPolicies(ServiceClass):
     def update_default_policies(self: object, body: dict = None, **kwargs) -> dict:
         """Update Device Control Policies by specifying the ID of the policy and details to update.
 
-        Keyword arguments:
-        blocked_notification -- dictionary containing the custom message and enablement status
-                                for the blocked notification. Dictionary.
-                                {
-                                    "custom_message": "string",
-                                    "use_custom": true
-                                }
-        blocked_custom_message -- Message to use for blocked notifications. Using this keyword will
-                                  automatically generate the necessary blocked_notification dictionary.
-                                  String.
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        /device-control-policies/updateDefaultDeviceControlPolicies
+
+        Keyword arguments
+        -----------------
+        blocked_notification : str
+            dictionary containing the custom message and enablement status
+            for the blocked notification. Dictionary.
+            {
+                "custom_message": "string",
+                "use_custom": true
+            }
+        blocked_custom_message : str
+            Message to use for blocked notifications. Using this keyword will
+            automatically generate the necessary blocked_notification.
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "custom_notifications": {
                         "blocked_notification": {
@@ -194,25 +232,23 @@ class DeviceControlPolicies(ServiceClass):
                         }
                     }
                 }
-        restricted_custom_message -- message to use for restricted notifications. Using this keyword will
-                                  automatically generate the necessary restricted_notification dictionary.
-                                  String.
-        restricted_notification -- dictionary containing the custom message and enablement status
-                                   for the restricted notification. Dictionary.
-                                   {
-                                       "custom_message": "string",
-                                       "use_custom": true
-                                   }
+        restricted_custom_message : str
+            message to use for restricted notifications. Using this keyword will
+            automatically generate the necessary restricted_notification.
+        restricted_notification : str
+            dictionary containing the custom message and enablement status
+            for the restricted notification. Dictionary.
+            {
+                "custom_message": "string",
+                "use_custom": true
+            }
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /device-control-policies/updateDefaultDeviceControlPolicies
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = default_device_policy_config_payload(passed_keywords=kwargs)
@@ -232,15 +268,26 @@ class DeviceControlPolicies(ServiceClass):
                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform a Device Control Policy action.
 
-        Keyword arguments:
-        action_name -- action to perform: 'add-host-group', 'add-rule-group', 'disable', 'enable',
-                       'remove-rule-group' or 'remove-host-group'.
-        action_parameters -- Action specific parameter options. List of dictionaries.
-                             {
-                                 "name": "string",
-                                 "value": "string"
-                             }
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        /device-control-policies/performDeviceControlPoliciesAction
+
+        Keyword arguments
+        -----------------
+        action_name : str
+            action to perform: 'add-host-group', 'add-rule-group', 'disable', 'enable',
+            'remove-rule-group' or 'remove-host-group'.
+        action_parameters : list
+            Action specific parameter options. List of dictionaries.
+            {
+                "name": "string",
+                "value": "string"
+            }
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "action_parameters": [
                         {
@@ -252,20 +299,20 @@ class DeviceControlPolicies(ServiceClass):
                         "string"
                     ]
                 }
-        group_id -- Host Group ID to apply the policy to. String.
-                    Overridden if action_parameters is specified.
-        ids -- Device Control policy ID(s) to perform actions against. String or list of strings.
-        parameters - full parameters payload, not required if action_name is provided as a keyword.
+        group_id : str
+            Host Group ID to apply the policy to. String.
+            Overridden if action_parameters is specified.
+        ids : str or list[str]
+            Device Control policy ID(s) to perform actions against.
+        parameters : dict
+            full parameters payload, not required if action_name is provided as a keyword.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /device-control-policies/performDeviceControlPoliciesAction
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         _allowed_actions = ['add-host-group', 'disable', 'enable', 'remove-host-group']
         operation_id = "performDeviceControlPoliciesAction"
@@ -300,8 +347,17 @@ class DeviceControlPolicies(ServiceClass):
     def update_policy_classes(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update device control policy's classes (USB and Bluetooth).
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        /device-control-with-bluetooth/patchDeviceControlPoliciesClassesV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "policies": [
                         {
@@ -370,19 +426,19 @@ class DeviceControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        bluetooth_classes -- Bluetooth device control policy. Dictionary.
-        id -- Device control policy ID. String.
-        usb_classes -- USB device control policy. Dictionary.
+        bluetooth_classes : dict
+            Bluetooth device control policy.
+        id : str
+            Device control policy ID.
+        usb_classes : dict
+            USB device control policy.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /device-control-with-bluetooth/patchDeviceControlPoliciesClassesV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = device_classes_policy_payload(kwargs)
@@ -397,19 +453,25 @@ class DeviceControlPolicies(ServiceClass):
     def get_default_settings(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get default device control settings (USB and Bluetooth).
 
-        Keyword arguments:
-        This method does not accept keyword arguments.
-
-        Arguments:
-        This method does not accept arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /device-control-with-bluetooth/getDefaultDeviceControlSettings
+        /device-control-with-bluetooth/getDefaultDeviceControlSettings
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Arguments
+        ---------
+        This method does not accept arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -421,8 +483,17 @@ class DeviceControlPolicies(ServiceClass):
     def update_default_settings(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the configuration for Default Device Control Settings.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        /device-control-with-bluetooth/patchDeviceControlPoliciesClassesV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "bluetooth_custom_notifications": {
                         "blocked_notification": {
@@ -463,19 +534,19 @@ class DeviceControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        bluetooth_custom_notifications -- Custom bluetooth notifications. Dictionary.
-        usb_custom_notifications -- Custom USB notifications. Dictionary.
-        usb_exceptions -- USB exceptions. Dictionary or list of dictionaries.
+        bluetooth_custom_notifications : dict
+            Custom bluetooth notifications.
+        usb_custom_notifications : dict
+            Custom USB notifications.
+        usb_exceptions : dict or list[dict]
+            USB exceptions.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /device-control-with-bluetooth/patchDeviceControlPoliciesClassesV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = device_policy_bluetooth_config_payload(kwargs)
@@ -496,26 +567,34 @@ class DeviceControlPolicies(ServiceClass):
         specified will have the lowest. You must specify all non-Default Policies for a platform
         when updating precedence.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        /device-control-policies/performDeviceControlPoliciesAction
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "ids": [
                         "string"
                     ],
                     "platform_name": "Windows"
                 }
-        ids -- Device Control policy ID(s) to perform actions against. String or list of strings.
-        platform_name -- OS platform name.
+        ids : str or list[str]
+            Device Control policy ID(s) to perform actions against.
+        platform_name : str
+            OS platform name.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /device-control-policies/performDeviceControlPoliciesAction
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -533,20 +612,29 @@ class DeviceControlPolicies(ServiceClass):
     def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a set of Device Control Policies by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of Device Control Policy IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /device-control-policies/getDeviceControlPolicies
+        /device-control-policies/getDeviceControlPolicies
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Device Control Policy IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -560,8 +648,17 @@ class DeviceControlPolicies(ServiceClass):
     def create_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Device Control Policies by specifying details about the policy to create.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        /device-control-policies/createDeviceControlPolicies
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "resources": [
                         {
@@ -613,22 +710,24 @@ class DeviceControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        clone_id -- ID of the Device Control Policy to clone. String.
-        description -- Device Control Policy description. String.
-        name -- Device Control Policy name. String.
-        platform_name -- Name of the operating system platform. String.
-        settings -- Device Control policy specific settings. Dictionary.
-                    See above for JSON dictionary format example.
+        clone_id : str
+            ID of the Device Control Policy to clone.
+        description : str
+            Device Control Policy description.
+        name : str
+            Device Control Policy name.
+        platform_name : str
+            Name of the operating system platform.
+        settings : dict
+            Device Control policy specific settings. Dictionary.
+            See above for JSON dictionary format example.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /device-control-policies/createDeviceControlPolicies
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = device_policy_payload(passed_keywords=kwargs)
@@ -644,20 +743,29 @@ class DeviceControlPolicies(ServiceClass):
     def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a set of Device Control Policies by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of Device Control Policy IDs to delete. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /device-control-policies/createDeviceControlPolicies
+        /device-control-policies/createDeviceControlPolicies
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Device Control Policy IDs to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -671,20 +779,29 @@ class DeviceControlPolicies(ServiceClass):
     def get_policies_v2(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get device control policies for the given filter criteria. Supports USB and Bluetooth.
 
-        Keyword arguments:
-        ids -- List of Device Control Policy IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /device-control-with-bluetooth/getDeviceControlPoliciesV2
+        /device-control-with-bluetooth/getDeviceControlPoliciesV2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Device Control Policy IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -698,8 +815,17 @@ class DeviceControlPolicies(ServiceClass):
     def create_policies_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Device Control Policies by specifying details about the policy to create.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        /device-control-policies/createDeviceControlPolicies
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "policies": [
                         {
@@ -736,24 +862,27 @@ class DeviceControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        bluetooth_settings -- Device Control policy USB specific settings. Dictionary.
-                              See above for JSON dictionary format example.
-        clone_id -- ID of the Device Control Policy to clone. String.
-        description -- Device Control Policy description. String.
-        name -- Device Control Policy name. String.
-        platform_name -- Name of the operating system platform. String.
-        usb_settings -- Device Control policy USB specific settings. Dictionary.
-                        See above for JSON dictionary format example.
+        bluetooth_settings : str
+            Device Control policy USB specific settings. Dictionary.
+            See above for JSON dictionary format example.
+        clone_id : str
+            ID of the Device Control Policy to clone.
+        description : str
+            Device Control Policy description.
+        name : str
+            Device Control Policy name.
+        platform_name : str
+            Name of the operating system platform.
+        usb_settings : str
+            Device Control policy USB specific settings. Dictionary.
+            See above for JSON dictionary format example.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /device-control-policies/createDeviceControlPolicies
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = device_control_policy_payload_v2(passed_keywords=kwargs)
@@ -769,8 +898,17 @@ class DeviceControlPolicies(ServiceClass):
     def update_policies_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Device Control Policies by specifying details about the policy to create.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        /device-control-with-bluetooth/patchDeviceControlPoliciesV2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "policies": [
                         {
@@ -807,24 +945,27 @@ class DeviceControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        bluetooth_settings -- Device Control policy USB specific settings. Dictionary.
-                              See above for JSON dictionary format example.
-        description -- Device Control Policy description. String.
-        id -- ID of the Device Control Policy to update. String.
-        name -- Device Control Policy name. String.
-        platform_name -- Name of the operating system platform. String.
-        usb_settings -- Device Control policy USB specific settings. Dictionary.
-                        See above for JSON dictionary format example.
+        bluetooth_settings : str
+            Device Control policy USB specific settings. Dictionary.
+            See above for JSON dictionary format example.
+        description : str
+            Device Control Policy description.
+        id : str
+            ID of the Device Control Policy to update.
+        name : str
+            Device Control Policy name.
+        platform_name : str
+            Name of the operating system platform.
+        usb_settings : str
+            Device Control policy USB specific settings. Dictionary.
+            See above for JSON dictionary format example.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /device-control-with-bluetooth/patchDeviceControlPoliciesV2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = device_control_policy_payload_v2(passed_keywords=kwargs)
@@ -840,8 +981,17 @@ class DeviceControlPolicies(ServiceClass):
     def update_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Device Control Policies by specifying the ID of the policy and details to update.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        /device-control-policies/updateDeviceControlPolicies
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "resources": [
                         {
@@ -892,21 +1042,22 @@ class DeviceControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        id -- ID of the Device Control Policy to update. String.
-        description -- Device Control Policy description. String.
-        name -- Device Control Policy name. String.
-        settings -- Device Control policy specific settings. Dictionary.
-                    See above for JSON dictionary format example.
+        id : str
+            ID of the Device Control Policy to update.
+        description : str
+            Device Control Policy description.
+        name : str
+            Device Control Policy name.
+        settings : dict
+            Device Control policy specific settings. Dictionary.
+            See above for JSON dictionary format example.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /device-control-policies/updateDeviceControlPolicies
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = device_policy_payload(passed_keywords=kwargs)
@@ -926,25 +1077,36 @@ class DeviceControlPolicies(ServiceClass):
         an FQL filter and paging details. Returns a set of Agent IDs which match the filter
         criteria.
 
-        Keyword arguments:
-        id -- The ID of the Device Control Policy to search for members of
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /device-control-policies/queryDeviceControlPolicyMembers
+        /device-control-policies/queryDeviceControlPolicyMembers
+
+        Keyword arguments
+        -----------------
+        id : str
+            The ID of the Device Control Policy to search for members of
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -962,28 +1124,38 @@ class DeviceControlPolicies(ServiceClass):
         FQL filter and paging details. Returns a set of Device Control Policy IDs
         which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-                created_by                      modified_timestamp
-                created_timestamp               name
-                enabled                         platform_name
-                modified_by                     precedence
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                    /device-control-policies/queryDeviceControlPolicyMembers
+        /device-control-policies/queryDeviceControlPolicyMembers
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+            created_by                      modified_timestamp
+            created_timestamp               name
+            enabled                         platform_name
+            modified_by                     precedence
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

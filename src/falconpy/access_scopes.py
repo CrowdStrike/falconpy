@@ -63,19 +63,28 @@ class AccessScopes(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """List Access Scopes By ID.
 
-        Keyword arguments:
-        ids -- The ids to retrieve. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/access-scopes/ListAccessScopesExternal
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The ids to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -92,21 +101,31 @@ class AccessScopes(ServiceClass):
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query Access Scopes and returns IDs.
 
-        Keyword arguments:
-        filter -- A valid FQL filter. Access Scope fields: name, created_by, created_at. String.
-        sort -- The sort value. String.
-        offset -- The offset value. Integer.
-        limit -- The limit value. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/access-scopes/QueryAccessScopesExternal
+
+        Keyword arguments
+        -----------------
+        filter : str
+            A valid FQL filter. Access Scope fields: name, created_by, created_at.
+        sort : str
+            The sort value.
+        offset : int
+            The offset value.
+        limit : int
+            The limit value.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

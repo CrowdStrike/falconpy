@@ -64,19 +64,28 @@ class FalconId(ServiceClass):
                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Fetch third party passkey registries.
 
-        Keyword arguments:
-        ids -- Third party passkey registry IDs to retrieve String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-id/GetThirdPartyPasskeyRegistry
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Third party passkey registry IDs to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -94,19 +103,28 @@ class FalconId(ServiceClass):
                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete third party passkey registries.
 
-        Keyword arguments:
-        ids -- Third party passkey registry IDs to delete String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-id/DeleteThirdPartyPasskeyRegistry
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Third party passkey registry IDs to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -123,23 +141,31 @@ class FalconId(ServiceClass):
                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update third party passkey registries.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-id/UpdateThirdPartyPasskeyRegistry
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "enabled": true,
                     "id": "string"
                 }
-        enabled -- The enabled value. Boolean.
-        id -- The id value. String.
+        enabled : bool
+            The enabled value.
+        id : str
+            The id value.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-id/UpdateThirdPartyPasskeyRegistry
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = update_third_party_passkey_registry_payload(passed_keywords=kwargs)
@@ -158,21 +184,31 @@ class FalconId(ServiceClass):
                                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query third party passkey registries.
 
-        Keyword arguments:
-        filter -- FQL filter. String.
-        offset -- Paging offset. Integer.
-        limit -- Paging limit. Integer.
-        sort -- Sorting field and direction. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-id/QueryThirdPartyPasskeyRegistry
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter.
+        offset : int
+            Paging offset.
+        limit : int
+            Paging limit.
+        sort : str
+            Sorting field and direction.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

@@ -60,19 +60,27 @@ class CloudAWSRegistration(ServiceClass):
     def trigger_health_check(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Trigger health check scan for AWS accounts.
 
-        Keyword arguments:
-        account_ids -- AWS Account IDs. String or list of strings.
-        organization_ids -- Organization IDs. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-aws-registration/cloud-registration-aws-trigger-health-check
+
+        Keyword arguments
+        -----------------
+        account_ids : str or list[str]
+            AWS Account IDs.
+        organization_ids : str or list[str]
+            Organization IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         kwargs["organization-ids"] = kwargs.get("organization_ids", None)
         kwargs["account-ids"] = kwargs.get("account_ids", None)
@@ -89,19 +97,27 @@ class CloudAWSRegistration(ServiceClass):
     def get_accounts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve existing AWS accounts by account IDs OR organization IDs.
 
-        Keyword arguments:
-        ids -- AWS account IDs to filter. String or list of strings.
-        organization_ids -- AWS organization IDs to filter. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-aws-registration/cloud-registration-aws-get-accounts
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            AWS account IDs to filter.
+        organization_ids : str or list[str]
+            AWS organization IDs to filter.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         kwargs["organization-ids"] = kwargs.get("organization_ids", None)
 
@@ -117,8 +133,16 @@ class CloudAWSRegistration(ServiceClass):
     def create_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new account.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-aws-registration/cloud-registration-aws-create-account
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -138,29 +162,33 @@ class CloudAWSRegistration(ServiceClass):
                         }
                     ]
                 }
-        account_id -- AWS account ID. String.
-        account_type -- AWS account type. String.
-        csp_events -- Flag indicating if CSP events should be included. Boolean.
-        is_master -- Flag indicating if this is a master account. Boolean.
-        organization_id -- AWS organization ID. String.
-        products -- List of included products and features. List of dictionaries.
-                    [
-                        {
-                            "features": [
-                                "string"
-                            ],
-                            "product": "string"
-                        }
-                    ]
+        account_id : str
+            AWS account ID.
+        account_type : str
+            AWS account type.
+        csp_events : bool
+            Flag indicating if CSP events should be included.
+        is_master : bool
+            Flag indicating if this is a master account.
+        organization_id : str
+            AWS organization ID.
+        products : list
+            List of included products and features. List of dictionaries.
+            [
+                {
+                    "features": [
+                        "string"
+                    ],
+                    "product": "string"
+                }
+            ]
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-aws-registration/cloud-registration-aws-create-account
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_aws_registration_payload(kwargs)
@@ -176,8 +204,16 @@ class CloudAWSRegistration(ServiceClass):
     def update_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an existing account.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-aws-registration/cloud-registration-aws-update-account
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -197,29 +233,33 @@ class CloudAWSRegistration(ServiceClass):
                         }
                     ]
                 }
-        account_id -- AWS account ID. String.
-        account_type -- AWS account type. String.
-        csp_events -- Flag indicating if CSP events should be included. Boolean.
-        is_master -- Flag indicating if this is a master account. Boolean.
-        organization_id -- AWS organization ID. String.
-        products -- List of included products and features. List of dictionaries.
-                    [
-                        {
-                            "features": [
-                                "string"
-                            ],
-                            "product": "string"
-                        }
-                    ]
+        account_id : str
+            AWS account ID.
+        account_type : str
+            AWS account type.
+        csp_events : bool
+            Flag indicating if CSP events should be included.
+        is_master : bool
+            Flag indicating if this is a master account.
+        organization_id : str
+            AWS organization ID.
+        products : list
+            List of included products and features. List of dictionaries.
+            [
+                {
+                    "features": [
+                        "string"
+                    ],
+                    "product": "string"
+                }
+            ]
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-aws-registration/cloud-registration-aws-update-account
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_aws_registration_payload(kwargs)
@@ -235,19 +275,27 @@ class CloudAWSRegistration(ServiceClass):
     def delete_account(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an existing AWS account or organization.
 
-        Keyword arguments:
-        ids -- AWS account IDs to remove. String or list of strings.
-        organization_ids -- AWS organization IDs to remove. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-aws-registration/cloud-registration-aws-delete-account
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            AWS account IDs to remove.
+        organization_ids : str or list[str]
+            AWS organization IDs to remove.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         kwargs["organization-ids"] = kwargs.get("organization_ids", None)
         return process_service_request(
@@ -262,21 +310,30 @@ class CloudAWSRegistration(ServiceClass):
     def validate_accounts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Validate the AWS account registration status, and discover organization child accounts if organization is specified.
 
-        Keyword arguments:
-        account_id -- AWS Account ID. organization-id shouldn't be specified if this is specified. String.
-        iam_role_arn -- IAM Role ARN. String.
-        organization_id -- AWS organization ID to validate master account.
-        account_id shouldn't be specified if this is specified. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-aws-registration/cloud-registration-aws-validate-accounts
+
+        Keyword arguments
+        -----------------
+        account_id : str
+            AWS Account ID. organization-id shouldn't be specified if this is specified.
+        iam_role_arn : str
+            IAM Role ARN.
+        organization_id : str
+            AWS organization ID to validate master account.
+            account_id shouldn't be specified if this is specified.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         kwargs["iam-role-arn"] = kwargs.get("iam_role_arn", None)
         kwargs["organization-id"] = kwargs.get("organization_id", None)
@@ -293,25 +350,38 @@ class CloudAWSRegistration(ServiceClass):
     def query_accounts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve existing AWS accounts by account IDs.
 
-        Keyword arguments:
-        organization_ids -- Organization IDs used to filter accounts. String or list of string.
-        products -- Products registered for an account. String or list of string. Required.
-        features -- Features registered for an account. String or list of string. Required.
-        account_status -- Account status to filter results by. String.
-        limit -- The maximum number of items to return. When not specified or 0, 100 is used.
-                 When larger than 500, 500 is used. Integer.
-        offset -- The offset to start retrieving records from. Integer.
-        group_by -- Field to group by. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-aws-registration/cloud-registration-aws-query-accounts
+
+        Keyword arguments
+        -----------------
+        organization_ids : str or list[str]
+            Organization IDs used to filter accounts.
+        products : str or list[str] (required)
+            Products registered for an account.
+        features : str or list[str] (required)
+            Features registered for an account.
+        account_status : str
+            Account status to filter results by.
+        limit : int
+            The maximum number of items to return. When not specified or 0, 100 is used.
+            When larger than 500, 500 is used.
+        offset : int
+            The offset to start retrieving records from.
+        group_by : str
+            Field to group by.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         kwargs["organization-ids"] = kwargs.get("organization_ids", None)
         kwargs["account-status"] = kwargs.get("account_status", None)

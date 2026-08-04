@@ -64,30 +64,41 @@ class Discover(ServiceClass):
 
         Returns details on applications which match the filter criteria.
 
-        Keyword arguments:
-        after -- A pagination token used with the limit parameter to manage pagination of results.
-                 On your first request, do not provide an after token. On subsequent requests,
-                 provide the after token from the previous response to continue from that place in
-                 the results. String.
-        facet -- Select various details blocks to be returned for each application entity. String.
-                 Supported values:
-                   browser_extension      host_info
-                   install_usage          package
-                   ide_extension
-        filter -- The filter expression that should be used to limit the results. FQL syntax. String.
-        limit -- The number of account IDs to return in this response. (Max: 100, default: 100)
-                 Use with the offset parameter to manage pagination of results. Integer.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- Sort assets by their properties. A single sort field is allowed. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/combined-applications
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the limit parameter to manage pagination of results.
+            On your first request, do not provide an after token. On subsequent requests,
+            provide the after token from the previous response to continue from that place in
+            the results.
+        facet : str or list[str]
+            Select various details blocks to be returned for each application entity. String.
+            Supported values:
+              browser_extension      host_info
+              install_usage          package
+              ide_extension
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The number of account IDs to return in this response. (Max: 100, default: 100)
+            Use with the offset parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            Sort assets by their properties. A single sort field is allowed.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -103,58 +114,69 @@ class Discover(ServiceClass):
 
         Returns details on assets which match the filter criteria.
 
-        Keyword arguments:
-        facet -- Select various details blocks to be returned for each host entity.
-                 String or list of strings.
-                 Supported values:
-                   system_insights      third_party
-                   risk_factors
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Available Filters:
-                    agent_version                   kernel_version
-                    aid                             last_discoverer_aid
-                    bios_manufacturer               last_seen_timestamp
-                    bios_version                    local_ips_count
-                    cid                             machine_domain
-                    city                            network_interfaces
-                    confidence                      network_interfaces.interface_alias
-                    country                         network_interfaces.interface_description
-                    current_local_ip                network_interfaces.local_ip
-                    discoverer_aids                 network_interfaces.mac_address
-                    discoverer_count                network_interfaces.network_prefix
-                    discoverer_platform_names       os_version
-                    discoverer_product_type_descs   ou
-                    discoverer_tags                 platform_name
-                    entity_type                     product_type
-                    external_ip                     product_type_desc
-                    first_discoverer_aid            site_name
-                    first_discoverer_ip             system_manufacturer
-                    first_seen_timestamp            system_product_name
-                    groups                          system_serial_number
-                    hostname                        tags
-                    id                              scan_details.scan_id
-                    scan_details.schedule_id        scan_details.scan_date
-                    vulnerability_assessment_date
-        limit -- The number of asset IDs to return in this response. (Max: 100, default: 100)
-                 Use with the offset parameter to manage pagination of results.
-        offset -- An offset used with the limit parameter to manage pagination of results.
-                  On your first request, don't provide an offset. On subsequent requests,
-                  provide the offset from the previous response to continue from that place
-                  in the results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- Sort assets by their properties. A single sort field is allowed.
-                Common sort options include:
-                  hostname|asc
-                  product_type|desc
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/combined-hosts
+
+        Keyword arguments
+        -----------------
+        facet : str or list[str]
+            Select various details blocks to be returned for each host entity.
+            String or list of strings.
+            Supported values:
+              system_insights      third_party
+              risk_factors
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Available Filters:
+              agent_version                   kernel_version
+              aid                             last_discoverer_aid
+              bios_manufacturer               last_seen_timestamp
+              bios_version                    local_ips_count
+              cid                             machine_domain
+              city                            network_interfaces
+              confidence                      network_interfaces.interface_alias
+              country                         network_interfaces.interface_description
+              current_local_ip                network_interfaces.local_ip
+              discoverer_aids                 network_interfaces.mac_address
+              discoverer_count                network_interfaces.network_prefix
+              discoverer_platform_names       os_version
+              discoverer_product_type_descs   ou
+              discoverer_tags                 platform_name
+              entity_type                     product_type
+              external_ip                     product_type_desc
+              first_discoverer_aid            site_name
+              first_discoverer_ip             system_manufacturer
+              first_seen_timestamp            system_product_name
+              groups                          system_serial_number
+              hostname                        tags
+              id                              scan_details.scan_id
+              scan_details.schedule_id        scan_details.scan_date
+              vulnerability_assessment_date
+        limit : int
+            The number of asset IDs to return in this response. (Max: 100, default: 100)
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            An offset used with the limit parameter to manage pagination of results.
+            On your first request, don't provide an offset. On subsequent requests,
+            provide the offset from the previous response to continue from that place
+            in the results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            Sort assets by their properties. A single sort field is allowed.
+            Common sort options include:
+              hostname|asc
+              product_type|desc
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -170,19 +192,28 @@ class Discover(ServiceClass):
 
         Find account IDs with `query_accounts`.
 
-        Keyword arguments:
-        ids -- One or more account IDs (max: 100). String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/get-accounts
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more account IDs (max: 100)
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -198,19 +229,28 @@ class Discover(ServiceClass):
 
         Find application IDs with `query_applications`.
 
-        Keyword arguments:
-        ids -- One or more application IDs (max: 100). String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/get-applications
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more application IDs (max: 100)
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -226,19 +266,28 @@ class Discover(ServiceClass):
 
         Find asset IDs with `query_hosts`.
 
-        Keyword arguments:
-        ids -- One or more asset IDs (max: 100). String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/get-hosts
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more asset IDs (max: 100)
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -254,19 +303,28 @@ class Discover(ServiceClass):
 
         Find login IDs with `query_logins`.
 
-        Keyword arguments:
-        ids -- One or more login IDs (max: 100). String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/get-logins
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more login IDs (max: 100)
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -283,44 +341,54 @@ class Discover(ServiceClass):
         Supports providing a FQL (Falcon Query Language) filter and paging details.
         Returns a set of account IDs which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Common filter options include:
-                    account_type:'Local'
-                    admin_privileges:'Yes'
-                    first_seen_timestamp:<'now-7d'
-                    last_successful_login_type:'Terminal server'
-                  Available Filters:
-                    id                            last_successful_login_timestamp
-                    cid                           last_successful_login_hostname
-                    user_sid                      last_successful_login_remote_ip
-                    login_domain                  last_successful_login_host_country
-                    account_name                  last_successful_login_host_city
-                    username                      last_failed_login_type
-                    account_type                  last_failed_login_timestamp
-                    admin_privileges              last_failed_login_hostname
-                    first_seen_timestamp          password_last_set_timestamp
-                    last_successful_login_type
-        limit -- The number of account IDs to return in this response. (Max: 100, default: 100)
-                 Use with the offset parameter to manage pagination of results.
-        offset -- An offset used with the limit parameter to manage pagination of results.
-                  On your first request, don't provide an offset. On subsequent requests,
-                  provide the offset from the previous response to continue from that place
-                  in the results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- Sort assets by their properties. A single sort field is allowed.
-                Common sort options include:
-                  username|asc
-                  last_failed_login_timestamp|desc
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/query-accounts
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Common filter options include:
+              account_type:'Local'
+              admin_privileges:'Yes'
+              first_seen_timestamp:<'now-7d'
+              last_successful_login_type:'Terminal server'
+            Available Filters:
+              id                            last_successful_login_timestamp
+              cid                           last_successful_login_hostname
+              user_sid                      last_successful_login_remote_ip
+              login_domain                  last_successful_login_host_country
+              account_name                  last_successful_login_host_city
+              username                      last_failed_login_type
+              account_type                  last_failed_login_timestamp
+              admin_privileges              last_failed_login_hostname
+              first_seen_timestamp          password_last_set_timestamp
+              last_successful_login_type
+        limit : int
+            The number of account IDs to return in this response. (Max: 100, default: 100)
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            An offset used with the limit parameter to manage pagination of results.
+            On your first request, don't provide an offset. On subsequent requests,
+            provide the offset from the previous response to continue from that place
+            in the results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            Sort assets by their properties. A single sort field is allowed.
+            Common sort options include:
+              username|asc
+              last_failed_login_timestamp|desc
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -337,46 +405,56 @@ class Discover(ServiceClass):
         Supports providing a FQL (Falcon Query Language) filter and paging details.
         Returns a set of account IDs which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Available Filters:
-                    name                            last_used_user_name
-                    version                         last_used_file_name
-                    vendor                          last_used_file_hash
-                    name_vendor                     last_used_timestamp
-                    name_vendor_version             last_updated_timestamp
-                    first_seen_timestamp            is_suspicious
-                    installation_timestamp          category
-                    architectures                   host.id
-                    installation_paths              host.platform_name
-                    versioning_scheme               host.hostname
-                    groups                          cid
-                    is_normalized                   host.os_version
-                    last_used_user_sid              host.machine_domain
-                    host.ou                         host.site_name
-                    host.country                    host.current_mac_address
-                    host.current_network_prefix     host.tags
-                    host.groups                     host.product_type_desc
-                    host.kernel_version             host.system_manufacturer
-                    host.internet_exposure          host.agent_version
-                    host.external_ip                host.aid
-        limit -- The number of account IDs to return in this response. (Max: 100, default: 100)
-                 Use with the offset parameter to manage pagination of results.
-        offset -- An offset used with the limit parameter to manage pagination of results.
-                  On your first request, don't provide an offset. On subsequent requests,
-                  provide the offset from the previous response to continue from that place
-                  in the results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- Sort assets by their properties. A single sort field is allowed.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/query-applications
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Available Filters:
+              name                            last_used_user_name
+              version                         last_used_file_name
+              vendor                          last_used_file_hash
+              name_vendor                     last_used_timestamp
+              name_vendor_version             last_updated_timestamp
+              first_seen_timestamp            is_suspicious
+              installation_timestamp          category
+              architectures                   host.id
+              installation_paths              host.platform_name
+              versioning_scheme               host.hostname
+              groups                          cid
+              is_normalized                   host.os_version
+              last_used_user_sid              host.machine_domain
+              host.ou                         host.site_name
+              host.country                    host.current_mac_address
+              host.current_network_prefix     host.tags
+              host.groups                     host.product_type_desc
+              host.kernel_version             host.system_manufacturer
+              host.internet_exposure          host.agent_version
+              host.external_ip                host.aid
+        limit : int
+            The number of account IDs to return in this response. (Max: 100, default: 100)
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            An offset used with the limit parameter to manage pagination of results.
+            On your first request, don't provide an offset. On subsequent requests,
+            provide the offset from the previous response to continue from that place
+            in the results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            Sort assets by their properties. A single sort field is allowed.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -393,53 +471,63 @@ class Discover(ServiceClass):
         Supports providing a FQL (Falcon Query Language) filter and paging details.
         Returns a set of asset IDs which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Available Filters:
-                    agent_version                   kernel_version
-                    aid                             last_discoverer_aid
-                    bios_manufacturer               last_seen_timestamp
-                    bios_version                    local_ips_count
-                    cid                             machine_domain
-                    city                            network_interfaces
-                    confidence                      network_interfaces.interface_alias
-                    country                         network_interfaces.interface_description
-                    current_local_ip                network_interfaces.local_ip
-                    discoverer_aids                 network_interfaces.mac_address
-                    discoverer_count                network_interfaces.network_prefix
-                    discoverer_platform_names       os_version
-                    discoverer_product_type_descs   ou
-                    discoverer_tags                 platform_name
-                    entity_type                     product_type
-                    external_ip                     product_type_desc
-                    first_discoverer_aid            site_name
-                    first_discoverer_ip             system_manufacturer
-                    first_seen_timestamp            system_product_name
-                    groups                          system_serial_number
-                    hostname                        tags
-                    id                              scan_details.scan_id
-                    scan_details.schedule_id        scan_details.scan_date
-                    vulnerability_assessment_date
-        limit -- The number of asset IDs to return in this response. (Max: 100, default: 100)
-                 Use with the offset parameter to manage pagination of results.
-        offset -- An offset used with the limit parameter to manage pagination of results.
-                  On your first request, don't provide an offset. On subsequent requests,
-                  provide the offset from the previous response to continue from that place
-                  in the results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- Sort assets by their properties. A single sort field is allowed.
-                Common sort options include:
-                  hostname|asc
-                  product_type|desc
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/query-hosts
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Available Filters:
+              agent_version                   kernel_version
+              aid                             last_discoverer_aid
+              bios_manufacturer               last_seen_timestamp
+              bios_version                    local_ips_count
+              cid                             machine_domain
+              city                            network_interfaces
+              confidence                      network_interfaces.interface_alias
+              country                         network_interfaces.interface_description
+              current_local_ip                network_interfaces.local_ip
+              discoverer_aids                 network_interfaces.mac_address
+              discoverer_count                network_interfaces.network_prefix
+              discoverer_platform_names       os_version
+              discoverer_product_type_descs   ou
+              discoverer_tags                 platform_name
+              entity_type                     product_type
+              external_ip                     product_type_desc
+              first_discoverer_aid            site_name
+              first_discoverer_ip             system_manufacturer
+              first_seen_timestamp            system_product_name
+              groups                          system_serial_number
+              hostname                        tags
+              id                              scan_details.scan_id
+              scan_details.schedule_id        scan_details.scan_date
+              vulnerability_assessment_date
+        limit : int
+            The number of asset IDs to return in this response. (Max: 100, default: 100)
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            An offset used with the limit parameter to manage pagination of results.
+            On your first request, don't provide an offset. On subsequent requests,
+            provide the offset from the previous response to continue from that place
+            in the results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            Sort assets by their properties. A single sort field is allowed.
+            Common sort options include:
+              hostname|asc
+              product_type|desc
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -456,46 +544,56 @@ class Discover(ServiceClass):
         Supports providing a FQL (Falcon Query Language) filter and paging details.
         Returns a set of asset IDs which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Common filter options include:
-                    account_type:'Local'
-                    login_type:'Interactive'
-                    first_seen_timestamp:<'now-7d'
-                    admin_privileges:'No'
-                  Available Filters:
-                    id                  login_timestamp
-                    cid                 login_domain
-                    login_status        admin_privileges
-                    account_id          local_ip
-                    host_id             remote_ip
-                    user_sid            host_country
-                    aid                 host_city
-                    account_name        is_suspicious
-                    username            failure_description
-                    hostname            login_event_count
-                    account_type        aggregation_time_interval
-                    login_type
-        limit -- The number of login IDs to return in this response. (Max: 100, default: 100)
-                 Use with the offset parameter to manage pagination of results.
-        offset -- An offset used with the limit parameter to manage pagination of results.
-                  On your first request, don't provide an offset. On subsequent requests,
-                  provide the offset from the previous response to continue from that place
-                  in the results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- Sort logins by their properties. A single sort field is allowed.
-                Common sort options include:
-                  account_name|asc
-                  login_timestamp|desc
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/query-logins
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Common filter options include:
+              account_type:'Local'
+              login_type:'Interactive'
+              first_seen_timestamp:<'now-7d'
+              admin_privileges:'No'
+            Available Filters:
+              id                  login_timestamp
+              cid                 login_domain
+              login_status        admin_privileges
+              account_id          local_ip
+              host_id             remote_ip
+              user_sid            host_country
+              aid                 host_city
+              account_name        is_suspicious
+              username            failure_description
+              hostname            login_event_count
+              account_type        aggregation_time_interval
+              login_type
+        limit : int
+            The number of login IDs to return in this response. (Max: 100, default: 100)
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            An offset used with the limit parameter to manage pagination of results.
+            On your first request, don't provide an offset. On subsequent requests,
+            provide the offset from the previous response to continue from that place
+            in the results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            Sort logins by their properties. A single sort field is allowed.
+            Common sort options include:
+              account_name|asc
+              login_timestamp|desc
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -511,19 +609,28 @@ class Discover(ServiceClass):
 
         Find IoT assets with `query_iot_hosts`.
 
-        Keyword arguments:
-        ids -- One or more login IDs (max: 100). String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/get-iot-hosts
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more login IDs (max: 100)
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -540,61 +647,71 @@ class Discover(ServiceClass):
         Supports providing a FQL (Falcon Query Language) filter and paging details.
         Returns a set of asset IDs which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Common filter options include:
-                    entity_type:'managed'
-                    product_type_desc:'Workstation'
-                    platform_name:'Windows'
-                    last_seen_timestamp:>'now-7d'
-                  Available Filters:
-                    agent_version                   last_seen_timestamp
-                    aid                             local_ip_addresses
-                    bios_manufacturer               local_ips_count
-                    bios_version                    mac_addresses
-                    business_criticality            machine_domain
-                    cid                             network_id
-                    city                            network_interfaces
-                    claroty_id                      number_of_disk_drives
-                    confidence                      os_is_eol
-                    country                         os_version
-                    current_local_ip                ou
-                    data_providers                  physical_core_count
-                    data_providers_count            platform_name
-                    device_class                    processor_package_count
-                    device_family                   product_type_desc
-                    device_type                     protocols
-                    discoverer_count                purdue_level
-                    discoverer_product_type_descs   reduced_functionality_mode
-                    entity_type                     site_name
-                    external_ip                     subnet
-                    first_seen_timestamp            system_manufacturer
-                    groups                          system_product_name
-                    hostname                        system_serial_number
-                    ics_id                          tags
-                    id                              virtual_zone
-                    internet_exposure               vlan
-                    kernel_version
-        limit -- The number of asset IDs to return in this response. (Max: 100, default: 100)
-                 Use with the offset parameter to manage pagination of results.
-        offset -- An offset used with the limit parameter to manage pagination of results.
-                  On your first request, don't provide an offset. On subsequent requests,
-                  provide the offset from the previous response to continue from that place
-                  in the results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- Sort assets by their properties. A single sort field is allowed.
-                Common sort options include:
-                  hostname|asc
-                  product_type_desc|desc
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/query-iot-hosts
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Common filter options include:
+              entity_type:'managed'
+              product_type_desc:'Workstation'
+              platform_name:'Windows'
+              last_seen_timestamp:>'now-7d'
+            Available Filters:
+              agent_version                   last_seen_timestamp
+              aid                             local_ip_addresses
+              bios_manufacturer               local_ips_count
+              bios_version                    mac_addresses
+              business_criticality            machine_domain
+              cid                             network_id
+              city                            network_interfaces
+              claroty_id                      number_of_disk_drives
+              confidence                      os_is_eol
+              country                         os_version
+              current_local_ip                ou
+              data_providers                  physical_core_count
+              data_providers_count            platform_name
+              device_class                    processor_package_count
+              device_family                   product_type_desc
+              device_type                     protocols
+              discoverer_count                purdue_level
+              discoverer_product_type_descs   reduced_functionality_mode
+              entity_type                     site_name
+              external_ip                     subnet
+              first_seen_timestamp            system_manufacturer
+              groups                          system_product_name
+              hostname                        system_serial_number
+              ics_id                          tags
+              id                              virtual_zone
+              internet_exposure               vlan
+              kernel_version
+        limit : int
+            The number of asset IDs to return in this response. (Max: 100, default: 100)
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            An offset used with the limit parameter to manage pagination of results.
+            On your first request, don't provide an offset. On subsequent requests,
+            provide the offset from the previous response to continue from that place
+            in the results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            Sort assets by their properties. A single sort field is allowed.
+            Common sort options include:
+              hostname|asc
+              product_type_desc|desc
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -611,61 +728,71 @@ class Discover(ServiceClass):
         Supports providing a FQL (Falcon Query Language) filter and paging details.
         Returns a set of asset IDs which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Common filter options include:
-                    entity_type:'managed'
-                    product_type_desc:'Workstation'
-                    platform_name:'Windows'
-                    last_seen_timestamp:>'now-7d'
-                  Available Filters:
-                    agent_version                   last_seen_timestamp
-                    aid                             local_ip_addresses
-                    bios_manufacturer               local_ips_count
-                    bios_version                    mac_addresses
-                    business_criticality            machine_domain
-                    cid                             network_id
-                    city                            network_interfaces
-                    claroty_id                      number_of_disk_drives
-                    confidence                      os_is_eol
-                    country                         os_version
-                    current_local_ip                ou
-                    data_providers                  physical_core_count
-                    data_providers_count            platform_name
-                    device_class                    processor_package_count
-                    device_family                   product_type_desc
-                    device_type                     protocols
-                    discoverer_count                purdue_level
-                    discoverer_product_type_descs   reduced_functionality_mode
-                    entity_type                     site_name
-                    external_ip                     subnet
-                    first_seen_timestamp            system_manufacturer
-                    groups                          system_product_name
-                    hostname                        system_serial_number
-                    ics_id                          tags
-                    id                              virtual_zone
-                    internet_exposure               vlan
-                    kernel_version
-        limit -- The number of asset IDs to return in this response. (Max: 100, default: 100)
-                 Use with the offset parameter to manage pagination of results.
-        offset -- An offset used with the limit parameter to manage pagination of results.
-                  On your first request, don't provide an offset. On subsequent requests,
-                  provide the offset from the previous response to continue from that place
-                  in the results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- Sort assets by their properties. A single sort field is allowed.
-                Common sort options include:
-                  hostname|asc
-                  product_type_desc|desc
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover-iot/query-iot-hostsV2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Common filter options include:
+              entity_type:'managed'
+              product_type_desc:'Workstation'
+              platform_name:'Windows'
+              last_seen_timestamp:>'now-7d'
+            Available Filters:
+              agent_version                   last_seen_timestamp
+              aid                             local_ip_addresses
+              bios_manufacturer               local_ips_count
+              bios_version                    mac_addresses
+              business_criticality            machine_domain
+              cid                             network_id
+              city                            network_interfaces
+              claroty_id                      number_of_disk_drives
+              confidence                      os_is_eol
+              country                         os_version
+              current_local_ip                ou
+              data_providers                  physical_core_count
+              data_providers_count            platform_name
+              device_class                    processor_package_count
+              device_family                   product_type_desc
+              device_type                     protocols
+              discoverer_count                purdue_level
+              discoverer_product_type_descs   reduced_functionality_mode
+              entity_type                     site_name
+              external_ip                     subnet
+              first_seen_timestamp            system_manufacturer
+              groups                          system_product_name
+              hostname                        system_serial_number
+              ics_id                          tags
+              id                              virtual_zone
+              internet_exposure               vlan
+              kernel_version
+        limit : int
+            The number of asset IDs to return in this response. (Max: 100, default: 100)
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            An offset used with the limit parameter to manage pagination of results.
+            On your first request, don't provide an offset. On subsequent requests,
+            provide the offset from the previous response to continue from that place
+            in the results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            Sort assets by their properties. A single sort field is allowed.
+            Common sort options include:
+              hostname|asc
+              product_type_desc|desc
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

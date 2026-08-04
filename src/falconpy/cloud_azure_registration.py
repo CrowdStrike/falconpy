@@ -67,8 +67,16 @@ class CloudAzureRegistration(ServiceClass):
     def delete_legacy_subscription(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete existing legacy Azure subscriptions.
 
-        Keyword arguments:
-        body -- Full body payload as a dictionary. Not required if using other keywords.
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-delete-legacy-subscription
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -78,18 +86,16 @@ class CloudAzureRegistration(ServiceClass):
                         }
                     ]
                 }
-        retain_client -- Boolean.
-        subscription_id -- String.
-        tenant_id -- String.
+        retain_client : bool
+        subscription_id : str
+        tenant_id : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: DELETE
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-delete-legacy-subscription
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_azure_registration_legacy_payload(passed_keywords=kwargs)
@@ -105,19 +111,28 @@ class CloudAzureRegistration(ServiceClass):
     def health_check(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Trigger health check scan for Azure registrations.
 
-        Keyword arguments:
-        tenant_ids -- Azure tenant IDs. String or list of string.
-        body -- Full body payload as a dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'tenant_ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-trigger-health-check
+
+        Keyword arguments
+        -----------------
+        tenant_ids : str or list[str]
+            Azure tenant IDs.
+        body : dict
+            Full body payload as a dictionary. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'tenant_ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         kwargs = handle_single_argument(args, kwargs, "tenant_ids")
         if not body:
@@ -134,19 +149,27 @@ class CloudAzureRegistration(ServiceClass):
     def get_registration(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve existing Azure registration for a tenant.
 
-        Keyword arguments:
-        tenant_id -- Tenant ID to retrieve. String.
-        registration_id -- Registration ID. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-get-registration
+
+        Keyword arguments
+        -----------------
+        tenant_id : str
+            Tenant ID to retrieve.
+        registration_id : str
+            Registration ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -163,8 +186,16 @@ class CloudAzureRegistration(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create an Azure registration for a tenant.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-create-registration
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON dictionary. Not required if using other keywords.
                 {
                     "resource": {
                         "account_type": "string",
@@ -228,40 +259,62 @@ class CloudAzureRegistration(ServiceClass):
                         "tenant_id": "string"
                     }
                 }
-            account_type -- Azure account type. String.
-            additional_features -- Additional features. List of dictionaries.
-            additional_properties -- Additional properties. Dictionary.
-            api_client_key_id -- Azure API client key ID. String.
-            api_client_key_type -- Azure API client key type. String.
-            cs_infra_region -- CrowdStrike infrastructure region. String.
-            cs_infra_subscription_id -- CrowdStrike infrastructure subscription ID. String.
-            deployment_method -- Deployment method. String.
-            deployment_stack_host_id -- Azure deployment stack host ID. String.
-            deployment_stack_name -- Azure deployment stack name. String.
-            dspm_regions -- DSPM regions. String or list of strings.
-            environment -- Azure environment. String.
-            event_hub_settings -- Azure Event Hub settings. List of dictionaries.
-            management_group_ids -- Azure management group IDs. String or list of strings.
-            microsoft_graph_permission_ids -- Microsoft Graph permission IDs. String or list of strings.
-            microsoft_graph_permissions_ids_readonly -- Flag indicating if Microsoft Graph permission IDs
-                                                        are read-only. Boolean.
-            products -- Products. List of dictionaries.
-            resource_name_prefix -- Resource naming prefix. String.
-            resource_name_suffix -- Resource naming suffix. String.
-            status -- Registration status. String.
-            subscription_ids -- Azure subscription IDs. String or list of strings.
-            tags -- Additional tags. Dictionary.
-            template_version -- Deployment template version. String.
-            tenant_id -- Azure tenant ID. String.
+        account_type : str
+            Azure account type.
+        additional_features : list[dict]
+            Additional features.
+        additional_properties : dict
+            Additional properties.
+        api_client_key_id : str
+            Azure API client key ID.
+        api_client_key_type : str
+            Azure API client key type.
+        cs_infra_region : str
+            CrowdStrike infrastructure region.
+        cs_infra_subscription_id : str
+            CrowdStrike infrastructure subscription ID.
+        deployment_method : str
+            Deployment method.
+        deployment_stack_host_id : str
+            Azure deployment stack host ID.
+        deployment_stack_name : str
+            Azure deployment stack name.
+        dspm_regions : str or list[str]
+            DSPM regions.
+        environment : str
+            Azure environment.
+        event_hub_settings : list[dict]
+            Azure Event Hub settings.
+        management_group_ids : str or list[str]
+            Azure management group IDs.
+        microsoft_graph_permission_ids : str or list[str]
+            Microsoft Graph permission IDs.
+        microsoft_graph_permissions_ids_readonly : bool
+            Flag indicating if Microsoft Graph permission IDs
+            are read-only.
+        products : list[dict]
+            Products.
+        resource_name_prefix : str
+            Resource naming prefix.
+        resource_name_suffix : str
+            Resource naming suffix.
+        status : str
+            Registration status.
+        subscription_ids : str or list[str]
+            Azure subscription IDs.
+        tags : dict
+            Additional tags.
+        template_version : str
+            Deployment template version.
+        tenant_id : str
+            Azure tenant ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-create-registration
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_azure_registration_create_payload(passed_keywords=kwargs)
@@ -277,8 +330,16 @@ class CloudAzureRegistration(ServiceClass):
     def update_registration(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an existing Azure registration for a tenant.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-delete-registration
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON dictionary. Not required if using other keywords.
                 {
                     "resource": {
                         "account_type": "string",
@@ -342,40 +403,62 @@ class CloudAzureRegistration(ServiceClass):
                         "tenant_id": "string"
                     }
                 }
-            account_type -- Azure account type. String.
-            additional_features -- Additional features. List of dictionaries.
-            additional_properties -- Additional properties. Dictionary.
-            api_client_key_id -- Azure API client key ID. String.
-            api_client_key_type -- Azure API client key type. String.
-            cs_infra_region -- CrowdStrike infrastructure region. String.
-            cs_infra_subscription_id -- CrowdStrike infrastructure subscription ID. String.
-            deployment_method -- Deployment method. String.
-            deployment_stack_host_id -- Azure deployment stack host ID. String.
-            deployment_stack_name -- Azure deployment stack name. String.
-            dspm_regions -- DSPM regions. String or list of strings.
-            environment -- Azure environment. String.
-            event_hub_settings -- Azure Event Hub settings. List of dictionaries.
-            management_group_ids -- Azure management group IDs. String or list of strings.
-            microsoft_graph_permission_ids -- Microsoft Graph permission IDs. String or list of strings.
-            microsoft_graph_permissions_ids_readonly -- Flag indicating if Microsoft Graph permission IDs
-                                                        are read-only. Boolean.
-            products -- Products. List of dictionaries.
-            resource_name_prefix -- Resource naming prefix. String.
-            resource_name_suffix -- Resource naming suffix. String.
-            status -- Registration status. String.
-            subscription_ids -- Azure subscription IDs. String or list of strings.
-            tags -- Additional tags. Dictionary.
-            template_version -- Deployment template version. String.
-            tenant_id -- Azure tenant ID. String.
+        account_type : str
+            Azure account type.
+        additional_features : list[dict]
+            Additional features.
+        additional_properties : dict
+            Additional properties.
+        api_client_key_id : str
+            Azure API client key ID.
+        api_client_key_type : str
+            Azure API client key type.
+        cs_infra_region : str
+            CrowdStrike infrastructure region.
+        cs_infra_subscription_id : str
+            CrowdStrike infrastructure subscription ID.
+        deployment_method : str
+            Deployment method.
+        deployment_stack_host_id : str
+            Azure deployment stack host ID.
+        deployment_stack_name : str
+            Azure deployment stack name.
+        dspm_regions : str or list[str]
+            DSPM regions.
+        environment : str
+            Azure environment.
+        event_hub_settings : list[dict]
+            Azure Event Hub settings.
+        management_group_ids : str or list[str]
+            Azure management group IDs.
+        microsoft_graph_permission_ids : str or list[str]
+            Microsoft Graph permission IDs.
+        microsoft_graph_permissions_ids_readonly : bool
+            Flag indicating if Microsoft Graph permission IDs
+            are read-only.
+        products : list[dict]
+            Products.
+        resource_name_prefix : str
+            Resource naming prefix.
+        resource_name_suffix : str
+            Resource naming suffix.
+        status : str
+            Registration status.
+        subscription_ids : str or list[str]
+            Azure subscription IDs.
+        tags : dict
+            Additional tags.
+        template_version : str
+            Deployment template version.
+        tenant_id : str
+            Azure tenant ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-delete-registration
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_azure_registration_create_payload(passed_keywords=kwargs)
@@ -391,18 +474,25 @@ class CloudAzureRegistration(ServiceClass):
     def delete_registration(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete existing Azure registrations.
 
-        Keyword arguments:
-        tenant_ids -- Azure tenant IDs to be removed. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-delete-registration
+
+        Keyword arguments
+        -----------------
+        tenant_ids : str or list[str]
+            Azure tenant IDs to be removed.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -419,19 +509,25 @@ class CloudAzureRegistration(ServiceClass):
         DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
         Calling this method will result in an error from the API.
 
-
-        Keyword arguments:
-        tenant_id -- Azure tenant ID to retrieve deployment scripts for. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/download_azure_script
+
+        Keyword arguments
+        -----------------
+        tenant_id : str
+            Azure tenant ID to retrieve deployment scripts for.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -445,8 +541,16 @@ class CloudAzureRegistration(ServiceClass):
     def download_script(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve script to create resources.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-download-script
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -454,16 +558,15 @@ class CloudAzureRegistration(ServiceClass):
                         }
                     ]
                 }
-        tenant_id -- Azure Tenant ID. String.
+        tenant_id : str
+            Azure Tenant ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-download-script
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_azure_registration_payload(kwargs)
@@ -479,19 +582,27 @@ class CloudAzureRegistration(ServiceClass):
     def validate_registration(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Validate an Azure registration by checking service principal, role assignments and deployment stack.
 
-        Keyword arguments:
-        tenant_id -- Azure tenant ID to be validated. String.
-        stack_name -- Azure deployment stack name to be validated. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-validate-registration
+
+        Keyword arguments
+        -----------------
+        tenant_id : str
+            Azure tenant ID to be validated.
+        stack_name : str
+            Azure deployment stack name to be validated.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -508,8 +619,16 @@ class CloudAzureRegistration(ServiceClass):
                                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create new issue suppression rules.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_create_suppressions
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -524,16 +643,15 @@ class CloudAzureRegistration(ServiceClass):
                         }
                     ]
                 }
-        resources -- The resources value. List.
+        resources : list
+            The resources value.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_create_suppressions
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_registration_azure_create_suppressions_payload(passed_keywords=kwargs)
@@ -552,17 +670,23 @@ class CloudAzureRegistration(ServiceClass):
                                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Remove/revoke suppression rules.
 
-        Keyword arguments:
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_delete_suppressions
+
+        Keyword arguments
+        -----------------
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -579,19 +703,27 @@ class CloudAzureRegistration(ServiceClass):
                                                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve distinct filterable values for issue suppression fields.
 
-        Keyword arguments:
-        registration_id -- Registration ID to filter values by. String.
-        field -- Field to get values for. Available values: issue_name, entity_id, suppressed_by, created_at, reason. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_issue_suppression_values_by_field
+
+        Keyword arguments
+        -----------------
+        registration_id : str
+            Registration ID to filter values by.
+        field : str
+            Field to get values for. Available values: issue_name, entity_id, suppressed_by, created_at, reason.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -608,22 +740,31 @@ class CloudAzureRegistration(ServiceClass):
                                                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve distinct filterable values for issue fields.
 
-        Keyword arguments:
-        registration_id -- Registration ID to filter values by. String.
-        filter -- FQL (Falcon Query Language) string for filtering results. Allowed filters are
-                  name,issue,severity,category,impact,entity_type,entity_id,entity_name,status. String.
-        field -- Field to get values for. Available values: issue, name, severity, category, impact, entity_type, entity_id,
-                 entity_name, status, feature. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_issue_values_by_field
+
+        Keyword arguments
+        -----------------
+        registration_id : str
+            Registration ID to filter values by.
+        filter : str
+            FQL (Falcon Query Language) string for filtering results. Allowed filters are
+            name,issue,severity,category,impact,entity_type,entity_id,entity_name,status.
+        field : str
+            Field to get values for. Available values: issue, name, severity, category, impact, entity_type, entity_id,
+            entity_name, status, feature.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -640,25 +781,37 @@ class CloudAzureRegistration(ServiceClass):
                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve issues for Azure registrations.
 
-        Keyword arguments:
-        registration_id -- Registration ID. String.
-        filter -- FQL (Falcon Query Language) string for filtering results. Allowed filters are
-                  name,issue,severity,category,impact,entity_type,entity_id,entity_name,status. String.
-        sort -- Field and direction for sorting results - allowed sort fields are
-                issue,name,severity,category,impact,entity_type,entity_id,entity_name,impacted_entities. String.
-        group_by -- Grouping method: 'name' (optional, default: ungrouped). Available values: name. String.
-        limit -- Maximum number of records to return (default: 100, max: 1000). Integer.
-        offset -- Starting index of result. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_issues
+
+        Keyword arguments
+        -----------------
+        registration_id : str
+            Registration ID.
+        filter : str
+            FQL (Falcon Query Language) string for filtering results. Allowed filters are
+            name,issue,severity,category,impact,entity_type,entity_id,entity_name,status.
+        sort : str
+            Field and direction for sorting results - allowed sort fields are
+            issue,name,severity,category,impact,entity_type,entity_id,entity_name,impacted_entities.
+        group_by : str
+            Grouping method: 'name' (optional, default: ungrouped). Available values: name.
+        limit : int
+            Maximum number of records to return (default: 100, max: 1000)
+        offset : int
+            Starting index of result.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -675,18 +828,25 @@ class CloudAzureRegistration(ServiceClass):
                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download Azure deployment script (Terraform or Bicep).
 
-        Keyword arguments:
-        tenant_id -- Azure tenant ID. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_script
+
+        Keyword arguments
+        -----------------
+        tenant_id : str
+            Azure tenant ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -703,22 +863,31 @@ class CloudAzureRegistration(ServiceClass):
                                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve all available script versions with filtering and sorting.
 
-        Keyword arguments:
-        deployment_method -- Filter by deployment method (e.g., 'bicep-legacy', 'bicep-deployment-stack'). String.
-        sort -- Field and direction for sorting results - allowed sort fields are version,deployment_method,published_date
-                String.
-        limit -- Maximum number of records to return (default: 100, max: 1000). Integer.
-        offset -- Starting index of result. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_script_versions
+
+        Keyword arguments
+        -----------------
+        deployment_method : str
+            Filter by deployment method (e.g., 'bicep-legacy', 'bicep-deployment-stack')
+        sort : str
+            Field and direction for sorting results - allowed sort fields are version,deployment_method,published_date.
+        limit : int
+            Maximum number of records to return (default: 100, max: 1000)
+        offset : int
+            Starting index of result.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -735,24 +904,35 @@ class CloudAzureRegistration(ServiceClass):
                                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve existing suppression rules with filtering.
 
-        Keyword arguments:
-        registration_id -- Registration ID. String.
-        filter -- FQL (Falcon Query Language) string for filtering results. Allowed filters are
-                  issue_name,entity_id,suppressed_by,created_at,reason. String.
-        sort -- Field and direction for sorting results - allowed sort fields are
-                issue_name,entity_id,suppressed_by,created_at,reason. String.
-        limit -- Maximum number of records to return (default: 100, max: 1000). Integer.
-        offset -- Starting index of result. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_suppressions
+
+        Keyword arguments
+        -----------------
+        registration_id : str
+            Registration ID.
+        filter : str
+            FQL (Falcon Query Language) string for filtering results. Allowed filters are
+            issue_name,entity_id,suppressed_by,created_at,reason.
+        sort : str
+            Field and direction for sorting results - allowed sort fields are
+            issue_name,entity_id,suppressed_by,created_at,reason.
+        limit : int
+            Maximum number of records to return (default: 100, max: 1000)
+        offset : int
+            Starting index of result.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -769,8 +949,16 @@ class CloudAzureRegistration(ServiceClass):
                                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update existing suppression rules.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_update_suppressions
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -779,16 +967,15 @@ class CloudAzureRegistration(ServiceClass):
                         }
                     ]
                 }
-        resources -- The resources value. List.
+        resources : list
+            The resources value.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_update_suppressions
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_registration_azure_update_suppressions_payload(passed_keywords=kwargs)

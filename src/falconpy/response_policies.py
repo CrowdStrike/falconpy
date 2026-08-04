@@ -65,24 +65,35 @@ class ResponsePolicies(ServiceClass):
 
         Returns a set of host details which match the filter criteria.
 
-        Keyword arguments:
-        id -- The ID of the Response Policy to search for members of
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/queryCombinedRTResponsePolicyMembers
+
+        Keyword arguments
+        -----------------
+        id : str
+            The ID of the Response Policy to search for members of
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -101,23 +112,33 @@ class ResponsePolicies(ServiceClass):
 
         Returns a set of Response Policies which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/queryCombinedRTResponsePolicies
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -135,15 +156,25 @@ class ResponsePolicies(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform the specified action on the Response Policies specified in the request.
 
-        Keyword arguments:
-        action_name -- action to perform: 'add-host-group', 'add-rule-group', 'disable',
-                       'enable', 'remove-host-group', or 'remove-rule-group'.
-        action_parameters -- Action specific parameter options. List of dictionaries.
-                             {
-                                 "name": "string",
-                                 "value": "string"
-                             }
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/performRTResponsePoliciesAction
+
+        Keyword arguments
+        -----------------
+        action_name : str
+            action to perform: 'add-host-group', 'add-rule-group', 'disable',
+            'enable', 'remove-host-group', or 'remove-rule-group'.
+        action_parameters : list
+            Action specific parameter options. List of dictionaries.
+            {
+                "name": "string",
+                "value": "string"
+            }
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "action_parameters": [
                         {
@@ -155,19 +186,20 @@ class ResponsePolicies(ServiceClass):
                         "string"
                     ]
                 }
-        group_id -- Host Group ID to apply the policy to. String.
-                    Overridden if action_parameters is provided.
-        ids -- Response policy ID(s) to perform actions against. String or list of strings.
-        parameters - full parameters payload, not required if action_name is provide as a keyword.
+        group_id : str
+            Host Group ID to apply the policy to. String.
+            Overridden if action_parameters is provided.
+        ids : str or list[str]
+            Response policy ID(s) to perform actions against.
+        parameters : dict
+            full parameters payload, not required if action_name is provide as a keyword.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/performRTResponsePoliciesAction
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -197,25 +229,33 @@ class ResponsePolicies(ServiceClass):
         have the lowest. You must specify all non-Default Policies for a platform when updating
         precedence.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/setRTResponsePoliciesPrecedence
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "ids": [
                         "string"
                     ],
                     "platform_name": "string"
                 }
-        ids -- Prevention policy ID(s) to perform actions against. String or list of strings.
-        platform_name -- OS platform name. (Linux, Mac, Windows)
+        ids : str or list[str]
+            Prevention policy ID(s) to perform actions against.
+        platform_name : str
+            OS platform name. (Linux, Mac, Windows)
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/setRTResponsePoliciesPrecedence
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -233,19 +273,28 @@ class ResponsePolicies(ServiceClass):
     def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a set of Response Policies by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of Response Policy IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/getRTResponsePolicies
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Response Policy IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -259,8 +308,16 @@ class ResponsePolicies(ServiceClass):
     def create_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Response Policies by specifying details about the policy to create.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/createRTResponsePolicies
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "resources": [
                         {
@@ -277,24 +334,27 @@ class ResponsePolicies(ServiceClass):
                         }
                     ]
                 }
-        clone_id -- Response Policy ID to clone. String.
-        description -- Response Policy description. String.
-        name -- Response Policy name. String.
-        platform_name -- Name of the operating system platform. String.
-        settings -- Response policy specific settings. List of dictionaries.
-                    {
-                        "id": "string",
-                        "value": {}
-                    }
+        clone_id : str
+            Response Policy ID to clone.
+        description : str
+            Response Policy description.
+        name : str
+            Response Policy name.
+        platform_name : str
+            Name of the operating system platform.
+        settings : list
+            Response policy specific settings. List of dictionaries.
+            {
+                "id": "string",
+                "value": {}
+            }
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/createRTResponsePolicies
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = response_policy_payload(passed_keywords=kwargs)
@@ -310,19 +370,28 @@ class ResponsePolicies(ServiceClass):
     def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a set of Response Policies by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of Response Policy IDs to delete. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/deleteRTResponsePolicies
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Response Policy IDs to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -336,8 +405,16 @@ class ResponsePolicies(ServiceClass):
     def update_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Response Policies by specifying the ID of the policy and details to update.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/updateRTResponsePolicies
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "resources": [
                         {
@@ -353,23 +430,25 @@ class ResponsePolicies(ServiceClass):
                         }
                     ]
                 }
-        description -- Response Policy description. String.
-        id -- Response Policy ID to update. String.
-        name -- Response Policy name. String.
-        settings -- Response policy specific settings. List of dictionaries.
-                    {
-                        "id": "string",
-                        "value": "string"
-                    }
+        description : str
+            Response Policy description.
+        id : str
+            Response Policy ID to update.
+        name : str
+            Response Policy name.
+        settings : list
+            Response policy specific settings. List of dictionaries.
+            {
+                "id": "string",
+                "value": "string"
+            }
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/updateRTResponsePolicies
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = response_policy_payload(passed_keywords=kwargs)
@@ -387,24 +466,35 @@ class ResponsePolicies(ServiceClass):
 
         Returns a set of Agent IDs which match the filter criteria.
 
-        Keyword arguments:
-        id -- The ID of the Response Policy to search for members of
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/queryRTResponsePolicyMembers
+
+        Keyword arguments
+        -----------------
+        id : str
+            The ID of the Response Policy to search for members of
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -420,23 +510,33 @@ class ResponsePolicies(ServiceClass):
 
         This returns a set of Response Policy IDs that match the given criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/queryRTResponsePolicies
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

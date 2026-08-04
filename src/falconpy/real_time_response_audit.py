@@ -59,27 +59,38 @@ class RealTimeResponseAudit(ServiceClass):
     def audit_sessions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all the RTR sessions created for a customer during a specified time period.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of sessions to return in this response. Integer.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- Starting index of overall result set from which to return ids.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. date_created|asc).
-                Available sort fields: created_at, updated_at, deleted_at
-        with_command_info -- Retrieve sessions with command information included. By default
-                             sessions are returned without command information which includes
-                             cloud request IDs and log fields.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-audit/RTRAuditSessions
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : str
+            The maximum number of sessions to return in this response. Integer.
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            Starting index of overall result set from which to return ids.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. date_created|asc).
+            Available sort fields: created_at, updated_at, deleted_at
+        with_command_info : bool
+            Retrieve sessions with command information included. By default
+            sessions are returned without command information which includes
+            cloud request IDs and log fields.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

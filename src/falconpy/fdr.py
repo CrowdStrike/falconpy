@@ -61,19 +61,19 @@ class FDR(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event%20schema/fdrschema.combined.event.get
 
         Keyword arguments
-        ----
+        -----------------
         This method does not accept keyword arguments.
 
         Arguments
-        ----
+        ---------
         This method does not accept arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -94,23 +94,23 @@ class FDR(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event%20schema/fdrschema.entities.event.get
 
         Keyword arguments
-        ----
+        -----------------
         ids : str
             FDR feed IDs to retrieve.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be 'ids'.
         All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -132,11 +132,11 @@ class FDR(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event%20schema/fdrschema.queries.event.get
 
         Keyword arguments
-        ----
+        -----------------
         filter : str
             FQL formatted filter to limit returned results.
         limit : int
@@ -153,7 +153,7 @@ class FDR(ServiceClass):
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -176,23 +176,23 @@ class FDR(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/field%20schema/fdrschema.entities.field.get
 
         Keyword arguments
-        ----
+        -----------------
         ids : str
             FDR feed IDs to retrieve.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
         Arguments
-        ----
+        ---------
         When not specified, the first argument to this method is assumed to be 'ids'.
         All others are ignored.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -211,11 +211,11 @@ class FDR(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/field%20schema/fdrschema.queries.field.get
 
         Keyword arguments
-        ----
+        -----------------
         filter : str
             FQL formatted filter to limit returned results.
         limit : int
@@ -232,7 +232,7 @@ class FDR(ServiceClass):
         This method only supports keywords for providing arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """

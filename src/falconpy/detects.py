@@ -69,8 +69,16 @@ class Detects(ServiceClass):
     def get_aggregate_detects(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get detect aggregates as specified via json in request body.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetAggregateDetects
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -105,38 +113,44 @@ class Detects(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetAggregateDetects
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             # Similar to 664: Detects aggregates expects a list
@@ -153,9 +167,18 @@ class Detects(ServiceClass):
     def update_detects_by_ids(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Modify the state, assignee, and visibility of detections.
 
-        Keyword arguments:
-        assigned_to_uuid -- A user ID to assign the detection to.
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/UpdateDetectsByIdsV2
+
+        Keyword arguments
+        -----------------
+        assigned_to_uuid : str
+            A user ID to assign the detection to.
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "assigned_to_uuid": "string",
                     "comment": "string",
@@ -168,28 +191,32 @@ class Detects(ServiceClass):
                     "show_in_ui": true,
                     "status": "string"
                 }
-        comment -- Optional comment to add to the detection. Comments are displayed with
-                   the detection in Falcon and are usually used to provide context or
-                   notes for other Falcon users. A detection can have multiple comments
-                   over time.
-        ids -- ID(s) of the detection to update. String or list of strings.
-        new_behaviors_processed -- String or list of strings.
-        show_in_ui -- Boolean determining if this detection is displayed in the Falcon
-                      console.
-        status -- Current status of the detection. Allowed values:
-                  ignored           new
-                  in_progress       true_positive
-                  false_positive
+        comment : str
+            Optional comment to add to the detection. Comments are displayed with
+            the detection in Falcon and are usually used to provide context or
+            notes for other Falcon users. A detection can have multiple comments
+            over time.
+        ids : str or list[str]
+            ID(s) of the detection to update.
+        new_behaviors_processed : str or list[str]
+        show_in_ui : bool
+            Boolean determining if this detection is displayed in the Falcon
+            console.
+        status : str
+            Current status of the detection. Allowed values:
+            ignored           new
+            in_progress       true_positive
+            false_positive
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/UpdateDetectsByIdsV2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = update_detects_payload(current_payload=generic_payload_list(
@@ -223,24 +250,33 @@ class Detects(ServiceClass):
     def get_detect_summaries(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """View information about detections.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetDetectSummaries
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- ID(s) of the detections to retrieve. String or list of strings.
+        ids : str or list[str]
+            ID(s) of the detections to retrieve.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetDetectSummaries
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_arguments=args,
@@ -261,93 +297,97 @@ class Detects(ServiceClass):
     def query_detects(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for detection IDs that match a given query.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  An asterisk wildcard '*' includes all results.
-
-                  AVAILABLE FILTERS
-                  General
-                  ----------------------------------------------------
-                  adversary_ids             max_confidence
-                  assigned_to_name          max_severity
-                  cid                       max_severity_displayname
-                  date_updated              seconds_to_triaged
-                  detection_id              seconds_to_resolved
-                  first_behavior            status
-                  last_behavior
-
-                  Behavioral (behaviors.filter) Ex: behaviors.md5
-                  ----------------------------------------------------
-                  alleged_filetype          pattern_disposition
-                  behavior_id               scenario
-                  cmdline                   severity
-                  confidence                sha256
-                  control_graph_id          tactic
-                  device_id                 technique
-                  filename                  timestamp
-                  ioc_source                triggering_process_id
-                  ioc_type                  triggering_process_graph_id
-                  ioc_value                 user_id
-                  md5                       user_name
-                  objective
-                  parent_details.parent_cmdline
-                  parent_details.parent_md5
-                  parent_details.parent_process_id
-                  parent_details.parent_process_graph_id
-                  parent_details.parent_sha256
-
-                  Devices (device.filter)  Ex: device.platform_name
-                  ----------------------------------------------------
-                  agent_load_flags          machine_domain
-                  agent_local_time          major_version
-                  agent_version             minor_version
-                  bios_manufacturer         modified_timestamp
-                  bios_version              os_version
-                  cid                       ou
-                  config_id_base            platform_id
-                  config_id_build           platform_name
-                  config_id_platform        product_type
-                  cpu_signature             product_type_desc
-                  device_id                 release_group
-                  external_ip               reduced_functionality_mode
-                  first_seen                serial_number
-                  hostname                  site_name
-                  last_seen                 status
-                  local_ip                  system_product_name
-                  mac_address               system_manufacturer
-
-                  Misc
-                  ----------------------------------------------------
-                  hostinfo.domain
-                  hostinfo.active_directory_dn_display
-
-                  quarantined_files.id      quarantined_files.state
-                  quarantined_files.paths   quarantined_files.sha256
-
-        For more detail regarding filtering options, please review:
-        https://falcon.crowdstrike.com/documentation/86/detections-monitoring-apis#find-detections
-
-        limit -- The maximum number of detections to return in this response.
-                 [Integer, default: 100; max: 9999]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The first detection to return, where 0 is the latest detection.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Search all detection metadata for the provided string.
-        sort -- The property to sort by. FQL syntax (e.g. last_behavior|asc).
-                Available sort fields:
-                adversary_id        last_behavior
-                devices.hostname    max_confidence
-                first_behavior      max_severity
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/QueryDetects
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+                      An asterisk wildcard '*' includes all results.
+                      AVAILABLE FILTERS
+                      General
+                      ----------------------------------------------------
+                      adversary_ids             max_confidence
+                      assigned_to_name          max_severity
+                      cid                       max_severity_displayname
+                      date_updated              seconds_to_triaged
+                      detection_id              seconds_to_resolved
+                      first_behavior            status
+                      last_behavior
+                      Behavioral (behaviors.filter) Ex: behaviors.md5
+                      ----------------------------------------------------
+                      alleged_filetype          pattern_disposition
+                      behavior_id               scenario
+                      cmdline                   severity
+                      confidence                sha256
+                      control_graph_id          tactic
+                      device_id                 technique
+                      filename                  timestamp
+                      ioc_source                triggering_process_id
+                      ioc_type                  triggering_process_graph_id
+                      ioc_value                 user_id
+                      md5                       user_name
+                      objective
+                      parent_details.parent_cmdline
+                      parent_details.parent_md5
+                      parent_details.parent_process_id
+                      parent_details.parent_process_graph_id
+                      parent_details.parent_sha256
+                      Devices (device.filter)  Ex: device.platform_name
+                      ----------------------------------------------------
+                      agent_load_flags          machine_domain
+                      agent_local_time          major_version
+                      agent_version             minor_version
+                      bios_manufacturer         modified_timestamp
+                      bios_version              os_version
+                      cid                       ou
+                      config_id_base            platform_id
+                      config_id_build           platform_name
+                      config_id_platform        product_type
+                      cpu_signature             product_type_desc
+                      device_id                 release_group
+                      external_ip               reduced_functionality_mode
+                      first_seen                serial_number
+                      hostname                  site_name
+                      last_seen                 status
+                      local_ip                  system_product_name
+                      mac_address               system_manufacturer
+                      Misc
+                      ----------------------------------------------------
+                      hostinfo.domain
+                      hostinfo.active_directory_dn_display
+                      quarantined_files.id      quarantined_files.state
+                      quarantined_files.paths   quarantined_files.sha256
+            For more detail regarding filtering options, please review:
+            https://falcon.crowdstrike.com/documentation/86/detections-monitoring-apis#find-detections
+        limit : int
+            The maximum number of detections to return in this response.
+            [Integer, default: 100; max: 9999]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The first detection to return, where 0 is the latest detection.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Search all detection metadata for the provided.
+        sort : str
+            The property to sort by. FQL syntax (e.g. last_behavior|asc).
+            Available sort fields:
+            adversary_id        last_behavior
+            devices.hostname    max_confidence
+            first_behavior      max_severity
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

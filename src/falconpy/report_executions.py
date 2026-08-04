@@ -60,19 +60,27 @@ class ReportExecutions(ServiceClass):
     def get_download(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get report entity download.
 
-        Keyword arguments:
-        ids -- ID of the report entity to retrieve.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/report-executions/report-executions-download.get
+
+        Keyword arguments
+        -----------------
+        ids : str
+            ID of the report entity to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        binary object on SUCCESS, dict object containing API response on FAILURE.
         """
         return process_service_request(
             calling_object=self,
@@ -86,24 +94,33 @@ class ReportExecutions(ServiceClass):
     def retry_reports(self: object, *args, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retries a report execution.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/report-executions/report-executions.retry
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 [
                     {
                         "id": "string"
                     }
                 ]
-        ids -- ID of the report to re-attempt execution. String or list of strings.
+        ids : str or list[str]
+            ID of the report to re-attempt execution.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/report-executions/report-executions.retry
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = reports_payload(passed_arguments=args, passed_keywords=kwargs)
@@ -119,19 +136,28 @@ class ReportExecutions(ServiceClass):
     def get_reports(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve report details for the provided report IDs.
 
-        Keyword arguments:
-        ids -- ID(s) of the reports to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/report-executions/report-executions.get
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            ID(s) of the reports to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -145,25 +171,36 @@ class ReportExecutions(ServiceClass):
     def query_reports(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all report execution IDs matching the query with filter.
 
-        Keyword arguments:
-        filter -- FQL query specifying the filter parameters.
-                  Filter term criteria: type, scheduled_report_id, status.
-                  Filter range criteria: created_on, last_updated_on, expiration_on;
-                    use any common date format, such as '2010-05-15T14:55:21.892315096Z'.
-        limit -- The maximum number of ids to return.
-        offset -- Starting integer index of overall result set from which to return ids.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Match query criteria, which includes all the filter string fields.
-        sort -- The property to sort by. FQL syntax. (e.g. created_on.asc, last_updated_on.desc)
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/report-executions/report-executions.query
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying the filter parameters.
+            Filter term criteria: type, scheduled_report_id, status.
+            Filter range criteria: created_on, last_updated_on, expiration_on;
+              use any common date format, such as '2010-05-15T14:55:21.892315096Z'.
+        limit : int
+            The maximum number of ids to return.
+        offset : str
+            Starting integer index of overall result set from which to return ids.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Match query criteria, which includes all the filter string fields.
+        sort : str
+            The property to sort by. FQL syntax. (e.g. created_on.asc, last_updated_on.desc)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

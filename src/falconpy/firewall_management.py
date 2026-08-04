@@ -70,8 +70,16 @@ class FirewallManagement(ServiceClass):
     def aggregate_events(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate events for customer.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate_events
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -106,40 +114,46 @@ class FirewallManagement(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
+            String.
+            This method does not support body payload validation.
 
         This method only supports keywords for providing arguments.
 
-        This method does not support body payload validation.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate_events
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -155,8 +169,16 @@ class FirewallManagement(ServiceClass):
     def aggregate_policy_rules(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate rules within a policy for customer.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate_policy_rules
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -191,40 +213,46 @@ class FirewallManagement(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
+            String.
+            This method does not support body payload validation.
 
         This method only supports keywords for providing arguments.
 
-        This method does not support body payload validation.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate_policy_rules
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -240,8 +268,16 @@ class FirewallManagement(ServiceClass):
     def aggregate_rule_groups(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate rule groups for customer.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate_rule_groups
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -276,40 +312,46 @@ class FirewallManagement(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
+            String.
+            This method does not support body payload validation.
 
         This method only supports keywords for providing arguments.
 
-        This method does not support body payload validation.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate_rule_groups
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -325,8 +367,16 @@ class FirewallManagement(ServiceClass):
     def aggregate_rules(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate rules for customer.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate_rules
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -361,40 +411,46 @@ class FirewallManagement(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
+            String.
+            This method does not support body payload validation.
 
         This method only supports keywords for providing arguments.
 
-        This method does not support body payload validation.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate_rules
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -410,19 +466,28 @@ class FirewallManagement(ServiceClass):
     def get_events(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get events entities by ID and optionally version.
 
-        Keyword arguments:
-        ids -- The IDs of the events to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if `ids` keyword is provided.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_events
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs of the events to retrieve.
+        parameters : dict
+            full parameters payload, not required if `ids` keyword is provided.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -440,19 +505,28 @@ class FirewallManagement(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the firewall field specifications by ID.
 
-        Keyword arguments:
-        ids -- The IDs of the rule types to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if `ids` keyword is provided.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_firewall_fields
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs of the rule types to retrieve.
+        parameters : dict
+            full parameters payload, not required if `ids` keyword is provided.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -466,19 +540,28 @@ class FirewallManagement(ServiceClass):
     def get_network_locations_details(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get network location entities by ID.
 
-        Keyword arguments:
-        ids -- The IDs of the event(s) to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if `ids` keyword is provided.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_rule_groups
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs of the event(s) to retrieve.
+        parameters : dict
+            full parameters payload, not required if `ids` keyword is provided.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -496,8 +579,16 @@ class FirewallManagement(ServiceClass):
                                           ) -> dict:
         """Update the network locations metadata such as polling intervals for the cid.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format. Not required if other keywords are provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-network-locations-metadata
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format. Not required if other keywords are provided.
                 {
                     "cid": "string",
                     "dns_resolution_targets_polling_interval": 0,
@@ -507,21 +598,22 @@ class FirewallManagement(ServiceClass):
                         "string"
                     ]
                 }
-        cid -- CID for the location. String.
-        comment -- Audit log comment for the action performed. String.
-        dns_resolution_targets_polling_interval -- Integer.
-        https_reachable_hsots_polling_interval -- Integer.
-        icmp_request_targets_polling_interval -- Integer
-        location_precedencee -- Reorder precedence of network locations. List of strings.
+        cid : str
+            CID for the location.
+        comment : str
+            Audit log comment for the action performed.
+        dns_resolution_targets_polling_interval : int
+        https_reachable_hsots_polling_interval : int
+        icmp_request_targets_polling_interval : int
+        location_precedencee : list[str]
+            Reorder precedence of network locations.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-network-locations-metadata
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = network_locations_metadata_payload(passed_keywords=kwargs)
@@ -542,26 +634,35 @@ class FirewallManagement(ServiceClass):
                                             ) -> dict:
         """Update the network locations precedence according to the list of IDs provided.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format. Not required if other keywords are provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-network-locations-precedence
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format. Not required if other keywords are provided.
                 {
                     "cid": "string",
                     "location_precedence": [
                         "string"
                     ]
                 }
-        cid -- CID for the location. String.
-        comment -- Audit log comment for the action performed. String.
-        location_precedencee -- Reorder precedence of network locations. List of strings.
+        cid : str
+            CID for the location.
+        comment : str
+            Audit log comment for the action performed.
+        location_precedencee : list[str]
+            Reorder precedence of network locations.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-network-locations-precedence
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = network_locations_metadata_payload(passed_keywords=kwargs)
@@ -578,19 +679,28 @@ class FirewallManagement(ServiceClass):
     def get_network_locations(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get network location entities by ID.
 
-        Keyword arguments:
-        ids -- The IDs of the location(s) to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if `ids` keyword is provided.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get-network-locations
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs of the location(s) to retrieve.
+        parameters : dict
+            full parameters payload, not required if `ids` keyword is provided.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -604,10 +714,19 @@ class FirewallManagement(ServiceClass):
     def create_network_locations(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
         """Create new network locations provided and return the ID.
 
-        Keyword arguments:
-        add_fw_rules -- Flag to indicate if the cloned locatoin needs to be added to the same
-                        firewall rules that encompass the original location.
-        body -- Full body payload in JSON format. Not required if other keywords are provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/create-network-locations
+
+        Keyword arguments
+        -----------------
+        add_fw_rules : bool
+            Flag to indicate if the cloned locatoin needs to be added to the same
+            firewall rules that encompass the original location.
+        body : dict
+            Full body payload in JSON format. Not required if other keywords are provided.
                 {
                     "connection_types": {
                         "wired": true,
@@ -655,30 +774,42 @@ class FirewallManagement(ServiceClass):
                     },
                     "name": "string"
                 }
-        clone_id -- A network location ID from which to copy rules. If this is provided then all
-                    other keywords except `add_fw_rules` and `comment` are ignored. String.
-        comment -- Audit log comment for this action. String.
-        connection_types -- Connections available at the location. Dictionary.
-        default_gateways -- List of available default gateways. List of strings.
-        description -- Description of the location. String.
-        dhcp_servers -- List of available DHCP servers. List of strings.
-        dns_resolution_targets -- Dictionary containing a list of DNS resolution targets.
-        dns_servers -- List of available DNS servers. List of strings.
-        enabled -- Flag indicating if this location is enabled. Boolean.
-        host_addresses -- List of available host addresses. List of strings.
-        https_reachable_hosts -- Dictionary of hosts reachable via HTTPS at this location.
-        icmp_request_targets -- Dictionary of targets for ICMP monitoring requests.
-        name -- Name for this rule. String.
-        parameters - full parameters payload, not required if using other keywords.
+        clone_id : str
+            A network location ID from which to copy rules. If this is provided then all
+            other keywords except `add_fw_rules` and `comment` are ignored.
+        comment : str
+            Audit log comment for this action.
+        connection_types : dict
+            Connections available at the location.
+        default_gateways : str or list[str]
+            List of available default gateways.
+        description : str
+            Description of the location.
+        dhcp_servers : str or list[str]
+            List of available DHCP servers.
+        dns_resolution_targets : dict
+            Dictionary containing a list of DNS resolution targets.
+        dns_servers : str or list[str]
+            List of available DNS servers.
+        enabled : bool
+            Flag indicating if this location is enabled.
+        host_addresses : str or list[str]
+            List of available host addresses.
+        https_reachable_hosts : dict
+            Dictionary of hosts reachable via HTTPS at this location.
+        icmp_request_targets : dict
+            Dictionary of targets for ICMP monitoring requests.
+        name : str
+            Name for this rule.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/create-network-locations
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = network_locations_create_payload(passed_keywords=kwargs)
@@ -696,8 +827,16 @@ class FirewallManagement(ServiceClass):
     def upsert_network_locations(self: object, body: dict = None, **kwargs) -> dict:
         """Update the network locations provided and return the ID.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format. Not required if other keywords are provided.
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/upsert-network-locations
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format. Not required if other keywords are provided.
                 {
                     "connection_types": {
                         "wired": true,
@@ -750,33 +889,48 @@ class FirewallManagement(ServiceClass):
                     "modified_by": "string",
                     "modified_on": "string"
                 }
-        comment -- Audit log comment for this action. String.
-        connection_types -- Connections available at the location. Dictionary.
-        created_on -- Timestamp string.
-        created_by -- String.
-        default_gateways -- List of available default gateways. List of strings.
-        description -- Description of the location. String.
-        dhcp_servers -- List of available DHCP servers. List of strings.
-        dns_resolution_targets -- Dictionary containing a list of DNS resolution targets.
-        dns_servers -- List of available DNS servers. List of strings.
-        enabled -- Flag indicating if this location is enabled. Boolean.
-        host_addresses -- List of available host addresses. List of strings.
-        https_reachable_hosts -- Dictionary of hosts reachable via HTTPS at this location.
-        icmp_request_targets -- Dictionary of targets for ICMP monitoring requests.
-        id -- Network location ID to be updated. String.
-        modified_by -- User UUID that modified this location. String.
-        modified_on -- UTC formatted date string of the update.
-        name -- Name for this rule. String.
-        parameters - full parameters payload, not required if using other keywords.
+        comment : str
+            Audit log comment for this action.
+        connection_types : dict
+            Connections available at the location.
+        created_on : str
+            Timestamp.
+        created_by : str
+        default_gateways : str or list[str]
+            List of available default gateways.
+        description : str
+            Description of the location.
+        dhcp_servers : str or list[str]
+            List of available DHCP servers.
+        dns_resolution_targets : dict
+            Dictionary containing a list of DNS resolution targets.
+        dns_servers : str or list[str]
+            List of available DNS servers.
+        enabled : bool
+            Flag indicating if this location is enabled.
+        host_addresses : str or list[str]
+            List of available host addresses.
+        https_reachable_hosts : dict
+            Dictionary of hosts reachable via HTTPS at this location.
+        icmp_request_targets : dict
+            Dictionary of targets for ICMP monitoring requests.
+        id : str
+            Network location ID to be updated.
+        modified_by : str
+            User UUID that modified this location.
+        modified_on : str
+            UTC formatted date string of the update.
+        name : str
+            Name for this rule.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PUT
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/upsert-network-locations
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = network_locations_create_payload(passed_keywords=kwargs)
@@ -793,8 +947,16 @@ class FirewallManagement(ServiceClass):
     def update_network_locations(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
         """Create new network locations provided and return the ID.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format. Not required if other keywords are provided.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-network-locations
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format. Not required if other keywords are provided.
                 {
                     "connection_types": {
                         "wired": true,
@@ -847,33 +1009,48 @@ class FirewallManagement(ServiceClass):
                     "modified_by": "string",
                     "modified_on": "string"
                 }
-        comment -- Audit log comment for this action. String.
-        connection_types -- Connections available at the location. Dictionary.
-        created_on -- Timestamp string.
-        created_by -- String.
-        default_gateways -- List of available default gateways. List of strings.
-        description -- Description of the location. String.
-        dhcp_servers -- List of available DHCP servers. List of strings.
-        dns_resolution_targets -- Dictionary containing a list of DNS resolution targets.
-        dns_servers -- List of available DNS servers. List of strings.
-        enabled -- Flag indicating if this location is enabled. Boolean.
-        host_addresses -- List of available host addresses. List of strings.
-        https_reachable_hosts -- Dictionary of hosts reachable via HTTPS at this location.
-        icmp_request_targets -- Dictionary of targets for ICMP monitoring requests.
-        id -- Network location ID to be updated. String.
-        modified_by -- User UUID that modified this location. String.
-        modified_on -- UTC formatted date string of the update.
-        name -- Name for this rule. String.
-        parameters - full parameters payload, not required if using other keywords.
+        comment : str
+            Audit log comment for this action.
+        connection_types : dict
+            Connections available at the location.
+        created_on : str
+            Timestamp.
+        created_by : str
+        default_gateways : str or list[str]
+            List of available default gateways.
+        description : str
+            Description of the location.
+        dhcp_servers : str or list[str]
+            List of available DHCP servers.
+        dns_resolution_targets : dict
+            Dictionary containing a list of DNS resolution targets.
+        dns_servers : str or list[str]
+            List of available DNS servers.
+        enabled : bool
+            Flag indicating if this location is enabled.
+        host_addresses : str or list[str]
+            List of available host addresses.
+        https_reachable_hosts : dict
+            Dictionary of hosts reachable via HTTPS at this location.
+        icmp_request_targets : dict
+            Dictionary of targets for ICMP monitoring requests.
+        id : str
+            Network location ID to be updated.
+        modified_by : str
+            User UUID that modified this location.
+        modified_on : str
+            UTC formatted date string of the update.
+        name : str
+            Name for this rule.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-network-locations
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = network_locations_create_payload(passed_keywords=kwargs)
@@ -895,19 +1072,28 @@ class FirewallManagement(ServiceClass):
                                  ) -> dict:
         """Delete network location entities by ID.
 
-        Keyword arguments:
-        ids -- The IDs of the network location(s) to delete. String or list of strings.
-        parameters - full parameters payload, not required if `ids` keyword is provided.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/delete-network-locations
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs of the network location(s) to delete.
+        parameters : dict
+            full parameters payload, not required if `ids` keyword is provided.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -921,19 +1107,28 @@ class FirewallManagement(ServiceClass):
     def get_platforms(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get platforms by ID, e.g., windows or mac or droid.
 
-        Keyword arguments:
-        ids -- The IDs of the platforms to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if `ids` keyword is provided.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_platforms
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs of the platforms to retrieve.
+        parameters : dict
+            full parameters payload, not required if `ids` keyword is provided.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -951,19 +1146,28 @@ class FirewallManagement(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get policy container entities by policy ID.
 
-        Keyword arguments:
-        ids -- The IDs of the policy container(s) to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if `ids` keyword is provided.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_policy_containers
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs of the policy container(s) to retrieve.
+        parameters : dict
+            full parameters payload, not required if `ids` keyword is provided.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -983,8 +1187,16 @@ class FirewallManagement(ServiceClass):
 
         **DEPRECATED**
 
-        Keyword arguments:
-        body -- Full body payload in JSON format. Not required if other keywords are provided.
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-policy-container-v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format. Not required if other keywords are provided.
                 {
                     "default_inbound": "string",
                     "default_outbound": "string",
@@ -999,25 +1211,33 @@ class FirewallManagement(ServiceClass):
                     "test_mode": true,
                     "tracking": "string"
                 }
-        default_inbound -- Default inbound. String.
-        default_outbound -- Default outbound. String.
-        enforce -- Flag indicating if the policy is enforced. Boolean.
-        is_default_policy -- Flag indicating if the policy is the default. Boolean.
-        local_logging -- Flag indicating if local logging should be enabled. Boolean.
-        platform_id -- Platform ID. (`windows`, `mac`, `linux`) String.
-        policy_id -- ID of the policy to be updated. String.
-        rule_group_ids -- Rule group IDs this policy applies to. String or list of strings.
-        test_mode -- Flag indicating if this policy is in test mode. Boolean.
-        tracking -- Tracking. String.
+        default_inbound : str
+            Default inbound.
+        default_outbound : str
+            Default outbound.
+        enforce : bool
+            Flag indicating if the policy is enforced.
+        is_default_policy : bool
+            Flag indicating if the policy is the default.
+        local_logging : bool
+            Flag indicating if local logging should be enabled.
+        platform_id : str
+            Platform ID. (`windows`, `mac`, `linux`)
+        policy_id : str
+            ID of the policy to be updated.
+        rule_group_ids : str or list[str]
+            Rule group IDs this policy applies to.
+        test_mode : bool
+            Flag indicating if this policy is in test mode.
+        tracking : str
+            Tracking.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PUT
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-policy-container-v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = firewall_container_payload(passed_keywords=kwargs)
@@ -1037,8 +1257,16 @@ class FirewallManagement(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an identified policy container.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format. Not required if other keywords are provided.
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-policy-container
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format. Not required if other keywords are provided.
                 {
                     "default_inbound": "string",
                     "default_outbound": "string",
@@ -1053,25 +1281,33 @@ class FirewallManagement(ServiceClass):
                     "test_mode": boolean,
                     "tracking": "string"
                 }
-        default_inbound -- Default inbound. String.
-        default_outbound -- Default outbound. String.
-        enforce -- Flag indicating if the policy is enforced. Boolean.
-        is_default_policy -- Flag indicating if the policy is the default. Boolean.
-        local_logging -- Flag indicating if local logging functionality is enabled. Boolean.
-        platform_id -- Platform ID. (`windows`, `mac`, `linux`) String.
-        policy_id -- ID of the policy to be updated. String.
-        rule_group_ids -- Rule group IDs this policy applies to. String or list of strings.
-        test_mode -- Flag indicating if this policy is in test mode. Boolean.
-        tracking -- Tracking. String.
+        default_inbound : str
+            Default inbound.
+        default_outbound : str
+            Default outbound.
+        enforce : bool
+            Flag indicating if the policy is enforced.
+        is_default_policy : bool
+            Flag indicating if the policy is the default.
+        local_logging : bool
+            Flag indicating if local logging functionality is enabled.
+        platform_id : str
+            Platform ID. (`windows`, `mac`, `linux`)
+        policy_id : str
+            ID of the policy to be updated.
+        rule_group_ids : str or list[str]
+            Rule group IDs this policy applies to.
+        test_mode : bool
+            Flag indicating if this policy is in test mode.
+        tracking : str
+            Tracking.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PUT
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-policy-container
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = firewall_container_payload(passed_keywords=kwargs)
@@ -1089,19 +1325,28 @@ class FirewallManagement(ServiceClass):
 
         These groups do not contain their rule entites, just the rule IDs in precedence order.
 
-        Keyword arguments:
-        ids -- The IDs of the rule group(s) to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if `ids` keyword is provided.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_rule_groups
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs of the rule group(s) to retrieve.
+        parameters : dict
+            full parameters payload, not required if `ids` keyword is provided.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1122,11 +1367,21 @@ class FirewallManagement(ServiceClass):
 
         Returns the ID.
 
-        Keyword arguments:
-        action -- Rule action to perform. String. Overridden if 'rules' keyword is provided.
-        address_family -- Address type, String. Either 'IP4', 'IP6' or 'NONE'.
-                          Overridden if 'rules' keyword is provided.
-        body -- Full body payload in JSON format. Not required if other keywords are provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/create-rule-group
+
+        Keyword arguments
+        -----------------
+        action : str
+            Rule action to perform. String. Overridden if 'rules' keyword is provided.
+        address_family : str
+            Address type, String. Either 'IP4', 'IP6' or 'NONE'.
+            Overridden if 'rules' keyword is provided.
+        body : dict
+            Full body payload in JSON format. Not required if other keywords are provided.
                 {
                     "description": "string",
                     "enabled": true,
@@ -1190,105 +1445,126 @@ class FirewallManagement(ServiceClass):
                         }
                     ]
                 }
-        clone_id -- A rule group ID from which to copy rules.
-                    If this is provided the `rules` keyword is ignored.
-        comment -- Audit log comment for this action. String.
-        description -- Rule group description. String.
-        direction -- Traffic direction for created rule. String. Either 'IN', 'OUT' or 'BOTH'.
-                     Overridden if 'rules' keyword is provided.
-        enabled -- Flag indicating if the rule group is enabled. Boolean.
-        fields -- Fields to impact. Dictionary or list of dictionaries.
-                  Overridden if 'rules' keyword is provided.
-        icmp -- ICMP protocol options. Dictionary.  Overridden if 'rules' keyword is provided.
-        library -- If this flag is set to true then the rules will be cloned from the
-                   clone_id from the CrowdStrike Firewall Rule Groups Library. String.
-        local_address -- Local address and netmask detail. Dictionary or list of dictionaries.
-                         Overridden if 'rules' keyword is provided.
-        local_port -- Local port range. Dictionary or list of dictionaries.
-                      Overridden if 'rules' keyword is provided.
-        log -- Log rule matches. Boolean. Overridden if 'rules' keyword is provided.
-        name -- Rule group name. String.
-        monitor -- Monitor count / period. Dictionary. Overridden if 'rules' keyword is provided.
-        parameters - full parameters payload, not required if using other keywords.
-        platform -- OS platform covered by rule. String.
-        protocol -- Integer protocol specified. Integer. Overridden if 'rules' keyword is provided.
-                    (TCP = 6, UDP = 17)
-        remote_address -- Remote address and netmask detail. Dictionary or list of dictionaries.
-                          Overridden if 'rules' keyword is provided.
-        remote_port -- Remote port range. Dictionary or list of dictionaries.
-                       Overridden if 'rules' keyword is provided.
-        rule_description -- Description for created rule. String.
-                            Overridden if 'rules' keyword is provided.
-        rule_enabled -- Enablement status for new rule. Boolean.
-                        Overridden if 'rules' keyword is provided.
-        rule_name -- Name for the new rule. String.  Overridden if 'rules' keyword is provided.
-        rules - Rule(s) in JSON format. Single dictionary or List of dictionaries.
-                {
-                    "action": "string",
-                    "address_family": "string",
-                    "description": "string",
-                    "direction": "string",
-                    "enabled": true,
-                    "fields": [
-                        {
-                            "final_value": "string",
-                            "label": "string",
-                            "name": "string",
-                            "type": "string",
-                            "value": "string",
-                            "values": [
-                                "string"
-                            ]
-                        }
-                    ],
-                    "icmp": {
-                        "icmp_code": "string",
-                        "icmp_type": "string"
-                    },
-                    "local_address": [
-                        {
-                            "address": "string",
-                            "netmask": 0
-                        }
-                    ],
-                    "local_port": [
-                        {
-                            "end": 0,
-                            "start": 0
-                        }
-                    ],
-                    "log": true,
-                    "monitor": {
-                        "count": "string",
-                        "period_ms": "string"
-                    },
-                    "name": "string",
-                    "protocol": "string",
-                    "remote_address": [
-                        {
-                            "address": "string",
-                            "netmask": 0
-                        }
-                    ],
-                    "remote_port": [
-                        {
-                            "end": 0,
-                            "start": 0
-                        }
-                    ],
-                    "temp_id": "string"
-                }
-        temp_id -- String to use for rule temporary ID. String.
-                   Overridden if 'rules' keyword is provided.
+        clone_id : str
+            A rule group ID from which to copy rules.
+            If this is provided the `rules` keyword is ignored.
+        comment : str
+            Audit log comment for this action.
+        description : str
+            Rule group description.
+        direction : str
+            Traffic direction for created rule. String. Either 'IN', 'OUT' or 'BOTH'.
+            Overridden if 'rules' keyword is provided.
+        enabled : bool
+            Flag indicating if the rule group is enabled.
+        fields : str
+            Fields to impact. Dictionary or list of dictionaries.
+            Overridden if 'rules' keyword is provided.
+        icmp : str
+            ICMP protocol options. Dictionary.  Overridden if 'rules' keyword is provided.
+        library : str
+            If this flag is set to true then the rules will be cloned from the
+            clone_id from the CrowdStrike Firewall Rule Groups Library.
+        local_address : str
+            Local address and netmask detail. Dictionary or list of dictionaries.
+            Overridden if 'rules' keyword is provided.
+        local_port : str
+            Local port range. Dictionary or list of dictionaries.
+            Overridden if 'rules' keyword is provided.
+        log : str
+            Log rule matches. Boolean. Overridden if 'rules' keyword is provided.
+        name : str
+            Rule group name.
+        monitor : str
+            Monitor count / period. Dictionary. Overridden if 'rules' keyword is provided.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        platform : str
+            OS platform covered by rule.
+        protocol : str
+            Integer protocol specified. Integer. Overridden if 'rules' keyword is provided.
+            (TCP = 6, UDP = 17)
+        remote_address : str
+            Remote address and netmask detail. Dictionary or list of dictionaries.
+            Overridden if 'rules' keyword is provided.
+        remote_port : str
+            Remote port range. Dictionary or list of dictionaries.
+            Overridden if 'rules' keyword is provided.
+        rule_description : str
+            Description for created rule. String.
+            Overridden if 'rules' keyword is provided.
+        rule_enabled : str
+            Enablement status for new rule. Boolean.
+            Overridden if 'rules' keyword is provided.
+        rule_name : str
+            Name for the new rule. String.  Overridden if 'rules' keyword is provided.
+        rules : list
+            Rule(s) in JSON format. Single dictionary or List of dictionaries.
+            {
+                "action": "string",
+                "address_family": "string",
+                "description": "string",
+                "direction": "string",
+                "enabled": true,
+                "fields": [
+                    {
+                        "final_value": "string",
+                        "label": "string",
+                        "name": "string",
+                        "type": "string",
+                        "value": "string",
+                        "values": [
+                            "string"
+                        ]
+                    }
+                ],
+                "icmp": {
+                    "icmp_code": "string",
+                    "icmp_type": "string"
+                },
+                "local_address": [
+                    {
+                        "address": "string",
+                        "netmask": 0
+                    }
+                ],
+                "local_port": [
+                    {
+                        "end": 0,
+                        "start": 0
+                    }
+                ],
+                "log": true,
+                "monitor": {
+                    "count": "string",
+                    "period_ms": "string"
+                },
+                "name": "string",
+                "protocol": "string",
+                "remote_address": [
+                    {
+                        "address": "string",
+                        "netmask": 0
+                    }
+                ],
+                "remote_port": [
+                    {
+                        "end": 0,
+                        "start": 0
+                    }
+                ],
+                "temp_id": "string"
+            }
+        temp_id : str
+            String to use for rule temporary ID. String.
+            Overridden if 'rules' keyword is provided.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/create-rule-group
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = firewall_rule_group_payload(passed_keywords=kwargs)
@@ -1311,19 +1587,28 @@ class FirewallManagement(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete rule group entities by ID.
 
-        Keyword arguments:
-        ids -- The IDs of the rule group(s) to delete. String or list of strings.
-        parameters - full parameters payload, not required if `ids` keyword is provided.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/delete-rule-groups
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs of the rule group(s) to delete.
+        parameters : dict
+            full parameters payload, not required if `ids` keyword is provided.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1344,8 +1629,16 @@ class FirewallManagement(ServiceClass):
 
         Can also create, edit, delete, or reorder rules.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format. Not required if other keywords are provided.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-rule-group
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format. Not required if other keywords are provided.
                 {
                     "diff_operations": [
                         {
@@ -1364,27 +1657,36 @@ class FirewallManagement(ServiceClass):
                     ],
                     "tracking": "string"
                 }
-        comment -- Audit log comment for this action. String.
-        diff_from -- From value for diff. String. Overridden if 'diff_operations' is provided.
-        diff_op -- Operation for diff. String. Overridden if 'diff_operations' is provided.
-        diff_operations -- Diff operations to perform against the rule group.
-                           Single dictionary or List of dictionaries.
-        diff_path -- Path for diff. String. Overridden if 'diff_operations' is provided.
-        diff_type -- Type of diff to apply. String.
-        id -- ID of the rule group to update. String.
-        parameters - full parameters payload, not required if using other keywords.
-        rule_ids -- Rule ID(s). List of strings.
-        rule_versions -- Rule version(s). List of integers.
-        tracking -- Tracking. String.
+        comment : str
+            Audit log comment for this action.
+        diff_from : str
+            From value for diff. String. Overridden if 'diff_operations' is provided.
+        diff_op : str
+            Operation for diff. String. Overridden if 'diff_operations' is provided.
+        diff_operations : list
+            Diff operations to perform against the rule group.
+            Single.
+        diff_path : str
+            Path for diff. String. Overridden if 'diff_operations' is provided.
+        diff_type : str
+            Type of diff to apply.
+        id : str
+            ID of the rule group to update.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        rule_ids : str or list[str]
+            Rule ID(s)
+        rule_versions : list[int]
+            Rule version(s)
+        tracking : str
+            Tracking.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-rule-group
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = firewall_rule_group_update_payload(passed_keywords=kwargs)
@@ -1406,8 +1708,16 @@ class FirewallManagement(ServiceClass):
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Validate the request for creating a new rule group on a platform for a customer with a name and description.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format. Not required if other keywords are provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/create-rule-group-validation
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format. Not required if other keywords are provided.
                 {
                     "description": "string",
                     "enabled": true,
@@ -1473,26 +1783,33 @@ class FirewallManagement(ServiceClass):
                         }
                     ]
                 }
-        clone_id -- A rule group ID from which to copy rules. If this is provided then the
-                    'rules' property of the body and the 'rules' keyword are ignored. String.
-        comment -- Audit log comment for this action. String.
-        description -- Description of the rule. String.
-        enabled -- Flag indicating if this rule is enabled. Boolean.
-        library -- If this flag is set to true then the rules will be cloned from the clone_id
-                   from the CrowdStrike Firewall Rule Groups Library. Boolean.
-        name -- Name for this rule. String.
-        parameters - full parameters payload, not required if using other keywords.
-        platform -- Platform name this rule applies to. String.
-        rules -- JSON formatted list of rules to validate. List of dictionaries.
+        clone_id : str
+            A rule group ID from which to copy rules. If this is provided then the
+            'rules' property of the body and the 'rules' keyword are ignored.
+        comment : str
+            Audit log comment for this action.
+        description : str
+            Description of the rule.
+        enabled : bool
+            Flag indicating if this rule is enabled.
+        library : str
+            If this flag is set to true then the rules will be cloned from the clone_id
+            from the CrowdStrike Firewall Rule Groups Library.
+        name : str
+            Name for this rule.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        platform : str
+            Platform name this rule applies to.
+        rules : list[dict]
+            JSON formatted list of rules to validate.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/create-rule-group-validation
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = firewall_rule_group_validation_payload(passed_keywords=kwargs)
@@ -1518,8 +1835,16 @@ class FirewallManagement(ServiceClass):
         Validates the request of updating name, description, or enabled status
         of a rule group, or create, edit, delete, or reorder rules.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format. Not required if other keywords are provided.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-rule-group-validation
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format. Not required if other keywords are provided.
                 {
                     "diff_operations": [
                         {
@@ -1538,27 +1863,36 @@ class FirewallManagement(ServiceClass):
                     ],
                     "tracking": "string"
                 }
-        comment -- Audit log comment for this action. String.
-        diff_from -- From value for diff. String. Overridden if 'diff_operations' is provided.
-        diff_op -- Operation for diff. String. Overridden if 'diff_operations' is provided.
-        diff_operations -- Diff operations to perform against the rule group.
-                           Single dictionary or List of dictionaries.
-        diff_path -- Path for diff. String. Overridden if 'diff_operations' is provided.
-        diff_type -- Type of diff to apply. String.
-        id -- ID of the rule group to update. String.
-        parameters - full parameters payload, not required if using other keywords.
-        rule_ids -- Rule ID(s). List of strings.
-        rule_versions -- Rule version(s). List of integers.
-        tracking -- Tracking. String.
+        comment : str
+            Audit log comment for this action.
+        diff_from : str
+            From value for diff. String. Overridden if 'diff_operations' is provided.
+        diff_op : str
+            Operation for diff. String. Overridden if 'diff_operations' is provided.
+        diff_operations : list
+            Diff operations to perform against the rule group.
+            Single.
+        diff_path : str
+            Path for diff. String. Overridden if 'diff_operations' is provided.
+        diff_type : str
+            Type of diff to apply.
+        id : str
+            ID of the rule group to update.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        rule_ids : str or list[str]
+            Rule ID(s)
+        rule_versions : list[int]
+            Rule version(s)
+        tracking : str
+            Tracking.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-rule-group-validation
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = firewall_rule_group_update_payload(passed_keywords=kwargs)
@@ -1579,19 +1913,28 @@ class FirewallManagement(ServiceClass):
         ID = 64-bit unsigned int as decimal string
         Family ID = 32-character hexadecimal string
 
-        Keyword arguments:
-        ids -- The IDs of the rule(s) to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if `ids` keyword is provided.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_rules
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs of the rule(s) to retrieve.
+        parameters : dict
+            full parameters payload, not required if `ids` keyword is provided.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1605,23 +1948,31 @@ class FirewallManagement(ServiceClass):
     def validate_filepath_pattern(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Validate that the test pattern matches the executable filepath glob pattern.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format. Not required if using other keywords. Dictionary.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/validate-filepath-pattern
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format. Not required if using other keywords.
                 {
                     "filepath_pattern": "string",
                     "filepath_test_string": "string"
                 }
-        filepath_pattern -- Pattern to test against. String.
-        filepath_test_string -- File path string to be tested. String.
+        filepath_pattern : str
+            Pattern to test against.
+        filepath_test_string : str
+            File path string to be tested.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/validate-filepath-pattern
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = firewall_filepattern_payload(passed_keywords=kwargs)
@@ -1638,35 +1989,45 @@ class FirewallManagement(ServiceClass):
     def query_events(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all event IDs matching the query with filter.
 
-        Keyword arguments:
-        after -- A pagination token used with the limit parameter to manage pagination
-                 of results. On your first request, don't provide an after token. On
-                 subsequent requests, provide the after token from the previous response
-                 to continue from that place in the results.
-        filter -- FQL query specifying the filter parameters.
-                  Filter term criteria:
-                  enabled           name
-                  platform          description
-
-                  Filter range criteria:
-                  created_on
-                  modified_on
-
-                  (use any common date format, such as '2010-05-15T14:55:21.892315096Z')
-        limit -- The maximum number of rule IDs to return. [integer, 1-5000] Defaults to 10.
-        offset -- The integer offset to start retrieving records from. Defaults to 0.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Perform a generic substring search across all fields.
-        sort -- The property to sort by. FQL syntax (e.g. created_on|desc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_events
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the limit parameter to manage pagination
+            of results. On your first request, don't provide an after token. On
+            subsequent requests, provide the after token from the previous response
+            to continue from that place in the results.
+        filter : str
+            FQL query specifying the filter parameters.
+            Filter term criteria:
+            enabled           name
+            platform          description
+            Filter range criteria:
+            created_on
+            modified_on
+            (use any common date format, such as '2010-05-15T14:55:21.892315096Z')
+        limit : int
+            The maximum number of rule IDs to return. [integer, 1-5000] Defaults to 10.
+        offset : str
+            The integer offset to start retrieving records from. Defaults to 0.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Perform a generic substring search across all fields.
+        sort : str
+            The property to sort by. FQL syntax (e.g. created_on|desc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1680,20 +2041,29 @@ class FirewallManagement(ServiceClass):
     def query_firewall_fields(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the firewall field specification IDs for the provided platform.
 
-        Keyword arguments:
-        platform_id -- Get fields configuration for this platform. String.
-        limit -- The maximum number of rule IDs to return. [integer, 1-5000] Defaults to 10.
-        offset -- The integer offset to start retrieving records from. Defaults to 0.
-        parameters - full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_firewall_fields
+
+        Keyword arguments
+        -----------------
+        platform_id : str
+            Get fields configuration for this platform.
+        limit : int
+            The maximum number of rule IDs to return. [integer, 1-5000] Defaults to 10.
+        offset : str
+            The integer offset to start retrieving records from. Defaults to 0.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1707,26 +2077,38 @@ class FirewallManagement(ServiceClass):
     def query_network_locations(self: object, parameters: dict = None, **kwargs) -> dict:
         """Find all network location IDs matching the query with filter.
 
-        Keyword arguments:
-        after -- A pagination token used with the limit parameter to manage pagination
-                 of results. On your first request, don't provide an after token. On
-                 subsequent requests, provide the after token from the previous response
-                 to continue from that place in the results. String.
-        filter -- FQL query specifying the filter parameters. String.
-        limit -- The maximum number of rule IDs to return. Integer.
-        offset -- The integer offset to start retrieving records from. String.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Perform a generic substring search across all fields. String.
-        sort -- The property to sort by. FQL syntax. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query-network-locations
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the limit parameter to manage pagination
+            of results. On your first request, don't provide an after token. On
+            subsequent requests, provide the after token from the previous response
+            to continue from that place in the results.
+        filter : str
+            FQL query specifying the filter parameters.
+        limit : int
+            The maximum number of rule IDs to return.
+        offset : str
+            The integer offset to start retrieving records from.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Perform a generic substring search across all fields.
+        sort : str
+            The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1740,19 +2122,27 @@ class FirewallManagement(ServiceClass):
     def query_platforms(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the list of platform names.
 
-        Keyword arguments:
-        limit -- The maximum number of rule IDs to return. [integer, 1-100]
-        offset -- The integer offset to start retrieving records from. Defaults to 0.
-        parameters - full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_platforms
+
+        Keyword arguments
+        -----------------
+        limit : int (1-100)
+            The maximum number of rule IDs to return.
+        offset : str
+            The integer offset to start retrieving records from. Defaults to 0.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1768,35 +2158,45 @@ class FirewallManagement(ServiceClass):
 
         Results are returned in precedence order.
 
-        Keyword arguments:
-        after -- A pagination token used with the limit parameter to manage pagination
-                 of results. On your first request, don't provide an after token. On
-                 subsequent requests, provide the after token from the previous response
-                 to continue from that place in the results.
-        filter -- FQL query specifying the filter parameters.
-                  Filter term criteria:
-                  enabled           name
-                  platform          description
-
-                  Filter range criteria:
-                  created_on
-                  modified_on
-
-                  (use any common date format, such as '2010-05-15T14:55:21.892315096Z')
-        limit -- The maximum number of rule IDs to return. [integer, 1-5000] Defaults to 10.
-        offset -- The integer offset to start retrieving records from. Defaults to 0.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Perform a generic substring search across all fields.
-        sort -- The property to sort by. FQL syntax (e.g. created_on|desc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_policy_rules
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the limit parameter to manage pagination
+            of results. On your first request, don't provide an after token. On
+            subsequent requests, provide the after token from the previous response
+            to continue from that place in the results.
+        filter : str
+            FQL query specifying the filter parameters.
+            Filter term criteria:
+            enabled           name
+            platform          description
+            Filter range criteria:
+            created_on
+            modified_on
+            (use any common date format, such as '2010-05-15T14:55:21.892315096Z')
+        limit : int
+            The maximum number of rule IDs to return. [integer, 1-5000] Defaults to 10.
+        offset : str
+            The integer offset to start retrieving records from. Defaults to 0.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Perform a generic substring search across all fields.
+        sort : str
+            The property to sort by. FQL syntax (e.g. created_on|desc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1810,35 +2210,45 @@ class FirewallManagement(ServiceClass):
     def query_rule_groups(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all rule group IDs matching the query with filter.
 
-        Keyword arguments:
-        after -- A pagination token used with the limit parameter to manage pagination
-                 of results. On your first request, don't provide an after token. On
-                 subsequent requests, provide the after token from the previous response
-                 to continue from that place in the results.
-        filter -- FQL query specifying the filter parameters.
-                  Filter term criteria:
-                  enabled           name
-                  platform          description
-
-                  Filter range criteria:
-                  created_on
-                  modified_on
-
-                  (use any common date format, such as '2010-05-15T14:55:21.892315096Z')
-        limit -- The maximum number of rule IDs to return. [integer, 1-5000] Defaults to 10.
-        offset -- The integer offset to start retrieving records from. Defaults to 0.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Perform a generic substring search across all fields.
-        sort -- The property to sort by. FQL syntax (e.g. created_on|desc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_rule_groups
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the limit parameter to manage pagination
+            of results. On your first request, don't provide an after token. On
+            subsequent requests, provide the after token from the previous response
+            to continue from that place in the results.
+        filter : str
+            FQL query specifying the filter parameters.
+            Filter term criteria:
+            enabled           name
+            platform          description
+            Filter range criteria:
+            created_on
+            modified_on
+            (use any common date format, such as '2010-05-15T14:55:21.892315096Z')
+        limit : int
+            The maximum number of rule IDs to return. [integer, 1-5000] Defaults to 10.
+        offset : str
+            The integer offset to start retrieving records from. Defaults to 0.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Perform a generic substring search across all fields.
+        sort : str
+            The property to sort by. FQL syntax (e.g. created_on|desc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1852,35 +2262,45 @@ class FirewallManagement(ServiceClass):
     def query_rules(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all rule IDs matching the query with filter.
 
-        Keyword arguments:
-        after -- A pagination token used with the limit parameter to manage pagination
-                 of results. On your first request, don't provide an after token. On
-                 subsequent requests, provide the after token from the previous response
-                 to continue from that place in the results.
-        filter -- FQL query specifying the filter parameters.
-                  Filter term criteria:
-                  enabled           name
-                  platform          description
-
-                  Filter range criteria:
-                  created_on
-                  modified_on
-
-                  (use any common date format, such as '2010-05-15T14:55:21.892315096Z')
-        limit -- The maximum number of rule IDs to return. [integer, 1-5000] Defaults to 10.
-        offset -- The integer offset to start retrieving records from. Defaults to 0.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Perform a generic substring search across all fields.
-        sort -- The property to sort by. FQL syntax (e.g. created_on|desc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_rule_groups
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the limit parameter to manage pagination
+            of results. On your first request, don't provide an after token. On
+            subsequent requests, provide the after token from the previous response
+            to continue from that place in the results.
+        filter : str
+            FQL query specifying the filter parameters.
+            Filter term criteria:
+            enabled           name
+            platform          description
+            Filter range criteria:
+            created_on
+            modified_on
+            (use any common date format, such as '2010-05-15T14:55:21.892315096Z')
+        limit : int
+            The maximum number of rule IDs to return. [integer, 1-5000] Defaults to 10.
+        offset : str
+            The integer offset to start retrieving records from. Defaults to 0.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Perform a generic substring search across all fields.
+        sort : str
+            The property to sort by. FQL syntax (e.g. created_on|desc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

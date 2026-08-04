@@ -83,7 +83,7 @@ class ServiceClass(BaseServiceClass):
         Instantiates the object, ingests authorization, and initializes attributes.
 
         Keyword arguments
-        ----
+        -----------------
         access_token : str
             Token string to use for all requests performed.
             Mutually exclusive to all other authentication elements.
@@ -132,11 +132,11 @@ class ServiceClass(BaseServiceClass):
             ownership of its lifecycle. When omitted (default), behavior is unchanged.
 
         Arguments
-        ----
+        ---------
         This method only accepts keywords to specify arguments.
 
         Returns
-        ----
+        -------
         class
             Instance of a ServiceClass derivative.
         """

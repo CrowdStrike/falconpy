@@ -59,16 +59,24 @@ class NetworkScanGlobalConfigs(ServiceClass):
     def get_global_configs(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get global configuration settings for network scanning for the CID.
 
-        Keyword arguments: This method does not accept keyword arguments.
-
-        Arguments: This method does not accept arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-global-configs/get_global_configs
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Arguments
+        ---------
+        This method does not accept arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -80,8 +88,16 @@ class NetworkScanGlobalConfigs(ServiceClass):
     def update_global_configs(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update global configuration settings for network scanning using provided specifications.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-global-configs/update_global_configs
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "auto_confirm_ownership": {
                         "min_managed_assets": integer
@@ -120,25 +136,29 @@ class NetworkScanGlobalConfigs(ServiceClass):
                         }
                     ]
                 }
-        auto_confirm_ownership -- Conditions for auto confirmation of network ownership. Dictionary.
-        max_concurrent_tasks -- Maximum number of scan tasks to run in parallel. Integer.
-        network_scanning_enabled -- Flag to enable or disable network scanning.
-                                    Setting to False attempts to stop ongoing scans
-                                    and prevents further scans from executing. Boolean.
-        scan_exclusion -- Scan target exclusions including common as well as zone-level exclusions
-                          (individual IPs, IP ranges, CIDRs). Required. Dictionary.
-        scanners -- List of assets that will act as eligible scanners. List of dictionaries.
-        scanners_exclusion -- List of assets that will always be excluded from being selected
-                              as scanners. List of dictionaries.
+        auto_confirm_ownership : dict
+            Conditions for auto confirmation of network ownership.
+        max_concurrent_tasks : int
+            Maximum number of scan tasks to run in parallel.
+        network_scanning_enabled : bool
+            Flag to enable or disable network scanning.
+            Setting to False attempts to stop ongoing scans
+            and prevents further scans from executing.
+        scan_exclusion : dict (required)
+            Scan target exclusions including common as well as zone-level exclusions
+            (individual IPs, IP ranges, CIDRs)
+        scanners : list[dict]
+            List of assets that will act as eligible scanners.
+        scanners_exclusion : list[dict]
+            List of assets that will always be excluded from being selected
+            as scanners.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-global-configs/update_global_configs
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = network_scan_global_configs_payload(passed_keywords=kwargs)

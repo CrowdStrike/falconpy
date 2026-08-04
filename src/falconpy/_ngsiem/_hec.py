@@ -88,7 +88,7 @@ class HEC:  # pylint: disable=R0902,R0904
         """Construct an instance of the HTTP event collector.
 
         Keyword arguments
-        ----
+        -----------------
         api_key: (string) [required]
             NGSIEM API key.
         api_url_key: (string) [required]

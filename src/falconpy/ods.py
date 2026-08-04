@@ -64,8 +64,16 @@ class ODS(ServiceClass):
     def aggregate_scan_hosts(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get aggregates on ODS scan-hosts data.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/aggregate-query-scan-host-metadata
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -100,38 +108,44 @@ class ODS(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/aggregate-query-scan-host-metadata
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -147,8 +161,16 @@ class ODS(ServiceClass):
     def aggregate_scans(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get aggregates on ODS scan data.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/aggregate-scans
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -183,38 +205,44 @@ class ODS(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/aggregate-scans
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -230,8 +258,16 @@ class ODS(ServiceClass):
     def aggregate_scheduled_scans(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get aggregates on ODS scheduled-scan data.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/aggregate-scheduled-scans
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -266,38 +302,44 @@ class ODS(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/aggregate-scheduled-scans
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -317,19 +359,28 @@ class ODS(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve malicious files by IDs.
 
-        Keyword arguments:
-        ids -- The scan IDs to retrieve the scan entities. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/get-malicious-files-by-ids
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The scan IDs to retrieve the scan entities.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -343,24 +394,33 @@ class ODS(ServiceClass):
     def cancel_scans(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Cancel ODS scans for the given scan IDs.
 
-        Keyword arguments:
-        body -- full body payload, not required if ids is provided as a keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/cancel-scans
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if ids is provided as a keyword.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- ID(s) of the scans to cancel. String or list of strings.
+        ids : str or list[str]
+            ID(s) of the scans to cancel.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/cancel-scans
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(
@@ -379,19 +439,28 @@ class ODS(ServiceClass):
     def get_scan_hosts(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scan hosts by IDs.
 
-        Keyword arguments:
-        ids -- The scan host IDs to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/get-scan-host-metadata-by-ids
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The scan host IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -448,19 +517,28 @@ class ODS(ServiceClass):
     def get_scans_v1(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scans by IDs.
 
-        Keyword arguments:
-        ids -- The scan IDs to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/get-scans-by-scan-ids
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The scan IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -474,19 +552,28 @@ class ODS(ServiceClass):
     def get_scans(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scans by IDs.
 
-        Keyword arguments:
-        ids -- The scan IDs to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/get-scans-by-scan-ids-v2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The scan IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -500,8 +587,16 @@ class ODS(ServiceClass):
     def create_scan(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create ODS scan and start it.
 
-        Keyword arguments:
-        body -- full body payload, not required if ids is provided as a keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/create-scan
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if ids is provided as a keyword.
                 {
                     "cloud_ml_level_detection": 0,
                     "cloud_ml_level_prevention": 0,
@@ -528,37 +623,54 @@ class ODS(ServiceClass):
                     "sensor_ml_level_detection": 0,
                     "sensor_ml_level_prevention": 0
                 }
-        cloud_ml_level_detection -- ML detection level. Integer.
-        cloud_ml_level_prevention -- ML prevention level. Integer.
-        cpu_priority -- Scan host CPU priority. Integer.
-        description -- Scan description. String.
-        endpoint_notification -- Flag indicating if the endpoint should be notified. Boolean.
-        file_paths -- File paths to be scanned. List of strings.
-        host_groups -- Host group IDs to scan. List of strings.
-        hosts -- Host AIDs to scan. List of strings.
-        ignored_by_channelfile -- Flag indicating if this scan is ignored by channelfiles. Boolean.
-                                  Overrides the value specified in the schedule dictionary.
-        initiated_from -- Endpoint the scan was initiated from. String.
-        interval -- Scan schedule interval in seconds. Integer. Overrides the value specified in
-                    the schedule dictionary.
-        max_duration -- Maximum duration in seconds for the scan. Integer.
-        max_file_size -- Maximum file size for files scanned. Integer.
-        pause_duration -- Time in seconds to pause during the scan. Integer.
-        quarantine -- Quarantine malicious files identified by the scan. Boolean.
-        scan_exclusions -- List of file path globs to exclude from the scan. List of strings.
-        start_timestamp -- Starting timestamp for the scan. String. Overrides the value specified
-                           in the schedule dictionary.
-        sensor_ml_level_detection -- Endpoint sensor ML detection level. Integer.
-        sensor_ml_level_prevention -- Endpoint sensor ML prevention level. Integer.
+        cloud_ml_level_detection : int
+            ML detection level.
+        cloud_ml_level_prevention : int
+            ML prevention level.
+        cpu_priority : int
+            Scan host CPU priority.
+        description : str
+            Scan description.
+        endpoint_notification : bool
+            Flag indicating if the endpoint should be notified.
+        file_paths : str or list[str]
+            File paths to be scanned.
+        host_groups : str or list[str]
+            Host group IDs to scan.
+        hosts : str or list[str]
+            Host AIDs to scan.
+        ignored_by_channelfile : dict
+            Flag indicating if this scan is ignored by channelfiles. Boolean.
+            Overrides the value specified in the schedule.
+        initiated_from : str
+            Endpoint the scan was initiated from.
+        interval : dict
+            Scan schedule interval in seconds. Integer. Overrides the value specified in
+            the schedule.
+        max_duration : int
+            Maximum duration in seconds for the scan.
+        max_file_size : int
+            Maximum file size for files scanned.
+        pause_duration : int
+            Time in seconds to pause during the scan.
+        quarantine : bool
+            Quarantine malicious files identified by the scan.
+        scan_exclusions : str or list[str]
+            List of file path globs to exclude from the scan.
+        start_timestamp : dict
+            Starting timestamp for the scan. String. Overrides the value specified
+            in the schedule.
+        sensor_ml_level_detection : int
+            Endpoint sensor ML detection level.
+        sensor_ml_level_prevention : int
+            Endpoint sensor ML prevention level.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/create-scan
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = scheduled_scan_payload(passed_keywords=kwargs)
@@ -579,19 +691,28 @@ class ODS(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scheduled scans by IDs.
 
-        Keyword arguments:
-        ids -- The scan IDs to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/get-scheduled-scans-by-scan-ids
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The scan IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -605,8 +726,16 @@ class ODS(ServiceClass):
     def schedule_scan(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create ODS scan and start or schedule scan for the given scan request.
 
-        Keyword arguments:
-        body -- full body payload, not required if ids is provided as a keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/schedule-scan
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if ids is provided as a keyword.
                 {
                     "cloud_ml_level_detection": 0,
                     "cloud_ml_level_prevention": 0,
@@ -638,43 +767,61 @@ class ODS(ServiceClass):
                     "sensor_ml_level_detection": 0,
                     "sensor_ml_level_prevention": 0
                 }
-        cloud_ml_level_detection -- ML detection level. Integer.
-        cloud_ml_level_prevention -- ML prevention level. Integer.
-        cpu_priority -- Scan host CPU priority. Integer.
-        description -- Scan description. String.
-        endpoint_notification -- Flag indicating if the endpoint should be notified. Boolean.
-        file_paths -- File paths to be scanned. List of strings.
-        host_groups -- Host group IDs to scan. List of strings.
-        ignored_by_channelfile -- Flag indicating if this scan is ignored by channelfiles. Boolean.
-                                  Overrides the value specified in the schedule dictionary.
-        initiated_from -- Endpoint the scan was initiated from. String.
-        interval -- Scan schedule interval in seconds. Integer. Overrides the value specified in
-                    the schedule dictionary.
-        max_duration -- Maximum duration in seconds for the scan. Integer.
-        max_file_size -- Maximum file size for files scanned. Integer.
-        pause_duration -- Time in seconds to pause during the scan. Integer.
-        quarantine -- Quarantine malicious files identified by the scan. Boolean.
-        scan_exclusions -- List of file path globs to exclude from the scan. List of strings.
-        scan_inclusions -- List of file path globs to include the scan. List of strings.
-        schedule -- Details related to the scan schedule. Dictionary.
-                    {
-                        "ignored_by_channelfile": true,
-                        "interval": 0,
-                        "start_timestamp": "string"
-                    }
-        start_timestamp -- Starting timestamp for the scan. String. Overrides the value specified
-                           in the schedule dictionary.
-        sensor_ml_level_detection -- Endpoint sensor ML detection level. Integer.
-        sensor_ml_level_prevention -- Endpoint sensor ML prevention level. Integer.
+        cloud_ml_level_detection : int
+            ML detection level.
+        cloud_ml_level_prevention : int
+            ML prevention level.
+        cpu_priority : int
+            Scan host CPU priority.
+        description : str
+            Scan description.
+        endpoint_notification : bool
+            Flag indicating if the endpoint should be notified.
+        file_paths : str or list[str]
+            File paths to be scanned.
+        host_groups : str or list[str]
+            Host group IDs to scan.
+        ignored_by_channelfile : dict
+            Flag indicating if this scan is ignored by channelfiles. Boolean.
+            Overrides the value specified in the schedule.
+        initiated_from : str
+            Endpoint the scan was initiated from.
+        interval : dict
+            Scan schedule interval in seconds. Integer. Overrides the value specified in
+            the schedule.
+        max_duration : int
+            Maximum duration in seconds for the scan.
+        max_file_size : int
+            Maximum file size for files scanned.
+        pause_duration : int
+            Time in seconds to pause during the scan.
+        quarantine : bool
+            Quarantine malicious files identified by the scan.
+        scan_exclusions : str or list[str]
+            List of file path globs to exclude from the scan.
+        scan_inclusions : str or list[str]
+            List of file path globs to include the scan.
+        schedule : dict
+            Details related to the scan schedule. Dictionary.
+            {
+                "ignored_by_channelfile": true,
+                "interval": 0,
+                "start_timestamp": "string"
+            }
+        start_timestamp : dict
+            Starting timestamp for the scan. String. Overrides the value specified
+            in the schedule.
+        sensor_ml_level_detection : int
+            Endpoint sensor ML detection level.
+        sensor_ml_level_prevention : int
+            Endpoint sensor ML prevention level.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/schedule-scan
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = scheduled_scan_payload(passed_keywords=kwargs)
@@ -695,20 +842,30 @@ class ODS(ServiceClass):
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete ODS scheduled scans for the given IDs.
 
-        Keyword arguments:
-        filter -- A FQL compatible query string. String.
-        ids -- List of scan IDs to delete. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/delete-scheduled-scans
+
+        Keyword arguments
+        -----------------
+        filter : str
+            A FQL compatible query.
+        ids : str or list[str]
+            List of scan IDs to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -722,34 +879,44 @@ class ODS(ServiceClass):
     def query_malicious_files(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for malicious files.
 
-        Keyword arguments:
-        filter -- A FQL compatible query string. String.
-                  Available filters:
-                  id                filename
-                  cid               hash
-                  scan_id           pattern_id
-                  host_id           severity
-                  host_scan_id      quarantined
-                  filepath          last_updated
-        limit -- The maximum number of records to return. [Integer, 1-500]
-        offset -- The integer offset to start retrieving records from. Integer.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. id|desc or filename|asc).
-                Available sort fields:
-                id                  hash
-                scan_id             pattern_id
-                host_id             severity
-                host_scan_id        last_updated
-                filename
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/query-malicious-files
+
+        Keyword arguments
+        -----------------
+        filter : str
+            A FQL compatible query string. String.
+            Available filters:
+            id                filename
+            cid               hash
+            scan_id           pattern_id
+            host_id           severity
+            host_scan_id      quarantined
+            filepath          last_updated
+        limit : int (1-500)
+            The maximum number of records to return.
+        offset : int
+            The integer offset to start retrieving records from.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. id|desc or filename|asc).
+            Available sort fields:
+            id                  hash
+            scan_id             pattern_id
+            host_id             severity
+            host_scan_id        last_updated
+            filename
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -763,37 +930,47 @@ class ODS(ServiceClass):
     def query_scan_hosts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for scan hosts.
 
-        Keyword arguments:
-        filter -- A FQL compatible query string. String.
-                  Available filters:
-                  id                    filecount.quarantined
-                  cid                   filecount.skipped
-                  profile_id            affected_hosts_count
-                  host_id               status
-                  scan_id               severity
-                  host_scan_id          completed_on
-                  filecount.scanned     started_on
-                  filecount.malicious   last_updated
-        limit -- The maximum number of records to return. [Integer, 1-500]
-        offset -- The integer offset to start retrieving records from. Integer.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. id|desc or status|asc).
-                Available sort fields:
-                id                      filecount.skipped
-                scan_id                 status
-                host_id                 severity
-                filecount.scanned       started_on
-                filecount.malicious     completed_on
-                filecount.quarantined   last_updated
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/query-scan-host-metadata
+
+        Keyword arguments
+        -----------------
+        filter : str
+            A FQL compatible query string. String.
+            Available filters:
+            id                    filecount.quarantined
+            cid                   filecount.skipped
+            profile_id            affected_hosts_count
+            host_id               status
+            scan_id               severity
+            host_scan_id          completed_on
+            filecount.scanned     started_on
+            filecount.malicious   last_updated
+        limit : int (1-500)
+            The maximum number of records to return.
+        offset : int
+            The integer offset to start retrieving records from.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. id|desc or status|asc).
+            Available sort fields:
+            id                      filecount.skipped
+            scan_id                 status
+            host_id                 severity
+            filecount.scanned       started_on
+            filecount.malicious     completed_on
+            filecount.quarantined   last_updated
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -807,42 +984,52 @@ class ODS(ServiceClass):
     def query_scans(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for scans.
 
-        Keyword arguments:
-        filter -- A FQL compatible query string. String.
-                  Available filters:
-                  id                    filecount.quarantined
-                  cid                   filecount.skipped
-                  profile_id            created_by
-                  initiated_from        status
-                  affected_hosts_count  severity
-                  description.keyword   scan_completed_on
-                  filecount.scanned     scan_started_on
-                  filecount.malicious   created_on
-                  last_updated          description
-                  targeted_host_count   missing_host_count
-                  targeted_platforms    targeted_platforms.keyword
-        limit -- The maximum number of records to return. [Integer, 1-500]
-        offset -- The integer offset to start retrieving records from. Integer.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. id|desc or status|asc).
-                Available sort fields:
-                id                      affected_hosts_count
-                initiated_from          status
-                description.keyword     severity
-                filecount.scanned       scan_started_on
-                filecount.malicious     scan_completed_on
-                filecount.quarantined   created_on
-                filecount.skipped       created_by
-                last_updated            description
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/query-scans
+
+        Keyword arguments
+        -----------------
+        filter : str
+            A FQL compatible query string. String.
+            Available filters:
+            id                    filecount.quarantined
+            cid                   filecount.skipped
+            profile_id            created_by
+            initiated_from        status
+            affected_hosts_count  severity
+            description.keyword   scan_completed_on
+            filecount.scanned     scan_started_on
+            filecount.malicious   created_on
+            last_updated          description
+            targeted_host_count   missing_host_count
+            targeted_platforms    targeted_platforms.keyword
+        limit : int (1-500)
+            The maximum number of records to return.
+        offset : int
+            The integer offset to start retrieving records from.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. id|desc or status|asc).
+            Available sort fields:
+            id                      affected_hosts_count
+            initiated_from          status
+            description.keyword     severity
+            filecount.scanned       scan_started_on
+            filecount.malicious     scan_completed_on
+            filecount.quarantined   created_on
+            filecount.skipped       created_by
+            last_updated            description
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -856,39 +1043,50 @@ class ODS(ServiceClass):
     def query_scheduled_scans(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for scheduled scans.
 
-        Keyword arguments:
-        filter -- A FQL compatible query string. String.
-                  Available filters:
-                    channel_file_status         created_by
-                    created_on                  deleted
-                    description                 description.keyword
-                    id                          initiated_from
-                    last_updated                schedule.Interval
-                    schedule.start_timestamp    status
-                    targeted_platforms
-        limit -- The maximum number of records to return. [Integer, 1-500]
-        offset -- The integer offset to start retrieving records from. Integer.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. id|desc or status|asc).
-                Available sort fields:
-                created_by|asc                   created_by|desc
-                created_on|asc                   created_on|desc
-                description.keyword|asc          description.keyword|desc
-                description|asc                  description|desc
-                id|asc                           id|desc
-                last_updated|asc                 last_updated|desc
-                schedule.interval|asc            schedule.interval|desc
-                schedule.start_timestamp|asc     schedule.start_timestamp|desc
-                status|asc                       status|desc
-                targeted_host_count|asc          targeted_host_count|desc
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/query-scheduled-scans
+
+        Keyword arguments
+        -----------------
+        filter : str
+            A FQL compatible query string. String.
+            Available filters:
+              channel_file_status         created_by
+              created_on                  deleted
+              description                 description.keyword
+              id                          initiated_from
+              last_updated                schedule.Interval
+              schedule.start_timestamp    status
+              targeted_platforms
+        limit : int (1-500)
+            The maximum number of records to return.
+        offset : int
+            The integer offset to start retrieving records from.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. id|desc or status|asc).
+            Available sort fields:
+            created_by|asc                   created_by|desc
+            created_on|asc                   created_on|desc
+            description.keyword|asc          description.keyword|desc
+            description|asc                  description|desc
+            id|asc                           id|desc
+            last_updated|asc                 last_updated|desc
+            schedule.interval|asc            schedule.interval|desc
+            schedule.start_timestamp|asc     schedule.start_timestamp|desc
+            status|asc                       status|desc
+            targeted_host_count|asc          targeted_host_count|desc
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

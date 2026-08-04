@@ -76,25 +76,36 @@ class Workflows(ServiceClass):
     def search_activities(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search workflow activities based on the provided filter.
 
-        Keyword arguments:
-        filter -- FQL query specifying filter parameters. String.
-        offset -- Starting pagination offset of records to return. String.
-        limit -- Maximum number of records to return. Integer.
-        sort -- FQL formatted sort (ex: name.desc,time.asc). String.
-                If direction is omitted, defaults to descending.
-        skip_artifact_resolution -- When true, skip Foundry artifact resolution and return the latest version of the activity,
-                                    regardless of whether the associated Foundry app is
-                                    installed. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowActivitiesCombined
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying filter parameters.
+        offset : str
+            Starting pagination offset of records to return.
+        limit : int
+            Maximum number of records to return.
+        sort : str
+            FQL formatted sort (ex: name.desc,time.asc). String.
+            If direction is omitted, defaults to descending.
+        skip_artifact_resolution : bool
+            When true, skip Foundry artifact resolution and return the latest version of the activity,
+            regardless of whether the associated Foundry app is
+            installed.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -111,22 +122,32 @@ class Workflows(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for activities by name. Returns all supported activities if no filter specified.
 
-        Keyword arguments:
-        filter -- FQL query specifying filter parameters. String.
-        offset -- Starting pagination offset of records to return. String.
-        limit -- Maximum number of records to return. Integer.
-        sort -- FQL formatted sort (ex: name.desc,time.asc). String.
-                If direction is omitted, defaults to descending.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowActivitiesContentCombined
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying filter parameters.
+        offset : str
+            Starting pagination offset of records to return.
+        limit : int
+            Maximum number of records to return.
+        sort : str
+            FQL formatted sort (ex: name.desc,time.asc). String.
+            If direction is omitted, defaults to descending.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -140,22 +161,32 @@ class Workflows(ServiceClass):
     def search_definitions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search workflow definitions based on the provided filter.
 
-        Keyword arguments:
-        filter -- FQL query specifying filter parameters. String.
-        offset -- Starting pagination offset of records to return. String.
-        limit -- Maximum number of records to return. Integer.
-        sort -- FQL formatted sort (ex: name.desc,time.asc). String.
-                If direction is omitted, defaults to descending.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsCombined
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying filter parameters.
+        offset : str
+            Starting pagination offset of records to return.
+        limit : int
+            Maximum number of records to return.
+        sort : str
+            FQL formatted sort (ex: name.desc,time.asc). String.
+            If direction is omitted, defaults to descending.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -169,22 +200,32 @@ class Workflows(ServiceClass):
     def search_executions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search workflow executions based on the provided filter.
 
-        Keyword arguments:
-        filter -- FQL query specifying filter parameters. String.
-        offset -- Starting pagination offset of records to return. String.
-        limit -- Maximum number of records to return. Integer.
-        sort -- FQL formatted sort (ex: name.desc,time.asc). String.
-                If direction is omitted, defaults to descending.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowExecutionsCombined
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying filter parameters.
+        offset : str
+            Starting pagination offset of records to return.
+        limit : int
+            Maximum number of records to return.
+        sort : str
+            FQL formatted sort (ex: name.desc,time.asc). String.
+            If direction is omitted, defaults to descending.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -198,20 +239,29 @@ class Workflows(ServiceClass):
     def search_triggers(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search workflow triggers based on the provided filter.
 
-        Keyword arguments:
-        filter -- FQL query specifying filter parameters. String.
-        offset -- Starting pagination offset of records to return. String.
-        limit -- Maximum number of records to return. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowTriggersCombined
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying filter parameters.
+        offset : str
+            Starting pagination offset of records to return.
+        limit : int
+            Maximum number of records to return.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -229,20 +279,30 @@ class Workflows(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Export a workflow definition for the given definition ID.
 
-        Keyword arguments:
-        id -- ID of workflow definitions to return details for. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        sanitize -- Sanitize PII from workflow before it's exported. Boolean.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsExport
+
+        Keyword arguments
+        -----------------
+        id : str
+            ID of workflow definitions to return details for.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sanitize : bool
+            Sanitize PII from workflow before it's exported.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -256,23 +316,33 @@ class Workflows(ServiceClass):
     def import_definition(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Import a workflow definition based on the provided model.
 
-        Keyword arguments:
-        data_file -- A workflow definition in YAML format to import. Can be the file location or file contents.
-                     Supports string or binary data.
-        name -- Workflow name to override. String.
-        validate_only -- When enabled, prevents saving workflow after validating. Boolean.
-        include_activity_metadata -- When true, populates the definition model with Activity metadata which includes Activity
-                                     Dependency and Vendor. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsImport
+
+        Keyword arguments
+        -----------------
+        data_file : bytes
+            A workflow definition in YAML format to import. Can be the file location or file contents.
+            Supports string or.
+        name : str
+            Workflow name to override.
+        validate_only : bool
+            When enabled, prevents saving workflow after validating.
+        include_activity_metadata : bool
+            When true, populates the definition model with Activity metadata which includes Activity
+            Dependency and Vendor.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         data_file = kwargs.get("data_file", None)
         content_type = "application/x-yaml"
@@ -323,24 +393,37 @@ class Workflows(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a workflow definition based on the provided model.
 
-        Keyword arguments:
-        validate_only -- When enabled, prevents saving workflow after validating. Boolean.
-        body -- Full body payload in JSON format, not required when using other keywords.
-        definition -- Full workflow definition. Dictionary.
-        change_log -- Optional description to outline changes made during the update. String.
-        enabled -- Specifies if the new definition should be enabled upon creation.
-        flight_control -- Flight control parameters. Dictionary.
-        id -- Used to identify documents across versions. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PUT
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsUpdate
+
+        Keyword arguments
+        -----------------
+        validate_only : bool
+            When enabled, prevents saving workflow after validating.
+        body : dict
+            Full body payload in JSON format, not required when using other keywords.
+        definition : dict
+            Full workflow definition.
+        change_log : str
+            Optional description to outline changes made during the update.
+        enabled : bool
+            Specifies if the new definition should be enabled upon creation.
+        flight_control : dict
+            Flight control parameters.
+        id : str
+            Used to identify documents across versions.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = workflow_definition_payload(passed_keywords=kwargs)
@@ -362,32 +445,43 @@ class Workflows(ServiceClass):
                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Execute an on-demand workflow. Response will contain the execution ID.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
-                {
-                    Workflow schema
-                }
-        definition_id -- Definition ID to execute. Either a name or ID can be specified.
-                         String or List of Strings.
-        execution_cid -- CID(s) to execute on. This can be a child for Flight Control scenarios.
-                         If unset, the definition CID is used. String or List of strings.
-        name -- Workflow name to execute. Either a name or ID can be specified. String.
-        parameters -- Full parameters payload in dictionary (JSON) format. Not required
-                      if you are using other keywords. Dictionary.
-        key -- Key used to help deduplicate executions. If unset a new UUID is used. String.
-        depth -- Used to record the execution depth to help limit execution loops when a workflow
-                 triggers another. The maximum depth is 4. Integer.
-        source_event_url -- Used to record a URL to the source that led to trigger the workflow.
-                            String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowExecute
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
+                {
+                    Workflow schema
+                }
+        definition_id : str or list[str]
+            Definition ID to execute. Either a name or ID can be specified.
+        execution_cid : str or list[str]
+            CID(s) to execute on. This can be a child for Flight Control scenarios.
+            If unset, the definition CID is used.
+        name : str
+            Workflow name to execute. Either a name or ID can be specified.
+        parameters : dict
+            Full parameters payload in dictionary (JSON) format. Not required
+            if you are using other keywords.
+        key : str
+            Key used to help deduplicate executions. If unset a new UUID is used.
+        depth : int
+            Used to record the execution depth to help limit execution loops when a workflow
+            triggers another. The maximum depth is 4.
+        source_event_url : str
+            Used to record a URL to the source that led to trigger the workflow.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -406,31 +500,43 @@ class Workflows(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Execute an on-demand workflow. Response will contain the execution ID.
 
-        Keyword arguments:
-        batch_size -- Used to set the size of the batch. Integer.
-        body -- full body payload, not required if using other keywords.
-                {}
-        definition_id -- Definition ID to execute. Either a name or ID can be specified.
-                         String or List of Strings.
-        execution_cid -- CID(s) to execute on. This can be a child for Flight Control scenarios.
-                         If unset, the definition CID is used. String or List of strings.
-        name -- Workflow name to execute. Either a name or ID can be specified. String.
-        parameters -- Full parameters payload in dictionary (JSON) format. Not required
-                      if you are using other keywords. Dictionary.
-        key -- Key used to help deduplicate executions. If unset a new UUID is used. String.
-        depth -- Used to record the execution depth to help limit execution loops when a workflow
-                 triggers another. The maximum depth is 4. Integer.
-        source_event_url -- Used to record a URL to the source that led to trigger the workflow.
-                            String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowExecuteInternal
+
+        Keyword arguments
+        -----------------
+        batch_size : int
+            Used to set the size of the batch.
+        body : dict
+            full body payload, not required if using other keywords.
+                {}
+        definition_id : str or list[str]
+            Definition ID to execute. Either a name or ID can be specified.
+        execution_cid : str or list[str]
+            CID(s) to execute on. This can be a child for Flight Control scenarios.
+            If unset, the definition CID is used.
+        name : str
+            Workflow name to execute. Either a name or ID can be specified.
+        parameters : dict
+            Full parameters payload in dictionary (JSON) format. Not required
+            if you are using other keywords.
+        key : str
+            Key used to help deduplicate executions. If unset a new UUID is used.
+        depth : int
+            Used to record the execution depth to help limit execution loops when a workflow
+            triggers another. The maximum depth is 4.
+        source_event_url : str
+            Used to record a URL to the source that led to trigger the workflow.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -449,8 +555,16 @@ class Workflows(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Execute a workflow definition with mocks.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowMockExecute
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "definition" {
                         Workflow schema
@@ -458,33 +572,38 @@ class Workflows(ServiceClass):
                     "mocks": "string",
                     "on_demand_trigger": "string"
                 }
-        definition_id -- Definition ID to execute. Either a name or ID can be specified.
-                         String or List of Strings.
-        execution_cid -- CID(s) to execute on. This can be a child for Flight Control scenarios.
-                         If unset, the definition CID is used. String or List of strings.
-        ignore_activity_mock_references -- When enabled, treats all activity mocks in the definition as disabled for this mock
-                                           execution. Mocks provided in the request body are treated normally. Boolean.
-        name -- Workflow name to execute. Either a name or ID can be specified. String.
-        parameters -- Full parameters payload in dictionary (JSON) format. Not required
-                      if you are using other keywords. Dictionary.
-        key -- Key used to help deduplicate executions. If unset a new UUID is used. String.
-        depth -- Used to record the execution depth to help limit execution loops when a workflow
-                 triggers another. The maximum depth is 4. Integer.
-        skip_validation -- When enabled, skips validating mocks from the request body against the mocked entity's
-                           output schema. Mocks provided in the definition by reference are not validated in any case.
-                           Boolean.
-        source_event_url -- Used to record a URL to the source that led to trigger the workflow.
-                            String.
-        validate_only -- PRevent execution after validating mocks against definition. Boolean.
+        definition_id : str
+            Definition ID to execute. Either a name or ID can be specified.
+        execution_cid : str or list[str]
+            CID(s) to execute on. This can be a child for Flight Control scenarios.
+            If unset, the definition CID is used.
+        ignore_activity_mock_references : bool
+            When enabled, treats all activity mocks in the definition as disabled for this mock
+            execution. Mocks provided in the request body are treated normally.
+        name : str
+            Workflow name to execute. Either a name or ID can be specified.
+        parameters : dict
+            Full parameters payload in dictionary (JSON) format. Not required
+            if you are using other keywords.
+        key : str
+            Key used to help deduplicate executions. If unset a new UUID is used.
+        depth : int
+            Used to record the execution depth to help limit execution loops when a workflow
+            triggers another. The maximum depth is 4.
+        skip_validation : bool
+            When enabled, skips validating mocks from the request body against the mocked entity's
+            output schema. Mocks provided in the definition by reference are not validated in any case.
+        source_event_url : str
+            Used to record a URL to the source that led to trigger the workflow.
+        validate_only : bool
+            PRevent execution after validating mocks against definition.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowMockExecute
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = workflow_mock_payload(passed_keywords=kwargs)
@@ -506,11 +625,21 @@ class Workflows(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Allow a user to resume/retry a failed workflow execution.
 
-        Keyword arguments:
-        action_name -- Action to perform. String.
-                       Allowed values: resume
-        action_parameters -- List of actions to perform. List of dictionaries.
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowExecutionsAction
+
+        Keyword arguments
+        -----------------
+        action_name : str
+            Action to perform. String.
+            Allowed values: resume
+        action_parameters : list[dict]
+            List of actions to perform.
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "action_parameters": [
                         {
@@ -522,18 +651,19 @@ class Workflows(ServiceClass):
                         "string"
                     ]
                 }
-        ids -- Execution IDs. String or List of Strings.
-        name -- For single action parameter actions. Specifies the action parameter name. String.
-        value -- For single action parameter actions. Specifies the action parameter value. String.
+        ids : str or list[str]
+            Execution IDs.
+        name : str
+            For single action parameter actions. Specifies the action parameter name.
+        value : str
+            For single action parameter actions. Specifies the action parameter value.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowExecutionsAction
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = simple_action_parameter(kwargs,
@@ -559,19 +689,28 @@ class Workflows(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve results for a specified execution.
 
-        Keyword arguments:
-        ids -- Workflow execution ID to retrieve results for. String or List of Strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowExecutionResults
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Workflow execution ID to retrieve results for.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -589,19 +728,28 @@ class Workflows(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get one or more specific human inputs by their IDs.
 
-        Keyword arguments:
-        ids -- IDs of human inputs to read. String or List of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowGetHumanInputV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of human inputs to read.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -622,25 +770,35 @@ class Workflows(ServiceClass):
         Provides an input in response to a human input action.
         Depending on action configuration, one or more of Approve, Decline, and/or Escalate are permitted.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowUpdateHumanInputV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format, not required when using other keywords.
                 {
                     "input": "string",
                     "note": "string"
                 }
-        id -- ID of human input to provide an input to. String.
-        input -- Input to insert. String.
-        note -- Optional note to append. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        id : str
+            ID of human input to provide an input to.
+        input : str
+            Input to insert.
+        note : str
+            Optional note to append.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowUpdateHumanInputV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = workflow_human_input(passed_keywords=kwargs)
@@ -658,27 +816,33 @@ class Workflows(ServiceClass):
     def deprovision(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Deprovision a system definition that was previously provisioned on a target CID.
 
-        Keyword arguments:
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowSystemDefinitionsDeProvision
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "definition_id": "string",
                     "deprovision_all": boolean,
                     "template_id": "string",
                     "template_name": "string"
                 }
-        definition_id -- String.
-        deprovision_all -- Boolean.
-        template_id -- String.
-        template_name -- String.
+        definition_id : str
+        deprovision_all : bool
+        template_id : str
+        template_name : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowSystemDefinitionsDeProvision
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = workflow_deprovision_payload(passed_keywords=kwargs)
@@ -700,9 +864,17 @@ class Workflows(ServiceClass):
         multi-instance, the customer scope definition ID must be supplied to determine which
         customer workflow should be update.
 
-        Keyword arguments:
-        activities -- Dictionary.
-        body -- Template to use for update. Not required if using other keywords. Dictionary.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowSystemDefinitionsPromote
+
+        Keyword arguments
+        -----------------
+        activities : dict
+        body : dict
+            Template to use for update. Not required if using other keywords.
                 {
                     "customer_definition_id": "string",
                     "name": "string",
@@ -742,23 +914,22 @@ class Workflows(ServiceClass):
                     "template_name": "string",
                     "template_version": "string"
                 }
-        conditions -- List of dictionaries.
-        customer_definition_id -- String.
-        name -- String.
-        parameters -- Dictionary. Overrides specified activities, conditions and trigger keywords.
-        template_id -- String.
-        template_name -- String.
-        template_version -- String.
-        trigger -- Dictionary.
+        conditions : list[dict]
+        customer_definition_id : str
+        name : str
+        parameters : dict
+            Dictionary. Overrides specified activities, conditions and trigger keywords.
+        template_id : str
+        template_name : str
+        template_version : str
+        trigger : dict
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowSystemDefinitionsPromote
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = workflow_template_payload(passed_keywords=kwargs)
@@ -775,9 +946,17 @@ class Workflows(ServiceClass):
     def provision(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Provision a system definition onto the target CID by using the template and provided parameters.
 
-        Keyword arguments:
-        activities -- Dictionary.
-        body -- Template to provision. Not required if using other keywords. Dictionary.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowSystemDefinitionsProvision
+
+        Keyword arguments
+        -----------------
+        activities : dict
+        body : dict
+            Template to provision. Not required if using other keywords.
                 {
                     "name": "string",
                     "parameters": {
@@ -816,23 +995,26 @@ class Workflows(ServiceClass):
                     "template_name": "string",
                     "template_version": "string"
                 }
-        conditions -- List of dictionaries.
-        name -- Optional name to be set on the customer scope definition. Must be unique within a given CID. String.
-        parameters -- Runtime parameters to be interpolated to template model. Dictionary.
-                      Overrides specified activities, conditions and trigger keywords.
-        template_id -- ID of the system definition template that was previously created. String.
-        template_name -- Name of the system definition template to provision. String.
-        template_version -- Version of system definition template, if omitted the latest version will be used. String.
-        trigger -- Dictionary.
+        conditions : list[dict]
+        name : str
+            Optional name to be set on the customer scope definition. Must be unique within a given CID.
+        parameters : dict
+            Runtime parameters to be interpolated to template model. Dictionary.
+            Overrides specified activities, conditions and trigger keywords.
+        template_id : str
+            ID of the system definition template that was previously created.
+        template_name : str
+            Name of the system definition template to provision.
+        template_version : str
+            Version of system definition template, if omitted the latest version will be used.
+        trigger : dict
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowSystemDefinitionsProvision
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = workflow_template_payload(passed_keywords=kwargs)
@@ -855,26 +1037,35 @@ class Workflows(ServiceClass):
 
         When a definition is disabled it will not execute against any new trigger events.
 
-        Keyword arguments:
-        action_name -- action to perform, 'enable', 'disable', or 'cancel'.
-        body -- full body payload, not required if ids are provided as keyword.
-                You must use body if you are going to specify action_parameters.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsAction
+
+        Keyword arguments
+        -----------------
+        action_name : str
+            action to perform, 'enable', 'disable', or 'cancel'.
+        body : dict
+            full body payload, not required if ids are provided as keyword.
+            You must use body if you are going to specify action_parameters.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- IDs of workflow definitions to perform the action against. String or list of strings.
-        parameters - full parameters payload, not required if action_name is provide as a keyword.
+        ids : str or list[str]
+            IDs of workflow definitions to perform the action against.
+        parameters : dict
+            full parameters payload, not required if action_name is provide as a keyword.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsAction
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -901,28 +1092,40 @@ class Workflows(ServiceClass):
         Results in an execution where test_mode=true and
         single_node_execution=true, associated with a definition ID if provided.
 
-        Keyword arguments:
-        execution_cid -- CID(s) to execute on. String or list of strings.
-        This can be a child if this is a flight control enabled definition.
-        definition_id -- Definition ID to execute. String.
-        name -- Workflow name to execute. String.
-        Either a name or an ID, or the definition itself in the request body, can be specified.
-        key -- Key used to help deduplicate executions, if unset a new UUID is used. String.
-        depth -- Used to record the execution depth to help limit execution loops when a workflow triggers another. Integer.
-        The maximum depth is 4.
-        body -- full body payload, not required if ids are provided as keyword.
-        Please visit the Swagger URL to view the full payload. It's long.
-        definition -- Dictionary.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowExecuteSingleNodeV1
+
+        Keyword arguments
+        -----------------
+        execution_cid : str or list[str]
+            CID(s) to execute on. String or list of strings.
+            This can be a child if this is a flight control enabled definition.
+        definition_id : str
+            Definition ID to execute.
+        name : str
+            Workflow name to execute. String.
+            Either a name or an ID, or the definition itself in the request body, can be specified.
+        key : str
+            Key used to help deduplicate executions, if unset a new UUID is used.
+        depth : int
+            Used to record the execution depth to help limit execution loops when a workflow triggers another. Integer.
+            The maximum depth is 4.
+        body : dict
+            full body payload, not required if ids are provided as keyword.
+            Please visit the Swagger URL to view the full payload. It's long.
+        definition : dict
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = {}
@@ -944,21 +1147,31 @@ class Workflows(ServiceClass):
 
         Returns the set of child workflow execution IDs which match the filter criteria.
 
-        Keyword arguments:
-        filter -- FQL query specifying filter parameters. String.
-        offset -- Starting pagination offset of records to return. String.
-        limit -- Maximum number of records to return. Integer.
-        sort -- Sort items by providing a comma separated list of property and direction (eg name.desc,time.asc). String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/v1.child-executions.query
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying filter parameters.
+        offset : str
+            Starting pagination offset of records to return.
+        limit : int
+            Maximum number of records to return.
+        sort : str
+            Sort items by providing a comma separated list of property and direction (eg name.desc,time.asc)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -976,19 +1189,28 @@ class Workflows(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Accept a list of workflow definition IDs and deletes those definitions and all their associated versions.
 
-        Keyword arguments:
-        ids -- IDs of the workflow definitions to delete String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsDelete
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of the workflow definitions to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

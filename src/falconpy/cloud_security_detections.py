@@ -62,53 +62,63 @@ class CloudSecurityDetections(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return IOMs grouped by rule.
 
-        Keyword arguments:
-        filter -- FQL string to filter results. String.
-                  Supported fields:
-                    account_id            account_name
-                    applicable_profile    attack_type
-                    benchmark_name        benchmark_version
-                    business_impact       cid
-                    cloud_group           cloud_label
-                    cloud_label_id        cloud_provider
-                    cloud_scope           created_at
-                    environment           extension_status
-                    first_detected        framework
-                    last_detected         policy_id
-                    policy_name           region
-                    requirement           resource_gcrn
-                    resource_id           resource_parent
-                    resource_status       resource_type
-                    resource_type_name    rule_group
-                    rule_id               rule_name
-                    rule_origin           section
-                    service               service_category
-                    severity              status
-                    suppressed_by         tactic_id
-                    tactic_name           tag_key
-                    tag_value             tags
-                    tags_string           technique_id
-                    technique_name        tenant_id
-                    zone
-        sort -- The field to sort on. String.
-                Sortable fields:
-                    assessed_assets       cloud_provider
-                    misconfigurations     rule_id
-                    severity
-                Use |asc or |desc suffix to specify sort direction.
-        limit -- The maximum number of items to return. When not specified or 0, 500 is used.
-                 When larger than 1000, 1000 is used. Integer.
-        offset -- Offset returned assets. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-detections/cspm-evaluations-combined-iom-by-rule
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL string to filter results. String.
+            Supported fields:
+              account_id            account_name
+              applicable_profile    attack_type
+              benchmark_name        benchmark_version
+              business_impact       cid
+              cloud_group           cloud_label
+              cloud_label_id        cloud_provider
+              cloud_scope           created_at
+              environment           extension_status
+              first_detected        framework
+              last_detected         policy_id
+              policy_name           region
+              requirement           resource_gcrn
+              resource_id           resource_parent
+              resource_status       resource_type
+              resource_type_name    rule_group
+              rule_id               rule_name
+              rule_origin           section
+              service               service_category
+              severity              status
+              suppressed_by         tactic_id
+              tactic_name           tag_key
+              tag_value             tags
+              tags_string           technique_id
+              technique_name        tenant_id
+              zone
+        sort : str
+            The field to sort on. String.
+            Sortable fields:
+                assessed_assets       cloud_provider
+                misconfigurations     rule_id
+                severity
+            Use |asc or |desc suffix to specify sort direction.
+        limit : int
+            The maximum number of items to return. When not specified or 0, 500 is used.
+            When larger than 1000, 1000 is used.
+        offset : int
+            Offset returned assets.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -126,20 +136,29 @@ class CloudSecurityDetections(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get IOMs based on the provided IDs.
 
-        Keyword arguments:
-        ids -- List of IOMs to return (maximum 100 IDs allowed).
-        Use POST method with same path if more entities are required. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-detections/cspm-evaluations-iom-entities
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str] (required)
+            List of IOMs to return (maximum 100 IDs allowed).
+            Use POST method with same path if more entities are.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -153,79 +172,88 @@ class CloudSecurityDetections(ServiceClass):
     def query_iom_entities(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of IOM IDs for the given parameters, filters and sort criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-                  Allowed filter fields:
-                    account_id            account_name
-                    applicable_profile    attack_type
-                    benchmark_name        benchmark_version
-                    business_impact       cid
-                    cloud_group           cloud_label
-                    cloud_label_id        cloud_provider
-                    cloud_scope           created_at
-                    environment           extension_status
-                    first_detected        framework
-                    last_detected         policy_id
-                    policy_name           policy_uuid
-                    region                requirement
-                    requirement_name      resource_gcrn
-                    resource_id           resource_parent
-                    resource_status       resource_type
-                    resource_type_name    rule_group
-                    rule_id               rule_name
-                    rule_origin           rule_remediation
-                    section               service
-                    service_category      severity
-                    status                suppressed_by
-                    suppression_reason    tactic_id
-                    tactic_name           tag_key
-                    tag_value             tags
-                    tags_string           technique_id
-                    technique_name        tenant_id
-
-        sort -- The field to sort on. Use |asc or |desc suffix to specify sort direction. String. Supported fields:
-                  account_id            account_name
-                  applicable_profile    attack_type
-                  benchmark_name        benchmark_version
-                  business_impact       cid
-                  cloud_group           cloud_label
-                  cloud_label_id        cloud_provider
-                  cloud_scope           created_at
-                  environment           extension_status
-                  first_detected        framework
-                  last_detected         policy_id
-                  policy_name           policy_uuid
-                  region                requirement
-                  requirement_name      resource_gcrn
-                  resource_id           resource_parent
-                  resource_status       resource_type
-                  resource_type_name    rule_group
-                  rule_id               rule_name
-                  rule_origin           rule_remediation
-                  section               service
-                  service_category      severity
-                  status                suppressed_by
-                  suppression_reason    tactic_id
-                  tactic_name           tag_key
-                  tag_value             tags
-                  tags_string           technique_id
-                  technique_name        tenant_id
-
-        limit -- The maximum number of items to return. When not specified or 0, 500 is used.
-        When larger than 1000, 1000 is used. Integer.
-        offset -- Offset returned assets. Integer.
-        after -- token-based pagination. Use for paginating through an entire result set.
-        Use only one of 'offset' and 'after' parameters for paginating. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-detections/cspm-evaluations-iom-queries
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. String.
+            Allowed filter fields:
+              account_id            account_name
+              applicable_profile    attack_type
+              benchmark_name        benchmark_version
+              business_impact       cid
+              cloud_group           cloud_label
+              cloud_label_id        cloud_provider
+              cloud_scope           created_at
+              environment           extension_status
+              first_detected        framework
+              last_detected         policy_id
+              policy_name           policy_uuid
+              region                requirement
+              requirement_name      resource_gcrn
+              resource_id           resource_parent
+              resource_status       resource_type
+              resource_type_name    rule_group
+              rule_id               rule_name
+              rule_origin           rule_remediation
+              section               service
+              service_category      severity
+              status                suppressed_by
+              suppression_reason    tactic_id
+              tactic_name           tag_key
+              tag_value             tags
+              tags_string           technique_id
+              technique_name        tenant_id
+        sort : str
+            The field to sort on. Use |asc or |desc suffix to specify sort direction. String. Supported fields:
+            account_id            account_name
+            applicable_profile    attack_type
+            benchmark_name        benchmark_version
+            business_impact       cid
+            cloud_group           cloud_label
+            cloud_label_id        cloud_provider
+            cloud_scope           created_at
+            environment           extension_status
+            first_detected        framework
+            last_detected         policy_id
+            policy_name           policy_uuid
+            region                requirement
+            requirement_name      resource_gcrn
+            resource_id           resource_parent
+            resource_status       resource_type
+            resource_type_name    rule_group
+            rule_id               rule_name
+            rule_origin           rule_remediation
+            section               service
+            service_category      severity
+            status                suppressed_by
+            suppression_reason    tactic_id
+            tactic_name           tag_key
+            tag_value             tags
+            tags_string           technique_id
+            technique_name        tenant_id
+        limit : int
+            The maximum number of items to return. When not specified or 0, 500 is used.
+            When larger than 1000, 1000 is used.
+        offset : int
+            Offset returned assets.
+        after : str
+            token-based pagination. Use for paginating through an entire result set.
+            Use only one of 'offset' and 'after' parameters for paginating.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

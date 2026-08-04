@@ -65,20 +65,29 @@ class ConfigurationAssessmentEvaluationLogic(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on evaluation logic items by providing one or more finding IDs.
 
-        Keyword arguments:
-        ids -- One or more evaluation logic finding IDs.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                /configuration-assessment-evaluation-logic/getEvaluationLogicMixin0
+        /configuration-assessment-evaluation-logic/getEvaluationLogicMixin0
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more evaluation logic finding IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

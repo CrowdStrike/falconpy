@@ -64,20 +64,29 @@ class CorrelationRules(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get rules aggregates as specified via json in the request body.
 
-        Keyword arguments:
-        body -- Full body payload as JSON formatted dictionary.
-        filter -- Filter results using FQL format. String.
-        ids -- The IDs to retrieve. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/aggregates.rule-versions.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as.
+        filter : str
+            Filter results using FQL format.
+        ids : str or list[str]
+            The IDs to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -95,25 +104,36 @@ class CorrelationRules(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all rules matching the query and filter.
 
-        Keyword arguments:
-        filter -- FQL query specifying the filter parameters. FQL formatted string.
-                  Supported filters: customer_id, user_id, user_uuid, status, name, created_on,
-                                     last_updated_on
-                  Supported range filters: created_on, last_updated_on
-        q -- Match query criteria, which includes all the filter string fields. String.
-        sort -- Rule property to sort on. FQL formatted string.
-        offset -- Starting index of overall result set from which to return IDs. Integer.
-        limit -- Number of IDs to return. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/combined_rules.get.v1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying the filter parameters. FQL formatted string.
+            Supported filters: customer_id, user_id, user_uuid, status, name, created_on,
+                               last_updated_on
+            Supported range filters: created_on, last_updated_on
+        q : str
+            Match query criteria, which includes all the filter string fields.
+        sort : str
+            Rule property to sort on.
+        offset : int
+            Starting index of overall result set from which to return IDs.
+        limit : int
+            Number of IDs to return.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -130,25 +150,36 @@ class CorrelationRules(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all rules matching the query and filter.
 
-        Keyword arguments:
-        filter -- FQL query specifying the filter parameters. FQL formatted string.
-                  Supported filters: customer_id, user_id, user_uuid, status, name, created_on,
-                                     last_updated_on
-                  Supported range filters: created_on, last_updated_on
-        q -- Match query criteria, which includes all the filter string fields. String.
-        sort -- Rule property to sort on. FQL formatted string.
-        offset -- Starting index of overall result set from which to return IDs. Integer.
-        limit -- Number of IDs to return. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/combined.rules.get.v2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying the filter parameters. FQL formatted string.
+            Supported filters: customer_id, user_id, user_uuid, status, name, created_on,
+                               last_updated_on
+            Supported range filters: created_on, last_updated_on
+        q : str
+            Match query criteria, which includes all the filter string fields.
+        sort : str
+            Rule property to sort on.
+        offset : int
+            Starting index of overall result set from which to return IDs.
+        limit : int
+            Number of IDs to return.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -166,19 +197,28 @@ class CorrelationRules(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve latest rule versions by rule IDs.
 
-        Keyword arguments:
-        rule_ids -- The rule IDs to retrieve. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'rule_ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities.latest-rules.get.v1
+
+        Keyword arguments
+        -----------------
+        rule_ids : str or list[str]
+            The rule IDs to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'rule_ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -192,8 +232,17 @@ class CorrelationRules(ServiceClass):
     def export_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Export rule versions.
 
-        Keyword arguments:
-        body -- Full body payload provided as a JSON format dictionary.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        /correlation-rules/entities.rule-versions_export.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a JSON format.
                 {
                     "get_latest": boolean,
                     "report_format": "string",
@@ -202,21 +251,23 @@ class CorrelationRules(ServiceClass):
                         "sort": "string"
                     }
                 }
-        filter -- Filter to use to filter rules. String.
-        get_latest -- Flag indicating if the latest rule version should be exported. Boolean.
-        report_format -- Format to use for rule export. String.
-        search -- Rule search to perform. Overrides filter and sort keywords. Dictionary.
-        sort -- Sort to use for rule export. String.
+        filter : str
+            Filter to use to filter rules.
+        get_latest : bool
+            Flag indicating if the latest rule version should be exported.
+        report_format : str
+            Format to use for rule export.
+        search : dict
+            Rule search to perform. Overrides filter and sort keywords.
+        sort : str
+            Sort to use for rule export.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /correlation-rules/entities.rule-versions_export.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = correlation_rules_export_payload(passed_keywords=kwargs)
@@ -232,19 +283,26 @@ class CorrelationRules(ServiceClass):
     def import_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Import rule.
 
-        Keyword arguments:
-        body -- Rule to be imported. Not required if rule is provided. JSON formatted dictionary.
-        rule -- Rule to be imported. JSON formatted dictionary.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /correlation-rules/entities.rule-versions_import.post.v1
+        /correlation-rules/entities.rule-versions_import.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Rule to be imported. Not required if rule is provided.
+        rule : dict
+            Rule to be imported.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = kwargs.get("rule", None)
@@ -260,22 +318,29 @@ class CorrelationRules(ServiceClass):
     def publish_rule_version(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Publish existing rule version.
 
-        Keyword arguments:
-        body -- Full body payload provided as a JSON format dictionary. Not required if using other keywords.
-                {
-                  "id": "string"
-                }
-        id -- Correlation rule version ID to be published. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /correlation-rules/entities.rule-versions_publish.patch.v1
+        /correlation-rules/entities.rule-versions_publish.patch.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a JSON format dictionary. Not required if using other keywords.
+                {
+                  "id": "string"
+                }
+        id : str
+            Correlation rule version ID to be published.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = {
@@ -297,20 +362,29 @@ class CorrelationRules(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete rule versions by IDs.
 
-        Keyword arguments:
-        ids -- The rule version IDs to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /correlation-rules/entities.rule-versions.delete.v1
+        /correlation-rules/entities.rule-versions.delete.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The rule version IDs to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -328,19 +402,28 @@ class CorrelationRules(ServiceClass):
                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve rules by IDs.
 
-        Keyword arguments:
-        ids -- The IDs to retrieve. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities_rules.get.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -358,19 +441,28 @@ class CorrelationRules(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve rule versions by IDs.
 
-        Keyword arguments:
-        ids -- The rule IDs to retrieve. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities.rules.get.v2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The rule IDs to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -384,8 +476,16 @@ class CorrelationRules(ServiceClass):
     def create_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create rule.
 
-        Keyword arguments:
-        body -- Full body payload provided as a JSON format dictionary.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities_rules.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a JSON format.
                 {
                     "anomaly": {
                         "event_field_name": "string",
@@ -473,31 +573,45 @@ class CorrelationRules(ServiceClass):
                     "template_id": "string",
                     "trigger_on_create": boolean
                 }
-        anomaly -- Anomaly detection configuration. Dictionary.
-        comment -- Correlation rule comment. String.
-        customer_id -- CID for the tenant. String.
-        description -- Correlation rule description. String.
-        guardrail_notifications -- List of guardrail notifications. List of dictionaries.
-        mitre_attack -- List of MITRE ATT&CK tactic and technique mappings. List of dictionaries.
-        name -- Correlation rule name. String.
-        notifications -- List of notifications to implement. List of dictionaries.
-        operation -- Operation to perform. Dictionary.
-        search -- Search to perform. Dictionary.
-        severity -- Correlation severity. Integer.
-        status -- Correlation rule status. String.
-        tactic -- Identified tactic. String.
-        technique -- Identified technique. String.
-        template_id -- Template identifier to base the rule on. String.
-        trigger_on_create -- Flag indicating if the rule triggers on creation. Boolean.
+        anomaly : dict
+            Anomaly detection configuration.
+        comment : str
+            Correlation rule comment.
+        customer_id : str
+            CID for the tenant.
+        description : str
+            Correlation rule description.
+        guardrail_notifications : list[dict]
+            List of guardrail notifications.
+        mitre_attack : list[dict]
+            List of MITRE ATT&CK tactic and technique mappings.
+        name : str
+            Correlation rule name.
+        notifications : list[dict]
+            List of notifications to implement.
+        operation : dict
+            Operation to perform.
+        search : dict
+            Search to perform.
+        severity : int
+            Correlation severity.
+        status : str
+            Correlation rule status.
+        tactic : str
+            Identified tactic.
+        technique : str
+            Identified technique.
+        template_id : str
+            Template identifier to base the rule on.
+        trigger_on_create : bool
+            Flag indicating if the rule triggers on creation.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities_rules.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = correlation_rules_payload(passed_keywords=kwargs)
@@ -517,18 +631,23 @@ class CorrelationRules(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete rules by IDs.
 
-        Keyword arguments:
-        ids -- The IDs to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities_rules.delete.v1
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities_rules.delete.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -542,8 +661,16 @@ class CorrelationRules(ServiceClass):
     def update_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update rule.
 
-        Keyword arguments:
-        body -- Full body payload provided as a JSON format dictionary.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities_rules.patch.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a JSON format.
                 [{
                     "anomaly": {
                         "event_field_name": "string",
@@ -632,32 +759,47 @@ class CorrelationRules(ServiceClass):
                     "template_id": "string",
                     "trigger_on_create": boolean
                 }]
-        anomaly -- Anomaly detection configuration. Dictionary.
-        comment -- Correlation rule comment. String.
-        customer_id -- CID for the tenant. String.
-        description -- Correlation rule description. String.
-        guardrail_notifications -- List of guardrail notifications. List of dictionaries.
-        id -- Correlation rule ID to be updated. String.
-        mitre_attack -- List of MITRE ATT&CK tactic and technique mappings. List of dictionaries.
-        name -- Correlation rule name. String.
-        notifications -- List of notifications to implement. List of dictionaries.
-        operation -- Operation to perform. Dictionary.
-        search -- Search to perform. Dictionary.
-        severity -- Correlation severity. Integer.
-        status -- Correlation rule status. String.
-        tactic -- Identified tactic. String.
-        technique -- Identified technique. String.
-        template_id -- Template identifier to base the rule on. String.
-        trigger_on_create -- Flag indicating if the rule triggers on creation. Boolean.
+        anomaly : dict
+            Anomaly detection configuration.
+        comment : str
+            Correlation rule comment.
+        customer_id : str
+            CID for the tenant.
+        description : str
+            Correlation rule description.
+        guardrail_notifications : list[dict]
+            List of guardrail notifications.
+        id : str
+            Correlation rule ID to be updated.
+        mitre_attack : list[dict]
+            List of MITRE ATT&CK tactic and technique mappings.
+        name : str
+            Correlation rule name.
+        notifications : list[dict]
+            List of notifications to implement.
+        operation : dict
+            Operation to perform.
+        search : dict
+            Search to perform.
+        severity : int
+            Correlation severity.
+        status : str
+            Correlation rule status.
+        tactic : str
+            Identified tactic.
+        technique : str
+            Identified technique.
+        template_id : str
+            Template identifier to base the rule on.
+        trigger_on_create : bool
+            Flag indicating if the rule triggers on creation.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities_rules.patch.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = correlation_rules_payload(passed_keywords=kwargs)
@@ -677,25 +819,36 @@ class CorrelationRules(ServiceClass):
     def query_rules(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all rule IDs matching the query and filter.
 
-        Keyword arguments:
-        filter -- FQL query specifying the filter parameters. FQL formatted string.
-                  Supported filters: customer_id, user_id, user_uuid, status, name, created_on,
-                                     last_updated_on
-                  Supported range filters: created_on, last_updated_on
-        q -- Match query criteria, which includes all the filter string fields. String.
-        sort -- Rule property to sort on. FQL formatted string.
-        offset -- Starting index of overall result set from which to return IDs. Integer.
-        limit -- Number of IDs to return. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/queries_rules.get.v1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying the filter parameters. FQL formatted string.
+            Supported filters: customer_id, user_id, user_uuid, status, name, created_on,
+                               last_updated_on
+            Supported range filters: created_on, last_updated_on
+        q : str
+            Match query criteria, which includes all the filter string fields.
+        sort : str
+            Rule property to sort on.
+        offset : int
+            Starting index of overall result set from which to return IDs.
+        limit : int
+            Number of IDs to return.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -709,25 +862,36 @@ class CorrelationRules(ServiceClass):
     def query_rules_v2(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all rule version IDs matching the query and filter.
 
-        Keyword arguments:
-        filter -- FQL query specifying the filter parameters. FQL formatted string.
-                  Supported filters: customer_id, user_id, user_uuid, status, name, created_on,
-                                     last_updated_on, state, version, rule_id, executor_rule_id
-                  Supported range filters: created_on, last_updated_on
-        q -- Match query criteria, which includes all the filter string fields. String.
-        sort -- Rule property to sort on. FQL formatted string.
-        offset -- Starting index of overall result set from which to return IDs. Integer.
-        limit -- Number of IDs to return. Integer. Default: 100
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/queries.rules.get.v2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying the filter parameters. FQL formatted string.
+            Supported filters: customer_id, user_id, user_uuid, status, name, created_on,
+                               last_updated_on, state, version, rule_id, executor_rule_id
+            Supported range filters: created_on, last_updated_on
+        q : str
+            Match query criteria, which includes all the filter string fields.
+        sort : str
+            Rule property to sort on.
+        offset : int
+            Starting index of overall result set from which to return IDs.
+        limit : int
+            Number of IDs to return. Integer. Default: 100
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -744,25 +908,35 @@ class CorrelationRules(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search rule template IDs matching the filter.
 
-        Keyword arguments:
-        filter -- FQL query specifying the filter parameters. String.
-                  Supported filters:
-                    name            description             vendor
-                    outcome         mitre_attack.tactic_id  mitre_attack.technique_id
-                    type            created_on              last_updated_on
-        sort -- Rule property to sort on. String.
-        offset -- Starting index of overall result set from which to return IDs. Integer.
-        limit -- Number of IDs to return. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/queries.templates.get.v1Mixin0
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying the filter parameters. String.
+            Supported filters:
+              name            description             vendor
+              outcome         mitre_attack.tactic_id  mitre_attack.technique_id
+              type            created_on              last_updated_on
+        sort : str
+            Rule property to sort on.
+        offset : int
+            Starting index of overall result set from which to return IDs.
+        limit : int
+            Number of IDs to return.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -776,8 +950,16 @@ class CorrelationRules(ServiceClass):
     def create_rule_from_template(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create rule from template.
 
-        Keyword arguments:
-        body -- Full body payload as JSON formatted dictionary.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities.templates_rules.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as.
                 [
                 {
                     "customer_id": "string",
@@ -862,15 +1044,15 @@ class CorrelationRules(ServiceClass):
                     ]
                 }
                 ]
-        customer_id -- Customer ID for the rule template. String.
-        templates -- List of rule template definitions to create rules from. List of dictionaries.
+        customer_id : str
+            Customer ID for the rule template.
+        templates : list[dict]
+            List of rule template definitions to create rules from.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities.templates_rules.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = correlation_rules_template_payload(passed_keywords=kwargs)
@@ -890,21 +1072,30 @@ class CorrelationRules(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve rule templates by IDs.
 
-        Keyword arguments:
-        ids -- The IDs. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities.templates.get.v1Mixin0
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

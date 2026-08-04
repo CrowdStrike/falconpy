@@ -66,8 +66,16 @@ class RealTimeResponse(ServiceClass):
             date_range
             term
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-AggregateSessions
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -102,40 +110,46 @@ class RealTimeResponse(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
+            String.
+            This method does not support body payload validation.
 
         This method only supports keywords for providing arguments.
 
-        This method does not support body payload validation.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-AggregateSessions
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -155,8 +169,16 @@ class RealTimeResponse(ServiceClass):
                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Batch executes a RTR active-responder command across hosts mapped to a given batch ID.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchActiveResponderCmd
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "base_command": "string",
                     "batch_id": "string",
@@ -166,33 +188,39 @@ class RealTimeResponse(ServiceClass):
                     ],
                     "persist_all": true
                 }
-        base_command -- Active-Responder command type we are going to execute,
-                        for example: `get` or `cp`.  String.
-                        Refer to the RTR documentation for the full list of commands.
-        batch_id -- Batch ID to execute the command on. Received from batch_init_session. String.
-        command_string -- Full command string for the command. For example `get some_file.txt`.
-        host_timeout_duration -- Timeout duration for how long a host has time to complete processing.
-                                 Default value is a bit less than the overall timeout value.
-                                 It cannot be greater than the overall request timeout. Maximum is < 10 minutes.
-                                 Example, `10s`. Valid units: `ns, us, ms, s, m, h`.
-        optional_hosts -- List of a subset of hosts we want to run the command on.
-                          If this list is supplied, only these hosts will receive the command.
-        parameters -- full parameters payload in JSON format. Not required if using other keywords.
-        persist_all -- Boolean.
-        timeout -- Timeout for how long to wait for the request in seconds.
-                   Default timeout: 30 seconds  Max timeout: 10 minutes
-        timeout_duration -- Timeout duration for how long to wait for the request in duration
-                            syntax. Example: `10s`.   Default value: `30s`. Maximum is `10m`.
-                            Valid units: `ns`, `us`, `ms`, `s`, `m`, `h`
+        base_command : str
+            Active-Responder command type we are going to execute,
+            for example: `get` or `cp`.  String.
+            Refer to the RTR documentation for the full list of commands.
+        batch_id : str
+            Batch ID to execute the command on. Received from batch_init_session.
+        command_string : str
+            Full command string for the command. For example `get some_file.txt`.
+        host_timeout_duration : str
+            Timeout duration for how long a host has time to complete processing.
+            Default value is a bit less than the overall timeout value.
+            It cannot be greater than the overall request timeout. Maximum is < 10 minutes.
+            Example, `10s`. Valid units: `ns, us, ms, s, m, h`.
+        optional_hosts : str or list[str]
+            List of a subset of hosts we want to run the command on.
+            If this list is supplied, only these hosts will receive the command.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        persist_all : bool
+        timeout : int
+            Timeout for how long to wait for the request in seconds.
+            Default timeout: 30 seconds  Max timeout: 10 minutes
+        timeout_duration : str
+            Timeout duration for how long to wait for the request in duration
+            syntax. Example: `10s`.   Default value: `30s`. Maximum is `10m`.
+            Valid units: `ns`, `us`, `ms`, `s`, `m`, `h`
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchActiveResponderCmd
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = command_payload(passed_keywords=kwargs)
@@ -214,8 +242,16 @@ class RealTimeResponse(ServiceClass):
                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Batch executes a RTR read-only command across the hosts mapped to the given batch ID.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchCmd
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "base_command": "string",
                     "batch_id": "string",
@@ -225,33 +261,39 @@ class RealTimeResponse(ServiceClass):
                     ],
                     "persist_all": true
                 }
-        base_command -- Active-Responder command type we are going to execute,
-                        for example: `get` or `cp`.  String.
-                        Refer to the RTR documentation for the full list of commands.
-        batch_id -- Batch ID to execute the command on. Received from batch_init_session. String.
-        command_string -- Full command string for the command. For example `get some_file.txt`.
-        host_timeout_duration -- Timeout duration for how long a host has time to complete processing.
-                                 Default value is a bit less than the overall timeout value.
-                                 It cannot be greater than the overall request timeout. Maximum is < 10 minutes.
-                                 Example, `10s`. Valid units: `ns, us, ms, s, m, h`.
-        optional_hosts -- List of a subset of hosts we want to run the command on.
-                          If this list is supplied, only these hosts will receive the command.
-        parameters -- full parameters payload in JSON format. Not required if using other keywords.
-        persist_all -- Boolean.
-        timeout -- Timeout for how long to wait for the request in seconds.
-                   Default timeout: 30 seconds  Max timeout: 10 minutes
-        timeout_duration -- Timeout duration for how long to wait for the request in duration
-                            syntax. Example: `10s`.   Default value: `30s`. Maximum is `10m`.
-                            Valid units: `ns`, `us`, `ms`, `s`, `m`, `h`
+        base_command : str
+            Active-Responder command type we are going to execute,
+            for example: `get` or `cp`.  String.
+            Refer to the RTR documentation for the full list of commands.
+        batch_id : str
+            Batch ID to execute the command on. Received from batch_init_session.
+        command_string : str
+            Full command string for the command. For example `get some_file.txt`.
+        host_timeout_duration : str
+            Timeout duration for how long a host has time to complete processing.
+            Default value is a bit less than the overall timeout value.
+            It cannot be greater than the overall request timeout. Maximum is < 10 minutes.
+            Example, `10s`. Valid units: `ns, us, ms, s, m, h`.
+        optional_hosts : str or list[str]
+            List of a subset of hosts we want to run the command on.
+            If this list is supplied, only these hosts will receive the command.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        persist_all : bool
+        timeout : int
+            Timeout for how long to wait for the request in seconds.
+            Default timeout: 30 seconds  Max timeout: 10 minutes
+        timeout_duration : str
+            Timeout duration for how long to wait for the request in duration
+            syntax. Example: `10s`.   Default value: `30s`. Maximum is `10m`.
+            Valid units: `ns`, `us`, `ms`, `s`, `m`, `h`
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchCmd
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = command_payload(passed_keywords=kwargs)
@@ -275,24 +317,35 @@ class RealTimeResponse(ServiceClass):
 
         Will return successful files when they are finished processing.
 
-        Keyword arguments:
-        timeout -- Timeout for how long to wait for the request in seconds.
-                   Default timeout: 30 seconds  Max timeout: 10 minutes
-        timeout_duration -- Timeout duration for how long to wait for the request in duration
-                            syntax. Example: `10s`.   Maximum is `10m`.
-                            Valid units: `ns`, `us`, `ms`, `s`, `m`, `h`
-        batch_get_cmd_req_id -- Batch Get Command Request ID received from batch_command.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'batch_get_cmd_req_id'.  All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchGetCmdStatus
+
+        Keyword arguments
+        -----------------
+        timeout : int
+            Timeout for how long to wait for the request in seconds.
+            Default timeout: 30 seconds  Max timeout: 10 minutes
+        timeout_duration : str
+            Timeout duration for how long to wait for the request in duration
+            syntax. Example: `10s`.   Maximum is `10m`.
+            Valid units: `ns`, `us`, `ms`, `s`, `m`, `h`
+        batch_get_cmd_req_id : str
+            Batch Get Command Request ID received from batch_command.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'batch_get_cmd_req_id'.  All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -312,8 +365,16 @@ class RealTimeResponse(ServiceClass):
 
         After this call is made batch_get_command_status is used to query for the results.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchGetCmd
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "batch_id": "string",
                     "file_path": "string",
@@ -322,29 +383,34 @@ class RealTimeResponse(ServiceClass):
                     ]
                 }
 
-        batch_id -- Batch ID to execute the command on. Received from batch_init_session. String.
-        file_path -- Full path to the file that is to be retrieved from each host in the batch.
-        host_timeout_duration -- Timeout duration for how long a host has time to complete processing.
-                                 Default value is a bit less than the overall timeout value.
-                                 It cannot be greater than the overall request timeout. Maximum is < 10 minutes.
-                                 Example, `10s`. Valid units: `ns, us, ms, s, m, h`.
-        optional_hosts -- List of a subset of hosts we want to run the command on.
-                          If this list is supplied, only these hosts will receive the command.
-        parameters -- full parameters payload in JSON format. Not required if using other keywords.
-        timeout -- Timeout for how long to wait for the request in seconds.
-                   Default timeout: 30 seconds  Max timeout: 10 minutes
-        timeout_duration -- Timeout duration for how long to wait for the request in duration
-                            syntax. Example: `10s`.   Default value: `30s`. Maximum is `10m`.
-                            Valid units: `ns`, `us`, `ms`, `s`, `m`, `h`
+        batch_id : str
+            Batch ID to execute the command on. Received from batch_init_session.
+        file_path : str
+            Full path to the file that is to be retrieved from each host in the batch.
+        host_timeout_duration : str
+            Timeout duration for how long a host has time to complete processing.
+            Default value is a bit less than the overall timeout value.
+            It cannot be greater than the overall request timeout. Maximum is < 10 minutes.
+            Example, `10s`. Valid units: `ns, us, ms, s, m, h`.
+        optional_hosts : str or list[str]
+            List of a subset of hosts we want to run the command on.
+            If this list is supplied, only these hosts will receive the command.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        timeout : int
+            Timeout for how long to wait for the request in seconds.
+            Default timeout: 30 seconds  Max timeout: 10 minutes
+        timeout_duration : str
+            Timeout duration for how long to wait for the request in duration
+            syntax. Example: `10s`.   Default value: `30s`. Maximum is `10m`.
+            Valid units: `ns`, `us`, `ms`, `s`, `m`, `h`
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchGetCmd
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = command_payload(passed_keywords=kwargs)
@@ -368,8 +434,16 @@ class RealTimeResponse(ServiceClass):
 
         Before any RTR commands can be used, an active session is needed on the host.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchInitSessions
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "existing_batch_id": "string",
                     "host_ids": [
@@ -378,30 +452,35 @@ class RealTimeResponse(ServiceClass):
                     "queue_offline": boolean
                 }
 
-        existing_batch_id -- Optional batch ID. Use an existing batch ID if you want to
-                             initialize new hosts and add them to the existing batch. String.
-        host_ids -- List of host agent ID's to initialize a RTR session on. List of strings.
-        host_timeout_duration -- Timeout duration for how long a host has time to complete processing.
-                                 Default value is a bit less than the overall timeout value.
-                                 It cannot be greater than the overall request timeout. Maximum is < 10 minutes.
-                                 Example, `10s`. Valid units: `ns, us, ms, s, m, h`.
-        queue_offline -- Boolean indicating if the command should be queued for execution when
-                         the host returns online.
-        parameters -- full parameters payload in JSON format. Not required if using other keywords.
-        timeout -- Timeout for how long to wait for the request in seconds.
-                   Default timeout: 30 seconds  Max timeout: 10 minutes
-        timeout_duration -- Timeout duration for how long to wait for the request in duration
-                            syntax. Example: `10s`.   Default value: `30s`. Maximum is `10m`.
-                            Valid units: `ns`, `us`, `ms`, `s`, `m`, `h`
+        existing_batch_id : str
+            Optional batch ID. Use an existing batch ID if you want to
+            initialize new hosts and add them to the existing batch.
+        host_ids : str or list[str]
+            List of host agent ID's to initialize a RTR session on.
+        host_timeout_duration : str
+            Timeout duration for how long a host has time to complete processing.
+            Default value is a bit less than the overall timeout value.
+            It cannot be greater than the overall request timeout. Maximum is < 10 minutes.
+            Example, `10s`. Valid units: `ns, us, ms, s, m, h`.
+        queue_offline : bool
+            Boolean indicating if the command should be queued for execution when
+            the host returns online.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        timeout : int
+            Timeout for how long to wait for the request in seconds.
+            Default timeout: 30 seconds  Max timeout: 10 minutes
+        timeout_duration : str
+            Timeout duration for how long to wait for the request in duration
+            syntax. Example: `10s`.   Default value: `30s`. Maximum is `10m`.
+            Valid units: `ns`, `us`, `ms`, `s`, `m`, `h`
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchInitSessions
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = command_payload(passed_keywords=kwargs)
@@ -425,32 +504,43 @@ class RealTimeResponse(ServiceClass):
 
         RTR sessions will expire after 10 minutes unless refreshed.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchRefreshSessions
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "batch_id": "string",
                     "hosts_to_remove": [
                         "string"
                     ]
                 }
-        batch_id -- Batch ID to execute the command on. Received from batch_init_session. String.
-        hosts_to_remove -- Hosts to remove from the batch session. Heartbeats will no longer happen
-                           on these hosts and the sessions will expire.
-        parameters -- full parameters payload in JSON format. Not required if using other keywords.
-        timeout -- Timeout for how long to wait for the request in seconds.
-                   Default timeout: 30 seconds  Max timeout: 10 minutes
-        timeout_duration -- Timeout duration for how long to wait for the request in duration
-                            syntax. Example: `10s`.   Default value: `30s`. Maximum is `10m`.
-                            Valid units: `ns`, `us`, `ms`, `s`, `m`, `h`
+        batch_id : str
+            Batch ID to execute the command on. Received from batch_init_session.
+        hosts_to_remove : str or list[str]
+            Hosts to remove from the batch session. Heartbeats will no longer happen
+            on these hosts and the sessions will expire.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        timeout : int
+            Timeout for how long to wait for the request in seconds.
+            Default timeout: 30 seconds  Max timeout: 10 minutes
+        timeout_duration : str
+            Timeout duration for how long to wait for the request in duration
+            syntax. Example: `10s`.   Default value: `30s`. Maximum is `10m`.
+            Valid units: `ns`, `us`, `ms`, `s`, `m`, `h`
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchRefreshSessions
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = command_payload(passed_keywords=kwargs)
@@ -472,22 +562,32 @@ class RealTimeResponse(ServiceClass):
                                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get status of an executed active-responder command on a single host.
 
-        Keyword arguments:
-        cloud_request_id -- Cloud Request ID of the executed command to query.
-        sequence_id -- Sequence ID that we want to retrieve. Command responses are
-                       chunked across sequences. Default value: 0
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'cloud_request_id'. All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                   /real-time-response/RTR-CheckActiveResponderCommandStatus
+        /real-time-response/RTR-CheckActiveResponderCommandStatus
+
+        Keyword arguments
+        -----------------
+        cloud_request_id : str
+            Cloud Request ID of the executed command to query.
+        sequence_id : int
+            Sequence ID that we want to retrieve. Command responses are
+            chunked across sequences. Default value: 0
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'cloud_request_id'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not kwargs.get("sequence_id", None) and not parameters.get("sequence_id", None):
             parameters["sequence_id"] = 0
@@ -507,8 +607,16 @@ class RealTimeResponse(ServiceClass):
                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Execute an active responder command on a single host.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-ExecuteActiveResponderCommand
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "base_command": "string",
                     "command_string": "string",
@@ -517,23 +625,27 @@ class RealTimeResponse(ServiceClass):
                     "persist": boolean,
                     "session_id": "string"
                 }
-        base_command -- Active-Responder command type we are going to execute,
-                        for example: `get` or `cp`.  String.
-                        Refer to the RTR documentation for the full list of commands.
-        command_string -- Full command string for the command. For example `get some_file.txt`.
-        device_id -- ID of the device to execute the command on. String.
-        id -- Command sequence. Integer.
-        persist -- Execute this command when host returns to service. Boolean.
-        session_id -- RTR session ID. String.
+        base_command : str
+            Active-Responder command type we are going to execute,
+            for example: `get` or `cp`.  String.
+            Refer to the RTR documentation for the full list of commands.
+        command_string : str
+            Full command string for the command. For example `get some_file.txt`.
+        device_id : str
+            ID of the device to execute the command on.
+        id : int
+            Command sequence.
+        persist : bool
+            Execute this command when host returns to service.
+        session_id : str
+            RTR session ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-ExecuteActiveResponderCommand
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = command_payload(passed_keywords=kwargs)
@@ -553,21 +665,31 @@ class RealTimeResponse(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get status of an executed command on a single host.
 
-        Keyword arguments:
-        cloud_request_id -- Cloud Request ID of the executed command to query.
-        sequence_id -- Sequence ID that we want to retrieve. Command responses are
-                       chunked across sequences. Default value: 0
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'cloud_request_id'. All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-CheckCommandStatus
+
+        Keyword arguments
+        -----------------
+        cloud_request_id : str
+            Cloud Request ID of the executed command to query.
+        sequence_id : int
+            Sequence ID that we want to retrieve. Command responses are
+            chunked across sequences. Default value: 0
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'cloud_request_id'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not kwargs.get("sequence_id", None) and not parameters.get("sequence_id", None):
             parameters["sequence_id"] = 0
@@ -584,8 +706,16 @@ class RealTimeResponse(ServiceClass):
     def execute_command(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Execute a command on a single host.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-ExecuteCommand
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "base_command": "string",
                     "command_string": "string",
@@ -594,23 +724,27 @@ class RealTimeResponse(ServiceClass):
                     "persist": boolean,
                     "session_id": "string"
                 }
-        base_command -- Active-Responder command type we are going to execute,
-                        for example: `get` or `cp`.  String.
-                        Refer to the RTR documentation for the full list of commands.
-        command_string -- Full command string for the command. For example `get some_file.txt`.
-        device_id -- ID of the device to execute the command on. String.
-        id -- Command sequence. Integer.
-        persist -- Execute this command when host returns to service. Boolean.
-        session_id -- RTR session ID. String.
+        base_command : str
+            Active-Responder command type we are going to execute,
+            for example: `get` or `cp`.  String.
+            Refer to the RTR documentation for the full list of commands.
+        command_string : str
+            Full command string for the command. For example `get some_file.txt`.
+        device_id : str
+            ID of the device to execute the command on.
+        id : int
+            Command sequence.
+        persist : bool
+            Execute this command when host returns to service.
+        session_id : str
+            RTR session ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-ExecuteCommand
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = command_payload(passed_keywords=kwargs)
@@ -629,22 +763,31 @@ class RealTimeResponse(ServiceClass):
                                     ) -> Union[Dict[str, Union[str, int, dict]], Result, Response]:
         """Get RTR extracted file contents for specified session and sha256.
 
-        Keyword arguments:
-        session_id -- RTR Session ID. String.
-        sha256 -- Extracted SHA256 value. String.
-        filename -- Filename to use for the archive name and the file within the archive. String.
-        stream -- Enabling streaming download for the requested file. Boolean.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: 7zip compressed binary object on SUCCESS
-                 dict object containing API response on FAILURE.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-GetExtractedFileContents
+
+        Keyword arguments
+        -----------------
+        session_id : str
+            RTR Session ID.
+        sha256 : str
+            Extracted SHA256 value.
+        filename : str
+            Filename to use for the archive name and the file within the archive.
+        stream : bool
+            Enabling streaming download for the requested file.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        7zip compressed binary object on SUCCESS
+                 dict object containing API response on FAILURE.
         """
         return process_service_request(
             calling_object=self,
@@ -659,19 +802,28 @@ class RealTimeResponse(ServiceClass):
     def list_files(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of files for the specified RTR session.
 
-        Keyword arguments:
-        session_id -- RTR Session ID. String.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'session_id'. All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-ListFiles
+
+        Keyword arguments
+        -----------------
+        session_id : str
+            RTR Session ID.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'session_id'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -685,19 +837,28 @@ class RealTimeResponse(ServiceClass):
     def list_files_v2(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of files for the specified RTR session.
 
-        Keyword arguments:
-        session_id -- RTR Session ID. String.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'session_id'. All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-ListFilesV2
+
+        Keyword arguments
+        -----------------
+        session_id : str
+            RTR Session ID.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'session_id'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -711,19 +872,27 @@ class RealTimeResponse(ServiceClass):
     def delete_file(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a RTR session file.
 
-        Keyword arguments:
-        ids -- RTR Session file ID. String.
-        session_id -- RTR Session ID. String.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-DeleteFile
+
+        Keyword arguments
+        -----------------
+        ids : str
+            RTR Session file ID.
+        session_id : str
+            RTR Session ID.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -737,19 +906,27 @@ class RealTimeResponse(ServiceClass):
     def delete_file_v2(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a RTR session file.
 
-        Keyword arguments:
-        ids -- RTR Session file ID. String.
-        session_id -- RTR Session ID. String.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-DeleteFileV2
+
+        Keyword arguments
+        -----------------
+        ids : str
+            RTR Session file ID.
+        session_id : str
+            RTR Session ID.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -763,26 +940,33 @@ class RealTimeResponse(ServiceClass):
     def pulse_session(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Refresh a session timeout on a single host.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-PulseSession
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "device_id": "string",
                     "origin": "string",
                     "queue_offline": true
                 }
-        device_id -- The host agent ID to initialize the RTR session on. String.
-                     RTR will retrieve an existing session for the calling user on this host.
-        origin -- String.
-        queue_offline -- Boolean.
+        device_id : str
+            The host agent ID to initialize the RTR session on. String.
+            RTR will retrieve an existing session for the calling user on this host.
+        origin : str
+        queue_offline : bool
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-PulseSession
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = command_payload(passed_keywords=kwargs)
@@ -798,25 +982,31 @@ class RealTimeResponse(ServiceClass):
     def list_sessions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get session metadata by session id.
 
-        Keyword arguments:
-        body -- full body payload, not required if ids are provided as keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-ListSessions
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if ids are provided as keyword.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- List of RTR sessions to retrieve.
-               RTR will only return the sessions that were created by the calling user.
-               String or list of strings.
+        ids : str or list[str]
+            List of RTR sessions to retrieve.
+            RTR will only return the sessions that were created by the calling user.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-ListSessions
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -832,25 +1022,31 @@ class RealTimeResponse(ServiceClass):
     def list_queued_sessions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get session metadata by session id.
 
-        Keyword arguments:
-        body -- full body payload, not required if ids are provided as keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-ListQueuedSessions
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if ids are provided as keyword.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- List of RTR sessions to retrieve.
-               RTR will only return the sessions that were created by the calling user.
-               String or list of strings.
+        ids : str or list[str]
+            List of RTR sessions to retrieve.
+            RTR will only return the sessions that were created by the calling user.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-ListQueuedSessions
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -866,31 +1062,40 @@ class RealTimeResponse(ServiceClass):
     def init_session(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Initialize a new session with the RTR cloud.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-InitSession
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "device_id": "string",
                     "origin": "string",
                     "queue_offline": true
                 }
-        device_id -- The host agent ID to initialize the RTR session on. String.
-                     RTR will retrieve an existing session for the calling user on this host.
-        origin -- String.
-        queue_offline -- Boolean.
-        timeout -- Timeout for how long to wait for the request in seconds. Integer.
-                   Default: 30  Maximum: 600
-        timeout_duration -- Timeout duration for how long to wait for the request in duration syntax.
-                            Example: 10s  Valid units: ns, us, ms, s, m, h
-                            Maximum is 10 minutes. Integer.
+        device_id : str
+            The host agent ID to initialize the RTR session on. String.
+            RTR will retrieve an existing session for the calling user on this host.
+        origin : str
+        queue_offline : bool
+        timeout : int
+            Timeout for how long to wait for the request in seconds. Integer.
+            Default: 30  Maximum: 600
+        timeout_duration : str
+            Timeout duration for how long to wait for the request in duration syntax.
+            Example: 10s  Valid units: ns, us, ms, s, m, h
+            Maximum is 10 minutes.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-InitSession
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = command_payload(passed_keywords=kwargs)
@@ -906,19 +1111,28 @@ class RealTimeResponse(ServiceClass):
     def delete_session(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a session.
 
-        Keyword arguments:
-        session_id -- RTR Session ID to delete. String.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'session_id'. All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-DeleteSession
+
+        Keyword arguments
+        -----------------
+        session_id : str
+            RTR Session ID to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'session_id'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -933,19 +1147,27 @@ class RealTimeResponse(ServiceClass):
     def delete_queued_session(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a queued session.
 
-        Keyword arguments:
-        cloud_request_id -- Cloud Request ID of the executed command to query. String.
-        session_id -- RTR Session ID to delete. String.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-DeleteQueuedSession
+
+        Keyword arguments
+        -----------------
+        cloud_request_id : str
+            Cloud Request ID of the executed command to query.
+        session_id : str
+            RTR Session ID to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -959,25 +1181,35 @@ class RealTimeResponse(ServiceClass):
     def list_all_sessions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of session_ids.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  “user_id” can accept a special value `@me` which will restrict results to
-                  records with current user’s ID.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax. Example: `date_created|asc`
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-ListAllSessions
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            “user_id” can accept a special value `@me` which will restrict results to
+            records with current user’s ID.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax. Example: `date_created|asc`
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

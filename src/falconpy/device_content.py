@@ -59,19 +59,28 @@ class DeviceContent(ServiceClass):
     def get_states(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the host content state for a number of ids between 1 and 100.
 
-        Keyword arguments:
-        ids -- The ids of the devices to fetch the content state of. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/device-content/entities.states.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The ids of the devices to fetch the content state of.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -85,22 +94,32 @@ class DeviceContent(ServiceClass):
     def query_states(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for the content state of the host.
 
-        Keyword arguments:
-        limit -- The max number of resource ids to return. Integer.
-        sort -- What field to sort the results on. String.
-        offset -- The offset token returned from the previous query. Integer.
-                  If none is returned, there are no more pages to the result set.
-        filter -- The FQL search filter. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/device-content/queries.states.v1
+
+        Keyword arguments
+        -----------------
+        limit : int
+            The max number of resource ids to return.
+        sort : str
+            What field to sort the results on.
+        offset : int
+            The offset token returned from the previous query. Integer.
+            If none is returned, there are no more pages to the result set.
+        filter : str
+            The FQL search filter.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

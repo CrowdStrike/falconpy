@@ -72,23 +72,33 @@ class FalconXSandbox(ServiceClass):
                       ) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Download IOC packs, PCAP files, and other analysis artifacts.
 
-        Keyword arguments:
-        id -- ID of an artifact, such as an IOC pack, PCAP file, or actor image.
-              Find an artifact ID in a report or summary. String.
-        name -- The name given to your download file. String.
-        parameters -- Full parameters payload, not required if id is provided as a keyword.
-        stream -- Enable streaming download of the returned file. Boolean.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: gzip-compressed binary object on SUCCESS
-                 dict object containing API response on FAILURE
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetArtifacts
+
+        Keyword arguments
+        -----------------
+        id : str
+            ID of an artifact, such as an IOC pack, PCAP file, or actor image.
+            Find an artifact ID in a report or summary.
+        name : str
+            The name given to your download file.
+        parameters : dict
+            Full parameters payload, not required if id is provided as a keyword.
+        stream : bool
+            Enable streaming download of the returned file.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        gzip-compressed binary object on SUCCESS
+                 dict object containing API response on FAILURE
         """
         # Create a copy of our default header dictionary
         header_payload = json.loads(json.dumps(self.headers))
@@ -112,22 +122,32 @@ class FalconXSandbox(ServiceClass):
                                    ) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Get extracted strings from a memory dump.
 
-        Keyword arguments:
-        id -- Extracted Strings ID. String.
-        name -- The name given to your download file. String.
-        parameters -- Full parameters payload, not required if id is provided as a keyword.
-        stream -- Enable streaming download of the returned file. Boolean.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: gzip-compressed binary object on SUCCESS
-                 dict object containing API response on FAILURE
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetMemoryDumpExtractedStrings
+
+        Keyword arguments
+        -----------------
+        id : str
+            Extracted Strings ID.
+        name : str
+            The name given to your download file.
+        parameters : dict
+            Full parameters payload, not required if id is provided as a keyword.
+        stream : bool
+            Enable streaming download of the returned file.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        gzip-compressed binary object on SUCCESS
+                 dict object containing API response on FAILURE
         """
         # Create a copy of our default header dictionary
         header_payload = json.loads(json.dumps(self.headers))
@@ -151,22 +171,32 @@ class FalconXSandbox(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Get hex view of a memory dump.
 
-        Keyword arguments:
-        id -- Hex Dump ID. String.
-        name -- The name given to your download file. String.
-        parameters -- Full parameters payload, not required if id is provided as a keyword.
-        stream -- Enable streaming download of the returned file. Boolean.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: gzip-compressed binary object on SUCCESS
-                 dict object containing API response on FAILURE
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetMemoryDumpHexDump
+
+        Keyword arguments
+        -----------------
+        id : str
+            Hex Dump ID.
+        name : str
+            The name given to your download file.
+        parameters : dict
+            Full parameters payload, not required if id is provided as a keyword.
+        stream : bool
+            Enable streaming download of the returned file.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        gzip-compressed binary object on SUCCESS
+                 dict object containing API response on FAILURE
         """
         # Create a copy of our default header dictionary
         header_payload = json.loads(json.dumps(self.headers))
@@ -190,22 +220,32 @@ class FalconXSandbox(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Get memory dump content as a binary.
 
-        Keyword arguments:
-        id -- Memory Dump ID. String.
-        name -- The name given to your download file. String.
-        parameters -- full parameters payload, not required if id is provided as a keyword.
-        stream -- Enable streaming download of the returned file. Boolean.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: gzip-compressed binary object on SUCCESS
-                 dict object containing API response on FAILURE
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetMemoryDump
+
+        Keyword arguments
+        -----------------
+        id : str
+            Memory Dump ID.
+        name : str
+            The name given to your download file.
+        parameters : dict
+            full parameters payload, not required if id is provided as a keyword.
+        stream : bool
+            Enable streaming download of the returned file.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        gzip-compressed binary object on SUCCESS
+                 dict object containing API response on FAILURE
         """
         # Create a copy of our default header dictionary
         header_payload = json.loads(json.dumps(self.headers))
@@ -229,19 +269,28 @@ class FalconXSandbox(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a short summary version of a sandbox report.
 
-        Keyword arguments:
-        ids -- List of Summary IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetSummaryReports
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Summary IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -257,21 +306,29 @@ class FalconXSandbox(ServiceClass):
 
         Time required for analysis varies but is usually less than 15 minutes.
 
-        Keyword arguments:
-        ids -- ID(s) of submitted malware samples. Find a submission ID from the response when
-               submitting a malware sample or search with `query_submissions`.
-               String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetSubmissions
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            ID(s) of submitted malware samples. Find a submission ID from the response when
+            submitting a malware sample or search with `query_submissions`.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -292,14 +349,24 @@ class FalconXSandbox(ServiceClass):
         The sample file must have been previously uploaded through `upload_sample`.
         Time required for analysis varies but is usually less than 15 minutes.
 
-        Keyword arguments:
-        action_script -- Runtime script for sandbox analysis.
-                         Accepted values:
-                         default                    default_randomtheme
-                         default_maxantievasion     default_openie
-                         default_randomfiles
-        aid -- Agent ID. String.
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/Submit
+
+        Keyword arguments
+        -----------------
+        action_script : str
+            Runtime script for sandbox analysis.
+            Accepted values:
+            default                    default_randomtheme
+            default_maxantievasion     default_openie
+            default_randomfiles
+        aid : str
+            Agent ID.
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "sandbox": [
                         {
@@ -321,47 +388,55 @@ class FalconXSandbox(ServiceClass):
                         "string"
                     ]
                 }
-        command_line -- Command line script passed to the submitted file at runtime.
-                        Max length: 2048 characters
-        document_password -- Auto-filled for Adobe or Office files that prompt for a password.
-                             Max length: 32 characters
-        enable_tor -- Deprecated, please use network_settings instead.
-                      If true, sandbox analysis routes network traffic via TOR.
-        environment_id -- Specifies the sandbox environment used for analysis.
-                          Accepted values:
-                          400 - macOS Catalina 10.15
-                          300 - Linux Ubuntu 16.04, 64-bit
-                          200 - Android (static analysis)
-                          160 - Windows 10, 64-bit
-                          140 - Windows 11, 64-bit
-                          110 - Windows 7, 64-bit
-                          100 - Windows 7, 32-bit
-        network_settings -- Specifies the sandbox network_settings used for analysis.
-                            Accepted values:
-                            default - Fully operating network
-                            tor - Route network traffic via TOR
-                            simulated - Simulate network traffic
-                            offline - No network traffic
-        send_email_notification -- Boolean indicating if an email notification should be sent.
-        sha256 -- ID of the sample, which is a SHA256 hash value. Find a sample ID
-                  from the response when uploading a malware sample or search with `query_sample`.
-                  The `url` keyword must be unset if this keyword is used.
-        submit_name -- Name of the malware sample that's used for file type detection and analysis.
-        system_date -- Set a custom date in the format yyyy-MM-dd for the sandbox environment.
-        system_time -- Set a custom time in the format HH:mm for the sandbox environment.
-        url -- A web page or file URL. It can be HTTP(S) or FTP.
-               The `sha256` keyword must be unset if url is used.
-        user_tags -- List of strings.
-
+        command_line : str
+            Command line script passed to the submitted file at runtime.
+            Max length: 2048 characters
+        document_password : str
+            Auto-filled for Adobe or Office files that prompt for a password.
+            Max length: 32 characters
+        enable_tor : str
+            Deprecated, please use network_settings instead.
+            If true, sandbox analysis routes network traffic via TOR.
+        environment_id : str
+            Specifies the sandbox environment used for analysis.
+            Accepted values:
+            400 - macOS Catalina 10.15
+            300 - Linux Ubuntu 16.04, 64-bit
+            200 - Android (static analysis)
+            160 - Windows 10, 64-bit
+            140 - Windows 11, 64-bit
+            110 - Windows 7, 64-bit
+            100 - Windows 7, 32-bit
+        network_settings : str
+            Specifies the sandbox network_settings used for analysis.
+            Accepted values:
+            default - Fully operating network
+            tor - Route network traffic via TOR
+            simulated - Simulate network traffic
+            offline - No network traffic
+        send_email_notification : bool
+            Boolean indicating if an email notification should be sent.
+        sha256 : str
+            ID of the sample, which is a SHA256 hash value. Find a sample ID
+            from the response when uploading a malware sample or search with `query_sample`.
+            The `url` keyword must be unset if this keyword is used.
+        submit_name : str
+            Name of the malware sample that's used for file type detection and analysis.
+        system_date : str
+            Set a custom date in the format yyyy-MM-dd for the sandbox environment.
+        system_time : str
+            Set a custom time in the format HH:mm for the sandbox environment.
+        url : str
+            A web page or file URL. It can be HTTP(S) or FTP.
+            The `sha256` keyword must be unset if url is used.
+        user_tags : str or list[str]
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/Submit
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = falconx_payload(passed_keywords=kwargs)
@@ -380,23 +455,33 @@ class FalconXSandbox(ServiceClass):
 
         Returns a set of report IDs that match your criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. String.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax. (`asc` or `desc`)
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QueryReports
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The offset to start retrieving records from. String.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax. (`asc` or `desc`)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -412,23 +497,33 @@ class FalconXSandbox(ServiceClass):
 
         Returns a set of submission IDs that match your criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. String.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax. (`asc` or `desc`)
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QuerySubmissions
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The offset to start retrieving records from. String.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax. (`asc` or `desc`)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -449,49 +544,57 @@ class FalconXSandbox(ServiceClass):
 
         After uploading, use `submit` to start analyzing the file.
 
-        Keyword arguments:
-        comment -- A descriptive comment to identify the file for other users. String.
-        file_data -- Content of the uploaded sample in binary format. Max file size is 256 MB.
-                     'sample' and 'upfile' are also accepted as this parameter.
-
-                     Accepted File Formats:
-                     Portable executables: .exe, .scr, .pif, .dll, .com, .cpl, etc.
-                     Office documents: .doc, .docx, .ppt, .pps, .pptx,
-                                       .ppsx, .xls, .xlsx, .rtf, .pub
-                     PDF
-                     APK
-                     Executable JAR
-                     Windows script component: .sct
-                     Windows shortcut: .lnk
-                     Windows help: .chm
-                     HTML application: .hta
-                     Windows script file: .wsf
-                     Javascript: .js
-                     Visual Basic: .vbs, .vbe
-                     Shockwave Flash: .swf
-                     Perl: .pl
-                     Powershell: .ps1, .psd1, .psm1
-                     Scalable vector graphics: .svg
-                     Python: .py
-                     Linux ELF executables
-                     Email files: MIME RFC 822 .eml, Outlook .msg
-        file_name -- Name of the file. String.
-        is_confidential -- Defines the visibility of this file in Falcon MalQuery, either
-                           via the  API or the Falcon console.
-                           True = File is only shown to users within your customer account.
-                           False = File can be seen by other CrowdStrike customers.
-                           Defaults to True.
-        parameters -- full parameters payload, not required if other keywords are provided.
-
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/UploadSampleV2
+
+        Keyword arguments
+        -----------------
+        comment : str
+            A descriptive comment to identify the file for other users.
+        file_data : str
+            Content of the uploaded sample in binary format. Max file size is 256 MB.
+            'sample' and 'upfile' are also accepted as this parameter.
+            Accepted File Formats:
+            Portable executables: .exe, .scr, .pif, .dll, .com, .cpl, etc.
+            Office documents: .doc, .docx, .ppt, .pps, .pptx,
+                              .ppsx, .xls, .xlsx, .rtf, .pub
+            PDF
+            APK
+            Executable JAR
+            Windows script component: .sct
+            Windows shortcut: .lnk
+            Windows help: .chm
+            HTML application: .hta
+            Windows script file: .wsf
+            Javascript: .js
+            Visual Basic: .vbs, .vbe
+            Shockwave Flash: .swf
+            Perl: .pl
+            Powershell: .ps1, .psd1, .psm1
+            Scalable vector graphics: .svg
+            Python: .py
+            Linux ELF executables
+            Email files: MIME RFC 822 .eml, Outlook .msg
+        file_name : str
+            Name of the file.
+        is_confidential : str
+            Defines the visibility of this file in Falcon MalQuery, either
+            via the  API or the Falcon console.
+            True = File is only shown to users within your customer account.
+            False = File can be seen by other CrowdStrike customers.
+            Defaults to True.
+        parameters : dict
+            full parameters payload, not required if other keywords are provided.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         method_args = ["file_name", "sample", "upfile", "file_data", "is_confidential", "comment"]
         kwargs = params_to_keywords(method_args,
@@ -532,21 +635,29 @@ class FalconXSandbox(ServiceClass):
     def get_reports(self: object, *args, parameters: dict = None, **kwargs) -> object:
         """Retrieve a full sandbox report.
 
-        Keyword arguments:
-        ids -- ID(s) of report. Find a report ID from the response when
-               submitting a malware sample or search with `query_reports`.
-               String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetReports
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            ID(s) of report. Find a report ID from the response when
+            submitting a malware sample or search with `query_reports`.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -562,21 +673,29 @@ class FalconXSandbox(ServiceClass):
 
         Operation can be checked for success by polling for the report ID on the get_summary_reports endpoint.
 
-        Keyword arguments:
-        ids -- ID(s) of report to delete. Find a report ID from the response when
-               submitting a malware sample or search with `query_reports`.
-               String.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/DeleteReport
+
+        Keyword arguments
+        -----------------
+        ids : str
+            ID(s) of report to delete. Find a report ID from the response when
+            submitting a malware sample or search with `query_reports`.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -597,24 +716,33 @@ class FalconXSandbox(ServiceClass):
         Use the password_protected boolean to specify if you want your zip to be password
         protected with the value "infected".
 
-        Keyword arguments:
-        ids -- SHA256 of the sample to retrieve. Find a report ID from the response when
-               submitting a malware sample or search with `query_sample`.
-               String.
-        parameters -- Full parameters payload, not required if ids is provided as a keyword.
-        password_protected -- Flag whether the sample should be zipped and password protected
-                              with a value of "infected". Default value is "false".
-        stream -- Enable streaming download of the returned file. Boolean.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetSampleV2
+
+        Keyword arguments
+        -----------------
+        ids : str
+            SHA256 of the sample to retrieve. Find a report ID from the response when
+            submitting a malware sample or search with `query_sample`.
+        parameters : dict
+            Full parameters payload, not required if ids is provided as a keyword.
+        password_protected : bool
+            Flag whether the sample should be zipped and password protected
+            with a value of "infected". Default value is "false".
+        stream : bool
+            Enable streaming download of the returned file.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        binary object on SUCCESS, dict object containing API response on FAILURE.
         """
         return process_service_request(
             calling_object=self,
@@ -629,21 +757,29 @@ class FalconXSandbox(ServiceClass):
     def delete_sample(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Remove a sample, including file, meta and submissions from the collection.
 
-        Keyword arguments:
-        ids -- SHA256 of the file to delete. Find the SHA256 from the response when
-               submitting a malware sample or search with `query_sample`.
-               String.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/DeleteSampleV2
+
+        Keyword arguments
+        -----------------
+        ids : str
+            SHA256 of the file to delete. Find the SHA256 from the response when
+            submitting a malware sample or search with `query_sample`.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -659,24 +795,34 @@ class FalconXSandbox(ServiceClass):
 
         Maximum number of accepted items is 200.
 
-        Keyword arguments:
-        sha256s -- List of SHA256s to confirm existence for. You will be returned a list of
-               existing hashes. String or list of strings.
-        body -- full body payload, not required if sha256 is provided as a keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QuerySampleV1
+
+        Keyword arguments
+        -----------------
+        sha256s : str or list[str]
+            List of SHA256s to confirm existence for. You will be returned a list of
+            existing hashes.
+        body : dict
+            full body payload, not required if sha256 is provided as a keyword.
                 {
                     "sha256s": [
                         "string"
                     ]
                 }
-        Arguments: When not specified, the first argument to this method is assumed to be 'sha256'.
-                   All others are ignored.
 
-        Returns: dict object containing API response.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'sha256'.
+        All others are ignored.
 
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QuerySampleV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="sha256s")

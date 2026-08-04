@@ -63,17 +63,23 @@ class APIClients(ServiceClass):
                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all available scopes for customer.
 
-        Keyword arguments:
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/api-clients/GetAccessibleScopes
+
+        Keyword arguments
+        -----------------
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -90,19 +96,27 @@ class APIClients(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Reset existing API Client(s)'s secret based on API Client ID(s) provided as request parameter(s) 'ids'.
 
-        Keyword arguments:
-        ids -- The API Client ID(s) for which to perform action on API Client(s). List.
-        action_name -- Action to perform as part of API Client update. Only allowed value is 'reset_secret'. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/api-clients/ResetAPIClientSecret
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The API Client ID(s) for which to perform action on API Client(s)
+        action_name : str
+            Action to perform as part of API Client update. Only allowed value is 'reset_secret'
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -120,19 +134,28 @@ class APIClients(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get API Client(s) based on API Client ID(s) provided as request parameter(s) 'ids'.
 
-        Keyword arguments:
-        ids -- The API Client ID(s) for which to obtain API Client definition(s). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/api-clients/GetAPIClients
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The API Client ID(s) for which to obtain API Client definition(s)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -149,8 +172,16 @@ class APIClients(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create new API Client.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/api-clients/CreateAPIClient
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "description": "string",
                     "name": "string",
@@ -158,18 +189,19 @@ class APIClients(ServiceClass):
                         "string"
                     ]
                 }
-        description -- The description value. String.
-        name -- The name value. String.
-        scopes -- The scopes value. List.
+        description : str
+            The description value.
+        name : str
+            The name value.
+        scopes : str or list[str]
+            The scopes value.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/api-clients/CreateAPIClient
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = create_api_client_payload(passed_keywords=kwargs)
@@ -189,19 +221,28 @@ class APIClients(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete existing API Client(s) based on API Client ID(s) provided as request parameter(s) 'ids'.
 
-        Keyword arguments:
-        ids -- The API Client ID(s) for which API Client(s) have to be deleted. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/api-clients/DeleteAPIClients
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The API Client ID(s) for which API Client(s) have to be deleted.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -219,9 +260,18 @@ class APIClients(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update existing API Client based on API Client ID provided as request parameter 'ids'.
 
-        Keyword arguments:
-        ids -- The API Client ID for which to update the API Client definition. String.
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/api-clients/UpdateAPIClient
+
+        Keyword arguments
+        -----------------
+        ids : str
+            The API Client ID for which to update the API Client definition.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "description": "string",
                     "name": "string",
@@ -229,19 +279,21 @@ class APIClients(ServiceClass):
                         "string"
                     ]
                 }
-        description -- The description value. String.
-        name -- The name value. String.
-        scopes -- The scopes value. List.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        description : str
+            The description value.
+        name : str
+            The name value.
+        scopes : str or list[str]
+            The scopes value.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/api-clients/UpdateAPIClient
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = update_api_client_payload(passed_keywords=kwargs)
@@ -262,21 +314,30 @@ class APIClients(ServiceClass):
                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get All API client ID(s) for customer.
 
-        Keyword arguments:
-        offset -- Starting index of overall result set from which to return ids. Integer.
-        limit -- Number of ids to return. Integer.
-        sort -- Possible values for sort by field includes id, name, created_by, updated_by, created_timestamp, last_modified.
-                Ex: 'name|asc', 'name|desc', etc. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/api-clients/GetAllAPIClientIdsForCustomer
+
+        Keyword arguments
+        -----------------
+        offset : int
+            Starting index of overall result set from which to return ids.
+        limit : int
+            Number of ids to return.
+        sort : str
+            Possible values for sort by field includes id, name, created_by, updated_by, created_timestamp, last_modified.
+            Ex: 'name|asc', 'name|desc', etc.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

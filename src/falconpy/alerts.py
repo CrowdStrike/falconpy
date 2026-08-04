@@ -65,8 +65,16 @@ class Alerts(ServiceClass):
         DEPRECATED: Please use the get_aggregate_alerts_v2 method
                     (PostAggregatesAlertsV2 operation) instead.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PostAggregatesAlertsV1
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -101,38 +109,44 @@ class Alerts(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PostAggregatesAlertsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             # Similar to 664: Alerts aggregates expects a list
@@ -153,8 +167,16 @@ class Alerts(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregates for Alerts across all CIDs.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PostAggregatesAlertsV2
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -189,40 +211,48 @@ class Alerts(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        include_hidden -- Allows previously hidden alerts to be retrieved.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        include_hidden : bool
+            Allows previously hidden alerts to be retrieved.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PostAggregatesAlertsV2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             # Similar to 664: Alerts aggregates expects a list
@@ -322,18 +352,32 @@ class Alerts(ServiceClass):
 
         DEPRECATED: Please use the update_alerts_v3 (PatchEntitiesAlertsV3 operation) instead.
 
-        Keyword arguments:
-        action_parameters -- List of dictionaries containing action specific parameter settings.
-        add_tag -- add a tag to 1 or more alert(s). String. Overridden by action_parameters.
-        append_comment -- appends new comment to existing comments. String.
-                          Overridden by action_parameters.
-        assign_to_name -- assign 1 or more alert(s) to a user identified by user name. String.
-                          Overridden by action_parameters.
-        assign_to_user_id -- assign 1 or more alert(s) to a user identified by user id
-                             (eg: user1@example.com). String. Overridden by action_parameters.
-        assign_to_uuid -- assign 1 or more alert(s) to a user identified by UUID. String.
-                          Overridden by action_parameters.
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PatchEntitiesAlertsV2
+
+        Keyword arguments
+        -----------------
+        action_parameters : list
+            List of dictionaries containing action specific parameter settings.
+        add_tag : str
+            add a tag to 1 or more alert(s). String. Overridden by action_parameters.
+        append_comment : str
+            appends new comment to existing comments. String.
+            Overridden by action_parameters.
+        assign_to_name : str
+            assign 1 or more alert(s) to a user identified by user name. String.
+            Overridden by action_parameters.
+        assign_to_user_id : str
+            assign 1 or more alert(s) to a user identified by user id
+            (eg: user1@example.com). String. Overridden by action_parameters.
+        assign_to_uuid : str
+            assign 1 or more alert(s) to a user identified by UUID. String.
+            Overridden by action_parameters.
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "ids": [
                         "string"
@@ -345,29 +389,36 @@ class Alerts(ServiceClass):
                         }
                     ]
                 }
-        ids -- ID(s) of the alert to update. String or list of strings.
-        new_behavior_processed -- adds a newly processed behavior to 1 or more alert(s). String.
-                                  Overridden by action_parameters.
-        remove_tag -- remove a tag from 1 or more alert(s). String.
-                      Overridden by action_parameters.
-        remove_tags_by_prefix -- remove tags with given prefix from 1 or more alert(s). String.
-                                 Overridden by action_parameters.
-        show_in_ui -- shows 1 or more alert(s) on UI if set to true, hides otherwise.
-                      An empty/nil value is also valid. Overridden by action_parameters.
-        unassign -- unassign an previously assigned user from 1 or more alert(s).
-                    The value passed to this action is ignored. Overridden by action_parameters.
-        update_status -- update status for 1 or more alert(s). String.
-                         Overridden by action_parameters.
+        ids : str or list[str]
+            ID(s) of the alert to update.
+        new_behavior_processed : str
+            adds a newly processed behavior to 1 or more alert(s). String.
+            Overridden by action_parameters.
+        remove_tag : str
+            remove a tag from 1 or more alert(s). String.
+            Overridden by action_parameters.
+        remove_tags_by_prefix : str
+            remove tags with given prefix from 1 or more alert(s). String.
+            Overridden by action_parameters.
+        show_in_ui : str
+            shows 1 or more alert(s) on UI if set to true, hides otherwise.
+            An empty/nil value is also valid. Overridden by action_parameters.
+        unassign : str
+            unassign an previously assigned user from 1 or more alert(s).
+            The value passed to this action is ignored. Overridden by action_parameters.
+        update_status : str
+            update status for 1 or more alert(s). String.
+            Overridden by action_parameters.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PatchEntitiesAlertsV2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = update_alerts_payload(
@@ -398,22 +449,36 @@ class Alerts(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform actions on alerts identified by detection ID(s) in request.
 
-        Keyword arguments:
-        action_parameters -- List of dictionaries containing action specific parameter settings.
-        add_tag -- add a tag to 1 or more alert(s). String. Overridden by action_parameters.
-        append_comment -- Appends new comment to existing comments. String.
-                          Comments are displayed with the Alert in Falcon and are usually used to
-                          provide context or notes for other Falcon users. An Alert can have multiple
-                          comments over time.
-                          Overridden by action_parameters.
-        assign_to_name -- assign 1 or more alert(s) to a user identified by user name. String.
-                          Overridden by action_parameters.
-        assign_to_user_id -- assign 1 or more alert(s) to a user identified by user id
-                             (eg: user1@example.com). String. Overridden by action_parameters.
-        assign_to_uuid -- assign 1 or more alert(s) to a user identified by UUID. String.
-                          Example: '00000000-0000-0000-0000-000000000000'
-                          Overridden by action_parameters.
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PatchEntitiesAlertsV3
+
+        Keyword arguments
+        -----------------
+        action_parameters : list
+            List of dictionaries containing action specific parameter settings.
+        add_tag : str
+            add a tag to 1 or more alert(s). String. Overridden by action_parameters.
+        append_comment : str
+            Appends new comment to existing comments. String.
+            Comments are displayed with the Alert in Falcon and are usually used to
+            provide context or notes for other Falcon users. An Alert can have multiple
+            comments over time.
+            Overridden by action_parameters.
+        assign_to_name : str
+            assign 1 or more alert(s) to a user identified by user name. String.
+            Overridden by action_parameters.
+        assign_to_user_id : str
+            assign 1 or more alert(s) to a user identified by user id
+            (eg: user1@example.com). String. Overridden by action_parameters.
+        assign_to_uuid : str
+            assign 1 or more alert(s) to a user identified by UUID. String.
+            Example: '00000000-0000-0000-0000-000000000000'
+            Overridden by action_parameters.
+        body : dict
+            full body payload, not required when using other keywords.
                 {
                     "composite_ids": [
                         "string"
@@ -425,33 +490,42 @@ class Alerts(ServiceClass):
                         }
                     ]
                 }
-        composite_ids -- CompositeID(s) of the alert to update. String or list of strings.
-        include_hidden -- Allows previously hidden alerts to be retrieved.
-        new_behavior_processed -- adds a newly processed behavior to 1 or more alert(s). String.
-                                  Overridden by action_parameters.
-        parameters - full parameters payload, not required if using other keywords.
-        remove_tag -- remove a tag from 1 or more alert(s). String.
-                      Overridden by action_parameters.
-        remove_tags_by_prefix -- remove tags with given prefix from 1 or more alert(s). String.
-                                 Overridden by action_parameters.
-        show_in_ui -- shows 1 or more alert(s) on UI if set to true, hides otherwise.
-                      An empty/nil value is also valid. Overridden by action_parameters.
-        unassign -- unassign an previously assigned user from 1 or more alert(s).
-                    Unassign Alert clears out the assigned user UUID, user ID, and username.
-                    The value passed to this action is ignored. Overridden by action_parameters.
-        update_status -- update status for 1 or more alert(s). String.
-                         Allowed values: (new, in_progress, reopened, closed)
-                         Overridden by action_parameters.
+        composite_ids : str or list[str]
+            CompositeID(s) of the alert to update.
+        include_hidden : bool
+            Allows previously hidden alerts to be retrieved.
+        new_behavior_processed : str
+            adds a newly processed behavior to 1 or more alert(s). String.
+            Overridden by action_parameters.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        remove_tag : str
+            remove a tag from 1 or more alert(s). String.
+            Overridden by action_parameters.
+        remove_tags_by_prefix : str
+            remove tags with given prefix from 1 or more alert(s). String.
+            Overridden by action_parameters.
+        show_in_ui : str
+            shows 1 or more alert(s) on UI if set to true, hides otherwise.
+            An empty/nil value is also valid. Overridden by action_parameters.
+        unassign : str
+            unassign an previously assigned user from 1 or more alert(s).
+            Unassign Alert clears out the assigned user UUID, user ID, and username.
+            The value passed to this action is ignored. Overridden by action_parameters.
+        update_status : str
+            update status for 1 or more alert(s). String.
+            Allowed values: (new, in_progress, reopened, closed)
+            Overridden by action_parameters.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PatchEntitiesAlertsV3
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = update_alerts_payload(
@@ -481,67 +555,77 @@ class Alerts(ServiceClass):
 
         This API is intended for retrieval of large amounts of Alerts(>10k) using a pagination based on a `after` token.
 
-        Keyword arguments:
-        after -- The after token is used for pagination of results. String.
-                 The after token is present when more results are available on the next page.
-                 To retrieve all Alerts:
-                    Use the after token in subsequent requests to fetch the next page.
-                    Continue this process until you reach a page without an after token, indicating the last page.
-                    This value is highly dependant on the sort parameter, so if you plan to change the sort order,
-                    you will have to re-start your search from the first page (without after parameter).
-        body -- Full body payload as a JSON formatted dictionary, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PostCombinedAlertsV1
+
+        Keyword arguments
+        -----------------
+        after : str
+            The after token is used for pagination of results. String.
+            The after token is present when more results are available on the next page.
+            To retrieve all Alerts:
+               Use the after token in subsequent requests to fetch the next page.
+               Continue this process until you reach a page without an after token, indicating the last page.
+               This value is highly dependant on the sort parameter, so if you plan to change the sort order,
+               you will have to re-start your search from the first page (without after parameter).
+        body : dict
+            Full body payload as a JSON formatted dictionary, not required when ids keyword is provided.
                 {
                     "after": "string",
                     "filter": "string",
                     "limit": integer,
                     "sort": "string"
                 }
-        filter -- Filter Alerts using a query in Falcon Query Language (FQL). String.
-                  Filter fields can be any keyword field that is part of #domain.Alert
-                  An asterisk wildcard * includes all results.
-                  Empty value means to not filter on anything.
-                  Most commonly used filter fields that supports exact match:
-                    cid             type
-                    id              pattern_id
-                    aggregate_id    platform
-                    product
-                  Most commonly used filter fields that supports wildcard (*):
-                    assigned_to_name    tactic_id
-                    assigned_to_uuid    technique
-                  Most commonly filter fields that supports range comparisons (>, <, >=, <=):
-                    severity            timestamp
-                    created_timestamp   updated_timestamp
-                  All filter fields and operations support negation (!).
-                  The full list of valid filter options is extensive.
-                  Review it in our documentation inside the Falcon console.
-        limit -- The maximum number of detections to return in this response. Integer.
-                 Default: 100, Max: 1000
-                 Use this parameter together with the after parameter to manage pagination of the results.
-        sort -- Sort parameter takes the form of <field|direction>. String.
-                The sorting fields can be any keyword field that is part of #domain.Alert except for the text based fields.
-                Most commonly used fields for sorting are:
-                    timestamp               assigned_to_uuid
-                    created_timestamp       tactic_id
-                    updated_timestamp       tactic
-                    status                  technique
-                    aggregate_id            technique_id
-                    assigned_to_name        pattern_id
-                    assigned_to_uid         product
-                By default all the results are sorted by the created_timestamp field in descending order.
-                Important:
-                    The pagination is done on live data in the order defined by the sort field parameter,
-                    so if you want to avoid inconsistent results where the same record might appear on multiple
-                    pages (or none), sort only on the fields that do not change over time.
-                    (Examples: created_timestamp, composite_id, etc.)
+        filter : str
+            Filter Alerts using a query in Falcon Query Language (FQL). String.
+            Filter fields can be any keyword field that is part of #domain.Alert
+            An asterisk wildcard * includes all results.
+            Empty value means to not filter on anything.
+            Most commonly used filter fields that supports exact match:
+              cid             type
+              id              pattern_id
+              aggregate_id    platform
+              product
+            Most commonly used filter fields that supports wildcard (*):
+              assigned_to_name    tactic_id
+              assigned_to_uuid    technique
+            Most commonly filter fields that supports range comparisons (>, <, >=, <=):
+              severity            timestamp
+              created_timestamp   updated_timestamp
+            All filter fields and operations support negation (!).
+            The full list of valid filter options is extensive.
+            Review it in our documentation inside the Falcon console.
+        limit : int
+            The maximum number of detections to return in this response. Integer.
+            Default: 100, Max: 1000
+            Use this parameter together with the after parameter to manage pagination of the results.
+        sort : str
+            Sort parameter takes the form of <field|direction>. String.
+            The sorting fields can be any keyword field that is part of #domain.Alert except for the text based fields.
+            Most commonly used fields for sorting are:
+                timestamp               assigned_to_uuid
+                created_timestamp       tactic_id
+                updated_timestamp       tactic
+                status                  technique
+                aggregate_id            technique_id
+                assigned_to_name        pattern_id
+                assigned_to_uid         product
+            By default all the results are sorted by the created_timestamp field in descending order.
+            Important:
+                The pagination is done on live data in the order defined by the sort field parameter,
+                so if you want to avoid inconsistent results where the same record might appear on multiple
+                pages (or none), sort only on the fields that do not change over time.
+                (Examples: created_timestamp, composite_id, etc.)
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PostCombinedAlertsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = combined_alerts_payload(kwargs)
@@ -559,24 +643,33 @@ class Alerts(ServiceClass):
 
         DEPRECATED: Please use the get_alerts_v2 method (PostEntitiesAlertsV1 operation) instead.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PostEntitiesAlertsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- ID(s) of the detections to retrieve. String or list of strings.
+        ids : str or list[str]
+            ID(s) of the detections to retrieve.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PostEntitiesAlertsV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_arguments=args,
@@ -602,26 +695,37 @@ class Alerts(ServiceClass):
                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve all Alerts given their IDs.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PostEntitiesAlertsV2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "composite_ids": [
                         "string"
                     ]
                 }
-        composite_ids -- ID(s) of the detections to retrieve. String or list of strings.
-        include_hidden -- Allows previously hidden alerts to be retrieved.
-        parameters - full parameters payload, not required if using other keywords.
+        composite_ids : str or list[str]
+            ID(s) of the detections to retrieve.
+        include_hidden : bool
+            Allows previously hidden alerts to be retrieved.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'composite_ids'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'composite_ids'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PostEntitiesAlertsV2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_arguments=args,
@@ -646,29 +750,38 @@ class Alerts(ServiceClass):
 
         DEPRECATED: Please use the query_alerts_v2 method (GetQueriesAlertsV2 operation) intead.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-
-        For more detail regarding filtering options, please review:
-        https://falcon.crowdstrike.com/documentation/86/detections-monitoring-apis#find-detections
-
-        limit -- The maximum number of detections to return in this response.
-                 [Integer, default: 10000; max: 10000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The first detection to return, where 0 is the latest detection.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Search all detection metadata for the provided string.
-        sort -- The property to sort by. FQL syntax (e.g. status|asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/GetQueriesAlertsV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            For more detail regarding filtering options, please review:
+            https://falcon.crowdstrike.com/documentation/86/detections-monitoring-apis#find-detections
+        limit : int
+            The maximum number of detections to return in this response.
+            [Integer, default: 10000; max: 10000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The first detection to return, where 0 is the latest detection.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Search all detection metadata for the provided.
+        sort : str
+            The property to sort by. FQL syntax (e.g. status|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -682,30 +795,40 @@ class Alerts(ServiceClass):
     def query_alerts_v2(self, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for detection IDs that match a given query.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-
-        For more detail regarding filtering options, please review:
-        https://falcon.crowdstrike.com/documentation/86/detections-monitoring-apis#find-detections
-
-        include_hidden -- Allows previously hidden alerts to be retrieved.
-        limit -- The maximum number of detections to return in this response.
-                 [Integer, default: 10000; max: 10000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The first detection to return, where 0 is the latest detection.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        q -- Search all detection metadata for the provided string.
-        sort -- The property to sort by. FQL syntax (e.g. status|asc).
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/GetQueriesAlertsV2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            For more detail regarding filtering options, please review:
+            https://falcon.crowdstrike.com/documentation/86/detections-monitoring-apis#find-detections
+        include_hidden : bool
+            Allows previously hidden alerts to be retrieved.
+        limit : int
+            The maximum number of detections to return in this response.
+            [Integer, default: 10000; max: 10000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The first detection to return, where 0 is the latest detection.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Search all detection metadata for the provided.
+        sort : str
+            The property to sort by. FQL syntax (e.g. status|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

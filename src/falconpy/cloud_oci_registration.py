@@ -60,32 +60,43 @@ class CloudOCIRegistration(ServiceClass):
     def get_account(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a list of OCI tenancies with support for FQL filtering, sorting, and pagination.
 
-        Keyword arguments:
-        filter -- FQL (Falcon Query Language) string for filtering results. String.
-                  Allowed filters:
-                    tenancy_name      created_at
-                    home_region       updated_at
-                    key_age           tenancy_ocid
-                    overall_status
-        sort -- Field and direction for sorting results. String.
-                Allowed sort fields:
-                    tenancy_name        created_at
-                    home_region         updated_at
-                    key_age             tenancy_ocid
-                    overall_status
-        next_token -- Token for cursor-based pagination. String. Currently unsupported.
-        limit -- Maximum number of records to return. Integer. (default: 100, max: 10000)
-        offset -- Starting index of result. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-get-account
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL (Falcon Query Language) string for filtering results. String.
+            Allowed filters:
+              tenancy_name      created_at
+              home_region       updated_at
+              key_age           tenancy_ocid
+              overall_status
+        sort : str
+            Field and direction for sorting results. String.
+            Allowed sort fields:
+                tenancy_name        created_at
+                home_region         updated_at
+                key_age             tenancy_ocid
+                overall_status
+        next_token : str
+            Token for cursor-based pagination. String. Currently unsupported.
+        limit : int
+            Maximum number of records to return. Integer. (default: 100, max: 10000)
+        offset : int
+            Starting index of result.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -99,8 +110,16 @@ class CloudOCIRegistration(ServiceClass):
     def rotate_key(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Refresh key for the OCI tenancy.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-rotate-key
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -108,16 +127,15 @@ class CloudOCIRegistration(ServiceClass):
                         }
                     ]
                 }
-        tenancy_ocid -- OCI tenancy ID. String.
+        tenancy_ocid : str
+            OCI tenancy ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-rotate-key
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_oci_refresh_payload(kwargs)
@@ -133,8 +151,16 @@ class CloudOCIRegistration(ServiceClass):
     def validate_tenancy(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Validate the OCI account in CSPM for a provided CID.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-validate-tenancy
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -150,17 +176,17 @@ class CloudOCIRegistration(ServiceClass):
                         }
                     ]
                 }
-        products -- OCI products to validate. List of dictionaries.
-        tenancy_ocid -- OCI tenancy ID. String.
+        products : list[dict]
+            OCI products to validate.
+        tenancy_ocid : str
+            OCI tenancy ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-validate-tenancy
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_oci_validate_payload(kwargs)
@@ -176,8 +202,16 @@ class CloudOCIRegistration(ServiceClass):
     def create_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create an OCI tenancy account.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-create-account
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -204,22 +238,27 @@ class CloudOCIRegistration(ServiceClass):
                         }
                     ]
                 }
-        group_name -- OCI group name. String.
-        home_region -- OCI home region. String.
-        policy_name -- Policy name. String.
-        products -- OCI products. List of dictionaries.
-        tenancy_ocid -- OCI tenancy ID. String.
-        user_email -- User email address. String.
-        user_name -- OCI user name. String.
+        group_name : str
+            OCI group name.
+        home_region : str
+            OCI home region.
+        policy_name : str
+            Policy name.
+        products : list[dict]
+            OCI products.
+        tenancy_ocid : str
+            OCI tenancy ID.
+        user_email : str
+            User email address.
+        user_name : str
+            OCI user name.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-create-account
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_oci_create_payload(kwargs)
@@ -235,8 +274,16 @@ class CloudOCIRegistration(ServiceClass):
     def update_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an existing OCI account.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-update-account
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -265,24 +312,31 @@ class CloudOCIRegistration(ServiceClass):
                         }
                     ]
                 }
-        group_name -- OCI group name. String.
-        home_region -- OCI home region. String.
-        policy_name -- Policy name. String.
-        products -- OCI products. List of dictionaries.
-        stack_ocid -- OCI stack ID. String.
-        tenancy_ocid -- OCI tenancy ID. String.
-        user_email -- User email address. String.
-        user_name -- OCI user name. String.
-        user_ocid -- OCI user ID. String.
+        group_name : str
+            OCI group name.
+        home_region : str
+            OCI home region.
+        policy_name : str
+            Policy name.
+        products : list[dict]
+            OCI products.
+        stack_ocid : str
+            OCI stack ID.
+        tenancy_ocid : str
+            OCI tenancy ID.
+        user_email : str
+            User email address.
+        user_name : str
+            OCI user name.
+        user_ocid : str
+            OCI user ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-update-account
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_oci_create_payload(kwargs)
@@ -302,19 +356,28 @@ class CloudOCIRegistration(ServiceClass):
                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an existing OCI tenancy.
 
-        Keyword arguments:
-        ids -- OCI tenancy OCIDs to remove.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-delete-account
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            OCI tenancy OCIDs to remove.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -328,8 +391,16 @@ class CloudOCIRegistration(ServiceClass):
     def download_script(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve script to create resources in tenancy OCID.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-download-script
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "resources": [
                         {
@@ -339,18 +410,19 @@ class CloudOCIRegistration(ServiceClass):
                         }
                     ]
                 }
-        deployment_method -- Deployment method. String.
-        is_download -- Flag indicating if the script is intended for download. Boolean.
-        tenancy_ocid -- OCI tenancy ID. String.
+        deployment_method : str
+            Deployment method.
+        is_download : bool
+            Flag indicating if the script is intended for download.
+        tenancy_ocid : str
+            OCI tenancy ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-download-script
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = cloud_oci_refresh_payload(kwargs)

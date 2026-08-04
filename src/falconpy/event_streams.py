@@ -66,22 +66,32 @@ class EventStreams(ServiceClass):
 
         Use the URL shown in a listAvailableStreamsOAuth2 response.
 
-        Keyword arguments:
-        action_name -- Action to perform. Only allowed value is "refresh_active_stream_session".
-        app_id -- Label that identifies your connection. Will also accept `appId`.
-                  32 character alphanumeric.
-        body -- accepted but not used.
-        parameters -- full parameters payload, not required if using other keywords.
-        partition -- Instance partition to request data for.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams/refreshActiveStreamSession
+
+        Keyword arguments
+        -----------------
+        action_name : str
+            Action to perform. Only allowed value is "refresh_active_stream_session".
+        app_id : str
+            Label that identifies your connection. Will also accept `appId`.
+            32 character alphanumeric.
+        body : dict
+            accepted but not used.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        partition : int
+            Instance partition to request data for.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not kwargs.get("action_name", None):
             parameters["action_name"] = "refresh_active_stream_session"
@@ -102,20 +112,28 @@ class EventStreams(ServiceClass):
     def list_available_streams(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Discover all event streams in your environment.
 
-        Keyword arguments:
-        app_id -- Label that identifies your connection. Will also accept `appId`.
-                  32 character alphanumeric.
-        format -- format for streaming events. Either 'json' or 'flatjson'.
-        parameters -- full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams/listAvailableStreamsOAuth2
+
+        Keyword arguments
+        -----------------
+        app_id : str
+            Label that identifies your connection. Will also accept `appId`.
+            32 character alphanumeric.
+        format : str
+            format for streaming events. Either 'json' or 'flatjson'.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if kwargs.get("app_id", None):
             parameters["appId"] = kwargs.get("app_id", None)

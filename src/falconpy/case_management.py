@@ -78,20 +78,29 @@ class CaseManagement(ServiceClass):
                                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get file details aggregates as specified via json in the request body.
 
-        Keyword arguments:
-        ids -- Resource IDs. String or a list of strings.
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        filter -- FQL filter expression. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/aggregates.file-details.post.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Resource IDs. String or a.
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
+        filter : str
+            FQL filter expression.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -106,20 +115,29 @@ class CaseManagement(ServiceClass):
     def query_file_details(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query file details.
 
-        Keyword arguments:
-        filter -- FQL filter expression. String.
-        limit -- Page size. Integer.
-        offset -- Page offset. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/combined.file-details.get.v1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression.
+        limit : int
+            Page size.
+        offset : int
+            Page offset.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -133,19 +151,28 @@ class CaseManagement(ServiceClass):
     def get_file_details(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get file details by id.
 
-        Keyword arguments:
-        ids -- Resource IDs. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.file-details.get.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Resource IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -159,23 +186,31 @@ class CaseManagement(ServiceClass):
     def update_file_details(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update file details.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.file-details.patch.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "description": "string",
                     "id": "string"
                 }
-        description -- File details update desecription. String.
-        id -- File details ID. String.
+        description : str
+            File details update desecription.
+        id : str
+            File details ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.file-details.patch.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             keys = ["description", "id"]
@@ -194,23 +229,30 @@ class CaseManagement(ServiceClass):
     def bulk_download_files(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download multiple existing file from case as a ZIP.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.files_bulk-download.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- List of files to download. List of strings.
+        ids : str or list[str]
+            List of files to download.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.files_bulk-download.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_file_ids_payload(passed_keywords=kwargs)
@@ -230,19 +272,28 @@ class CaseManagement(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download existing file from case.
 
-        Keyword arguments:
-        id -- Resource ID. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.files_download.get.v1
+
+        Keyword arguments
+        -----------------
+        id : str
+            Resource ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -256,20 +307,29 @@ class CaseManagement(ServiceClass):
     def upload_file(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload file for case.
 
-        Keyword arguments:
-        file -- Local file to Upload. String.
-        description -- Description of the file. String.
-        case_id -- Case ID for the file. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.files_upload.post.v1
+
+        Keyword arguments
+        -----------------
+        file : str
+            Local file to Upload.
+        description : str
+            Description of the file.
+        case_id : str
+            Case ID for the file.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         file = kwargs.get("file", None)
         if file:
@@ -307,19 +367,28 @@ class CaseManagement(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete file details by id.
 
-        Keyword arguments:
-        ids -- Resource IDs. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.files.delete.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Resource IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -333,20 +402,29 @@ class CaseManagement(ServiceClass):
     def query_file_detail_ids(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for ids of file details.
 
-        Keyword arguments:
-        filter -- FQL filter expression. String.
-        limit -- Page size. Integer.
-        offset -- Page offset. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/queries.file-details.get.v1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression.
+        limit : int
+            Page size.
+        offset : int
+            Page offset.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -360,23 +438,31 @@ class CaseManagement(ServiceClass):
     def get_rtr_file_metadata(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get metadata for a file via RTR without retrieving it.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.get-rtr-file-metadata.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "aid": "string",
                     "file_path": "string"
                 }
-        aid -- The agent ID of the host to retrieve file metadata from. String.
-        file_path -- The path to the file on the host. String.
+        aid : str
+            The agent ID of the host to retrieve file metadata from.
+        file_path : str
+            The path to the file on the host.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.get-rtr-file-metadata.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_rtr_file_metadata_payload(passed_keywords=kwargs)
@@ -392,27 +478,37 @@ class CaseManagement(ServiceClass):
     def retrieve_rtr_file(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a file from host using RTR and add it to a case.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.retrieve-rtr-file.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "aid": "string",
                     "case_id": "string",
                     "description": "string",
                     "file_path": "string"
                 }
-        aid -- The agent ID of the host to retrieve the file from. String.
-        case_id -- The ID of the case to add the file to. String.
-        description -- A description of the file being retrieved. String.
-        file_path -- The path to the file on the host. String.
+        aid : str
+            The agent ID of the host to retrieve the file from.
+        case_id : str
+            The ID of the case to add the file to.
+        description : str
+            A description of the file being retrieved.
+        file_path : str
+            The path to the file on the host.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.retrieve-rtr-file.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_rtr_file_payload(passed_keywords=kwargs)
@@ -428,8 +524,16 @@ class CaseManagement(ServiceClass):
     def retrieve_rtr_recent_file(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a recently fetched RTR file and add it to a case.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.retrieve-rtr-recent-file.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "aid": "string",
                     "case_id": "string",
@@ -437,20 +541,23 @@ class CaseManagement(ServiceClass):
                     "session_id": "string",
                     "sha256": "string"
                 }
-        aid -- The agent ID of the host. String.
-        case_id -- The ID of the case to add the file to. String.
-        description -- A description of the file being retrieved. String.
-        session_id -- The RTR session ID for the file retrieval. String.
-        sha256 -- The SHA256 hash of the file to retrieve. String.
+        aid : str
+            The agent ID of the host.
+        case_id : str
+            The ID of the case to add the file to.
+        description : str
+            A description of the file being retrieved.
+        session_id : str
+            The RTR session ID for the file retrieval.
+        sha256 : str
+            The SHA256 hash of the file to retrieve.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.retrieve-rtr-recent-file.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_rtr_recent_file_payload(passed_keywords=kwargs)
@@ -469,8 +576,16 @@ class CaseManagement(ServiceClass):
                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get notification groups aggregations.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/aggregates.notification-groups.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -488,23 +603,29 @@ class CaseManagement(ServiceClass):
                         "type": "terms"
                     }
                 ]
-        date_ranges -- Date range timeframe. List of dictionaries.
-        field -- Field to aggregate on. String.
-        filter -- Filter criteria in the form of an FQL query. String.
-        from -- Starting index of overall result set. Integer.
-        name -- Name of the aggregation. String.
-        size -- Maximum number of records to return. Integer.
-        sort -- The field to sort on. String.
-        type -- Type of aggregation to perform. String.
+        date_ranges : list[dict]
+            Date range timeframe.
+        field : str
+            Field to aggregate on.
+        filter : str
+            Filter criteria in the form of an FQL query.
+        from : int
+            Starting index of overall result set.
+        name : str
+            Name of the aggregation.
+        size : int
+            Maximum number of records to return.
+        sort : str
+            The field to sort on.
+        type : str
+            Type of aggregation to perform.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/aggregates.notification-groups.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_notification_groups_payload(passed_keywords=kwargs)
@@ -523,8 +644,16 @@ class CaseManagement(ServiceClass):
                                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get notification groups aggregations.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/aggregates.notification-groups.post.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -542,23 +671,29 @@ class CaseManagement(ServiceClass):
                         "type": "terms"
                     }
                 ]
-        date_ranges -- Date range timeframe. List of dictionaries.
-        field -- Field to aggregate on. String.
-        filter -- Filter criteria in the form of an FQL query. String.
-        from -- Starting index of overall result set. Integer.
-        name -- Name of the aggregation. String.
-        size -- Maximum number of records to return. Integer.
-        sort -- The field to sort on. String.
-        type -- Type of aggregation to perform. String.
+        date_ranges : list[dict]
+            Date range timeframe.
+        field : str
+            Field to aggregate on.
+        filter : str
+            Filter criteria in the form of an FQL query.
+        from : int
+            Starting index of overall result set.
+        name : str
+            Name of the aggregation.
+        size : int
+            Maximum number of records to return.
+        sort : str
+            The field to sort on.
+        type : str
+            Type of aggregation to perform.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/aggregates.notification-groups.post.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_notification_groups_payload(passed_keywords=kwargs)
@@ -574,8 +709,16 @@ class CaseManagement(ServiceClass):
     def get_sla_aggregations(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get SLA aggregations.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/aggregates.slas.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -593,23 +736,29 @@ class CaseManagement(ServiceClass):
                         "type": "terms"
                     }
                 ]
-        date_ranges -- Date range timeframe. List of dictionaries.
-        field -- Field to aggregate on. String.
-        filter -- Filter criteria in the form of an FQL query. String.
-        from -- Starting index of overall result set. Integer.
-        name -- Name of the aggregation. String.
-        size -- Maximum number of records to return. Integer.
-        sort -- The field to sort on. String.
-        type -- Type of aggregation to perform. String.
+        date_ranges : list[dict]
+            Date range timeframe.
+        field : str
+            Field to aggregate on.
+        filter : str
+            Filter criteria in the form of an FQL query.
+        from : int
+            Starting index of overall result set.
+        name : str
+            Name of the aggregation.
+        size : int
+            Maximum number of records to return.
+        sort : str
+            The field to sort on.
+        type : str
+            Type of aggregation to perform.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/aggregates.slas.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_notification_groups_payload(passed_keywords=kwargs)
@@ -625,8 +774,16 @@ class CaseManagement(ServiceClass):
     def get_template_aggregations(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get templates aggregations.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/aggregates.templates.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -644,23 +801,29 @@ class CaseManagement(ServiceClass):
                         "type": "terms"
                     }
                 ]
-        date_ranges -- Date range timeframe. List of dictionaries.
-        field -- Field to aggregate on. String.
-        filter -- Filter criteria in the form of an FQL query. String.
-        from -- Starting index of overall result set. Integer.
-        name -- Name of the aggregation. String.
-        size -- Maximum number of records to return. Integer.
-        sort -- The field to sort on. String.
-        type -- Type of aggregation to perform. String.
+        date_ranges : list[dict]
+            Date range timeframe.
+        field : str
+            Field to aggregate on.
+        filter : str
+            Filter criteria in the form of an FQL query.
+        from : int
+            Starting index of overall result set.
+        name : str
+            Name of the aggregation.
+        size : int
+            Maximum number of records to return.
+        sort : str
+            The field to sort on.
+        type : str
+            Type of aggregation to perform.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/aggregates.templates.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_notification_groups_payload(passed_keywords=kwargs)
@@ -676,8 +839,16 @@ class CaseManagement(ServiceClass):
     def get_access_tag_aggregations(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get access tag aggregates.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/aggregates.access-tags.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -695,23 +866,29 @@ class CaseManagement(ServiceClass):
                         "type": "terms"
                     }
                 ]
-        date_ranges -- Date range timeframe. List of dictionaries.
-        field -- Field to aggregate on. String.
-        filter -- Filter criteria in the form of an FQL query. String.
-        from -- Starting index of overall result set. Integer.
-        name -- Name of the aggregation. String.
-        size -- Maximum number of records to return. Integer.
-        sort -- The field to sort on. String.
-        type -- Type of aggregation to perform. String.
+        date_ranges : list[dict]
+            Date range timeframe.
+        field : str
+            Field to aggregate on.
+        filter : str
+            Filter criteria in the form of an FQL query.
+        from : int
+            Starting index of overall result set.
+        name : str
+            Name of the aggregation.
+        size : int
+            Maximum number of records to return.
+        sort : str
+            The field to sort on.
+        type : str
+            Type of aggregation to perform.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/aggregates.access-tags.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_notification_groups_payload(passed_keywords=kwargs)
@@ -731,20 +908,30 @@ class CaseManagement(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get access tags.
 
-        Keyword arguments:
-        ids -- Resource IDs. String or list of strings.
-        with_has_access -- Evaluate FGAC and return has_access property. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.access-tags.get.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Resource IDs.
+        with_has_access : bool
+            Evaluate FGAC and return has_access property.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -758,19 +945,28 @@ class CaseManagement(ServiceClass):
     def get_fields(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get fields by ID.
 
-        Keyword arguments:
-        ids -- Resource IDs. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.fields.get.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Resource IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -788,19 +984,28 @@ class CaseManagement(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get notification groups by ID.
 
-        Keyword arguments:
-        ids -- Resource IDs. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.notification-groups.get.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Resource IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -814,8 +1019,16 @@ class CaseManagement(ServiceClass):
     def create_notification_group(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create notification group.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.notification-groups.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "channels": [
                         {
@@ -831,18 +1044,19 @@ class CaseManagement(ServiceClass):
                     "description": "string",
                     "name": "string"
                 }
-        channels -- The notification group channel configuration parameters. List of dictionaries.
-        description -- Notification group description. String.
-        name -- Notification group name. String.
+        channels : list[dict]
+            The notification group channel configuration parameters.
+        description : str
+            Notification group description.
+        name : str
+            Notification group name.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.notification-groups.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_create_notification_payload(passed_keywords=kwargs)
@@ -858,37 +1072,47 @@ class CaseManagement(ServiceClass):
     def update_notification_group(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update notification group.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "channels": [
-                {
-                "config_id": "string",
-                "config_name": "string",
-                "recipients": [
-                    "string"
-                ],
-                "severity": "string",
-                "type": "email"
-                }
-            ],
-            "description": "string",
-            "id": "string",
-            "name": "string"
-        }
-        channels -- The notification group channel configuration parameters. List of dictionaries.
-        description -- Notification group description. String.
-        id -- The ID of the notification group. String.
-        name -- Notification group name. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.notification-groups.patch.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "channels": [
+                        {
+                        "config_id": "string",
+                        "config_name": "string",
+                        "recipients": [
+                            "string"
+                        ],
+                        "severity": "string",
+                        "type": "email"
+                        }
+                    ],
+                    "description": "string",
+                    "id": "string",
+                    "name": "string"
+                }
+        channels : list[dict]
+            The notification group channel configuration parameters.
+        description : str
+            Notification group description.
+        id : str
+            The ID of the notification group.
+        name : str
+            Notification group name.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_create_notification_payload(passed_keywords=kwargs)
@@ -907,18 +1131,25 @@ class CaseManagement(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete notification groups by ID.
 
-        Keyword arguments:
-        ids -- Resource IDs.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.notification-groups.delete.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Resource IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -936,19 +1167,28 @@ class CaseManagement(ServiceClass):
                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get notification groups by ID.
 
-        Keyword arguments:
-        ids -- Resource IDs. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.notification-groups.get.v2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Resource IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -962,32 +1202,41 @@ class CaseManagement(ServiceClass):
     def create_notification_group_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create notification group.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "channels": [
-                {
-                "config_id": "string",
-                "config_name": "string",
-                "params": {},
-                "type": "email"
-                }
-            ],
-            "description": "string",
-            "name": "string"
-        }
-        channels -- The notification group channel configuration parameters. List of dictionaries.
-        description -- Notification group description. String.
-        name -- Notification group name. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.notification-groups.post.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "channels": [
+                        {
+                        "config_id": "string",
+                        "config_name": "string",
+                        "params": {},
+                        "type": "email"
+                        }
+                    ],
+                    "description": "string",
+                    "name": "string"
+                }
+        channels : list[dict]
+            The notification group channel configuration parameters.
+        description : str
+            Notification group description.
+        name : str
+            Notification group name.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_create_notification_payload(passed_keywords=kwargs)
@@ -1003,33 +1252,44 @@ class CaseManagement(ServiceClass):
     def update_notification_group_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update notification group.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "channels": [
-                {
-                "config_id": "string",
-                "config_name": "string",
-                "params": {},
-                "type": "email"
-                }
-            ],
-            "description": "string",
-            "id": "string",
-            "name": "string"
-        }
-        This method only supports keywords for providing arguments.
-        channels -- The notification group channel configuration parameters. List of dictionaries.
-        description -- Notification group description. String.
-        id -- The ID of the notification group. String.
-        name -- Notification group name. String.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.notification-groups.patch.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "channels": [
+                        {
+                        "config_id": "string",
+                        "config_name": "string",
+                        "params": {},
+                        "type": "email"
+                        }
+                    ],
+                    "description": "string",
+                    "id": "string",
+                    "name": "string"
+                }
+        channels : list[dict]
+            The notification group channel configuration parameters.
+        description : str
+            Notification group description.
+        id : str
+            The ID of the notification group.
+        name : str
+            Notification group name.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_create_notification_payload(passed_keywords=kwargs)
@@ -1049,19 +1309,28 @@ class CaseManagement(ServiceClass):
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete notification groups by ID.
 
-        Keyword arguments:
-        ids -- Resource IDs. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.notification-groups.delete.v2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Resource IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1075,19 +1344,28 @@ class CaseManagement(ServiceClass):
     def get_slas(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get SLAs by ID.
 
-        Keyword arguments:
-        ids -- Resource IDs. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.slas.get.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Resource IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1101,38 +1379,47 @@ class CaseManagement(ServiceClass):
     def create_sla(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create SLA.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "description": "string",
-            "goals": [
-                {
-                "duration_seconds": 0,
-                "escalation_policy": {
-                    "steps": [
-                    {
-                        "escalate_after_seconds": 0,
-                        "notification_group_id": "string"
-                    }
-                    ]
-                },
-                "type": "string"
-                }
-            ],
-            "name": "string"
-        }
-        description -- The description of the SLA. String.
-        goals -- The SLA goals. List of dictionaries.
-        name -- The name of the SLA. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.slas.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "description": "string",
+                    "goals": [
+                        {
+                        "duration_seconds": 0,
+                        "escalation_policy": {
+                            "steps": [
+                            {
+                                "escalate_after_seconds": 0,
+                                "notification_group_id": "string"
+                            }
+                            ]
+                        },
+                        "type": "string"
+                        }
+                    ],
+                    "name": "string"
+                }
+        description : str
+            The description of the SLA.
+        goals : list[dict]
+            The SLA goals.
+        name : str
+            The name of the SLA.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_sla_payload(passed_keywords=kwargs)
@@ -1148,38 +1435,47 @@ class CaseManagement(ServiceClass):
     def update_sla(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update SLA.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "description": "string",
-            "goals": [
-                {
-                "duration_seconds": 0,
-                "escalation_policy": {
-                    "steps": [
-                    {
-                        "escalate_after_seconds": 0,
-                        "notification_group_id": "string"
-                    }
-                    ]
-                },
-                "type": "string"
-                }
-            ],
-            "name": "string"
-        }
-        description -- The description of the SLA. String.
-        goals -- The SLA goals. List of dictionaries.
-        name -- The name of the SLA. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.slas.patch.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "description": "string",
+                    "goals": [
+                        {
+                        "duration_seconds": 0,
+                        "escalation_policy": {
+                            "steps": [
+                            {
+                                "escalate_after_seconds": 0,
+                                "notification_group_id": "string"
+                            }
+                            ]
+                        },
+                        "type": "string"
+                        }
+                    ],
+                    "name": "string"
+                }
+        description : str
+            The description of the SLA.
+        goals : list[dict]
+            The SLA goals.
+        name : str
+            The name of the SLA.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_sla_payload(passed_keywords=kwargs)
@@ -1195,19 +1491,28 @@ class CaseManagement(ServiceClass):
     def delete_sla(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete SLAs.
 
-        Keyword arguments:
-        ids -- Resource IDs. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.slas.delete.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Resource IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1221,21 +1526,30 @@ class CaseManagement(ServiceClass):
     def get_template_snapshots(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get template snapshots.
 
-        Keyword arguments:
-        ids -- Snapshot IDs. String or list of strings.
-        template_ids -- Retrieves the latest snapshot for all Template IDs. String or list of strings.
-        versions -- Retrieve a specific version of the template from the parallel array `template_ids`.
-        A value of zero will return the latest snapshot. Integer or list of Integers.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.template-snapshots.get.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Snapshot IDs.
+        template_ids : str or list[str]
+            Retrieves the latest snapshot for all Template IDs.
+        versions : str or list[str]
+            Retrieve a specific version of the template from the parallel array `template_ids`.
+            A value of zero will return the latest snapshot.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1249,20 +1563,29 @@ class CaseManagement(ServiceClass):
     def export_templates(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Export templates to files in a zip archive.
 
-        Keyword arguments:
-        ids -- Template IDs. String or list of strings.
-        filter -- FQL filter expression. String.
-        format -- Export file format. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.templates_export.get.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Template IDs.
+        filter : str
+            FQL filter expression.
+        format : str
+            Export file format.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1276,19 +1599,27 @@ class CaseManagement(ServiceClass):
     def import_template(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Import a template from a file.
 
-        Keyword arguments:
-        file -- Local file. formData.
-        dry_run -- Run validation only. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.templates_import.post.v1
+
+        Keyword arguments
+        -----------------
+        file : bytes
+            Local file.
+        dry_run : bool
+            Run validation only.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         file = kwargs.get("file", None)
         if file:
@@ -1317,20 +1648,30 @@ class CaseManagement(ServiceClass):
     def get_templates(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get templates by ID.
 
-        Keyword arguments:
-        ids -- Resource IDs. String or list of strings.
-        with_has_access -- Evaluate FGAC and return has_access property. Boolean.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.templates.get.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Resource IDs.
+        with_has_access : bool
+            Evaluate FGAC and return has_access property.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1344,41 +1685,51 @@ class CaseManagement(ServiceClass):
     def create_template(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create template.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "description": "string",
-            "fields": [
-                {
-                "data_type": "string",
-                "default_value": "string",
-                "input_type": "string",
-                "multivalued": true,
-                "name": "string",
-                "options": [
-                    {
-                    "value": "string"
-                    }
-                ],
-                "required": true
-                }
-            ],
-            "name": "string",
-            "sla_id": "string"
-        }
-        description -- The description of the template. String.
-        fields -- The fields required to create a template. List of dictionaries.
-        name -- The name of the template. String.
-        sla_id -- The ID of the SLA. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.templates.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "description": "string",
+                    "fields": [
+                        {
+                        "data_type": "string",
+                        "default_value": "string",
+                        "input_type": "string",
+                        "multivalued": true,
+                        "name": "string",
+                        "options": [
+                            {
+                            "value": "string"
+                            }
+                        ],
+                        "required": true
+                        }
+                    ],
+                    "name": "string",
+                    "sla_id": "string"
+                }
+        description : str
+            The description of the template.
+        fields : list[dict]
+            The fields required to create a template.
+        name : str
+            The name of the template.
+        sla_id : str
+            The ID of the SLA.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_template_payload(passed_keywords=kwargs)
@@ -1394,45 +1745,56 @@ class CaseManagement(ServiceClass):
     def update_template(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update template.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "description": "string",
-            "fields": [
-                {
-                "data_type": "string",
-                "default_value": "string",
-                "id": "string",
-                "input_type": "string",
-                "multivalued": true,
-                "name": "string",
-                "options": [
-                    {
-                    "id": "string",
-                    "value": "string"
-                    }
-                ],
-                "required": true
-                }
-            ],
-            "id": "string",
-            "name": "string",
-            "sla_id": "string"
-        }
-        description -- The description of the template. String.
-        fields -- The fields required to create a template. List of dictionaries.
-        id -- The ID of the template to update. String.
-        name -- The name of the template. String.
-        sla_id -- The ID of the SLA. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.templates.patch.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "description": "string",
+                    "fields": [
+                        {
+                        "data_type": "string",
+                        "default_value": "string",
+                        "id": "string",
+                        "input_type": "string",
+                        "multivalued": true,
+                        "name": "string",
+                        "options": [
+                            {
+                            "id": "string",
+                            "value": "string"
+                            }
+                        ],
+                        "required": true
+                        }
+                    ],
+                    "id": "string",
+                    "name": "string",
+                    "sla_id": "string"
+                }
+        description : str
+            The description of the template.
+        fields : list[dict]
+            The fields required to create a template.
+        id : str
+            The ID of the template to update.
+        name : str
+            The name of the template.
+        sla_id : str
+            The ID of the SLA.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_template_payload(passed_keywords=kwargs)
@@ -1448,19 +1810,28 @@ class CaseManagement(ServiceClass):
     def delete_templates(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete templates.
 
-        Keyword arguments:
-        ids -- Resource IDs. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.templates.delete.v1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Resource IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1474,21 +1845,31 @@ class CaseManagement(ServiceClass):
     def query_access_tags(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query access tags.
 
-        Keyword arguments:
-        filter -- FQL filter expression. String.
-        sort -- Sort expression. String.
-        limit -- Page size. Integer.
-        after -- Pagination token. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/queries.access-tags.get.v1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression.
+        sort : str
+            Sort expression.
+        limit : int
+            Page size.
+        after : str
+            Pagination token.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1502,20 +1883,29 @@ class CaseManagement(ServiceClass):
     def query_fields(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query fields.
 
-        Keyword arguments:
-        filter -- FQL filter expression. String.
-        limit -- Page size. Integer.
-        offset -- Page offset. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/queries.fields.get.v1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression.
+        limit : int
+            Page size.
+        offset : int
+            Page offset.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1532,21 +1922,31 @@ class CaseManagement(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query notification groups.
 
-        Keyword arguments:
-        filter -- FQL filter expression. String.
-        sort -- Sort expression. String.
-        limit -- Page size. Integer.
-        offset -- Page offset. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/queries.notification-groups.get.v1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression.
+        sort : str
+            Sort expression.
+        limit : int
+            Page size.
+        offset : int
+            Page offset.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1563,21 +1963,31 @@ class CaseManagement(ServiceClass):
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query notification groups.
 
-        Keyword arguments:
-        filter -- FQL filter expression. String.
-        sort -- Sort expression. String.
-        limit -- Page size. Integer.
-        offset -- Page offset. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/queries.notification-groups.get.v2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression.
+        sort : str
+            Sort expression.
+        limit : int
+            Page size.
+        offset : int
+            Page offset.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1591,21 +2001,31 @@ class CaseManagement(ServiceClass):
     def query_slas(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query SLAs.
 
-        Keyword arguments:
-        filter -- FQL filter expression. String.
-        sort -- Sort expression. String.
-        limit -- Page size. Integer.
-        offset -- Page offset. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/queries.slas.get.v1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression.
+        sort : str
+            Sort expression.
+        limit : int
+            Page size.
+        offset : int
+            Page offset.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1622,20 +2042,29 @@ class CaseManagement(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query template snapshots.
 
-        Keyword arguments:
-        filter -- FQL filter expression. String.
-        limit -- Page size. Integer.
-        offset -- Page offset. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/queries.template-snapshots.get.v1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression.
+        limit : int
+            Page size.
+        offset : int
+            Page offset.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1649,21 +2078,31 @@ class CaseManagement(ServiceClass):
     def query_templates(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query templates.
 
-        Keyword arguments:
-        filter -- FQL filter expression. String.
-        sort -- Sort expression. String.
-        limit -- Page size. Integer.
-        offset -- Page offset. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/queries.templates.get.v1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression.
+        sort : str
+            Sort expression.
+        limit : int
+            Page size.
+        offset : int
+            Page offset.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1677,8 +2116,16 @@ class CaseManagement(ServiceClass):
     def add_case_alert_evidence(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Add the given list of alert evidence to the specified case.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.alert-evidence.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "alerts": [
                         {
@@ -1687,17 +2134,17 @@ class CaseManagement(ServiceClass):
                     ],
                     "id": "string"
                 }
-        alerts -- The alert IDs. String.
-        id -- The specified case ID. String.
+        alerts : list
+            The alert IDs.
+        id : str
+            The specified case ID.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.alert-evidence.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = specified_case_payload(passed_keywords=kwargs)
@@ -1713,25 +2160,33 @@ class CaseManagement(ServiceClass):
     def add_case_tags(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Add the given list of tags to the specified case.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.case-tags.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "id": "string",
                     "tags": [
                         "string"
                     ]
                 }
-        id -- The specified case ID. String.
-        tags -- The given list of tags. List of strings.
+        id : str
+            The specified case ID.
+        tags : str or list[str]
+            The given list of tags.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.case-tags.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = specified_case_payload(passed_keywords=kwargs)
@@ -1747,19 +2202,27 @@ class CaseManagement(ServiceClass):
     def delete_case_tags(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Remove the specified tags from the specified case.
 
-        Keyword arguments:
-        id -- The ID of the case to remove tags from. String.
-        tag -- The tag to remove from the case. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.case-tags.delete.v1
+
+        Keyword arguments
+        -----------------
+        id : str
+            The ID of the case to remove tags from.
+        tag : str or list[str]
+            The tag to remove from the case.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -1773,8 +2236,16 @@ class CaseManagement(ServiceClass):
     def create_case(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create the given Case.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.cases.put.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "assigned_to_user_uuid": "string",
                     "description": "string",
@@ -1805,23 +2276,29 @@ class CaseManagement(ServiceClass):
                         "id": "string"
                     }
                 }
-        assigned_to_user_uuid -- UUID of the user to assign the case to. String.
-        description -- The description of the case. String.
-        evidence -- The case evidence info. Dictionary.
-        name -- The name of the case. String.
-        severity -- The severity level of the case. Integer.
-        status -- The current status of the case. String.
-        tags -- The tags to be attached to the case. List of strings.
-        template -- The template case to utilize. Dictionary.
+        assigned_to_user_uuid : str
+            UUID of the user to assign the case to.
+        description : str
+            The description of the case.
+        evidence : dict
+            The case evidence info.
+        name : str
+            The name of the case.
+        severity : int
+            The severity level of the case.
+        status : str
+            The current status of the case.
+        tags : str or list[str]
+            The tags to be attached to the case.
+        template : dict
+            The template case to utilize.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PUT
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.cases.put.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_manage_payload(passed_keywords=kwargs)
@@ -1837,22 +2314,30 @@ class CaseManagement(ServiceClass):
     def get_cases(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve all Cases given their IDs.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.cases.post.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "ids": [
                         "string"
                     ]
                 }
 
+
+
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.cases.post.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_management_file_ids_payload(passed_keywords=kwargs)
@@ -1868,8 +2353,16 @@ class CaseManagement(ServiceClass):
     def update_case_fields(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update given fields on the specified case.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.cases.patch.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "expected_consistency_version": 0,
                     "expected_version": 0,
@@ -1895,21 +2388,23 @@ class CaseManagement(ServiceClass):
                     },
                     "id": "string"
                 }
-        expected_consistency_version -- The consistency version. Integer.
-        expected_version -- The version. Integer.
-        fields -- The updated given fields for the specified case. Dictionary.
-        id -- The specified case ID. String.
-
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        expected_consistency_version : int
+            The consistency version.
+        expected_version : int
+            The version.
+        fields : dict
+            The updated given fields for the specified case.
+        id : str
+            The specified case ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.cases.patch.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = update_case_payload(passed_keywords=kwargs)
@@ -1925,8 +2420,16 @@ class CaseManagement(ServiceClass):
     def add_case_event_evidence(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Add the given list of event evidence to the specified case.
 
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.event-evidence.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload provided as a dictionary. Not required if using other keywords.
                 {
                     "events": [
                         {
@@ -1935,18 +2438,19 @@ class CaseManagement(ServiceClass):
                     ],
                     "id": "string"
                 }
-        events -- The event evidence field . List of dictionaries.
-        id -- The specified case ID. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        events : list[dict]
+            The event evidence field.
+        id : str
+            The specified case ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.event-evidence.post.v1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = case_evidence_payload(passed_keywords=kwargs)
@@ -1962,27 +2466,38 @@ class CaseManagement(ServiceClass):
     def query_case_ids(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve all Cases IDs that match a given query.
 
-        Keyword arguments:
-        limit -- The maximum number of Cases to return in this response (default: 100; max: 10000). Integer.
-        Use this parameter together with the `offset` parameter to manage pagination of the results.
-        offset -- The first case to return, where `0` is the latest case. Integer.
-        Use with the `offset` parameter to manage pagination of results.
-        sort -- The field to sort on. Sort parameter takes the form <field|direction>. String.
-        The sorting fields can be any keyword field that is part of #domain.Case except for the text based fields.
-        If the fields are missing from the Cases, the service will fallback to its default ordering.
-        filter -- FQL filter expression. String.
-        Filter fields can be any keyword field that is part of #domain.Case.
-        q -- Search all Case metadata for the provided string. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/queries.cases.get.v1
+
+        Keyword arguments
+        -----------------
+        limit : int
+            The maximum number of Cases to return in this response (default: 100; max: 10000). Integer.
+            Use this parameter together with the `offset` parameter to manage pagination of the results.
+        offset : int
+            The first case to return, where `0` is the latest case. Integer.
+            Use with the `offset` parameter to manage pagination of results.
+        sort : str
+            The field to sort on. Sort parameter takes the form <field|direction>. String.
+            The sorting fields can be any keyword field that is part of #domain.Case except for the text based fields.
+            If the fields are missing from the Cases, the service will fallback to its default ordering.
+        filter : str
+            FQL filter expression. String.
+            Filter fields can be any keyword field that is part of #domain.Case.
+        q : str
+            Search all Case metadata for the provided.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

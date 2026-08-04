@@ -64,33 +64,44 @@ class ConfigurationAssessment(ServiceClass):
 
         Returns a set of HostFinding entities which match the filter criteria
 
-        Keyword arguments:
-        after -- A pagination token used with the `limit` parameter to manage pagination of
-                 results. On your first request, do not provide an `after` token. On subsequent
-                 requests, provide the `after` token from the previous response to continue
-                 from that place in the results. String.
-        limit -- The number of items to return in this response (default: 100, max: 5000).
-                 Use with the after parameter to manage pagination of results. String.
-        sort -- Sort assessment by their properties. String.
-                Sort examples: created_timestamp|desc, updated_timestamp|asc
-        filter -- Filter items using a query in Falcon Query Language (FQL). String.
-                  Wildcards * are unsupported.
-                  Filter examples:
-                  created_timestamp:>'2019-11-25T22:36:12Z'
-                  updated_timestamp:>'2019-11-25T22:36:12Z'
-                  aid:'1a2345b67c8d90e12f3af456789b0123'
-        facet -- Select various details blocks to be returned for each assessment entity. String.
-                 Supported values: host, finding.rule, finding.evaluation_logic
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/configuration-assessment/getCombinedAssessmentsQuery
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the `limit` parameter to manage pagination of
+            results. On your first request, do not provide an `after` token. On subsequent
+            requests, provide the `after` token from the previous response to continue
+            from that place in the results.
+        limit : int
+            The number of items to return in this response (default: 100, max: 5000).
+            Use with the after parameter to manage pagination of results.
+        sort : str
+            Sort assessment by their properties. String.
+            Sort examples: created_timestamp|desc, updated_timestamp|asc
+        filter : str
+            Filter items using a query in Falcon Query Language (FQL). String.
+            Wildcards * are unsupported.
+            Filter examples:
+            created_timestamp:>'2019-11-25T22:36:12Z'
+            updated_timestamp:>'2019-11-25T22:36:12Z'
+            aid:'1a2345b67c8d90e12f3af456789b0123'
+        facet : str or list[str]
+            Select various details blocks to be returned for each assessment entity. String.
+            Supported values: host, finding.rule, finding.evaluation_logic
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -108,19 +119,28 @@ class ConfigurationAssessment(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get rules details for provided one or more rule IDs.
 
-        Keyword arguments:
-        ids -- One or more rules IDs (max: 400). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/configuration-assessment/getRuleDetails
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more rules IDs (max: 400)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

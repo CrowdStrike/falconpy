@@ -60,19 +60,28 @@ class CustomIOA(ServiceClass):
     def get_patterns(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get pattern severities by ID.
 
-        Keyword arguments:
-        ids -- Pattern IDs. String or list of strings.
-        parameters -- full parameters payload, not required if using `ids` keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-patterns
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Pattern IDs.
+        parameters : dict
+            full parameters payload, not required if using `ids` keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -86,19 +95,28 @@ class CustomIOA(ServiceClass):
     def get_platforms(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get platforms by ID.
 
-        Keyword arguments:
-        ids -- Platform IDs. String or list of strings.
-        parameters -- full parameters payload, not required if using `ids` keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-platformsMixin0
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Platform IDs.
+        parameters : dict
+            full parameters payload, not required if using `ids` keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -112,19 +130,28 @@ class CustomIOA(ServiceClass):
     def get_rule_groups(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get rule groups by ID.
 
-        Keyword arguments:
-        ids -- Rule group IDs. String or list of strings.
-        parameters -- full parameters payload, not required if using `ids` keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-rule-groupsMixin0
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Rule group IDs.
+        parameters : dict
+            full parameters payload, not required if using `ids` keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -144,21 +171,31 @@ class CustomIOA(ServiceClass):
 
         Returns the rule group.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format. Not required if other keywords are provided.
-        comment -- Comment for the rule group. String.
-        description -- Rule group description. String.
-        name -- Name of the rule group. String.
-        platform -- Platform this rule group applies to. Allowed values: `windows`, `mac`, `linux`
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/create-rule-groupMixin0
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format. Not required if other keywords are provided.
+        comment : str
+            Comment for the rule group.
+        description : str
+            Rule group description.
+        name : str
+            Name of the rule group.
+        platform : str
+            Platform this rule group applies to. Allowed values: `windows`, `mac`, `linux`
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ioa_custom_payload(passed_keywords=kwargs)
@@ -179,20 +216,30 @@ class CustomIOA(ServiceClass):
                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete rule groups by ID.
 
-        Keyword arguments:
-        comment -- Explains why the rule group is being deleted. String.
-        ids -- Rule group IDs to be deleted. String or list of strings.
-        parameters -- full parameters payload, not required if using `ids` keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/delete-rule-groupsMixin0
+
+        Keyword arguments
+        -----------------
+        comment : str
+            Explains why the rule group is being deleted.
+        ids : str or list[str]
+            Rule group IDs to be deleted.
+        parameters : dict
+            full parameters payload, not required if using `ids` keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -212,8 +259,16 @@ class CustomIOA(ServiceClass):
 
         The following properties can be modified: `name`, `description`, `enabled`.
 
-        Keyword arguments:
-        body -- Full body payload in JSON format. Not required if other keywords are provided.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/update-rule-groupMixin0
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload in JSON format. Not required if other keywords are provided.
                 {
                     "comment": "string",
                     "description": "string",
@@ -222,21 +277,25 @@ class CustomIOA(ServiceClass):
                     "name": "string",
                     "rulegroup_version": 0
                 }
-        comment -- Comment for the rule group. String.
-        description -- Rule group description. String.
-        enabled -- Flag indicating if the group is enabled. Boolean.
-        id -- ID of the rule group. String.
-        name -- Name of the rule group. String.
-        rulegroup_version -- Rule group version to modify. Integer.
+        comment : str
+            Comment for the rule group.
+        description : str
+            Rule group description.
+        enabled : bool
+            Flag indicating if the group is enabled.
+        id : str
+            ID of the rule group.
+        name : str
+            Name of the rule group.
+        rulegroup_version : int
+            Rule group version to modify.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/update-rule-groupMixin0
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ioa_custom_payload(passed_keywords=kwargs)
@@ -252,19 +311,28 @@ class CustomIOA(ServiceClass):
     def get_rule_types(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get rule types by ID.
 
-        Keyword arguments:
-        ids -- Rule type IDs. String or list of strings.
-        parameters -- full parameters payload, not required if using `ids` keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-rule-types
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Rule type IDs.
+        parameters : dict
+            full parameters payload, not required if using `ids` keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -278,19 +346,28 @@ class CustomIOA(ServiceClass):
     def get_rules_get(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get rules by ID and optionally version in the following format: ID[:version].
 
-        Keyword arguments:
-        body -- full body payload in JSON format, not required if using `ids` keyword is used.
-        ids -- Rule IDs to retrieve. String or list of strings.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-rules-get
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload in JSON format, not required if using `ids` keyword is used.
+        ids : str or list[str]
+            Rule IDs to retrieve.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -308,19 +385,28 @@ class CustomIOA(ServiceClass):
 
         The max number of IDs is constrained by URL size.
 
-        Keyword arguments:
-        ids -- Rule IDs. String or list of strings.
-        parameters -- full parameters payload, not required if using `ids` keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-rulesMixin0
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Rule IDs.
+        parameters : dict
+            full parameters payload, not required if using `ids` keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -338,8 +424,16 @@ class CustomIOA(ServiceClass):
                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a rule within a rule group. Returns the rule.
 
-        Keyword arguments:
-        body -- full body payload in JSON format, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/create-rule
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload in JSON format, not required if using other keywords.
                 {
                     "comment": "string",
                     "description": "string",
@@ -364,36 +458,42 @@ class CustomIOA(ServiceClass):
                     "rulegroup_id": "string",
                     "ruletype_id": "string"
                 }
-        comment -- Comment related to this update. String.
-        description -- Rule description. String.
-        disposition_id -- Disposition ID. Integer.
-        field_values -- Rule values represented as an object. Dictionary.
-                        {
-                            "final_value": "string",
-                            "label": "string",
-                            "name": "string",
-                            "type": "string",
-                            "value": "string",
-                            "values": [
-                                {
-                                    "label": "string",
-                                    "value": "string"
-                                }
-                            ]
-                        }
-        name -- Name of the rule. String.
-        pattern_severity -- Severity. String.
-        rulegroup_id -- ID of the rule group. String.
-        ruletype_id -- ID of the rule type. String.
+        comment : str
+            Comment related to this update.
+        description : str
+            Rule description.
+        disposition_id : int
+            Disposition ID.
+        field_values : list
+            Rule values represented as an object. Dictionary.
+            {
+                "final_value": "string",
+                "label": "string",
+                "name": "string",
+                "type": "string",
+                "value": "string",
+                "values": [
+                    {
+                        "label": "string",
+                        "value": "string"
+                    }
+                ]
+            }
+        name : str
+            Name of the rule.
+        pattern_severity : str
+            Severity.
+        rulegroup_id : str
+            ID of the rule group.
+        ruletype_id : str
+            ID of the rule type.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/create-rule
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ioa_custom_payload(passed_keywords=kwargs)
@@ -413,20 +513,29 @@ class CustomIOA(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete rules from a rule group by ID.
 
-        Keyword arguments:
-        comment -- Explains why the entity is being deleted. String.
-        ids -- Rule IDs to be deleted. String or list of strings.
-        parameters -- full parameters payload, not required if using `ids` keyword.
-        rule_group_id -- The parent rule group. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/delete-rules
+
+        Keyword arguments
+        -----------------
+        comment : str
+            Explains why the entity is being deleted.
+        ids : str or list[str]
+            Rule IDs to be deleted.
+        parameters : dict
+            full parameters payload, not required if using `ids` keyword.
+        rule_group_id : str
+            The parent rule group.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -444,8 +553,16 @@ class CustomIOA(ServiceClass):
                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update rules within a rule group. Return the updated rules.
 
-        Keyword arguments:
-        body -- full body payload in JSON format, not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/update-rules
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload in JSON format, not required if using other keywords.
                 {
                     "comment": "string",
                     "rule_updates": [
@@ -477,45 +594,47 @@ class CustomIOA(ServiceClass):
                     "rulegroup_id": "string",
                     "rulegroup_version": 0
                 }
-        comment -- Comment related to this update. String.
-        rulegroup_id -- ID of the rule group. String.
-        rule_updates -- JSON dictionary representing the rule updates to
-                        be performed. Only one rule update can be done
-                        in this manner. Dictionary.
-                        {
-                            "description": "string",
-                            "disposition_id": 0,
-                            "enabled": true,
-                            "field_values": [
-                                {
-                                    "final_value": "string",
-                                    "label": "string",
-                                    "name": "string",
-                                    "type": "string",
-                                    "value": "string",
-                                    "values": [
-                                        {
-                                            "label": "string",
-                                            "value": "string"
-                                        }
-                                    ]
-                                }
-                            ],
-                            "instance_id": "string",
-                            "name": "string",
-                            "pattern_severity": "string",
-                            "rulegroup_version": 0
-                        }
-        rulegroup_version -- Version of the rule group. Integer.
+        comment : str
+            Comment related to this update.
+        rulegroup_id : str
+            ID of the rule group.
+        rule_updates : list
+            JSON dictionary representing the rule updates to
+            be performed. Only one rule update can be done
+            in this manner. Dictionary.
+            {
+                "description": "string",
+                "disposition_id": 0,
+                "enabled": true,
+                "field_values": [
+                    {
+                        "final_value": "string",
+                        "label": "string",
+                        "name": "string",
+                        "type": "string",
+                        "value": "string",
+                        "values": [
+                            {
+                                "label": "string",
+                                "value": "string"
+                            }
+                        ]
+                    }
+                ],
+                "instance_id": "string",
+                "name": "string",
+                "pattern_severity": "string",
+                "rulegroup_version": 0
+            }
+        rulegroup_version : int
+            Version of the rule group.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/update-rules
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ioa_custom_payload(passed_keywords=kwargs)
@@ -534,8 +653,16 @@ class CustomIOA(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update rules within a rule group. Return the updated rules.
 
-        Keyword arguments:
-        body -- full body payload in JSON format, not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/update-rules-v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload in JSON format, not required if using other keywords.
                 {
                     "comment": "string",
                     "rule_updates": [
@@ -567,45 +694,47 @@ class CustomIOA(ServiceClass):
                     "rulegroup_id": "string",
                     "rulegroup_version": 0
                 }
-        comment -- Comment related to this update. String.
-        rulegroup_id -- ID of the rule group. String.
-        rule_updates -- JSON dictionary representing the rule updates to
-                        be performed. Only one rule update can be done
-                        in this manner. Dictionary.
-                        {
-                            "description": "string",
-                            "disposition_id": 0,
-                            "enabled": true,
-                            "field_values": [
-                                {
-                                    "final_value": "string",
-                                    "label": "string",
-                                    "name": "string",
-                                    "type": "string",
-                                    "value": "string",
-                                    "values": [
-                                        {
-                                            "label": "string",
-                                            "value": "string"
-                                        }
-                                    ]
-                                }
-                            ],
-                            "instance_id": "string",
-                            "name": "string",
-                            "pattern_severity": "string",
-                            "rulegroup_version": 0
-                        }
-        rulegroup_version -- Version of the rule group. Integer.
+        comment : str
+            Comment related to this update.
+        rulegroup_id : str
+            ID of the rule group.
+        rule_updates : list
+            JSON dictionary representing the rule updates to
+            be performed. Only one rule update can be done
+            in this manner. Dictionary.
+            {
+                "description": "string",
+                "disposition_id": 0,
+                "enabled": true,
+                "field_values": [
+                    {
+                        "final_value": "string",
+                        "label": "string",
+                        "name": "string",
+                        "type": "string",
+                        "value": "string",
+                        "values": [
+                            {
+                                "label": "string",
+                                "value": "string"
+                            }
+                        ]
+                    }
+                ],
+                "instance_id": "string",
+                "name": "string",
+                "pattern_severity": "string",
+                "rulegroup_version": 0
+            }
+        rulegroup_version : int
+            Version of the rule group.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/update-rules-v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ioa_custom_payload(passed_keywords=kwargs)
@@ -621,8 +750,16 @@ class CustomIOA(ServiceClass):
     def validate(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Validate field values and check for matches if a test string is provided.
 
-        Keyword arguments:
-        body -- full body payload in JSON format, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/validate
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload in JSON format, not required if using other keywords.
                 {
                     "fields": [
                         {
@@ -638,28 +775,29 @@ class CustomIOA(ServiceClass):
                         }
                     ]
                 }
-        fields -- List of fields to validate. List of dictionaries.
-                  {
-                      "name": "string",
-                      "test_data": "string",
-                      "type": "string",
-                      "values": [
-                          {
-                              "label": "string",
-                              "value": "string"
-                          }
-                      ]
-                  }
+        fields : list
+            List of fields to validate. List of dictionaries.
+            {
+                "name": "string",
+                "test_data": "string",
+                "type": "string",
+                "values": [
+                    {
+                        "label": "string",
+                        "value": "string"
+                    }
+                ]
+            }
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'fields'.
-                   All others are ignored.
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'fields'.
+        All others are ignored.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/validate
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="fields")
@@ -675,21 +813,29 @@ class CustomIOA(ServiceClass):
     def query_patterns(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all pattern severity IDs.
 
-        Keyword arguments:
-        limit -- The maximum number of records to return in this response. [Integer, 1-500]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. String.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-patterns
+
+        Keyword arguments
+        -----------------
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-500]
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The offset to start retrieving records from. String.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -703,21 +849,29 @@ class CustomIOA(ServiceClass):
     def query_platforms(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all platform IDs.
 
-        Keyword arguments:
-        limit -- The maximum number of records to return in this response. [Integer, 1-500]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. String.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-platformsMixin0
+
+        Keyword arguments
+        -----------------
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-500]
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The offset to start retrieving records from. String.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -731,39 +885,49 @@ class CustomIOA(ServiceClass):
     def query_rule_groups_full(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all rule groups matching the query with optional filter.
 
-        Keyword arguments:
-        filter -- FQL query specifying the filter parameters. String.
-                  Filter term criteria:
-                  enabled                   rules.name
-                  platform                  rules.description
-                  name                      rules.pattern_severity
-                  description               rules.ruletype_name
-                  rules.action_label        rules.enabled
-
-                  Filter range criteria:
-                  created_on
-                  modified_on (use any common date format, e.g. '2010-05-15T14:55:21.892315096Z')
-        limit -- The maximum number of records to return in this response. [Integer, 1-500]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. String.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- full parameters payload, not required if using other keywords.
-        q -- Match query criteria, which includes all the filter string fields. String.
-        sort -- FQL syntax specifying sort criteria. String.
-                Possible order by fields:
-                created_by              enabled
-                created_on              name
-                modified_by             description
-                modified_on
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rule-groups-full
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying the filter parameters. String.
+            Filter term criteria:
+            enabled                   rules.name
+            platform                  rules.description
+            name                      rules.pattern_severity
+            description               rules.ruletype_name
+            rules.action_label        rules.enabled
+            Filter range criteria:
+            created_on
+            modified_on (use any common date format, e.g. '2010-05-15T14:55:21.892315096Z')
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-500]
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The offset to start retrieving records from. String.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Match query criteria, which includes all the filter string fields.
+        sort : str
+            FQL syntax specifying sort criteria. String.
+            Possible order by fields:
+            created_by              enabled
+            created_on              name
+            modified_by             description
+            modified_on
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -777,39 +941,49 @@ class CustomIOA(ServiceClass):
     def query_rule_groups(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all rule group IDs matching the query with optional filter.
 
-        Keyword arguments:
-        filter -- FQL query specifying the filter parameters. String.
-                  Filter term criteria:
-                  enabled                   rules.name
-                  platform                  rules.description
-                  name                      rules.pattern_severity
-                  description               rules.ruletype_name
-                  rules.action_label        rules.enabled
-
-                  Filter range criteria:
-                  created_on
-                  modified_on (use any common date format, e.g. '2010-05-15T14:55:21.892315096Z')
-        limit -- The maximum number of records to return in this response. [Integer, 1-500]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. String.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- full parameters payload, not required if using other keywords.
-        q -- Match query criteria, which includes all the filter string fields. String.
-        sort -- FQL syntax specifying sort criteria. String.
-                Possible order by fields:
-                created_by              enabled
-                created_on              name
-                modified_by             description
-                modified_on
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rule-groupsMixin0
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying the filter parameters. String.
+            Filter term criteria:
+            enabled                   rules.name
+            platform                  rules.description
+            name                      rules.pattern_severity
+            description               rules.ruletype_name
+            rules.action_label        rules.enabled
+            Filter range criteria:
+            created_on
+            modified_on (use any common date format, e.g. '2010-05-15T14:55:21.892315096Z')
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-500]
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The offset to start retrieving records from. String.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Match query criteria, which includes all the filter string fields.
+        sort : str
+            FQL syntax specifying sort criteria. String.
+            Possible order by fields:
+            created_by              enabled
+            created_on              name
+            modified_by             description
+            modified_on
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -823,21 +997,29 @@ class CustomIOA(ServiceClass):
     def query_rule_types(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all rule type IDs.
 
-        Keyword arguments:
-        limit -- The maximum number of records to return in this response. [Integer, 1-500]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. String.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rule-types
+
+        Keyword arguments
+        -----------------
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-500]
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The offset to start retrieving records from. String.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -851,40 +1033,50 @@ class CustomIOA(ServiceClass):
     def query_rules(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all rule IDs matching the query with optional filter.
 
-        Keyword arguments:
-        filter -- FQL query specifying the filter parameters. String.
-                  Filter term criteria:
-                  enabled                   rules.name
-                  platform                  rules.description
-                  name                      rules.pattern_severity
-                  description               rules.ruletype_name
-                  rules.action_label        rules.enabled
-
-                  Filter range criteria:
-                  created_on
-                  modified_on (use any common date format, e.g. '2010-05-15T14:55:21.892315096Z')
-        limit -- The maximum number of records to return in this response. [Integer, 1-500]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. String.
-                  Use with the limit parameter to manage pagination of results.
-        parameters -- full parameters payload, not required if using other keywords.
-        q -- Match query criteria, which includes all the filter string fields. String.
-        sort -- FQL syntax specifying sort criteria. String.
-                Possible order by fields:
-                rules.ruletype_name                 rules.created_on
-                rules.enabled                       rules.current_version.description
-                rules.created_by                    rules.current_version.pattern_severity
-                rules.current_version.name          rules.current_version.action_label
-                rules.current_version.modified_by   rules.current_version.modified_on
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rulesMixin0
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying the filter parameters. String.
+            Filter term criteria:
+            enabled                   rules.name
+            platform                  rules.description
+            name                      rules.pattern_severity
+            description               rules.ruletype_name
+            rules.action_label        rules.enabled
+            Filter range criteria:
+            created_on
+            modified_on (use any common date format, e.g. '2010-05-15T14:55:21.892315096Z')
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-500]
+            Use with the offset parameter to manage pagination of results.
+        offset : str
+            The offset to start retrieving records from. String.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        q : str
+            Match query criteria, which includes all the filter string fields.
+        sort : str
+            FQL syntax specifying sort criteria. String.
+            Possible order by fields:
+            rules.ruletype_name                 rules.created_on
+            rules.enabled                       rules.current_version.description
+            rules.created_by                    rules.current_version.pattern_severity
+            rules.current_version.name          rules.current_version.action_label
+            rules.current_version.modified_by   rules.current_version.modified_on
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

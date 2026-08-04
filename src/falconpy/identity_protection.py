@@ -63,28 +63,36 @@ class IdentityProtection(ServiceClass):
         Allows to retrieve entities, timeline activities, identity-based incidents and
         security assessment. Allows to perform actions on entities and identity-based incidents.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
-                {
-                    "query": "string"
-                }
-        query -- JSON-similar string. (GraphQL syntax)
-        variables -- variables to use for interpolation. Dictionary.
-
-        This method only supports keywords for providing arguments.
-        Currently using a non-standard body payload format.
-        Example payload:
-        {
-            "query": "{\n  entities(first: 1)\n  {\n    nodes {\n      entityId    \n    }\n  }\n}"
-        }
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html
-                   /identity-protection/api.preempt.proxy.post.graphql
+        /identity-protection/api.preempt.proxy.post.graphql
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
+                {
+                    "query": "string"
+                }
+        query : str
+            JSON-similar string. (GraphQL syntax)
+        variables : str
+            variables to use for interpolation. Dictionary.
+            Currently using a non-standard body payload format.
+            Example payload:
+            {
+                "query": "{\n  entities(first: 1)\n  {\n    nodes {\n      entityId    \n    }\n  }\n}"
+            }
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = {}
@@ -103,8 +111,16 @@ class IdentityProtection(ServiceClass):
     def get_sensor_aggregates(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get sensor aggregates as specified via json in request body.
 
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protection/GetSensorAggregates
+
+        Keyword arguments
+        -----------------
+        body : list
+            full body payload, not required when using other keywords.
                 [
                     {
                         "date_ranges": [
@@ -139,38 +155,44 @@ class IdentityProtection(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- If peforming a date range query specify the from and to date ranges.
-                       These can be in common date formats like 2019-07-18 or now.
-                       List of dictionaries.
-        exclude -- Fields to exclude. String.
-        field -- Term you want to aggregate on. If doing a date_range query,
-                 this is the date field you want to apply the date ranges to. String.
-        filter -- Optional filter criteria in the form of an FQL query.
-                  For more information about FQL queries, see our FQL documentation in Falcon.
-                  String.
-        from -- Integer.
-        include -- Fields to include. String.
-        interval -- String.
-        max_doc_count -- Maximum number of documents. Integer.
-        min_doc_count -- Minimum number of documents. Integer.
-        missing -- String.
-        name -- Scan name. String.
-        q -- FQL syntax. String.
-        ranges -- List of dictionaries.
-        size -- Integer.
-        sort -- FQL syntax. String.
-        sub_aggregates -- List of strings.
-        time_zone -- String.
-        type -- String.
+        date_ranges : list[dict]
+            If peforming a date range query specify the from and to date ranges.
+            These can be in common date formats like 2019-07-18 or now.
+        exclude : str
+            Fields to exclude.
+        field : str
+            Term you want to aggregate on. If doing a date_range query,
+            this is the date field you want to apply the date ranges to.
+        filter : str
+            Optional filter criteria in the form of an FQL query.
+            For more information about FQL queries, see our FQL documentation in Falcon.
+        from : int
+        include : str
+            Fields to include.
+        interval : str
+        max_doc_count : int
+            Maximum number of documents.
+        min_doc_count : int
+            Minimum number of documents.
+        missing : str
+        name : str
+            Scan name.
+        q : str
+            FQL syntax.
+        ranges : list[dict]
+        size : int
+        sort : str
+            FQL syntax.
+        sub_aggregates : list[str]
+        time_zone : str
+        type : str
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protection/GetSensorAggregates
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             # Similar to 664: Detects aggregates expects a list
@@ -187,23 +209,30 @@ class IdentityProtection(ServiceClass):
     def get_sensor_details(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on one or more sensors by providing device IDs.
 
-        Keyword arguments:
-        body -- full body payload, not required if ids are provided as keyword.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protection/GetSensorDetails
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if ids are provided as keyword.
                 {
                     "ids": [
                         "string"
                     ]
                 }
-        ids -- Sensor ID(s) to retrieve. String or list of strings.  (Max: 5,000)
+        ids : str or list[str]
+            Sensor ID(s) to retrieve. String or list of strings.  (Max: 5,000)
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protection/GetSensorDetails
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -223,19 +252,28 @@ class IdentityProtection(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get policy rules.
 
-        Keyword arguments:
-        ids -- Rule IDs. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protection/api.preempt.proxy.get.policy-rules
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Rule IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -249,10 +287,20 @@ class IdentityProtection(ServiceClass):
     def create_policy_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create policy rule.
 
-        Keyword arguments:
-        action -- Action to perform. String.
-        activity -- Activities that trigger the policy. Dictionary.
-        body -- Full body payload as a dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protection/api.preempt.proxy.post.policy-rules
+
+        Keyword arguments
+        -----------------
+        action : str
+            Action to perform.
+        activity : dict
+            Activities that trigger the policy.
+        body : dict
+            Full body payload as a dictionary. Not required if using other keywords.
                 {
                     "action": "string",
                     "activity": {
@@ -332,25 +380,30 @@ class IdentityProtection(ServiceClass):
                     },
                     "trigger": "string"
                 }
-        destination -- Activity destination. Dictionary.
-        enabled -- Flag indicating if the policy rule should be enabled. Boolean.
-        name -- Policy rule name.
-        simulation_mode -- Simulate the policy action instead of actually taking action. Boolean.
-                           simulationMode will also be accepted for this argument.
-        source_endpoint -- Source endpoint details. Dictionary.
-                           sourceEndpoint will also be accepted for this argument.
-        source_user -- Source user details. Dictionary.
-                       sourceUser will also be accepted for this argument.
-        trigger -- Policy rule trigger. String.
+        destination : dict
+            Activity destination.
+        enabled : bool
+            Flag indicating if the policy rule should be enabled.
+        name : str
+            Policy rule name.
+        simulation_mode : str
+            Simulate the policy action instead of actually taking action. Boolean.
+            simulationMode will also be accepted for this argument.
+        source_endpoint : str
+            Source endpoint details. Dictionary.
+            sourceEndpoint will also be accepted for this argument.
+        source_user : str
+            Source user details. Dictionary.
+            sourceUser will also be accepted for this argument.
+        trigger : str
+            Policy rule trigger.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protection/api.preempt.proxy.post.policy-rules
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = idp_policy_payload(passed_keywords=kwargs)
@@ -371,20 +424,29 @@ class IdentityProtection(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete policy rules.
 
-        Keyword arguments:
-        ids -- Rule IDs to delete. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html
-            #/identity-protection/api.preempt.proxy.delete.policy-rules
+        #/identity-protection/api.preempt.proxy.delete.policy-rules
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Rule IDs to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -398,23 +460,33 @@ class IdentityProtection(ServiceClass):
     def query_sensors(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for sensors in your environment by providing hostname, IP, and other criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-200]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax. Ex: hostanme.desc or status.asc
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protections/QuerySensorsByFilter
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-200]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax. Ex: hostanme.desc or status.asc
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -428,21 +500,30 @@ class IdentityProtection(ServiceClass):
     def query_policy_rules(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query policy rule IDs.
 
-        Keyword arguments:
-        enabled -- Whether the rule is enabled. Boolean.
-        simulation_mode -- Whether the rule is in simulation mode. Boolean.
-        name -- Rule name. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html
-            #/identity-protection/api.preempt.proxy.get.policy-rules.query
+        #/identity-protection/api.preempt.proxy.get.policy-rules.query
+
+        Keyword arguments
+        -----------------
+        enabled : bool
+            Whether the rule is enabled.
+        simulation_mode : bool
+            Whether the rule is in simulation mode.
+        name : str
+            Rule name.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

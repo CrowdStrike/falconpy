@@ -64,19 +64,28 @@ class ServerlessExports(ServiceClass):
                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download an export file.
 
-        Keyword arguments:
-        id -- Export job ID. String. Required.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/serverless-exports/DownloadExportFileMixin0
+
+        Keyword arguments
+        -----------------
+        id : str (required)
+            Export job ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -93,19 +102,25 @@ class ServerlessExports(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Read export jobs entities.
 
-        Keyword arguments:
-        ids -- Export Job IDs to read. Allowed up to 100 IDs per request.
-               String or list of strings. Required.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/serverless-exports/ReadExportJobsMixin0
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str] (required)
+            Export Job IDs to read. Allowed up to 100 IDs per request.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -125,9 +140,17 @@ class ServerlessExports(ServiceClass):
         Maximum of 1 job in progress per resource. Use expand_vulnerabilities=true
         to get detailed vulnerability information.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using
-                other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/serverless-exports/LaunchExportJobMixin0
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using
+            other keywords.
                 {
                     "expand_vulnerabilities": boolean,
                     "format": "string",
@@ -135,22 +158,25 @@ class ServerlessExports(ServiceClass):
                     "resource": "string",
                     "sort": "string"
                 }
-        expand_vulnerabilities -- Flag to include detailed vulnerability information. Boolean.
-        format -- The export file format. String.
-        fql -- Filter the export using Falcon Query Language (FQL). String.
-        resource -- The resource to export. Supported resources:
-                    function.detections, function.vulnerabilities-expanded,
-                    function.vulnerabilities. String.
-        sort -- The fields to sort the records on. String.
+        expand_vulnerabilities : bool
+            Flag to include detailed vulnerability information.
+        format : str
+            The export file format.
+        fql : str
+            Filter the export using Falcon Query Language (FQL)
+        resource : str
+            The resource to export. Supported resources:
+            function.detections, function.vulnerabilities-expanded,
+            function.vulnerabilities.
+        sort : str
+            The fields to sort the records on.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/serverless-exports/LaunchExportJobMixin0
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = serverless_exports_launch_payload(passed_keywords=kwargs)
@@ -170,21 +196,30 @@ class ServerlessExports(ServiceClass):
                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query export jobs entities.
 
-        Keyword arguments:
-        filter -- Filter exports using a query in Falcon Query Language (FQL).
-                  Only the last 100 jobs are returned.
-                  Supported filter fields: resource, status. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be
-                   'filter'. All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/serverless-exports/QueryExportJobsMixin0
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter exports using a query in Falcon Query Language (FQL).
+            Only the last 100 jobs are returned.
+            Supported filter fields: resource, status.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be
+        'filter'. All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

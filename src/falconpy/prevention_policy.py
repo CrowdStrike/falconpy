@@ -65,25 +65,36 @@ class PreventionPolicy(ServiceClass):
 
         Returns a set of host details which match the filter criteria.
 
-        Keyword arguments:
-        id -- The ID of the Prevention Policy to search for members of
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /prevention-policies/queryCombinedPreventionPolicyMembers
+        /prevention-policies/queryCombinedPreventionPolicyMembers
+
+        Keyword arguments
+        -----------------
+        id : str
+            The ID of the Prevention Policy to search for members of
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -102,28 +113,38 @@ class PreventionPolicy(ServiceClass):
 
         Returns a set of Prevention Policies which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-                created_by                      modified_timestamp
-                created_timestamp               name
-                enabled                         platform_name
-                modified_by                     precedence
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                      /prevention-policies/queryCombinedPreventionPolicies
+        /prevention-policies/queryCombinedPreventionPolicies
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+            created_by                      modified_timestamp
+            created_timestamp               name
+            enabled                         platform_name
+            modified_by                     precedence
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -141,15 +162,26 @@ class PreventionPolicy(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform the specified action on the Prevention Policies specified in the request.
 
-        Keyword arguments:
-        action_name -- action to perform: 'add-host-group', 'add-rule-group', 'disable',
-                       'enable', 'remove-host-group', or 'remove-rule-group'.
-        action_parameters -- Action specific parameter options. List of dictionaries.
-                             {
-                                 "name": "string",
-                                 "value": "string"
-                             }
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        /prevention-policies/performPreventionPoliciesAction
+
+        Keyword arguments
+        -----------------
+        action_name : str
+            action to perform: 'add-host-group', 'add-rule-group', 'disable',
+            'enable', 'remove-host-group', or 'remove-rule-group'.
+        action_parameters : list
+            Action specific parameter options. List of dictionaries.
+            {
+                "name": "string",
+                "value": "string"
+            }
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "action_parameters": [
                         {
@@ -161,20 +193,20 @@ class PreventionPolicy(ServiceClass):
                         "string"
                     ]
                 }
-        group_id -- Host Group ID to apply the policy to. String.
-                    Overridden if action_parameters is provided.
-        ids -- Prevention policy ID(s) to perform actions against. String or list of strings.
-        parameters - full parameters payload, not required if action_name is provide as a keyword.
+        group_id : str
+            Host Group ID to apply the policy to. String.
+            Overridden if action_parameters is provided.
+        ids : str or list[str]
+            Prevention policy ID(s) to perform actions against.
+        parameters : dict
+            full parameters payload, not required if action_name is provide as a keyword.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                        /prevention-policies/performPreventionPoliciesAction
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -204,26 +236,34 @@ class PreventionPolicy(ServiceClass):
         have the lowest. You must specify all non-Default Policies for a platform when updating
         precedence.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        /prevention-policies/setPreventionPoliciesPrecedence
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "ids": [
                         "string"
                     ],
                     "platform_name": "Windows"
                 }
-        ids -- Prevention policy ID(s) to perform actions against. String or list of strings.
-        platform_name -- OS platform name. (Windows, Mac, Linux, Android, iOS)
+        ids : str or list[str]
+            Prevention policy ID(s) to perform actions against.
+        platform_name : str
+            OS platform name. (Windows, Mac, Linux, Android, iOS)
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                        /prevention-policies/setPreventionPoliciesPrecedence
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -241,19 +281,28 @@ class PreventionPolicy(ServiceClass):
     def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a set of Prevention Policies by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of Prevention Policy IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies/getPreventionPolicies
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Prevention Policy IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -267,8 +316,16 @@ class PreventionPolicy(ServiceClass):
     def create_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Prevention Policies by specifying details about the policy to create.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies/createPreventionPolicies
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "resources": [
                         {
@@ -285,25 +342,28 @@ class PreventionPolicy(ServiceClass):
                         }
                     ]
                 }
-        clone_id -- Prevention Policy ID to clone. String.
-        description -- Prevention Policy description. String.
-        name -- Prevention Policy name. String.
-        platform_name -- Name of the operating system platform. String.
-                         Allowed values: Windows, Mac, Linux, iOS, Android
-        settings -- Prevention policy specific settings. List of dictionaries.
-                    {
-                        "id": "string",
-                        "value": {}
-                    }
+        clone_id : str
+            Prevention Policy ID to clone.
+        description : str
+            Prevention Policy description.
+        name : str
+            Prevention Policy name.
+        platform_name : str
+            Name of the operating system platform. String.
+            Allowed values: Windows, Mac, Linux, iOS, Android
+        settings : list
+            Prevention policy specific settings. List of dictionaries.
+            {
+                "id": "string",
+                "value": {}
+            }
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies/createPreventionPolicies
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = prevention_policy_payload(passed_keywords=kwargs)
@@ -319,19 +379,28 @@ class PreventionPolicy(ServiceClass):
     def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a set of Prevention Policies by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of Prevention Policy IDs to delete. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies/deletePreventionPolicies
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of Prevention Policy IDs to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -345,8 +414,16 @@ class PreventionPolicy(ServiceClass):
     def update_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Prevention Policies by specifying the ID of the policy and details to update.
 
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies/updatePreventionPolicies
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required if keywords are used.
                 {
                     "resources": [
                         {
@@ -362,23 +439,25 @@ class PreventionPolicy(ServiceClass):
                         }
                     ]
                 }
-        description -- Prevention Policy description. String.
-        id -- Prevention Policy ID to update. String.
-        name -- Prevention Policy name. String.
-        settings -- Prevention policy specific settings. List of dictionaries.
-                    {
-                        "id": "string",
-                        "value": "string"
-                    }
+        description : str
+            Prevention Policy description.
+        id : str
+            Prevention Policy ID to update.
+        name : str
+            Prevention Policy name.
+        settings : list
+            Prevention policy specific settings. List of dictionaries.
+            {
+                "id": "string",
+                "value": "string"
+            }
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies/updatePreventionPolicies
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = prevention_policy_payload(passed_keywords=kwargs)
@@ -396,25 +475,36 @@ class PreventionPolicy(ServiceClass):
 
         Returns a set of Agent IDs which match the filter criteria.
 
-        Keyword arguments:
-        id -- The ID of the Prevention Policy to search for members of
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                       /prevention-policies/queryPreventionPolicyMembers
+        /prevention-policies/queryPreventionPolicyMembers
+
+        Keyword arguments
+        -----------------
+        id : str
+            The ID of the Prevention Policy to search for members of
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -430,27 +520,37 @@ class PreventionPolicy(ServiceClass):
 
         Returns a set of Prevention Policy IDs which match the filter criteria.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Integer.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax.
-                created_by                      modified_timestamp
-                created_timestamp               name
-                enabled                         platform_name
-                modified_by                     precedence
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies/queryPreventionPolicies
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+        limit : int
+            The maximum number of records to return in this response. [Integer, 1-5000]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from. Integer.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+            created_by                      modified_timestamp
+            created_timestamp               name
+            enabled                         platform_name
+            modified_by                     precedence
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

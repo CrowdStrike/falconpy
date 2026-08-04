@@ -63,29 +63,39 @@ class CloudSecurityCompliance(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get sections and requirements with scores for benchmarks.
 
-        Keyword arguments:
-        filter -- FQL formatted filter to limit returned results. String.
-                  Allowed values:
-                    account_id          account_name
-                    business_impact     cloud_label
-                    cloud_label_id      cloud_provider
-                    environment         groups
-                    region              resource_type
-                    resource_type_name  tag_key
-                    tag_value           tags_string
-        ids -- The UUIDs of compliance frameworks to retrieve (maximum 20 IDs allowed). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-security-compliance/cloud-compliance-framework-posture-summaries
+        /cloud-security-compliance/cloud-compliance-framework-posture-summaries
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL formatted filter to limit returned results. String.
+            Allowed values:
+              account_id          account_name
+              business_impact     cloud_label
+              cloud_label_id      cloud_provider
+              environment         groups
+              region              resource_type
+              resource_type_name  tag_key
+              tag_value           tags_string
+        ids : str or list[str]
+            The UUIDs of compliance frameworks to retrieve (maximum 20 IDs allowed)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -103,29 +113,39 @@ class CloudSecurityCompliance(ServiceClass):
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get compliance score and counts for rules.
 
-        Keyword arguments:
-        filter -- FQL formatted filter to limit returned results. String.
-                  Allowed values:
-                    account_id          account_name
-                    business_impact     cloud_label
-                    cloud_label_id      cloud_provider
-                    environment         groups
-                    region              resource_type
-                    resource_type_name  tag_key
-                    tag_value           tags_string
-        ids -- The uuids of compliance rules to retrieve (maximum 350 IDs allowed).
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-security-compliance/cloud-compliance-rule-posture-summaries
+        /cloud-security-compliance/cloud-compliance-rule-posture-summaries
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL formatted filter to limit returned results. String.
+            Allowed values:
+              account_id          account_name
+              business_impact     cloud_label
+              cloud_label_id      cloud_provider
+              environment         groups
+              region              resource_type
+              resource_type_name  tag_key
+              tag_value           tags_string
+        ids : str or list[str]
+            The uuids of compliance rules to retrieve (maximum 350 IDs allowed).
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

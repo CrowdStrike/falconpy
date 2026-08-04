@@ -60,19 +60,28 @@ class FoundryLogScale(ServiceClass):
     def list_repos(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """List available repositories and views.
 
-        Keyword arguments:
-        check_test_data -- Include whether test data is present in the application repository. Boolean.
-        parameters - full parameters payload, not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'check_test_data'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-logscale/ListReposV1
+
+        Keyword arguments
+        -----------------
+        check_test_data : bool
+            Include whether test data is present in the application repository.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'check_test_data'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -91,23 +100,34 @@ class FoundryLogScale(ServiceClass):
                     ) -> dict:
         """Ingest data into the application repository synchronously.
 
-        Keyword arguments:
-        data_content -- JSON formatted data to ingest. String.
-        data_file -- Content of the uploaded archive in binary format.
-                     'file' is also accepted as this parameter.
-        parameters -- full parameters payload, not required if using other keywords.
-        tag -- Custom tag for ingested data in the form 'tag:value'. String.
-        tag_source -- Tag the data with the specified source. String.
-        test_data -- Tag the data with 'test-ingest'. Defaults to False. Boolean.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-logscale/IngestDataV1
+
+        Keyword arguments
+        -----------------
+        data_content : str
+            JSON formatted data to ingest.
+        data_file : str
+            Content of the uploaded archive in binary format.
+            'file' is also accepted as this parameter.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        tag : str
+            Custom tag for ingested data in the form 'tag:value'
+        tag_source : str
+            Tag the data with the specified source.
+        test_data : bool
+            Tag the data with 'test-ingest'. Defaults to False.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         # Try to find the binary object they provided us
         if not data_file:
@@ -144,23 +164,34 @@ class FoundryLogScale(ServiceClass):
                           ) -> dict:
         """Ingest data into the application repository asynchronously.
 
-        Keyword arguments:
-        data_content -- JSON formatted data to ingest. String.
-        data_file -- Content of the uploaded file in binary format.
-                     'file' is also accepted as this parameter.
-        parameters -- full parameters payload, not required if using other keywords.
-        tag -- Custom tag for ingested data in the form 'tag:value'. String.
-        tag_source -- Tag the data with the specified source. String.
-        test_data -- Tag the data with 'test-ingest'. Defaults to False. Boolean.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-logscale/IngestDataAsyncV1
+
+        Keyword arguments
+        -----------------
+        data_content : str
+            JSON formatted data to ingest.
+        data_file : str
+            Content of the uploaded file in binary format.
+            'file' is also accepted as this parameter.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        tag : str
+            Custom tag for ingested data in the form 'tag:value'
+        tag_source : str
+            Tag the data with the specified source.
+        test_data : bool
+            Tag the data with 'test-ingest'. Defaults to False.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         # Try to find the binary object they provided us
         if not data_file:
@@ -196,23 +227,34 @@ class FoundryLogScale(ServiceClass):
                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a lookup file.
 
-        Keyword arguments:
-        data_file -- Content of the uploaded file in binary format.
-                     'file' is also accepted as this parameter.
-        name -- Name used to identify the file
-        description -- File description
-        id -- Unique identifier of the file being updated.
-        repo -- Name of repository or view to save the file
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/lookup-files/CreateFileV1
+
+        Keyword arguments
+        -----------------
+        data_file : str
+            Content of the uploaded file in binary format.
+            'file' is also accepted as this parameter.
+        name : str
+            Name used to identify the file
+        description : str
+            File description
+        id : str
+            Unique identifier of the file being updated.
+        repo : str
+            Name of repository or view to save the file
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not data_file:
             data_file = kwargs.get("file", None)
@@ -245,21 +287,30 @@ class FoundryLogScale(ServiceClass):
                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a lookup file.
 
-        Keyword arguments:
-        data_file -- Content of the uploaded file in binary format.
-                     'file' is also accepted as this parameter.
-        description -- File description. String.
-        id -- Unique identifier of the file being updated. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/lookup-files/UpdateFileV1
+
+        Keyword arguments
+        -----------------
+        data_file : str
+            Content of the uploaded file in binary format.
+            'file' is also accepted as this parameter.
+        description : str
+            File description.
+        id : str
+            Unique identifier of the file being updated.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not data_file:
             data_file = kwargs.get("file", None)
@@ -292,9 +343,18 @@ class FoundryLogScale(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Deploy a saved search.
 
-        Keyword arguments:
-        app_id -- Application ID. String.
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-logscale/CreateSavedSearchesDynamicExecuteV1
+
+        Keyword arguments
+        -----------------
+        app_id : str
+            Application ID.
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "end": "string",
                     "repo_or_view": "string",
@@ -302,27 +362,36 @@ class FoundryLogScale(ServiceClass):
                     "search_query_args": {},
                     "start": "string"
                 }
-        end -- Ending position. String.
-        include_schema_generation -- Include generated schemas in the response. Boolean.
-        incude_test_data -- Include test data when executing searches. Boolean.
-        infer_json_types -- Whether to try to infer data types in json event response
-                            instead of returning map[string]string. Boolean.
-        match_response_schema -- Whether to validate search results against their schema. Boolean.
-        metadata -- Include metadata in the response. Boolean.
-        mode -- Mode to execute the query under (async or sync). String.
-        repo_or_view -- Name of the repo or view to perform the search. String.
-        search_query -- Query for the search. String.
-        search_query_args -- Argumetns provided to the search. Dictionary.
-        start -- Starting position. String.
+        end : str
+            Ending position.
+        include_schema_generation : bool
+            Include generated schemas in the response.
+        incude_test_data : bool
+            Include test data when executing searches.
+        infer_json_types : bool
+            Whether to try to infer data types in json event response
+            instead of returning map[string]
+        match_response_schema : bool
+            Whether to validate search results against their schema.
+        metadata : bool
+            Include metadata in the response.
+        mode : str
+            Mode to execute the query under (async or sync)
+        repo_or_view : str
+            Name of the repo or view to perform the search.
+        search_query : str
+            Query for the search.
+        search_query_args : dict
+            Argumetns provided to the search.
+        start : str
+            Starting position.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-logscale/CreateSavedSearchesDynamicExecuteV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = foundry_dynamic_search_payload(passed_keywords=kwargs)
@@ -340,29 +409,43 @@ class FoundryLogScale(ServiceClass):
     def get_search_results(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the results of a saved search.
 
-        Keyword arguments:
-        app_id -- Application ID. String.
-        job_id -- Job ID for a previously executed asynchronous query. String.
-        job_status_only -- If set to true, result rows are dropped from the response
-                           and only the job status is returned. Boolean.
-        limit -- The maximum number of records to return in this response. Integer.
-                 Use with the offset parameter to manage pagination of results.
-        infer_json_types -- Whether to try to infer data types in json event response
-                            instead of returning map[string]string. Boolean.
-        match_response_schema -- Whether to validate search results against their schema. Boolean.
-        metadata -- Flag indicating if metadata should be included in the results. Boolean.
-        offset -- The offset to start retrieving records from. String.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-logscale/GetSavedSearchesExecuteV1
+
+        Keyword arguments
+        -----------------
+        app_id : str
+            Application ID.
+        job_id : str
+            Job ID for a previously executed asynchronous query.
+        job_status_only : bool
+            If set to true, result rows are dropped from the response
+            and only the job status is returned.
+        limit : str
+            The maximum number of records to return in this response. Integer.
+            Use with the offset parameter to manage pagination of results.
+        infer_json_types : bool
+            Whether to try to infer data types in json event response
+            instead of returning map[string]
+        match_response_schema : bool
+            Whether to validate search results against their schema.
+        metadata : bool
+            Flag indicating if metadata should be included in the results.
+        offset : str
+            The offset to start retrieving records from. String.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -380,9 +463,18 @@ class FoundryLogScale(ServiceClass):
                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Deploy a saved search.
 
-        Keyword arguments:
-        app_id -- Application ID. String.
-        body -- full body payload, not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-logscale/CreateSavedSearchesExecuteV1
+
+        Keyword arguments
+        -----------------
+        app_id : str
+            Application ID.
+        body : dict
+            full body payload, not required if using other keywords.
                 {
                     "end": "string",
                     "id": "string",
@@ -421,31 +513,43 @@ class FoundryLogScale(ServiceClass):
                         ]
                     }
                 }
-        detailed -- Flag indicating if search field details should be included. Boolean.
-        end -- Ending position. String.
-        id -- Saved search ID. String.
-        include_test_data -- Include test data when executing searches. Boolean.
-        infer_json_types -- Whether to try to infer data types in json event response
-                            instead of returning map[string]string. Boolean.
-        match_response_schema -- Whether to validate search results against their schema. Boolean.
-        metadata -- Include metadata in the response. Boolean.
-        name -- Saved search name. String.
-        search_parameters -- Search specific parameters. Dictionary.
-                             NOT to be confused with the default parameters dictionary.
-        start -- Starting position. String.
-        with_in -- With in. Dictionary.
-        with_limit -- With limit. Dictionary.
-        with_renames -- With renames. Dictionary.
-        with_sort -- With sort. Dictionary.
+        detailed : bool
+            Flag indicating if search field details should be included.
+        end : str
+            Ending position.
+        id : str
+            Saved search ID.
+        include_test_data : bool
+            Include test data when executing searches.
+        infer_json_types : bool
+            Whether to try to infer data types in json event response
+            instead of returning map[string]
+        match_response_schema : bool
+            Whether to validate search results against their schema.
+        metadata : bool
+            Include metadata in the response.
+        name : str
+            Saved search name.
+        search_parameters : dict
+            Search specific parameters. Dictionary.
+            NOT to be confused with the default parameters.
+        start : str
+            Starting position.
+        with_in : dict
+            With in.
+        with_limit : dict
+            With limit.
+        with_renames : list
+            With renames.
+        with_sort : dict
+            With sort.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-logscale/CreateSavedSearchesExecuteV1
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = foundry_execute_search_payload(passed_keywords=kwargs)
@@ -463,18 +567,26 @@ class FoundryLogScale(ServiceClass):
     def populate(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Populate a saved search.
 
-        Keyword arguments:
-        app_id -- Application ID. String.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'app_id'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-logscale/CreateSavedSearchesIngestV1
+
+        Keyword arguments
+        -----------------
+        app_id : str
+            Application ID.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'app_id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -488,21 +600,29 @@ class FoundryLogScale(ServiceClass):
     def download_results(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the results of a saved search as a file.
 
-        Keyword arguments:
-        job_id -- Job ID for a previously executed asynchronous query. String.
-        infer_json_types -- Whether to try to infer data types in json event response
-                            instead of returning map[string]string. Boolean.
-        parameters - full parameters payload, not required if using other keywords.
-        result_format -- Result file format. Allowed values: 'json' or 'csv'. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: binary object (success) or dict object (failure) containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-logscale/GetSavedSearchesJobResultsDownloadV1
+
+        Keyword arguments
+        -----------------
+        job_id : str
+            Job ID for a previously executed asynchronous query.
+        infer_json_types : bool
+            Whether to try to infer data types in json event response
+            instead of returning map[string]
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        result_format : str
+            Result file format. Allowed values: 'json' or 'csv'
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        binary object (success) or dict object (failure) containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -516,19 +636,28 @@ class FoundryLogScale(ServiceClass):
     def list_views(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """List views.
 
-        Keyword arguments:
-        check_test_data -- Include whether test data is present in the application repository. Boolean.
-        parameters - full parameters payload, not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'check_test_data'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-logscale/ListViewV1
+
+        Keyword arguments
+        -----------------
+        check_test_data : bool
+            Include whether test data is present in the application repository.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'check_test_data'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

@@ -64,28 +64,37 @@ class KubernetesContainerCompliance(ServiceClass):
 
         Includes pass/fail assessment counts for various asset types.
 
-        Keyword arguments:
-        filter -- FQL filter expression used to limit the results. String.
-                  Filter fields include:
-                    cid                             cloud_info.cluster_type
-                    cloud_info.cloud_account_id     compliance_finding.framework_name
-                    cloud_info.cloud_provider       compliance_finding.framework_name_version
-                    cloud_info.cloud_region         compliance_finding.framework_version
-                    cloud_info.cluster_id           compliance_finding.severity
-                    cloud_info.cluster_name
-        limit -- The maximum number of records to return. (1-500) Default is 20. Integer.
-        offset -- The zero-based position of the first record to return. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /kubernetes-container-compliance/AggregateAssessmentsGroupedByClustersV2
+        /kubernetes-container-compliance/AggregateAssessmentsGroupedByClustersV2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression used to limit the results. String.
+            Filter fields include:
+              cid                             cloud_info.cluster_type
+              cloud_info.cloud_account_id     compliance_finding.framework_name
+              cloud_info.cloud_provider       compliance_finding.framework_name_version
+              cloud_info.cloud_region         compliance_finding.framework_version
+              cloud_info.cluster_id           compliance_finding.severity
+              cloud_info.cluster_name
+        limit : int
+            The maximum number of records to return. (1-500) Default is 20.
+        offset : int
+            The zero-based position of the first record to return.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -102,26 +111,33 @@ class KubernetesContainerCompliance(ServiceClass):
                                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Provide aggregated compliance assessment metrics and rule status information, organized by asset type.
 
-        Keyword arguments:
-        filter -- FQL filter expression used to limit the results. String.
-                  Filter fields include:
-                    cid                             cloud_info.cluster_type
-                    cloud_info.cloud_account_id     compliance_finding.asset_type
-                    cloud_info.cloud_provider       compliance_finding.framework_name
-                    cloud_info.cloud_region         compliance_finding.framework_name_version
-                    cloud_info.cluster_id           compliance_finding.framework_version
-                    cloud_info.cluster_name         compliance_finding.severity
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /kubernetes-container-compliance/AggregateComplianceByAssetType
+        /kubernetes-container-compliance/AggregateComplianceByAssetType
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression used to limit the results. String.
+            Filter fields include:
+              cid                             cloud_info.cluster_type
+              cloud_info.cloud_account_id     compliance_finding.asset_type
+              cloud_info.cloud_provider       compliance_finding.framework_name
+              cloud_info.cloud_region         compliance_finding.framework_name_version
+              cloud_info.cluster_id           compliance_finding.framework_version
+              cloud_info.cluster_name         compliance_finding.severity
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -138,26 +154,33 @@ class KubernetesContainerCompliance(ServiceClass):
                                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Provide aggregated compliance assessment metrics and rule status information, organized by Kubernetes cluster type.
 
-        Keyword arguments:
-        filter -- FQL filter expression used to limit the results. String.
-                  Filter fields include:
-                    cid                             cloud_info.cluster_type
-                    cloud_info.cloud_account_id     compliance_finding.asset_type
-                    cloud_info.cloud_provider       compliance_finding.framework_name
-                    cloud_info.cloud_region         compliance_finding.framework_name_version
-                    cloud_info.cluster_id           compliance_finding.framework_version
-                    cloud_info.cluster_name         compliance_finding.severity
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /kubernetes-container-compliance/AggregateComplianceByClusterType
+        /kubernetes-container-compliance/AggregateComplianceByClusterType
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression used to limit the results. String.
+            Filter fields include:
+              cid                             cloud_info.cluster_type
+              cloud_info.cloud_account_id     compliance_finding.asset_type
+              cloud_info.cloud_provider       compliance_finding.framework_name
+              cloud_info.cloud_region         compliance_finding.framework_name_version
+              cloud_info.cluster_id           compliance_finding.framework_version
+              cloud_info.cluster_name         compliance_finding.severity
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -174,26 +197,33 @@ class KubernetesContainerCompliance(ServiceClass):
                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Provide aggregated compliance assessment metrics and rule status information, organized by compliance framework.
 
-        Keyword arguments:
-        filter -- FQL filter expression used to limit the results. String.
-                  Filter fields include:
-                    cid                             cloud_info.cluster_type
-                    cloud_info.cloud_account_id     compliance_finding.asset_type
-                    cloud_info.cloud_provider       compliance_finding.framework_name
-                    cloud_info.cloud_region         compliance_finding.framework_name_version
-                    cloud_info.cluster_id           compliance_finding.framework_version
-                    cloud_info.cluster_name         compliance_finding.severity
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /kubernetes-container-compliance/AggregateComplianceByFramework
+        /kubernetes-container-compliance/AggregateComplianceByFramework
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression used to limit the results. String.
+            Filter fields include:
+              cid                             cloud_info.cluster_type
+              cloud_info.cloud_account_id     compliance_finding.asset_type
+              cloud_info.cloud_provider       compliance_finding.framework_name
+              cloud_info.cloud_region         compliance_finding.framework_name_version
+              cloud_info.cluster_id           compliance_finding.framework_version
+              cloud_info.cluster_name         compliance_finding.severity
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -213,27 +243,35 @@ class KubernetesContainerCompliance(ServiceClass):
         Results are ranked in descending order based on the number of failed compliance rules
         across severity levels (critical, high, medium, and low).
 
-        Keyword arguments:
-        filter -- FQL filter expression used to limit the results. String.
-                  Filter fields include:
-                    cid                             cloud_info.cluster_type
-                    cloud_info.cloud_account_id     compliance_finding.asset_type
-                    cloud_info.cloud_provider       compliance_finding.framework_name
-                    cloud_info.cloud_region         compliance_finding.framework_name_version
-                    cloud_info.cluster_id           compliance_finding.framework_version
-                    cloud_info.cluster_name         compliance_finding.severity
-        limit -- The maximum number of records to return. (1-100) Default is 10. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /kubernetes-container-compliance/AggregateFailedRulesByClustersV3
+        /kubernetes-container-compliance/AggregateFailedRulesByClustersV3
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression used to limit the results. String.
+            Filter fields include:
+              cid                             cloud_info.cluster_type
+              cloud_info.cloud_account_id     compliance_finding.asset_type
+              cloud_info.cloud_provider       compliance_finding.framework_name
+              cloud_info.cloud_region         compliance_finding.framework_name_version
+              cloud_info.cluster_id           compliance_finding.framework_version
+              cloud_info.cluster_name         compliance_finding.severity
+        limit : int
+            The maximum number of records to return. (1-100) Default is 10.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -252,29 +290,38 @@ class KubernetesContainerCompliance(ServiceClass):
 
         Results organized by compliance rule, including pass/fail assessment counts.
 
-        Keyword arguments:
-        filter -- FQL filter expression used to limit the results. String.
-                  Filter fields include:
-                    cid                             compliance_finding.asset_type
-                    cloud_info.cloud_account_id     compliance_finding.framework_name
-                    cloud_info.cloud_provider       compliance_finding.framework_name_version
-                    cloud_info.cloud_region         compliance_finding.framework_version
-                    cloud_info.cluster_id           compliance_finding.id
-                    cloud_info.cluster_name         compliance_finding.severity
-                    cloud_info.cluster_type         compliance_finding.status
-        limit -- The maximum number of records to return. (1-500) Default is 20. Integer.
-        offset -- The zero-based position of the first record to return. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /kubernetes-container-compliance/AggregateAssessmentsGroupedByRulesV2
+        /kubernetes-container-compliance/AggregateAssessmentsGroupedByRulesV2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression used to limit the results. String.
+            Filter fields include:
+              cid                             compliance_finding.asset_type
+              cloud_info.cloud_account_id     compliance_finding.framework_name
+              cloud_info.cloud_provider       compliance_finding.framework_name_version
+              cloud_info.cloud_region         compliance_finding.framework_version
+              cloud_info.cluster_id           compliance_finding.id
+              cloud_info.cluster_name         compliance_finding.severity
+              cloud_info.cluster_type         compliance_finding.status
+        limit : int
+            The maximum number of records to return. (1-500) Default is 20.
+        offset : int
+            The zero-based position of the first record to return.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -294,27 +341,35 @@ class KubernetesContainerCompliance(ServiceClass):
         Results are ranked in descending order based on the number of failed assessments across
         severity levels (critical, high, medium, and low).
 
-        Keyword arguments:
-        filter -- FQL filter expression used to limit the results. String.
-                  Filter fields include:
-                    cid                             cloud_info.cluster_type
-                    cloud_info.cloud_account_id     compliance_finding.asset_type
-                    cloud_info.cloud_provider       compliance_finding.framework_name
-                    cloud_info.cloud_region         compliance_finding.framework_name_version
-                    cloud_info.cluster_id           compliance_finding.framework_version
-                    cloud_info.cluster_name         compliance_finding.severity
-        limit -- The maximum number of records to return. (1-100) Default is 10. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /kubernetes-container-compliance/AggregateTopFailedImages
+        /kubernetes-container-compliance/AggregateTopFailedImages
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression used to limit the results. String.
+            Filter fields include:
+              cid                             cloud_info.cluster_type
+              cloud_info.cloud_account_id     compliance_finding.asset_type
+              cloud_info.cloud_provider       compliance_finding.framework_name
+              cloud_info.cloud_region         compliance_finding.framework_name_version
+              cloud_info.cluster_id           compliance_finding.framework_version
+              cloud_info.cluster_name         compliance_finding.severity
+        limit : int
+            The maximum number of records to return. (1-100) Default is 10.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -333,36 +388,45 @@ class KubernetesContainerCompliance(ServiceClass):
 
         Provides information needed to identify compliance violations.
 
-        Keyword arguments:
-        after -- A pagination token used with the `limit` parameter to manage pagination of results. String.
-                 On your first request, don't provide an `after` token. On subsequent requests, provide the
-                 `after` token from the previous response to continue from that place in the results.
-        filter -- FQL filter expression used to limit the results. String.
-                  Filter fields include:
-                    cid                                     compliance_finding.framework_name_version
-                    cloud_info.cloud_account_id             compliance_finding.framework_version
-                    cloud_info.cloud_provider               compliance_finding.id
-                    cloud_info.cloud_region                 compliance_finding.severity
-                    cloud_info.cluster_id                   compliance_finding.status
-                    cloud_info.cluster_name                 image_digest
-                    cloud_info.cluster_type                 image_id
-                    cloud_info.namespace                    image_registry
-                    compliance_finding.asset_uid            image_repository
-                    compliance_finding.framework_name       image_tag
-        limit -- The maximum number of images for which assessments are to be returned. Integer.
-                 Use with the after parameter to manage pagination of results.
-                 Default: 100, Max: 100
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /kubernetes-container-compliance/CombinedImagesFindings
+        /kubernetes-container-compliance/CombinedImagesFindings
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the `limit` parameter to manage pagination of results. String.
+            On your first request, don't provide an `after` token. On subsequent requests, provide the
+            `after` token from the previous response to continue from that place in the results.
+        filter : str
+            FQL filter expression used to limit the results. String.
+            Filter fields include:
+              cid                                     compliance_finding.framework_name_version
+              cloud_info.cloud_account_id             compliance_finding.framework_version
+              cloud_info.cloud_provider               compliance_finding.id
+              cloud_info.cloud_region                 compliance_finding.severity
+              cloud_info.cluster_id                   compliance_finding.status
+              cloud_info.cluster_name                 image_digest
+              cloud_info.cluster_type                 image_id
+              cloud_info.namespace                    image_registry
+              compliance_finding.asset_uid            image_repository
+              compliance_finding.framework_name       image_tag
+        limit : int
+            The maximum number of images for which assessments are to be returned. Integer.
+            Use with the after parameter to manage pagination of results.
+            Default: 100, Max: 100
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -381,36 +445,45 @@ class KubernetesContainerCompliance(ServiceClass):
 
         Provides information needed to identify compliance violations.
 
-        Keyword arguments:
-        after -- A pagination token used with the `limit` parameter to manage pagination of results. String.
-                 On your first request, don't provide an `after` token. On subsequent requests, provide the
-                 `after` token from the previous response to continue from that place in the results.
-        filter -- FQL filter expression used to limit the results. String.
-                  Filter fields include:
-                    cid                                     compliance_finding.framework_name_version
-                    cloud_info.cloud_account_id             compliance_finding.framework_version
-                    cloud_info.cloud_provider               compliance_finding.id
-                    cloud_info.cloud_region                 compliance_finding.severity
-                    cloud_info.cluster_id                   compliance_finding.status
-                    cloud_info.cluster_name                 aid
-                    cloud_info.cluster_type                 node_id
-                    compliance_finding.asset_type           node_name
-                    compliance_finding.asset_uid            node_type
-                    compliance_finding.framework_name
-        limit -- The maximum number of nodes for which assessments are to be returned. Integer.
-                 Use with the after parameter to manage pagination of results.
-                 Default: 100, Max: 100.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /kubernetes-container-compliance/CombinedNodesFindings
+        /kubernetes-container-compliance/CombinedNodesFindings
+
+        Keyword arguments
+        -----------------
+        after : str
+            A pagination token used with the `limit` parameter to manage pagination of results. String.
+            On your first request, don't provide an `after` token. On subsequent requests, provide the
+            `after` token from the previous response to continue from that place in the results.
+        filter : str
+            FQL filter expression used to limit the results. String.
+            Filter fields include:
+              cid                                     compliance_finding.framework_name_version
+              cloud_info.cloud_account_id             compliance_finding.framework_version
+              cloud_info.cloud_provider               compliance_finding.id
+              cloud_info.cloud_region                 compliance_finding.severity
+              cloud_info.cluster_id                   compliance_finding.status
+              cloud_info.cluster_name                 aid
+              cloud_info.cluster_type                 node_id
+              compliance_finding.asset_type           node_name
+              compliance_finding.asset_uid            node_type
+              compliance_finding.framework_name
+        limit : int
+            The maximum number of nodes for which assessments are to be returned. Integer.
+            Use with the after parameter to manage pagination of results.
+            Default: 100, Max: 100.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -430,20 +503,29 @@ class KubernetesContainerCompliance(ServiceClass):
 
         Includes descriptions, remediation steps, and audit procedures by specifying rule identifiers.
 
-        Keyword arguments:
-        ids -- Rule IDs. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /kubernetes-container-compliance/getRulesMetadataByID
+        /kubernetes-container-compliance/getRulesMetadataByID
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Rule IDs.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

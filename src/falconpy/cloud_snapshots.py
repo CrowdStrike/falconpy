@@ -63,39 +63,49 @@ class CloudSnapshots(ServiceClass):
     def search_detections(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search IaC Detections using a query in Falcon Query Language.
 
-        Keyword arguments:
-        filter -- Search IaC detections using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    detection_uuid          file_name
-                    last_detected           platform
-                    project_name            project_owner
-                    project_ref             provider
-                    resource_name           rule_category
-                    rule_name               rule_type
-                    rule_uuid               service
-                    severity
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        sort -- Fields to sort the records on. String
-                Supported columns:
-                    detection_uuid          file_name
-                    last_detected           platform
-                    project_name            project_owner
-                    project_ref             provider
-                    resource_name           rule_category
-                    rule_name               rule_type
-                    rule_uuid               service
-                    severity
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspg-iacapi/CombinedDetections
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Search IaC detections using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              detection_uuid          file_name
+              last_detected           platform
+              project_name            project_owner
+              project_ref             provider
+              resource_name           rule_category
+              rule_name               rule_type
+              rule_uuid               service
+              severity
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        sort : str
+            Fields to sort the records on. String
+            Supported columns:
+                detection_uuid          file_name
+                last_detected           platform
+                project_name            project_owner
+                project_ref             provider
+                resource_name           rule_category
+                rule_name               rule_type
+                rule_uuid               service
+                severity
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -109,32 +119,42 @@ class CloudSnapshots(ServiceClass):
     def search_scan_jobs(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for snapshot jobs identified by the provided filter.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Available sort fields:
-                    account_id          region
-                    asset_identifier    status
-                    cloud_provider
-        limit -- The upper-bound on the number of records to retrieve.
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The offset from where to begin.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. last_behavior|asc).
-                Available sort fields:
-                account_id          last_updated_timestamp
-                asset_identifier    region
-                cloud_provider      status
-                instance_type
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/ReadDeploymentsCombined
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            Available sort fields:
+              account_id          region
+              asset_identifier    status
+              cloud_provider
+        limit : int
+            The upper-bound on the number of records to retrieve.
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset from where to begin.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. last_behavior|asc).
+            Available sort fields:
+            account_id          last_updated_timestamp
+            asset_identifier    region
+            cloud_provider      status
+            instance_type
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -148,19 +168,28 @@ class CloudSnapshots(ServiceClass):
     def get_scan_jobs(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve snapshot jobs identified by the provided IDs.
 
-        Keyword arguments:
-        parameters -- full parameters payload, not required if using other keywords.
-        ids -- ID(s) of the snapshots to retrieve. String or list of strings. Max: 100
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/ReadDeploymentsEntities
+
+        Keyword arguments
+        -----------------
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        ids : str or list[str]
+            ID(s) of the snapshots to retrieve. String or list of strings. Max: 100
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -174,31 +203,41 @@ class CloudSnapshots(ServiceClass):
     def launch_scan_job(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Launch a snapshot scan for a given cloud asset.
 
-        Keyword arguments:
-        account_id -- Cloud provider account ID. String.
-        asset_identifier -- Cloud asset identifier. String.
-        body - full body payload in JSON format, not required if using other keywords.
-               {
-                   "resources": [
-                       {
-                           "account_id": "string",
-                           "asset_identifier": "string",
-                           "cloud_provider": "string",
-                           "region": "string"
-                       }
-                   ]
-               }
-        cloud_provider -- Cloud provider ID. String.
-        region -- Cloud provider region ID. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/CreateDeploymentEntity
+
+        Keyword arguments
+        -----------------
+        account_id : str
+            Cloud provider account ID.
+        asset_identifier : str
+            Cloud asset identifier.
+        body : dict
+            full body payload in JSON format, not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "account_id": "string",
+                            "asset_identifier": "string",
+                            "cloud_provider": "string",
+                            "region": "string"
+                        }
+                    ]
+                }
+        cloud_provider : str
+            Cloud provider ID.
+        region : str
+            Cloud provider region ID.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = snapshot_launch_payload(passed_keywords=kwargs)
@@ -215,19 +254,28 @@ class CloudSnapshots(ServiceClass):
     def get_scan_reports(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the scan report for an instance.
 
-        Keyword arguments:
-        parameters -- full parameters payload, not required if using other keywords.
-        ids -- The instance identifiers to fetch reports for. String or list of strings. Max: 100
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/GetScanReport
+
+        Keyword arguments
+        -----------------
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        ids : str or list[str]
+            The instance identifiers to fetch reports for. String or list of strings. Max: 100
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -246,15 +294,15 @@ class CloudSnapshots(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/GetCredentialsMixin0
 
         Keyword arguments
-        ----
+        -----------------
         This method does not accept keyword arguments.
 
         Arguments
-        ----
+        ---------
         This method does not accept arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -270,19 +318,19 @@ class CloudSnapshots(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        ----
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspg-iacapi/GetCredentialsMixin0
 
         Keyword arguments
-        ----
+        -----------------
         This method does not accept keyword arguments.
 
         Arguments
-        ----
+        ---------
         This method does not accept arguments.
 
         Returns
-        ----
+        -------
         dict
             Dictionary object containing API response.
         """
@@ -296,43 +344,56 @@ class CloudSnapshots(ServiceClass):
     def register_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create inventory from data received from a snapshot.
 
-        Keyword arguments:
-        body - full body payload in JSON format, not required if using other keywords.
-               {
-                   "aws_accounts": [
-                       {
-                           "account_number": "string",
-                           "batch_regions": [
-                               {
-                                   "job_definition_name": "string",
-                                   "job_queue": "string",
-                                   "region": "string"
-                               }
-                           ],
-                           "iam_external_id": "string",
-                           "iam_role_arn": "string",
-                           "kms_alias": "string",
-                           "processing_account": "string"
-                       }
-                   ]
-               }
-        aws_accounts -- Complete list of AWS accounts to register. List of dictionaries.
-                        Overrides any values specified below.
-        account_number -- AWS account number. String
-        batch_regions -- Region the batch is executed. List of dictionaries.
-        iam_external_id -- The external ID of the IAM account used. String.
-        iam_role_arn -- The AWS ARN for the IAM account used. String.
-        kms_alias -- The KMS alias for the IAM account used. String.
-        processing_account -- The name of the processing account. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/RegisterCspmSnapshotAccount
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload in JSON format, not required if using other keywords.
+                {
+                    "aws_accounts": [
+                        {
+                            "account_number": "string",
+                            "batch_regions": [
+                                {
+                                    "job_definition_name": "string",
+                                    "job_queue": "string",
+                                    "region": "string"
+                                }
+                            ],
+                            "iam_external_id": "string",
+                            "iam_role_arn": "string",
+                            "kms_alias": "string",
+                            "processing_account": "string"
+                        }
+                    ]
+                }
+        aws_accounts : list
+            Complete list of AWS accounts to register. List of dictionaries.
+            Overrides any values specified below.
+        account_number : str
+            AWS account number.
+        batch_regions : list[dict]
+            Region the batch is executed.
+        iam_external_id : str
+            The external ID of the IAM account used.
+        iam_role_arn : str
+            The AWS ARN for the IAM account used.
+        kms_alias : str
+            The KMS alias for the IAM account used.
+        processing_account : str
+            The name of the processing account.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = snapshot_registration_payload(passed_keywords=kwargs)

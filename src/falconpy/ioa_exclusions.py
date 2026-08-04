@@ -69,20 +69,34 @@ class IOAExclusions(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Self Service IOA Exclusion aggregates as specified via json in the request body.
 
-        Keyword arguments:
-        ifn_regex -- The `ifn_regex` expression to filter exclusion aggregations by. String.
-        Used alongside filter expressions provided in the request body.
-        cl_regex -- The `cl_regex` expression to filter exclusion aggregations by. String.
-        Used alongside filter expressions provided in the request body.
-        parent_ifn_regex -- The `parent_ifn_regex` expression to filter exclusion aggregations by. String.
-        Used alongside filter expressions provided in the request body.
-        parent_cl_regex -- The `parent_cl_regex` expression to filter exclusion aggregations by. String.
-        Used alongside filter expressions provided in the request body.
-        grandparent_ifn_regex -- The `grandparent_ifn_regex` expression to filter exclusion aggregations by. String.
-        Used alongside filter expressions provided in the request body.
-        grandparent_cl_regex -- The `grandparent_cl_regex` expression to filter exclusion aggregations by. String.
-        Used alongside filter expressions provided in the request body.
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/ss-ioa-exclusions.aggregates.v2
+
+        Keyword arguments
+        -----------------
+        ifn_regex : str
+            The `ifn_regex` expression to filter exclusion aggregations by. String.
+            Used alongside filter expressions provided in the request body.
+        cl_regex : str
+            The `cl_regex` expression to filter exclusion aggregations by. String.
+            Used alongside filter expressions provided in the request body.
+        parent_ifn_regex : str
+            The `parent_ifn_regex` expression to filter exclusion aggregations by. String.
+            Used alongside filter expressions provided in the request body.
+        parent_cl_regex : str
+            The `parent_cl_regex` expression to filter exclusion aggregations by. String.
+            Used alongside filter expressions provided in the request body.
+        grandparent_ifn_regex : str
+            The `grandparent_ifn_regex` expression to filter exclusion aggregations by. String.
+            Used alongside filter expressions provided in the request body.
+        grandparent_cl_regex : str
+            The `grandparent_cl_regex` expression to filter exclusion aggregations by. String.
+            Used alongside filter expressions provided in the request body.
+        body : list
+            full body payload, not required when ids keyword is provided.
                 {
                     "date_ranges": [
                         {
@@ -131,35 +145,53 @@ class IOAExclusions(ServiceClass):
                     "time_zone": "string",
                     "type": "string"
                 }
-        date_ranges -- Date range timeframe. List of dictionaries.
-        exclude -- Fields to exclude from results. String.
-        extended_bounds -- Extended bounds for histogram aggregations. Dictionary.
-        field -- Field to aggregate on. String.
-        filters_spec -- Additional filter specifications. Dictionary.
-        from -- Starting index of overall result set. Integer.
-        include -- Fields to include in results. String.
-        max_doc_count -- Maximum number of documents per bucket. Integer.
-        min_doc_count -- Minimum number of documents per bucket. Integer.
-        missing -- Value to use for documents missing the field. String.
-        name -- Name of the aggregation. String.
-        percents -- Percentile values to calculate. List of integers.
-        q -- Full text search query. String.
-        ranges -- Range boundaries for range aggregations. List of dictionaries.
-        size -- Maximum number of records to return. Integer.
-        sort -- The field to sort on. String.
-        sub_aggregates -- Nested aggregation definitions. List.
-        time_zone -- Time zone for date histogram aggregations. String.
-        type -- Type of aggregation to perform. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        date_ranges : list[dict]
+            Date range timeframe.
+        exclude : str
+            Fields to exclude from results.
+        extended_bounds : dict
+            Extended bounds for histogram aggregations.
+        field : str
+            Field to aggregate on.
+        filters_spec : dict
+            Additional filter specifications.
+        from : int
+            Starting index of overall result set.
+        include : str
+            Fields to include in results.
+        max_doc_count : int
+            Maximum number of documents per bucket.
+        min_doc_count : int
+            Minimum number of documents per bucket.
+        missing : str
+            Value to use for documents missing the field.
+        name : str
+            Name of the aggregation.
+        percents : list[int]
+            Percentile values to calculate.
+        q : str
+            Full text search query.
+        ranges : list[dict]
+            Range boundaries for range aggregations.
+        size : int
+            Maximum number of records to return.
+        sort : str
+            The field to sort on.
+        sub_aggregates : list
+            Nested aggregation definitions.
+        time_zone : str
+            Time zone for date histogram aggregations.
+        type : str
+            Type of aggregation to perform.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/ss-ioa-exclusions.aggregates.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = aggregate_payload(submitted_keywords=kwargs)
@@ -176,8 +208,16 @@ class IOAExclusions(ServiceClass):
     def get_ss_exclusion_reports_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a report of Self Service IOA Exclusions scoped by the given filters.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/ss-ioa-exclusions.get-reports.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "report_format": "string",
                     "search": {
@@ -185,17 +225,17 @@ class IOAExclusions(ServiceClass):
                         "sort": "string"
                     }
                 }
-        report_format -- Format of the report to generate. String.
-        search -- Search criteria including filter and sort options. Dictionary.
+        report_format : str
+            Format of the report to generate.
+        search : dict
+            Search criteria including filter and sort options.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/ss-ioa-exclusions.get-reports.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ioa_ss_exclusion_payload(passed_keywords=kwargs)
@@ -215,19 +255,28 @@ class IOAExclusions(ServiceClass):
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the Self Service IOA Exclusions rules by id.
 
-        Keyword arguments:
-        ids -- The ids of the exclusions to retrieve. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/ss-ioa-exclusions.get.v2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The ids of the exclusions to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -241,8 +290,16 @@ class IOAExclusions(ServiceClass):
     def create_ss_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create new Self Service IOA Exclusions.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/ss-ioa-exclusions.create.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "exclusions": [
                         {
@@ -264,16 +321,15 @@ class IOAExclusions(ServiceClass):
                         }
                     ]
                 }
-        exclusions -- List of exclusion definitions to create. List of dictionaries.
+        exclusions : list[dict]
+            List of exclusion definitions to create.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/ss-ioa-exclusions.create.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             if kwargs.get("exclusions", None):
@@ -292,8 +348,16 @@ class IOAExclusions(ServiceClass):
     def update_ss_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the Self Service IOA Exclusions rule by id.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/ss-ioa-exclusions.update.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "exclusions": [
                         {
@@ -316,16 +380,15 @@ class IOAExclusions(ServiceClass):
                         }
                     ]
                 }
-        exclusions -- List of exclusion definitions to update. List of dictionaries.
+        exclusions : list[dict]
+            List of exclusion definitions to update.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/ss-ioa-exclusions.update.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             if kwargs.get("exclusions", None):
@@ -344,19 +407,27 @@ class IOAExclusions(ServiceClass):
     def delete_ss_exclusions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete the Self Service IOA Exclusions rule by id.
 
-        Keyword arguments:
-        ids -- The ids of the exclusions to delete. String or list of strings.
-        comment -- The comment why these ss ioa exclusions were deleted. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/ss-ioa-exclusions.delete.v2
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            The ids of the exclusions to delete.
+        comment : str
+            The comment why these ss ioa exclusions were deleted.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -375,8 +446,16 @@ class IOAExclusions(ServiceClass):
 
         For child, parent and grandparent.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/ss-ioa-exclusions.matched-rule.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "aid": "string",
                     "command_line": "string",
@@ -389,23 +468,29 @@ class IOAExclusions(ServiceClass):
                         "string"
                     ]
                 }
-        aid -- Agent ID to match exclusions against. String.
-        command_line -- Command line of the child process. String.
-        grandparent_command_line -- Command line of the grandparent process. String.
-        grandparent_image_file_name -- Image file name of the grandparent process. String.
-        image_file_name -- Image file name of the child process. String.
-        parent_command_line -- Command line of the parent process. String.
-        parent_image_file_name -- Image file name of the parent process. String.
-        pattern_ids -- Pattern IDs to match exclusions against. List of strings.
+        aid : str
+            Agent ID to match exclusions against.
+        command_line : str
+            Command line of the child process.
+        grandparent_command_line : str
+            Command line of the grandparent process.
+        grandparent_image_file_name : str
+            Image file name of the grandparent process.
+        image_file_name : str
+            Image file name of the child process.
+        parent_command_line : str
+            Command line of the parent process.
+        parent_image_file_name : str
+            Image file name of the parent process.
+        pattern_ids : str or list[str]
+            Pattern IDs to match exclusions against.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/ss-ioa-exclusions.matched-rule.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ioa_ss_default_exclusion_payload(passed_keywords=kwargs)
@@ -421,8 +506,16 @@ class IOAExclusions(ServiceClass):
     def get_default_ss_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get defaults for Self Service IOA Exclusions based on provided IFN/CLI for child, parent and grandparent.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/ss-ioa-exclusions.new-rules.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
                 {
                     "aid": "string",
                     "command_line": "string",
@@ -432,22 +525,27 @@ class IOAExclusions(ServiceClass):
                     "parent_command_line": "string",
                     "parent_image_file_name": "string"
                 }
-        aid -- Agent ID to get default exclusions for. String.
-        command_line -- Command line of the child process. String.
-        grandparent_command_line -- Command line of the grandparent process. String.
-        grandparent_image_file_name -- Image file name of the grandparent process. String.
-        image_file_name -- Image file name of the child process. String.
-        parent_command_line -- Command line of the parent process. String.
-        parent_image_file_name -- Image file name of the parent process. String.
+        aid : str
+            Agent ID to get default exclusions for.
+        command_line : str
+            Command line of the child process.
+        grandparent_command_line : str
+            Command line of the grandparent process.
+        grandparent_image_file_name : str
+            Image file name of the grandparent process.
+        image_file_name : str
+            Image file name of the child process.
+        parent_command_line : str
+            Command line of the parent process.
+        parent_image_file_name : str
+            Image file name of the parent process.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/ss-ioa-exclusions.new-rules.v2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ioa_ss_default_exclusion_payload(passed_keywords=kwargs)
@@ -463,29 +561,46 @@ class IOAExclusions(ServiceClass):
     def query_ss_exclusions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for Self Service IOA Exclusions.
 
-        Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. String.
-        Filtered queries involving regex fields should specify their expressions in the `ifn_regex` and `cl_regex` parameters.
-        Regex parameters here are used alongside expressions specified in the filter query parameter.
-        ifn_regex -- The `ifn_regex` expression to filter exclusions by. String.
-        cl_regex -- The `cl_regex` expression to filter exclusions by. String.
-        parent_ifn_regex -- The `parent_ifn_regex` expression to filter exclusions by. String.
-        parent_cl_regex -- The `parent_cl_regex` expression to filter exclusions by. String.
-        grandparent_ifn_regex -- The `grandparent_ifn_regex` expression to filter exclusions by. String.
-        grandparent_cl_regex -- The `grandparent_cl_regex` expression to filter exclusions by. String.
-        offset -- The offset to start retrieving records from. Integer.
-        limit -- The maximum records to return. [1-500]. Integer.
-        sort -- The sort expression that should be used to sort the results. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/ss-ioa-exclusions.search.v2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results. String.
+            Filtered queries involving regex fields should specify their expressions in the
+            `ifn_regex` and `cl_regex` parameters.
+            Regex parameters here are used alongside expressions specified in the filter query parameter.
+        ifn_regex : str
+            The `ifn_regex` expression to filter exclusions by.
+        cl_regex : str
+            The `cl_regex` expression to filter exclusions by.
+        parent_ifn_regex : str
+            The `parent_ifn_regex` expression to filter exclusions by.
+        parent_cl_regex : str
+            The `parent_cl_regex` expression to filter exclusions by.
+        grandparent_ifn_regex : str
+            The `grandparent_ifn_regex` expression to filter exclusions by.
+        grandparent_cl_regex : str
+            The `grandparent_cl_regex` expression to filter exclusions by.
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return. [1-500]
+        sort : str
+            The sort expression that should be used to sort the results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -499,19 +614,28 @@ class IOAExclusions(ServiceClass):
     def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a set of IOA Exclusions by specifying their IDs.
 
-        Keyword arguments:
-        ids -- List of exclusion IDs to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/getIOAExclusionsV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            List of exclusion IDs to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -525,39 +649,54 @@ class IOAExclusions(ServiceClass):
     def create_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create the IOA exclusions.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
-            {
-                "cl_regex": "string",
-                "comment": "string",
-                "description": "string",
-                "detection_json": "string",
-                "groups": [
-                    "string"
-                ],
-                "ifn_regex": "string",
-                "name": "string",
-                "pattern_id": "string",
-                "pattern_name": "string"
-            }
-        cl_regex -- Command line regex value for the exclusion. String.
-        comment -- Comment describing why the exclusion is entered. String.
-        description -- Description of the exclusion. String.
-        detection_json -- Detection JSON payload for the exclusion. String.
-        groups -- Group IDs to exclude. List of strings.
-        ifn_regex -- Image file name regex value for the exclusion. String.
-        name -- Name of the exclusion. String.
-        pattern_id -- Pattern ID associated with the exclusion. String.
-        pattern_name -- Pattern name associated with the exclusion. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: POST
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/createIOAExclusionsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
+                {
+                    "cl_regex": "string",
+                    "comment": "string",
+                    "description": "string",
+                    "detection_json": "string",
+                    "groups": [
+                        "string"
+                    ],
+                    "ifn_regex": "string",
+                    "name": "string",
+                    "pattern_id": "string",
+                    "pattern_name": "string"
+                }
+        cl_regex : str
+            Command line regex value for the exclusion.
+        comment : str
+            Comment describing why the exclusion is entered.
+        description : str
+            Description of the exclusion.
+        detection_json : str
+            Detection JSON payload for the exclusion.
+        groups : str or list[str]
+            Group IDs to exclude.
+        ifn_regex : str
+            Image file name regex value for the exclusion.
+        name : str
+            Name of the exclusion.
+        pattern_id : str
+            Pattern ID associated with the exclusion.
+        pattern_name : str
+            Pattern name associated with the exclusion.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ioa_exclusion_payload(passed_keywords=kwargs)
@@ -573,20 +712,30 @@ class IOAExclusions(ServiceClass):
     def delete_exclusions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete the IOA Exclusions by ID.
 
-        Keyword arguments:
-        comment -- Explains why this exclusions was deleted. String.
-        ids -- List of exclusion IDs to delete. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: DELETE
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/deleteIOAExclusionsV1
+
+        Keyword arguments
+        -----------------
+        comment : str
+            Explains why this exclusions was deleted.
+        ids : str or list[str]
+            List of exclusion IDs to delete.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -600,42 +749,57 @@ class IOAExclusions(ServiceClass):
     def update_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the IOA Exclusions.
 
-        Keyword arguments:
-        body -- full body payload, not required when ids keyword is provided.
-            {
-                "cl_regex": "string",
-                "comment": "string",
-                "description": "string",
-                "detection_json": "string",
-                "groups": [
-                    "string"
-                ],
-                "id": "string",
-                "ifn_regex": "string",
-                "name": "string",
-                "pattern_id": "string",
-                "pattern_name": "string"
-            }
-        cl_regex -- Command line regex value for the exclusion. String.
-        comment -- Comment describing why the exclusion is updated. String.
-        description -- Description of the exclusion. String.
-        detection_json -- Detection JSON payload for the exclusion. String.
-        groups -- Group IDs to exclude. List of strings.
-        id -- Identifier of the exclusion to update. String.
-        ifn_regex -- Image file name regex value for the exclusion. String.
-        name -- Name of the exclusion. String.
-        pattern_id -- Pattern ID associated with the exclusion. String.
-        pattern_name -- Pattern name associated with the exclusion. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: PATCH
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/updateIOAExclusionsV1
 
+        Keyword arguments
+        -----------------
+        body : dict
+            full body payload, not required when ids keyword is provided.
+                {
+                    "cl_regex": "string",
+                    "comment": "string",
+                    "description": "string",
+                    "detection_json": "string",
+                    "groups": [
+                        "string"
+                    ],
+                    "id": "string",
+                    "ifn_regex": "string",
+                    "name": "string",
+                    "pattern_id": "string",
+                    "pattern_name": "string"
+                }
+        cl_regex : str
+            Command line regex value for the exclusion.
+        comment : str
+            Comment describing why the exclusion is updated.
+        description : str
+            Description of the exclusion.
+        detection_json : str
+            Detection JSON payload for the exclusion.
+        groups : str or list[str]
+            Group IDs to exclude.
+        id : str
+            Identifier of the exclusion to update.
+        ifn_regex : str
+            Image file name regex value for the exclusion.
+        name : str
+            Name of the exclusion.
+        pattern_id : str
+            Pattern ID associated with the exclusion.
+        pattern_name : str
+            Pattern name associated with the exclusion.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = ioa_exclusion_payload(passed_keywords=kwargs)
@@ -656,42 +820,54 @@ class IOAExclusions(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for IOA Exclusions.
 
-        Keyword arguments:
-        cl_regex -- The cl_regex expression to filter exclusions by, used alongside expressions
-                    specified in the filter query parameter.
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  The filter expression that should be used to limit the results.
-                  Filtered queries involving regex fields should specify their expressions in the
-                  'ifn_regex' and 'cl_regex' parameters.
-                  An asterisk wildcard '*' includes all results.
-                  AVAILABLE FILTERS
-                  applied_globally            last_modified
-                  created_by                  modified_by
-                  created_on                  value
-                  name                        pattern
-        ifn_regex -- The ifn_regex expression to filter exclusions by, used alongside expressions
-                     specified in the filter query parameter. String.
-        limit -- The maximum number of exclusions to return in this response.
-                 [Integer, default: 100; max: 500]
-                 Use with the offset parameter to manage pagination of results.
-        offset -- The first exclusion to return, where 0 is the latest exclusion.
-                  Use with the limit parameter to manage pagination of results.
-        parameters - full parameters payload, not required if using other keywords.
-        sort -- The property to sort by. FQL syntax (e.g. last_behavior|asc).
-                Available sort fields:
-                applied_globally            last_modified
-                created_by                  modified_by
-                created_on                  value
-                name                        pattern
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/queryIOAExclusionsV1
+
+        Keyword arguments
+        -----------------
+        cl_regex : str
+            The cl_regex expression to filter exclusions by, used alongside expressions
+            specified in the filter query parameter.
+        filter : str
+            The filter expression that should be used to limit the results. FQL syntax.
+            The filter expression that should be used to limit the results.
+            Filtered queries involving regex fields should specify their expressions in the
+            'ifn_regex' and 'cl_regex' parameters.
+            An asterisk wildcard '*' includes all results.
+            AVAILABLE FILTERS
+            applied_globally            last_modified
+            created_by                  modified_by
+            created_on                  value
+            name                        pattern
+        ifn_regex : str
+            The ifn_regex expression to filter exclusions by, used alongside expressions
+            specified in the filter query parameter.
+        limit : int
+            The maximum number of exclusions to return in this response.
+            [Integer, default: 100; max: 500]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The first exclusion to return, where 0 is the latest exclusion.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax (e.g. last_behavior|asc).
+            Available sort fields:
+            applied_globally            last_modified
+            created_by                  modified_by
+            created_on                  value
+            name                        pattern
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

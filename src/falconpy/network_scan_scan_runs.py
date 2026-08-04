@@ -63,8 +63,16 @@ class NetworkScanScanRuns(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return scan-runs aggregations.
 
-        Keyword arguments:
-        body -- Full body payload as a list of dictionaries in JSON format.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scan-runs/aggregate_scan_runs
+
+        Keyword arguments
+        -----------------
+        body : list
+            Full body payload as a list of dictionaries in JSON format.
                 [{
                     "date_ranges": [{}],
                     "exclude": "string",
@@ -85,14 +93,14 @@ class NetworkScanScanRuns(ServiceClass):
                     "type": "string"
                 }]
 
+
+
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scan-runs/aggregate_scan_runs
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -112,19 +120,28 @@ class NetworkScanScanRuns(ServiceClass):
                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scan-runs by their IDs.
 
-        Keyword arguments:
-        ids -- IDs of scan-runs to be retrieved (Min: 1, Max: 100). String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scan-runs/get_scan_runs
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            IDs of scan-runs to be retrieved (Min: 1, Max: 100)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -141,8 +158,16 @@ class NetworkScanScanRuns(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create scan-runs using provided specifications.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scan-runs/create_scan_runs
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "config": {
                         "additional_tcp_ports": ["string"],
@@ -198,17 +223,17 @@ class NetworkScanScanRuns(ServiceClass):
                     },
                     "scan_id": "string"
                 }
-        config -- The scan run configuration. Dictionary.
-        scan_id -- The scan ID based on which to create a scan run. String.
+        config : dict
+            The scan run configuration.
+        scan_id : str
+            The scan ID based on which to create a scan run.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scan-runs/create_scan_runs
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = scan_run_create_payload(passed_keywords=kwargs)
@@ -227,23 +252,31 @@ class NetworkScanScanRuns(ServiceClass):
                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update scan-runs using provided specifications.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scan-runs/update_scan_runs
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "action": "string",
                     "id": "string"
                 }
-        action -- The action to be performed for the scan run. Allowed value: stop. String.
-        id -- The ID of the scan run to update. String.
+        action : str
+            The action to be performed for the scan run. Allowed value: stop.
+        id : str
+            The ID of the scan run to update.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scan-runs/update_scan_runs
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = scan_run_update_payload(passed_keywords=kwargs)
@@ -262,24 +295,34 @@ class NetworkScanScanRuns(ServiceClass):
                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scan-run IDs by filter.
 
-        Keyword arguments:
-        offset -- An offset used with the limit parameter to manage pagination of results. On your first request, don’t provide
-                  an offset. On subsequent requests, add previous offset with the previous limit to continue from that place in
-                  the results Integer.
-        limit -- The number of scan-run IDs to return in this response (Min: 1, Max: 100,
-                 Default: 100). Integer.
-        sort -- Sort scan-runs by their properties. A single sort field is allowed. String.
-        filter -- Search for scan-runs by providing an FQL filter. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scan-runs/query_scan_runs
+
+        Keyword arguments
+        -----------------
+        offset : int
+            An offset used with the limit parameter to manage pagination of results. On your first request, don’t provide
+            an offset. On subsequent requests, add previous offset with the previous limit to continue from that place in
+            the results.
+        limit : int
+            The number of scan-run IDs to return in this response (Min: 1, Max: 100,
+            Default: 100)
+        sort : str
+            Sort scan-runs by their properties. A single sort field is allowed.
+        filter : str
+            Search for scan-runs by providing an FQL filter.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

@@ -62,28 +62,36 @@ class DriftIndicators(ServiceClass):
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the count of Drift Indicators by the date. by default it's for 7 days.
 
-        Keyword arguments:
-        filter -- Filter drift indicators using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    cid                     namespace
-                    cloud_name              occurred_at
-                    command_line            parent_process_id
-                    container_id            pod_name
-                    file_name               prevented
-                    file_sha256             scheduler_name
-                    host_id                 severity
-                    indicator_process_id    worker_node_name
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/drift-indicators/GetDriftIndicatorsValuesByDate
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter drift indicators using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              cid                     namespace
+              cloud_name              occurred_at
+              command_line            parent_process_id
+              container_id            pod_name
+              file_name               prevented
+              file_sha256             scheduler_name
+              host_id                 severity
+              indicator_process_id    worker_node_name
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -100,27 +108,34 @@ class DriftIndicators(ServiceClass):
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the total count of Drift indicators over a time period.
 
-        Keyword arguments:
-        filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    cid                     namespace
-                    cloud_name              occurred_at
-                    command_line            parent_process_id
-                    container_id            pod_name
-                    file_name               prevented
-                    file_sha256             scheduler_name
-                    host_id                 severity
-                    indicator_process_id    worker_node_name
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/drift-indicators/ReadDriftIndicatorsCount
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              cid                     namespace
+              cloud_name              occurred_at
+              command_line            parent_process_id
+              container_id            pod_name
+              file_name               prevented
+              file_sha256             scheduler_name
+              host_id                 severity
+              indicator_process_id    worker_node_name
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -137,30 +152,40 @@ class DriftIndicators(ServiceClass):
                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Drift Indicators by the provided search criteria.
 
-        Keyword arguments:
-        filter -- Filter Drift Indicators using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    cid                     namespace
-                    cloud_name              occurred_at
-                    command_line            parent_process_id
-                    container_id            pod_name
-                    file_name               prevented
-                    file_sha256             scheduler_name
-                    host_id                 severity
-                    indicator_process_id    worker_node_name
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        sort -- The fields to sort the records on. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/drift-indicators/SearchAndReadDriftIndicatorEntities
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter Drift Indicators using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              cid                     namespace
+              cloud_name              occurred_at
+              command_line            parent_process_id
+              container_id            pod_name
+              file_name               prevented
+              file_sha256             scheduler_name
+              host_id                 severity
+              indicator_process_id    worker_node_name
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        sort : str
+            The fields to sort the records on.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -178,19 +203,28 @@ class DriftIndicators(ServiceClass):
                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Drift Indicator entities identified by the provided IDs.
 
-        Keyword arguments:
-        ids -- AID(s) of the hosts to retrieve. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/drift-indicators/ReadDriftIndicatorEntities
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            AID(s) of the hosts to retrieve.
+        parameters : dict
+            full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -207,30 +241,40 @@ class DriftIndicators(ServiceClass):
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve all drift indicators that match the given query.
 
-        Keyword arguments:
-        filter -- Filter Drift Indicators using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    cid                     namespace
-                    cloud_name              occurred_at
-                    command_line            parent_process_id
-                    container_id            pod_name
-                    file_name               prevented
-                    file_sha256             scheduler_name
-                    host_id                 severity
-                    indicator_process_id    worker_node_name
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        sort -- The fields to sort the records on. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/drift-indicators/SearchDriftIndicators
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter Drift Indicators using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              cid                     namespace
+              cloud_name              occurred_at
+              command_line            parent_process_id
+              container_id            pod_name
+              file_name               prevented
+              file_sha256             scheduler_name
+              host_id                 severity
+              indicator_process_id    worker_node_name
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        sort : str
+            The fields to sort the records on.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

@@ -59,16 +59,24 @@ class DeliverySettings(ServiceClass):
     def get_delivery_settings(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Delivery Settings.
 
-        Keyword arguments: This method does not accept keyword arguments.
-
-        Arguments: This method does not accept arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/delivery-settings/GetDeliverySettings
+
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Arguments
+        ---------
+        This method does not accept arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -80,8 +88,16 @@ class DeliverySettings(ServiceClass):
     def create_delivery_settings(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Delivery Settings.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/delivery-settings/PostDeliverySettings
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
                 {
                     "delivery_settings": [
                         {
@@ -90,17 +106,17 @@ class DeliverySettings(ServiceClass):
                         }
                     ]
                 }
-        delivery_cadence -- Cadence for the delivery. String.
-        delivery_type -- Type of delivery. String.
+        delivery_cadence : str
+            Cadence for the delivery.
+        delivery_type : str
+            Type of delivery.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/delivery-settings/PostDeliverySettings
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = delivery_settings_payload(passed_keywords=kwargs)

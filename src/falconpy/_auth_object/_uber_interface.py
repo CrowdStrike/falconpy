@@ -199,7 +199,7 @@ class UberInterface(FalconInterface):
         """Legacy Uber Class functionality handler.
 
         DEPRECATED
-        ----
+        ----------
         Consider updating your code to leverage the login method.
         """
         return self.login()
@@ -208,7 +208,7 @@ class UberInterface(FalconInterface):
         """Legacy Uber Class functionality handler.
 
         DEPRECATED
-        ----
+        ----------
         Consider updating your code to leverage the logout method.
         """
         return self.logout()
@@ -217,7 +217,7 @@ class UberInterface(FalconInterface):
         """Legacy property to confirm credential dictionary format.
 
         DEPRECATED
-        ----
+        ----------
         Consider updating your code to leverage the cred_format_valid property.
         """
         return self.cred_format_valid
@@ -226,7 +226,7 @@ class UberInterface(FalconInterface):
         """Legacy property getter for the current authorization headers.
 
         DEPRECATED
-        ----
+        ----------
         Consider updating your code to leverage the auth_headers property.
         """
         return self.auth_headers
@@ -254,7 +254,7 @@ class UberInterface(FalconInterface):
         """Legacy attribute handler to return the token string.
 
         DEPRECATED
-        ----
+        ----------
         Consider updating your code to leverage the token_value property.
         """
         return self.token_value

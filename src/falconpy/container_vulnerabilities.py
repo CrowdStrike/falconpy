@@ -62,34 +62,43 @@ class ContainerVulnerabilities(ServiceClass):
                                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of vulnerabilities grouped by actively exploited.
 
-        Keyword arguments:
-        filter -- Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    ai_related                  fix_status
-                    base_os                     image_digest
-                    cid                         image_id
-                    container_id                images_impacted_range
-                    container_running_status    include_base_image_vuln
-                    containers_impacted_range   index_digest
-                    cps_rating                  package_name_version
-                    cve_id                      registry
-                    cvss_score                  repository
-                    description                 severity
-                    exploited_status            tag
-                    exploited_status_name
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                /container-vulnerabilities/ReadVulnerabilityCountByActivelyExploited
+        /container-vulnerabilities/ReadVulnerabilityCountByActivelyExploited
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              ai_related                  fix_status
+              base_os                     image_digest
+              cid                         image_id
+              container_id                images_impacted_range
+              container_running_status    include_base_image_vuln
+              containers_impacted_range   index_digest
+              cps_rating                  package_name_version
+              cve_id                      registry
+              cvss_score                  repository
+              description                 severity
+              exploited_status            tag
+              exploited_status_name
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -106,34 +115,43 @@ class ContainerVulnerabilities(ServiceClass):
                                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of vulnerabilities grouped by csp_rating.
 
-        Keyword arguments:
-        filter -- Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    ai_related                  fix_status
-                    base_os                     image_digest
-                    cid                         image_id
-                    container_id                images_impacted_range
-                    container_running_status    include_base_image_vuln
-                    containers_impacted_range   index_digest
-                    cps_rating                  package_name_version
-                    cve_id                      registry
-                    cvss_score                  repository
-                    description                 severity
-                    exploited_status            tag
-                    exploited_status_name
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                /container-vulnerabilities/ReadVulnerabilityCountByCPSRating
+        /container-vulnerabilities/ReadVulnerabilityCountByCPSRating
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              ai_related                  fix_status
+              base_os                     image_digest
+              cid                         image_id
+              container_id                images_impacted_range
+              container_running_status    include_base_image_vuln
+              containers_impacted_range   index_digest
+              cps_rating                  package_name_version
+              cve_id                      registry
+              cvss_score                  repository
+              description                 severity
+              exploited_status            tag
+              exploited_status_name
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -150,34 +168,43 @@ class ContainerVulnerabilities(ServiceClass):
                                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of vulnerabilities grouped by cvss score.
 
-        Keyword arguments:
-        filter -- Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    ai_related                  fix_status
-                    base_os                     image_digest
-                    cid                         image_id
-                    container_id                images_impacted_range
-                    container_running_status    include_base_image_vuln
-                    containers_impacted_range   index_digest
-                    cps_rating                  package_name_version
-                    cve_id                      registry
-                    cvss_score                  repository
-                    description                 severity
-                    exploited_status            tag
-                    exploited_status_name
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                /container-vulnerabilities/ReadVulnerabilityCountByCVSSScore
+        /container-vulnerabilities/ReadVulnerabilityCountByCVSSScore
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              ai_related                  fix_status
+              base_os                     image_digest
+              cid                         image_id
+              container_id                images_impacted_range
+              container_running_status    include_base_image_vuln
+              containers_impacted_range   index_digest
+              cps_rating                  package_name_version
+              cve_id                      registry
+              cvss_score                  repository
+              description                 severity
+              exploited_status            tag
+              exploited_status_name
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -194,34 +221,43 @@ class ContainerVulnerabilities(ServiceClass):
                                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of vulnerabilities grouped by severity.
 
-        Keyword arguments:
-        filter -- Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    ai_related                  fix_status
-                    base_os                     image_digest
-                    cid                         image_id
-                    container_id                images_impacted_range
-                    container_running_status    include_base_image_vuln
-                    containers_impacted_range   index_digest
-                    cps_rating                  package_name_version
-                    cve_id                      registry
-                    cvss_score                  repository
-                    description                 severity
-                    exploited_status            tag
-                    exploited_status_name
-        limit -- The upper-bound on the number of records to retrieve. String.
-        offset -- The offset from where to begin. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                /container-vulnerabilities/ReadVulnerabilityCountBySeverity
+        /container-vulnerabilities/ReadVulnerabilityCountBySeverity
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              ai_related                  fix_status
+              base_os                     image_digest
+              cid                         image_id
+              container_id                images_impacted_range
+              container_running_status    include_base_image_vuln
+              containers_impacted_range   index_digest
+              cps_rating                  package_name_version
+              cve_id                      registry
+              cvss_score                  repository
+              description                 severity
+              exploited_status            tag
+              exploited_status_name
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -238,33 +274,42 @@ class ContainerVulnerabilities(ServiceClass):
                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of vulnerabilities.
 
-        Keyword arguments:
-        filter -- Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    ai_related                  fix_status
-                    base_os                     image_digest
-                    cid                         image_id
-                    container_id                images_impacted_range
-                    container_running_status    include_base_image_vuln
-                    containers_impacted_range   index_digest
-                    cps_rating                  package_name_version
-                    cve_id                      registry
-                    cvss_score                  repository
-                    description                 severity
-                    exploited_status            tag
-                    exploited_status_name
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-vulnerabilities/ReadVulnerabilityCount
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              ai_related                  fix_status
+              base_os                     image_digest
+              cid                         image_id
+              container_id                images_impacted_range
+              container_running_status    include_base_image_vuln
+              containers_impacted_range   index_digest
+              cps_rating                  package_name_version
+              cve_id                      registry
+              cvss_score                  repository
+              description                 severity
+              exploited_status            tag
+              exploited_status_name
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -281,22 +326,31 @@ class ContainerVulnerabilities(ServiceClass):
                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve top x vulnerabilities with the most impacted images.
 
-        Keyword arguments:
-        filter -- Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
-                  Supported filters: cid, cve_id, registry, repository,tag
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                /container-vulnerabilities/ReadVulnerabilitiesByImageCount
+        /container-vulnerabilities/ReadVulnerabilitiesByImageCount
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
+            Supported filters: cid, cve_id, registry, repository,tag
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -313,22 +367,31 @@ class ContainerVulnerabilities(ServiceClass):
                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve top x vulnerabilities with the most recent publication date.
 
-        Keyword arguments:
-        filter -- Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
-                  Supported filters: cid, cve_id, registry, repository,tag
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                /container-vulnerabilities/ReadVulnerabilitiesPublicationDate
+        /container-vulnerabilities/ReadVulnerabilitiesPublicationDate
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
+            Supported filters: cid, cve_id, registry, repository,tag
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -345,28 +408,38 @@ class ContainerVulnerabilities(ServiceClass):
                                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve vulnerability details related to an image.
 
-        Keyword arguments:
-        id -- Image UUID. String.
-        filter -- Filter the vulnerabilities using a query in Falcon Query Language (FQL). String.
-                  Supported vulnerability filters:
-                    cid                 exploited_status_name
-                    cps_rating          is_zero_day
-                    cve_id              remediation_available
-                    cvss_score          severity
-                    exploited_status    include_base_image_vuln
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                /container-vulnerabilities/ReadCombinedVulnerabilitiesDetails
+        /container-vulnerabilities/ReadCombinedVulnerabilitiesDetails
+
+        Keyword arguments
+        -----------------
+        id : str
+            Image UUID.
+        filter : str
+            Filter the vulnerabilities using a query in Falcon Query Language (FQL). String.
+            Supported vulnerability filters:
+              cid                 exploited_status_name
+              cps_rating          is_zero_day
+              cve_id              remediation_available
+              cvss_score          severity
+              exploited_status    include_base_image_vuln
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -383,21 +456,30 @@ class ContainerVulnerabilities(ServiceClass):
                                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve vulnerability and package related info for this customer.
 
-        Keyword arguments:
-        cve_id -- Vulnerability CVE ID. String.
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                /container-vulnerabilities/ReadCombinedVulnerabilitiesInfo
+        /container-vulnerabilities/ReadCombinedVulnerabilitiesInfo
+
+        Keyword arguments
+        -----------------
+        cve_id : str
+            Vulnerability CVE ID.
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -414,39 +496,49 @@ class ContainerVulnerabilities(ServiceClass):
                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve vulnerability and aggregate data filtered by the provided FQL.
 
-        Keyword arguments:
-        filter -- Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
-                  Supported filters:
-                    ai_related                  fix_status
-                    base_os                     image_digest
-                    cid                         image_id
-                    container_id                images_impacted_range
-                    container_running_status    include_base_image_vuln
-                    containers_impacted_range   index_digest
-                    cps_rating                  package_name_version
-                    cve_id                      registry
-                    cvss_score                  repository
-                    description                 severity
-                    exploited_status            tag
-                    exploited_status_name
-        limit -- The upper-bound on the number of records to retrieve. Integer.
-        offset -- The offset from where to begin. Integer.
-        sort -- The fields to sort the records on. String.
-                Supported columns:
-                  cps_current_rating    images_impacted
-                  cve_id                packages_impacted
-                  cvss_score            severity
-                  description
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-vulnerabilities/ReadCombinedVulnerabilities
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
+            Supported filters:
+              ai_related                  fix_status
+              base_os                     image_digest
+              cid                         image_id
+              container_id                images_impacted_range
+              container_running_status    include_base_image_vuln
+              containers_impacted_range   index_digest
+              cps_rating                  package_name_version
+              cve_id                      registry
+              cvss_score                  repository
+              description                 severity
+              exploited_status            tag
+              exploited_status_name
+        limit : int
+            The upper-bound on the number of records to retrieve.
+        offset : int
+            The offset from where to begin.
+        sort : str
+            The fields to sort the records on. String.
+            Supported columns:
+              cps_current_rating    images_impacted
+              cve_id                packages_impacted
+              cvss_score            severity
+              description
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

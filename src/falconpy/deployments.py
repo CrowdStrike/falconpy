@@ -63,22 +63,32 @@ class Deployments(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for release-notes resources and returns details.
 
-        Keyword arguments:
-        filter -- FQL query specifying filter parameters. String.
-        limit -- Maximum number of records to return. Integer.
-        offset -- Starting pagination offset of records to return. Integer.
-        sort -- Sort items by providing a comma separated list of property and direction (eg name.desc,time.asc). String.
-                If direction is omitted, defaults to descending.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/release-notes/CombinedReleaseNotesV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying filter parameters.
+        limit : int
+            Maximum number of records to return.
+        offset : str
+            Starting pagination offset of records to return.
+        sort : str
+            Sort items by providing a comma separated list of property and direction (eg name.desc,time.asc). String.
+            If direction is omitted, defaults to descending.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -92,19 +102,28 @@ class Deployments(ServiceClass):
     def get_deployments(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get deployment resources by IDs.
 
-        Keyword arguments:
-        ids -- Release version IDs to retrieve deployment details. String or list of strings.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/deployments/GetDeploymentsExternalV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Release version IDs to retrieve deployment details.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -118,22 +137,32 @@ class Deployments(ServiceClass):
     def query_releases(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for releases resources and returns details.
 
-        Keyword arguments:
-        filter -- FQL query specifying filter parameters. String.
-        limit -- Maximum number of records to return. Integer.
-        offset -- Starting pagination offset of records to return. Integer.
-        sort -- Sort items by providing a comma separated list of property and direction (eg name.desc,time.asc).
-                If direction is omitted, defaults to descending. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/releases/CombinedReleasesV1Mixin0
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying filter parameters.
+        limit : int
+            Maximum number of records to return.
+        offset : str
+            Starting pagination offset of records to return.
+        sort : str
+            Sort items by providing a comma separated list of property and direction (eg name.desc,time.asc).
+            If direction is omitted, defaults to descending.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -147,23 +176,30 @@ class Deployments(ServiceClass):
     def get_release_notes_v1(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the release notes for the IDs in the request.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/release-notes/GetEntityIDsByQueryPOST
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required when using other keywords.
                 {
                     "IDs": [
                         "string"
                     ]
                 }
-        ids -- Release note IDs to be retrieve. String or list of strings.
+        ids : str or list[str]
+            Release note IDs to be retrieve.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/release-notes/GetEntityIDsByQueryPOST
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -180,23 +216,30 @@ class Deployments(ServiceClass):
     def get_release_notes(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the release notes for the IDs in the request.
 
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary. Not required when using other keywords.
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/release-notes/GetEntityIDsByQueryPOSTV2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required when using other keywords.
                 {
                     "IDs": [
                         "string"
                     ]
                 }
-        ids -- Release note IDs to be retrieve. String or list of strings.
+        ids : str or list[str]
+            Release note IDs to be retrieve.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/release-notes/GetEntityIDsByQueryPOSTV2
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -213,22 +256,32 @@ class Deployments(ServiceClass):
     def query_release_note_ids(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for release-notes resources and returns IDs.
 
-        Keyword arguments:
-        filter -- FQL query specifying filter parameters. String.
-        limit -- Maximum number of records to return. Integer.
-        offset -- Starting pagination offset of records to return. Integer.
-        sort -- Sort items by providing a comma separated list of property and direction (eg name.desc,time.asc). String.
-                If direction is omitted, defaults to descending.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/release-notes/QueryReleaseNotesV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL query specifying filter parameters.
+        limit : int
+            Maximum number of records to return.
+        offset : str
+            Starting pagination offset of records to return.
+        sort : str
+            Sort items by providing a comma separated list of property and direction (eg name.desc,time.asc). String.
+            If direction is omitted, defaults to descending.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,

@@ -63,19 +63,25 @@ class IntelligenceFeeds(ServiceClass):
                       **kwargs) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Download feed file contents as a zip archive.
 
-        Keyword arguments:
-        feed_item_id -- Feed object reference ID.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-        stream -- Enable streaming download of the returned file. Boolean.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
 
+        Keyword arguments
+        -----------------
+        feed_item_id : str
+            Feed object reference ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        stream : bool
+            Enable streaming download of the returned file.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        binary object on SUCCESS, dict object containing API response on FAILURE.
         """
         return process_service_request(
             calling_object=self,
@@ -91,12 +97,19 @@ class IntelligenceFeeds(ServiceClass):
 
         This method does not accept arguments.
 
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
 
+        Keyword arguments
+        -----------------
+        This method does not accept keyword arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -110,25 +123,33 @@ class IntelligenceFeeds(ServiceClass):
                     **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query the accessible feeds for a customer.
 
-        Keyword arguments:
-        feed_name -- Feed Name.
-        feed_interval -- Feed interval must be one of: 'dump', 'daily', 'hourly' or 'minutely'.
-        since -- Since is a valid timestamp in RFC3399 format.
-                 Restrictions: minutely: now()-2h
-                               hourly: now()-2d
-                               daily: now()-5d
-                               dump: now()-7d
-                               any: Automatically combines the appropriate intervals
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        -----------
 
+        Keyword arguments
+        -----------------
+        feed_name : str
+            Feed Name.
+        feed_interval : str
+            Feed interval must be one of: 'dump', 'daily', 'hourly' or 'minutely'.
+        since : str
+            Since is a valid timestamp in RFC3399 format.
+            Restrictions: minutely: now()-2h
+                          hourly: now()-2d
+                          daily: now()-5d
+                          dump: now()-7d
+                          any: Automatically combines the appropriate intervals
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
         """
         # if kwargs.get("feed_name", None):
         #     kwargs["feed-name"] = kwargs.get("feed_name", None)
