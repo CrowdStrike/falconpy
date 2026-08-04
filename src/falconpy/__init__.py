@@ -192,6 +192,7 @@ from .malquery import MalQuery
 from .message_center import MessageCenter
 from .ml_exclusions import MLExclusions
 from .mobile_enrollment import MobileEnrollment
+from .models import Models
 from .mssp import FlightControl
 from .network_scan_global_configs import NetworkScanGlobalConfigs
 from .network_scan_networks import NetworkScanNetworks
@@ -297,7 +298,8 @@ __all__ = [
     "KnowledgeBaseAuditEvents", "KnowledgeBaseFiles",
     "KnowledgeBases", "ProfileGroups",
     "FalconId", "AgentInvocation",
-    "AgentTemplates", "AgentVersions"
+    "AgentTemplates", "AgentVersions",
+    "Models"
     ]
 """
 This is free and unencumbered software released into the public domain.
