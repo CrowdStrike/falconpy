@@ -390,3 +390,43 @@ class TestNGSIEMUploadCoverage:
         monkeypatch.setattr(ngsiem_mod, "process_service_request", lambda **kw: error_dict)
         result = falcon.upload_file(repository="search-all", lookup_file="tests/testfile.csv")
         assert result["status_code"] == 403
+
+
+class TestNGSIEMStartSearchBody:
+    """Confirm start_search honors the documented body keyword. Closes #1491."""
+
+    SEARCH = {"queryString": "#repo=fusion | head(1)", "start": "24h", "isLive": False}
+
+    @staticmethod
+    def _capture(monkeypatch):
+        """Intercept process_service_request, recording the body it receives."""
+        import falconpy.ngsiem as ngsiem_mod
+
+        captured = {}
+
+        def fake_request(**kwargs):
+            captured.update(kwargs)
+            return {"status_code": 200, "body": {"id": "job-1"}, "headers": {}}
+
+        monkeypatch.setattr(ngsiem_mod, "process_service_request", fake_request)
+        return captured
+
+    def test_body_keyword_reaches_the_api(self, monkeypatch):
+        """body= used to short-circuit into a local error without issuing a request."""
+        captured = self._capture(monkeypatch)
+        result = falcon.start_search(repository="search-all", body=self.SEARCH)
+        assert captured["body"] == self.SEARCH
+        assert result["status_code"] == 200
+
+    def test_search_keyword_still_works(self, monkeypatch):
+        """The pre-existing search= path must be unaffected."""
+        captured = self._capture(monkeypatch)
+        result = falcon.start_search(repository="search-all", search=self.SEARCH)
+        assert captured["body"] == self.SEARCH
+        assert result["status_code"] == 200
+
+    def test_neither_keyword_still_errors(self, monkeypatch):
+        """With no payload and no keywords, the local 500 is still correct."""
+        self._capture(monkeypatch)
+        result = falcon.start_search(repository="search-all")
+        assert result["status_code"] == 500

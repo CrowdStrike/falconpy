@@ -426,9 +426,9 @@ class NGSIEM(ServiceClass):
             Dictionary object containing API response.
         """
         repository = kwargs.get("repository", None)
-        search = kwargs.get("search", None)
+        search = kwargs.get("search", None) or body
 
-        if not body and not search:
+        if not search:
             search = ngsiem_search_payload(kwargs)
 
         if repository and search:
