@@ -80,6 +80,8 @@ class Deployments(ServiceClass):
         sort : str
             Sort items by providing a comma separated list of property and direction (eg name.desc,time.asc). String.
             If direction is omitted, defaults to descending.
+        Authorization : str
+            authorization header.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -112,6 +114,8 @@ class Deployments(ServiceClass):
         -----------------
         ids : str or list[str]
             Release version IDs to retrieve deployment details.
+        Authorization : str
+            authorization header.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -154,6 +158,8 @@ class Deployments(ServiceClass):
         sort : str
             Sort items by providing a comma separated list of property and direction (eg name.desc,time.asc).
             If direction is omitted, defaults to descending.
+        Authorization : str
+            authorization header.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -193,6 +199,8 @@ class Deployments(ServiceClass):
                 }
         ids : str or list[str]
             Release note IDs to be retrieve.
+        Authorization : str
+            authorization header.
 
         This method only supports keywords for providing arguments.
 
@@ -233,6 +241,8 @@ class Deployments(ServiceClass):
                 }
         ids : str or list[str]
             Release note IDs to be retrieve.
+        Authorization : str
+            authorization header.
 
         This method only supports keywords for providing arguments.
 
@@ -273,6 +283,8 @@ class Deployments(ServiceClass):
         sort : str
             Sort items by providing a comma separated list of property and direction (eg name.desc,time.asc). String.
             If direction is omitted, defaults to descending.
+        Authorization : str
+            authorization header.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
