@@ -167,7 +167,7 @@ _recon_endpoints = [
     "/recon/entities/exports/v1",
     "Get the status of export jobs based on their IDs. Export jobs can be launched by calling "
     "CreateExportJobsV1 When a job is complete, use the job ID to download the file(s) associated with it using GET "
-    "entitiesGetFileContentForExportJobsV1.",
+    "entities/export-files/v1.",
     "recon",
     [
       {
