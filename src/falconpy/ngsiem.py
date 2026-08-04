@@ -61,6 +61,21 @@ from ._payload import (
     bulk_update_saved_queries_from_template_payload,
     create_parser_extension_payload,
     update_parser_extension_payload,
+    add_dashboard_labels_payload,
+    add_file_labels_payload,
+    add_saved_query_labels_payload,
+    bulk_add_dashboard_labels_payload,
+    bulk_add_lookup_file_labels_payload,
+    bulk_add_saved_query_labels_payload,
+    bulk_remove_dashboard_labels_payload,
+    bulk_remove_lookup_file_labels_payload,
+    bulk_remove_saved_query_labels_payload,
+    bulk_update_dashboard_labels_payload,
+    bulk_update_lookup_file_labels_payload,
+    bulk_update_saved_query_labels_payload,
+    update_dashboard_labels_payload,
+    update_file_labels_payload,
+    update_saved_query_labels_payload,
     )
 from ._result import Result
 from ._service_class import ServiceClass
@@ -3078,15 +3093,870 @@ class NGSIEM(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def add_dashboard_labels(self: object,
+                             body: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Add multiple labels to a single dashboard.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/addDashboardLabels
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "id": "string",
+                    "labels": [
+                        "string"
+                    ],
+                    "search_domain": "string"
+                }
+        id : str
+            The unique identifier of the dashboard.
+        labels : list
+            The labels to add (max 10 labels, max 60 chars each)
+        search_domain : str
+            The search domain (view or repository) containing the dashboard.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = add_dashboard_labels_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="addDashboardLabels",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def add_file_labels(self: object,
+                        body: dict = None,
+                        **kwargs
+                        ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Add multiple labels to a single file.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/addFileLabels
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "filename": "string",
+                    "labels": [
+                        "string"
+                    ],
+                    "search_domain": "string"
+                }
+        filename : str
+            The name of the lookup file.
+        labels : list
+            The labels to add (max 10 total labels per file, max 60 chars each)
+        search_domain : str
+            The search domain (view or repository) containing the file.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = add_file_labels_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="addFileLabels",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def add_saved_query_labels(self: object,
+                               body: dict = None,
+                               **kwargs
+                               ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Add multiple labels to a saved query.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/addSavedQueryLabels
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "id": "string",
+                    "labels": [
+                        "string"
+                    ],
+                    "search_domain": "string"
+                }
+        id : str
+            The unique identifier of the saved query.
+        labels : list
+            The labels to add (max 10 labels, max 60 chars each)
+        search_domain : str
+            The search domain (view or repository) containing the saved query.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = add_saved_query_labels_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="addSavedQueryLabels",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_add_dashboard_labels(self: object,
+                                  body: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Add labels to multiple dashboards (max 100 items, non-transactional).
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/bulkAddDashboardLabels
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "items": [
+                        {
+                            "id": "string",
+                            "labels": [
+                                "string"
+                            ]
+                        }
+                    ],
+                    "search_domain": "string"
+                }
+        items : list
+            List of dashboards with labels to add/remove/replace (max 100 items)
+        search_domain : str
+            The search domain (view or repository) containing the dashboards.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = bulk_add_dashboard_labels_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="bulkAddDashboardLabels",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_add_lookup_file_labels(self: object,
+                                    body: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Add labels to multiple lookup files (max 100 items, non-transactional).
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/bulkAddLookupFileLabels
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "items": [
+                        {
+                            "filename": "string",
+                            "labels": [
+                                "string"
+                            ]
+                        }
+                    ],
+                    "search_domain": "string"
+                }
+        items : list
+            List of files with labels to add/remove/replace (max 100 items)
+        search_domain : str
+            The search domain (view or repository) containing the files.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = bulk_add_lookup_file_labels_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="bulkAddLookupFileLabels",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_add_saved_query_labels(self: object,
+                                    body: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Add labels to multiple saved queries (max 100 items, non-transactional).
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/bulkAddSavedQueryLabels
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "items": [
+                        {
+                            "id": "string",
+                            "labels": [
+                                "string"
+                            ]
+                        }
+                    ],
+                    "search_domain": "string"
+                }
+        items : list
+            List of saved queries with labels to add/remove/replace (max 100 items)
+        search_domain : str
+            The search domain (view or repository) containing the saved queries.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = bulk_add_saved_query_labels_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="bulkAddSavedQueryLabels",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_remove_dashboard_labels(self: object,
+                                     body: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Remove labels from multiple dashboards (max 100 items, non-transactional).
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/bulkRemoveDashboardLabels
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "items": [
+                        {
+                            "id": "string",
+                            "labels": [
+                                "string"
+                            ]
+                        }
+                    ],
+                    "search_domain": "string"
+                }
+        items : list
+            List of dashboards with labels to add/remove/replace (max 100 items)
+        search_domain : str
+            The search domain (view or repository) containing the dashboards.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = bulk_remove_dashboard_labels_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="bulkRemoveDashboardLabels",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_remove_lookup_file_labels(self: object,
+                                       body: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Remove labels from multiple lookup files (max 100 items, non-transactional).
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/bulkRemoveLookupFileLabels
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "items": [
+                        {
+                            "filename": "string",
+                            "labels": [
+                                "string"
+                            ]
+                        }
+                    ],
+                    "search_domain": "string"
+                }
+        items : list
+            List of files with labels to add/remove/replace (max 100 items)
+        search_domain : str
+            The search domain (view or repository) containing the files.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = bulk_remove_lookup_file_labels_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="bulkRemoveLookupFileLabels",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_remove_saved_query_labels(self: object,
+                                       body: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Remove labels from multiple saved queries (max 100 items, non-transactional).
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/bulkRemoveSavedQueryLabels
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "items": [
+                        {
+                            "id": "string",
+                            "labels": [
+                                "string"
+                            ]
+                        }
+                    ],
+                    "search_domain": "string"
+                }
+        items : list
+            List of saved queries with labels to add/remove/replace (max 100 items)
+        search_domain : str
+            The search domain (view or repository) containing the saved queries.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = bulk_remove_saved_query_labels_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="bulkRemoveSavedQueryLabels",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_update_dashboard_labels(self: object,
+                                     body: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Replace all labels on multiple dashboards (max 100 items, non-transactional).
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/bulkUpdateDashboardLabels
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "items": [
+                        {
+                            "id": "string",
+                            "labels": [
+                                "string"
+                            ]
+                        }
+                    ],
+                    "search_domain": "string"
+                }
+        items : list
+            List of dashboards with labels to add/remove/replace (max 100 items)
+        search_domain : str
+            The search domain (view or repository) containing the dashboards.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = bulk_update_dashboard_labels_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="bulkUpdateDashboardLabels",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_update_lookup_file_labels(self: object,
+                                       body: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Replace all labels on multiple lookup files (max 100 items, non-transactional).
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/bulkUpdateLookupFileLabels
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "items": [
+                        {
+                            "filename": "string",
+                            "labels": [
+                                "string"
+                            ]
+                        }
+                    ],
+                    "search_domain": "string"
+                }
+        items : list
+            List of files with labels to add/remove/replace (max 100 items)
+        search_domain : str
+            The search domain (view or repository) containing the files.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = bulk_update_lookup_file_labels_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="bulkUpdateLookupFileLabels",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_update_saved_query_labels(self: object,
+                                       body: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Replace all labels on multiple saved queries (max 100 items, non-transactional).
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/bulkUpdateSavedQueryLabels
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "items": [
+                        {
+                            "id": "string",
+                            "labels": [
+                                "string"
+                            ]
+                        }
+                    ],
+                    "search_domain": "string"
+                }
+        items : list
+            List of saved queries with labels to add/remove/replace (max 100 items)
+        search_domain : str
+            The search domain (view or repository) containing the saved queries.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = bulk_update_saved_query_labels_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="bulkUpdateSavedQueryLabels",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def remove_dashboard_labels(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Remove multiple labels from a single dashboard.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/removeDashboardLabels
+
+        Keyword arguments
+        -----------------
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="removeDashboardLabels",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def remove_file_labels(self: object,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Remove multiple labels from a single file.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/removeFileLabels
+
+        Keyword arguments
+        -----------------
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="removeFileLabels",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def remove_saved_query_labels(self: object,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Remove multiple labels from a saved query.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/removeSavedQueryLabels
+
+        Keyword arguments
+        -----------------
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="removeSavedQueryLabels",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_dashboard_labels(self: object,
+                                body: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Replace all labels on a single dashboard.
+
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/updateDashboardLabels
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "id": "string",
+                    "labels": [
+                        "string"
+                    ],
+                    "search_domain": "string"
+                }
+        id : str
+            The unique identifier of the dashboard.
+        labels : list
+            The new labels (replaces all existing, max 10 labels, max 60 chars each)
+        search_domain : str
+            The search domain (view or repository) containing the dashboard.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = update_dashboard_labels_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updateDashboardLabels",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_file_labels(self: object,
+                           body: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Replace all labels on a single file.
+
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/updateFileLabels
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "filename": "string",
+                    "labels": [
+                        "string"
+                    ],
+                    "search_domain": "string"
+                }
+        filename : str
+            The name of the lookup file.
+        labels : list
+            The new labels (replaces all existing labels, max 10 labels, max 60 chars each)
+        search_domain : str
+            The search domain (view or repository) containing the file.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = update_file_labels_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updateFileLabels",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_saved_query_labels(self: object,
+                                  body: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Replace all labels on a single saved query.
+
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/updateSavedQueryLabels
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "id": "string",
+                    "labels": [
+                        "string"
+                    ],
+                    "search_domain": "string"
+                }
+        id : str
+            The unique identifier of the saved query.
+        labels : list
+            The new labels (replaces all existing labels, max 10 labels, max 60 chars each)
+        search_domain : str
+            The search domain (view or repository) containing the saved query.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = update_saved_query_labels_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updateSavedQueryLabels",
+            body=body
+            )
+
+    addDashboardLabels = add_dashboard_labels
+    addFileLabels = add_file_labels
+    addSavedQueryLabels = add_saved_query_labels
+    bulkAddDashboardLabels = bulk_add_dashboard_labels
+    bulkAddLookupFileLabels = bulk_add_lookup_file_labels
+    bulkAddSavedQueryLabels = bulk_add_saved_query_labels
     BulkCreateDashboardsFromTemplate = bulk_create_dashboards_from_template
     BulkCreateLookupFiles = bulk_create_lookup_files
     BulkCreateSavedQueriesFromTemplate = bulk_create_saved_queries_from_template
     BulkGetLookupFiles = bulk_get_lookup_files
+    bulkRemoveDashboardLabels = bulk_remove_dashboard_labels
+    bulkRemoveLookupFileLabels = bulk_remove_lookup_file_labels
+    bulkRemoveSavedQueryLabels = bulk_remove_saved_query_labels
+    bulkUpdateDashboardLabels = bulk_update_dashboard_labels
     BulkUpdateDashboardsFromTemplate = bulk_update_dashboards_from_template
+    bulkUpdateLookupFileLabels = bulk_update_lookup_file_labels
     BulkUpdateLookupFiles = bulk_update_lookup_files
     BulkUpdateSavedQueriesFromTemplate = bulk_update_saved_queries_from_template
+    bulkUpdateSavedQueryLabels = bulk_update_saved_query_labels
     CreateParserExtension = create_parser_extension
+    removeDashboardLabels = remove_dashboard_labels
+    removeFileLabels = remove_file_labels
+    removeSavedQueryLabels = remove_saved_query_labels
+    updateDashboardLabels = update_dashboard_labels
+    updateFileLabels = update_file_labels
     UpdateParserExtension = update_parser_extension
+    updateSavedQueryLabels = update_saved_query_labels
     UploadLookupV1 = upload_file
     GetLookupV1 = get_file
     GetLookupFromPackageWithNamespaceV1 = get_file_from_package_with_namespace

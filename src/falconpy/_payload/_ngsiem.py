@@ -436,3 +436,294 @@ def update_parser_extension_payload(passed_keywords: dict) -> dict:
             returned_payload[key] = passed_keywords.get(key)
 
     return returned_payload
+
+
+def add_dashboard_labels_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a addDashboardLabels request.
+
+    {
+        "id": "string",
+        "labels": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["id", "labels", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def add_file_labels_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a addFileLabels request.
+
+    {
+        "filename": "string",
+        "labels": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["filename", "labels", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def add_saved_query_labels_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a addSavedQueryLabels request.
+
+    {
+        "id": "string",
+        "labels": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["id", "labels", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def bulk_add_dashboard_labels_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a bulkAddDashboardLabels request.
+
+    {
+        "items": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["items", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def bulk_add_lookup_file_labels_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a bulkAddLookupFileLabels request.
+
+    {
+        "items": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["items", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def bulk_add_saved_query_labels_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a bulkAddSavedQueryLabels request.
+
+    {
+        "items": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["items", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def bulk_remove_dashboard_labels_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a bulkRemoveDashboardLabels request.
+
+    {
+        "items": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["items", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def bulk_remove_lookup_file_labels_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a bulkRemoveLookupFileLabels request.
+
+    {
+        "items": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["items", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def bulk_remove_saved_query_labels_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a bulkRemoveSavedQueryLabels request.
+
+    {
+        "items": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["items", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def bulk_update_dashboard_labels_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a bulkUpdateDashboardLabels request.
+
+    {
+        "items": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["items", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def bulk_update_lookup_file_labels_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a bulkUpdateLookupFileLabels request.
+
+    {
+        "items": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["items", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def bulk_update_saved_query_labels_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a bulkUpdateSavedQueryLabels request.
+
+    {
+        "items": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["items", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def update_dashboard_labels_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a updateDashboardLabels request.
+
+    {
+        "id": "string",
+        "labels": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["id", "labels", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def update_file_labels_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a updateFileLabels request.
+
+    {
+        "filename": "string",
+        "labels": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["filename", "labels", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def update_saved_query_labels_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a updateSavedQueryLabels request.
+
+    {
+        "id": "string",
+        "labels": [
+            "string"
+        ],
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["id", "labels", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload

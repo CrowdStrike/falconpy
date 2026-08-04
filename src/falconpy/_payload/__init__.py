@@ -192,12 +192,24 @@ from ._network_scan_zones import (
     network_scan_zone_update_payload
     )
 from ._ngsiem import (
+    add_dashboard_labels_payload,
+    add_file_labels_payload,
+    add_saved_query_labels_payload,
+    bulk_add_dashboard_labels_payload,
+    bulk_add_lookup_file_labels_payload,
+    bulk_add_saved_query_labels_payload,
     bulk_create_dashboards_from_template_payload,
     bulk_create_lookup_files_payload,
     bulk_create_saved_queries_from_template_payload,
+    bulk_remove_dashboard_labels_payload,
+    bulk_remove_lookup_file_labels_payload,
+    bulk_remove_saved_query_labels_payload,
+    bulk_update_dashboard_labels_payload,
     bulk_update_dashboards_from_template_payload,
+    bulk_update_lookup_file_labels_payload,
     bulk_update_lookup_files_payload,
     bulk_update_saved_queries_from_template_payload,
+    bulk_update_saved_query_labels_payload,
     create_parser_extension_payload,
     ngsiem_auto_update_policy_payload,
     ngsiem_bulk_install_parsers_payload,
@@ -207,7 +219,10 @@ from ._ngsiem import (
     ngsiem_install_parser_payload,
     ngsiem_parser_payload,
     ngsiem_search_payload,
+    update_dashboard_labels_payload,
+    update_file_labels_payload,
     update_parser_extension_payload,
+    update_saved_query_labels_payload,
     )
 from ._prevention_policy import prevention_policy_payload
 from ._sensor_update_policy import sensor_policy_payload, maintenance_token_payload
@@ -370,5 +385,12 @@ __all__ = [
     "invoke_published_agent_external_v1_payload", "entities_merge_post_v1_payload",
     "cspm_evaluations_iom_entities_post_payload", "entities_rules_ownership_put_v2_payload",
     "entities_web_location_group_create_payload", "entities_web_location_group_patch_payload",
-    "exclusions_sdmf_query_v1_payload"
+    "exclusions_sdmf_query_v1_payload", "add_dashboard_labels_payload",
+    "add_file_labels_payload", "add_saved_query_labels_payload",
+    "bulk_add_dashboard_labels_payload", "bulk_add_lookup_file_labels_payload",
+    "bulk_add_saved_query_labels_payload", "bulk_remove_dashboard_labels_payload",
+    "bulk_remove_lookup_file_labels_payload", "bulk_remove_saved_query_labels_payload",
+    "bulk_update_dashboard_labels_payload", "bulk_update_lookup_file_labels_payload",
+    "bulk_update_saved_query_labels_payload", "update_dashboard_labels_payload",
+    "update_file_labels_payload", "update_saved_query_labels_payload"
 ]

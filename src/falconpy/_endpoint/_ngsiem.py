@@ -220,6 +220,48 @@ _ngsiem_endpoints = [
     ]
   ],
   [
+    "bulkAddDashboardLabels",
+    "POST",
+    "/ngsiem-content/entities/bulk-dashboard-labels-add/v1",
+    "Add labels to multiple dashboards (max 100 items, non-transactional)",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "bulkRemoveDashboardLabels",
+    "POST",
+    "/ngsiem-content/entities/bulk-dashboard-labels-remove/v1",
+    "Remove labels from multiple dashboards (max 100 items, non-transactional)",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "bulkUpdateDashboardLabels",
+    "POST",
+    "/ngsiem-content/entities/bulk-dashboard-labels-replace/v1",
+    "Replace all labels on multiple dashboards (max 100 items, non-transactional)",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "BulkCreateDashboardsFromTemplate",
     "POST",
     "/ngsiem-content/entities/bulk-dashboards-template/v1",
@@ -240,6 +282,48 @@ _ngsiem_endpoints = [
     "/ngsiem-content/entities/bulk-dashboards-template/v1",
     "Update Multiple Dashboards from YAML Templates. Processes all items and returns per-item success/failure "
     "results. Failed items are included in the errors array with appropriate HTTP status codes.",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "bulkAddLookupFileLabels",
+    "POST",
+    "/ngsiem-content/entities/bulk-lookupfile-labels-add/v1",
+    "Add labels to multiple lookup files (max 100 items, non-transactional)",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "bulkRemoveLookupFileLabels",
+    "POST",
+    "/ngsiem-content/entities/bulk-lookupfile-labels-remove/v1",
+    "Remove labels from multiple lookup files (max 100 items, non-transactional)",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "bulkUpdateLookupFileLabels",
+    "POST",
+    "/ngsiem-content/entities/bulk-lookupfile-labels-replace/v1",
+    "Replace all labels on multiple lookup files (max 100 items, non-transactional)",
     "ngsiem",
     [
       {
@@ -338,6 +422,90 @@ _ngsiem_endpoints = [
     [
       {
         "description": "bulk update saved queries request",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "bulkAddSavedQueryLabels",
+    "POST",
+    "/ngsiem-content/entities/bulk-savedquery-labels-add/v1",
+    "Add labels to multiple saved queries (max 100 items, non-transactional)",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "bulkRemoveSavedQueryLabels",
+    "POST",
+    "/ngsiem-content/entities/bulk-savedquery-labels-remove/v1",
+    "Remove labels from multiple saved queries (max 100 items, non-transactional)",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "bulkUpdateSavedQueryLabels",
+    "POST",
+    "/ngsiem-content/entities/bulk-savedquery-labels-replace/v1",
+    "Replace all labels on multiple saved queries (max 100 items, non-transactional)",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "updateDashboardLabels",
+    "PUT",
+    "/ngsiem-content/entities/dashboard-labels/v1",
+    "Replace all labels on a single dashboard",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "addDashboardLabels",
+    "POST",
+    "/ngsiem-content/entities/dashboard-labels/v1",
+    "Add multiple labels to a single dashboard",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "removeDashboardLabels",
+    "DELETE",
+    "/ngsiem-content/entities/dashboard-labels/v1",
+    "Remove multiple labels from a single dashboard",
+    "ngsiem",
+    [
+      {
         "name": "body",
         "in": "body",
         "required": True
@@ -466,6 +634,48 @@ _ngsiem_endpoints = [
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "updateFileLabels",
+    "PUT",
+    "/ngsiem-content/entities/lookupfile-labels/v1",
+    "Replace all labels on a single file",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "addFileLabels",
+    "POST",
+    "/ngsiem-content/entities/lookupfile-labels/v1",
+    "Add multiple labels to a single file",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "removeFileLabels",
+    "DELETE",
+    "/ngsiem-content/entities/lookupfile-labels/v1",
+    "Remove multiple labels from a single file",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
       }
     ]
   ],
@@ -1047,6 +1257,48 @@ _ngsiem_endpoints = [
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "updateSavedQueryLabels",
+    "PUT",
+    "/ngsiem-content/entities/savedquery-labels/v1",
+    "Replace all labels on a single saved query",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "addSavedQueryLabels",
+    "POST",
+    "/ngsiem-content/entities/savedquery-labels/v1",
+    "Add multiple labels to a saved query",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "removeSavedQueryLabels",
+    "DELETE",
+    "/ngsiem-content/entities/savedquery-labels/v1",
+    "Remove multiple labels from a saved query",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
       }
     ]
   ],
