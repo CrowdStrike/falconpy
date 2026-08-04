@@ -249,10 +249,11 @@ from ._filevantage import (
     filevantage_start_payload
     )
 from ._ml_exclusions import (
+    exclusions_sdmf_query_v1_payload,
     ml_exclusions_actions_payload,
     ml_exclusions_report_payload,
-    ml_exclusions_update_payload
-)
+    ml_exclusions_update_payload,
+    )
 from ._mssp import mssp_payload
 from ._firewall import (
     firewall_policy_payload,
@@ -368,5 +369,6 @@ __all__ = [
     "update_parser_extension_payload", "invoke_agent_version_external_v1_payload",
     "invoke_published_agent_external_v1_payload", "entities_merge_post_v1_payload",
     "cspm_evaluations_iom_entities_post_payload", "entities_rules_ownership_put_v2_payload",
-    "entities_web_location_group_create_payload", "entities_web_location_group_patch_payload"
+    "entities_web_location_group_create_payload", "entities_web_location_group_patch_payload",
+    "exclusions_sdmf_query_v1_payload"
 ]

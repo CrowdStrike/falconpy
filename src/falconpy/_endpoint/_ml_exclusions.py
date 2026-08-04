@@ -67,12 +67,12 @@ _ml_exclusions_endpoints = [
     "ml_exclusions",
     [
       {
+        "type": "string",
         "enum": [
           "add_item",
           "remove_item",
           "validate_filepath"
         ],
-        "type": "string",
         "description": "The action to perform.",
         "name": "action_name",
         "in": "query",
@@ -134,20 +134,6 @@ _ml_exclusions_endpoints = [
     ]
   ],
   [
-    "exclusions_update_v2",
-    "PATCH",
-    "/exclusions/entities/exclusions/v2",
-    "Update the exclusions by id, with ancestor fields.",
-    "ml_exclusions",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "exclusions_delete_v2",
     "DELETE",
     "/exclusions/entities/exclusions/v2",
@@ -170,6 +156,20 @@ _ml_exclusions_endpoints = [
         "description": "The comment why these exclusions were deleted",
         "name": "comment",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "exclusions_update_v2",
+    "PATCH",
+    "/exclusions/entities/exclusions/v2",
+    "Update the exclusions by id, with ancestor fields.",
+    "ml_exclusions",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
       }
     ]
   ],
@@ -199,6 +199,7 @@ _ml_exclusions_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "parent_value",
           "value",
@@ -210,10 +211,24 @@ _ml_exclusions_endpoints = [
           "modified_by",
           "is_descendant_process"
         ],
-        "type": "string",
         "description": "The sort expression that should be used to sort the results.",
         "name": "sort",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "exclusions_sdmf_query_v1",
+    "POST",
+    "/exclusions/sdmf/query/v1",
+    "Executes an SDMF data frame query against exclusion entities",
+    "ml_exclusions",
+    [
+      {
+        "description": "SDMF DataFrame query",
+        "name": "body",
+        "in": "body",
+        "required": True
       }
     ]
   ],
@@ -252,20 +267,6 @@ _ml_exclusions_endpoints = [
     ]
   ],
   [
-    "updateMLExclusionsV1",
-    "PATCH",
-    "/policy/entities/ml-exclusions/v1",
-    "Update the ML exclusions",
-    "ml_exclusions",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "deleteMLExclusionsV1",
     "DELETE",
     "/policy/entities/ml-exclusions/v1",
@@ -288,6 +289,20 @@ _ml_exclusions_endpoints = [
         "description": "Explains why this exclusions was deleted",
         "name": "comment",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "updateMLExclusionsV1",
+    "PATCH",
+    "/policy/entities/ml-exclusions/v1",
+    "Update the ML exclusions",
+    "ml_exclusions",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
       }
     ]
   ],
@@ -317,6 +332,7 @@ _ml_exclusions_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "applied_globally.asc",
           "applied_globally.desc",
@@ -331,7 +347,6 @@ _ml_exclusions_endpoints = [
           "value.asc",
           "value.desc"
         ],
-        "type": "string",
         "description": "The sort expression that should be used to sort the results.",
         "name": "sort",
         "in": "query"

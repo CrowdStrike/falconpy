@@ -45,6 +45,13 @@ class TestMLExclusions:
                                                               excluded_from="banana,apples"
                                                               ),
             "delete_exclusion": falcon.delete_exclusions(ids="12345678"),
+            "exclusions_sdmf_query_v1": falcon.exclusions_sdmf_query_v1(id="string", nodes="string", res_id="string",
+                deadline="string", duration="string",
+                execution_context="string",
+                execution_details="string",
+                is_export_request="string", pagination_info="string",
+                partial_results="string", query_stats="string",
+                store_headers="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

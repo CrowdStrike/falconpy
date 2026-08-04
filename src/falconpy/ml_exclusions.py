@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import (
@@ -42,8 +43,9 @@ from ._payload import (
     aggregate_payload,
     ml_exclusions_actions_payload,
     ml_exclusions_report_payload,
-    ml_exclusions_update_payload
-)
+    ml_exclusions_update_payload,
+    exclusions_sdmf_query_v1_payload,
+    )
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._ml_exclusions import _ml_exclusions_endpoints as Endpoints
@@ -911,6 +913,115 @@ class MLExclusions(ServiceClass):
             operation_id="queryMLExclusionsV1",
             keywords=kwargs,
             params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def exclusions_sdmf_query_v1(self: object,
+                                 body: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Execute an SDMF data frame query against exclusion entities.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions_sdmf_query_v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "control_info": {
+                        "deadline": "string",
+                        "duration": "string",
+                        "execution_context": {
+                            "catalog_version": "string",
+                            "execution_options": "string",
+                            "extensions": "string",
+                            "queried_cids": [
+                                "string"
+                            ]
+                        },
+                        "execution_details": {
+                            "driver_calls": "string"
+                        },
+                        "is_export_request": true,
+                        "pagination_info": {
+                            "limit": 0,
+                            "offset": "string"
+                        },
+                        "partial_results": true,
+                        "query_stats": {
+                            "execution_stats": {
+                                "visited_entities": 0,
+                                "visited_relationships": 0
+                            },
+                            "total_hits": {
+                                "relation": "string",
+                                "total": 0
+                            }
+                        },
+                        "store_headers": "string"
+                    },
+                    "id": "string",
+                    "nodes": [
+                        {
+                            "alias": "string",
+                            "id": "string",
+                            "operator": "string",
+                            "res_id": "string",
+                            "schema": {
+                                "base": [
+                                    "string"
+                                ],
+                                "facets": [
+                                    "string"
+                                ],
+                                "fields": [
+                                    {
+                                        "facets": [
+                                            "string"
+                                        ],
+                                        "is_relationship": true,
+                                        "is_required": true,
+                                        "multiplicity": "string",
+                                        "name": "string",
+                                        "scope": "string",
+                                        "type": "string"
+                                    }
+                                ],
+                                "res_id": "string"
+                            }
+                        }
+                    ],
+                    "res_id": "string"
+                }
+        control_info : dict
+            The control_info value.
+        id : str
+            The id value.
+        nodes : list
+            The nodes value.
+        res_id : str
+            The res_id value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = exclusions_sdmf_query_v1_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="exclusions_sdmf_query_v1",
+            body=body
             )
 
     # These method names align to the operation IDs in the API but
