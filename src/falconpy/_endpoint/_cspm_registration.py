@@ -1308,7 +1308,8 @@ _cspm_registration_endpoints = [
     "getCloudEventIDs",
     "GET",
     "/detects/queries/cloud-events/v1",
-    "Get list of related cloud event LogScale IDs for a given IOA",
+    "Deprecated: use cdrapi entities/event-details/v1 'logscale_related_events_query' instead. Get list of "
+    "related cloud event LogScale IDs for a given IOA.",
     "cspm_registration",
     [
       {
