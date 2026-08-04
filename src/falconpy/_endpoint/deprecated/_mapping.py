@@ -80,6 +80,8 @@ _deprecated_op_mapping = {
     "AggregatesKnowledgeBaseAuditEventsV1": "",
 
     "AggregatesKnowledgeBasesV1": "",
+
+    "WorkflowExecuteInternal": "",
 }
 
 _deprecated_cls_mapping = {

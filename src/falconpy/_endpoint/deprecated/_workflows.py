@@ -73,5 +73,78 @@ _workflows_endpoints = [
         "in": "query"
       }
     ]
+  ],
+  [
+    "WorkflowExecuteInternal",
+    "POST",
+    "/workflows/entities/execute/internal/v1",
+    "Executes an on-demand Workflow - internal workflows permitted, the body is JSON used to trigger the "
+
+    "execution, the response the execution ID(s)",
+
+    "workflows",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "CID(s) to execute on. This can be a child if this is a flight control enabled "
+
+        "definition. If unset the definition CID is used.",
+
+        "name": "execution_cid",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Definition ID to execute, either a name or an ID can be specified.",
+        "name": "definition_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Workflow name to execute, either a name or an ID can be specified.",
+        "name": "name",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Key used to help deduplicate executions, if unset a new UUID is used",
+        "name": "key",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Used to record the execution depth to help limit execution loops when a workflow "
+
+        "triggers another. The maximum depth is 4.",
+
+        "name": "depth",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Used to set the batchSize, if unset the default batchSize is used",
+        "name": "batch_size",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Used to record a URL to the source that led to triggering this workflow",
+        "name": "source_event_url",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
   ]
 ]
