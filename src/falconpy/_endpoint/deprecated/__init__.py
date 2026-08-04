@@ -82,6 +82,7 @@ from ._foundry_logscale import _foundry_logscale_endpoints
 from ._spotlight_vulnerabilities import _spotlight_vulnerabilities_endpoints
 from ._incidents import _incidents_endpoints
 from ._knowledge_base_audit_events import _knowledge_base_audit_events_endpoints
+from ._knowledge_bases import _knowledge_bases_endpoints
 
 _admission_control_policies_deprecated = _admission_control_policies_endpoints
 _alerts_deprecated = _alerts_endpoints
@@ -133,5 +134,6 @@ _foundry_logscale_deprecated = _foundry_logscale_endpoints
 _spotlight_vulnerabilities_deprecated = _spotlight_vulnerabilities_endpoints
 _incidents_deprecated = _incidents_endpoints
 _knowledge_base_audit_events_deprecated = _knowledge_base_audit_events_endpoints
+_knowledge_bases_deprecated = _knowledge_bases_endpoints
 _deprecated_operation_mapping = _deprecated_op_mapping
 _deprecated_class_mapping = _deprecated_cls_mapping

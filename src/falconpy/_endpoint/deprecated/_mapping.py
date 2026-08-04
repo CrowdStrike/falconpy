@@ -78,6 +78,8 @@ _deprecated_op_mapping = {
     "combinedQueryInstalledPatches": "",
 
     "AggregatesKnowledgeBaseAuditEventsV1": "",
+
+    "AggregatesKnowledgeBasesV1": "",
 }
 
 _deprecated_cls_mapping = {
