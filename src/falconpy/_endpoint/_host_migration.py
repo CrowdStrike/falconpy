@@ -216,15 +216,9 @@ _host_migration_endpoints = [
       {
         "type": "string",
         "enum": [
-          "created_time|asc",
-          "created_time|desc",
-          "created_time",
-          "groups|asc",
-          "groups|desc",
-          "groups",
-          "hostgroups|asc",
-          "hostgroups|desc",
-          "hostgroups",
+          "id|asc",
+          "id|desc",
+          "id",
           "hostname|asc",
           "hostname|desc",
           "hostname",
@@ -234,9 +228,18 @@ _host_migration_endpoints = [
           "source_cid|asc",
           "source_cid|desc",
           "source_cid",
+          "created_time|asc",
+          "created_time|desc",
+          "created_time",
           "host_migration_id|asc",
           "host_migration_id|desc",
           "host_migration_id",
+          "groups|asc",
+          "groups|desc",
+          "groups",
+          "hostgroups|asc",
+          "hostgroups|desc",
+          "hostgroups",
           "static_host_groups|asc",
           "static_host_groups|desc",
           "static_host_groups",
@@ -245,10 +248,7 @@ _host_migration_endpoints = [
           "status",
           "migration_id|asc",
           "migration_id|desc",
-          "migration_id",
-          "id|asc",
-          "id|desc",
-          "id"
+          "migration_id"
         ],
         "description": "The property to sort by.",
         "name": "sort",
@@ -256,9 +256,9 @@ _host_migration_endpoints = [
       },
       {
         "type": "string",
-        "description": "The filter expression that should be used to limit the results. Valid fields: "
-        "hostname, target_cid, source_cid, host_migration_id, static_host_groups, status, migration_id, id, "
-        "created_time, groups, hostgroups",
+        "description": "The filter expression that should be used to limit the results. Valid fields: id, "
+        "hostname, target_cid, source_cid, created_time, host_migration_id, groups, hostgroups, static_host_groups, "
+        "status, migration_id",
         "name": "filter",
         "in": "query"
       }
