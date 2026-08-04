@@ -225,6 +225,7 @@ from ._ngsiem import (
     update_saved_query_labels_payload,
     )
 from ._prevention_policy import prevention_policy_payload
+from ._scanning_orchestrator import create_schedules_payload, trigger_scan_by_schedule_payload, update_schedules_payload
 from ._sensor_update_policy import sensor_policy_payload, maintenance_token_payload
 from ._response_policy import response_policy_payload
 from ._real_time_response import command_payload, data_payload
@@ -392,5 +393,7 @@ __all__ = [
     "bulk_remove_lookup_file_labels_payload", "bulk_remove_saved_query_labels_payload",
     "bulk_update_dashboard_labels_payload", "bulk_update_lookup_file_labels_payload",
     "bulk_update_saved_query_labels_payload", "update_dashboard_labels_payload",
-    "update_file_labels_payload", "update_saved_query_labels_payload"
+    "update_file_labels_payload", "update_saved_query_labels_payload",
+    "create_schedules_payload", "trigger_scan_by_schedule_payload",
+    "update_schedules_payload"
 ]

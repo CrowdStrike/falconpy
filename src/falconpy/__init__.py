@@ -219,6 +219,7 @@ from .report_executions import ReportExecutions
 from .response_policies import ResponsePolicies
 from .saas_security import SaasSecurity
 from .sample_uploads import SampleUploads
+from .scanning_orchestrator import ScanningOrchestrator
 from .scheduled_reports import ScheduledReports
 from .sensor_download import SensorDownload
 from .sensor_update_policy import SensorUpdatePolicy, SensorUpdatePolicies
@@ -299,7 +300,7 @@ __all__ = [
     "KnowledgeBases", "ProfileGroups",
     "FalconId", "AgentInvocation",
     "AgentTemplates", "AgentVersions",
-    "Models"
+    "Models", "ScanningOrchestrator"
     ]
 """
 This is free and unencumbered software released into the public domain.
