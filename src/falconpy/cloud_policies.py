@@ -85,6 +85,8 @@ class CloudPolicies(ServiceClass):
             Cloud service provider for the resource type.
         resource_type : str
             Selects the resource type for which to retrieve the rule input schema.
+        enriched : bool
+            When true, returns the enriched schema with inlined related resource types. Defaults to true.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 

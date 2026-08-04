@@ -76,6 +76,13 @@ _cloud_policies_endpoints = [
         "name": "resource_type",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "boolean",
+        "default": True,
+        "description": "When true, returns the enriched schema with inlined related resource types. Defaults to true.",
+        "name": "enriched",
+        "in": "query"
       }
     ]
   ],
@@ -481,9 +488,9 @@ _cloud_policies_endpoints = [
       {
         "description": "Rule severity integer to provide maps to the following: 0=Critical, 1=High, 2=Medium "
         "and 3=Low.\nFor CSPM IOM Custom Rules, logic is mandatory and parent_rule_id should not be specified.\nFor "
-        "Runtime IOM Custom Rules (KAC), logic is mandatory. Fields controls, resource_type, and parent_rule_id should "
-        "not be specified.\nFor Managed Rule duplication, parent_rule_id is mandatory and logic should be not "
-        "specified.",
+        "CSPM IAC Custom Rules, logic is mandatory and description is optional.\nFor Runtime IOM Custom Rules (KAC), "
+        "logic is mandatory. Fields controls, resource_type, and parent_rule_id should not be specified.\nFor Managed "
+        "Rule duplication, parent_rule_id is mandatory and logic should be not specified.",
         "name": "body",
         "in": "body",
         "required": True
