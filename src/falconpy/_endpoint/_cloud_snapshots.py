@@ -47,8 +47,9 @@ _cloud_snapshots_endpoints = [
       {
         "type": "string",
         "description": "Search IaC detections using a query in Falcon Query Language (FQL). Supported filters: "
-        " detection_uuid,file_name,last_detected,platform,project_name,project_owner,project_ref,provider,resource_name "
-        ",rule_category,rule_name,rule_type,rule_uuid,service,severity",
+        " detection_uuid,file_name,is_from_module,last_detected,module_path,module_source,module_version,platform,proje "
+        "ct_name,project_owner,project_ref,provider,resource_name,rule_category,rule_name,rule_type,rule_uuid,service,s "
+        "everity",
         "name": "filter",
         "in": "query"
       },
@@ -67,8 +68,8 @@ _cloud_snapshots_endpoints = [
       {
         "type": "string",
         "description": "fields to sort the records on. Supported columns:  [detection_uuid file_name "
-        "last_detected platform project_name project_owner project_ref provider resource_name rule_category rule_name "
-        "rule_type rule_uuid service severity]",
+        "is_from_module last_detected module_path module_source module_version platform project_name project_owner "
+        "project_ref provider resource_name rule_category rule_name rule_type rule_uuid service severity]",
         "name": "sort",
         "in": "query"
       }
