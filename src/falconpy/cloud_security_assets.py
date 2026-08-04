@@ -83,6 +83,8 @@ class CloudSecurityAssets(ServiceClass):
             Pagination offset.
         limit : int
             Page size.
+        sort : str
+            Sort expression in the format field|direction (e.g. key|desc), where direction is asc or desc. Sortable fields depend on the finding type. Currently supported for packages: 'key' (package name and version) and 'vulnerabilities' (number of vulnerabilities).
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
