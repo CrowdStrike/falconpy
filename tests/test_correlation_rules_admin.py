@@ -27,7 +27,9 @@ class TestCloudSecurityAssets:
                                                                                     id="rule123",
                                                                                     user_id="user456",
                                                                                     user_uuid="uuid789"
-                                                                                    )
+                                                                                    ),
+            "entities_rules_ownership_put_v2": falcon.entities_rules_ownership_put_v2(api_client_id="string", ids="string",
+                user_id="string", user_uuid="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

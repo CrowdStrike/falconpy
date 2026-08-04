@@ -55,3 +55,24 @@ def correlation_rules_admin_payload(passed_keywords: dict) -> Dict[str, List[Dic
         if passed_keywords.get(key, None) is not None:
             returned_payload[key] = passed_keywords.get(key, None)
     return returned_payload
+
+
+def entities_rules_ownership_put_v2_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a entities_rules_ownership_put_v2 request.
+
+    {
+        "api_client_id": "string",
+        "ids": [
+            "string"
+        ],
+        "user_id": "string",
+        "user_uuid": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["api_client_id", "ids", "user_id", "user_uuid"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload

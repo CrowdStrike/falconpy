@@ -129,7 +129,10 @@ from ._container import (
     inventory_scan_payload
     )
 from ._content_update_policy import content_update_policy_action_payload, content_update_policy_payload
-from ._correlation_rules_admin import correlation_rules_admin_payload
+from ._correlation_rules_admin import (
+    correlation_rules_admin_payload,
+    entities_rules_ownership_put_v2_payload,
+    )
 
 from ._data_protection_configuration import (
     data_protection_classification_payload,
@@ -362,5 +365,5 @@ __all__ = [
     "devices_actions_delete_v1_payload", "indicator_sdmf_query_v1_payload",
     "update_parser_extension_payload", "invoke_agent_version_external_v1_payload",
     "invoke_published_agent_external_v1_payload", "entities_merge_post_v1_payload",
-    "cspm_evaluations_iom_entities_post_payload"
+    "cspm_evaluations_iom_entities_post_payload", "entities_rules_ownership_put_v2_payload"
 ]

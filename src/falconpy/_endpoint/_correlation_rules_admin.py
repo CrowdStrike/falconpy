@@ -50,5 +50,19 @@ _correlation_rules_admin_endpoints = [
         "required": True
       }
     ]
+  ],
+  [
+    "entities_rules_ownership_put_v2",
+    "PUT",
+    "/correlation-rules/entities/rules/ownership/v2",
+    "Bulk change the owner of existing Correlation Rules",
+    "correlation_rules_admin",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
   ]
 ]

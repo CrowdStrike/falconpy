@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request
+from ._payload import entities_rules_ownership_put_v2_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._correlation_rules_admin import _correlation_rules_admin_endpoints as Endpoints
@@ -99,6 +100,57 @@ class CorrelationRulesAdmin(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="entities_rules_ownership_put_v1",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def entities_rules_ownership_put_v2(self: object,
+                                        body: dict = None,
+                                        **kwargs
+                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Bulk change the owner of existing Correlation Rules.
+
+        HTTP Method: PUT
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules-admin/entities_rules_ownership_put_v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "api_client_id": "string",
+                    "ids": [
+                        "string"
+                    ],
+                    "user_id": "string",
+                    "user_uuid": "string"
+                }
+        api_client_id : str
+            The api_client_id value.
+        ids : list
+            The ids value.
+        user_id : str
+            The user_id value.
+        user_uuid : str
+            The user_uuid value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = entities_rules_ownership_put_v2_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_rules_ownership_put_v2",
             body=body
             )
 
