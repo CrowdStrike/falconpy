@@ -19,6 +19,7 @@
                                                         |::.|     CrowdStrike Falcon      |::.|
                                                         `---' OAuth2 API SDK for Python 3 `---'
 """
+from ._agent_invocation import invoke_agent_version_external_v1_payload, invoke_published_agent_external_v1_payload
 from ._api_clients import create_api_client_payload, update_api_client_payload
 from ._cloud_security_assets import cloud_security_assets_entities_post_payload
 from ._falcon_id import update_third_party_passkey_registry_payload
@@ -357,5 +358,6 @@ __all__ = [
     "bulk_update_saved_queries_from_template_payload", "create_parser_extension_payload",
     "cloud_registration_gcp_post_terraform_script_payload", "update_third_party_passkey_registry_payload",
     "devices_actions_delete_v1_payload", "indicator_sdmf_query_v1_payload",
-    "update_parser_extension_payload"
+    "update_parser_extension_payload", "invoke_agent_version_external_v1_payload",
+    "invoke_published_agent_external_v1_payload"
 ]

@@ -107,6 +107,7 @@ from ._ngsiem import (
 from ._helper import random_string, Indicator, Color, find_operation
 from .access_scopes import AccessScopes
 from .admission_control_policies import AdmissionControlPolicies
+from .agent_invocation import AgentInvocation
 from .alerts import Alerts
 from .api_clients import APIClients
 from .api_integrations import APIIntegrations
@@ -293,7 +294,7 @@ __all__ = [
     "FederatedConnections", "FoundryLookupFiles",
     "KnowledgeBaseAuditEvents", "KnowledgeBaseFiles",
     "KnowledgeBases", "ProfileGroups",
-    "FalconId"
+    "FalconId", "AgentInvocation"
     ]
 """
 This is free and unencumbered software released into the public domain.
