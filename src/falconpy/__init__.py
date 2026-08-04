@@ -227,6 +227,7 @@ from .sensor_usage import SensorUsage
 from .sensor_visibility_exclusions import SensorVisibilityExclusions
 from .serverless_exports import ServerlessExports
 from .serverless_vulnerabilities import ServerlessVulnerabilities
+from .spans import Spans
 from .spotlight_vulnerabilities import SpotlightVulnerabilities
 from .spotlight_vulnerability_metadata import SpotlightVulnerabilityMetadata
 from .spotlight_evaluation_logic import SpotlightEvaluationLogic
@@ -300,7 +301,8 @@ __all__ = [
     "KnowledgeBases", "ProfileGroups",
     "FalconId", "AgentInvocation",
     "AgentTemplates", "AgentVersions",
-    "Models", "ScanningOrchestrator"
+    "Models", "ScanningOrchestrator",
+    "Spans"
     ]
 """
 This is free and unencumbered software released into the public domain.
