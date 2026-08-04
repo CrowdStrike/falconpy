@@ -109,6 +109,7 @@ from .access_scopes import AccessScopes
 from .admission_control_policies import AdmissionControlPolicies
 from .agent_invocation import AgentInvocation
 from .agent_templates import AgentTemplates
+from .agent_versions import AgentVersions
 from .alerts import Alerts
 from .api_clients import APIClients
 from .api_integrations import APIIntegrations
@@ -296,7 +297,7 @@ __all__ = [
     "KnowledgeBaseAuditEvents", "KnowledgeBaseFiles",
     "KnowledgeBases", "ProfileGroups",
     "FalconId", "AgentInvocation",
-    "AgentTemplates"
+    "AgentTemplates", "AgentVersions"
     ]
 """
 This is free and unencumbered software released into the public domain.
