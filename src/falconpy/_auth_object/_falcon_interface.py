@@ -50,7 +50,7 @@ from ._bearer_token import BearerToken
 from .._log import LogFacility
 from .._constant import MIN_TOKEN_RENEW_WINDOW, MAX_TOKEN_RENEW_WINDOW
 from ._interface_config import InterfaceConfiguration
-from .._enum import TokenFailReason
+from .._enum import TokenFailReason, BaseURL
 from .._util import (
     autodiscover_region,
     confirm_base_url,
@@ -61,6 +61,10 @@ from .._util import (
     review_provided_credentials
     )
 from .._error import InvalidCredentials, NoAuthenticationMechanism
+
+
+# Default base URL, used to detect whether the caller specified one.
+_DEFAULT_BASE_URL = f"https://{BaseURL.US1.value}"
 
 
 # pylint: disable=R0902,R0904
@@ -98,6 +102,12 @@ class FalconInterface(BaseFalconAuth):
         self._pythonic: bool = False
         if isinstance(pythonic, bool):
             self._pythonic = pythonic
+
+        # A base URL specified by the caller takes precedence over any cloud
+        # region derived during authentication.
+        base_url_provided: bool = (
+            base_url is not None and confirm_base_url(base_url) != _DEFAULT_BASE_URL
+        )
 
         # Setup our configuration object using the provided keywords.
         self._config: InterfaceConfiguration = InterfaceConfiguration(base_url=base_url,
@@ -167,10 +177,10 @@ class FalconInterface(BaseFalconAuth):
                     # Attempt to retrieve the cloud region from the same object.
                     # Fall back to our previously set default on failure.
                     try:
-                        if cvar.cs_cloud:
+                        if cvar.cs_cloud and not base_url_provided:
                             self._config.base_url = confirm_base_url(cvar.cs_cloud)
                     except AttributeError:
-                        if self.token_value:
+                        if self.token_value and not base_url_provided:
                             self._config.base_url = confirm_base_url(os.getenv("CS_CLOUD", "auto"))
                     self._auth_style = "CONTEXT"
                     break

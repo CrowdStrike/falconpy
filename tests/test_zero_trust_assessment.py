@@ -32,6 +32,56 @@ class ContextRequest:
     cs_cloud: str = field(default='')
 
 
+class TestContextAuthenticationBaseURL:
+    """Confirm Context Authentication does not override an explicit base_url."""
+
+    EXPLICIT_URL = "https://api.dodo.crowdstrike.red"
+
+    @staticmethod
+    def _context(cloud=None):
+        """Set a context variable exposing an access token and an optional cs_cloud."""
+        holder = ContextRequest() if cloud is not None else BaselessContextRequest()
+        holder.access_token = "fake-token-for-testing"
+        if cloud is not None:
+            holder.cs_cloud = cloud
+        request_context = ContextVar("base-url-context", default=holder)
+        return request_context, request_context.set(holder)
+
+    def test_explicit_base_url_survives_cs_cloud(self):
+        """An explicitly provided base_url must win over the context cs_cloud."""
+        request_context, token = self._context(cloud="dodo-red")
+        try:
+            zta = ZeroTrustAssessment(base_url=self.EXPLICIT_URL)
+            assert zta.base_url == self.EXPLICIT_URL
+            assert zta.auth_style == "CONTEXT"
+        finally:
+            request_context.reset(token)
+
+    def test_cs_cloud_still_applies_without_an_explicit_base_url(self):
+        """With no base_url supplied, the context cs_cloud must still be honored."""
+        request_context, token = self._context(cloud="US2")
+        try:
+            assert ZeroTrustAssessment().base_url == "https://api.us-2.crowdstrike.com"
+        finally:
+            request_context.reset(token)
+
+    def test_explicit_base_url_survives_a_context_without_cs_cloud(self):
+        """A context lacking cs_cloud must not reset an explicit base_url either."""
+        request_context, token = self._context()
+        try:
+            assert ZeroTrustAssessment(base_url=self.EXPLICIT_URL).base_url == self.EXPLICIT_URL
+        finally:
+            request_context.reset(token)
+
+    def test_uber_class_explicit_base_url_survives_cs_cloud(self):
+        """The Uber Class must honor an explicit base_url under Context Authentication."""
+        request_context, token = self._context(cloud="dodo-red")
+        try:
+            assert APIHarnessV2(base_url=self.EXPLICIT_URL).base_url == self.EXPLICIT_URL
+        finally:
+            request_context.reset(token)
+
+
 class TestZeroTrustAssessment:
 
     def test_get_assessment(self):
