@@ -46,5 +46,7 @@ class IngestBaseURL(Enum):
 
     US1 = "ingest.us-1.crowdstrike.com"
     US2 = "ingest.us-2.crowdstrike.com"
+    US3 = "ingest.us-3.crowdstrike.com"
     EU1 = "ingest.eu-1.crowdstrike.com"
     USGOV1 = "ingest.laggar.gcw.crowdstrike.com"
+    USGOV2 = "ingest.us-gov-2.crowdstrike.mil"
