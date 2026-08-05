@@ -411,6 +411,25 @@ class TestUtilFunctionsCoverage:
         except InvalidBaseURL:
             pass
 
+    def test_confirm_base_url_accepts_dashed_region_names(self):
+        """Every region name must resolve identically with and without dashes."""
+        dashed = {
+            "us-1": "US1",
+            "us-2": "US2",
+            "us-3": "US3",
+            "eu-1": "EU1",
+            "us-gov-1": "USGOV1",
+            "us-gov-2": "USGOV2",
+        }
+        for name, undashed in dashed.items():
+            assert confirm_base_url_func(name) == confirm_base_url_func(undashed)
+
+    def test_confirm_base_url_dashed_region_is_case_insensitive(self):
+        """A dashed region name must resolve regardless of case."""
+        expected = "https://api.us-3.crowdstrike.com"
+        for variant in ["us-3", "US-3", "Us-3", "uS-3"]:
+            assert confirm_base_url_func(variant) == expected
+
     def test_deprecated_operation_with_log(self):
         """deprecated_operation non-pythonic with logger."""
         logger = logging.getLogger("test_deprecated_op")
