@@ -2513,7 +2513,7 @@ class CaseManagement(ServiceClass):
                                body: dict = None,
                                **kwargs
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Merges a source case into a destination case.
+        """Merge a source case into a destination case.
 
         HTTP Method: POST
 

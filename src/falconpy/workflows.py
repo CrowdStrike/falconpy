@@ -290,7 +290,8 @@ class Workflows(ServiceClass):
         id : str
             ID of workflow definitions to return details for.
         include_mocks : bool
-            when enabled, includes referenced node-mocks inline in the exported YAML. Each mock's output_data field is a JSON-encoded string rather than native YAML.
+            when enabled, includes referenced node-mocks inline in the exported YAML. Each
+            mock's output_data field is a JSON-encoded string rather than native YAML.
         version : int
             version of the definition to export (e.g. 0 for draft); omit for active/published.
         parameters : dict

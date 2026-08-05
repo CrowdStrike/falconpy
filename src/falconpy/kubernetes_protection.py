@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 # pylint: disable=C0302, R0904
 from typing import Dict, Union
 from ._util import process_service_request, force_default, handle_single_argument
+from ._payload import aggregate_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._kubernetes_protection import _kubernetes_protection_endpoints as Endpoints
