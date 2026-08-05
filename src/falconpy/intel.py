@@ -575,6 +575,11 @@ class Intel(ServiceClass):
             Ex: created_date|asc.
         filter : str
             Filter your query by specifying FQL filter parameters.
+            The `last_updated` and `created_timestamp` fields are returned as ISO 8601
+            timestamp strings for this operation, so their filter values must be
+            quoted. Ex: last_updated:>='2026-01-28T10:22:34Z'. An unquoted value
+            is parsed as an integer, so a Unix epoch timestamp is accepted without
+            error but matches nothing and the filter appears to be ignored.
         q : str
             Perform a generic substring search across all fields.
         fields : str or list[str]
@@ -1104,6 +1109,11 @@ class Intel(ServiceClass):
         -----------------
         filter : str
             The filter expression that should be used to limit the results. FQL syntax.
+            The `last_updated` and `created_timestamp` fields are returned as ISO 8601
+            timestamp strings for this operation, so their filter values must be
+            quoted. Ex: last_updated:>='2026-01-28T10:22:34Z'. An unquoted value
+            is parsed as an integer, so a Unix epoch timestamp is accepted without
+            error but matches nothing and the filter appears to be ignored.
         limit : int (1-5000)
             The maximum number of actors to return.
         offset : int
