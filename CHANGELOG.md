@@ -1,4 +1,283 @@
 # Version 1.6.5
+## Added features and functionality
++ Added: Optional `session` keyword argument (a `requests.Session` instance) accepted by `OAuth2`, `APIHarnessV2`,
+  the legacy `APIHarness`, and every Service Class, allowing callers to reuse a single HTTP connection across
+  login, every API call, token renewal, and logout. FalconPy never closes a session provided this way; the
+  caller retains ownership of its lifecycle. Behavior is unchanged when this keyword is omitted.
+    - `_util/_functions.py`
+    - `_api_request/_request.py`
+    - `_api_request/_request_connection.py`
+    - `_auth_object/_interface_config.py`
+    - `_auth_object/_falcon_interface.py`
+    - `_auth_object/_uber_interface.py`
+    - `oauth2.py`
+    - `_util/_service.py`
+    - `_util/_uber.py`
+    - `_service_class/_base_service_class.py`
+    - `api_complete/_legacy.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_session_support.py`
+    - `tests/test_session_connection_reuse.py`
+    - Thanks to @Davack for their contribution! 🙇
+
++ Added: New __Agent Invocation__ service collection with three operations.
+    - _invoke_published_agent_external_v1_
+    - _get_agent_invocation_v3_
+    - _invoke_agent_version_external_v1_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_agent_invocation.py`
+    - `_payload/__init__.py`
+    - `_payload/_agent_invocation.py`
+    - `__init__.py`
+    - `agent_invocation.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_agent_invocation.py`
+
++ Added: New __Agent Templates__ service collection with two operations.
+    - _entities_agent_templates_v1_
+    - _queries_agent_templates_v1_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_agent_templates.py`
+    - `_payload/__init__.py`
+    - `_payload/_agent_templates.py`
+    - `__init__.py`
+    - `agent_templates.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_agent_templates.py`
+
++ Added: New __Agent Versions__ service collection with two operations.
+    - _get_agent_versions_v1_
+    - _query_agent_versions_v1_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_agent_versions.py`
+    - `_payload/__init__.py`
+    - `_payload/_agent_versions.py`
+    - `__init__.py`
+    - `agent_versions.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_agent_versions.py`
+
++ Added: Added `entities_merge_post_v1` operation to the __Case Management__ service collection.
+    - _entities_merge_post_v1_
+    - `_endpoint/_case_management.py`
+    - `case_management.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_case_management.py`
+
++ Updated: Added `enriched` as an allowed parameter in the _GetRuleInputSchema_ operation within the __Cloud Policies__ service collection.
+    - `_endpoint/_cloud_policies.py`
+    - `cloud_policies.py`
+
++ Updated: Added `sort` as an allowed parameter in the _cloud_security_assets_combined_application_findings_ operation, updated the `filter` parameter description in the _cloud_security_assets_combined_compliance_by_account_ operation, and updated the `filter` parameter description in the _cloud_security_assets_queries_ operation within the __Cloud Security Assets__ service collection.
+    - `_endpoint/_cloud_security_assets.py`
+    - `cloud_security_assets.py`
+
++ Added: Added `cspm_evaluations_iom_entities_post` operation to the __Cloud Security Detections__ service collection.
+    - _cspm_evaluations_iom_entities_post_
+    - `_endpoint/_cloud_security_detections.py`
+    - `cloud_security_detections.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_security_detections.py`
+
++ Added: Added `entities_rules_ownership_put_v2` operation to the __Correlation Rules Admin__ service collection.
+    - _entities_rules_ownership_put_v2_
+    - `_endpoint/_correlation_rules_admin.py`
+    - `correlation_rules_admin.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_correlation_rules_admin.py`
+
++ Added: Added five new operations to the __Data Protection Configuration__ service collection.
+    - _entities_web_location_group_get_
+    - _entities_web_location_group_create_
+    - _entities_web_location_group_delete_
+    - _entities_web_location_group_patch_
+    - _queries_web_location_group_get_
+    - `_endpoint/_data_protection_configuration.py`
+    - `data_protection_configuration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_data_protection_configuration.py`
+
++ Updated: Added `Authorization` as an allowed parameter to the _CombinedReleaseNotesV1_, _CombinedReleasesV1Mixin0_, _GetDeploymentsExternalV1_, _GetEntityIDsByQueryPOST_, _GetEntityIDsByQueryPOSTV2_, and _QueryReleaseNotesV1_ operations within the __Deployments__ service collection.
+    - `_endpoint/_deployments.py`
+    - `deployments.py`
+
++ Updated: Added `cloud_service_compartment_id` as an allowed `sort` value for the _CombinedHiddenDevicesByFilter_ and _CombinedDevicesByFilter_ operations within the __Hosts__ service collection.
+    - `_endpoint/_hosts.py`
+    - `hosts.py`
+
++ Decommissioned: Decommissioned all six operations within the __Incidents__ service collection (_CrowdScore_, _GetBehaviors_, _GetIncidents_, _PerformIncidentAction_, _QueryBehaviors_, and _QueryIncidents_). The Incidents API reached end of life and these operations were removed from the API specification. The `Incidents` Service Class and its methods remain importable and are tagged `DECOMMISSIONED` so existing code continues to load, but calls to these operations will no longer succeed. Use the __Alerts__ service collection instead.
+    - `_endpoint/_incidents.py`
+    - `_endpoint/deprecated/_incidents.py`
+    - `_endpoint/deprecated/_mapping.py`
+    - `incidents.py`
+
++ Decommissioned: Decommissioned `AggregatesKnowledgeBaseAuditEventsV1` operation in the __Knowledge Base Audit Events__ service collection.
+    - `_endpoint/_knowledge_base_audit_events.py`
+    - `_endpoint/deprecated/_knowledge_base_audit_events.py`
+    - `_endpoint/deprecated/_mapping.py`
+    - `knowledge_base_audit_events.py`
+
++ Decommissioned: Decommissioned `AggregatesKnowledgeBasesV1` operation in the __Knowledge Bases__ service collection.
+    - `_endpoint/_knowledge_bases.py`
+    - `_endpoint/deprecated/_knowledge_bases.py`
+    - `_endpoint/deprecated/_mapping.py`
+    - `knowledge_bases.py`
+
++ Added: Added `PostAggregatesPods` operation to the __Kubernetes Protection__ service collection.
+    - _post_aggregates_pods_
+    - `_endpoint/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_kubernetes_protection.py`
+
++ Added: Added `exclusions_sdmf_query_v1` operation to the __Ml Exclusions__ service collection.
+    - _exclusions_sdmf_query_v1_
+    - `_endpoint/_ml_exclusions.py`
+    - `ml_exclusions.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ml_exclusions.py`
+
++ Added: New __Models__ service collection with two operations.
+    - _entities_models_v1_
+    - _queries_models_v1_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_models.py`
+    - `_payload/__init__.py`
+    - `_payload/_models.py`
+    - `__init__.py`
+    - `models.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_models.py`
+
++ Added: Added 18 new operations to the __Ngsiem__ service collection.
+    - _bulk_add_dashboard_labels_
+    - _bulk_remove_dashboard_labels_
+    - _bulk_update_dashboard_labels_
+    - _bulk_add_lookup_file_labels_
+    - _bulk_remove_lookup_file_labels_
+    - _bulk_update_lookup_file_labels_
+    - _bulk_add_saved_query_labels_
+    - _bulk_remove_saved_query_labels_
+    - _bulk_update_saved_query_labels_
+    - _update_dashboard_labels_
+    - _add_dashboard_labels_
+    - _remove_dashboard_labels_
+    - _update_file_labels_
+    - _add_file_labels_
+    - _remove_file_labels_
+    - _update_saved_query_labels_
+    - _add_saved_query_labels_
+    - _remove_saved_query_labels_
+    - `_endpoint/_ngsiem.py`
+    - `ngsiem.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ngsiem.py`
+
++ Added: New __Scanning Orchestrator__ service collection with eight operations.
+    - _get_combined_schedules_
+    - _trigger_scan_by_schedule_
+    - _get_schedules_
+    - _create_schedules_
+    - _delete_schedules_
+    - _update_schedules_
+    - _get_service_types_
+    - _search_schedules_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_scanning_orchestrator.py`
+    - `_payload/__init__.py`
+    - `_payload/_scanning_orchestrator.py`
+    - `__init__.py`
+    - `scanning_orchestrator.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_scanning_orchestrator.py`
+
++ Added: New __Spans__ service collection with two operations.
+    - _entities_spans_v1_
+    - _queries_spans_v1_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_spans.py`
+    - `_payload/__init__.py`
+    - `_payload/_spans.py`
+    - `__init__.py`
+    - `spans.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_spans.py`
+
++ Added: New __Stream__ service collection with one operation.
+    - _stream_invocation_response_v1_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_stream.py`
+    - `_payload/__init__.py`
+    - `_payload/_stream.py`
+    - `__init__.py`
+    - `stream.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_stream.py`
+
++ Updated: Added `Authorization` as an allowed parameter to the _GetEventsBody_, _GetEventsEntities_, _QueryEvents_, _GetRulesEntities_, and _QueryRules_ operations within the __Tailored Intelligence__ service collection.
+    - `_endpoint/_tailored_intelligence.py`
+    - `tailored_intelligence.py`
+
++ Added: New __Tools__ service collection with two operations.
+    - _entities_tools_v1_
+    - _queries_tools_v1_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_tools.py`
+    - `_payload/__init__.py`
+    - `_payload/_tools.py`
+    - `__init__.py`
+    - `tools.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_tools.py`
+
++ Decommissioned: Decommissioned `WorkflowExecuteInternal` operation in the __Workflows__ service collection.
+    - `_endpoint/_workflows.py`
+    - `_endpoint/deprecated/_workflows.py`
+    - `_endpoint/deprecated/_mapping.py`
+    - `workflows.py`
+
++ Updated: Added `include_mocks` and `version` as allowed parameters in the _WorkflowDefinitionsExport_ operation within the __Workflows__ service collection.
+    - `_endpoint/_workflows.py`
+    - `workflows.py`
+
++ Updated: Converted method docstrings within every service collection to the "format friendly" style. Keyword arguments and return values are now typed entries beneath underlined section headers, which is valid numpydoc and reStructuredText and renders as structured documentation in editors and IDEs. Method behavior is unchanged.
+    - `*.py` (every service collection)
+    - `.pylintrc`
+
+## Issues resolved
++ Fixed: Fixed the documented `body` keyword argument being ignored by the _start_search_ method within the __NGSIEM__ service collection. The search payload was only built when `body` was absent, and the request was then gated on that payload, so passing `body` returned a local error result without calling the API. The `search` keyword is unaffected. Closes #1491.
+    - `ngsiem.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ngsiem.py`
+    - Thanks go out to @mraible for identifying, reporting, and confirming a fix for this issue! 🙇
+
++ Fixed: Documented the timestamp format required by the `filter` keyword for the _query_malware_ and _query_malware_entities_ operations within the __Intel__ service collection. These operations return `last_updated` and `created_timestamp` as ISO 8601 strings, so filter values for those fields must be quoted (`last_updated:>='2026-01-28T10:22:34Z'`). An unquoted value is parsed as an integer, so a Unix epoch timestamp is accepted but matches no records, making the filter appear to be ignored. FalconPy passes the `filter` value to the API unmodified, so this is a documentation change only. Closes #1422.
+    - `intel.py`
+    - Thanks go out to @Kakudou for identifying and reporting this issue! 🙇
+
++ Fixed: Fixed path parameters being interpolated into operation routes without per-segment encoding. A value containing a forward slash or a dot-segment sequence altered the generated path, and since the `requests` library normalizes a path before transmission, the request could be issued against a different route than the calling method selected. The new `encode_path_segment` handler is applied at all three route construction sites: `handle_path_variables` (Service Classes), `handle_field` and `scrub_target` (the Uber Class), and the path variable handlers within the legacy `APIHarness`. Integers, UUIDs and hyphenated keys are unaffected. Closes #1488.
+    - `_util/__init__.py`
+    - `_util/_functions.py`
+    - `_util/_uber.py`
+    - `api_complete/_legacy.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_path_encoding.py`
+    - Thanks go out to @liyander for identifying and reporting this issue! 🙇
+
++ Fixed: Fixed Context Authentication discarding an explicitly provided `base_url`. The cloud region advertised by the discovered context object was applied unconditionally, replacing the base URL specified by the caller, which retargeted requests to the context `cs_cloud` value within Foundry FaaS functions. A caller-provided base URL now takes precedence, and the context is only consulted when one was not supplied.
+    - `_auth_object/_falcon_interface.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_zero_trust_assessment.py`
+    - Thanks go out to @mraible for identifying, reporting, and providing a reproduction for this issue! 🙇
+
++ Fixed: Added `US-3` to the list of dashed region names recognized when a base URL is specified by name. Passing `base_url="us-3"` produced `https://us-3` instead of the US-3 API URL, since the dash was only stripped for regions present in that list. All regions now resolve the same way with or without the dash.
+    - `_util/_functions.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_authentications.py`
+
++ Fixed: Added the missing `US-3` and `USGOV-2` ingest base URLs. Retrieving an ingest base URL for a US-3 or USGOV-2 tenant raised a `KeyError`, making the NGSIEM HTTP Event Collector unusable in those regions.
+    - `_enum/_ingest_base_url.py`
+
 # Version 1.6.4
 ## Added features and functionality
 + Added: Added [PEP 561](https://peps.python.org/pep-0561/) type stub (`.pyi`) files for every service collection, along with a `py.typed` marker, so type checkers and IDEs can surface method signatures, keyword arguments, and return types. Deprecated and decommissioned methods are annotated with `@deprecated` so editors flag them at call sites.
