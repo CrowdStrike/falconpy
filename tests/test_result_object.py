@@ -827,3 +827,88 @@ class TestResultNextCoverage:
         )
         val = next(r)
         assert val == "item1"
+
+
+def _static_result() -> Result:
+    """Build a Result from a fixed payload, with no API call involved."""
+    return Result(
+        status_code=200,
+        headers={"Content-Type": "application/json"},
+        body={
+            "meta": {"trace_id": "abc"},
+            "resources": ["alpha", "beta", "gamma"],
+            "errors": []
+        }
+    )
+
+
+class TestResultContainerHelpers:
+    """Cover the Result and BaseResource container helpers without a live API call.
+
+    The equivalent tests above build their Result from a live query_devices_by_filter
+    response, so they are skipped whenever that call is unavailable or rate limited.
+    These construct the payload directly so the code paths are always exercised.
+    """
+
+    def test_reverse_iteration(self):
+        """Result.__reversed__ must walk the resources list backwards."""
+        assert list(reversed(_static_result())) == ["gamma", "beta", "alpha"]
+
+    def test_getitem_by_position(self):
+        """Result.__getitem__ must index into the resources list."""
+        result = _static_result()
+        assert result[0] == "alpha"
+        assert result[1] == "beta"
+
+    def test_contains_is_an_exact_match(self):
+        """Result.__contains__ matches whole entries, not substrings."""
+        result = _static_result()
+        assert "beta" in result
+        assert "bet" not in result
+
+    def test_prune_returns_substring_matches(self):
+        """Result.prune returns entries containing the search string."""
+        assert _static_result().prune("bet") == ["beta"]
+
+    def test_resources_contains_filters_on_substring(self):
+        """Resources.contains is the substring filter behind prune."""
+        assert _static_result().resources.contains("a") == ["alpha", "beta", "gamma"]
+
+    def test_resources_contains_with_no_matches(self):
+        """A search string that matches nothing returns an empty list."""
+        assert _static_result().resources.contains("zeta") == []
+
+    def test_base_resource_getitem_and_reversed(self):
+        """BaseResource exposes positional access and reverse iteration."""
+        resources = _static_result().resources
+        assert resources[0] == "alpha"
+        assert list(resources.__reversed__()) == ["gamma", "beta", "alpha"]
+
+    def test_simple_resource_contains_on_empty_data(self):
+        """Resources.contains must tolerate an empty resources list."""
+        empty = Result(
+            status_code=200,
+            headers={"Content-Type": "application/json"},
+            body={"meta": {"trace_id": "abc"}, "resources": [], "errors": []}
+        )
+        assert empty.resources.contains("alpha") == []
+
+    def test_next_raises_stop_iteration_at_the_end(self):
+        """Result.__next__ must raise StopIteration once the position reaches the end."""
+        single = Result(
+            status_code=200,
+            headers={"Content-Type": "application/json"},
+            body={"meta": {"trace_id": "abc"}, "resources": ["only"], "errors": []}
+        )
+        with pytest.raises(StopIteration):
+            next(single)
+
+    def test_next_raises_stop_iteration_when_empty(self):
+        """Result.__next__ must raise StopIteration when there are no resources."""
+        empty = Result(
+            status_code=200,
+            headers={"Content-Type": "application/json"},
+            body={"meta": {"trace_id": "abc"}, "resources": [], "errors": []}
+        )
+        with pytest.raises(StopIteration):
+            next(empty)

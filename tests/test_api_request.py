@@ -24,6 +24,7 @@ from falconpy._util._functions import (
     log_api_activity,
     log_api_payloads,
     perform_request,
+    sanitize_dictionary,
 )
 
 auth = Authorization.TestAuthorization()
@@ -241,3 +242,49 @@ class TestPerformRequestLogCoverage:
         )
         logger.removeHandler(handler)
         assert result is not None
+
+
+class TestSanitizeDictionary:
+    """Cover _util/_functions.py sanitize_dictionary redaction and truncation."""
+
+    def test_resources_list_is_truncated_to_record_max(self):
+        """A resources list must be trimmed to the requested record maximum."""
+        dirty = {"body": {"resources": [f"record{idx}" for idx in range(10)]}}
+        cleaned = sanitize_dictionary(dirty, record_max=3)
+        assert cleaned["body"]["resources"] == ["record0", "record1", "record2"]
+
+    def test_resources_list_keeps_at_least_one_record(self):
+        """A record maximum below one must still retain a single record."""
+        dirty = {"body": {"resources": ["only", "extra"]}}
+        cleaned = sanitize_dictionary(dirty, record_max=0)
+        assert cleaned["body"]["resources"] == ["only"]
+
+    def test_non_list_resources_are_left_alone(self):
+        """Resources that are not a list must not be truncated."""
+        dirty = {"body": {"resources": {"key": "value"}}}
+        cleaned = sanitize_dictionary(dirty, record_max=1)
+        assert cleaned["body"]["resources"] == {"key": "value"}
+
+    def test_empty_resources_list_is_left_alone(self):
+        """An empty resources list must be returned untouched."""
+        cleaned = sanitize_dictionary({"body": {"resources": []}}, record_max=1)
+        assert cleaned["body"]["resources"] == []
+
+    def test_credentials_and_authorization_are_redacted(self):
+        """Confidential keys must be redacted at the top level and within the body."""
+        dirty = {
+            "client_id": "real_id",
+            "client_secret": "real_secret",
+            "Authorization": "Bearer real_token",
+            "body": {"access_token": "real_token", "resources": ["kept"]},
+        }
+        cleaned = sanitize_dictionary(dirty, record_max=5)
+        assert cleaned["client_id"] == "REDACTED"
+        assert cleaned["client_secret"] == "REDACTED"
+        assert cleaned["Authorization"] == "Bearer REDACTED"
+        assert cleaned["body"]["access_token"] == "REDACTED"
+        assert cleaned["body"]["resources"] == ["kept"]
+
+    def test_non_dictionary_input_is_returned_unchanged(self):
+        """A non-dictionary argument must pass straight through."""
+        assert sanitize_dictionary("plain string") == "plain string"

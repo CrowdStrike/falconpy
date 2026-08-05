@@ -15,6 +15,7 @@ import requests
 sys.path.append(os.path.abspath('src'))
 # flake8: noqa=E402
 from falconpy import OAuth2, APIHarness, APIHarnessV2, Hosts, APIError, Result
+from falconpy._auth_object._interface_config import InterfaceConfiguration
 from falconpy._util import perform_request
 import falconpy._util._functions as _funcs
 
@@ -334,3 +335,33 @@ class TestSessionConcurrencySmoke:
 
         assert all(r["status_code"] == 200 for r in results)
         assert session.request.call_count == num_calls
+
+
+class TestSessionPropertyMutators:
+    """Cover the session property setters on the auth object and its configuration."""
+
+    def test_interface_configuration_session_setter(self):
+        """InterfaceConfiguration.session must store the assigned session."""
+        config = InterfaceConfiguration(base_url="https://api.crowdstrike.com")
+        assert config.session is None
+        session = requests.Session()
+        config.session = session
+        assert config.session is session
+
+    def test_falcon_interface_session_setter_propagates_to_config(self):
+        """Assigning to FalconInterface.session must reach the underlying configuration."""
+        session = requests.Session()
+        auth = OAuth2(client_id="fake_id", client_secret="fake_secret")
+        assert auth.session is None
+
+        auth.session = session
+        assert auth.session is session
+        assert auth.config.session is session
+
+    def test_falcon_interface_session_can_be_cleared(self):
+        """Clearing the session must restore the default (no session) behavior."""
+        auth = OAuth2(client_id="fake_id", client_secret="fake_secret", session=requests.Session())
+        assert auth.session is not None
+        auth.session = None
+        assert auth.session is None
+        assert auth.config.session is None
