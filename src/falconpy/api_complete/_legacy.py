@@ -55,6 +55,7 @@ from .._util import (
     args_to_params,
     return_preferred_default,
     autodiscover_region,
+    encode_path_segment,
     )
 from .._enum import BaseURL, ContainerBaseURL, TokenFailReason
 from .._constant import PREFER_IDS_IN_BODY, MOCK_OPERATIONS
@@ -277,21 +278,21 @@ class APIHarness:
     def _handle_partition(tgt: str, kwa: dict):
         if kwa.get("partition", None) is not None:
             # Partition needs to be embedded into the endpoint URL
-            tgt = tgt.format(str(kwa.get("partition", None)))
+            tgt = tgt.format(encode_path_segment(kwa.get("partition", None)))
         return tgt
 
     @staticmethod
     def _handle_distinct_field(tgt: str, kwa: dict):
         if kwa.get("distinct_field", None) is not None:
             # distinct_field also needs to be embedded into the endpoint URL
-            tgt = tgt.format(str(kwa.get("distinct_field", None)))
+            tgt = tgt.format(encode_path_segment(kwa.get("distinct_field", None)))
         return tgt
 
     @staticmethod
     def _handle_container_image_id(tgt: str, kwa: dict):
         if kwa.get("image_id", None) is not None:
             # container image ID also needs to be embedded into the endpoint URL
-            tgt = tgt.format(str(kwa.get("image_id", None)))
+            tgt = tgt.format(encode_path_segment(kwa.get("image_id", None)))
         return tgt
 
     @staticmethod

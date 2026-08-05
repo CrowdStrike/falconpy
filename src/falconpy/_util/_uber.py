@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Tuple
-from ._functions import args_to_params, return_preferred_default
+from ._functions import args_to_params, return_preferred_default, encode_path_segment
 from .._constant import PREFER_IDS_IN_BODY, MOCK_OPERATIONS
 from .._enum import BaseURL, ContainerBaseURL
 
@@ -61,9 +61,9 @@ def handle_field(tgt: str, kwa: dict, fld: str) -> str:
     """Embed the distinct_field value (SensorUpdatePolicy) within the endpoint URL."""
     # Could potentially be zero, handle multiple path variable endpoint module variations
     try:
-        returned = tgt.format(str(kwa.get(fld, None))) if kwa.get(fld, None) is not None else tgt
+        returned = tgt.format(encode_path_segment(kwa.get(fld, None))) if kwa.get(fld, None) is not None else tgt
     except KeyError:  # pragma: no cover
-        targ = {fld: str(kwa.get(fld, None))}
+        targ = {fld: encode_path_segment(kwa.get(fld, None))}
         returned = tgt.format(**targ)
     return returned
 
@@ -140,7 +140,7 @@ def scrub_target(oper: str, scrubbed: str, kwas: dict) -> str:
             else:
                 # Handle replacements for multiple PATH variables.
                 fnames = {
-                    fna: kwas[fna]
+                    fna: encode_path_segment(kwas[fna])
                     for fna in field_names
                 }
                 scrubbed = scrubbed.format(**fnames)

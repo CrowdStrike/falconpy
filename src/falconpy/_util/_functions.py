@@ -45,6 +45,7 @@ try:
 except (ImportError, ModuleNotFoundError):  # Support import as a module
     SimplejsonJSONDecodeError = None  # Support import as a module
 from json.decoder import JSONDecodeError as StdJSONDecodeError
+from urllib.parse import quote
 from typing import Dict, Any, Union, Optional, List, TYPE_CHECKING
 from copy import deepcopy
 from logging import Logger
@@ -756,56 +757,69 @@ def process_service_request(calling_object: ServiceClass,  # pylint: disable=R09
     return service_request(**new_keywords)
 
 
+def encode_path_segment(value: Any) -> str:
+    """Percent-encode a value so it occupies exactly one URL path segment.
+
+    Path parameters (object identifiers, collection names, object keys and the
+    like) are each declared as a single path segment in the endpoint tables.
+    Encoding with safe="" escapes every reserved character -- most importantly
+    the forward slash -- so a caller supplied value cannot introduce additional
+    path segments or dot-segment sequences that the HTTP client would later
+    normalize into a different, unintended API route.
+    """
+    return quote(str(value), safe="")
+
+
 def handle_path_variables(passed: dict, route_url: str):
     """Review passed arguments and perform any necessary replacements to our operation route."""
     passed_partition = passed.get("partition", None)
     if passed_partition or isinstance(passed_partition, int):
-        route_url = route_url.format(str(passed_partition))
+        route_url = route_url.format(encode_path_segment(passed_partition))
     passed_distinct_field = passed.get("distinct_field", None)
     if passed_distinct_field:
-        route_url = route_url.format(str(passed_distinct_field))
+        route_url = route_url.format(encode_path_segment(passed_distinct_field))
     passed_image_id = passed.get("image_id", None)
     if passed_image_id:
-        route_url = route_url.format(str(passed_image_id))
+        route_url = route_url.format(encode_path_segment(passed_image_id))
     passed_collection_name = passed.get("collection_name", None)
     if passed_collection_name:
-        collect_args = {"collection_name": str(passed_collection_name)}
+        collect_args = {"collection_name": encode_path_segment(passed_collection_name)}
         passed_object_key = passed.get("object_key", None)
         if passed_object_key:
-            collect_args["object_key"] = str(passed_object_key)
+            collect_args["object_key"] = encode_path_segment(passed_object_key)
         passed_collection_version = passed.get("collection_version", None)
         if passed_collection_version:
-            collect_args["collection_version"] = str(passed_collection_version)
+            collect_args["collection_version"] = encode_path_segment(passed_collection_version)
         passed_schema_version = passed.get("schema_version", None)
         if passed_schema_version:
-            collect_args["schema_version"] = str(passed_schema_version)
+            collect_args["schema_version"] = encode_path_segment(passed_schema_version)
         route_url = route_url.format(**collect_args)
     passed_vertex_type = passed.get("vertex_type", None)
     if passed_vertex_type:
-        route_url = route_url.format(str(passed_vertex_type))
+        route_url = route_url.format(encode_path_segment(passed_vertex_type))
     passed_id = passed.get("path_id", None)
     if "aspm-api-gateway" in route_url and passed_id:
-        route_url = route_url.format(passed.get("path_id"))
+        route_url = route_url.format(encode_path_segment(passed_id))
     # Falcon Container
     passed_uuid = passed.get("uuid", None)
     if passed_uuid:
-        route_url = route_url.format(uuid=str(passed_uuid))
+        route_url = route_url.format(uuid=encode_path_segment(passed_uuid))
     # NGSIEM
     passed_repository = passed.get("repository", None)
     if passed_repository:
-        repo_args = {"repository": str(passed_repository)}
+        repo_args = {"repository": encode_path_segment(passed_repository)}
         passed_filename = passed.get("filename", None)
         if passed_filename:
-            repo_args["filename"] = str(passed_filename)
+            repo_args["filename"] = encode_path_segment(passed_filename)
         passed_package = passed.get("package", None)
         if passed_package:
-            repo_args["package"] = passed_package
+            repo_args["package"] = encode_path_segment(passed_package)
         passed_namespace = passed.get("namespace", None)
         if passed_namespace:
-            repo_args["namespace"] = passed_namespace
+            repo_args["namespace"] = encode_path_segment(passed_namespace)
         passed_id = passed.get("search_id", None)
         if passed_id:
-            repo_args["id"] = passed_id
+            repo_args["id"] = encode_path_segment(passed_id)
         route_url = route_url.format(**repo_args)
 
     return route_url
