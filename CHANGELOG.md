@@ -278,6 +278,13 @@
 + Fixed: Added the missing `US-3` and `USGOV-2` ingest base URLs. Retrieving an ingest base URL for a US-3 or USGOV-2 tenant raised a `KeyError`, making the NGSIEM HTTP Event Collector unusable in those regions.
     - `_enum/_ingest_base_url.py`
 
++ Fixed: Fixed an explicitly provided empty list being discarded by the exclusion payload handlers. The `groups` and `excluded_from` keywords were only added to the payload when their value evaluated as true, so `groups=[]` produced the same request body as omitting the keyword entirely, and a call intended to clear group scoping returned a success status without changing the exclusion. An empty list is now sent. Closes #1499.
+    - `_payload/_generic.py`
+    - `_payload/_ml_exclusions.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ml_exclusions.py`
+    - `tests/test_sensor_visibility_exclusions.py`
+
 # Version 1.6.4
 ## Added features and functionality
 + Added: Added [PEP 561](https://peps.python.org/pep-0561/) type stub (`.pyi`) files for every service collection, along with a `py.typed` marker, so type checkers and IDEs can surface method signatures, keyword arguments, and return types. Deprecated and decommissioned methods are annotated with `@deprecated` so editors flag them at call sites.
