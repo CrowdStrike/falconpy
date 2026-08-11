@@ -41,6 +41,11 @@ class TestSVExclusions:
                                                              id="12345678",
                                                              value="Bananas"
                                                              ),
+           "update_exclusion_empty_groups": falcon.update_exclusions(comment="Unit Testing",
+                                                                     groups=[],
+                                                                     id="12345678",
+                                                                     value="Bananas"
+                                                                     ),
            "delete_exclusion": falcon.delete_exclusions(ids="12345678"),
         }
         for key in tests:

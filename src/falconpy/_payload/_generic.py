@@ -162,12 +162,12 @@ def exclusion_payload(passed_keywords: dict) -> dict:
         if passed_keywords.get(key, None) is not None:
             returned_payload[key] = passed_keywords.get(key, None)
     group_list = passed_keywords.get("groups", None)
-    if group_list:
+    if group_list is not None:
         if isinstance(group_list, str):
             group_list = group_list.split(",")
         returned_payload["groups"] = group_list
     exclude_list = passed_keywords.get("excluded_from", None)
-    if exclude_list:
+    if exclude_list is not None:
         if isinstance(exclude_list, str):
             exclude_list = exclude_list.split(",")
         returned_payload["excluded_from"] = exclude_list
