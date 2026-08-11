@@ -142,6 +142,48 @@ class TestMLExclusions:
 
         return error_checks
 
+    def serviceMLE_EmptyLists(self):
+        error_checks = True
+        tests = {
+            "update_exclusion_empty_groups": falcon.update_exclusions(
+                comment="Unit Testing",
+                groups=[],
+                id="12345678",
+                value="Bananas"
+                ),
+            "update_exclusion_empty_excluded_from": falcon.update_exclusions(
+                comment="Unit Testing",
+                excluded_from=[],
+                id="12345678",
+                value="Bananas"
+                ),
+            "update_ml_exclusions_empty_groups": falcon.update_ml_exclusions(
+                comment="Unit Testing",
+                groups=[],
+                id="12345678",
+                value="test"
+                ),
+            "update_ml_exclusions_false_descendant": falcon.update_ml_exclusions(
+                comment="Unit Testing",
+                id="12345678",
+                is_descendant_process=False,
+                value="test"
+                ),
+            "update_exclusions_v2_empty_groups": falcon.update_exclusions_v2(
+                comment="Unit Testing",
+                groups=[],
+                id="12345678",
+                value="test"
+                ),
+        }
+        for key in tests:
+            if tests[key]["status_code"] not in AllowedResponses:
+                error_checks = False
+                # print(f"{key} failed with status {tests[key]['status_code']}")
+                # print(tests[key])
+
+        return error_checks
+
     def test_Find(self):
         assert self.serviceMLE_ListExclusions() is True
 
@@ -150,3 +192,6 @@ class TestMLExclusions:
 
     def test_V2Exclusions(self):
         assert self.serviceMLE_V2Exclusions() is True
+
+    def test_EmptyLists(self):
+        assert self.serviceMLE_EmptyLists() is True

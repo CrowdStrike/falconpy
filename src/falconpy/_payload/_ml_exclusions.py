@@ -110,7 +110,7 @@ def ml_exclusions_update_payload(passed_keywords: dict) -> Dict[str, Union[str, 
             "parent_value", "value", "is_descendant_process"]
     list_keys = ["excluded_from", "groups"]
     for key in keys:
-        if passed_keywords.get(key, None):
+        if passed_keywords.get(key, None) is not None:
             if key in list_keys:
                 provided = passed_keywords.get(key, None)
                 if isinstance(provided, str):
