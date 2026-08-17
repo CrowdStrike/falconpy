@@ -36,7 +36,7 @@ The CrowdStrike Falcon SDK for Python was developed for Python 3. Current versio
 
 > [!NOTE]
 > Developers working with Python version `3.6` will need to leverage versions of FalconPy less than `1.4.0`. 
-> Developers working with Python version `3.7` will need to leverage version of FalconPy less than `1.6.0`.
+> Developers working with Python version `3.7` will need to leverage versions of FalconPy less than `1.6.0`.
 
 [![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy)](https://pypi.org/project/crowdstrike-falconpy/#files)
 [![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy)](https://pypi.org/project/crowdstrike-falconpy/#files)
