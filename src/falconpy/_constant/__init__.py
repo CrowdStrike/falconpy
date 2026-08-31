@@ -77,3 +77,5 @@ MAX_TOKEN_RENEW_WINDOW: int = 1200
 MIN_TOKEN_RENEW_WINDOW: int = 120
 # Maximum length for strings generated with the random_string function (in seconds).
 MAX_RANDOM_STRING_LENGTH: int = 4096
+# Maximum length of a non-JSON error payload retained in a generated error message.
+MAX_ERROR_PAYLOAD_LENGTH: int = 4096
