@@ -61,7 +61,8 @@ from .._constant import (
     ALLOWED_METHODS as _ALLOWED_METHODS,
     USER_AGENT as _USER_AGENT,
     MAX_DEBUG_RECORDS,
-    GLOBAL_API_MAX_RETURN
+    GLOBAL_API_MAX_RETURN,
+    MAX_ERROR_PAYLOAD_LENGTH
 )
 from .._error import (
     RegionSelectError,
@@ -325,6 +326,16 @@ def calc_content_return(resp: requests.Response,
     # Catch and log API response errors
     try:
         if resp.status_code >= 400:
+            if not isinstance(returned, dict):
+                # An error was returned as content we could not parse as JSON,
+                # leaving us with a binary payload. Normalize it to the standard
+                # error format so the status code and the response headers - which
+                # carry the trace ID needed to research the failure - are retained
+                # instead of being discarded by an unhandled exception. (Issue #1508)
+                returned = Result()(status_code=resp.status_code,
+                                    headers=resp.headers,
+                                    body=build_error_body_from_payload(returned, resp.status_code)
+                                    )
             _message = None
             _errors = returned.get("body", {}).get("errors", [])
             if _errors:
@@ -545,6 +556,26 @@ def log_api_activity(content_return: Union[dict, bytes], content_type: str, api:
             api.log_util.debug("RESULT: %s", content_return)
         else:
             api.log_util.debug("RESULT: binary response received from API")
+
+
+def build_error_body_from_payload(payload: Union[bytes, str], status_code: int) -> dict:
+    """Wrap a non-JSON response payload in the standard error format.
+
+    Error responses are not always JSON. Proxies, load balancers and WAF
+    appliances positioned in front of the API can answer with HTML error
+    pages, empty bodies or unexpected content types. These payloads reach
+    the SDK as raw binary content instead of a dictionary. (Issue #1508)
+    """
+    if isinstance(payload, bytes):
+        message = payload.decode("utf-8", errors="replace").strip()
+    else:
+        message = str(payload).strip()
+    if not message:
+        message = "No content was received for this request."
+    if len(message) > MAX_ERROR_PAYLOAD_LENGTH:
+        message = f"{message[:MAX_ERROR_PAYLOAD_LENGTH]}..."
+
+    return {"errors": [{"code": status_code, "message": message}], "resources": []}
 
 
 def generate_error_result(
