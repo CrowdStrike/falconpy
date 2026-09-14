@@ -95,6 +95,35 @@ class NoContentWarning(SDKWarning):
     _message = "No content was received for this request."
 
 
+class NonJsonContentWarning(NoContentWarning):
+    """A non-JSON response body was received (for example, plain-text diagnostics).
+
+    This subclasses NoContentWarning so that any existing handler catching
+    NoContentWarning continues to behave as before, while the raw response body
+    is retained and surfaced instead of being discarded.
+    """
+
+    _code = 400
+    _message = "A non-JSON response body was received for this request."
+
+    def __init__(self,
+                 code: int = None,
+                 message: str = None,
+                 headers: dict = None,
+                 body: str = None
+                 ):
+        """Construct an instance of the class, retaining the raw response body."""
+        self.body = body if body else ""
+        super().__init__(code=code, message=message, headers=headers)
+
+    @property
+    def result(self) -> dict:
+        """Return a formatted result that surfaces the raw response body."""
+        _content = self.body if self.body else self.message
+        _body = {"errors": [{"message": f"{_content}"}], "resources": []}
+        return Result()(self.code, self.headers, _body)
+
+
 class NoAuthenticationMechanism(SDKWarning):
     """No authentication mechanism was specified when creating this class."""
 

@@ -71,6 +71,7 @@ from .._error import (
     KeywordsOnly,
     APIError,
     NoContentWarning,
+    NonJsonContentWarning,
     PayloadValidationError,
     InvalidBaseURL,
     SSLDisabledWarning,
@@ -489,11 +490,24 @@ def perform_request(endpoint: str = "",  # noqa: C901
                 api.log_error(returned.get("status_code"), bad_region.message, returned)
 
             except JSONDecodeError as json_decode_error:
-                # No response content, but a successful request was made
+                # The response body could not be parsed as JSON. This is raised
+                # both for a genuinely empty body and for a non-empty body that
+                # simply is not JSON (for example, the plain-text diagnostics
+                # NGSIEM returns for a CQL syntax error). Distinguish the two so
+                # a body that was received is surfaced, not discarded. [Issue 1498]
                 if "/identity-protection/combined/graphql/v1" in api.endpoint:  # pragma: no cover
                     raise SDKError(message=f"{str(json_decode_error)}",
                                    headers=api.debug_headers
                                    ) from json_decode_error
+
+                raw_body = (response.text or "").strip()
+                if raw_body:
+                    api.log_warning("WARNING: Non-JSON response body received "
+                                    f"(status code: {response.status_code}).")
+                    raise NonJsonContentWarning(headers=response.headers,
+                                                code=response.status_code,
+                                                body=raw_body
+                                                ) from json_decode_error
 
                 api.log_warning("WARNING: No content was received for this request.")
                 raise NoContentWarning(headers=response.headers,
