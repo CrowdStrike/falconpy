@@ -59,6 +59,7 @@ from ._warnings import (
     SDKWarning,
     SSLDisabledWarning,
     NoContentWarning,
+    NonJsonContentWarning,
     NoAuthenticationMechanism,
     UnnecessaryEncodingUsed,
     SDKDeprecationWarning,
@@ -69,7 +70,8 @@ from ._warnings import (
 
 __all__ = ["SDKError", "RegionSelectError", "InvalidMethod", "InvalidOperation",
            "TokenNotSpecified", "KeywordsOnly", "SDKWarning", "SSLDisabledWarning",
-           "InvalidCredentials", "APIError", "NoContentWarning", "CannotRevokeToken",
+           "InvalidCredentials", "APIError", "NoContentWarning", "NonJsonContentWarning",
+           "CannotRevokeToken",
            "FunctionalityNotImplemented", "InvalidBaseURL", "PayloadValidationError",
            "NoAuthenticationMechanism", "FeatureNotSupportedByPythonVersion",
            "InvalidIndex", "InvalidCredentialFormat", "UnnecessaryEncodingUsed",
