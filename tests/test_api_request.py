@@ -17,7 +17,9 @@ from falconpy import (
     APIError,
     RequestValidator,
     FalconInterface,
-    InterfaceConfiguration
+    InterfaceConfiguration,
+    NoContentWarning,
+    NonJsonContentWarning
     )
 from falconpy._result._base_dictionary import UnsupportedPythonVersion
 from falconpy._util._functions import (
@@ -242,6 +244,67 @@ class TestPerformRequestLogCoverage:
         )
         logger.removeHandler(handler)
         assert result is not None
+
+    def test_perform_request_non_json_body_is_preserved(self, monkeypatch):
+        """A non-JSON response body must be surfaced, not discarded [Issue 1498]."""
+        import falconpy._util._functions as _funcs
+
+        diagnostic = (
+            "A bare string can't start with a slash '/'. "
+            "(Error: BareStringStartsWithSlash)"
+        )
+
+        class _FakeResp:
+            status_code = 400
+            headers = {"Content-Type": "text/plain; charset=UTF-8"}
+            content = diagnostic.encode("utf-8")
+            text = diagnostic
+
+            def json(self):
+                raise ValueError("not json")
+
+        monkeypatch.setattr(_funcs.requests, "request", lambda *a, **kw: _FakeResp())
+        result = perform_request(
+            method="GET",
+            endpoint="https://api.crowdstrike.com/humio/api/v1/repositories/x/query",
+            headers={},
+            verify=True
+        )
+        assert result["status_code"] == 400
+        assert result["body"]["errors"][0]["message"] == diagnostic
+
+    def test_perform_request_empty_body_still_reports_no_content(self, monkeypatch):
+        """An empty body must keep the original NoContentWarning behavior."""
+        import falconpy._util._functions as _funcs
+
+        class _FakeResp:
+            status_code = 400
+            headers = {"Content-Type": "text/plain; charset=UTF-8"}
+            content = b""
+            text = ""
+
+            def json(self):
+                raise ValueError("not json")
+
+        monkeypatch.setattr(_funcs.requests, "request", lambda *a, **kw: _FakeResp())
+        result = perform_request(
+            method="GET",
+            endpoint="https://api.crowdstrike.com/humio/api/v1/repositories/x/query",
+            headers={},
+            verify=True
+        )
+        assert result["body"]["errors"][0]["message"] == (
+            "No content was received for this request."
+        )
+
+    def test_non_json_content_warning_retains_body(self):
+        """The warning must retain the raw body and remain a NoContentWarning."""
+        diagnostic = "Unexpected '$'. (Error: UnexpectedToken)"
+        warning = NonJsonContentWarning(code=400, headers={"X": "1"}, body=diagnostic)
+        assert isinstance(warning, NoContentWarning)
+        assert warning.body == diagnostic
+        assert warning.result["status_code"] == 400
+        assert warning.result["body"]["errors"][0]["message"] == diagnostic
 
 
 class TestSanitizeDictionary:
