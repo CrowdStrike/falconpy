@@ -24,6 +24,7 @@ from ._agent_invocation import (
     invoke_published_agent_external_v1_payload,
     update_agent_invocation_payload,
     )
+from ._agents import create_or_update_agent_payload, update_agent_payload
 from ._api_clients import create_api_client_payload, update_api_client_payload
 from ._cloud_security_assets import cloud_security_assets_entities_post_payload
 from ._cloud_security_detections import cspm_evaluations_iom_entities_post_payload
@@ -399,5 +400,6 @@ __all__ = [
     "bulk_update_saved_query_labels_payload", "update_dashboard_labels_payload",
     "update_file_labels_payload", "update_saved_query_labels_payload",
     "create_schedules_payload", "trigger_scan_by_schedule_payload",
-    "update_schedules_payload", "update_agent_invocation_payload"
+    "update_schedules_payload", "update_agent_invocation_payload",
+    "create_or_update_agent_payload", "update_agent_payload"
 ]
