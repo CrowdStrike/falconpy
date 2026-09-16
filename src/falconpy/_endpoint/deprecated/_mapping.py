@@ -108,6 +108,8 @@ _deprecated_op_mapping = {
 
     "EntitiesAgentTemplatesV1": "",
     "QueriesAgentTemplatesV1": "",
+
+    "GetConfigurationDetections": "",
 }
 
 _deprecated_cls_mapping = {
