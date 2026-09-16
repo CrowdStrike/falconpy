@@ -48,6 +48,7 @@ from ._browser_security import (
     )
 from ._cloud_security_assets import cloud_security_assets_entities_post_payload
 from ._cloud_security_detections import cspm_evaluations_iom_entities_post_payload
+from ._code_security import exchange_github_app_code_payload, register_scm_app_payload
 from ._falcon_id import update_third_party_passkey_registry_payload
 from ._federated_connections import patch_federated_connections_config_payload, post_federated_connections_config_payload
 from ._generic import (
@@ -431,5 +432,6 @@ __all__ = [
     "query_combined_seraphic_agents_payload", "query_destination_groups_payload",
     "query_seraphic_agents_payload", "query_seraphic_rules_payload",
     "update_destination_group_payload", "update_seraphic_rule_payload",
-    "generate_gcp_infra_manager_script_payload"
+    "generate_gcp_infra_manager_script_payload", "exchange_github_app_code_payload",
+    "register_scm_app_payload"
 ]
