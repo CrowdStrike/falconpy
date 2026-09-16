@@ -161,6 +161,92 @@ class Hosts(ServiceClass):
             host_utc_offset                                       hostname
             instance_id                                           internet_exposure
             k8s_cluster_git_version                               k8s_cluster_id
+            k8s_cluster_version                                   k8s_node_uid
+            kernel_version                                        last_login_timestamp
+            last_login_uid                                        last_login_user
+            last_login_user_sid                                   last_reboot
+            last_seen                                             license_activation_state
+            linux_sensor_mode                                     local_ip
+            local_ip.raw                                          mac_address
+            machine_domain                                        major_version
+            managed_apps.airlock.version                          managed_apps.automox.version
+            managed_apps.aws-verified-access.version              managed_apps.identity-protection.version
+            managed_apps.jumpcloud.version                        managed_apps.netskope.version
+            migration_completed_time                              minor_version
+            modified_timestamp                                    os_build
+            os_product_name                                       os_version
+            ou                                                    platform_id
+            platform_name                                         pod_annotations
+            pod_host_ip4                                          pod_host_ip6
+            pod_hostname                                          pod_id
+            pod_ip4                                               pod_ip6
+            pod_labels                                            pod_name
+            pod_namespace                                         pod_service_account_name
+            pointer_size                                          policies.applied
+            policies.policy_id                                    policies.policy_type
+            policy_id                                             product_type
+            product_type_desc                                     reduced_functionality_mode
+            release_group                                         rtr_state
+            safe_mode                                             serial_number
+            service_provider                                      service_provider_account_id
+            site_name                                             status
+            system_manufacturer                                   system_product_name
+            tags                                                  zone_group
+            device_policies.airlock.policy_type                   device_policies.application-abuse-prevention.applied
+            device_policies.application-abuse-prevention.policy_iddevice_policies.application-abuse-prevention.policy_type
+            device_policies.automox.applied                       device_policies.automox.policy_id
+            device_policies.automox.policy_type                   device_policies.aws-verified-access.applied
+            device_policies.aws-verified-access.policy_id         device_policies.aws-verified-access.policy_type
+            device_policies.browser-extension.applied             device_policies.browser-extension.policy_id
+            device_policies.browser-extension.policy_type         device_policies.cloud-ml.applied
+            device_policies.cloud-ml.policy_id                    device_policies.cloud-ml.policy_type
+            device_policies.consumer-subscription.applied         device_policies.consumer-subscription.policy_id
+            device_policies.consumer-subscription.policy_type     device_policies.content-update.applied
+            device_policies.content-update.policy_id              device_policies.content-update.policy_type
+            device_policies.data-protection-cloud.applied         device_policies.data-protection-cloud.policy_id
+            device_policies.data-protection-cloud.policy_type     device_policies.data-protection.applied
+            device_policies.data-protection.policy_id             device_policies.data-protection.policy_type
+            device_policies.device_control.applied                device_policies.device_control.policy_id
+            device_policies.device_control.policy_type            device_policies.exposure-management.applied
+            device_policies.exposure-management.policy_id         device_policies.exposure-management.policy_type
+            device_policies.fem-browser-extension-control.applied device_policies.fem-browser-extension-control.policy_id
+            device_policies.fem-browser-extension-control.policy_typedevice_policies.fim.applied
+            device_policies.fim.policy_id                         device_policies.fim.policy_type
+            device_policies.firewall.applied                      device_policies.firewall.policy_id
+            device_policies.firewall.policy_type                  device_policies.firewall.rule_set_id
+            device_policies.host-retention.applied                device_policies.host-retention.policy_id
+            device_policies.host-retention.policy_type            device_policies.identity-endpoint.applied
+            device_policies.identity-endpoint.policy_id           device_policies.identity-endpoint.policy_type
+            device_policies.identity-protection.applied           device_policies.identity-protection.policy_id
+            device_policies.identity-protection.policy_type       device_policies.it-automation.applied
+            device_policies.it-automation.policy_id               device_policies.it-automation.policy_type
+            device_policies.jumpcloud.applied                     device_policies.jumpcloud.policy_id
+            device_policies.jumpcloud.policy_type                 device_policies.kubernetes-admission-control.applied
+            device_policies.kubernetes-admission-control.policy_iddevice_policies.kubernetes-admission-control.policy_type
+            device_policies.logscale-collector.applied            device_policies.logscale-collector.policy_id
+            device_policies.logscale-collector.policy_type        device_policies.mobile.applied
+            device_policies.mobile.policy_id                      device_policies.mobile.policy_type
+            device_policies.netskope.applied                      device_policies.netskope.policy_id
+            device_policies.netskope.policy_type                  device_policies.network-scan-content.applied
+            device_policies.network-scan-content.policy_id        device_policies.network-scan-content.policy_type
+            device_policies.prevention.applied                    device_policies.prevention.policy_id
+            device_policies.prevention.policy_type                device_policies.remote_response.applied
+            device_policies.remote_response.policy_id             device_policies.remote_response.policy_type
+            device_policies.sca.applied                           device_policies.sca.policy_id
+            device_policies.sca.policy_type                       device_policies.sensor_update.applied
+            device_policies.sensor_update.policy_id               device_policies.sensor_update.policy_type
+            device_policies.sensor_update.uninstall_protection    device_policies.system-tray.applied
+            device_policies.system-tray.policy_id                 device_policies.system-tray.policy_type
+            device_policies.vulnerability-management.applied      device_policies.vulnerability-management.policy_id
+            device_policies.vulnerability-management.policy_type  device_policies.ztl.applied
+            device_policies.ztl.policy_id                         device_policies.ztl.policy_type
+            email                                                 external_ip
+            filesystem_containment_status                         first_login_timestamp
+            first_login_user                                      first_seen
+            group_hash                                            groups
+            host_utc_offset                                       hostname
+            instance_id                                           internet_exposure
+            k8s_cluster_git_version                               k8s_cluster_id
             k8s_cluster_version                                   kernel_version
             last_login_timestamp                                  last_login_uid
             last_login_user                                       last_login_user_sid
@@ -1027,6 +1113,92 @@ class Hosts(ServiceClass):
             device_id                                             device_policies.aidr.applied
             device_policies.aidr.policy_id                        device_policies.aidr.policy_type
             device_policies.airlock.applied                       device_policies.airlock.policy_id
+            device_policies.airlock.policy_type                   device_policies.application-abuse-prevention.applied
+            device_policies.application-abuse-prevention.policy_iddevice_policies.application-abuse-prevention.policy_type
+            device_policies.automox.applied                       device_policies.automox.policy_id
+            device_policies.automox.policy_type                   device_policies.aws-verified-access.applied
+            device_policies.aws-verified-access.policy_id         device_policies.aws-verified-access.policy_type
+            device_policies.browser-extension.applied             device_policies.browser-extension.policy_id
+            device_policies.browser-extension.policy_type         device_policies.cloud-ml.applied
+            device_policies.cloud-ml.policy_id                    device_policies.cloud-ml.policy_type
+            device_policies.consumer-subscription.applied         device_policies.consumer-subscription.policy_id
+            device_policies.consumer-subscription.policy_type     device_policies.content-update.applied
+            device_policies.content-update.policy_id              device_policies.content-update.policy_type
+            device_policies.data-protection-cloud.applied         device_policies.data-protection-cloud.policy_id
+            device_policies.data-protection-cloud.policy_type     device_policies.data-protection.applied
+            device_policies.data-protection.policy_id             device_policies.data-protection.policy_type
+            device_policies.device_control.applied                device_policies.device_control.policy_id
+            device_policies.device_control.policy_type            device_policies.exposure-management.applied
+            device_policies.exposure-management.policy_id         device_policies.exposure-management.policy_type
+            device_policies.fem-browser-extension-control.applied device_policies.fem-browser-extension-control.policy_id
+            device_policies.fem-browser-extension-control.policy_typedevice_policies.fim.applied
+            device_policies.fim.policy_id                         device_policies.fim.policy_type
+            device_policies.firewall.applied                      device_policies.firewall.policy_id
+            device_policies.firewall.policy_type                  device_policies.firewall.rule_set_id
+            device_policies.host-retention.applied                device_policies.host-retention.policy_id
+            device_policies.host-retention.policy_type            device_policies.identity-endpoint.applied
+            device_policies.identity-endpoint.policy_id           device_policies.identity-endpoint.policy_type
+            device_policies.identity-protection.applied           device_policies.identity-protection.policy_id
+            device_policies.identity-protection.policy_type       device_policies.it-automation.applied
+            device_policies.it-automation.policy_id               device_policies.it-automation.policy_type
+            device_policies.jumpcloud.applied                     device_policies.jumpcloud.policy_id
+            device_policies.jumpcloud.policy_type                 device_policies.kubernetes-admission-control.applied
+            device_policies.kubernetes-admission-control.policy_iddevice_policies.kubernetes-admission-control.policy_type
+            device_policies.logscale-collector.applied            device_policies.logscale-collector.policy_id
+            device_policies.logscale-collector.policy_type        device_policies.mobile.applied
+            device_policies.mobile.policy_id                      device_policies.mobile.policy_type
+            device_policies.netskope.applied                      device_policies.netskope.policy_id
+            device_policies.netskope.policy_type                  device_policies.network-scan-content.applied
+            device_policies.network-scan-content.policy_id        device_policies.network-scan-content.policy_type
+            device_policies.prevention.applied                    device_policies.prevention.policy_id
+            device_policies.prevention.policy_type                device_policies.remote_response.applied
+            device_policies.remote_response.policy_id             device_policies.remote_response.policy_type
+            device_policies.sca.applied                           device_policies.sca.policy_id
+            device_policies.sca.policy_type                       device_policies.sensor_update.applied
+            device_policies.sensor_update.policy_id               device_policies.sensor_update.policy_type
+            device_policies.sensor_update.uninstall_protection    device_policies.system-tray.applied
+            device_policies.system-tray.policy_id                 device_policies.system-tray.policy_type
+            device_policies.vulnerability-management.applied      device_policies.vulnerability-management.policy_id
+            device_policies.vulnerability-management.policy_type  device_policies.ztl.applied
+            device_policies.ztl.policy_id                         device_policies.ztl.policy_type
+            email                                                 external_ip
+            filesystem_containment_status                         first_login_timestamp
+            first_login_user                                      first_seen
+            group_hash                                            groups
+            host_utc_offset                                       hostname
+            instance_id                                           internet_exposure
+            k8s_cluster_git_version                               k8s_cluster_id
+            k8s_cluster_version                                   k8s_node_uid
+            kernel_version                                        last_login_timestamp
+            last_login_uid                                        last_login_user
+            last_login_user_sid                                   last_reboot
+            last_seen                                             license_activation_state
+            linux_sensor_mode                                     local_ip
+            local_ip.raw                                          mac_address
+            machine_domain                                        major_version
+            managed_apps.airlock.version                          managed_apps.automox.version
+            managed_apps.aws-verified-access.version              managed_apps.identity-protection.version
+            managed_apps.jumpcloud.version                        managed_apps.netskope.version
+            migration_completed_time                              minor_version
+            modified_timestamp                                    os_build
+            os_product_name                                       os_version
+            ou                                                    platform_id
+            platform_name                                         pod_annotations
+            pod_host_ip4                                          pod_host_ip6
+            pod_hostname                                          pod_id
+            pod_ip4                                               pod_ip6
+            pod_labels                                            pod_name
+            pod_namespace                                         pod_service_account_name
+            pointer_size                                          policies.applied
+            policies.policy_id                                    policies.policy_type
+            policy_id                                             product_type
+            product_type_desc                                     reduced_functionality_mode
+            release_group                                         rtr_state
+            safe_mode                                             serial_number
+            service_provider                                      service_provider_account_id
+            site_name                                             status
+            system_manufacturer                                   system_product_name
+            tags                                                  zone_group
             device_policies.airlock.policy_type                   device_policies.application-abuse-prevention.applied
             device_policies.application-abuse-prevention.policy_iddevice_policies.application-abuse-prevention.policy_type
             device_policies.automox.applied                       device_policies.automox.policy_id
