@@ -246,7 +246,6 @@ _foundry_logscale_endpoints = [
       },
       {
         "type": "string",
-        "minimum": 0,
         "description": "Maximum number of records to return.",
         "name": "limit",
         "in": "query"
@@ -267,7 +266,6 @@ _foundry_logscale_endpoints = [
       },
       {
         "type": "string",
-        "minimum": 0,
         "description": "Starting pagination offset of records to return.",
         "name": "offset",
         "in": "query"
