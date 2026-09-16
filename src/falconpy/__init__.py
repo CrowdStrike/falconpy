@@ -115,6 +115,7 @@ from .alerts import Alerts
 from .api_clients import APIClients
 from .api_integrations import APIIntegrations
 from .api_complete import APIHarness, APIHarnessV2
+from .application_abuse_exclusions import ApplicationAbuseExclusions
 from .aspm import ASPM
 from .cao_hunting import CAOHunting
 from .case_management import CaseManagement
@@ -306,7 +307,8 @@ __all__ = [
     "AgentTemplates", "AgentVersions",
     "Models", "ScanningOrchestrator",
     "Spans", "Stream",
-    "Tools", "Agents"
+    "Tools", "Agents",
+    "ApplicationAbuseExclusions"
     ]
 """
 This is free and unencumbered software released into the public domain.
