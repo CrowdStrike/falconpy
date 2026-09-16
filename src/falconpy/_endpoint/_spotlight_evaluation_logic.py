@@ -91,7 +91,6 @@ _spotlight_evaluation_logic_endpoints = [
       },
       {
         "type": "string",
-        "minimum": 0,
         "description": "Starting index of overall result set from which to return ids.",
         "name": "offset",
         "in": "query"
