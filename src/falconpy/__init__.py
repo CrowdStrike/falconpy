@@ -134,6 +134,7 @@ from .cloud_security_detections import CloudSecurityDetections
 from .cloud_security_registration_combined import CloudSecurityRegistrationCombined
 from .cloud_security_risks import CloudSecurityRisks
 from .cloud_snapshots import CloudSnapshots
+from .code_security import CodeSecurity
 from .container_image_compliance import ContainerImageCompliance, ComplianceAssessments
 from .configuration_assessment_evaluation_logic import ConfigurationAssessmentEvaluationLogic
 from .configuration_assessment import ConfigurationAssessment
@@ -311,7 +312,7 @@ __all__ = [
     "Spans", "Stream",
     "Tools", "Agents",
     "ApplicationAbuseExclusions", "Audit",
-    "BrowserSecurity"
+    "BrowserSecurity", "CodeSecurity"
     ]
 """
 This is free and unencumbered software released into the public domain.
