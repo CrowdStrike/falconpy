@@ -44,6 +44,7 @@ class Workflows(ServiceClass):
         offset: Optional[str] = None,
         limit: Optional[int] = None,
         sort: Optional[str] = None,
+        skip_fields: Optional[Union[str, List[str]]] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

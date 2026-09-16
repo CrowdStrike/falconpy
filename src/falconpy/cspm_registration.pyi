@@ -1,5 +1,6 @@
 """Type stubs for cspm_registration."""
 from typing import Dict, List, Optional, Union
+from typing_extensions import deprecated
 from ._service_class import ServiceClass
 from ._result import Result
 
@@ -329,6 +330,7 @@ class CSPMRegistration(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def get_configuration_detections(
         self,
         *,
