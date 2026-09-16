@@ -35,10 +35,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=R0904,C0302
+# pylint: disable=C0302,R0904
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import generic_payload_list, aggregate_payload
+from ._payload import (
+    generic_payload_list,
+    aggregate_payload,
+    get_user_invitations_payload,
+    retrieve_users_v2_payload,
+    get_user_allowed_actions_payload,
+    update_user_roles_payload,
+    )
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._user_management import _user_management_endpoints as Endpoints
@@ -1299,17 +1306,459 @@ class UserManagement(ServiceClass):
             params=handle_single_argument(args, parameters, "uid")
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def combined_user_roles_v3(self: object,
+                               parameters: dict = None,
+                               **kwargs
+                               ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get User Grant(s) including external users.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/CombinedUserRolesV3
+
+        Keyword arguments
+        -----------------
+        user_uuid : str
+            User UUID to get available roles for.
+        cid : str
+            Customer ID to get grants for. Empty CID would result in Role IDs for user against current CID in view.
+        direct_only : bool
+            Specifies if to request direct Only role grants or all role grants between user and CID (specified in
+            query params)
+        filter : str
+            Filter using a query in Falcon Query Language (FQL). Supported filters: expires_at, role_id, role_name.
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return. [1-500]
+        sort : str
+            The property to sort by. Available values: cid, cid|asc, cid|desc, expires_at, expires_at|asc, expires_at|desc,
+            role_name, role_name|asc, role_name|desc, type, type|asc, type|desc, user_uuid, user_uuid|asc, user_uuid|desc.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CombinedUserRolesV3",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["list", "dict"])
+    def aggregate_users_v2(self: object,
+                           body: list = None,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get user aggregates including external users as specified via json in request body.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/aggregateUsersV2
+
+        Keyword arguments
+        -----------------
+        user_type : str
+            Filter results by user type (internal or external). Omit to return all users. Available values: internal,
+            external.
+        body : dict
+            Full body payload as a JSON formatted list. Not required if using other keywords.
+                [
+                    {
+                        "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                        ],
+                        "exclude": "string",
+                        "field": "string",
+                        "filter": "string",
+                        "from": 0,
+                        "include": "string",
+                        "interval": "string",
+                        "max_doc_count": 0,
+                        "min_doc_count": 0,
+                        "missing": "string",
+                        "name": "string",
+                        "q": "string",
+                        "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                        ],
+                        "size": 0,
+                        "sort": "string",
+                        "sub_aggregates": [
+                            null
+                        ],
+                        "time_zone": "string",
+                        "type": "string"
+                    }
+                ]
+        date_ranges : list[dict]
+            List of date range objects.
+        field : str
+            The field to aggregate on.
+        filter : str
+            FQL filter expression.
+        interval : str
+            Time interval for aggregation.
+        min_doc_count : int
+            Minimum document count threshold.
+        missing : str
+            Missing value handling.
+        name : str
+            Name of the aggregation.
+        q : str
+            Full text search across all metadata fields.
+        ranges : list[dict]
+            List of range objects.
+        size : int
+            Maximum number of results.
+        sort : str
+            Sort expression.
+        sub_aggregates : list[str]
+            List of sub-aggregate expressions.
+        time_zone : str
+            Time zone for date operations.
+        type : str
+            Type of aggregation (terms, date_histogram, etc.)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="aggregateUsersV2",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_user_invitations(self: object,
+                             body: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get one or more external user invitations by ID.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/getUserInvitationsGETV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids : list
+            The ids value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = get_user_invitations_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getUserInvitationsGETV1",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_user_invitations(self: object,
+                               parameters: dict = None,
+                               **kwargs
+                               ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Query external user invitation IDs using an FQL filter.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/queryUserInvitationsV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression (e.g. target_cid:'cid-123'+status:'pending')
+        sort : str
+            FQL sort expression (e.g. created_at.desc)
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return. [1-500]
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryUserInvitationsV1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_users_v2(self: object,
+                       parameters: dict = None,
+                       **kwargs
+                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """List user IDs for all users in your customer account.
+
+        List user IDs for all users in your customer account, including external users who have roles assigned in your
+        customer account.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/queryUserV2
+
+        Keyword arguments
+        -----------------
+        filter : str
+            Filter using a query in Falcon Query Language (FQL). Supported filters: assigned_cids, cid,
+            direct_assigned_cids, factors, first_name, has_temporary_roles, last_name, name, non_ancestor_assigned_cids,
+            status, temporarily_assigned_cids, uid, uuid, associated_cids.
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return. [1-500]
+        sort : str
+            The property to sort by. Available values: cid_name, cid_name|asc, cid_name|desc, created_at, created_at|asc,
+            created_at|desc, first_name, first_name|asc, first_name|desc, has_temporary_roles, has_temporary_roles|asc,
+            has_temporary_roles|desc, last_login_at, last_login_at|asc, last_login_at|desc, last_name, last_name|asc,
+            last_name|desc, name, name|asc, name|desc, status, status|asc, status|desc, temporarily_assigned_cids,
+            temporarily_assigned_cids|asc, temporarily_assigned_cids|desc, uid, uid|asc, uid|desc.
+        user_type : str
+            Filter results by user type (internal or external). Omit to return all users. Available values: internal,
+            external.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryUserV2",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def retrieve_users_v2(self: object,
+                          body: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get info about users including their name, UID, CID and whether they are external by providing user UUIDs.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/retrieveUsersGETV2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids : list
+            The ids value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = retrieve_users_v2_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="retrieveUsersGETV2",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_user_allowed_actions(self: object,
+                                 body: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Provide the list of actions that can performed on the user on the CID.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/userAllowedActionsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "allowed_actions": [
+                        {
+                            "action": "string",
+                            "cid": "string",
+                            "resource_ids": [
+                                "string"
+                            ],
+                            "uuid": "string"
+                        }
+                    ]
+                }
+        allowed_actions : list
+            The allowed_actions value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = get_user_allowed_actions_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="userAllowedActionsV1",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_user_roles(self: object,
+                          body: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Grant or Revoke one or more role(s) to a user against a CID.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/userRolesActionV2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "action": "string",
+                    "cid": "string",
+                    "expires_at": "string",
+                    "role_ids": [
+                        "string"
+                    ],
+                    "uuid": "string"
+                }
+        action : str
+            The action value.
+        cid : str
+            The cid value.
+        expires_at : str
+            The expires_at value.
+        role_ids : list
+            The role_ids value.
+        uuid : str
+            The uuid value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = update_user_roles_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="userRolesActionV2",
+            body=body
+            )
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
     aggregateUsersV1 = aggregate_users
+    aggregateUsersV2 = aggregate_users_v2
     combinedUserRolesV1 = get_user_grants_v1
     CombinedUserRolesV2 = get_user_grants
+    CombinedUserRolesV3 = combined_user_roles_v3
     get_user_roles = get_user_grants  # Helper alias
     get_user_roles_combined = get_user_grants  # Helper alias
     entitiesRolesGETV2 = get_roles_mssp
     entitiesRolesV1 = get_roles_mssp_v1
+    getUserInvitationsGETV1 = get_user_invitations
+    queryUserInvitationsV1 = query_user_invitations
+    queryUserV2 = query_users_v2
+    retrieveUsersGETV2 = retrieve_users_v2
     userActionV1 = user_action
+    userAllowedActionsV1 = get_user_allowed_actions
     userRolesActionV1 = user_roles_action
     retrieveUsersGETV1 = retrieve_users
     createUserV1 = create_user_mssp
@@ -1331,6 +1780,7 @@ class UserManagement(ServiceClass):
     RetrieveEmailsByCID = retrieve_emails_by_cid
     RetrieveUserUUIDsByCID = retrieve_user_uuids_by_cid
     RetrieveUserUUID = retrieve_user_uuid
+    userRolesActionV2 = update_user_roles
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8
