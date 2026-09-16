@@ -171,6 +171,7 @@ from ._mobile_enrollment import _mobile_enrollment_endpoints
 from ._models import _models_endpoints
 from ._mssp import _mssp_endpoints
 from ._network_containment import _network_containment_endpoints
+from ._network_scan_detections import _network_scan_detections_endpoints
 from ._network_scan_global_configs import _network_scan_global_configs_endpoints
 from ._network_scan_networks import _network_scan_networks_endpoints
 from ._network_scan_scan_run_reports import _network_scan_scan_run_reports_endpoints
@@ -312,6 +313,7 @@ api_endpoints.extend(_mobile_enrollment_endpoints)
 api_endpoints.extend(_models_endpoints)
 api_endpoints.extend(_mssp_endpoints)
 api_endpoints.extend(_network_containment_endpoints)
+api_endpoints.extend(_network_scan_detections_endpoints)
 api_endpoints.extend(_network_scan_global_configs_endpoints)
 api_endpoints.extend(_network_scan_networks_endpoints)
 api_endpoints.extend(_network_scan_scan_run_reports_endpoints)
