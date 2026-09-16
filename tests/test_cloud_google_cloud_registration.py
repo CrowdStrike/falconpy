@@ -74,6 +74,7 @@ class TestCloudGoogleCloudRegistration:
             "cloud_registration_gcp_delete_registration": falcon.delete_registration(ids="12345678"),
             "cloud_registration_gcp_get_entities": falcon.get_entities(ids=["string"]),
             "cloud_registration_gcp_post_terraform_script": falcon.cloud_registration_gcp_post_terraform_script(resources="string"),
+            "cloud_registration_gcp_post_infra_manager_script": falcon.generate_gcp_infra_manager_script(resources="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
