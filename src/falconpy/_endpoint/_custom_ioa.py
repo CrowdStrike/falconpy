@@ -112,20 +112,6 @@ _custom_ioa_endpoints = [
     ]
   ],
   [
-    "update_rule_groupMixin0",
-    "PATCH",
-    "/ioarules/entities/rule-groups/v1",
-    "Update a rule group. The following properties can be modified: name, description, enabled.",
-    "custom_ioa",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "delete_rule_groupsMixin0",
     "DELETE",
     "/ioarules/entities/rule-groups/v1",
@@ -147,6 +133,20 @@ _custom_ioa_endpoints = [
         "description": "The IDs of the entities",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "update_rule_groupMixin0",
+    "PATCH",
+    "/ioarules/entities/rule-groups/v1",
+    "Update a rule group. The following properties can be modified: name, description, enabled.",
+    "custom_ioa",
+    [
+      {
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
@@ -222,20 +222,6 @@ _custom_ioa_endpoints = [
     ]
   ],
   [
-    "update_rules",
-    "PATCH",
-    "/ioarules/entities/rules/v1",
-    "Update rules within a rule group. Return the updated rules.",
-    "custom_ioa",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "delete_rules",
     "DELETE",
     "/ioarules/entities/rules/v1",
@@ -264,6 +250,20 @@ _custom_ioa_endpoints = [
         "description": "The IDs of the entities",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "update_rules",
+    "PATCH",
+    "/ioarules/entities/rules/v1",
+    "Update rules within a rule group. Return the updated rules.",
+    "custom_ioa",
+    [
+      {
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
@@ -349,6 +349,7 @@ _custom_ioa_endpoints = [
     "custom_ioa",
     [
       {
+        "type": "string",
         "enum": [
           "created_by",
           "created_on",
@@ -357,15 +358,14 @@ _custom_ioa_endpoints = [
           "modified_on",
           "name"
         ],
-        "type": "string",
         "description": "Possible order by fields: {created_by, created_on, enabled, modified_by, modified_on, name}",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "FQL query specifying the filter parameters. Filter term criteria: [enabled platform "
-        "name description rules.action_label rules.name rules.description rules.pattern_severity rules.ruletype_name "
+        "description": "FQL query specifying the filter parameters. Filter term criteria: [id enabled platform "
+        " name description rules.action_label rules.name rules.description rules.pattern_severity rules.ruletype_name "
         "rules.enabled]. Filter range criteria: created_on, modified_on; use any common date format, such as "
         "'2010-05-15T14:55:21.892315096Z'.",
         "name": "filter",
@@ -399,6 +399,7 @@ _custom_ioa_endpoints = [
     "custom_ioa",
     [
       {
+        "type": "string",
         "enum": [
           "created_by",
           "created_on",
@@ -407,15 +408,14 @@ _custom_ioa_endpoints = [
           "modified_on",
           "name"
         ],
-        "type": "string",
         "description": "Possible order by fields: {created_by, created_on, enabled, modified_by, modified_on, name}",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "FQL query specifying the filter parameters. Filter term criteria: [enabled platform "
-        "name description rules.action_label rules.name rules.description rules.pattern_severity rules.ruletype_name "
+        "description": "FQL query specifying the filter parameters. Filter term criteria: [id enabled platform "
+        " name description rules.action_label rules.name rules.description rules.pattern_severity rules.ruletype_name "
         "rules.enabled]. Filter range criteria: created_on, modified_on; use any common date format, such as "
         "'2010-05-15T14:55:21.892315096Z'.",
         "name": "filter",
@@ -470,6 +470,7 @@ _custom_ioa_endpoints = [
     "custom_ioa",
     [
       {
+        "type": "string",
         "enum": [
           "rules.created_by",
           "rules.created_on",
@@ -482,7 +483,6 @@ _custom_ioa_endpoints = [
           "rules.enabled",
           "rules.ruletype_name"
         ],
-        "type": "string",
         "description": "Possible order by fields: {rules.created_by, rules.created_on, "
         "rules.current_version.action_label, rules.current_version.description, rules.current_version.modified_by, "
         "rules.current_version.modified_on, rules.current_version.name, rules.current_version.pattern_severity, "
@@ -492,8 +492,8 @@ _custom_ioa_endpoints = [
       },
       {
         "type": "string",
-        "description": "FQL query specifying the filter parameters. Filter term criteria: [enabled platform "
-        "name description rules.action_label rules.name rules.description rules.pattern_severity rules.ruletype_name "
+        "description": "FQL query specifying the filter parameters. Filter term criteria: [id enabled platform "
+        " name description rules.action_label rules.name rules.description rules.pattern_severity rules.ruletype_name "
         "rules.enabled]. Filter range criteria: created_on, modified_on; use any common date format, such as "
         "'2010-05-15T14:55:21.892315096Z'.",
         "name": "filter",
