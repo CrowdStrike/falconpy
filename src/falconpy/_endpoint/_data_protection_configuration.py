@@ -132,7 +132,8 @@ _data_protection_configuration_endpoints = [
     "entities_cloud_application_create",
     "POST",
     "/data-protection/entities/cloud-applications/v1",
-    "Persist the given cloud application for the provided entity instance",
+    "Persist the given cloud application for the provided entity instance. Each URL is normalized (FQDN and "
+    "path lowercased) and validated: if not compliant, it is rejected with a 400.",
     "data_protection_configuration",
     [
       {
@@ -167,7 +168,8 @@ _data_protection_configuration_endpoints = [
     "entities_cloud_application_patch",
     "PATCH",
     "/data-protection/entities/cloud-applications/v1",
-    "Update a cloud application",
+    "Update a cloud application. Every URL in the request payload is normalized (FQDN and path lowercased) and "
+    "validated with the same rules as create; the whole payload is checked, not just newly-added URLs.",
     "data_protection_configuration",
     [
       {
@@ -836,10 +838,10 @@ _data_protection_configuration_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter results by specific attributes , allowed attributes are [created_by "
-        "properties.content_patterns_operator properties.protection_mode properties.sensitivity_labels created_at "
-        "modified_by modified_at properties.content_patterns properties.evidence_duplication_enabled "
-        "properties.file_types properties.web_sources name]",
+        "description": "Filter results by specific attributes , allowed attributes are "
+        "[properties.evidence_duplication_enabled properties.protection_mode properties.sensitivity_labels modified_at "
+        "properties.content_patterns_operator properties.file_types properties.web_sources name created_at created_by "
+        "modified_by properties.content_patterns]",
         "name": "filter",
         "in": "query"
       },
@@ -879,7 +881,8 @@ _data_protection_configuration_endpoints = [
         "type": "string",
         "description": "Optional filter for searching cloud applications. Allowed filters are 'name' (string), "
         " 'type' (array of strings representing the tier, accepted values are: integrated, predefined, custom), "
-        "'deleted' (boolean), supports_network_inspection (boolean) and 'application_group_id' (string)",
+        "'deleted' (boolean), supports_network_inspection (boolean), 'application_group_id' (string), 'created' and "
+        "'last_updated'",
         "name": "filter",
         "in": "query"
       },
@@ -887,7 +890,7 @@ _data_protection_configuration_endpoints = [
         "type": "string",
         "description": "The sort instructions to order by on. Allowed values are 'name' (string), 'type' "
         "(array of strings representing the tier, accepted values are: integrated, predefined, custom), 'deleted' "
-        "(boolean) and 'application_group_id' (string)",
+        "(boolean), 'application_group_id' (string), 'created' and 'last_updated'",
         "name": "sort",
         "in": "query"
       },
@@ -918,14 +921,14 @@ _data_protection_configuration_endpoints = [
       {
         "type": "string",
         "description": "The filter to use when finding content patterns. Allowed filters are 'name', 'type', "
-        "'category', 'region', 'example', 'created_at', 'updated_at' and 'deleted'",
+        "'category', 'region', 'example', 'created', 'last_updated' and 'deleted'",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "string",
         "description": "The sort instructions to order by on. Allowed values are 'name', 'type', 'category', "
-        "'region', 'created_at', 'updated_at', 'example' and 'deleted'",
+        "'region', 'created', 'last_updated', 'example' and 'deleted'",
         "name": "sort",
         "in": "query"
       },
@@ -956,14 +959,14 @@ _data_protection_configuration_endpoints = [
       {
         "type": "string",
         "description": "The filter to use when finding enterprise accounts. Allowed filters are 'name', "
-        "'application_group_id', 'deleted', 'created_at' and 'updated_at'",
+        "'application_group_id', 'deleted', 'created' and 'last_updated'",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "string",
         "description": "The sort instructions to order by on. Allowed values are 'name', "
-        "'application_group_id', 'deleted', 'created_at' and 'updated_at'",
+        "'application_group_id', 'deleted', 'created' and 'last_updated'",
         "name": "sort",
         "in": "query"
       },
@@ -993,13 +996,14 @@ _data_protection_configuration_endpoints = [
     [
       {
         "type": "string",
-        "description": "The filter to use when finding file types. Allowed filter is 'name', 'created_at' and 'updated_at'",
+        "description": "The filter to use when finding file types. Allowed filters are 'name', 'created', "
+        "'last_updated' and 'product'",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "The sort instructions to order by on. Allowed values are 'name', 'created_at' and 'updated_at'",
+        "description": "The sort instructions to order by on. Allowed values are 'name', 'created' and 'last_updated'",
         "name": "sort",
         "in": "query"
       },
@@ -1030,14 +1034,14 @@ _data_protection_configuration_endpoints = [
       {
         "type": "string",
         "description": "The filter to use when finding sensitivity labels. The only allowed filters are "
-        "'name', 'display_name', 'external_id' and 'deleted'",
+        "'name', 'display_name', 'external_id', 'deleted', 'created' and 'last_updated'",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "string",
         "description": "The sort instructions to order by on. Allowed values are 'name', 'display_name', "
-        "'deleted', 'created_at' and 'updated_at'",
+        "'deleted', 'created' and 'last_updated'",
         "name": "sort",
         "in": "query"
       },
@@ -1068,8 +1072,14 @@ _data_protection_configuration_endpoints = [
       {
         "type": "string",
         "description": "Optional filter for searching local application group. Allowed filters are 'name' "
-        "(string), is_deleted (boolean), platform (string), 'created_at' and 'updated_at'",
+        "(string), is_deleted (boolean), platform (string), 'created' and 'last_updated'",
         "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The sort instructions to order by on. Allowed values are 'name', 'created' and 'last_updated'",
+        "name": "sort",
         "in": "query"
       },
       {
@@ -1099,8 +1109,15 @@ _data_protection_configuration_endpoints = [
       {
         "type": "string",
         "description": "Optional filter for searching local applications. Allowed filters are 'name' (string), "
-        "is_deleted (boolean), 'created_at' and 'updated_at'",
+        "is_deleted (boolean), 'created' and 'last_updated'",
         "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The sort instructions to order by on. Allowed values are 'name', 'executable_name', "
+        "'created' and 'last_updated'",
+        "name": "sort",
         "in": "query"
       },
       {
@@ -1136,26 +1153,26 @@ _data_protection_configuration_endpoints = [
       },
       {
         "type": "string",
-        "description": "Filter results by specific attributes , allowed attributes are [precedence is_default "
-        "properties.evidence_encrypted_enabled properties.be_upload_timeout_duration_seconds "
-        "properties.enable_screen_capture description modified_by properties.evidence_download_enabled "
-        "properties.classifications properties.be_paste_timeout_response name is_enabled created_at modified_at "
-        "properties.inspection_depth properties.enable_clipboard_web_origin properties.besplash_custom_message "
-        "properties.be_paste_clipboard_over_size_behaviour_block properties.min_confidence_level "
-        "properties.enable_clipboard_inspection properties.allow_notifications properties.block_notifications "
-        "properties.be_upload_timeout_response properties.be_paste_clipboard_min_size_unit "
-        "properties.be_paste_clipboard_max_size properties.screen_capture_duration_pre_event "
-        "properties.max_file_size_to_inspect_unit properties.browsers_without_active_extension "
-        "properties.evidence_duplication_enabled_default properties.enable_network_inspection "
-        "properties.be_exclude_domains properties.be_paste_timeout_duration_milliseconds "
-        "properties.be_paste_clipboard_min_size properties.be_paste_clipboard_max_size_unit created_by "
-        "properties.enable_content_inspection properties.enable_context_inspection properties.custom_allow_notification "
-        " properties.custom_block_notification properties.besplash_enabled properties.besplash_message_source "
-        "properties.max_file_size_to_inspect properties.block_all_data_access properties.similarity_detection "
-        "properties.evidence_storage_free_disk_perc properties.evidence_storage_max_size properties.euj_dialog_timeout "
-        "properties.screen_capture_duration_post_event properties.enable_ocr properties.similarity_threshold "
-        "properties.enable_end_user_notifications_unsupported_browser "
-        "properties.network_inspection_files_exceeding_size_limit]",
+        "description": "Filter results by specific attributes , allowed attributes are [name "
+        "properties.enable_end_user_notifications_unsupported_browser properties.block_notifications "
+        "properties.evidence_encrypted_enabled properties.be_paste_timeout_duration_milliseconds "
+        "properties.be_paste_clipboard_max_size properties.be_paste_clipboard_over_size_behaviour_block description "
+        "precedence modified_at properties.enable_context_inspection properties.inspection_depth "
+        "properties.be_paste_clipboard_min_size_unit is_enabled properties.enable_content_inspection "
+        "properties.browsers_without_active_extension properties.block_all_data_access properties.similarity_threshold "
+        "properties.enable_clipboard_web_origin properties.custom_allow_notification "
+        "properties.evidence_download_enabled properties.similarity_detection properties.enable_network_inspection "
+        "properties.network_inspection_files_exceeding_size_limit properties.be_exclude_domains "
+        "properties.besplash_message_source properties.be_paste_clipboard_min_size properties.max_file_size_to_inspect "
+        "properties.screen_capture_duration_pre_event is_default properties.min_confidence_level "
+        "properties.besplash_enabled properties.besplash_custom_message properties.be_upload_timeout_response "
+        "properties.evidence_storage_free_disk_perc properties.screen_capture_duration_post_event created_at "
+        "modified_by properties.max_file_size_to_inspect_unit properties.enable_screen_capture properties.enable_ocr "
+        "properties.network_inspection_exclude_list_v2 created_by properties.enable_clipboard_inspection "
+        "properties.allow_notifications properties.classifications properties.be_upload_timeout_duration_seconds "
+        "properties.be_paste_clipboard_max_size_unit properties.evidence_storage_max_size properties.euj_dialog_timeout "
+        " properties.custom_block_notification properties.evidence_duplication_enabled_default "
+        "properties.be_paste_timeout_response properties.enable_print_monitor]",
         "name": "filter",
         "in": "query"
       },
@@ -1178,7 +1195,7 @@ _data_protection_configuration_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort by, allowed fields are :[name precedence created_at modified_at]",
+        "description": "The property to sort by, allowed fields are :[precedence created_at modified_at name]",
         "name": "sort",
         "in": "query"
       }
@@ -1237,8 +1254,15 @@ _data_protection_configuration_endpoints = [
       {
         "type": "string",
         "description": "The filter to use when finding web locations. Allowed filters are 'name', 'type', "
-        "'deleted', 'application_id', 'provider_location_id' and 'enterprise_account_id'",
+        "'deleted', 'application_id', 'provider_location_id', 'enterprise_account_id', 'created' and 'last_updated'",
         "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The sort instructions to order by on. Allowed values are 'name', 'type', 'deleted', "
+        "'application_id', 'provider_location_id', 'enterprise_account_id', 'created' and 'last_updated'",
+        "name": "sort",
         "in": "query"
       },
       {
