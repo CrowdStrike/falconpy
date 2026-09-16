@@ -201,6 +201,7 @@ from .mobile_enrollment import MobileEnrollment
 from .models import Models
 from .mssp import FlightControl
 from .network_containment import NetworkContainment
+from .network_scan_detections import NetworkScanDetections
 from .network_scan_global_configs import NetworkScanGlobalConfigs
 from .network_scan_networks import NetworkScanNetworks
 from .network_scan_scan_run_reports import NetworkScanScanRunReports
@@ -315,7 +316,8 @@ __all__ = [
     "Tools", "Agents",
     "AIDR", "ApplicationAbuseExclusions",
     "Audit", "BrowserSecurity",
-    "CodeSecurity", "NetworkContainment"
+    "CodeSecurity", "NetworkContainment",
+    "NetworkScanDetections"
     ]
 """
 This is free and unencumbered software released into the public domain.

@@ -99,6 +99,7 @@ from ._hosts import devices_actions_delete_v1_payload
 from ._intel import cao_incidents_aggregates_v1_payload, cao_incidents_entities_v1_payload
 from ._knowledge_bases import entities_knowledge_bases_create_v1_payload, entities_knowledge_bases_update_v1_payload
 from ._network_containment import create_allowlist_rules_payload, update_allowlist_rules_payload
+from ._network_scan_detections import aggregate_netscan_detections_payload
 from ._profile_groups import (
     create_group_v1_mixin0_payload,
     get_group_users_v1_payload,
@@ -435,5 +436,5 @@ __all__ = [
     "update_destination_group_payload", "update_seraphic_rule_payload",
     "generate_gcp_infra_manager_script_payload", "exchange_github_app_code_payload",
     "register_scm_app_payload", "create_allowlist_rules_payload",
-    "update_allowlist_rules_payload"
+    "update_allowlist_rules_payload", "aggregate_netscan_detections_payload"
 ]
