@@ -111,11 +111,11 @@ _knowledge_bases_endpoints = [
     "EntitiesKnowledgeBasesCreateV1",
     "POST",
     "/agentic-studio/entities/knowledge_bases/v1",
-    "Create or update a knowledge base. For deletion, provide knowledge base with IsDeleted=true.",
+    "Create or update a knowledge base. To delete a knowledge base, set is_deleted to true.",
     "knowledge_bases",
     [
       {
-        "description": "Knowledge base definition to create or update",
+        "description": "Knowledge base definition to create or update.",
         "name": "body",
         "in": "body",
         "required": True
