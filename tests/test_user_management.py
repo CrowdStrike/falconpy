@@ -137,7 +137,22 @@ class TestFalconUserManagement:
             "delete_user_mssp": falcon.delete_user_mssp(ids="1234567890"),
             "update_user_mssp": falcon.update_user_mssp(user_uuid="123456789", first_name="Bob"),
             "query_roles": falcon.query_roles("1234567890"),
-            "query_users": falcon.query_users()
+            "query_users": falcon.query_users(),
+            "CombinedUserRolesV3": falcon.combined_user_roles_v3(user_uuid="string", cid="string", direct_only=True,
+                filter="string", offset=1, limit=1, sort="string"),
+            "aggregateUsersV2": falcon.aggregate_users_v2(user_type="string",
+                date_ranges=[{"from": "string", "to": "string"}], field="string",
+                filter="string", interval="string", min_doc_count=0,
+                missing="string", name="string", q="string",
+                ranges=[{"From": 0, "To": 0}], size=0, sort="string",
+                sub_aggregates=["string"], time_zone="string", type="string"),
+            "getUserInvitationsGETV1": falcon.get_user_invitations(ids="string"),
+            "queryUserInvitationsV1": falcon.query_user_invitations(filter="string", sort="string", offset=1, limit=1),
+            "queryUserV2": falcon.query_users_v2(filter="string", offset=1, limit=1, sort="string", user_type="string"),
+            "retrieveUsersGETV2": falcon.retrieve_users_v2(ids="string"),
+            "userAllowedActionsV1": falcon.get_user_allowed_actions(allowed_actions="string"),
+            "userRolesActionV2": falcon.update_user_roles(action="string", cid="string", expires_at="string",
+                role_ids="string", uuid="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

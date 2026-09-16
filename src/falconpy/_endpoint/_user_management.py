@@ -52,6 +52,30 @@ _user_management_endpoints = [
     ]
   ],
   [
+    "aggregateUsersV2",
+    "POST",
+    "/user-management/aggregates/users/v2",
+    "Get user aggregates including external users as specified via json in request body.",
+    "user_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      },
+      {
+        "type": "string",
+        "enum": [
+          "internal",
+          "external"
+        ],
+        "description": "Filter results by user type (internal or external). Omit to return all users.",
+        "name": "user_type",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "combinedUserRolesV1",
     "GET",
     "/user-management/combined/user-roles/v1",
@@ -211,6 +235,86 @@ _user_management_endpoints = [
     ]
   ],
   [
+    "CombinedUserRolesV3",
+    "GET",
+    "/user-management/combined/user-roles/v3",
+    "Get User Grant(s) including external users. This endpoint lists grants between a User and a Customer, "
+    "where the user may be homed in a partner CID.",
+    "user_management",
+    [
+      {
+        "type": "string",
+        "description": "User UUID to get available roles for.",
+        "name": "user_uuid",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Customer ID to get grants for. Empty CID would result in Role IDs for user against "
+        "current CID in view.",
+        "name": "cid",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "Specifies if to request direct Only role grants or all role grants between user and "
+        "CID (specified in query params)",
+        "name": "direct_only",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter using a query in Falcon Query Language (FQL). Supported filters: expires_at, "
+        "role_id, role_name",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 0,
+        "minimum": 0,
+        "description": "The offset to start retrieving records from",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "maximum": 500,
+        "minimum": 1,
+        "description": "The maximum records to return. [1-500]",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "default": "role_name|asc",
+        "enum": [
+          "cid",
+          "cid|asc",
+          "cid|desc",
+          "expires_at",
+          "expires_at|asc",
+          "expires_at|desc",
+          "role_name",
+          "role_name|asc",
+          "role_name|desc",
+          "type",
+          "type|asc",
+          "type|desc",
+          "user_uuid",
+          "user_uuid|asc",
+          "user_uuid|desc"
+        ],
+        "description": "The property to sort by",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "entitiesRolesGETV2",
     "POST",
     "/user-management/entities/roles/GET/v2",
@@ -275,6 +379,35 @@ _user_management_endpoints = [
     ]
   ],
   [
+    "userAllowedActionsV1",
+    "POST",
+    "/user-management/entities/user-allowed-actions/v1",
+    "Provides the list of actions that can performed on the user on the CID.",
+    "user_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "getUserInvitationsGETV1",
+    "POST",
+    "/user-management/entities/user-invitations/GET/v1",
+    "Get one or more external user invitations by ID.",
+    "user_management",
+    [
+      {
+        "description": "List of invitation IDs to retrieve.",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "userRolesActionV1",
     "POST",
     "/user-management/entities/user-role-actions/v1",
@@ -292,10 +425,43 @@ _user_management_endpoints = [
     ]
   ],
   [
+    "userRolesActionV2",
+    "POST",
+    "/user-management/entities/user-role-actions/v2",
+    "Grant or Revoke one or more role(s) to a user against a CID. The user can be a regular user or a invited "
+    "external user to the CID. User UUID, CID and Role ID(s) can be provided in request payload. Available "
+    "Action(s) : assign-role or grant, AND remove-role or revoke",
+    "user_management",
+    [
+      {
+        "description": "CID, RoleID(s), User UUID and Action are required. Allowed values for Action param "
+        "include 'grant'/'assign-role' and 'revoke'/remove-role'.",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "retrieveUsersGETV1",
     "POST",
     "/user-management/entities/users/GET/v1",
     "Get info about users including their name, UID and CID by providing user UUIDs",
+    "user_management",
+    [
+      {
+        "description": "Maximum of 5000 User UUIDs can be specified per request.",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "retrieveUsersGETV2",
+    "POST",
+    "/user-management/entities/users/GET/v2",
+    "Get info about users including their name, UID, CID and whether they are external by providing user UUIDs",
     "user_management",
     [
       {
@@ -402,6 +568,44 @@ _user_management_endpoints = [
     ]
   ],
   [
+    "queryUserInvitationsV1",
+    "GET",
+    "/user-management/queries/user-invitations/v1",
+    "Query external user invitation IDs using an FQL filter.",
+    "user_management",
+    [
+      {
+        "type": "string",
+        "description": "FQL filter expression (e.g. target_cid:'cid-123'+status:'pending').",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "FQL sort expression (e.g. created_at.desc).",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 0,
+        "minimum": 0,
+        "description": "The offset to start retrieving records from.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "maximum": 500,
+        "minimum": 1,
+        "description": "The maximum records to return. [1-500]",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "queryUserV1",
     "GET",
     "/user-management/queries/users/v1",
@@ -471,6 +675,90 @@ _user_management_endpoints = [
         ],
         "description": "The property to sort by",
         "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "queryUserV2",
+    "GET",
+    "/user-management/queries/users/v2",
+    "List user IDs for all users in your customer account, including external users who have roles assigned in "
+    "your customer account. For more information on each user, provide the user ID to retrieveUsersGETV1.",
+    "user_management",
+    [
+      {
+        "type": "string",
+        "description": "Filter using a query in Falcon Query Language (FQL). Supported filters: assigned_cids, "
+        " cid, direct_assigned_cids, factors, first_name, has_temporary_roles, last_name, name, "
+        "non_ancestor_assigned_cids, status, temporarily_assigned_cids, uid, uuid, associated_cids",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 0,
+        "minimum": 0,
+        "description": "The offset to start retrieving records from",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "maximum": 500,
+        "minimum": 1,
+        "description": "The maximum records to return. [1-500]",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "default": "uid|asc",
+        "enum": [
+          "cid_name",
+          "cid_name|asc",
+          "cid_name|desc",
+          "created_at",
+          "created_at|asc",
+          "created_at|desc",
+          "first_name",
+          "first_name|asc",
+          "first_name|desc",
+          "has_temporary_roles",
+          "has_temporary_roles|asc",
+          "has_temporary_roles|desc",
+          "last_login_at",
+          "last_login_at|asc",
+          "last_login_at|desc",
+          "last_name",
+          "last_name|asc",
+          "last_name|desc",
+          "name",
+          "name|asc",
+          "name|desc",
+          "status",
+          "status|asc",
+          "status|desc",
+          "temporarily_assigned_cids",
+          "temporarily_assigned_cids|asc",
+          "temporarily_assigned_cids|desc",
+          "uid",
+          "uid|asc",
+          "uid|desc"
+        ],
+        "description": "The property to sort by",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "enum": [
+          "internal",
+          "external"
+        ],
+        "description": "Filter results by user type (internal or external). Omit to return all users.",
+        "name": "user_type",
         "in": "query"
       }
     ]
