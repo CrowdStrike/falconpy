@@ -86,5 +86,55 @@ _access_scopes_endpoints = [
         "in": "query"
       }
     ]
+  ],
+  [
+    "ListAccessScopesExternal",
+    "GET",
+    "/access-scope-management/entities/access-scopes/v1",
+    "DECOMMISSIONED: List Access Scopes By ID",
+    "access_scopes",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "name": "ids",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "QueryAccessScopesExternal",
+    "GET",
+    "/access-scope-management/queries/access-scopes/v1",
+    "DECOMMISSIONED: Query Access Scopes and returns IDs",
+    "access_scopes",
+    [
+      {
+        "type": "string",
+        "description": "A valid FQL filter.\nAccess Scope fields: name, created_by, created_at.",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "format": "int64",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "format": "int64",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
   ]
 ]

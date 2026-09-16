@@ -82,6 +82,9 @@ _deprecated_op_mapping = {
     "AggregatesKnowledgeBasesV1": "",
 
     "WorkflowExecuteInternal": "",
+
+    "ListAccessScopesExternal": "",
+    "QueryAccessScopesExternal": "",
 }
 
 _deprecated_cls_mapping = {

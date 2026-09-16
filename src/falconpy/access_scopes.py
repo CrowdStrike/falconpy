@@ -101,6 +101,10 @@ class AccessScopes(ServiceClass):
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query Access Scopes and returns IDs.
 
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
+
         HTTP Method: GET
 
         Swagger URL
