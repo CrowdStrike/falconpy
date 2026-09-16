@@ -201,6 +201,7 @@ from ._sensor_usage import _sensor_usage_endpoints
 from ._sensor_visibility_exclusions import _sensor_visibility_exclusions_endpoints
 from ._serverless_exports import _serverless_exports_endpoints
 from ._serverless_vulnerabilities import _serverless_vulnerabilities_endpoints
+from ._skills import _skills_endpoints
 from ._spans import _spans_endpoints
 from ._spotlight_evaluation_logic import _spotlight_evaluation_logic_endpoints
 from ._spotlight_vulnerability_metadata import _spotlight_vulnerability_metadata_endpoints
@@ -343,6 +344,7 @@ api_endpoints.extend(_sensor_usage_endpoints)
 api_endpoints.extend(_sensor_visibility_exclusions_endpoints)
 api_endpoints.extend(_serverless_exports_endpoints)
 api_endpoints.extend(_serverless_vulnerabilities_endpoints)
+api_endpoints.extend(_skills_endpoints)
 api_endpoints.extend(_spans_endpoints)
 api_endpoints.extend(_spotlight_evaluation_logic_endpoints)
 api_endpoints.extend(_spotlight_vulnerability_metadata_endpoints)
