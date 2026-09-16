@@ -170,3 +170,9 @@ class TestCloudPolicies:
                 # print(key)
                 # print(tests[key])
         assert error_checks
+
+    def test_payload_coverage(self):
+        """Exercise nested payload builder branches."""
+        falcon.create_suppression_rule(rule_ids="string", rule_names="string", rule_origins="string", rule_providers="string", rule_resource_type_names="string", rule_risk_factors="string", rule_services="string", rule_severities="string", account_ids="string", cloud_group_ids="string", cloud_providers="string", regions="string", resource_ids="string", resource_names="string", resource_types="string", service_categories="string", tags="string")
+        falcon.update_suppression_rule(rule_ids="string", rule_names="string", rule_origins="string", rule_providers="string", rule_resource_type_names="string", rule_risk_factors="string", rule_services="string", rule_severities="string", account_ids="string", cloud_group_ids="string", cloud_providers="string", regions="string", resource_ids="string", resource_names="string", resource_types="string", service_categories="string", tags="string")
+        assert True

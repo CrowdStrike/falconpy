@@ -690,9 +690,9 @@ _cloud_policies_endpoints = [
         "le_cloneable*\t\n*rule_compliance_benchmark*\t\n*rule_compliance_benchmark_uuid*\t\n*rule_compliance_framework "
         "*\t\n*rule_control_requirement*\t\n*rule_control_section*\t\n*rule_created_at*\t\n*rule_description*\t\n*rule_"
         "domain*\t\n*rule_mitre_tactic*\t\n*rule_mitre_technique*\t\n*rule_name*\t\n*rule_origin*\t\n*rule_parent_uuid* "
-        "\t\n*rule_provider*\t\n*rule_resource_type*\t\n*rule_resource_type_name*\t\n*rule_risk_factor*\t\n*rule_servic "
-        "e*\t\n*rule_severity*\t\n*rule_short_code*\t\n*rule_status*\t\n*rule_subdomain*\t\n*rule_updated_at*\t\n*rule_"
-        "updated_by*\t\n",
+        "\t\n*rule_provider*\t\n*rule_resource_type*\t\n*rule_resource_type_name*\t\n*rule_risk_factor*\t\n*rule_annota "
+        "tion_status*\t\n*rule_service*\t\n*rule_severity*\t\n*rule_short_code*\t\n*rule_status*\t\n*rule_subdomain*\t\n"
+        "*rule_updated_at*\t\n*rule_updated_by*\t\n",
         "name": "filter",
         "in": "query"
       },
@@ -716,9 +716,9 @@ _cloud_policies_endpoints = [
         "*rule_cloneable*\t\n*rule_compliance_benchmark*\t\n*rule_compliance_benchmark_uuid*\t\n*rule_compliance_framew "
         "ork*\t\n*rule_control_requirement*\t\n*rule_control_section*\t\n*rule_created_at*\t\n*rule_description*\t\n*ru "
         "le_domain*\t\n*rule_mitre_tactic*\t\n*rule_mitre_technique*\t\n*rule_name*\t\n*rule_origin*\t\n*rule_parent_uu "
-        "id*\t\n*rule_provider*\t\n*rule_resource_type*\t\n*rule_resource_type_name*\t\n*rule_risk_factor*\t\n*rule_ser "
-        "vice*\t\n*rule_severity*\t\n*rule_short_code*\t\n*rule_status*\t\n*rule_subdomain*\t\n*rule_updated_at*\t\n*ru "
-        "le_updated_by*\t\n \n\nUse the |asc or |desc suffix to specify sort direction.",
+        "id*\t\n*rule_provider*\t\n*rule_resource_type*\t\n*rule_resource_type_name*\t\n*rule_risk_factor*\t\n*rule_ann "
+        "otation_status*\t\n*rule_service*\t\n*rule_severity*\t\n*rule_short_code*\t\n*rule_status*\t\n*rule_subdomain* "
+        "\t\n*rule_updated_at*\t\n*rule_updated_by*\t\n \n\nUse the |asc or |desc suffix to specify sort direction.",
         "name": "sort",
         "in": "query"
       }
