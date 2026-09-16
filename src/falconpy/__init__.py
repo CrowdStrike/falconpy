@@ -318,8 +318,11 @@ __all__ = [
     "AIDR", "ApplicationAbuseExclusions",
     "Audit", "BrowserSecurity",
     "CodeSecurity", "NetworkContainment",
-    "NetworkScanDetections", "Skills"
+    "NetworkScanDetections", "Skills",
+    "Guardian", "Seraphic"
     ]
+Seraphic = BrowserSecurity
+Guardian = AIDR
 """
 This is free and unencumbered software released into the public domain.
 
