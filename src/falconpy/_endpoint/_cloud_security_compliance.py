@@ -45,12 +45,12 @@ _cloud_security_compliance_endpoints = [
     "cloud_security_compliance",
     [
       {
-        "maxItems": 20,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "csv",
+        "maxItems": 20,
         "description": "The uuids of compliance frameworks to retrieve (maximum 20 IDs allowed).",
         "name": "ids",
         "in": "query",
@@ -59,8 +59,8 @@ _cloud_security_compliance_endpoints = [
       {
         "type": "string",
         "description": "FQL filter, supported properties:\n  - account_id  account_name  business_impact  "
-        "cloud_label  cloud_label_id  cloud_provider  environment  groups  region  resource_type  resource_type_name  "
-        "tag_key  tag_value  tags_string",
+        "cloud_label  cloud_label_id  cloud_provider  environment  groups  region  resource_gcrn  resource_type  "
+        "resource_type_name  tag_key  tag_value  tags_string",
         "name": "filter",
         "in": "query"
       }
@@ -74,12 +74,12 @@ _cloud_security_compliance_endpoints = [
     "cloud_security_compliance",
     [
       {
-        "maxItems": 350,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "csv",
+        "maxItems": 350,
         "description": "The uuids of compliance rules to retrieve (maximum 350 IDs allowed).",
         "name": "ids",
         "in": "query",
@@ -88,8 +88,8 @@ _cloud_security_compliance_endpoints = [
       {
         "type": "string",
         "description": "FQL filter, supported properties:\n  - account_id  account_name  business_impact  "
-        "cloud_label  cloud_label_id  cloud_provider  environment  groups  region  resource_type  resource_type_name  "
-        "tag_key  tag_value  tags_string",
+        "cloud_label  cloud_label_id  cloud_provider  environment  groups  region  resource_gcrn  resource_type  "
+        "resource_type_name  tag_key  tag_value  tags_string",
         "name": "filter",
         "in": "query"
       }
