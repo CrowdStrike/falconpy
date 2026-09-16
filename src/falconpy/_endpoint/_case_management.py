@@ -381,7 +381,6 @@ _case_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
@@ -408,7 +407,6 @@ _case_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
@@ -429,7 +427,6 @@ _case_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
@@ -464,7 +461,6 @@ _case_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
@@ -499,7 +495,6 @@ _case_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
@@ -534,7 +529,6 @@ _case_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
@@ -569,7 +563,6 @@ _case_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
@@ -604,7 +597,6 @@ _case_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
@@ -639,7 +631,6 @@ _case_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "uniqueItems": True,
         "description": "Snapshot IDs",
         "name": "ids",
         "in": "query"
@@ -650,7 +641,6 @@ _case_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "uniqueItems": True,
         "description": "Retrieves the latest snapshot for all Template IDs",
         "name": "template_ids",
         "in": "query"
@@ -681,7 +671,6 @@ _case_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "uniqueItems": True,
         "description": "Template IDs",
         "name": "ids",
         "in": "query"
@@ -740,7 +729,6 @@ _case_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
@@ -781,7 +769,6 @@ _case_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "uniqueItems": True,
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
