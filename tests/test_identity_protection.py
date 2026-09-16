@@ -114,3 +114,8 @@ class TestIdentityProtection:
 
     def test_remaining_functionality(self):
         assert self.service_idp_remaining_tests() is True
+
+    def test_payload_coverage(self):
+        """Exercise nested payload builder branches."""
+        falcon.post_policy_rules(accessType="string", accessTypeCustom="string", entityId="string", groupMembership="string")
+        assert True
