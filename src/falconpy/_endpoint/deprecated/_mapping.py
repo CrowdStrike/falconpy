@@ -82,6 +82,8 @@ _deprecated_op_mapping = {
     "AggregatesKnowledgeBasesV1": "",
 
     "WorkflowExecuteInternal": "",
+
+    "GetConfigurationDetections": "",
 }
 
 _deprecated_cls_mapping = {
