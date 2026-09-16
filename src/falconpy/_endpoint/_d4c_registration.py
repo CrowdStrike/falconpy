@@ -83,8 +83,6 @@ _d4c_registration_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "maxLength": 3,
-        "minLength": 1,
         "description": "The maximum records to return. Defaults to 100.",
         "name": "limit",
         "in": "query"
@@ -422,8 +420,6 @@ _d4c_registration_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "maxLength": 3,
-        "minLength": 1,
         "description": "The maximum records to return. Defaults to 100.",
         "name": "limit",
         "in": "query"
@@ -635,8 +631,6 @@ _d4c_registration_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "maxLength": 3,
-        "minLength": 1,
         "description": "The maximum records to return. Defaults to 100.",
         "name": "limit",
         "in": "query"
