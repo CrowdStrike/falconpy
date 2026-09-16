@@ -385,6 +385,16 @@ _intel_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Fields to return in response",
+        "name": "fields",
+        "in": "query"
       }
     ]
   ],
