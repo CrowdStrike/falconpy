@@ -40,7 +40,11 @@ from ._util import force_default, process_service_request, handle_single_argumen
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._cloud_google_cloud_registration import _cloud_google_cloud_registration_endpoints as Endpoints
-from ._payload import cloud_google_registration_create_payload, cloud_registration_gcp_post_terraform_script_payload
+from ._payload import (
+    cloud_google_registration_create_payload,
+    cloud_registration_gcp_post_terraform_script_payload,
+    generate_gcp_infra_manager_script_payload,
+    )
 
 
 class CloudGoogleCloudRegistration(ServiceClass):
@@ -87,6 +91,8 @@ class CloudGoogleCloudRegistration(ServiceClass):
             Limit applies across all entity types.
         offset : int
             Starting index of result.
+        include_all_statuses : bool
+            Include entities with any registration status (default: False).
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -566,7 +572,104 @@ class CloudGoogleCloudRegistration(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def generate_gcp_infra_manager_script(self: object,
+                                          body: dict = None,
+                                          **kwargs
+                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Generate Google Cloud Infrastructure Manager deployment commands.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud-registration-gcp-post-infra-manager-script
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "dspm_settings": {
+                                "deployment_version": "string",
+                                "infra": "string",
+                                "user_inputs": {
+                                    "custom_network": {
+                                        "subnets": "string",
+                                        "vpc_name": "string"
+                                    },
+                                    "host_project_id": "string",
+                                    "network_configuration_type": "string",
+                                    "org_id": "string",
+                                    "regions": [
+                                        "string"
+                                    ]
+                                },
+                                "wif_principal": "string"
+                            },
+                            "entity_id": [
+                                "string"
+                            ],
+                            "excluded_project_patterns": [
+                                "string"
+                            ],
+                            "falcon_client_key_id": "string",
+                            "falcon_client_key_type": "string",
+                            "infra_manager_region": "string",
+                            "infra_project_id": "string",
+                            "labels": "string",
+                            "realtime_visibility_enabled": true,
+                            "registration_id": "string",
+                            "registration_name": "string",
+                            "resource_name_prefix": "string",
+                            "resource_name_suffix": "string",
+                            "tags": "string",
+                            "template": "string",
+                            "vulnerability_scanning_settings": {
+                                "deployment_version": "string",
+                                "infra": "string",
+                                "user_inputs": {
+                                    "custom_network": {
+                                        "subnets": "string",
+                                        "vpc_name": "string"
+                                    },
+                                    "host_project_id": "string",
+                                    "network_configuration_type": "string",
+                                    "org_id": "string",
+                                    "regions": [
+                                        "string"
+                                    ]
+                                },
+                                "wif_principal": "string"
+                            },
+                            "wif_project_id": "string"
+                        }
+                    ]
+                }
+        resources : list
+            The resources value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = generate_gcp_infra_manager_script_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_gcp_post_infra_manager_script",
+            body=body
+            )
+
     cloud_registration_gcp_get_entities = get_entities
+    cloud_registration_gcp_post_infra_manager_script = generate_gcp_infra_manager_script
     cloud_registration_gcp_trigger_health_check = trigger_health_check
     cloud_registration_gcp_get_registration = get_registration
     cloud_registration_gcp_put_registration = update_registration
