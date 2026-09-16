@@ -111,6 +111,7 @@ from .agent_invocation import AgentInvocation
 from .agent_templates import AgentTemplates
 from .agent_versions import AgentVersions
 from .agents import Agents
+from .aidr import AIDR
 from .alerts import Alerts
 from .api_clients import APIClients
 from .api_integrations import APIIntegrations
@@ -306,7 +307,8 @@ __all__ = [
     "AgentTemplates", "AgentVersions",
     "Models", "ScanningOrchestrator",
     "Spans", "Stream",
-    "Tools", "Agents"
+    "Tools", "Agents",
+    "AIDR"
     ]
 """
 This is free and unencumbered software released into the public domain.
