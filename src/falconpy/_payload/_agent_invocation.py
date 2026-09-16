@@ -78,3 +78,20 @@ def invoke_agent_version_external_v1_payload(passed_keywords: dict) -> dict:
             returned_payload[key] = passed_keywords.get(key)
 
     return returned_payload
+
+
+def update_agent_invocation_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a PatchAgentInvocationV3 request.
+
+    {
+        "id": "string",
+        "status": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["id", "status"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
