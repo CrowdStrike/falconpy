@@ -358,7 +358,8 @@ _ngsiem_endpoints = [
           "falcon",
           "third-party",
           "dashboards",
-          "parsers-repository"
+          "parsers-repository",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -390,6 +391,36 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "BulkCreatePersistedAggregations",
+    "POST",
+    "/ngsiem-content/entities/bulk-persisted-aggregations/v1",
+    "Create Multiple Persisted Aggregations. Processes all items and returns per-item success/failure results",
+    "ngsiem",
+    [
+      {
+        "description": "bulk create persisted aggregations request",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "BulkUpdatePersistedAggregations",
+    "PATCH",
+    "/ngsiem-content/entities/bulk-persisted-aggregations/v1",
+    "Update Multiple Persisted Aggregations. Processes all items and returns per-item success/failure results",
+    "ngsiem",
+    [
+      {
+        "description": "bulk update persisted aggregations request",
         "name": "body",
         "in": "body",
         "required": True
@@ -535,7 +566,8 @@ _ngsiem_endpoints = [
           "all",
           "falcon",
           "third-party",
-          "dashboards"
+          "dashboards",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -555,7 +587,8 @@ _ngsiem_endpoints = [
         "enum": [
           "all",
           "falcon",
-          "third-party"
+          "third-party",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -587,7 +620,8 @@ _ngsiem_endpoints = [
         "enum": [
           "all",
           "falcon",
-          "third-party"
+          "third-party",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -629,7 +663,8 @@ _ngsiem_endpoints = [
         "enum": [
           "all",
           "falcon",
-          "third-party"
+          "third-party",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -692,7 +727,8 @@ _ngsiem_endpoints = [
           "all",
           "falcon",
           "third-party",
-          "parsers-repository"
+          "parsers-repository",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -759,7 +795,8 @@ _ngsiem_endpoints = [
           "falcon",
           "third-party",
           "dashboards",
-          "parsers-repository"
+          "parsers-repository",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -824,7 +861,8 @@ _ngsiem_endpoints = [
           "all",
           "falcon",
           "third-party",
-          "parsers-repository"
+          "parsers-repository",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -846,7 +884,8 @@ _ngsiem_endpoints = [
           "falcon",
           "falcon-for-it",
           "third-party",
-          "parsers-repository"
+          "parsers-repository",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -905,6 +944,40 @@ _ngsiem_endpoints = [
     [
       {
         "description": "update parser extension request",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetParserRollbackOptions",
+    "GET",
+    "/ngsiem-content/entities/parsers-rollback/v1",
+    "Retrieve available rollback versions for a parser. Returns a list of previous versions that the parser "
+    "can be rolled back to, including version metadata, changelog, and author information.",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "The unique identifier for the parser",
+        "name": "parser_id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "RollbackParser",
+    "POST",
+    "/ngsiem-content/entities/parsers-rollback/v1",
+    "Rollback a parser to a previously installed version. This operation changes the active parser version to "
+    "a specified earlier version. The rollback is recorded in audit logs with the initiator's identity. Requires "
+    "parser_id and target_version in the request body.",
+    "ngsiem",
+    [
+      {
+        "description": "rollback parser request",
         "name": "body",
         "in": "body",
         "required": True
@@ -1142,6 +1215,86 @@ _ngsiem_endpoints = [
     ]
   ],
   [
+    "GetPersistedAggregation",
+    "GET",
+    "/ngsiem-content/entities/persisted-aggregations/v1",
+    "Get a persisted aggregation by ID",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "Persisted aggregation ID",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo)",
+        "name": "search_domain",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "CreatePersistedAggregation",
+    "POST",
+    "/ngsiem-content/entities/persisted-aggregations/v1",
+    "Create a Persisted Aggregation in LogScale",
+    "ngsiem",
+    [
+      {
+        "description": "create persisted aggregation request",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DeletePersistedAggregation",
+    "DELETE",
+    "/ngsiem-content/entities/persisted-aggregations/v1",
+    "Delete one or more Persisted Aggregations by ID",
+    "ngsiem",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Persisted aggregation ID(s) to delete. Supports single or multiple IDs.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo)",
+        "name": "search_domain",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdatePersistedAggregation",
+    "PATCH",
+    "/ngsiem-content/entities/persisted-aggregations/v1",
+    "Update a Persisted Aggregation. Supports renaming via currentName → newName",
+    "ngsiem",
+    [
+      {
+        "description": "update persisted aggregation request",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetSavedQueryTemplate",
     "GET",
     "/ngsiem-content/entities/savedqueries-template/v1",
@@ -1164,7 +1317,8 @@ _ngsiem_endpoints = [
           "all",
           "falcon",
           "third-party",
-          "dashboards"
+          "dashboards",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -1184,7 +1338,8 @@ _ngsiem_endpoints = [
         "enum": [
           "all",
           "falcon",
-          "third-party"
+          "third-party",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -1210,7 +1365,8 @@ _ngsiem_endpoints = [
         "enum": [
           "all",
           "falcon",
-          "third-party"
+          "third-party",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -1252,7 +1408,8 @@ _ngsiem_endpoints = [
         "enum": [
           "all",
           "falcon",
-          "third-party"
+          "third-party",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -1339,7 +1496,8 @@ _ngsiem_endpoints = [
           "all",
           "falcon",
           "third-party",
-          "dashboards"
+          "dashboards",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -1385,7 +1543,8 @@ _ngsiem_endpoints = [
           "falcon",
           "third-party",
           "dashboards",
-          "parsers-repository"
+          "parsers-repository",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -1456,6 +1615,45 @@ _ngsiem_endpoints = [
     ]
   ],
   [
+    "ListPersistedAggregations",
+    "GET",
+    "/ngsiem-content/queries/persisted-aggregations/v1",
+    "List persisted aggregations in a search domain with pagination",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "default": "50",
+        "pattern": "^\\d{1,4}$",
+        "description": "maximum number of results to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "default": "0",
+        "pattern": "^\\d{1,4}$",
+        "description": "number of results to offset the returned results by",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "FQL filter to apply to the name of the content, only currently support text match on "
+        "name field: name:~'value'",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo)",
+        "name": "search_domain",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ListSavedQueries",
     "GET",
     "/ngsiem-content/queries/savedqueries/v1",
@@ -1492,7 +1690,8 @@ _ngsiem_endpoints = [
           "all",
           "falcon",
           "third-party",
-          "dashboards"
+          "dashboards",
+          "query-audit"
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
@@ -1761,7 +1960,6 @@ _ngsiem_endpoints = [
         },
         "collectionFormat": "csv",
         "maxItems": 20,
-        "uniqueItems": True,
         "description": "Unique identifiers of the config(s) to delete",
         "name": "ids",
         "in": "query",
