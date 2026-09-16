@@ -37,7 +37,11 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import invoke_agent_version_external_v1_payload, invoke_published_agent_external_v1_payload
+from ._payload import (
+    invoke_agent_version_external_v1_payload,
+    invoke_published_agent_external_v1_payload,
+    update_agent_invocation_payload,
+    )
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._agent_invocation import _agent_invocation_endpoints as Endpoints
@@ -301,6 +305,50 @@ class AgentInvocation(ServiceClass):
             operation_id="InvokeAgentVersionExternalV1",
             body=body
             )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_agent_invocation(self: object,
+                                body: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Modify an in-flight agent invocation.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/agent-invocation/PatchAgentInvocationV3
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "id": "string",
+                    "status": "string"
+                }
+        id : str
+            The id value.
+        status : str
+            The status value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = update_agent_invocation_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="PatchAgentInvocationV3",
+            body=body
+            )
     InvokePublishedAgentExternalV1 = invoke_published_agent_external_v1
     GetAgentInvocationV3 = get_agent_invocation_v3
     InvokeAgentVersionExternalV1 = invoke_agent_version_external_v1
+    PatchAgentInvocationV3 = update_agent_invocation
