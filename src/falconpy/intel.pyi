@@ -85,6 +85,7 @@ class Intel(ServiceClass):
         self,
         *args: Union[str, List[str]],
         ids: Optional[Union[str, List[str]]] = None,
+        fields: Optional[Union[str, List[str]]] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

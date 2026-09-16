@@ -85,7 +85,6 @@ class FoundryLogScale(ServiceClass):
         id: Optional[str] = None,
         mode: Optional[str] = None,
         name: Optional[str] = None,
-        parameters: Optional[dict] = None,
         start: Optional[str] = None,
         version: Optional[str] = None,
         with_in: Optional[dict] = None,
@@ -93,6 +92,7 @@ class FoundryLogScale(ServiceClass):
         with_renames: Optional[list] = None,
         with_sort: Optional[dict] = None,
         body: Optional[dict] = None,
+        parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
     def populate(

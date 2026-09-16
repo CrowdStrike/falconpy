@@ -16,6 +16,9 @@ class SaasSecurity(ServiceClass):
         impact: Optional[str] = None,
         compliance: Optional[bool] = None,
         check_type: Optional[str] = None,
+        check_tags: Optional[str] = None,
+        business_owner: Optional[str] = None,
+        org_domain: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -70,6 +73,7 @@ class SaasSecurity(ServiceClass):
         self,
         *,
         id: Optional[str] = None,
+        duration_in_days: Optional[int] = None,
         entities: Optional[str] = None,
         reason: Optional[str] = None,
         body: Optional[dict] = None,
@@ -80,6 +84,7 @@ class SaasSecurity(ServiceClass):
         self,
         *,
         id: Optional[str] = None,
+        duration_in_days: Optional[int] = None,
         reason: Optional[str] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
@@ -97,6 +102,8 @@ class SaasSecurity(ServiceClass):
         compliance: Optional[bool] = None,
         check_type: Optional[str] = None,
         check_tags: Optional[str] = None,
+        business_owner: Optional[str] = None,
+        org_domain: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -223,6 +230,150 @@ class SaasSecurity(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def connect_check_tag(
+        self,
+        *,
+        id: Optional[str] = None,
+        tag_id: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def create_app_journal_comment(
+        self,
+        *,
+        id: Optional[Union[str, List[str]]] = None,
+        note: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def create_check_journal_comment(
+        self,
+        *,
+        id: Optional[Union[str, List[str]]] = None,
+        note: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def create_user_journal_comment(
+        self,
+        *,
+        id: Optional[Union[str, List[str]]] = None,
+        note: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def disconnect_check_tag(
+        self,
+        *,
+        id: Optional[str] = None,
+        tag_id: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def get_ai_agent_details(
+        self,
+        *args: Union[str, List[str]],
+        id: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def get_ai_agents_inventory(
+        self,
+        *,
+        name: Optional[str] = None,
+        limit: Optional[int] = None,
+        offset: Optional[int] = None,
+        integration_id: Optional[str] = None,
+        access: Optional[str] = None,
+        agent_owner: Optional[str] = None,
+        tool_type: Optional[str] = None,
+        knowledge_source: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def get_app_journal(
+        self,
+        *,
+        id: Optional[str] = None,
+        limit: Optional[int] = None,
+        offset: Optional[int] = None,
+        author: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def get_check_journal(
+        self,
+        *,
+        id: Optional[str] = None,
+        limit: Optional[int] = None,
+        offset: Optional[int] = None,
+        author: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def get_check_params(
+        self,
+        *args: Union[str, List[str]],
+        id: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def get_check_tags(
+        self,
+        *,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def get_user_journal(
+        self,
+        *,
+        id: Optional[str] = None,
+        limit: Optional[int] = None,
+        offset: Optional[int] = None,
+        author: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def restore_affected_entity(
+        self,
+        *,
+        id: Optional[str] = None,
+        entities: Optional[str] = None,
+        body: Optional[dict] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def restore_security_check(
+        self,
+        *,
+        id: Optional[str] = None,
+        body: Optional[dict] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def set_check_param(
+        self,
+        *,
+        id: Optional[str] = None,
+        all_future_instances: Optional[bool] = None,
+        param_name: Optional[str] = None,
+        reason: Optional[str] = None,
+        value: Optional[str] = None,
+        body: Optional[dict] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    ConnectCheckTagV3 = connect_check_tag
+    CreateAppJournalCommentV3 = create_app_journal_comment
+    CreateCheckJournalCommentV3 = create_check_journal_comment
+    CreateUserJournalCommentV3 = create_user_journal_comment
+    DisconnectCheckTagV3 = disconnect_check_tag
+    GetAiAgentDetails = get_ai_agent_details
+    GetAiAgentsInventory = get_ai_agents_inventory
+    GetAppJournalV3 = get_app_journal
+    GetCheckJournalV3 = get_check_journal
+    GetCheckParamsV3 = get_check_params
+    GetCheckTagsV3 = get_check_tags
     GetMetricsV3 = get_metrics
     GetAlertsV3 = get_alerts
     GetAppInventoryUsers = get_application_users
@@ -232,6 +383,7 @@ class SaasSecurity(ServiceClass):
     DismissSecurityCheckV3 = dismiss_security_check
     GetSecurityChecksV3 = get_security_checks
     GetSecurityCheckComplianceV3 = get_security_check_compliance
+    GetUserJournalV3 = get_user_journal
     IntegrationBuilderEndTransactionV3 = complete_integration_upload
     IntegrationBuilderResetV3 = reset_integration_builder
     IntegrationBuilderGetStatusV3 = get_integration_builder_status
@@ -244,3 +396,6 @@ class SaasSecurity(ServiceClass):
     GetSystemLogsV3 = get_system_logs
     GetSystemUsersV3 = get_system_users
     GetUserInventoryV3 = get_user_inventory
+    RestoreAffectedEntityV3 = restore_affected_entity
+    RestoreSecurityCheckV3 = restore_security_check
+    SetCheckParamV3 = set_check_param

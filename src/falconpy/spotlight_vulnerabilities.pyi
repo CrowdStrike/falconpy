@@ -24,8 +24,8 @@ class SpotlightVulnerabilities(ServiceClass):
         *,
         after: Optional[str] = None,
         limit: Optional[int] = None,
-        sort: Optional[str] = None,
         filter: Optional[str] = None,
+        sort: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

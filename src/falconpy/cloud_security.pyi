@@ -21,8 +21,8 @@ class CloudSecurity(ServiceClass):
         *,
         filter: Optional[str] = None,
         sort: Optional[str] = None,
-        offset: Optional[str] = None,
-        limit: Optional[str] = None,
+        offset: Optional[int] = None,
+        limit: Optional[int] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -71,8 +71,8 @@ class CloudSecurity(ServiceClass):
         *,
         filter: Optional[str] = None,
         sort: Optional[str] = None,
-        offset: Optional[str] = None,
-        limit: Optional[str] = None,
+        offset: Optional[int] = None,
+        limit: Optional[int] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

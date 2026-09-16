@@ -34,6 +34,15 @@ class AgentInvocation(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def update_agent_invocation(
+        self,
+        *,
+        id: Optional[str] = None,
+        status: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
     InvokePublishedAgentExternalV1 = invoke_published_agent_external_v1
     GetAgentInvocationV3 = get_agent_invocation_v3
     InvokeAgentVersionExternalV1 = invoke_agent_version_external_v1
+    PatchAgentInvocationV3 = update_agent_invocation

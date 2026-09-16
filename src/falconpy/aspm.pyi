@@ -534,6 +534,19 @@ class ASPM(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def get_combined_aspm_findings(
+        self,
+        *,
+        gcrn: Optional[str] = None,
+        type: Optional[str] = None,
+        filter: Optional[str] = None,
+        offset: Optional[int] = None,
+        limit: Optional[int] = None,
+        sort: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    aspm_combined_application_findings = get_combined_aspm_findings
     ExecuteFunctionDataCount = execute_function_data_count
     ExecuteFunctionsCount = execute_functions_count
     ExecuteFunctionDataQueryCount = execute_function_data_query_count

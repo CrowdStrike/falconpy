@@ -670,6 +670,90 @@ class NGSIEM(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def bulk_create_persisted_aggregations(
+        self,
+        *,
+        items: Optional[list] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def bulk_update_persisted_aggregations(
+        self,
+        *,
+        items: Optional[list] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def create_persisted_aggregation(
+        self,
+        *,
+        description: Optional[str] = None,
+        destination: Optional[str] = None,
+        enabled: Optional[bool] = None,
+        labels: Optional[Union[str, List[str]]] = None,
+        name: Optional[str] = None,
+        query_ownership_type: Optional[str] = None,
+        query_string: Optional[str] = None,
+        schedule: Optional[dict] = None,
+        search_domain: Optional[str] = None,
+        static_fields: Optional[list] = None,
+        tag: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def delete_persisted_aggregation(
+        self,
+        *,
+        ids: Optional[Union[str, List[str]]] = None,
+        search_domain: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def get_parser_rollback_options(
+        self,
+        *,
+        parser_id: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def get_persisted_aggregation(
+        self,
+        *,
+        ids: Optional[str] = None,
+        search_domain: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def list_persisted_aggregations(
+        self,
+        *,
+        limit: Optional[str] = None,
+        offset: Optional[str] = None,
+        filter: Optional[str] = None,
+        search_domain: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def rollback_parser(
+        self,
+        *,
+        parser_id: Optional[str] = None,
+        target_version: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def update_persisted_aggregation(
+        self,
+        *,
+        description: Optional[str] = None,
+        enabled: Optional[bool] = None,
+        id: Optional[str] = None,
+        labels: Optional[Union[str, List[str]]] = None,
+        name: Optional[str] = None,
+        search_domain: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
     addDashboardLabels = add_dashboard_labels
     addFileLabels = add_file_labels
     addSavedQueryLabels = add_saved_query_labels
@@ -678,6 +762,7 @@ class NGSIEM(ServiceClass):
     bulkAddSavedQueryLabels = bulk_add_saved_query_labels
     BulkCreateDashboardsFromTemplate = bulk_create_dashboards_from_template
     BulkCreateLookupFiles = bulk_create_lookup_files
+    BulkCreatePersistedAggregations = bulk_create_persisted_aggregations
     BulkCreateSavedQueriesFromTemplate = bulk_create_saved_queries_from_template
     BulkGetLookupFiles = bulk_get_lookup_files
     bulkRemoveDashboardLabels = bulk_remove_dashboard_labels
@@ -687,15 +772,23 @@ class NGSIEM(ServiceClass):
     BulkUpdateDashboardsFromTemplate = bulk_update_dashboards_from_template
     bulkUpdateLookupFileLabels = bulk_update_lookup_file_labels
     BulkUpdateLookupFiles = bulk_update_lookup_files
+    BulkUpdatePersistedAggregations = bulk_update_persisted_aggregations
     BulkUpdateSavedQueriesFromTemplate = bulk_update_saved_queries_from_template
     bulkUpdateSavedQueryLabels = bulk_update_saved_query_labels
     CreateParserExtension = create_parser_extension
+    CreatePersistedAggregation = create_persisted_aggregation
+    DeletePersistedAggregation = delete_persisted_aggregation
+    GetParserRollbackOptions = get_parser_rollback_options
+    GetPersistedAggregation = get_persisted_aggregation
+    ListPersistedAggregations = list_persisted_aggregations
     removeDashboardLabels = remove_dashboard_labels
     removeFileLabels = remove_file_labels
     removeSavedQueryLabels = remove_saved_query_labels
+    RollbackParser = rollback_parser
     updateDashboardLabels = update_dashboard_labels
     updateFileLabels = update_file_labels
     UpdateParserExtension = update_parser_extension
+    UpdatePersistedAggregation = update_persisted_aggregation
     updateSavedQueryLabels = update_saved_query_labels
     UploadLookupV1 = upload_file
     GetLookupV1 = get_file
