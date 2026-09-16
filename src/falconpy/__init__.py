@@ -330,8 +330,13 @@ __all__ = [
     "Spotlight",
     "Serverless",
     "Firewall",
-    "Foundry"
+    "Foundry",
+    "Seraphic"
     ]
+# The Seraphic Enterprise Browser API is published as the Browser Security
+# service collection. Seraphic is an alias for BrowserSecurity so the service
+# collection can be instantiated under either name.
+Seraphic = BrowserSecurity
 """
 This is free and unencumbered software released into the public domain.
 
