@@ -26,6 +26,7 @@ class TestAgentInvocation:
             "InvokeAgentVersionExternalV1": falcon.invoke_agent_version_external_v1(credit_cents_limit="string",
                                                                                     deadline_seconds="string", id="string",
                                                                                     messages="string", version_id="string"),
+            "PatchAgentInvocationV3": falcon.update_agent_invocation(id="string", status="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

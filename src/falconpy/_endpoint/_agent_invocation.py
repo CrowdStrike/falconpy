@@ -57,7 +57,7 @@ _agent_invocation_endpoints = [
     "GetAgentInvocationV3",
     "GET",
     "/agentic-studio/entities/agent-invocations/v3",
-    "Retrieves the list of of messages that are resulted from the specified invocation",
+    "Get the messages that an invocation produced.",
     "agent_invocation",
     [
       {
@@ -65,6 +65,23 @@ _agent_invocation_endpoints = [
         "description": "Invocation ID",
         "name": "id",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "PatchAgentInvocationV3",
+    "PATCH",
+    "/agentic-studio/entities/agent-invocations/v3",
+    "Modify an in-flight agent invocation. The only accepted status transition is to cancelled, which cancels "
+    "the invocation; any other status is rejected with 400. Cancelling an invocation that has already reached a "
+    "terminal state succeeds without changing it.",
+    "agent_invocation",
+    [
+      {
+        "description": "Invocation ID and the status to move it to. Only cancelled is accepted.",
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
