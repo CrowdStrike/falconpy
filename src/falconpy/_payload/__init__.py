@@ -32,6 +32,20 @@ from ._application_abuse_exclusions import (
     update_app_abuse_exclusions_payload,
     )
 from ._audit import create_audit_query_job_payload
+from ._browser_security import (
+    activate_agents_payload,
+    add_url_domain_list_payload,
+    apply_agent_tasks_payload,
+    classify_domains_payload,
+    create_destination_group_payload,
+    deactivate_agents_payload,
+    query_combined_seraphic_agents_payload,
+    query_destination_groups_payload,
+    query_seraphic_agents_payload,
+    query_seraphic_rules_payload,
+    update_destination_group_payload,
+    update_seraphic_rule_payload,
+    )
 from ._cloud_security_assets import cloud_security_assets_entities_post_payload
 from ._cloud_security_detections import cspm_evaluations_iom_entities_post_payload
 from ._falcon_id import update_third_party_passkey_registry_payload
@@ -409,5 +423,11 @@ __all__ = [
     "update_schedules_payload", "update_agent_invocation_payload",
     "create_or_update_agent_payload", "update_agent_payload",
     "create_app_abuse_exclusion_payload", "create_app_abuse_report_payload",
-    "update_app_abuse_exclusions_payload", "create_audit_query_job_payload"
+    "update_app_abuse_exclusions_payload", "create_audit_query_job_payload",
+    "activate_agents_payload", "add_url_domain_list_payload",
+    "apply_agent_tasks_payload", "classify_domains_payload",
+    "create_destination_group_payload", "deactivate_agents_payload",
+    "query_combined_seraphic_agents_payload", "query_destination_groups_payload",
+    "query_seraphic_agents_payload", "query_seraphic_rules_payload",
+    "update_destination_group_payload", "update_seraphic_rule_payload"
 ]
