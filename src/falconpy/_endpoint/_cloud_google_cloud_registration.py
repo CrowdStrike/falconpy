@@ -86,6 +86,13 @@ _cloud_google_cloud_registration_endpoints = [
         "description": "Starting index of result",
         "name": "offset",
         "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "Include entities with any registration status (default: False)",
+        "name": "include_all_statuses",
+        "in": "query"
       }
     ]
   ],
@@ -182,6 +189,20 @@ _cloud_google_cloud_registration_endpoints = [
         "in": "query",
         "required": True
       },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "cloud_registration_gcp_post_infra_manager_script",
+    "POST",
+    "/cloud-security-registration-google-cloud/entities/scripts-infra-manager/v1",
+    "Generate Google Cloud Infrastructure Manager deployment commands",
+    "cloud_google_cloud_registration",
+    [
       {
         "name": "body",
         "in": "body",
