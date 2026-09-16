@@ -331,6 +331,12 @@ from ._cloud_snapshots import (
     snapshot_registration_payload,
     snapshot_launch_payload
     )
+from ._user_management import (
+    get_user_allowed_actions_payload,
+    get_user_invitations_payload,
+    retrieve_users_v2_payload,
+    update_user_roles_payload,
+    )
 from ._workflows import (
     workflow_deprovision_payload,
     workflow_template_payload,
@@ -453,5 +459,7 @@ __all__ = [
     "create_persisted_aggregation_payload", "rollback_parser_payload",
     "update_persisted_aggregation_payload", "create_app_journal_comment_payload",
     "create_check_journal_comment_payload", "create_user_journal_comment_payload",
-    "restore_affected_entity_payload", "set_check_param_payload"
+    "restore_affected_entity_payload", "set_check_param_payload",
+    "get_user_allowed_actions_payload", "get_user_invitations_payload",
+    "retrieve_users_v2_payload", "update_user_roles_payload"
 ]
