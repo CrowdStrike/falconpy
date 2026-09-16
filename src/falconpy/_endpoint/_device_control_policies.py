@@ -58,16 +58,16 @@ _device_control_policies_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "The offset to start retrieving records from",
         "name": "offset",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 5000,
         "minimum": 1,
-        "type": "integer",
         "description": "The maximum records to return. [1-5000]",
         "name": "limit",
         "in": "query"
@@ -95,21 +95,22 @@ _device_control_policies_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "The offset to start retrieving records from",
         "name": "offset",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 5000,
         "minimum": 1,
-        "type": "integer",
         "description": "The maximum records to return. [1-5000]",
         "name": "limit",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "created_by.asc",
           "created_by.desc",
@@ -128,7 +129,6 @@ _device_control_policies_endpoints = [
           "precedence.asc",
           "precedence.desc"
         ],
-        "type": "string",
         "description": "The property to sort by",
         "name": "sort",
         "in": "query"
@@ -165,6 +165,7 @@ _device_control_policies_endpoints = [
     "device_control_policies",
     [
       {
+        "type": "string",
         "enum": [
           "add-host-group",
           "add-rule-group",
@@ -173,7 +174,6 @@ _device_control_policies_endpoints = [
           "remove-host-group",
           "remove-rule-group"
         ],
-        "type": "string",
         "description": "The action to perform",
         "name": "action_name",
         "in": "query",
@@ -190,7 +190,7 @@ _device_control_policies_endpoints = [
     "patchDeviceControlPoliciesClassesV1",
     "PATCH",
     "/policy/entities/device-control-classes/v1",
-    "Update device control policy's classes (USB and Bluetooth)",
+    "Update device control policy's classes",
     "device_control_policies",
     [
       {
@@ -204,7 +204,7 @@ _device_control_policies_endpoints = [
     "getDefaultDeviceControlSettings",
     "GET",
     "/policy/entities/device-control-default-settings/v1",
-    "Get default device control settings (USB and Bluetooth)",
+    "Get default device control settings",
     "device_control_policies",
     []
   ],
@@ -273,20 +273,6 @@ _device_control_policies_endpoints = [
     ]
   ],
   [
-    "updateDeviceControlPolicies",
-    "PATCH",
-    "/policy/entities/device-control/v1",
-    "Update Device Control Policies by specifying the ID of the policy and details to update",
-    "device_control_policies",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "deleteDeviceControlPolicies",
     "DELETE",
     "/policy/entities/device-control/v1",
@@ -307,10 +293,24 @@ _device_control_policies_endpoints = [
     ]
   ],
   [
+    "updateDeviceControlPolicies",
+    "PATCH",
+    "/policy/entities/device-control/v1",
+    "Update Device Control Policies by specifying the ID of the policy and details to update",
+    "device_control_policies",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "getDeviceControlPoliciesV2",
     "GET",
     "/policy/entities/device-control/v2",
-    "Get device control policies for the given filter criteria. (USB and Bluetooth)",
+    "Get device control policies for the given filter criteria.",
     "device_control_policies",
     [
       {
@@ -330,7 +330,7 @@ _device_control_policies_endpoints = [
     "postDeviceControlPoliciesV2",
     "POST",
     "/policy/entities/device-control/v2",
-    "Create/clone a device control policy (USB and Bluetooth)",
+    "Create/clone a device control policy",
     "device_control_policies",
     [
       {
@@ -344,7 +344,7 @@ _device_control_policies_endpoints = [
     "patchDeviceControlPoliciesV2",
     "PATCH",
     "/policy/entities/device-control/v2",
-    "Update device control policy base (USB and Bluetooth)",
+    "Update device control policy base",
     "device_control_policies",
     [
       {
@@ -375,16 +375,16 @@ _device_control_policies_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "The offset to start retrieving records from",
         "name": "offset",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 5000,
         "minimum": 1,
-        "type": "integer",
         "description": "The maximum records to return. [1-5000]",
         "name": "limit",
         "in": "query"
@@ -412,21 +412,22 @@ _device_control_policies_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "The offset to start retrieving records from",
         "name": "offset",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 5000,
         "minimum": 1,
-        "type": "integer",
         "description": "The maximum records to return. [1-5000]",
         "name": "limit",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "created_by.asc",
           "created_by.desc",
@@ -445,7 +446,6 @@ _device_control_policies_endpoints = [
           "precedence.asc",
           "precedence.desc"
         ],
-        "type": "string",
         "description": "The property to sort by",
         "name": "sort",
         "in": "query"
