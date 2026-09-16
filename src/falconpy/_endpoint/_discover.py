@@ -100,7 +100,7 @@ _discover_endpoints = [
         "collectionFormat": "multi",
         "description": "Select various details blocks to be returned for each application entity. Supported va "
         "lues:\n\n<ul><li>browser_extension</li><li>host_info</li><li>install_usage</li><li>dev_package</li><li>ide_ext "
-        "ension</li></ul>",
+        "ension</li><li>llm</li><li>mcp</li></ul>",
         "name": "facet",
         "in": "query"
       }
@@ -342,20 +342,22 @@ _discover_endpoints = [
       },
       {
         "type": "string",
-        "description": "Filter accounts using an FQL query. Common filter options include:<ul><li>account_type "
-        ":'Local'</li><li>admin_privileges:'Yes'</li><li>first_seen_timestamp:<'now-"
-        "7d'</li><li>last_successful_login_type:'Terminal server'</li></ul>\n\t\t\tAvailable filter fields that support "
-        " exact match: id, cid, user_sid, account_name, username, account_type, admin_privileges, first_seen_timestamp, "
-        " last_successful_login_type, last_successful_login_timestamp, last_successful_login_hostname, "
-        "last_successful_login_remote_ip, last_successful_login_host_country, last_successful_login_host_city, "
-        "login_domain, last_failed_login_type, last_failed_login_timestamp, last_failed_login_hostname, "
-        "password_last_set_timestamp, local_admin_privileges\n\t\t\tAvailable filter fields that supports wildcard (*): "
-        " id, cid, user_sid, account_name, username, account_type, admin_privileges, last_successful_login_type, "
-        "last_successful_login_hostname, last_successful_login_remote_ip, last_successful_login_host_country, "
-        "last_successful_login_host_city, login_domain, last_failed_login_type, last_failed_login_hostname, "
-        "local_admin_privileges\n\t\t\tAvailable filter fields that supports range comparisons (>, <, >=, <=): "
-        "first_seen_timestamp, last_successful_login_timestamp,last_failed_login_timestamp, "
-        "password_last_set_timestamp\n\t\t\tAll filter fields and operations supports negation (!).",
+        "description": "Filter accounts using an FQL query. Common filter options include:\n\t\t\t<ul>\n\t\t\t"
+        "<li>account_type:'Local'</li>\n\t\t\t<li>admin_privileges:'Yes'</li>\n\t\t\t<li>first_seen_timestamp:<'now-"
+        "7d'</li>\n\t\t\t<li>last_successful_login_type:'Terminal server'</li>\n\t\t\t</ul>\n\t\t\tAvailable filter "
+        "fields that support exact match:\n\t\t\tid, cid, user_sid, account_name, username, account_type, "
+        "admin_privileges, first_seen_timestamp,\n\t\t\tlast_successful_login_type, last_successful_login_timestamp, "
+        "last_successful_login_hostname,\n\t\t\tlast_successful_login_aid, last_successful_login_remote_ip, "
+        "last_successful_login_host_country,\n\t\t\tlast_successful_login_host_city, login_domain, "
+        "last_failed_login_type, last_failed_login_timestamp,\n\t\t\tlast_failed_login_hostname, "
+        "password_last_set_timestamp, local_admin_privileges\n\n\t\t\tAvailable filter fields that supports wildcard "
+        "(*):\n\t\t\tid, cid, user_sid, account_name, username, account_type, admin_privileges, "
+        "last_successful_login_type,\n\t\t\tlast_successful_login_hostname, last_successful_login_remote_ip, "
+        "last_successful_login_host_country,\n\t\t\tlast_successful_login_host_city, login_domain, "
+        "last_failed_login_type, last_failed_login_hostname,\n\t\t\tlocal_admin_privileges\n\n\t\t\tAvailable filter "
+        "fields that supports range comparisons (>, <, >=, <=):\n\t\t\tfirst_seen_timestamp, "
+        "last_successful_login_timestamp, last_failed_login_timestamp, password_last_set_timestamp\n\n\t\t\tAll filter "
+        "fields and operations supports negation (!).",
         "name": "filter",
         "in": "query"
       }
