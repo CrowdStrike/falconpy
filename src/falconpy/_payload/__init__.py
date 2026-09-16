@@ -259,6 +259,13 @@ from ._ngsiem import (
     update_saved_query_labels_payload,
     )
 from ._prevention_policy import prevention_policy_payload
+from ._saas_security import (
+    create_app_journal_comment_payload,
+    create_check_journal_comment_payload,
+    create_user_journal_comment_payload,
+    restore_affected_entity_payload,
+    set_check_param_payload,
+    )
 from ._scanning_orchestrator import create_schedules_payload, trigger_scan_by_schedule_payload, update_schedules_payload
 from ._sensor_update_policy import sensor_policy_payload, maintenance_token_payload
 from ._response_policy import response_policy_payload
@@ -444,5 +451,7 @@ __all__ = [
     "update_allowlist_rules_payload", "aggregate_netscan_detections_payload",
     "bulk_create_persisted_aggregations_payload", "bulk_update_persisted_aggregations_payload",
     "create_persisted_aggregation_payload", "rollback_parser_payload",
-    "update_persisted_aggregation_payload"
+    "update_persisted_aggregation_payload", "create_app_journal_comment_payload",
+    "create_check_journal_comment_payload", "create_user_journal_comment_payload",
+    "restore_affected_entity_payload", "set_check_param_payload"
 ]

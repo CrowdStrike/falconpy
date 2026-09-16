@@ -35,8 +35,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302,R0904
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
+from ._payload import (
+    create_app_journal_comment_payload,
+    create_check_journal_comment_payload,
+    create_user_journal_comment_payload,
+    restore_affected_entity_payload,
+    set_check_param_payload,
+    )
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._saas_security import _saas_security_endpoints as Endpoints
@@ -70,8 +78,10 @@ class SaasSecurity(ServiceClass):
         status : str
             Exposure status. String.
             Available values:
-              Passed      Failed
-              Dismissed   Pending
+              Can't Run           Dismissed
+              Failed              NA
+              Not Available       Passed
+              Pending             Stale
               Can't Run   Stale
         limit : int
             The maximum number of objects to return.
@@ -88,10 +98,16 @@ class SaasSecurity(ServiceClass):
         check_type : str
             Check Type. String.
             Available values:
-              apps            devices
-              users           assets
-              permissions     Falcon Shield Security Check
-              custom
+              Falcon Shield Security Check    apps
+              assets                          custom
+              devices                         permissions
+              shadow_vendors                  users
+        check_tags : str
+            Comma separated list of check tags names or ids.
+        business_owner : str
+            Business owner email of the integration the check belongs to.
+        org_domain : str
+            Org domain of the integration the check belongs to.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -133,8 +149,8 @@ class SaasSecurity(ServiceClass):
         type : str
             The type of alert you want to get. String.
             Available values:
-                configuration_drift     check_degraded
-                integration_failure     Threat
+                check_degraded         configuration_drift
+                integration_failure    threat
         integration_id : str
             Comma separated list of integration ID's of the alert you want to get.
         from_date : str
@@ -414,8 +430,10 @@ class SaasSecurity(ServiceClass):
         status : str
             Exposure status. String.
             Available values:
-              Passsed         Failed
-              Dismissed       Pending
+              Can't Run           Dismissed
+              Failed              NA
+              Not Available       Passed
+              Pending             Stale
               Can't Run       Stale
         integration_id : str
             Comma separated list of integration IDs.
@@ -428,12 +446,16 @@ class SaasSecurity(ServiceClass):
         check_type : str
             Check Type. String.
             Available values:
-              apps            devices
-              users           assets
-              permissions     Falcon Shield Security Check
-              custom
+              Falcon Shield Security Check    apps
+              assets                          custom
+              devices                         permissions
+              shadow_vendors                  users
         check_tags : str
             Comma separated list of check tags names or ids.
+        business_owner : str
+            Business owner email of the integration the check belongs to.
+        org_domain : str
+            Org domain of the integration the check belongs to.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -973,6 +995,653 @@ class SaasSecurity(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def connect_check_tag(self: object,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """POST Connect a Check Tag to a Security Check.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/ConnectCheckTagV3
+
+        Keyword arguments
+        -----------------
+        id : str
+            Security Check ID.
+        tag_id : str
+            Check Tag ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ConnectCheckTagV3",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_app_journal_comment(self: object,
+                                   body: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """POST App Journal Comment.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/CreateAppJournalCommentV3
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "id": [
+                        "string"
+                    ],
+                    "note": "string"
+                }
+        id : list
+            One or more item identifiers to append the comment to (up to 50)
+        note : str
+            Comment content.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = create_app_journal_comment_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateAppJournalCommentV3",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_check_journal_comment(self: object,
+                                     body: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """POST Security Check Journal Comment.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/CreateCheckJournalCommentV3
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "id": [
+                        "string"
+                    ],
+                    "note": "string"
+                }
+        id : list
+            One or more item identifiers to append the comment to (up to 50)
+        note : str
+            Comment content.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = create_check_journal_comment_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateCheckJournalCommentV3",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_user_journal_comment(self: object,
+                                    body: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """POST User Journal Comment.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/CreateUserJournalCommentV3
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "id": [
+                        "string"
+                    ],
+                    "note": "string"
+                }
+        id : list
+            One or more item identifiers to append the comment to (up to 50)
+        note : str
+            Comment content.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = create_user_journal_comment_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateUserJournalCommentV3",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def disconnect_check_tag(self: object,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """DELETE Disconnect a Check Tag from a Security Check.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/DisconnectCheckTagV3
+
+        Keyword arguments
+        -----------------
+        id : str
+            Security Check ID.
+        tag_id : str
+            Check Tag ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DisconnectCheckTagV3",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_ai_agent_details(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """GET AI Agent Details.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/GetAiAgentDetails
+
+        Keyword arguments
+        -----------------
+        id : str or list[str]
+            Agent item ID in format: 'agent_id|||integration_id' (id)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetAiAgentDetails",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_ai_agents_inventory(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """GET AI Agents Inventory.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/GetAiAgentsInventory
+
+        Keyword arguments
+        -----------------
+        name : str
+            Agent name (partial match)
+        limit : int
+            The maximum number of objects to return.
+        offset : int
+            The starting index of the results.
+        integration_id : str
+            Comma separated list of integration IDs.
+        access : str
+            Filter by access value (exact match)
+        agent_owner : str
+            Filter by agent owner email (partial match)
+        tool_type : str
+            Filter by a single tool type contained in the agent's tool types.
+        knowledge_source : str
+            Filter by a single knowledge source contained in the agent's knowledge sources.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetAiAgentsInventory",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_app_journal(self: object,
+                        parameters: dict = None,
+                        **kwargs
+                        ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """GET App Journal.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/GetAppJournalV3
+
+        Keyword arguments
+        -----------------
+        id : str
+            App item identity (app_item_id, format 'app_id|||integration_id')
+        limit : int
+            The maximum number of objects to return.
+        offset : int
+            The starting index of the results.
+        author : str
+            Filter by entry author: a full or partial creator name, a creator email address, or an API client id.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetAppJournalV3",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_check_journal(self: object,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """GET Security Check Journal.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/GetCheckJournalV3
+
+        Keyword arguments
+        -----------------
+        id : str
+            Security Check ID.
+        limit : int
+            The maximum number of objects to return.
+        offset : int
+            The starting index of the results.
+        author : str
+            Filter by entry author: a full or partial creator name, a creator email address, or an API client id.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCheckJournalV3",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_check_params(self: object,
+                         *args,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """GET List Security Check Params.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/GetCheckParamsV3
+
+        Keyword arguments
+        -----------------
+        id : str or list[str]
+            Security Check ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCheckParamsV3",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_check_tags(self: object,
+                       parameters: dict = None,
+                       **kwargs
+                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """GET List Check Tags.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/GetCheckTagsV3
+
+        Keyword arguments
+        -----------------
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCheckTagsV3",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_user_journal(self: object,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """GET User Journal.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/GetUserJournalV3
+
+        Keyword arguments
+        -----------------
+        id : str
+            User item identity (email / login name)
+        limit : int
+            The maximum number of objects to return.
+        offset : int
+            The starting index of the results.
+        author : str
+            Filter by entry author: a full or partial creator name, a creator email address, or an API client id.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetUserJournalV3",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def restore_affected_entity(self: object,
+                                body: dict = None,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """POST Restore Affected Entity.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/RestoreAffectedEntityV3
+
+        Keyword arguments
+        -----------------
+        id : str
+            Security Check ID.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "entities": "string"
+                }
+        entities : str
+            Comma separated list of currently dismissed entity names to restore.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = restore_affected_entity_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RestoreAffectedEntityV3",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def restore_security_check(self: object,
+                               body: dict = None,
+                               parameters: dict = None,
+                               **kwargs
+                               ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """POST Restore Security Check by ID.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/RestoreSecurityCheckV3
+
+        Keyword arguments
+        -----------------
+        id : str
+            Security Check ID.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {}
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RestoreSecurityCheckV3",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def set_check_param(self: object,
+                        body: dict = None,
+                        parameters: dict = None,
+                        **kwargs
+                        ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """POST Set a Security Check Param.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/SetCheckParamV3
+
+        Keyword arguments
+        -----------------
+        id : str
+            Security Check ID.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "all_future_instances": true,
+                    "param_name": "string",
+                    "reason": "string",
+                    "value": "string"
+                }
+        all_future_instances : bool
+            Also apply this value to future instances of the same SaaS.
+        param_name : str
+            Name of the param to set, as returned by the GET.
+        reason : str
+            Why the param was changed. Recorded on the check's timeline.
+        value : str
+            The new value. Must match the param's param_type, and for a range or enum param must be within its
+            param_selection_options.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = set_check_param_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="SetCheckParamV3",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    ConnectCheckTagV3 = connect_check_tag
+    CreateAppJournalCommentV3 = create_app_journal_comment
+    CreateCheckJournalCommentV3 = create_check_journal_comment
+    CreateUserJournalCommentV3 = create_user_journal_comment
+    DisconnectCheckTagV3 = disconnect_check_tag
+    GetAiAgentDetails = get_ai_agent_details
+    GetAiAgentsInventory = get_ai_agents_inventory
+    GetAppJournalV3 = get_app_journal
+    GetCheckJournalV3 = get_check_journal
+    GetCheckParamsV3 = get_check_params
+    GetCheckTagsV3 = get_check_tags
     GetMetricsV3 = get_metrics
     GetAlertsV3 = get_alerts
     GetAppInventoryUsers = get_application_users
@@ -982,6 +1651,7 @@ class SaasSecurity(ServiceClass):
     DismissSecurityCheckV3 = dismiss_security_check
     GetSecurityChecksV3 = get_security_checks
     GetSecurityCheckComplianceV3 = get_security_check_compliance
+    GetUserJournalV3 = get_user_journal
     IntegrationBuilderEndTransactionV3 = complete_integration_upload
     IntegrationBuilderResetV3 = reset_integration_builder
     IntegrationBuilderGetStatusV3 = get_integration_builder_status
@@ -994,3 +1664,6 @@ class SaasSecurity(ServiceClass):
     GetSystemLogsV3 = get_system_logs
     GetSystemUsersV3 = get_system_users
     GetUserInventoryV3 = get_user_inventory
+    RestoreAffectedEntityV3 = restore_affected_entity
+    RestoreSecurityCheckV3 = restore_security_check
+    SetCheckParamV3 = set_check_param
