@@ -67,7 +67,7 @@ class NetworkScanTemplates(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/get_template_configs
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/get-template-configs
 
         Keyword arguments
         -----------------
@@ -101,7 +101,7 @@ class NetworkScanTemplates(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/get_templates
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/get-templates
 
         Keyword arguments
         -----------------
@@ -139,7 +139,7 @@ class NetworkScanTemplates(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/create_templates
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/create-templates
 
         Keyword arguments
         -----------------
@@ -217,7 +217,7 @@ class NetworkScanTemplates(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/update_templates
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/update-templates
 
         Keyword arguments
         -----------------
@@ -296,7 +296,7 @@ class NetworkScanTemplates(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/delete_templates
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/delete-templates
 
         Keyword arguments
         -----------------
@@ -334,7 +334,7 @@ class NetworkScanTemplates(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/query_templates
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-templates/query-templates
 
         Keyword arguments
         -----------------

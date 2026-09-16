@@ -67,7 +67,7 @@ class NetworkScanScanRunReports(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scan-run-reports/get_scan_run_reports
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scan-run-reports/get-scan-run-reports
 
         Keyword arguments
         -----------------

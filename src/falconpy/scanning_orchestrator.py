@@ -67,7 +67,7 @@ class ScanningOrchestrator(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/get_combined_schedules
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/get-combined-schedules
 
         Keyword arguments
         -----------------
@@ -110,7 +110,7 @@ class ScanningOrchestrator(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/trigger_scan_by_schedule
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/trigger-scan-by-schedule
 
         Keyword arguments
         -----------------
@@ -153,7 +153,7 @@ class ScanningOrchestrator(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/get_schedules
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/get-schedules
 
         Keyword arguments
         -----------------
@@ -191,7 +191,7 @@ class ScanningOrchestrator(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/create_schedules
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/create-schedules
 
         Keyword arguments
         -----------------
@@ -261,7 +261,7 @@ class ScanningOrchestrator(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/delete_schedules
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/delete-schedules
 
         Keyword arguments
         -----------------
@@ -299,7 +299,7 @@ class ScanningOrchestrator(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/update_schedules
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/update-schedules
 
         Keyword arguments
         -----------------
@@ -409,7 +409,7 @@ class ScanningOrchestrator(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/get_service_types
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/get-service-types
 
         Keyword arguments
         -----------------
@@ -444,7 +444,7 @@ class ScanningOrchestrator(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/search_schedules
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scanning-orchestrator/search-schedules
 
         Keyword arguments
         -----------------

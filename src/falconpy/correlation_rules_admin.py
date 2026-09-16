@@ -114,7 +114,7 @@ class CorrelationRulesAdmin(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules-admin/entities_rules_ownership_put_v2
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules-admin/entities.rules_ownership.put.v2
 
         Keyword arguments
         -----------------

@@ -67,7 +67,7 @@ class NetworkScanScans(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/aggregate_scansMixin0
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/aggregate-scansMixin0
 
         Keyword arguments
         -----------------
@@ -173,7 +173,7 @@ class NetworkScanScans(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/get_scans
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/get-scans
 
         Keyword arguments
         -----------------
@@ -211,7 +211,7 @@ class NetworkScanScans(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/create_scans
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/create-scans
 
         Keyword arguments
         -----------------
@@ -330,7 +330,7 @@ class NetworkScanScans(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/update_scans
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/update-scans
 
         Keyword arguments
         -----------------
@@ -453,7 +453,7 @@ class NetworkScanScans(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/delete_scans
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/delete-scans
 
         Keyword arguments
         -----------------
@@ -491,7 +491,7 @@ class NetworkScanScans(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/query_scansMixin0
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scans/query-scansMixin0
 
         Keyword arguments
         -----------------

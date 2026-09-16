@@ -185,7 +185,7 @@ class NGSIEM(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/humio-auth-proxy/GetLookupV1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetLookupV1
 
         Keyword arguments
         -----------------
@@ -301,7 +301,7 @@ class NGSIEM(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/humio-auth-proxy/GetLookupFromPackageV1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetLookupFromPackageV1
 
         Keyword arguments
         -----------------
@@ -359,7 +359,7 @@ class NGSIEM(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/humio-auth-proxy/StartSearchV1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/StartSearchV1
 
         Keyword arguments
         -----------------
@@ -483,7 +483,7 @@ class NGSIEM(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/humio-auth-proxy/GetSearchStatusV1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetSearchStatusV1
 
         Keyword arguments
         -----------------
@@ -552,7 +552,7 @@ class NGSIEM(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/humio-auth-proxy/StopSearchV1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/StopSearchV1
 
         Keyword arguments
         -----------------
