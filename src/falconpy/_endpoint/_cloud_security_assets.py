@@ -106,12 +106,12 @@ _cloud_security_assets_endpoints = [
       {
         "type": "string",
         "description": "FQL string to filter on asset contents. Filterable fields include:  account_id  "
-        "account_name  aspm.cloud_account  aspm.cloud_region  aspm.cloud_tag_key  aspm.cloud_tag_value  aspm.cloud_tags "
-        "  aspm.deployment_provider  assessment_id  business_impact  cloud_group  cloud_label  cloud_label_id  "
-        "cloud_provider  cloud_scope  compliant  control.benchmark.name  control.benchmark.version  "
-        "control.extension.status  control.framework  control.name  control.type  control.version  environment  "
-        "last_evaluated  region  resource_gcrn  resource_provider  resource_type  resource_type_name  service  "
-        "service_category  severities  tag_key  tag_value  tags_string",
+        "account_name  aspm.cloud_account  aspm.cloud_region  aspm.deployment_provider  aspm.deployment_type  "
+        "assessment_id  business_impact  cloud_group  cloud_label  cloud_label_id  cloud_provider  cloud_scope  "
+        "compliant  control.benchmark.name  control.benchmark.version  control.extension.status  control.framework  "
+        "control.name  control.type  control.version  environment  last_evaluated  region  resource_gcrn  "
+        "resource_provider  resource_type  resource_type_name  service  service_category  severities  tag_key  "
+        "tag_value  tags_string",
         "name": "filter",
         "in": "query"
       },
@@ -215,15 +215,15 @@ _cloud_security_assets_endpoints = [
         "type": "string",
         "description": "FQL string to filter on asset contents. Filterable fields include:  "
         "account_bitmap_token_64  account_id  account_name  active  application_name  aspm.cloud_account  "
-        "aspm.cloud_region  aspm.cloud_tag_key  aspm.cloud_tag_value  aspm.cloud_tags  "
-        "aspm.deployment_cloud_resource_id  aspm.deployment_provider  aspm.deployment_type  aspm.technologies  "
-        "azure.resource_group  azure.vm_id  business_impact  cloud_group  cloud_label  cloud_label_id  cloud_provider  "
-        "cloud_risks.rule  cloud_risks.severity  cloud_risks.status  cloud_scope  cluster_id  cluster_name  "
-        "compartment_ocid  compliant.benchmark_name  compliant.benchmark_version  compliant.framework  "
-        "compliant.policy_id  compliant.requirement  compliant.rule  compliant.section  configuration.id  "
-        "control.benchmark.name  control.benchmark.version  control.framework  control.requirement  control.type  "
-        "control.version  creation_time  cve_ids  data_classifications.found  data_classifications.label  "
-        "data_classifications.label_id  data_classifications.scanned  data_classifications.tag  "
+        "aspm.cloud_region  aspm.deployment_cloud_resource_id  aspm.deployment_provider  aspm.deployment_type  "
+        "aspm.technologies  azure.resource_group  azure.vm_id  business_context.contributing_rule_ids  "
+        "business_context.criticality  business_context.evaluated_at  business_impact  cloud_group  cloud_label  "
+        "cloud_label_id  cloud_provider  cloud_risks.rule  cloud_risks.severity  cloud_risks.status  cloud_scope  "
+        "cluster_id  cluster_name  compartment_ocid  compliant.benchmark_name  compliant.benchmark_version  "
+        "compliant.framework  compliant.policy_id  compliant.requirement  compliant.rule  compliant.section  "
+        "configuration.id  control.benchmark.name  control.benchmark.version  control.framework  control.requirement  "
+        "control.type  control.version  creation_time  cve_ids  data_classifications.found  data_classifications.label "
+        "  data_classifications.label_id  data_classifications.scanned  data_classifications.tag  "
         "data_classifications.tag_id  environment  exprt_ratings  first_seen  gcp.multi_region  gcp.physical_region  "
         "highest_severity  id  insights.boolean_value  insights.date_value  insights.id  insights.integer_value  "
         "insights.string_list_value  insights.string_value  instance_id  instance_state  ioa_count  iom_count  "
