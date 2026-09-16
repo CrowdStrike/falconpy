@@ -256,7 +256,7 @@ class ContainerDetections(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-detections/GetRuntimeDetectionsCombinedV2
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/runtime-detections/GetRuntimeDetectionsCombinedV2
 
         Keyword arguments
         -----------------

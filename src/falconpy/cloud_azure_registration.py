@@ -623,7 +623,7 @@ class CloudAzureRegistration(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_create_suppressions
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-create-suppressions
 
         Keyword arguments
         -----------------
@@ -674,7 +674,7 @@ class CloudAzureRegistration(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_delete_suppressions
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-delete-suppressions
 
         Keyword arguments
         -----------------
@@ -707,7 +707,7 @@ class CloudAzureRegistration(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_issue_suppression_values_by_field
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-get-issue-suppression-values-by-field
 
         Keyword arguments
         -----------------
@@ -744,7 +744,7 @@ class CloudAzureRegistration(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_issue_values_by_field
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-get-issue-values-by-field
 
         Keyword arguments
         -----------------
@@ -785,7 +785,7 @@ class CloudAzureRegistration(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_issues
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-get-issues
 
         Keyword arguments
         -----------------
@@ -832,7 +832,7 @@ class CloudAzureRegistration(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_script
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-get-script
 
         Keyword arguments
         -----------------
@@ -867,7 +867,7 @@ class CloudAzureRegistration(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_script_versions
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-get-script-versions
 
         Keyword arguments
         -----------------
@@ -908,7 +908,7 @@ class CloudAzureRegistration(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_get_suppressions
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-get-suppressions
 
         Keyword arguments
         -----------------
@@ -953,7 +953,7 @@ class CloudAzureRegistration(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud_registration_azure_update_suppressions
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-update-suppressions
 
         Keyword arguments
         -----------------

@@ -613,7 +613,7 @@ class Discover(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/get-iot-hosts
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover-iot/get-iot-hosts
 
         Keyword arguments
         -----------------
@@ -651,7 +651,7 @@ class Discover(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/query-iot-hosts
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover-iot/query-iot-hosts
 
         Keyword arguments
         -----------------

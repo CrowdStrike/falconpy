@@ -2519,7 +2519,7 @@ class CaseManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities_merge_post_v1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.merge.post.v1
 
         Keyword arguments
         -----------------
