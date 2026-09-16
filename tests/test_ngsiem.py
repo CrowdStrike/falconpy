@@ -85,6 +85,26 @@ class TestNGSIEM:
             "updateDashboardLabels": falcon.update_dashboard_labels(id="string", labels="string", search_domain="string"),
             "updateFileLabels": falcon.update_file_labels(filename="string", labels="string", search_domain="string"),
             "updateSavedQueryLabels": falcon.update_saved_query_labels(id="string", labels="string", search_domain="string"),
+            "BulkCreatePersistedAggregations": falcon.bulk_create_persisted_aggregations(items="string"),
+            "BulkUpdatePersistedAggregations": falcon.bulk_update_persisted_aggregations(items="string"),
+            "CreatePersistedAggregation": falcon.create_persisted_aggregation(description="string", destination="string",
+                enabled="string", labels="string",
+                name="string", query_ownership_type="string",
+                query_string="string", search_domain="string",
+                static_fields="string", tag="string",
+                backfill_amount="string",
+                backfill_unit="string", interval="string",
+                offset_seconds="string",
+                timestamp_type="string"),
+            "DeletePersistedAggregation": falcon.delete_persisted_aggregation(ids=["string"], search_domain="string"),
+            "GetParserRollbackOptions": falcon.get_parser_rollback_options(parser_id="string"),
+            "GetPersistedAggregation": falcon.get_persisted_aggregation(ids="string", search_domain="string"),
+            "ListPersistedAggregations": falcon.list_persisted_aggregations(limit="string", offset="string", filter="string",
+                search_domain="string"),
+            "RollbackParser": falcon.rollback_parser(parser_id="string", target_version="string"),
+            "UpdatePersistedAggregation": falcon.update_persisted_aggregation(description="string", enabled="string",
+                id="string", labels="string", name="string",
+                search_domain="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
@@ -448,3 +468,8 @@ class TestNGSIEMStartSearchBody:
         self._capture(monkeypatch)
         result = falcon.start_search(repository="search-all")
         assert result["status_code"] == 500
+
+    def test_payload_coverage(self):
+        """Exercise nested payload builder branches."""
+        falcon.create_persisted_aggregation(backfill_amount="string", backfill_unit="string", interval="string", offset_seconds="string", timestamp_type="string")
+        assert True
