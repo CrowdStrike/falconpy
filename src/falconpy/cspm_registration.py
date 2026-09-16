@@ -1604,6 +1604,10 @@ class CSPMRegistration(ServiceClass):
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve list of active misconfigurations.
 
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
+
         HTTP Method: GET
 
         Swagger URL
