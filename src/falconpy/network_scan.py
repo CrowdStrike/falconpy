@@ -43,6 +43,7 @@ from .network_scan_templates import NetworkScanTemplates
 from .network_scan_networks import NetworkScanNetworks
 from .network_scan_scans import NetworkScanScans
 from .network_scan_zones import NetworkScanZones
+from .network_scan_detections import NetworkScanDetections
 
 
 class NetworkScan(NetworkScanGlobalConfigs,  # pylint: disable=too-many-ancestors
@@ -52,7 +53,8 @@ class NetworkScan(NetworkScanGlobalConfigs,  # pylint: disable=too-many-ancestor
                   NetworkScanTemplates,
                   NetworkScanNetworks,
                   NetworkScanScans,
-                  NetworkScanZones):
+                  NetworkScanZones,
+                  NetworkScanDetections):
     """Combined NetworkScan service collection providing access to all network scanning operations.
 
     This class aggregates all NetworkScan sub-service collections into a single interface
@@ -66,6 +68,7 @@ class NetworkScan(NetworkScanGlobalConfigs,  # pylint: disable=too-many-ancestor
     - NetworkScanNetworks: Network asset discovery and management.
     - NetworkScanScans: Scan scheduling and management.
     - NetworkScanZones: Scan zone configuration and management.
+    - NetworkScanDetections
 
     The only requirement to instantiate an instance of this class is one of the following.
 
