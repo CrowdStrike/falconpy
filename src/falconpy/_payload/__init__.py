@@ -26,6 +26,11 @@ from ._agent_invocation import (
     )
 from ._agents import create_or_update_agent_payload, update_agent_payload
 from ._api_clients import create_api_client_payload, update_api_client_payload
+from ._application_abuse_exclusions import (
+    create_app_abuse_exclusion_payload,
+    create_app_abuse_report_payload,
+    update_app_abuse_exclusions_payload,
+    )
 from ._cloud_security_assets import cloud_security_assets_entities_post_payload
 from ._cloud_security_detections import cspm_evaluations_iom_entities_post_payload
 from ._falcon_id import update_third_party_passkey_registry_payload
@@ -401,5 +406,7 @@ __all__ = [
     "update_file_labels_payload", "update_saved_query_labels_payload",
     "create_schedules_payload", "trigger_scan_by_schedule_payload",
     "update_schedules_payload", "update_agent_invocation_payload",
-    "create_or_update_agent_payload", "update_agent_payload"
+    "create_or_update_agent_payload", "update_agent_payload",
+    "create_app_abuse_exclusion_payload", "create_app_abuse_report_payload",
+    "update_app_abuse_exclusions_payload"
 ]

@@ -83,6 +83,7 @@ from ._aidr import _aidr_endpoints
 from ._alerts import _alerts_endpoints
 from ._api_clients import _api_clients_endpoints
 from ._api_integrations import _api_integrations_endpoints
+from ._application_abuse_exclusions import _application_abuse_exclusions_endpoints
 from ._aspm import _aspm_endpoints
 from ._cao_hunting import _cao_hunting_endpoints
 from ._case_management import _case_management_endpoints
@@ -219,6 +220,7 @@ api_endpoints.extend(_aidr_endpoints)
 api_endpoints.extend(_alerts_endpoints)
 api_endpoints.extend(_api_clients_endpoints)
 api_endpoints.extend(_api_integrations_endpoints)
+api_endpoints.extend(_application_abuse_exclusions_endpoints)
 api_endpoints.extend(_aspm_endpoints)
 api_endpoints.extend(_cao_hunting_endpoints)
 api_endpoints.extend(_case_management_endpoints)
