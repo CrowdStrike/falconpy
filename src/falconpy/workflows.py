@@ -217,6 +217,9 @@ class Workflows(ServiceClass):
         sort : str
             FQL formatted sort (ex: name.desc,time.asc). String.
             If direction is omitted, defaults to descending.
+        skip_fields : list
+            Fields to omit from the response; valid values are (trigger, activities, flows, submodels). When specified, the
+            corresponding node-level details are skipped.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
