@@ -103,21 +103,21 @@ _knowledge_base_files_endpoints = [
     [
       {
         "type": "string",
-        "description": "ID of the document to update",
+        "description": "ID of the knowledge base file to update",
         "name": "id",
         "in": "formData",
         "required": True
       },
       {
         "type": "file",
-        "description": "New file content to replace the existing document",
+        "description": "New file content to replace the existing knowledge base file",
         "name": "file",
         "in": "formData",
         "required": True
       },
       {
         "type": "string",
-        "description": "New description for the document",
+        "description": "New description for the knowledge base file",
         "name": "file_description",
         "in": "formData"
       }
@@ -156,7 +156,7 @@ _knowledge_base_files_endpoints = [
     "EntitiesKnowledgeBaseFilesDeleteV1",
     "DELETE",
     "/agentic-studio/entities/knowledge_base_files/v1",
-    "Delete document from knowledge base.",
+    "Delete a knowledge base file.",
     "knowledge_base_files",
     [
       {
@@ -168,7 +168,7 @@ _knowledge_base_files_endpoints = [
       },
       {
         "type": "string",
-        "description": "ID of the document to delete",
+        "description": "ID of the knowledge base file to delete",
         "name": "id",
         "in": "query",
         "required": True

@@ -40,6 +40,8 @@ class TestKnowledgeBaseFiles:
             "QueriesKnowledgeBaseFilesV1": falcon.queries_knowledge_base_files_v1(knowledge_base_id="string", offset=1,
                                                                                   limit=1, filter="string",
                                                                                   include_deleted=True),
+            "EntitiesKnowledgeBaseFilesUpdateV12": falcon.entities_knowledge_base_files_update_v1(),
+            "EntitiesKnowledgeBaseFilesCreateV12": falcon.entities_knowledge_base_files_create_v1(),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
