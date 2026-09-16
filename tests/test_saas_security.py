@@ -47,7 +47,25 @@ class TestSaasSecurity:
             "GetSupportedSaasV3": falcon.GetSupportedSaasV3(),
             "GetSystemLogsV3": falcon.GetSystemLogsV3(),
             "GetSystemUsersV3": falcon.GetSystemUsersV3(),
-            "GetUserInventoryV3": falcon.GetUserInventoryV3()
+            "GetUserInventoryV3": falcon.GetUserInventoryV3(),
+            "ConnectCheckTagV3": falcon.connect_check_tag(id="string", tag_id="string"),
+            "CreateAppJournalCommentV3": falcon.create_app_journal_comment(id="string", note="string"),
+            "CreateCheckJournalCommentV3": falcon.create_check_journal_comment(id="string", note="string"),
+            "CreateUserJournalCommentV3": falcon.create_user_journal_comment(id="string", note="string"),
+            "DisconnectCheckTagV3": falcon.disconnect_check_tag(id="string", tag_id="string"),
+            "GetAiAgentDetails": falcon.get_ai_agent_details(id="12345678"),
+            "GetAiAgentsInventory": falcon.get_ai_agents_inventory(name="string", limit=1, offset=1, integration_id="string",
+                access="string", agent_owner="string", tool_type="string",
+                knowledge_source="string"),
+            "GetAppJournalV3": falcon.get_app_journal(id="string", limit=1, offset=1, author="string"),
+            "GetCheckJournalV3": falcon.get_check_journal(id="string", limit=1, offset=1, author="string"),
+            "GetCheckParamsV3": falcon.get_check_params(id="12345678"),
+            "GetCheckTagsV3": falcon.get_check_tags(),
+            "GetUserJournalV3": falcon.get_user_journal(id="string", limit=1, offset=1, author="string"),
+            "RestoreAffectedEntityV3": falcon.restore_affected_entity(id="string", entities="string"),
+            "RestoreSecurityCheckV3": falcon.restore_security_check(id="string"),
+            "SetCheckParamV3": falcon.set_check_param(id="string", all_future_instances="string", param_name="string",
+                reason="string", value="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
