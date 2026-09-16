@@ -110,6 +110,7 @@ from .admission_control_policies import AdmissionControlPolicies
 from .agent_invocation import AgentInvocation
 from .agent_templates import AgentTemplates
 from .agent_versions import AgentVersions
+from .agentic_studio import AgenticStudio
 from .agents import Agents
 from .alerts import Alerts
 from .api_clients import APIClients
@@ -142,6 +143,7 @@ from .container_alerts import ContainerAlerts
 from .container_detections import ContainerDetections
 from .container_images import ContainerImages
 from .container_packages import ContainerPackages
+from .container_security import ContainerSecurity
 from .container_vulnerabilities import ContainerVulnerabilities
 from .correlation_rules import CorrelationRules
 from .correlation_rules_admin import CorrelationRulesAdmin
@@ -170,8 +172,10 @@ from .falconx_sandbox import FalconXSandbox
 from .fdr import FDR
 from .federated_connections import FederatedConnections
 from .filevantage import FileVantage
+from .firewall import Firewall
 from .firewall_management import FirewallManagement
 from .firewall_policies import FirewallPolicies
+from .foundry import Foundry
 from .foundry_logscale import FoundryLogScale
 from .foundry_lookup_files import FoundryLookupFiles
 from .guardian import Guardian
@@ -233,10 +237,12 @@ from .sensor_download import SensorDownload
 from .sensor_update_policy import SensorUpdatePolicy, SensorUpdatePolicies
 from .sensor_usage import SensorUsage
 from .sensor_visibility_exclusions import SensorVisibilityExclusions
+from .serverless import Serverless
 from .serverless_exports import ServerlessExports
 from .serverless_vulnerabilities import ServerlessVulnerabilities
 from .skills import Skills
 from .spans import Spans
+from .spotlight import Spotlight
 from .spotlight_vulnerabilities import SpotlightVulnerabilities
 from .spotlight_vulnerability_metadata import SpotlightVulnerabilityMetadata
 from .spotlight_evaluation_logic import SpotlightEvaluationLogic
@@ -318,7 +324,13 @@ __all__ = [
     "ApplicationAbuseExclusions", "Audit",
     "BrowserSecurity", "CodeSecurity",
     "Guardian", "NetworkContainment",
-    "NetworkScanDetections", "Skills"
+    "NetworkScanDetections", "Skills",
+    "AgenticStudio",
+    "ContainerSecurity",
+    "Spotlight",
+    "Serverless",
+    "Firewall",
+    "Foundry"
     ]
 """
 This is free and unencumbered software released into the public domain.
