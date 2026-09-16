@@ -105,7 +105,7 @@ _cloud_security_endpoints = [
         "in": "query"
       },
       {
-        "type": "string",
+        "type": "integer",
         "default": "0",
         "format": "int64",
         "description": "The starting position of the list operation.",
@@ -113,7 +113,7 @@ _cloud_security_endpoints = [
         "in": "query"
       },
       {
-        "type": "string",
+        "type": "integer",
         "default": "100",
         "format": "int64",
         "description": "The maximum number of cloud groups to retrieve.",
@@ -211,7 +211,7 @@ _cloud_security_endpoints = [
         "in": "query"
       },
       {
-        "type": "string",
+        "type": "integer",
         "default": "0",
         "format": "int64",
         "description": "The starting position of the list operation.",
@@ -219,7 +219,7 @@ _cloud_security_endpoints = [
         "in": "query"
       },
       {
-        "type": "string",
+        "type": "integer",
         "default": "100",
         "format": "int64",
         "description": "The maximum number of cloud groups to retrieve.",
