@@ -38,6 +38,44 @@ For more information, please refer to <https://unlicense.org>
 
 _spotlight_vulnerabilities_endpoints = [
   [
+    "combinedQueryInstalledPatches",
+    "GET",
+    "/spotlight/combined/installed-patches/v1",
+    "Get installed patches information for hosts",
+    "spotlight_vulnerabilities",
+    [
+      {
+        "type": "string",
+        "description": "Pagination token for next page",
+        "name": "after",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Maximum number of results",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "FQL query specifying the filter parameters.\n\t\t\tEmpty value means to not filter on "
+        "anything.\n\t\t\tAvailable filter fields that supports exact match: aid, cid, hostname, "
+        "reboot_required\n\t\t\tAvailable filter fields that supports wildcard (*): N/A\n\t\t\tAvailable filter fields "
+        "that supports range comparisons (>, <, >=, <=): N/A\n\t\t\tAll filter fields and operations supports negation "
+        "(!)",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort field and direction. Available sort fields: hostname. \n\t\t\tEx: 'hostname|asc' "
+        "or 'hostname|desc'.",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "combinedQueryVulnerabilities",
     "GET",
     "/spotlight/combined/vulnerabilities/v1",
@@ -64,8 +102,9 @@ _spotlight_vulnerabilities_endpoints = [
       },
       {
         "type": "string",
-        "description": "Sort vulnerabilities by their properties. Common sort options "
-        "include:\n\n<ul><li>updated_timestamp|asc</li><li>closed_timestamp|asc</li></ul>",
+        "description": "Sort vulnerabilities by their properties. Common sort options include:\n\n<ul><li>upda "
+        "ted_timestamp|asc</li><li>closed_timestamp|asc</li><li>rule.name|asc/desc</li><li>rule.recommendation_id|asc/d "
+        "esc</li></ul>",
         "name": "sort",
         "in": "query"
       },
@@ -74,12 +113,15 @@ _spotlight_vulnerabilities_endpoints = [
         "description": "Filter items using a query in Falcon Query Language (FQL). Wildcards * and empty "
         "filter values are unsupported.\n\t\t\tAvailable filter fields that supports match (~): N/A\n\t\t\tAvailable "
         "filter fields that supports exact match: aid, cid, last_seen_within, status, cve.id, cve.is_cisa_kev, "
-        "cve.remediation_level, cve.cps_rating, cve.exprt_rating, cve.exploit_status_to_include, cve.severity, "
-        "cve.base_score, cve.types, host_info.asset_criticality, host_info.asset_roles, host_info.internet_exposure, "
-        "host_info.tags, host_info.groups, host_info.product_type_desc, host_info.platform_name, "
-        "suppression_info.is_suppressed, suppression_info.reason, host_info.instance_state\n\t\t\tAvailable filter "
-        "fields that supports wildcard (*): N/A\n\t\t\tAvailable filter fields that supports range comparisons (>, <, "
-        ">=, <=): created_timestamp, closed_timestamp, updated_timestamp, cve.base_score\n\t\t\t",
+        "cve.remediation_level, cve.cps_rating,\n\t\t\t\t\tcve.exprt_rating, cve.exploit_status_to_include, "
+        "cve.severity, cve.base_score, cve.types, host_info.asset_criticality, "
+        "host_info.asset_roles,\n\t\t\t\t\thost_info.internet_exposure, host_info.tags, host_info.groups, "
+        "host_info.product_type_desc, host_info.platform_name, "
+        "suppression_info.is_suppressed,\n\t\t\t\t\tsuppression_info.reason, host_info.instance_state, "
+        "assessment_status, assessment_reason, rule.name, rule.recommendation_id, "
+        "rule.cs_id,\n\t\t\t\t\tdata_providers.policy_id, data_providers.rule_group_id\n\t\t\tAvailable filter fields "
+        "that supports wildcard (*): N/A\n\t\t\tAvailable filter fields that supports range comparisons (>, <, >=, <=): "
+        "created_timestamp, closed_timestamp, updated_timestamp, cve.base_score\n\t\t\t",
         "name": "filter",
         "in": "query",
         "required": True
@@ -165,8 +207,9 @@ _spotlight_vulnerabilities_endpoints = [
       {
         "type": "string",
         "description": "Sort vulnerabilities by their properties. Available sort options:\n\n<ul><li>updated_t "
-        "imestamp|asc/desc</li><li>closed_timestamp|asc</li><li>updated_timestamp|asc/desc</li></ul>. Can be used in a "
-        "format <field>|asc for ascending order or <field>|desc for descending order.",
+        "imestamp|asc/desc</li><li>closed_timestamp|asc</li><li>updated_timestamp|asc/desc</li><li>rule.name|asc/desc</ "
+        "li><li>rule.recommendation_id|asc/desc</li></ul>. Can be used in a format <field>|asc for ascending order or "
+        "<field>|desc for descending order.",
         "name": "sort",
         "in": "query"
       },
@@ -179,9 +222,10 @@ _spotlight_vulnerabilities_endpoints = [
         "cve.base_score, cve.types, host_info.asset_criticality,\n\t\t\thost_info.asset_roles, "
         "host_info.internet_exposure, host_info.tags, host_info.groups, host_info.product_type_desc, "
         "host_info.platform_name,\n\t\t\tsuppression_info.is_suppressed, suppression_info.reason, "
-        "host_info.instance_state\n\t\t\tAvailable filter fields that supports wildcard (*): N/A\n\t\t\tAvailable "
-        "filter fields that supports range comparisons (>, <, >=, <=): created_timestamp, closed_timestamp, "
-        "updated_timestamp, cve.base_score\n\t\t\t",
+        "host_info.instance_state,\n\t\t\tassessment_status, assessment_reason, rule.name, rule.recommendation_id, "
+        "rule.cs_id, data_providers.policy_id, data_providers.rule_group_id\n\t\t\tAvailable filter fields that "
+        "supports wildcard (*): N/A\n\t\t\tAvailable filter fields that supports range comparisons (>, <, >=, <=): "
+        "created_timestamp, closed_timestamp, updated_timestamp, cve.base_score\n\t\t\t",
         "name": "filter",
         "in": "query",
         "required": True
@@ -203,45 +247,6 @@ _spotlight_vulnerabilities_endpoints = [
         "collectionFormat": "multi",
         "description": "One or more remediation IDs (max: 400).",
         "name": "ids",
-        "in": "query",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "combinedQueryInstalledPatches",
-    "GET",
-    "/spotlight/combined/installed-patches/v1",
-    "DECOMMISSIONED: Gets installed patches information for hosts.",
-    "spotlight_vulnerabilities",
-    [
-      {
-        "type": "string",
-        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
-
-        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
-
-        "previous response to continue from that place in the results.",
-
-        "name": "after",
-        "in": "query"
-      },
-      {
-        "type": "integer",
-        "description": "Maximum number of entities to return.",
-        "name": "limit",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Sort installed patches by their properties.",
-        "name": "sort",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Filter items using a query in Falcon Query Language (FQL).",
-        "name": "filter",
         "in": "query",
         "required": True
       }
