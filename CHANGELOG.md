@@ -1,3 +1,358 @@
+# Version 1.6.6
+## Added Features and functionality
++ Added: New __AgenticStudio__ parent service collection aggregating all 12 Agentic Studio sub-services via multiple inheritance.
+    - _Agents_
+    - _AgentInvocation_
+    - _AgentTemplates_
+    - _AgentVersions_
+    - _KnowledgeBases_
+    - _KnowledgeBaseFiles_
+    - _KnowledgeBaseAuditEvents_
+    - _Models_
+    - _Skills_
+    - _Spans_
+    - _Tools_
+    - _Stream_
+    - `__init__.py`
+    - `agentic_studio.py`
+
++ Added: New __ContainerSecurity__ parent service collection aggregating all seven Container Security sub-services via multiple inheritance.
+    - _ContainerAlerts_
+    - _ContainerDetections_
+    - _ContainerImageCompliance_
+    - _ContainerImages_
+    - _ContainerVulnerabilities_
+    - _DriftIndicators_
+    - _ImageAssessmentPolicies_
+    - `__init__.py`
+    - `container_security.py`
+
++ Added: New __Spotlight__ parent service collection aggregating all three Spotlight sub-services via multiple inheritance.
+    - _SpotlightVulnerabilities_
+    - _SpotlightVulnerabilityMetadata_
+    - _SpotlightEvaluationLogic_
+    - `__init__.py`
+    - `spotlight.py`
+
++ Added: New __Serverless__ parent service collection aggregating both Serverless sub-services via multiple inheritance.
+    - _ServerlessExports_
+    - _ServerlessVulnerabilities_
+    - `__init__.py`
+    - `serverless.py`
+
++ Added: New __Firewall__ parent service collection aggregating both Firewall sub-services via multiple inheritance.
+    - _FirewallPolicies_
+    - _FirewallManagement_
+    - `__init__.py`
+    - `firewall.py`
+
++ Added: New __Foundry__ parent service collection aggregating all four Foundry sub-services via multiple inheritance.
+    - _FoundryLookupFiles_
+    - _FoundryLogScale_
+    - _CustomStorage_
+    - _FaaSExecution_
+    - `__init__.py`
+    - `foundry.py`
+
++ Updated: Added __Network Scan Detections__ to the __Network Scan__ parent service collection, bringing it to nine sub-services via multiple inheritance.
+    - _NetworkScanGlobalConfigs_
+    - _NetworkScanScanRunReports_
+    - _NetworkScanScanRuns_
+    - _NetworkScanScanners_
+    - _NetworkScanTemplates_
+    - _NetworkScanNetworks_
+    - _NetworkScanScans_
+    - _NetworkScanZones_
+    - _NetworkScanDetections_
+    - `network_scan.py`
+
++ Added: Added `PatchAgentInvocationV3` operation to the __Agent Invocation__ service collection.
+    - _update_agent_invocation_
+    - `_endpoint/_agent_invocation.py`
+    - `agent_invocation.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_agent_invocation.py`
+
++ Added: New __Agents__ service collection with five operations.
+    - _delete_agent_
+    - _get_studio_agents_
+    - _create_or_update_agent_
+    - _update_agent_
+    - _query_studio_agents_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_agents.py`
+    - `_payload/__init__.py`
+    - `_payload/_agents.py`
+    - `__init__.py`
+    - `agents.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_agents.py`
+
++ Added: New __Application Abuse Exclusions__ service collection with nine operations.
+    - _aggregate_app_abuse_exclusions_
+    - _create_app_abuse_report_
+    - _get_app_abuse_exclusions_
+    - _create_app_abuse_exclusion_
+    - _delete_app_abuse_exclusions_
+    - _update_app_abuse_exclusions_
+    - _get_app_abuse_apps_by_category_
+    - _get_app_abuse_categories_
+    - _query_app_abuse_exclusions_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_application_abuse_exclusions.py`
+    - `_payload/__init__.py`
+    - `_payload/_application_abuse_exclusions.py`
+    - `__init__.py`
+    - `application_abuse_exclusions.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_application_abuse_exclusions.py`
+
++ Added: Added `aspm_combined_application_findings` operation to the __ASPM__ service collection.
+    - _get_combined_aspm_findings_
+    - `_endpoint/_aspm.py`
+    - `aspm.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_aspm.py`
+
++ Added: New __Audit__ service collection with four operations.
+    - _export_audit_query_results_
+    - _get_audit_query_results_
+    - _poll_audit_query_status_
+    - _create_audit_query_job_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_audit.py`
+    - `_payload/__init__.py`
+    - `_payload/_audit.py`
+    - `__init__.py`
+    - `audit.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_audit.py`
+
++ Added: New __Browser Security__ service collection with 21 operations. Also available under the alias `Seraphic`.
+    - _query_combined_seraphic_agents_
+    - _classify_domains_
+    - _activate_agents_
+    - _deactivate_agents_
+    - _apply_agent_tasks_
+    - _get_seraphic_agents_
+    - _get_seraphic_audit_logs_
+    - _get_destination_groups_
+    - _create_destination_group_
+    - _delete_destination_group_
+    - _update_destination_group_
+    - _get_extension_analysis_
+    - _get_seraphic_rules_
+    - _update_seraphic_rule_
+    - _get_tenant_settings_
+    - _get_url_domain_lists_
+    - _add_url_domain_list_
+    - _delete_url_domain_list_
+    - _query_seraphic_agents_
+    - _query_destination_groups_
+    - _query_seraphic_rules_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_browser_security.py`
+    - `_payload/__init__.py`
+    - `_payload/_browser_security.py`
+    - `__init__.py`
+    - `browser_security.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_browser_security.py`
+
++ Added: Added `cloud_registration_gcp_post_infra_manager_script` operation to the __Cloud Google Cloud Registration__ service collection.
+    - _generate_gcp_infra_manager_script_
+    - `_endpoint/_cloud_google_cloud_registration.py`
+    - `cloud_google_cloud_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_google_cloud_registration.py`
+
++ Added: New __Code Security__ service collection with 15 operations.
+    - _get_scm_repository_aggregates_
+    - _get_branch_config_
+    - _create_branch_config_
+    - _delete_branch_config_
+    - _update_branch_config_
+    - _list_scm_connections_
+    - _get_scm_connection_
+    - _delete_scm_connection_
+    - _trigger_scm_sync_
+    - _list_scm_exclusion_rules_
+    - _create_scm_exclusion_rule_
+    - _delete_scm_exclusion_rule_
+    - _list_scm_repositories_
+    - _exchange_github_app_code_
+    - _register_scm_app_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_code_security.py`
+    - `_payload/__init__.py`
+    - `_payload/_code_security.py`
+    - `__init__.py`
+    - `code_security.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_code_security.py`
+
++ Decommissioned: Decommissioned `GetConfigurationDetections` operation in the __CSPM Registration__ service collection. The v1 IOM endpoint (`GET /detects/entities/iom/v1`) is flagged as deprecated in the API specification and has been superseded by the v2 IOM operations. The `get_configuration_detections` method remains importable and is tagged `DECOMMISSIONED` so existing code continues to load, but calls to this operation will no longer succeed. Use `GetConfigurationDetectionIDsV2` (`get_configuration_detection_ids_v2`) to retrieve detection IDs and `GetConfigurationDetectionEntities` (`get_configuration_detection_entities`) to retrieve detection details instead.
+    - `_endpoint/_cspm_registration.py`
+    - `_endpoint/deprecated/_cspm_registration.py`
+    - `_endpoint/deprecated/_mapping.py`
+    - `cspm_registration.py`
+
++ Updated: Updated the `filter` parameter description in the _queries_classification_get_v2_, _queries_cloud_application_get_v2_, _queries_content_pattern_get_v2_, _queries_enterprise_account_get_v2_, _queries_file_type_get_v2_, _queries_sensitivity_label_get_v2_, _queries_local_application_group_get_, _queries_local_application_get_, _queries_policy_get_v2_, and _queries_web_location_get_v2_ operations, updated the `sort` parameter description in the _queries_cloud_application_get_v2_, _queries_content_pattern_get_v2_, _queries_enterprise_account_get_v2_, _queries_file_type_get_v2_, _queries_sensitivity_label_get_v2_, and _queries_policy_get_v2_ operations, and added `sort` as an allowed parameter in the _queries_local_application_group_get_, _queries_local_application_get_, and _queries_web_location_get_v2_ operations within the __Data Protection Configuration__ service collection.
+    - `_endpoint/_data_protection_configuration.py`
+    - `data_protection_configuration.py`
+
++ Added: New __AIDR__ service collection with 33 operations. Also available under the alias `Guardian`.
+    - _aggregate_aidr_agent_sessions_
+    - _aggregate_aidr_agents_
+    - _aggregate_aidr_detections_
+    - _aggregate_aidr_skill_usage_
+    - _aggregate_aidr_skills_
+    - _aggregate_aidr_tool_usage_
+    - _aggregate_aidr_tools_
+    - _get_aidr_agent_installations_
+    - _get_aidr_agent_os_users_
+    - _get_aidr_agent_sessions_
+    - _get_aidr_agents_
+    - _get_aidr_classified_file_access_
+    - _get_aidr_executions_
+    - _get_aidr_file_events_
+    - _get_aidr_model_names_
+    - _get_aidr_network_events_
+    - _get_aidr_process_tree_
+    - _get_aidr_session_activity_
+    - _get_aidr_skills_
+    - _get_aidr_tools_
+    - _query_aidr_agent_installations_
+    - _query_aidr_agent_os_users_
+    - _query_aidr_agent_sessions_
+    - _query_aidr_agents_
+    - _query_aidr_detections_
+    - _query_aidr_executions_
+    - _query_aidr_mcp_server_names_
+    - _query_aidr_model_names_
+    - _query_aidr_prompts_
+    - _query_aidr_skill_usage_
+    - _query_aidr_skills_
+    - _query_aidr_tool_usage_
+    - _query_aidr_tools_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_aidr.py`
+    - `__init__.py`
+    - `aidr.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_aidr.py`
+
++ Updated: Added `k8s_node_uid` as allowed `sort` value in the _CombinedHiddenDevicesByFilter_ and _CombinedDevicesByFilter_ operations within the __Hosts__ service collection.
+    - `_endpoint/_hosts.py`
+    - `hosts.py`
+
++ Updated: Added `fields` as an allowed parameter in the _GetMalwareEntities_ operation within the __Intel__ service collection.
+    - `_endpoint/_intel.py`
+    - `intel.py`
+
++ Added: New __Network Containment__ service collection with five operations.
+    - _get_allowlist_rules_
+    - _create_allowlist_rules_
+    - _delete_allowlist_rules_
+    - _update_allowlist_rules_
+    - _query_allowlist_rules_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_network_containment.py`
+    - `_payload/__init__.py`
+    - `_payload/_network_containment.py`
+    - `__init__.py`
+    - `network_containment.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_network_containment.py`
+
++ Added: New __Network Scan Detections__ service collection with four operations.
+    - _aggregate_netscan_detections_
+    - _get_combined_netscan_detections_
+    - _get_netscan_detections_
+    - _query_netscan_detections_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_network_scan_detections.py`
+    - `_payload/__init__.py`
+    - `_payload/_network_scan_detections.py`
+    - `__init__.py`
+    - `network_scan_detections.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_network_scan_detections.py`
+
++ Added: Added nine new operations to the __NGSIEM__ service collection.
+    - _bulk_create_persisted_aggregations_
+    - _bulk_update_persisted_aggregations_
+    - _get_parser_rollback_options_
+    - _rollback_parser_
+    - _get_persisted_aggregation_
+    - _create_persisted_aggregation_
+    - _delete_persisted_aggregation_
+    - _update_persisted_aggregation_
+    - _list_persisted_aggregations_
+    - `_endpoint/_ngsiem.py`
+    - `ngsiem.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ngsiem.py`
+
++ Added: Added 15 new operations to the __SaaS Security__ service collection.
+    - _get_ai_agent_details_
+    - _get_ai_agents_inventory_
+    - _get_app_journal_
+    - _create_app_journal_comment_
+    - _get_check_journal_
+    - _create_check_journal_comment_
+    - _get_check_params_
+    - _set_check_param_
+    - _restore_affected_entity_
+    - _restore_security_check_
+    - _get_check_tags_
+    - _connect_check_tag_
+    - _disconnect_check_tag_
+    - _get_user_journal_
+    - _create_user_journal_comment_
+    - `_endpoint/_saas_security.py`
+    - `saas_security.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_saas_security.py`
+
++ Added: New __Skills__ service collection with six operations.
+    - _download_studio_skill_
+    - _get_studio_skills_
+    - _update_studio_skill_
+    - _create_studio_skill_
+    - _delete_studio_skill_
+    - _query_studio_skills_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_skills.py`
+    - `_payload/__init__.py`
+    - `_payload/_skills.py`
+    - `__init__.py`
+    - `skills.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_skills.py`
+
++ Updated: Added `agentic_root_process`, `detected_nonexec_written`, `nonexec_written_by_process`, `process_ai_session`, `spawns_agent`, `subagent_connected_mcp`, `subagent_loaded_skill`, `subagent_used_tool` as allowed `edge_type` values in the _combined_edges_get_ operation and added `ai-subagents`, `ai_subagent`, `nonexec_file`, `nonexec_files` as allowed `vertex_type` values in the _combined_summary_get_, _entities_vertices_get_, and _entities_vertices_getv2_ operations within the __Threatgraph__ service collection.
+    - `_endpoint/_threatgraph.py`
+    - `threatgraph.py`
+
++ Added: Added eight new operations to the __User Management__ service collection.
+    - _aggregate_users_v2_
+    - _combined_user_roles_v3_
+    - _get_user_allowed_actions_
+    - _get_user_invitations_
+    - _update_user_roles_
+    - _retrieve_users_v2_
+    - _query_user_invitations_
+    - _query_users_v2_
+    - `_endpoint/_user_management.py`
+    - `user_management.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_user_management.py`
+
++ Updated: Added `skip_fields` as an allowed parameter in the _WorkflowExecutionsCombined_ operation within the __Workflows__ service collection.
+    - `_endpoint/_workflows.py`
+    - `workflows.py`
+
 # Version 1.6.5
 ## Added features and functionality
 + Added: Optional `session` keyword argument (a `requests.Session` instance) accepted by `OAuth2`, `APIHarnessV2`,
