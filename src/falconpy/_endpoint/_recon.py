@@ -562,9 +562,10 @@ _recon_endpoints = [
         "typosquatting.base_domain.punycode_format typosquatting.base_domain.is_registered "
         "typosquatting.base_domain.whois.registrar.name typosquatting.base_domain.whois.registrar.status "
         "typosquatting.base_domain.whois.registrant.email typosquatting.base_domain.whois.registrant.name "
-        "typosquatting.base_domain.whois.registrant.org typosquatting.base_domain.whois.name_servers created_date "
-        "updated_date assigned_to_uuid risk_score_label breach_summary.credential_statuses "
-        "breach_summary.is_retroactively_deduped]",
+        "typosquatting.base_domain.whois.registrant.org typosquatting.base_domain.whois.name_servers "
+        "typosquatting.base_domain.url_scan.scan_id typosquatting.base_domain.url_scan.status "
+        "typosquatting.base_domain.url_scan.captured_at created_date updated_date assigned_to_uuid risk_score_label "
+        "breach_summary.credential_statuses breach_summary.is_retroactively_deduped]",
         "name": "filter",
         "in": "query"
       },
