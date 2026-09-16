@@ -46,8 +46,6 @@ _cloud_connect_aws_endpoints = [
     "cloud_connect_aws",
     [
       {
-        "maxLength": 1000,
-        "minLength": 1,
         "type": "integer",
         "default": 100,
         "description": "The maximum records to return. [1-1000]. Defaults to 100.",
@@ -90,12 +88,12 @@ _cloud_connect_aws_endpoints = [
     "cloud_connect_aws",
     [
       {
-        "maxItems": 5000,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
+        "maxItems": 5000,
         "description": "IDs of accounts to retrieve details",
         "name": "ids",
         "in": "query",
@@ -111,31 +109,17 @@ _cloud_connect_aws_endpoints = [
     "cloud_connect_aws",
     [
       {
+        "type": "string",
+        "default": "manual",
         "enum": [
           "cloudformation",
           "manual"
         ],
-        "type": "string",
-        "default": "manual",
         "description": "Mode for provisioning. Allowed values are manual or cloudformation. Defaults to manual "
         "if not defined.",
         "name": "mode",
         "in": "query"
       },
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "UpdateAWSAccounts",
-    "PATCH",
-    "/cloud-connect-aws/entities/accounts/v1",
-    "Update AWS Accounts by specifying the ID of the account and details to update",
-    "cloud_connect_aws",
-    [
       {
         "name": "body",
         "in": "body",
@@ -159,6 +143,20 @@ _cloud_connect_aws_endpoints = [
         "description": "IDs of accounts to remove",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateAWSAccounts",
+    "PATCH",
+    "/cloud-connect-aws/entities/accounts/v1",
+    "Update AWS Accounts by specifying the ID of the account and details to update",
+    "cloud_connect_aws",
+    [
+      {
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
@@ -206,8 +204,6 @@ _cloud_connect_aws_endpoints = [
     "cloud_connect_aws",
     [
       {
-        "maxLength": 1000,
-        "minLength": 1,
         "type": "integer",
         "default": 100,
         "description": "The maximum records to return. [1-1000]. Defaults to 100.",
