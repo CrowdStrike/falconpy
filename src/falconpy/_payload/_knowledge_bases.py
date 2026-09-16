@@ -83,6 +83,7 @@ def entities_knowledge_bases_create_v1_payload(passed_keywords: dict) -> dict:
     """
     returned_payload = {}
     keys = [
+        "attribution",
         "created_at",
         "created_by",
         "description",
@@ -185,6 +186,7 @@ def entities_knowledge_bases_update_v1_payload(passed_keywords: dict) -> dict:
     """
     returned_payload = {}
     keys = [
+        "attribution",
         "created_at",
         "created_by",
         "description",

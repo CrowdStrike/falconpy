@@ -208,6 +208,8 @@ class KnowledgeBases(ServiceClass):
 
         Swagger URL
         -----------
+        attribution : str
+            The attribution value.
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-bases/EntitiesKnowledgeBasesCreateV1
 
         Keyword arguments
@@ -303,6 +305,8 @@ class KnowledgeBases(ServiceClass):
 
         Swagger URL
         -----------
+        attribution : str
+            The attribution value.
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/knowledge-bases/EntitiesKnowledgeBasesUpdateV1
 
         Keyword arguments
