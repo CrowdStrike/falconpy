@@ -37,6 +37,8 @@ For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=C0302
 
+# pylint: disable=C0302
+
 _cspm_registration_endpoints = [
   [
     "GetCSPMAwsAccount",
@@ -98,8 +100,6 @@ _cspm_registration_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "maxLength": 3,
-        "minLength": 1,
         "description": "The maximum records to return. Defaults to 100.",
         "name": "limit",
         "in": "query"
@@ -436,8 +436,6 @@ _cspm_registration_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "maxLength": 3,
-        "minLength": 1,
         "description": "The maximum records to return. Defaults to 100.",
         "name": "limit",
         "in": "query"
@@ -613,8 +611,6 @@ _cspm_registration_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "maxLength": 3,
-        "minLength": 1,
         "description": "The maximum records to return. Defaults to 100.",
         "name": "limit",
         "in": "query"
@@ -792,8 +788,6 @@ _cspm_registration_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "maxLength": 3,
-        "minLength": 1,
         "description": "The maximum records to return. Defaults to 100.",
         "name": "limit",
         "in": "query"
@@ -1112,7 +1106,6 @@ _cspm_registration_endpoints = [
       },
       {
         "type": "integer",
-        "pattern": "^\\d+$",
         "description": "The maximum records to return. [1-500]",
         "name": "limit",
         "in": "query"
@@ -1135,151 +1128,6 @@ _cspm_registration_endpoints = [
         "collectionFormat": "multi",
         "description": "Resource UUID",
         "name": "resource_uuid",
-        "in": "query"
-      }
-    ]
-  ],
-  [
-    "GetConfigurationDetections",
-    "GET",
-    "/detects/entities/iom/v1",
-    "Get list of active misconfigurations. This endpoint is deprecated, please use "
-    "GetConfigurationDetectionIDsV2 and GetConfigurationDetectionEntities instead",
-    "cspm_registration",
-    [
-      {
-        "type": "string",
-        "enum": [
-          "aws",
-          "azure",
-          "gcp"
-        ],
-        "description": "Cloud Provider (e.g.: aws|azure|gcp)",
-        "name": "cloud_provider",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "AWS account ID or GCP Project Number or Azure subscription ID",
-        "name": "account_id",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Azure Subscription ID",
-        "name": "azure_subscription_id",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Azure Tenant ID",
-        "name": "azure_tenant_id",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "enum": [
-          "all",
-          "new",
-          "reoccurring"
-        ],
-        "description": "Status (e.g.: new|reoccurring|all)",
-        "name": "status",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "pattern": "^[0-9a-z-_]{2,}$",
-        "description": "Cloud Provider Region",
-        "name": "region",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "enum": [
-          "Critical",
-          "High",
-          "Informational",
-          "Medium"
-        ],
-        "description": "Policy Severity",
-        "name": "severity",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "enum": [
-          "ACM",
-          "ACR",
-          "Any",
-          "App Engine",
-          "AppService",
-          "BigQuery",
-          "Cloud Load Balancing",
-          "Cloud Logging",
-          "Cloud SQL",
-          "Cloud Storage",
-          "CloudFormation",
-          "CloudTrail",
-          "CloudWatch Logs",
-          "Cloudfront",
-          "Compute Engine",
-          "Config",
-          "Disk",
-          "DynamoDB",
-          "EBS",
-          "EC2",
-          "ECR",
-          "EFS",
-          "EKS",
-          "ELB",
-          "EMR",
-          "Elasticache",
-          "GuardDuty",
-          "IAM",
-          "Identity",
-          "KMS",
-          "KeyVault",
-          "Kinesis",
-          "Kubernetes",
-          "Lambda",
-          "LoadBalancer",
-          "Monitor",
-          "NLB/ALB",
-          "NetworkSecurityGroup",
-          "PostgreSQL",
-          "RDS",
-          "Redshift",
-          "S3",
-          "SES",
-          "SNS",
-          "SQLDatabase",
-          "SQLServer",
-          "SQS",
-          "SSM",
-          "Serverless Application Repository",
-          "StorageAccount",
-          "Subscriptions",
-          "VPC",
-          "VirtualMachine",
-          "VirtualNetwork"
-        ],
-        "description": "Cloud Service (e.g.: EBS|EC2|S3 etc.)",
-        "name": "service",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "String to get next page of results, is associated with a previous execution of "
-        "GetConfigurationDetections. Cannot be combined with any filter except limit.",
-        "name": "next_token",
-        "in": "query"
-      },
-      {
-        "type": "integer",
-        "pattern": "^\\d+$",
-        "description": "The maximum records to return. [1-500]",
-        "name": "limit",
         "in": "query"
       }
     ]
@@ -1511,7 +1359,6 @@ _cspm_registration_endpoints = [
     [
       {
         "type": "integer",
-        "pattern": "^\\d+$",
         "description": "Policy ID",
         "name": "ids",
         "in": "query",
@@ -1673,6 +1520,155 @@ _cspm_registration_endpoints = [
         "name": "body",
         "in": "body",
         "required": True
+      }
+    ]
+  ],
+  [
+    "GetConfigurationDetections",
+    "GET",
+    "/detects/entities/iom/v1",
+    "DECOMMISSIONED: Get list of active misconfigurations. This endpoint is deprecated, please use "
+
+    "GetConfigurationDetectionIDsV2 and GetConfigurationDetectionEntities instead",
+
+    "cspm_registration",
+    [
+      {
+        "type": "string",
+        "enum": [
+          "aws",
+          "azure",
+          "gcp"
+        ],
+        "description": "Cloud Provider (e.g.: aws|azure|gcp)",
+        "name": "cloud_provider",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "AWS account ID or GCP Project Number or Azure subscription ID",
+        "name": "account_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Azure Subscription ID",
+        "name": "azure_subscription_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Azure Tenant ID",
+        "name": "azure_tenant_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "enum": [
+          "all",
+          "new",
+          "reoccurring"
+        ],
+        "description": "Status (e.g.: new|reoccurring|all)",
+        "name": "status",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "pattern": "^[0-9a-z-_]{2,}$",
+        "description": "Cloud Provider Region",
+        "name": "region",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "enum": [
+          "Critical",
+          "High",
+          "Informational",
+          "Medium"
+        ],
+        "description": "Policy Severity",
+        "name": "severity",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "enum": [
+          "ACM",
+          "ACR",
+          "Any",
+          "App Engine",
+          "AppService",
+          "BigQuery",
+          "Cloud Load Balancing",
+          "Cloud Logging",
+          "Cloud SQL",
+          "Cloud Storage",
+          "CloudFormation",
+          "CloudTrail",
+          "CloudWatch Logs",
+          "Cloudfront",
+          "Compute Engine",
+          "Config",
+          "Disk",
+          "DynamoDB",
+          "EBS",
+          "EC2",
+          "ECR",
+          "EFS",
+          "EKS",
+          "ELB",
+          "EMR",
+          "Elasticache",
+          "GuardDuty",
+          "IAM",
+          "Identity",
+          "KMS",
+          "KeyVault",
+          "Kinesis",
+          "Kubernetes",
+          "Lambda",
+          "LoadBalancer",
+          "Monitor",
+          "NLB/ALB",
+          "NetworkSecurityGroup",
+          "PostgreSQL",
+          "RDS",
+          "Redshift",
+          "S3",
+          "SES",
+          "SNS",
+          "SQLDatabase",
+          "SQLServer",
+          "SQS",
+          "SSM",
+          "Serverless Application Repository",
+          "StorageAccount",
+          "Subscriptions",
+          "VPC",
+          "VirtualMachine",
+          "VirtualNetwork"
+        ],
+        "description": "Cloud Service (e.g.: EBS|EC2|S3 etc.)",
+        "name": "service",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "String to get next page of results, is associated with a previous execution of "
+
+        "GetConfigurationDetections. Cannot be combined with any filter except limit.",
+
+        "name": "next_token",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "pattern": "^\\d+$",
+        "description": "The maximum records to return. [1-500]",
+        "name": "limit",
+        "in": "query"
       }
     ]
   ]
