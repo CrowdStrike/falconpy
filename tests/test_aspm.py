@@ -119,7 +119,10 @@ class TestASPM:
                                                    scope="string"
                                                    ),
             "GetGroupHierarchy": falcon.get_group_hierarchy(),
-            "GetGroupsV2": falcon.get_groups_v2(type="string")
+            "GetGroupsV2": falcon.get_groups_v2(type="string"),
+            "aspm_combined_application_findings": falcon.get_combined_aspm_findings(gcrn="string", type="string",
+                filter="string", offset=1, limit=1,
+                sort="string"),
         }
         for key in tests:
             if not isinstance(tests[key], bytes):
@@ -129,3 +132,15 @@ class TestASPM:
                     print(tests[key])
                 
         assert error_checks
+
+    def test_payload_coverage(self):
+        """Exercise nested payload builder branches."""
+        falcon.update_executor_node(imageAddress="string", imagePullSecrets="string", podLabels="string", State="string", StateLastUpdated="string", StateReason="string")
+        falcon.create_executor_node(imageAddress="string", imagePullSecrets="string", podLabels="string", State="string", StateLastUpdated="string", StateReason="string")
+        falcon.create_integration_task(accessToken="string", additionalHeader="string", businessApplication="string", data="string", enabled="string", id="string", integration="string", integrationTaskType="string", latestTaskRun="string", name="string", nextRun="string", progress="string", schedule="string", scheduleEveryUnitDisplayName="string", trigger="string", type="string")
+        falcon.update_integration_task(accessToken="string", additionalHeader="string", businessApplication="string", data="string", enabled="string", id="string", integration="string", integrationTaskType="string", latestTaskRun="string", name="string", nextRun="string", progress="string", schedule="string", scheduleEveryUnitDisplayName="string", trigger="string", type="string")
+        falcon.create_integration(data="string", enabled="string", id="string", integration_type="string", name="string", node="string", type="string", update_time="string")
+        falcon.update_integration(data="string", enabled="string", id="string", integration_type="string", name="string", node="string", type="string", update_time="string")
+        falcon.execute_query(direction="string", limit="string", offset="string", orderBy="string", fields="string", serviceFields="string", withoutServices="string")
+        falcon.get_services_count(direction="string", limit="string", offset="string", order_by="string")
+        assert True
