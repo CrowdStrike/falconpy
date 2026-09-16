@@ -1375,11 +1375,6 @@ _kubernetes_protection_endpoints = [
           "type": "string"
         },
         "collectionFormat": "csv",
-        "enum": [
-          "aws",
-          "azure",
-          "gcp"
-        ],
         "description": "Cloud Provider",
         "name": "clouds",
         "in": "query"
@@ -1419,10 +1414,6 @@ _kubernetes_protection_endpoints = [
           "type": "string"
         },
         "collectionFormat": "csv",
-        "enum": [
-          "aks",
-          "eks"
-        ],
         "description": "Cluster Service",
         "name": "cluster_service",
         "in": "query"
@@ -1433,11 +1424,6 @@ _kubernetes_protection_endpoints = [
           "type": "string"
         },
         "collectionFormat": "csv",
-        "enum": [
-          "Not Installed",
-          "Running",
-          "Stopped"
-        ],
         "description": "Cluster Status",
         "name": "cluster_status",
         "in": "query"
@@ -1554,11 +1540,6 @@ _kubernetes_protection_endpoints = [
           "type": "string"
         },
         "collectionFormat": "csv",
-        "enum": [
-          "Not Installed",
-          "Running",
-          "Stopped"
-        ],
         "description": "Cluster Status",
         "name": "status",
         "in": "query"
