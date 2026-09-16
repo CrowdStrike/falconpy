@@ -66,7 +66,6 @@ _deployments_endpoints = [
       },
       {
         "type": "string",
-        "minimum": 0,
         "description": "Starting pagination offset of records to return.",
         "name": "offset",
         "in": "query"
@@ -110,7 +109,6 @@ _deployments_endpoints = [
       },
       {
         "type": "string",
-        "minimum": 0,
         "description": "Starting pagination offset of records to return.",
         "name": "offset",
         "in": "query"
@@ -223,7 +221,6 @@ _deployments_endpoints = [
       },
       {
         "type": "string",
-        "minimum": 0,
         "description": "Starting pagination offset of records to return.",
         "name": "offset",
         "in": "query"
