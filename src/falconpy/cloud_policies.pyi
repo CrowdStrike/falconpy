@@ -190,6 +190,7 @@ class CloudPolicies(ServiceClass):
         self,
         *,
         alert_info: Optional[str] = None,
+        annotation_status: Optional[str] = None,
         attack_types: Optional[Union[str, List[str]]] = None,
         category: Optional[str] = None,
         controls: Optional[list] = None,

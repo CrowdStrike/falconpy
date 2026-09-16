@@ -1,11 +1,13 @@
 """Type stubs for agent_invocation."""
 from typing import Dict, List, Optional, Union
+from typing_extensions import deprecated
 from ._service_class import ServiceClass
 from ._result import Result
 
 
 class AgentInvocation(ServiceClass):
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def invoke_published_agent_external_v1(
         self,
         *,
@@ -23,6 +25,7 @@ class AgentInvocation(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def invoke_agent_version_external_v1(
         self,
         *,
@@ -34,6 +37,15 @@ class AgentInvocation(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def update_agent_invocation(
+        self,
+        *,
+        id: Optional[str] = None,
+        status: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
     InvokePublishedAgentExternalV1 = invoke_published_agent_external_v1
     GetAgentInvocationV3 = get_agent_invocation_v3
     InvokeAgentVersionExternalV1 = invoke_agent_version_external_v1
+    PatchAgentInvocationV3 = update_agent_invocation

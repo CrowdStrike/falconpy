@@ -1,5 +1,6 @@
 """Type stubs for admission_control_policies."""
 from typing import Dict, List, Optional, Union
+from typing_extensions import deprecated
 from ._service_class import ServiceClass
 from ._result import Result
 
@@ -13,6 +14,7 @@ class AdmissionControlPolicies(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def create_policy(
         self,
         *,
@@ -39,6 +41,7 @@ class AdmissionControlPolicies(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def add_host_groups(
         self,
         *,
@@ -47,6 +50,7 @@ class AdmissionControlPolicies(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def remove_host_groups(
         self,
         *,
@@ -55,6 +59,7 @@ class AdmissionControlPolicies(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def update_policy_precedence(
         self,
         *,
@@ -63,6 +68,7 @@ class AdmissionControlPolicies(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def add_custom_rules(
         self,
         *,
@@ -71,6 +77,7 @@ class AdmissionControlPolicies(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def delete_custom_rules(
         self,
         *,
@@ -79,6 +86,7 @@ class AdmissionControlPolicies(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def set_rule_group_precedence(
         self,
         *,
@@ -87,6 +95,7 @@ class AdmissionControlPolicies(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def replace_rule_group_selectors(
         self,
         *,
@@ -95,6 +104,7 @@ class AdmissionControlPolicies(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def create_rule_groups(
         self,
         *,
@@ -103,6 +113,7 @@ class AdmissionControlPolicies(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def update_rule_groups(
         self,
         *,
@@ -111,6 +122,7 @@ class AdmissionControlPolicies(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def delete_rule_groups(
         self,
         *,
@@ -119,6 +131,7 @@ class AdmissionControlPolicies(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    @deprecated("This operation is no longer available in CrowdStrike's API. Calling this method will result in an error from the API.")
     def query_policies(
         self,
         *,

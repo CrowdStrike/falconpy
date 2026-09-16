@@ -14,6 +14,7 @@ class CloudGoogleCloudRegistration(ServiceClass):
         sort: Optional[str] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
+        include_all_statuses: Optional[bool] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -145,7 +146,31 @@ class CloudGoogleCloudRegistration(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def generate_gcp_infra_manager_script(
+        self,
+        *,
+        dspm_settings: Optional[dict] = None,
+        entity_id: Optional[Union[str, List[str]]] = None,
+        excluded_project_patterns: Optional[Union[str, List[str]]] = None,
+        falcon_client_key_id: Optional[str] = None,
+        falcon_client_key_type: Optional[str] = None,
+        infra_manager_region: Optional[str] = None,
+        infra_project_id: Optional[str] = None,
+        labels: Optional[str] = None,
+        realtime_visibility_enabled: Optional[bool] = None,
+        registration_id: Optional[str] = None,
+        registration_name: Optional[str] = None,
+        resource_name_prefix: Optional[str] = None,
+        resource_name_suffix: Optional[str] = None,
+        tags: Optional[str] = None,
+        template: Optional[str] = None,
+        vulnerability_scanning_settings: Optional[dict] = None,
+        wif_project_id: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
     cloud_registration_gcp_get_entities = get_entities
+    cloud_registration_gcp_post_infra_manager_script = generate_gcp_infra_manager_script
     cloud_registration_gcp_trigger_health_check = trigger_health_check
     cloud_registration_gcp_get_registration = get_registration
     cloud_registration_gcp_put_registration = update_registration
