@@ -231,7 +231,7 @@ class FoundryLogScale(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/lookup-files/CreateFileV1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-lookup-files/CreateFileV1
 
         Keyword arguments
         -----------------
@@ -291,7 +291,7 @@ class FoundryLogScale(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/lookup-files/UpdateFileV1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-lookup-files/UpdateFileV1
 
         Keyword arguments
         -----------------

@@ -67,7 +67,7 @@ class ContainerImageCompliance(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/complianceAssessments/extAggregateClusterAssessments
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-image-compliance/extAggregateClusterAssessments
 
         Keyword arguments
         -----------------
@@ -107,7 +107,7 @@ class ContainerImageCompliance(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/complianceAssessments/extAggregateImageAssessments
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-image-compliance/extAggregateImageAssessments
 
         Keyword arguments
         -----------------
@@ -162,7 +162,7 @@ class ContainerImageCompliance(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/complianceAssessments/extAggregateRulesAssessments
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-image-compliance/extAggregateRulesAssessments
 
         Keyword arguments
         -----------------
@@ -210,7 +210,7 @@ class ContainerImageCompliance(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/complianceAssessments/extAggregateFailedContainersByRulesPath
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-image-compliance/extAggregateFailedContainersByRulesPath
 
         Keyword arguments
         -----------------
@@ -259,7 +259,7 @@ class ContainerImageCompliance(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/complianceAssessments/extAggregateFailedContainersCountBySeverity
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-image-compliance/extAggregateFailedContainersCountBySeverity
 
         Keyword arguments
         -----------------
@@ -308,7 +308,7 @@ class ContainerImageCompliance(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/complianceAssessments/extAggregateFailedImagesByRulesPath
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-image-compliance/extAggregateFailedImagesByRulesPath
 
         Keyword arguments
         -----------------
@@ -357,7 +357,7 @@ class ContainerImageCompliance(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/complianceAssessments/extAggregateFailedImagesCountBySeverity
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-image-compliance/extAggregateFailedImagesCountBySeverity
 
         Keyword arguments
         -----------------
@@ -406,7 +406,7 @@ class ContainerImageCompliance(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/complianceAssessments/extAggregateFailedRulesByClusters
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-image-compliance/extAggregateFailedRulesByClusters
 
         Keyword arguments
         -----------------
@@ -455,7 +455,7 @@ class ContainerImageCompliance(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/complianceAssessments/extAggregateFailedRulesByImages
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-image-compliance/extAggregateFailedRulesByImages
 
         Keyword arguments
         -----------------
@@ -505,7 +505,7 @@ class ContainerImageCompliance(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/complianceAssessments/extAggregateFailedRulesCountBySeverity
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-image-compliance/extAggregateFailedRulesCountBySeverity
 
         Keyword arguments
         -----------------
@@ -554,7 +554,7 @@ class ContainerImageCompliance(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/complianceAssessments/extAggregateRulesByStatus
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-image-compliance/extAggregateRulesByStatus
 
         Keyword arguments
         -----------------

@@ -67,7 +67,7 @@ class CloudSecurityRegistrationCombined(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-registration-combined/cloud_registration_cross_provider_get_account_aggregates
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-registration-combined/cloud-registration-cross-provider-get-account-aggregates
 
         Keyword arguments
         -----------------

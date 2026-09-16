@@ -361,7 +361,7 @@ class CloudSecurityAssets(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-assets/cloud_security_assets_entities_post
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-assets/cloud-security-assets-entities-post
 
         Keyword arguments
         -----------------

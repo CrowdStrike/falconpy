@@ -67,7 +67,7 @@ class NetworkScanZones(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/aggregate_zones
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/aggregate-zones
 
         Keyword arguments
         -----------------
@@ -172,7 +172,7 @@ class NetworkScanZones(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/combined_zones
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/combined-zones
 
         Keyword arguments
         -----------------
@@ -216,7 +216,7 @@ class NetworkScanZones(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/get_zones
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/get-zones
 
         Keyword arguments
         -----------------
@@ -254,7 +254,7 @@ class NetworkScanZones(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/create_zones
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/create-zones
 
         Keyword arguments
         -----------------
@@ -301,7 +301,7 @@ class NetworkScanZones(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/update_zones
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/update-zones
 
         Keyword arguments
         -----------------
@@ -357,7 +357,7 @@ class NetworkScanZones(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/delete_zones
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/delete-zones
 
         Keyword arguments
         -----------------
@@ -395,7 +395,7 @@ class NetworkScanZones(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/query_zones
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-zones/query-zones
 
         Keyword arguments
         -----------------

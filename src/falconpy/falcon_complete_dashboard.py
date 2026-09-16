@@ -65,7 +65,7 @@ class CompleteDashboard(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateAlerts
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-complete-dashboard/AggregateAlerts
 
         Keyword arguments
         -----------------
@@ -152,7 +152,7 @@ class CompleteDashboard(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateAllowList
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-complete-dashboard/AggregateAllowList
 
         Keyword arguments
         -----------------
@@ -239,7 +239,7 @@ class CompleteDashboard(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateBlockList
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-complete-dashboard/AggregateBlockList
 
         Keyword arguments
         -----------------
@@ -442,7 +442,7 @@ class CompleteDashboard(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateEscalations
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-complete-dashboard/AggregateEscalations
 
         Keyword arguments
         -----------------
@@ -604,7 +604,7 @@ class CompleteDashboard(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregatePreventionPolicy
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-complete-dashboard/AggregatePreventionPolicy
 
         Keyword arguments
         -----------------
@@ -703,7 +703,7 @@ class CompleteDashboard(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateRemediations
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-complete-dashboard/AggregateRemediations
 
         Keyword arguments
         -----------------
@@ -805,7 +805,7 @@ class CompleteDashboard(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateSensorUpdatePolicy
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-complete-dashboard/AggregateSensorUpdatePolicy
 
         Keyword arguments
         -----------------
@@ -904,7 +904,7 @@ class CompleteDashboard(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateSupportIssues
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-complete-dashboard/AggregateSupportIssues
 
         Keyword arguments
         -----------------
@@ -1109,7 +1109,7 @@ class CompleteDashboard(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/QueryAlertIdsByFilter
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-complete-dashboard/QueryAlertIdsByFilter
 
         Keyword arguments
         -----------------
@@ -1152,7 +1152,7 @@ class CompleteDashboard(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/QueryAlertIdsByFilterV2
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-complete-dashboard/QueryAlertIdsByFilterV2
 
         Keyword arguments
         -----------------
@@ -1195,7 +1195,7 @@ class CompleteDashboard(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/QueryAllowListFilter
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-complete-dashboard/QueryAllowListFilter
 
         Keyword arguments
         -----------------
@@ -1238,7 +1238,7 @@ class CompleteDashboard(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/QueryBlockListFilter
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-complete-dashboard/QueryBlockListFilter
 
         Keyword arguments
         -----------------

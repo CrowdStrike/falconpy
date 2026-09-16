@@ -67,7 +67,7 @@ class NetworkScanScanners(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scanners/aggregate_scanners
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scanners/aggregate-scanners
 
         Keyword arguments
         -----------------
@@ -124,7 +124,7 @@ class NetworkScanScanners(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scanners/get_scanners
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scanners/get-scanners
 
         Keyword arguments
         -----------------
@@ -162,7 +162,7 @@ class NetworkScanScanners(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scanners/update_scanners
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scanners/update-scanners
 
         Keyword arguments
         -----------------
@@ -208,7 +208,7 @@ class NetworkScanScanners(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scanners/query_scanners
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-scanners/query-scanners
 
         Keyword arguments
         -----------------

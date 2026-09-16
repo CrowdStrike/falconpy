@@ -74,7 +74,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate_events
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate-events
 
         Keyword arguments
         -----------------
@@ -173,7 +173,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate_policy_rules
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate-policy-rules
 
         Keyword arguments
         -----------------
@@ -272,7 +272,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate_rule_groups
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate-rule-groups
 
         Keyword arguments
         -----------------
@@ -371,7 +371,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate_rules
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/aggregate-rules
 
         Keyword arguments
         -----------------
@@ -470,7 +470,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_events
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get-events
 
         Keyword arguments
         -----------------
@@ -509,7 +509,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_firewall_fields
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get-firewall-fields
 
         Keyword arguments
         -----------------
@@ -544,7 +544,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_rule_groups
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get-rule-groups
 
         Keyword arguments
         -----------------
@@ -1111,7 +1111,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_platforms
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get-platforms
 
         Keyword arguments
         -----------------
@@ -1150,7 +1150,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_policy_containers
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get-policy-containers
 
         Keyword arguments
         -----------------
@@ -1329,7 +1329,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_rule_groups
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get-rule-groups
 
         Keyword arguments
         -----------------
@@ -1917,7 +1917,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_rules
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get-rules
 
         Keyword arguments
         -----------------
@@ -1993,7 +1993,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_events
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query-events
 
         Keyword arguments
         -----------------
@@ -2045,7 +2045,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_firewall_fields
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query-firewall-fields
 
         Keyword arguments
         -----------------
@@ -2126,7 +2126,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_platforms
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query-platforms
 
         Keyword arguments
         -----------------
@@ -2162,7 +2162,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_policy_rules
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query-policy-rules
 
         Keyword arguments
         -----------------
@@ -2214,7 +2214,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_rule_groups
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query-rule-groups
 
         Keyword arguments
         -----------------
@@ -2266,7 +2266,7 @@ class FirewallManagement(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_rule_groups
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query-rule-groups
 
         Keyword arguments
         -----------------

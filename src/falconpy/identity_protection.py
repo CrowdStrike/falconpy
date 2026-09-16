@@ -115,7 +115,7 @@ class IdentityProtection(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protection/GetSensorAggregates
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-entities/GetSensorAggregates
 
         Keyword arguments
         -----------------
@@ -213,7 +213,7 @@ class IdentityProtection(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protection/GetSensorDetails
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-entities/GetSensorDetails
 
         Keyword arguments
         -----------------
@@ -464,7 +464,7 @@ class IdentityProtection(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protections/QuerySensorsByFilter
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-entities/QuerySensorsByFilter
 
         Keyword arguments
         -----------------

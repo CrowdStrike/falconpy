@@ -64,7 +64,7 @@ class CloudSecurity(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/%2Fcloud-security-risks/combined-cloud-risks
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security/combined-cloud-risks
 
         Keyword arguments
         -----------------
