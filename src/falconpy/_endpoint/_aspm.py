@@ -129,11 +129,6 @@ _aspm_endpoints = [
           "type": "string"
         },
         "collectionFormat": "csv",
-        "enum": [
-          "aws",
-          "azure",
-          "gcp"
-        ],
         "name": "cloud_provider",
         "in": "query"
       },
@@ -328,12 +323,6 @@ _aspm_endpoints = [
           "type": "string"
         },
         "collectionFormat": "csv",
-        "enum": [
-          "artifact_id",
-          "artifact_name",
-          "artifact_hash",
-          "artifact_full_path"
-        ],
         "name": "orderBy",
         "in": "query"
       },
@@ -560,7 +549,6 @@ _aspm_endpoints = [
     [
       {
         "type": "integer",
-        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -576,7 +564,6 @@ _aspm_endpoints = [
     [
       {
         "type": "integer",
-        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -611,7 +598,6 @@ _aspm_endpoints = [
     [
       {
         "type": "integer",
-        "pattern": "[0-9]+",
         "description": "Group ID",
         "name": "ID",
         "in": "path",
@@ -628,7 +614,6 @@ _aspm_endpoints = [
     [
       {
         "type": "integer",
-        "pattern": "[0-9]+",
         "description": "Group ID",
         "name": "ID",
         "in": "path",
@@ -645,7 +630,6 @@ _aspm_endpoints = [
     [
       {
         "type": "integer",
-        "pattern": "[0-9]+",
         "description": "Group ID",
         "name": "ID",
         "in": "path",
@@ -662,7 +646,6 @@ _aspm_endpoints = [
     [
       {
         "type": "integer",
-        "pattern": "[0-9]+",
         "description": "Group ID",
         "name": "ID",
         "in": "path",
@@ -943,7 +926,6 @@ _aspm_endpoints = [
     [
       {
         "type": "integer",
-        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -964,7 +946,6 @@ _aspm_endpoints = [
     [
       {
         "type": "integer",
-        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -980,7 +961,6 @@ _aspm_endpoints = [
     [
       {
         "type": "integer",
-        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -1006,7 +986,6 @@ _aspm_endpoints = [
     [
       {
         "type": "integer",
-        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -1032,7 +1011,6 @@ _aspm_endpoints = [
     [
       {
         "type": "integer",
-        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -1118,7 +1096,6 @@ _aspm_endpoints = [
     [
       {
         "type": "integer",
-        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -1139,7 +1116,6 @@ _aspm_endpoints = [
     [
       {
         "type": "integer",
-        "pattern": "[0-9]+",
         "name": "ID",
         "in": "path",
         "required": True
@@ -1342,6 +1318,63 @@ _aspm_endpoints = [
         "type": "string",
         "description": "URL encoded pagination JSON - limit, offset, direction, orderBy",
         "name": "pagination",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "aspm_combined_application_findings",
+    "GET",
+    "/aspm/combined/aspm-application-findings/v1",
+    "Get findings of a given type for an application resource, with filtering, sorting and pagination.",
+    "aspm",
+    [
+      {
+        "type": "string",
+        "description": "Bearer token",
+        "name": "Authorization",
+        "in": "header",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Application GCRN (selects the application)",
+        "name": "gcrn",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Finding type (e.g. packages, vulnerabilities, datastore_access)",
+        "name": "type",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "FQL filter over findings content (e.g. name:*'lib'). Application selection is via the gcrn param.",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 0,
+        "description": "Pagination offset",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 50,
+        "description": "Page size (max 1000)",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort expression field|direction (e.g. key|desc). Supported per finding type; packages "
+        "support 'key' and 'vulnerabilities'.",
+        "name": "sort",
         "in": "query"
       }
     ]
