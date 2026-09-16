@@ -101,6 +101,10 @@ class AgentTemplates(ServiceClass):
                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query agent template IDs with pagination.
 
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
+
         HTTP Method: GET
 
         Swagger URL

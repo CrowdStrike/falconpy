@@ -105,6 +105,9 @@ _deprecated_op_mapping = {
     "GetAgentInvocationV3": "",
     "InvokeAgentVersionExternalV1": "",
     "InvokePublishedAgentExternalV1": "",
+
+    "EntitiesAgentTemplatesV1": "",
+    "QueriesAgentTemplatesV1": "",
 }
 
 _deprecated_cls_mapping = {

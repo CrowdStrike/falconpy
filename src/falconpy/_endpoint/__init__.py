@@ -74,6 +74,7 @@ from .deprecated import _knowledge_base_audit_events_deprecated
 from .deprecated import _knowledge_bases_deprecated
 from .deprecated import _access_scopes_deprecated
 from .deprecated import _agent_invocation_deprecated
+from .deprecated import _agent_templates_deprecated
 
 from ._access_scopes import _access_scopes_endpoints
 from ._admission_control_policies import _admission_control_policies_endpoints
@@ -396,6 +397,7 @@ deprecated_endpoints.extend(_knowledge_base_audit_events_deprecated)
 deprecated_endpoints.extend(_knowledge_bases_deprecated)
 deprecated_endpoints.extend(_access_scopes_deprecated)
 deprecated_endpoints.extend(_agent_invocation_deprecated)
+deprecated_endpoints.extend(_agent_templates_deprecated)
 
 # Mapping of manually deprecated endpoints
 operation_deprecation_mapping = _deprecated_operation_mapping
