@@ -25,6 +25,7 @@ class KnowledgeBases(ServiceClass):
     def entities_knowledge_bases_create_v1(
         self,
         *,
+        attribution: Optional[dict] = None,
         created_at: Optional[str] = None,
         created_by: Optional[dict] = None,
         description: Optional[str] = None,
@@ -41,6 +42,7 @@ class KnowledgeBases(ServiceClass):
     def entities_knowledge_bases_update_v1(
         self,
         *,
+        attribution: Optional[dict] = None,
         created_at: Optional[str] = None,
         created_by: Optional[dict] = None,
         description: Optional[str] = None,

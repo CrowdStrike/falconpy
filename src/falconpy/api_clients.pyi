@@ -31,8 +31,11 @@ class APIClients(ServiceClass):
         self,
         *,
         description: Optional[str] = None,
+        is_confidential: Optional[bool] = None,
         name: Optional[str] = None,
+        redirect_uris: Optional[Union[str, List[str]]] = None,
         scopes: Optional[Union[str, List[str]]] = None,
+        type: Optional[str] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -48,8 +51,11 @@ class APIClients(ServiceClass):
         *,
         ids: Optional[str] = None,
         description: Optional[str] = None,
+        is_confidential: Optional[bool] = None,
         name: Optional[str] = None,
+        redirect_uris: Optional[Union[str, List[str]]] = None,
         scopes: Optional[Union[str, List[str]]] = None,
+        type: Optional[str] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
