@@ -74,6 +74,7 @@ _sensor_update_policies_endpoints = [
     "sensor_update_policy",
     [
       {
+        "type": "string",
         "enum": [
           "windows",
           "mac",
@@ -81,16 +82,11 @@ _sensor_update_policies_endpoints = [
           "linuxarm64",
           "zlinux"
         ],
-        "type": "string",
         "description": "The platform to return builds for",
         "name": "platform",
         "in": "query"
       },
       {
-        "enum": [
-          "prod",
-          "early_adopter"
-        ],
         "type": "array",
         "items": {
           "type": "string"
@@ -116,16 +112,16 @@ _sensor_update_policies_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "The offset to start retrieving records from",
         "name": "offset",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 500,
         "minimum": 1,
-        "type": "integer",
         "description": "The maximum records to return. [1-500]",
         "name": "limit",
         "in": "query"
@@ -153,16 +149,16 @@ _sensor_update_policies_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "The offset to start retrieving records from",
         "name": "offset",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 5000,
         "minimum": 1,
-        "type": "integer",
         "description": "The maximum records to return. [1-5000]",
         "name": "limit",
         "in": "query"
@@ -190,21 +186,22 @@ _sensor_update_policies_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "The offset to start retrieving records from",
         "name": "offset",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 5000,
         "minimum": 1,
-        "type": "integer",
         "description": "The maximum records to return. [1-5000]",
         "name": "limit",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "created_by.asc",
           "created_by.desc",
@@ -223,7 +220,6 @@ _sensor_update_policies_endpoints = [
           "precedence.asc",
           "precedence.desc"
         ],
-        "type": "string",
         "description": "The property to sort by",
         "name": "sort",
         "in": "query"
@@ -246,21 +242,22 @@ _sensor_update_policies_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "The offset to start retrieving records from",
         "name": "offset",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 5000,
         "minimum": 1,
-        "type": "integer",
         "description": "The maximum records to return. [1-5000]",
         "name": "limit",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "created_by.asc",
           "created_by.desc",
@@ -279,7 +276,6 @@ _sensor_update_policies_endpoints = [
           "precedence.asc",
           "precedence.desc"
         ],
-        "type": "string",
         "description": "The property to sort by",
         "name": "sort",
         "in": "query"
@@ -294,6 +290,7 @@ _sensor_update_policies_endpoints = [
     "sensor_update_policy",
     [
       {
+        "type": "string",
         "enum": [
           "add-host-group",
           "add-rule-group",
@@ -302,7 +299,6 @@ _sensor_update_policies_endpoints = [
           "remove-host-group",
           "remove-rule-group"
         ],
-        "type": "string",
         "description": "The action to perform",
         "name": "action_name",
         "in": "query",
@@ -366,20 +362,6 @@ _sensor_update_policies_endpoints = [
     ]
   ],
   [
-    "updateSensorUpdatePolicies",
-    "PATCH",
-    "/policy/entities/sensor-update/v1",
-    "Update Sensor Update Policies by specifying the ID of the policy and details to update",
-    "sensor_update_policy",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "deleteSensorUpdatePolicies",
     "DELETE",
     "/policy/entities/sensor-update/v1",
@@ -395,6 +377,20 @@ _sensor_update_policies_endpoints = [
         "description": "The IDs of the Sensor Update Policies to delete",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "updateSensorUpdatePolicies",
+    "PATCH",
+    "/policy/entities/sensor-update/v1",
+    "Update Sensor Update Policies by specifying the ID of the policy and details to update",
+    "sensor_update_policy",
+    [
+      {
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
@@ -470,16 +466,16 @@ _sensor_update_policies_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "The offset to start retrieving records from",
         "name": "offset",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 500,
         "minimum": 1,
-        "type": "integer",
         "description": "The maximum records to return. [1-500]",
         "name": "limit",
         "in": "query"
@@ -507,16 +503,16 @@ _sensor_update_policies_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "The offset to start retrieving records from",
         "name": "offset",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 5000,
         "minimum": 1,
-        "type": "integer",
         "description": "The maximum records to return. [1-5000]",
         "name": "limit",
         "in": "query"
@@ -544,21 +540,22 @@ _sensor_update_policies_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "The offset to start retrieving records from",
         "name": "offset",
         "in": "query"
       },
       {
+        "type": "integer",
         "maximum": 5000,
         "minimum": 1,
-        "type": "integer",
         "description": "The maximum records to return. [1-5000]",
         "name": "limit",
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "created_by.asc",
           "created_by.desc",
@@ -577,7 +574,6 @@ _sensor_update_policies_endpoints = [
           "precedence.asc",
           "precedence.desc"
         ],
-        "type": "string",
         "description": "The property to sort by",
         "name": "sort",
         "in": "query"
