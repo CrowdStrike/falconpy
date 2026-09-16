@@ -53,20 +53,18 @@ _real_time_response_audit_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "created_at",
           "updated_at",
           "deleted_at"
         ],
-        "type": "string",
         "description": "how to sort the session IDs. e.g. sort=created_at|desc will sort the results based on "
         "createdAt in descending order",
         "name": "sort",
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 1,
         "type": "string",
         "description": "number of sessions to be returned",
         "name": "limit",
