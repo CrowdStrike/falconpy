@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302
 
 _saas_security_endpoints = [
   [
@@ -45,15 +46,17 @@ _saas_security_endpoints = [
     "saas_security",
     [
       {
-        "enum": [
-          "Passed",
-          "Failed",
-          "Dismissed",
-          "Pending",
-          "Can't Run",
-          "Stale"
-        ],
         "type": "string",
+        "enum": [
+          "Can't Run",
+          "Dismissed",
+          "Failed",
+          "Passed",
+          "Pending",
+          "Stale",
+          "NA",
+          "Not Available"
+        ],
         "description": "Exposure status",
         "name": "status",
         "in": "query"
@@ -77,12 +80,12 @@ _saas_security_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           1,
           2,
           3
         ],
-        "type": "string",
         "description": "Impact",
         "name": "impact",
         "in": "query"
@@ -94,18 +97,110 @@ _saas_security_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "apps",
           "devices",
           "users",
           "assets",
           "permissions",
+          "shadow_vendors",
           "Falcon Shield Security Check",
           "custom"
         ],
-        "type": "string",
         "description": "Check Type",
         "name": "check_type",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Comma separated list of check tags names or ids",
+        "name": "check_tags",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Business owner email of the integration the check belongs to",
+        "name": "business_owner",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Org domain of the integration the check belongs to",
+        "name": "org_domain",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetAiAgentDetails",
+    "GET",
+    "/saas-security/entities/ai-agent-details/v3",
+    "GET AI Agent Details",
+    "saas_security",
+    [
+      {
+        "type": "string",
+        "description": "Agent item ID in format: 'agent_id|||integration_id' (id)",
+        "name": "id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetAiAgentsInventory",
+    "GET",
+    "/saas-security/entities/ai-agents/v3",
+    "GET AI Agents Inventory",
+    "saas_security",
+    [
+      {
+        "type": "string",
+        "description": "Agent name (partial match)",
+        "name": "name",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The maximum number of objects to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The starting index of the results",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Comma separated list of integration IDs",
+        "name": "integration_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter by access value (exact match)",
+        "name": "access",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter by agent owner email (partial match)",
+        "name": "agent_owner",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter by a single tool type contained in the agent's tool types",
+        "name": "tool_type",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter by a single knowledge source contained in the agent's knowledge sources",
+        "name": "knowledge_source",
         "in": "query"
       }
     ]
@@ -142,13 +237,13 @@ _saas_security_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "configuration_drift",
           "check_degraded",
           "integration_failure",
-          "Threat"
+          "threat"
         ],
-        "type": "string",
         "description": "The type of alert you want to get",
         "name": "type",
         "in": "query"
@@ -177,6 +272,54 @@ _saas_security_endpoints = [
         "type": "boolean",
         "name": "ascending",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetAppJournalV3",
+    "GET",
+    "/saas-security/entities/app-journal/v3",
+    "GET App Journal",
+    "saas_security",
+    [
+      {
+        "type": "string",
+        "description": "App item identity (app_item_id, format 'app_id|||integration_id')",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "integer",
+        "description": "The maximum number of objects to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The starting index of the results",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter by entry author: a full or partial creator name, a creator email address, or an API client id",
+        "name": "author",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateAppJournalCommentV3",
+    "POST",
+    "/saas-security/entities/app-journal/v3",
+    "POST App Journal Comment",
+    "saas_security",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
       }
     ]
   ],
@@ -222,13 +365,13 @@ _saas_security_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "approved",
           "in review",
           "rejected",
           "unclassified"
         ],
-        "type": "string",
         "description": "Comma separated list of application statuses (approved, in review, rejected, unclassified)",
         "name": "status",
         "in": "query"
@@ -343,6 +486,187 @@ _saas_security_endpoints = [
     ]
   ],
   [
+    "GetCheckJournalV3",
+    "GET",
+    "/saas-security/entities/check-journal/v3",
+    "GET Security Check Journal",
+    "saas_security",
+    [
+      {
+        "type": "string",
+        "description": "Security Check ID",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "integer",
+        "description": "The maximum number of objects to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The starting index of the results",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter by entry author: a full or partial creator name, a creator email address, or an API client id",
+        "name": "author",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateCheckJournalCommentV3",
+    "POST",
+    "/saas-security/entities/check-journal/v3",
+    "POST Security Check Journal Comment",
+    "saas_security",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetCheckParamsV3",
+    "GET",
+    "/saas-security/entities/check-params/v3",
+    "GET List Security Check Params",
+    "saas_security",
+    [
+      {
+        "type": "string",
+        "description": "Security Check ID",
+        "name": "id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "SetCheckParamV3",
+    "POST",
+    "/saas-security/entities/check-params/v3",
+    "POST Set a Security Check Param",
+    "saas_security",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Security Check ID",
+        "name": "id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "RestoreAffectedEntityV3",
+    "POST",
+    "/saas-security/entities/check-restore-affected/v3",
+    "POST Restore Affected Entity",
+    "saas_security",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Security Check ID",
+        "name": "id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "RestoreSecurityCheckV3",
+    "POST",
+    "/saas-security/entities/check-restore/v3",
+    "POST Restore Security Check by ID",
+    "saas_security",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Security Check ID",
+        "name": "id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetCheckTagsV3",
+    "GET",
+    "/saas-security/entities/check-tags/v3",
+    "GET List Check Tags",
+    "saas_security",
+    []
+  ],
+  [
+    "ConnectCheckTagV3",
+    "POST",
+    "/saas-security/entities/check-tags/v3",
+    "POST Connect a Check Tag to a Security Check",
+    "saas_security",
+    [
+      {
+        "type": "string",
+        "description": "Security Check ID",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Check Tag ID",
+        "name": "tag_id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DisconnectCheckTagV3",
+    "DELETE",
+    "/saas-security/entities/check-tags/v3",
+    "DELETE Disconnect a Check Tag from a Security Check",
+    "saas_security",
+    [
+      {
+        "type": "string",
+        "description": "Security Check ID",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Check Tag ID",
+        "name": "tag_id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetSecurityChecksV3",
     "GET",
     "/saas-security/entities/checks/v3",
@@ -368,15 +692,17 @@ _saas_security_endpoints = [
         "in": "query"
       },
       {
-        "enum": [
-          "Passed",
-          "Failed",
-          "Dismissed",
-          "Pending",
-          "Can't Run",
-          "Stale"
-        ],
         "type": "string",
+        "enum": [
+          "Can't Run",
+          "Dismissed",
+          "Failed",
+          "Passed",
+          "Pending",
+          "Stale",
+          "NA",
+          "Not Available"
+        ],
         "description": "Exposure status",
         "name": "status",
         "in": "query"
@@ -388,12 +714,12 @@ _saas_security_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "Low",
           "Medium",
           "High"
         ],
-        "type": "string",
         "description": "Impact",
         "name": "impact",
         "in": "query"
@@ -405,16 +731,17 @@ _saas_security_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "apps",
           "devices",
           "users",
           "assets",
           "permissions",
+          "shadow_vendors",
           "Falcon Shield Security Check",
           "custom"
         ],
-        "type": "string",
         "description": "Check Type",
         "name": "check_type",
         "in": "query"
@@ -423,6 +750,18 @@ _saas_security_endpoints = [
         "type": "string",
         "description": "Comma separated list of check tags names or ids",
         "name": "check_tags",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Business owner email of the integration the check belongs to",
+        "name": "business_owner",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Org domain of the integration the check belongs to",
+        "name": "org_domain",
         "in": "query"
       }
     ]
@@ -777,6 +1116,54 @@ _saas_security_endpoints = [
     "GET System Users",
     "saas_security",
     []
+  ],
+  [
+    "GetUserJournalV3",
+    "GET",
+    "/saas-security/entities/user-journal/v3",
+    "GET User Journal",
+    "saas_security",
+    [
+      {
+        "type": "string",
+        "description": "User item identity (email / login name)",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "integer",
+        "description": "The maximum number of objects to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The starting index of the results",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter by entry author: a full or partial creator name, a creator email address, or an API client id",
+        "name": "author",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateUserJournalCommentV3",
+    "POST",
+    "/saas-security/entities/user-journal/v3",
+    "POST User Journal Comment",
+    "saas_security",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
   ],
   [
     "GetUserInventoryV3",
