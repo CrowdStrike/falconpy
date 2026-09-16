@@ -3332,6 +3332,53 @@ class ASPM(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_combined_aspm_findings(self: object,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get findings of a given type for an application resource, with filtering, sorting and pagination.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/aspmapi/aspm-combined-application-findings
+
+        Keyword arguments
+        -----------------
+        gcrn : str
+            Application GCRN (selects the application)
+        type : str
+            Finding type (e.g. packages, vulnerabilities, datastore_access)
+        filter : str
+            FQL filter over findings content (e.g. name:*'lib'). Application selection is via the gcrn param.
+        offset : int
+            Pagination offset.
+        limit : int
+            Page size (max 1000)
+        sort : str
+            Sort expression field|direction (e.g. key|desc). Supported per finding type; packages support 'key' and
+            'vulnerabilities'
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="aspm_combined_application_findings",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    aspm_combined_application_findings = get_combined_aspm_findings
     ExecuteFunctionDataCount = execute_function_data_count
     ExecuteFunctionsCount = execute_functions_count
     ExecuteFunctionDataQueryCount = execute_function_data_query_count
