@@ -99,6 +99,10 @@ class AdmissionControlPolicies(ServiceClass):
     def create_policy(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create an admission control policy.
 
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
+
         HTTP Method: POST
 
         Swagger URL
@@ -241,6 +245,10 @@ class AdmissionControlPolicies(ServiceClass):
     def add_host_groups(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Add one or more host groups to an admission control policy.
 
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
+
         HTTP Method: POST
 
         Swagger URL
@@ -290,6 +298,10 @@ class AdmissionControlPolicies(ServiceClass):
     def remove_host_groups(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Remove one or more host groups from an admission control policy.
 
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
+
         HTTP Method: DELETE
 
         Swagger URL
@@ -323,6 +335,10 @@ class AdmissionControlPolicies(ServiceClass):
     @force_default(defaults=["body"], default_types=["dict"])
     def update_policy_precedence(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update admission control policy precedence.
+
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
 
         HTTP Method: PATCH
 
@@ -370,6 +386,10 @@ class AdmissionControlPolicies(ServiceClass):
     @force_default(defaults=["body"], default_types=["dict"])
     def add_custom_rules(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Add one or more custom Rego rules to a rule group in an admission control policy.
+
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
 
         The requested custom rules are also added to all other unspecified rule groups in the policy with action 'Disabled'.
 
@@ -426,6 +446,10 @@ class AdmissionControlPolicies(ServiceClass):
                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete one or more custom Rego rules from all rule groups in an admission control policy.
 
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
+
         HTTP Method: DELETE
 
         Swagger URL
@@ -459,6 +483,10 @@ class AdmissionControlPolicies(ServiceClass):
     @force_default(defaults=["body"], default_types=["dict"])
     def set_rule_group_precedence(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Change precedence of rule groups within an admission control policy.
+
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
 
         HTTP Method: PUT
 
@@ -506,6 +534,10 @@ class AdmissionControlPolicies(ServiceClass):
                                      **kwargs
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Replace labels and/or namespaces of a rule group within an admission control policy.
+
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
 
         HTTP Method: PUT
 
@@ -563,6 +595,10 @@ class AdmissionControlPolicies(ServiceClass):
     def create_rule_groups(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create one or more rule groups and add them to an existing admission control policy.
 
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
+
         The list of new rule groups will be created with the last rule group having highest precedence,
         second to last with second highest precedence, and so on.
 
@@ -610,6 +646,10 @@ class AdmissionControlPolicies(ServiceClass):
     @force_default(defaults=["body"], default_types=["dict"])
     def update_rule_groups(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a rule group.
+
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
 
         HTTP Method: PATCH
 
@@ -676,6 +716,10 @@ class AdmissionControlPolicies(ServiceClass):
     def delete_rule_groups(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete rule groups.
 
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
+
         HTTP Method: DELETE
 
         Swagger URL
@@ -709,6 +753,10 @@ class AdmissionControlPolicies(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policies(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search admission control policies.
+
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
 
         HTTP Method: GET
 

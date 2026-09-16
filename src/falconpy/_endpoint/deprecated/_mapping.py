@@ -85,6 +85,22 @@ _deprecated_op_mapping = {
 
     "ListAccessScopesExternal": "",
     "QueryAccessScopesExternal": "",
+
+    "admission_control_add_host_groups": "",
+    "admission_control_add_rule_group_custom_rule": "",
+    "admission_control_create_policy": "",
+    "admission_control_create_rule_groups": "",
+    "admission_control_delete_policies": "",
+    "admission_control_delete_rule_groups": "",
+    "admission_control_get_policies": "",
+    "admission_control_query_policies": "",
+    "admission_control_remove_host_groups": "",
+    "admission_control_remove_rule_group_custom_rule": "",
+    "admission_control_replace_rule_group_selectors": "",
+    "admission_control_set_rule_group_precedence": "",
+    "admission_control_update_policy": "",
+    "admission_control_update_policy_precedence": "",
+    "admission_control_update_rule_groups": "",
 }
 
 _deprecated_cls_mapping = {
