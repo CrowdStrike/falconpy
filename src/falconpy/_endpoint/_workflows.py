@@ -155,7 +155,9 @@ _workflows_endpoints = [
     "WorkflowExecutionsCombined",
     "GET",
     "/workflows/combined/executions/v1",
-    "Search workflow executions based on the provided filter",
+    "Search workflow executions based on the provided filter. Note: the 'entity' filter matches associated "
+    "entity values (e.g. hostnames, IPs, emails, detection IDs) by exact match; only the first 1024 characters of "
+    "each entity value are indexed for filtering.",
     "workflows",
     [
       {
@@ -182,6 +184,18 @@ _workflows_endpoints = [
         "description": "Sort items by providing a comma separated list of property and direction (eg "
         "name.desc,time.asc). If direction is omitted, defaults to descending.",
         "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "maxItems": 4,
+        "description": "Fields to omit from the response; valid values are (trigger, activities, flows, "
+        "submodels). When specified, the corresponding node-level details are skipped.",
+        "name": "skip_fields",
         "in": "query"
       }
     ]
