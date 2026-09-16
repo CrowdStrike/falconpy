@@ -79,7 +79,7 @@ _container_alerts_endpoints = [
       {
         "type": "string",
         "description": "Search Container Alerts using a query in Falcon Query Language (FQL). Supported filter "
-        "fields:  cid  container_id  last_seen  name  severity",
+        "fields:  cid  container_id  context_image_filename  last_seen  name  sensor_type  severity",
         "name": "filter",
         "in": "query"
       },
