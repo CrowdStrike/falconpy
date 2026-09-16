@@ -63,6 +63,10 @@ class AgentInvocation(ServiceClass):
                                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Invoke a published agent by ID with the specified input.
 
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
+
         HTTP Method: POST
 
         Swagger URL
@@ -199,6 +203,10 @@ class AgentInvocation(ServiceClass):
                                          **kwargs
                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Invoke a specific agent version by agent ID and version ID with the specified input.
+
+        DECOMMISSIONED: This operation is no longer available in CrowdStrike's API.
+        Calling this method will result in an error from the API.
+
 
         HTTP Method: POST
 

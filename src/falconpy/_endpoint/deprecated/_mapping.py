@@ -101,6 +101,10 @@ _deprecated_op_mapping = {
     "admission_control_update_policy": "",
     "admission_control_update_policy_precedence": "",
     "admission_control_update_rule_groups": "",
+
+    "GetAgentInvocationV3": "",
+    "InvokeAgentVersionExternalV1": "",
+    "InvokePublishedAgentExternalV1": "",
 }
 
 _deprecated_cls_mapping = {
