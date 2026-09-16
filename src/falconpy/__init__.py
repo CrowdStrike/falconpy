@@ -118,6 +118,7 @@ from .api_complete import APIHarness, APIHarnessV2
 from .application_abuse_exclusions import ApplicationAbuseExclusions
 from .aspm import ASPM
 from .audit import Audit
+from .browser_security import BrowserSecurity
 from .cao_hunting import CAOHunting
 from .case_management import CaseManagement
 from .certificate_based_exclusions import CertificateBasedExclusions
@@ -309,7 +310,8 @@ __all__ = [
     "Models", "ScanningOrchestrator",
     "Spans", "Stream",
     "Tools", "Agents",
-    "ApplicationAbuseExclusions", "Audit"
+    "ApplicationAbuseExclusions", "Audit",
+    "BrowserSecurity"
     ]
 """
 This is free and unencumbered software released into the public domain.
