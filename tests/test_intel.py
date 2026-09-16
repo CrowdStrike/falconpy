@@ -81,3 +81,8 @@ class TestIntel:
 
     def test_all_code_paths(self):
         assert self.intel_test_all_code_paths() is True
+
+    def test_payload_coverage(self):
+        """Exercise nested payload builder branches."""
+        falcon.cao_incidents_aggregates_v1(max="string", min="string", filters="string", other_bucket="string", other_bucket_key="string")
+        assert True
