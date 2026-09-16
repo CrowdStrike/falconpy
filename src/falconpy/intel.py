@@ -496,6 +496,8 @@ class Intel(ServiceClass):
             Malware family entities to retrieve. String or list of strings.
             Malware family names should be in lower case with spaces, dots and
             slashes replaced with dashes.
+        fields : list
+            Fields to return in response.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
