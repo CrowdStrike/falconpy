@@ -76,6 +76,11 @@ from ._payload import (
     update_dashboard_labels_payload,
     update_file_labels_payload,
     update_saved_query_labels_payload,
+    bulk_create_persisted_aggregations_payload,
+    bulk_update_persisted_aggregations_payload,
+    create_persisted_aggregation_payload,
+    rollback_parser_payload,
+    update_persisted_aggregation_payload,
     )
 from ._result import Result
 from ._service_class import ServiceClass
@@ -1937,7 +1942,9 @@ class NGSIEM(ServiceClass):
         update_mode : str
             How to update the file entries. String.
             Available values:
-                 append      update
+                 all                   falcon
+                 parsers-repository    query-audit
+                 third-party
         key_columns : str
             For update mode, the comma separated list of key columns to use when matching entries. String.
             (REQUIRED when update_mode=update)
@@ -3930,6 +3937,452 @@ class NGSIEM(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_create_persisted_aggregations(self: object,
+                                           body: dict = None,
+                                           **kwargs
+                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create Multiple Persisted Aggregations.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkCreatePersistedAggregations
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "items": [
+                        {
+                            "description": "string",
+                            "destination": "string",
+                            "enabled": true,
+                            "labels": [
+                                "string"
+                            ],
+                            "name": "string",
+                            "query_ownership_type": "string",
+                            "query_string": "string",
+                            "schedule": {
+                                "backfill_amount": 0,
+                                "backfill_unit": "string",
+                                "interval": "string",
+                                "offset_seconds": 0,
+                                "timestamp_type": "string"
+                            },
+                            "search_domain": "string",
+                            "static_fields": [
+                                "string"
+                            ],
+                            "tag": "string"
+                        }
+                    ]
+                }
+        items : list
+            Aggregations to create (max 100)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = bulk_create_persisted_aggregations_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BulkCreatePersistedAggregations",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_update_persisted_aggregations(self: object,
+                                           body: dict = None,
+                                           **kwargs
+                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update Multiple Persisted Aggregations.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkUpdatePersistedAggregations
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "items": [
+                        {
+                            "description": "string",
+                            "enabled": true,
+                            "id": "string",
+                            "labels": [
+                                "string"
+                            ],
+                            "name": "string",
+                            "search_domain": "string"
+                        }
+                    ]
+                }
+        items : list
+            Aggregations to update (max 100)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = bulk_update_persisted_aggregations_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BulkUpdatePersistedAggregations",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_persisted_aggregation(self: object,
+                                     body: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create a Persisted Aggregation in LogScale.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreatePersistedAggregation
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "description": "string",
+                    "destination": "string",
+                    "enabled": true,
+                    "labels": [
+                        "string"
+                    ],
+                    "name": "string",
+                    "query_ownership_type": "string",
+                    "query_string": "string",
+                    "schedule": {
+                        "backfill_amount": 0,
+                        "backfill_unit": "string",
+                        "interval": "string",
+                        "offset_seconds": 0,
+                        "timestamp_type": "string"
+                    },
+                    "search_domain": "string",
+                    "static_fields": [
+                        "string"
+                    ],
+                    "tag": "string"
+                }
+        description : str
+            Optional description (max 1024 chars)
+        destination : str
+            Destination PA repository name (must be a repository of kind PersistedAggregation)
+        enabled : bool
+            Enable immediately.
+        labels : list
+            Optional labels (max 64 chars each)
+        name : str
+            Display name (alphanumeric start, max 128 chars)
+        query_ownership_type : str
+            Ownership type (defaults to 'Organization' if not specified; valid values: 'Organization', 'User')
+        query_string : str
+            LogScale query.
+        schedule : dict
+            Schedule configuration.
+        search_domain : str
+            Search domain (view or repository) name to query.
+        static_fields : list
+            Optional static key-value fields (max 20)
+        tag : str
+            Unique tag identifier (alphanumeric, underscore, hyphen, period; max 128 chars; must start with letter)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = create_persisted_aggregation_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreatePersistedAggregation",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_persisted_aggregation(self: object,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete one or more Persisted Aggregations by ID.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/DeletePersistedAggregation
+
+        Keyword arguments
+        -----------------
+        ids : list
+            Persisted aggregation ID(s) to delete. Supports single or multiple IDs.
+        search_domain : str
+            name of search domain (view or repo)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeletePersistedAggregation",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_parser_rollback_options(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve available rollback versions for a parser.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetParserRollbackOptions
+
+        Keyword arguments
+        -----------------
+        parser_id : str
+            The unique identifier for the parser.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetParserRollbackOptions",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_persisted_aggregation(self: object,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get a persisted aggregation by ID.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetPersistedAggregation
+
+        Keyword arguments
+        -----------------
+        ids : str
+            Persisted aggregation ID.
+        search_domain : str
+            name of search domain (view or repo)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetPersistedAggregation",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_persisted_aggregations(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """List persisted aggregations in a search domain with pagination.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ListPersistedAggregations
+
+        Keyword arguments
+        -----------------
+        limit : str
+            maximum number of results to return.
+        offset : str
+            number of results to offset the returned results by.
+        filter : str
+            FQL filter to apply to the name of the content, only currently support text match on name field:
+            name:~'value'
+        search_domain : str
+            name of search domain (view or repo)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ListPersistedAggregations",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def rollback_parser(self: object,
+                        body: dict = None,
+                        **kwargs
+                        ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Rollback a parser to a previously installed version.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/RollbackParser
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "parser_id": "string",
+                    "target_version": "string"
+                }
+        parser_id : str
+            The unique identifier for the parser to rollback.
+        target_version : str
+            The version to rollback to.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = rollback_parser_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RollbackParser",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_persisted_aggregation(self: object,
+                                     body: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update a Persisted Aggregation.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdatePersistedAggregation
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "description": "string",
+                    "enabled": true,
+                    "id": "string",
+                    "labels": [
+                        "string"
+                    ],
+                    "name": "string",
+                    "search_domain": "string"
+                }
+        description : str
+            Optional: new description.
+        enabled : bool
+            Optional: enable/disable aggregation.
+        id : str
+            Aggregation ID (required)
+        labels : list
+            Optional: new labels.
+        name : str
+            Optional: new name.
+        search_domain : str
+            Search domain (view or repository) name (required for access control)
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = update_persisted_aggregation_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdatePersistedAggregation",
+            body=body
+            )
+
     addDashboardLabels = add_dashboard_labels
     addFileLabels = add_file_labels
     addSavedQueryLabels = add_saved_query_labels
@@ -3938,6 +4391,7 @@ class NGSIEM(ServiceClass):
     bulkAddSavedQueryLabels = bulk_add_saved_query_labels
     BulkCreateDashboardsFromTemplate = bulk_create_dashboards_from_template
     BulkCreateLookupFiles = bulk_create_lookup_files
+    BulkCreatePersistedAggregations = bulk_create_persisted_aggregations
     BulkCreateSavedQueriesFromTemplate = bulk_create_saved_queries_from_template
     BulkGetLookupFiles = bulk_get_lookup_files
     bulkRemoveDashboardLabels = bulk_remove_dashboard_labels
@@ -3947,15 +4401,23 @@ class NGSIEM(ServiceClass):
     BulkUpdateDashboardsFromTemplate = bulk_update_dashboards_from_template
     bulkUpdateLookupFileLabels = bulk_update_lookup_file_labels
     BulkUpdateLookupFiles = bulk_update_lookup_files
+    BulkUpdatePersistedAggregations = bulk_update_persisted_aggregations
     BulkUpdateSavedQueriesFromTemplate = bulk_update_saved_queries_from_template
     bulkUpdateSavedQueryLabels = bulk_update_saved_query_labels
     CreateParserExtension = create_parser_extension
+    CreatePersistedAggregation = create_persisted_aggregation
+    DeletePersistedAggregation = delete_persisted_aggregation
+    GetParserRollbackOptions = get_parser_rollback_options
+    GetPersistedAggregation = get_persisted_aggregation
+    ListPersistedAggregations = list_persisted_aggregations
     removeDashboardLabels = remove_dashboard_labels
     removeFileLabels = remove_file_labels
     removeSavedQueryLabels = remove_saved_query_labels
+    RollbackParser = rollback_parser
     updateDashboardLabels = update_dashboard_labels
     updateFileLabels = update_file_labels
     UpdateParserExtension = update_parser_extension
+    UpdatePersistedAggregation = update_persisted_aggregation
     updateSavedQueryLabels = update_saved_query_labels
     UploadLookupV1 = upload_file
     GetLookupV1 = get_file

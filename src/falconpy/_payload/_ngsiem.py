@@ -727,3 +727,134 @@ def update_saved_query_labels_payload(passed_keywords: dict) -> dict:
             returned_payload[key] = passed_keywords.get(key)
 
     return returned_payload
+
+
+def bulk_create_persisted_aggregations_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a BulkCreatePersistedAggregations request.
+
+    {
+        "items": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["items"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def bulk_update_persisted_aggregations_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a BulkUpdatePersistedAggregations request.
+
+    {
+        "items": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["items"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def create_persisted_aggregation_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a CreatePersistedAggregation request.
+
+    {
+        "description": "string",
+        "destination": "string",
+        "enabled": true,
+        "labels": [
+            "string"
+        ],
+        "name": "string",
+        "query_ownership_type": "string",
+        "query_string": "string",
+        "schedule": {
+            "backfill_amount": 0,
+            "backfill_unit": "string",
+            "interval": "string",
+            "offset_seconds": 0,
+            "timestamp_type": "string"
+        },
+        "search_domain": "string",
+        "static_fields": [
+            "string"
+        ],
+        "tag": "string"
+    }
+    """
+    returned_payload = {}
+    keys = [
+        "description",
+        "destination",
+        "enabled",
+        "labels",
+        "name",
+        "query_ownership_type",
+        "query_string",
+        "schedule",
+        "search_domain",
+        "static_fields",
+        "tag"
+    ]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    schedule_keys = ["backfill_amount", "backfill_unit", "interval", "offset_seconds", "timestamp_type"]
+    if "schedule" not in returned_payload:
+        returned_payload["schedule"] = {}
+    for key in schedule_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["schedule"][key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def rollback_parser_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a RollbackParser request.
+
+    {
+        "parser_id": "string",
+        "target_version": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["parser_id", "target_version"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def update_persisted_aggregation_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a UpdatePersistedAggregation request.
+
+    {
+        "description": "string",
+        "enabled": true,
+        "id": "string",
+        "labels": [
+            "string"
+        ],
+        "name": "string",
+        "search_domain": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["description", "enabled", "id", "labels", "name", "search_domain"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload

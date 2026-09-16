@@ -229,6 +229,7 @@ from ._ngsiem import (
     bulk_add_saved_query_labels_payload,
     bulk_create_dashboards_from_template_payload,
     bulk_create_lookup_files_payload,
+    bulk_create_persisted_aggregations_payload,
     bulk_create_saved_queries_from_template_payload,
     bulk_remove_dashboard_labels_payload,
     bulk_remove_lookup_file_labels_payload,
@@ -237,9 +238,11 @@ from ._ngsiem import (
     bulk_update_dashboards_from_template_payload,
     bulk_update_lookup_file_labels_payload,
     bulk_update_lookup_files_payload,
+    bulk_update_persisted_aggregations_payload,
     bulk_update_saved_queries_from_template_payload,
     bulk_update_saved_query_labels_payload,
     create_parser_extension_payload,
+    create_persisted_aggregation_payload,
     ngsiem_auto_update_policy_payload,
     ngsiem_bulk_install_parsers_payload,
     ngsiem_clone_parser_payload,
@@ -248,9 +251,11 @@ from ._ngsiem import (
     ngsiem_install_parser_payload,
     ngsiem_parser_payload,
     ngsiem_search_payload,
+    rollback_parser_payload,
     update_dashboard_labels_payload,
     update_file_labels_payload,
     update_parser_extension_payload,
+    update_persisted_aggregation_payload,
     update_saved_query_labels_payload,
     )
 from ._prevention_policy import prevention_policy_payload
@@ -436,5 +441,8 @@ __all__ = [
     "update_destination_group_payload", "update_seraphic_rule_payload",
     "generate_gcp_infra_manager_script_payload", "exchange_github_app_code_payload",
     "register_scm_app_payload", "create_allowlist_rules_payload",
-    "update_allowlist_rules_payload", "aggregate_netscan_detections_payload"
+    "update_allowlist_rules_payload", "aggregate_netscan_detections_payload",
+    "bulk_create_persisted_aggregations_payload", "bulk_update_persisted_aggregations_payload",
+    "create_persisted_aggregation_payload", "rollback_parser_payload",
+    "update_persisted_aggregation_payload"
 ]
