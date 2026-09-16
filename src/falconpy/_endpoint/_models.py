@@ -61,7 +61,7 @@ _models_endpoints = [
     "QueriesModelsV1",
     "GET",
     "/agentic-studio/queries/models/v1",
-    "Query models based on the provided filters. TBD what the available filters are.",
+    "Query models based on the provided filters.",
     "models",
     [
       {
