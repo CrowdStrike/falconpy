@@ -79,6 +79,7 @@ from ._agent_invocation import _agent_invocation_endpoints
 from ._agent_templates import _agent_templates_endpoints
 from ._agent_versions import _agent_versions_endpoints
 from ._agents import _agents_endpoints
+from ._aidr import _aidr_endpoints
 from ._alerts import _alerts_endpoints
 from ._api_clients import _api_clients_endpoints
 from ._api_integrations import _api_integrations_endpoints
@@ -214,6 +215,7 @@ api_endpoints.extend(_agent_invocation_endpoints)
 api_endpoints.extend(_agent_templates_endpoints)
 api_endpoints.extend(_agent_versions_endpoints)
 api_endpoints.extend(_agents_endpoints)
+api_endpoints.extend(_aidr_endpoints)
 api_endpoints.extend(_alerts_endpoints)
 api_endpoints.extend(_api_clients_endpoints)
 api_endpoints.extend(_api_integrations_endpoints)
