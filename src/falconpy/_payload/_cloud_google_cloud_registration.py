@@ -119,3 +119,21 @@ def cloud_registration_gcp_post_terraform_script_payload(passed_keywords: dict) 
             returned_payload[key] = passed_keywords.get(key)
 
     return returned_payload
+
+
+def generate_gcp_infra_manager_script_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a cloud_registration_gcp_post_infra_manager_script request.
+
+    {
+        "resources": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["resources"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload

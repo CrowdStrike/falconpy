@@ -126,6 +126,7 @@ from ._cloud_azure_registration import (
 from ._cloud_google_cloud_registration import (
     cloud_google_registration_create_payload,
     cloud_registration_gcp_post_terraform_script_payload,
+    generate_gcp_infra_manager_script_payload,
     )
 from ._cloud_oci_registration import (
     cloud_oci_refresh_payload,
@@ -429,5 +430,6 @@ __all__ = [
     "create_destination_group_payload", "deactivate_agents_payload",
     "query_combined_seraphic_agents_payload", "query_destination_groups_payload",
     "query_seraphic_agents_payload", "query_seraphic_rules_payload",
-    "update_destination_group_payload", "update_seraphic_rule_payload"
+    "update_destination_group_payload", "update_seraphic_rule_payload",
+    "generate_gcp_infra_manager_script_payload"
 ]
