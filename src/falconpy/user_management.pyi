@@ -233,14 +233,115 @@ class UserManagement(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def combined_user_roles_v3(
+        self,
+        *,
+        user_uuid: Optional[str] = None,
+        cid: Optional[str] = None,
+        direct_only: Optional[bool] = None,
+        filter: Optional[str] = None,
+        offset: Optional[int] = None,
+        limit: Optional[int] = None,
+        sort: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def aggregate_users_v2(
+        self,
+        *,
+        user_type: Optional[str] = None,
+        date_ranges: Optional[list] = None,
+        exclude: Optional[str] = None,
+        extended_bounds: Optional[dict] = None,
+        field: Optional[str] = None,
+        filter: Optional[str] = None,
+        filters_spec: Optional[dict] = None,
+        include: Optional[str] = None,
+        interval: Optional[str] = None,
+        max_doc_count: Optional[int] = None,
+        min_doc_count: Optional[int] = None,
+        missing: Optional[str] = None,
+        name: Optional[str] = None,
+        percents: Optional[list] = None,
+        q: Optional[str] = None,
+        ranges: Optional[list] = None,
+        size: Optional[int] = None,
+        sort: Optional[str] = None,
+        sub_aggregates: Optional[list] = None,
+        time_zone: Optional[str] = None,
+        type: Optional[str] = None,
+        body: Optional[list] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def get_user_invitations(
+        self,
+        *,
+        ids: Optional[Union[str, List[str]]] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def query_user_invitations(
+        self,
+        *,
+        filter: Optional[str] = None,
+        sort: Optional[str] = None,
+        offset: Optional[int] = None,
+        limit: Optional[int] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def query_users_v2(
+        self,
+        *,
+        filter: Optional[str] = None,
+        offset: Optional[int] = None,
+        limit: Optional[int] = None,
+        sort: Optional[str] = None,
+        user_type: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def retrieve_users_v2(
+        self,
+        *,
+        ids: Optional[Union[str, List[str]]] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def get_user_allowed_actions(
+        self,
+        *,
+        allowed_actions: Optional[list] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def update_user_roles(
+        self,
+        *,
+        action: Optional[str] = None,
+        cid: Optional[str] = None,
+        expires_at: Optional[str] = None,
+        role_ids: Optional[Union[str, List[str]]] = None,
+        uuid: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
     aggregateUsersV1 = aggregate_users
+    aggregateUsersV2 = aggregate_users_v2
     combinedUserRolesV1 = get_user_grants_v1
     CombinedUserRolesV2 = get_user_grants
+    CombinedUserRolesV3 = combined_user_roles_v3
     get_user_roles = get_user_grants
     get_user_roles_combined = get_user_grants
     entitiesRolesGETV2 = get_roles_mssp
     entitiesRolesV1 = get_roles_mssp_v1
+    getUserInvitationsGETV1 = get_user_invitations
+    queryUserInvitationsV1 = query_user_invitations
+    queryUserV2 = query_users_v2
+    retrieveUsersGETV2 = retrieve_users_v2
     userActionV1 = user_action
+    userAllowedActionsV1 = get_user_allowed_actions
     userRolesActionV1 = user_roles_action
     retrieveUsersGETV1 = retrieve_users
     createUserV1 = create_user_mssp
@@ -262,3 +363,4 @@ class UserManagement(ServiceClass):
     RetrieveEmailsByCID = retrieve_emails_by_cid
     RetrieveUserUUIDsByCID = retrieve_user_uuids_by_cid
     RetrieveUserUUID = retrieve_user_uuid
+    userRolesActionV2 = update_user_roles

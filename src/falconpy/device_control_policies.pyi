@@ -64,6 +64,7 @@ class DeviceControlPolicies(ServiceClass):
         *,
         bluetooth_custom_notifications: Optional[dict] = None,
         usb_custom_notifications: Optional[dict] = None,
+        usb_exceptions: Optional[dict] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
