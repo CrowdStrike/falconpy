@@ -200,11 +200,12 @@ _quick_scan_pro_endpoints = [
         "ent.technique,static_indicators,malware_config.url,malware_config.domain,malware_config.ip,artifacts_tree.node "
         "s.type,artifacts_tree.nodes.value,artifacts_tree.nodes.verdict,artifacts_tree.nodes.verdict_reasons,artifacts_"
         "tree.nodes.malware_family,artifacts_tree.nodes.adversary,artifacts_tree.nodes.properties.name,artifacts_tree.n "
-        "odes.properties.repository,artifacts_tree.nodes.properties.version,yara_rules.rule_name,yara_rules.sha256,yara "
-        "_rules.tags\nAvailable filter fields that supports wildcard (*): mitre_attacks.description, "
-        "yara_rules.description\nAvailable filter fields that supports range comparisons (>, <, >=, <=): "
-        "created_timestamp, updated_timestamp, file_size, yara_rules.created_at, yara_rules.updated_at\nAll filter "
-        "fields and operations supports negation (!).\n_all field is used to search between all fields.",
+        "odes.properties.repository,artifacts_tree.nodes.properties.version,artifacts_tree.nodes.properties.authors,yar "
+        "a_rules.rule_name,yara_rules.sha256,yara_rules.tags\nAvailable filter fields that supports wildcard (*): "
+        "mitre_attacks.description, yara_rules.description\nAvailable filter fields that supports range comparisons (>, "
+        " <, >=, <=): created_timestamp, updated_timestamp, file_size, yara_rules.created_at, "
+        "yara_rules.updated_at\nAll filter fields and operations supports negation (!).\n_all field is used to search "
+        "between all fields.",
         "name": "filter",
         "in": "query",
         "required": True
