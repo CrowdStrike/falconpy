@@ -2330,6 +2330,8 @@ class DataProtectionConfiguration(ServiceClass):
         offset : int
             The offset to start retrieving records from. Integer.
             Use with the limit parameter to manage pagination of results.
+        sort : str
+            The sort instructions to order by on. Allowed values are 'name', 'created' and 'last_updated'.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -2374,6 +2376,8 @@ class DataProtectionConfiguration(ServiceClass):
         offset : int
             The offset to start retrieving records from. Integer.
             Use with the limit parameter to manage pagination of results.
+        sort : str
+            The sort instructions to order by on. Allowed values are 'name', 'executable_name', 'created' and 'last_updated'.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -2488,6 +2492,9 @@ class DataProtectionConfiguration(ServiceClass):
         offset : int
             The offset to start retrieving records from. Integer.
             Use with the limit parameter to manage pagination of results.
+        sort : str
+            The sort instructions to order by on. Allowed values are 'name', 'type', 'deleted', 'application_id',
+            'provider_location_id', 'enterprise_account_id', 'created' and 'last_updated'.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
