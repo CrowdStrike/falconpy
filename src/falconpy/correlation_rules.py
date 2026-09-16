@@ -108,7 +108,7 @@ class CorrelationRules(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/combined_rules.get.v1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/combined.rules.get.v1
 
         Keyword arguments
         -----------------
@@ -406,7 +406,7 @@ class CorrelationRules(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities_rules.get.v1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities.rules.get.v1
 
         Keyword arguments
         -----------------
@@ -480,7 +480,7 @@ class CorrelationRules(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities_rules.post.v1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities.rules.post.v1
 
         Keyword arguments
         -----------------
@@ -635,7 +635,7 @@ class CorrelationRules(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities_rules.delete.v1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities.rules.delete.v1
 
         Keyword arguments
         -----------------
@@ -665,7 +665,7 @@ class CorrelationRules(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities_rules.patch.v1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities.rules.patch.v1
 
         Keyword arguments
         -----------------
@@ -823,7 +823,7 @@ class CorrelationRules(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/queries_rules.get.v1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/queries.rules.get.v1
 
         Keyword arguments
         -----------------

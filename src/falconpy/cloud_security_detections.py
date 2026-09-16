@@ -275,7 +275,7 @@ class CloudSecurityDetections(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-detections/cspm_evaluations_iom_entities_post
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-detections/cspm-evaluations-iom-entities-post
 
         Keyword arguments
         -----------------

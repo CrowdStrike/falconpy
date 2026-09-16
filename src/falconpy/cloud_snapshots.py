@@ -291,7 +291,7 @@ class CloudSnapshots(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/GetCredentialsMixin0
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspg-iacapi/GetCredentialsMixin0
 
         Keyword arguments
         -----------------

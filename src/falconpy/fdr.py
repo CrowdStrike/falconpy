@@ -62,7 +62,7 @@ class FDR(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event%20schema/fdrschema.combined.event.get
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-schema/fdrschema.combined.event.get
 
         Keyword arguments
         -----------------
@@ -95,7 +95,7 @@ class FDR(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event%20schema/fdrschema.entities.event.get
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-schema/fdrschema.entities.event.get
 
         Keyword arguments
         -----------------
@@ -133,7 +133,7 @@ class FDR(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event%20schema/fdrschema.queries.event.get
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-schema/fdrschema.queries.event.get
 
         Keyword arguments
         -----------------
@@ -177,7 +177,7 @@ class FDR(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/field%20schema/fdrschema.entities.field.get
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/field-schema/fdrschema.entities.field.get
 
         Keyword arguments
         -----------------
@@ -212,7 +212,7 @@ class FDR(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/field%20schema/fdrschema.queries.field.get
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/field-schema/fdrschema.queries.field.get
 
         Keyword arguments
         -----------------

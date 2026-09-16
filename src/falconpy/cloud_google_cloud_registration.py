@@ -522,7 +522,7 @@ class CloudGoogleCloudRegistration(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud_registration_gcp_post_terraform_script
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud-registration-gcp-post-terraform-script
 
         Keyword arguments
         -----------------

@@ -63,7 +63,7 @@ class NetworkScanGlobalConfigs(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-global-configs/get_global_configs
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-global-configs/get-global-configs
 
         Keyword arguments
         -----------------
@@ -92,7 +92,7 @@ class NetworkScanGlobalConfigs(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-global-configs/update_global_configs
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-scan-global-configs/update-global-configs
 
         Keyword arguments
         -----------------

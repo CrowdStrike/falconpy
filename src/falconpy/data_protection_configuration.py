@@ -2524,7 +2524,7 @@ class DataProtectionConfiguration(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities_web_location_group_create
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.web-location-group.create
 
         Keyword arguments
         -----------------
@@ -2573,7 +2573,7 @@ class DataProtectionConfiguration(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities_web_location_group_delete
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.web-location-group.delete
 
         Keyword arguments
         -----------------
@@ -2612,7 +2612,7 @@ class DataProtectionConfiguration(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities_web_location_group_get
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.web-location-group.get
 
         Keyword arguments
         -----------------
@@ -2651,7 +2651,7 @@ class DataProtectionConfiguration(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities_web_location_group_patch
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.web-location-group.patch
 
         Keyword arguments
         -----------------
@@ -2705,7 +2705,7 @@ class DataProtectionConfiguration(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/queries_web_location_group_get
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/queries.web-location-group.get
 
         Keyword arguments
         -----------------

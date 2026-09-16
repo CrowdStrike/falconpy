@@ -1020,7 +1020,7 @@ class UserManagement(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveUser
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/retrieveUser
 
         Keyword arguments
         -----------------

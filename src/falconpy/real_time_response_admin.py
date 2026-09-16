@@ -242,7 +242,7 @@ class RealTimeResponseAdmin(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_GetFalconScripts
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-GetFalconScripts
 
         Keyword arguments
         -----------------
@@ -316,7 +316,7 @@ class RealTimeResponseAdmin(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_GetPut_Files
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-GetPut-Files
 
         Keyword arguments
         -----------------
@@ -445,7 +445,7 @@ class RealTimeResponseAdmin(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_DeletePut_Files
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-DeletePut-Files
 
         Keyword arguments
         -----------------
@@ -670,7 +670,7 @@ class RealTimeResponseAdmin(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_DeleteScripts
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-DeleteScripts
 
         Keyword arguments
         -----------------
@@ -906,7 +906,7 @@ class RealTimeResponseAdmin(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_ListFalconScripts
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-ListFalconScripts
 
         Keyword arguments
         -----------------

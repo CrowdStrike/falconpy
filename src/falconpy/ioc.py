@@ -891,7 +891,7 @@ class IOC(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.get.device.count.v1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.get.device_count.v1
 
         Keyword arguments
         -----------------
@@ -981,7 +981,7 @@ class IOC(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.get.devices.ran.on.v1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.get.devices_ran_on.v1
 
         Keyword arguments
         -----------------
@@ -1187,7 +1187,7 @@ class IOC(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator_sdmf_query_v1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.sdmf-query.v1
 
         Keyword arguments
         -----------------

@@ -67,7 +67,7 @@ class CloudSecurityRisks(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-risks/cloud_security_timeline_risks_enriched
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-risks/cloud-security-timeline-risks-enriched
 
         Keyword arguments
         -----------------

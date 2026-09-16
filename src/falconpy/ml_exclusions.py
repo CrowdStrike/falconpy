@@ -926,7 +926,7 @@ class MLExclusions(ServiceClass):
 
         Swagger URL
         -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions_sdmf_query_v1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.sdmf-query.v1
 
         Keyword arguments
         -----------------
