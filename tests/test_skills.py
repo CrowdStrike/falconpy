@@ -12,7 +12,7 @@ from falconpy import Skills
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = Skills(auth_object=config)
-AllowedResponses = [200, 201, 207, 400, 403, 404, 429, 415, 500]
+AllowedResponses = [200, 201, 207, 400, 403, 404, 429, 415]
 
 with open("tests/test.yml", "rb") as _fh:
     BINARY_FILE = _fh.read()
