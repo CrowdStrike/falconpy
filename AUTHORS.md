@@ -113,6 +113,11 @@ This has been a critical element in the development of the FalconPy project.
 + `@subbu-cs`
 + Jay Prajapati, `@jayy-77`
 + Gene Kazimiarovich, `@gkazimiarovich`
++ Will Webster, `@wwebster-rr`
++ `@MRX-72`
++ Yashvardhan Khaitan, `@yashvardhan-khaitan`
++ `@ManuelFCastillo`
+
 
 ## Sponsors
 Without the support of these executives, the FalconPy project would not have happened.
