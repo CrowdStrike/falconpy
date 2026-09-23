@@ -120,7 +120,7 @@ class NonJsonContentWarning(NoContentWarning):
     def result(self) -> dict:
         """Return a formatted result that surfaces the raw response body."""
         _content = self.body if self.body else self.message
-        _body = {"errors": [{"message": f"{_content}"}], "resources": []}
+        _body = {"errors": [{"code": self.code, "message": f"{_content}"}], "resources": []}
         return Result()(self.code, self.headers, _body)
 
 
