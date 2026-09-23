@@ -463,6 +463,7 @@ class UserManagement(ServiceClass):
                 {
                     "action": "string",
                     "cid": "string",
+                    "expires_at": "UTC date string",
                     "role_ids": [
                         "string"
                     ],
@@ -470,6 +471,9 @@ class UserManagement(ServiceClass):
                 }
         cid : str (required)
             Customer ID of the tenant to take the action within.
+            Must be provided as a keyword or as part of the `body` payload.
+        expires_at : str
+            UTC formatted date string indicating the expiration.
             Must be provided as a keyword or as part of the `body` payload.
         role_ids : str or list[str] (required)
             Role IDs you want to adjust within the user id.
@@ -491,7 +495,7 @@ class UserManagement(ServiceClass):
             body = generic_payload_list(submitted_keywords=kwargs,
                                         payload_value="role_ids"
                                         )
-            for item in ["action", "cid", "uuid"]:
+            for item in ["action", "cid", "uuid", "expires_at"]:
                 if kwargs.get(item, None):
                     body[item] = kwargs.get(item, None)
 
