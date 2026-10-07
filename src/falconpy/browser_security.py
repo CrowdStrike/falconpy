@@ -35,9 +35,18 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import activate_agents_payload, add_url_domain_list_payload, apply_agent_tasks_payload, classify_domains_payload
+from ._payload import (
+    activate_agents_payload,
+    add_url_domain_list_payload,
+    apply_agent_tasks_payload,
+    classify_domains_payload,
+    create_sensitive_data_profile_payload,
+    query_sensitive_data_profiles_payload,
+    update_sensitive_data_profile_payload,
+    )
 from ._payload import create_destination_group_payload, deactivate_agents_payload, query_combined_seraphic_agents_payload
 from ._payload import query_destination_groups_payload, query_seraphic_agents_payload, query_seraphic_rules_payload
 from ._payload import update_destination_group_payload, update_seraphic_rule_payload
@@ -332,10 +341,10 @@ class BrowserSecurity(ServiceClass):
                 }
         actions : list
             The actions value.
-        ttl : int
-            The ttl value.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
+        ttlHours : str
+            Time to live (in hours) for the tasks request. Integer.
 
         This method only supports keywords for providing arguments.
 
@@ -1222,16 +1231,293 @@ class BrowserSecurity(ServiceClass):
             params=parameters,
             body=body
             )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_sensitive_data_profile(self: object,
+                                      body: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create a sensitive data profile.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/seraphic-enterprise-browser/CreateSensitiveDataProfile
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "apply_exact_match": true,
+                    "custom_regex": [
+                        {
+                            "name": "string",
+                            "regex": "string",
+                            "threshold": 0
+                        }
+                    ],
+                    "description": "string",
+                    "name": "string",
+                    "predefined_piis": [
+                        {
+                            "predefined_pii": "string",
+                            "threshold": 0
+                        }
+                    ]
+                }
+        apply_exact_match : bool
+            When true, retrieve only exact regex matches; when false, retrieve all matches.
+        custom_regex : list
+            Custom regular expressions to apply.
+        description : str
+            The sensitive data profile description.
+        name : str
+            The sensitive data profile name.
+        predefined_piis : list
+            The predefined PII detectors to apply.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = create_sensitive_data_profile_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateSensitiveDataProfile",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_sensitive_data_profile(self: object,
+                                      *args,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete a sensitive data profile.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/seraphic-enterprise-browser/DeleteSensitiveDataProfile
+
+        Keyword arguments
+        -----------------
+        id : str or list[str]
+            The resource ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteSensitiveDataProfile",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_sensitive_data_profiles(self: object,
+                                    *args,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve sensitive data profiles by ID, with the rules that reference them.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/seraphic-enterprise-browser/GetSensitiveDataProfiles
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            One or more resource IDs.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetSensitiveDataProfiles",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def query_sensitive_data_profiles(self: object,
+                                      body: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Query sensitive data profiles by filter, sort and pagination.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/seraphic-enterprise-browser/QuerySensitiveDataProfiles
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "advanced_filter": "string",
+                    "exclude": [
+                        "string"
+                    ],
+                    "filter": "string",
+                    "limit": 0,
+                    "search": "string",
+                    "skip": 0,
+                    "sort": [
+                        "string"
+                    ]
+                }
+        advanced_filter : dict
+            Advanced filter sensitive data profiles by field.
+        exclude : list
+            A list of profile IDs to exclude.
+        filter : dict
+            Filter sensitive data profiles by field.
+        limit : int
+            The maximum number of items to return in the response.
+        search : str
+            Search query. Can include wildcards.
+        skip : int
+            The number of items to skip before returning results.
+        sort : list
+            Sort by field and order.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = query_sensitive_data_profiles_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QuerySensitiveDataProfiles",
+            body=body
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def update_sensitive_data_profile(self: object,
+                                      body: dict = None,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Partial-update a sensitive data profile.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/seraphic-enterprise-browser/UpdateSensitiveDataProfile
+
+        Keyword arguments
+        -----------------
+        id : str
+            The resource ID.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "apply_exact_match": true,
+                    "custom_regex": [
+                        {
+                            "name": "string",
+                            "regex": "string",
+                            "threshold": 0
+                        }
+                    ],
+                    "description": "string",
+                    "name": "string",
+                    "predefined_piis": [
+                        {
+                            "predefined_pii": "string",
+                            "threshold": 0
+                        }
+                    ]
+                }
+        apply_exact_match : bool
+            When true, retrieve only exact regex matches; when false, retrieve all matches.
+        custom_regex : list
+            Custom regular expressions to apply.
+        description : str
+            The sensitive data profile description.
+        name : str
+            The sensitive data profile name.
+        predefined_piis : list
+            The predefined PII detectors to apply.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = update_sensitive_data_profile_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateSensitiveDataProfile",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
     CombinedQueryAgents = query_combined_seraphic_agents
     ClassifyDomains = classify_domains
     ActivateAgents = activate_agents
+    CreateSensitiveDataProfile = create_sensitive_data_profile
     DeactivateAgents = deactivate_agents
     ApplyAgentTasks = apply_agent_tasks
+    DeleteSensitiveDataProfile = delete_sensitive_data_profile
     GetAgents = get_seraphic_agents
     GetAuditLogsMixin0 = get_seraphic_audit_logs
     GetDestinationGroups = get_destination_groups
     CreateDestinationGroup = create_destination_group
     DeleteDestinationGroup = delete_destination_group
+    GetSensitiveDataProfiles = get_sensitive_data_profiles
+    QuerySensitiveDataProfiles = query_sensitive_data_profiles
     UpdateDestinationGroup = update_destination_group
     GetExtensionAnalysis = get_extension_analysis
     GetRules = get_seraphic_rules
@@ -1243,3 +1529,4 @@ class BrowserSecurity(ServiceClass):
     QueryAgents = query_seraphic_agents
     QueryDestinationGroups = query_destination_groups
     QueryRulesMixin0 = query_seraphic_rules
+    UpdateSensitiveDataProfile = update_sensitive_data_profile

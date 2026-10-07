@@ -69,6 +69,17 @@ class TestBrowserSecurity:
             "QueryRulesMixin0": falcon.query_seraphic_rules(category="string", advanced_filter="string", exclude="string",
                                                             filter="string", limit="string", rule_ids="string",
                                                             search="string", skip="string", sort="string"),
+            "CreateSensitiveDataProfile": falcon.create_sensitive_data_profile(apply_exact_match="string",
+                custom_regex="string", description="string",
+                name="string", predefined_piis="string"),
+            "DeleteSensitiveDataProfile": falcon.delete_sensitive_data_profile(id="12345678"),
+            "GetSensitiveDataProfiles": falcon.get_sensitive_data_profiles(ids="12345678"),
+            "QuerySensitiveDataProfiles": falcon.query_sensitive_data_profiles(advanced_filter="string", exclude="string",
+                filter="string", limit="string",
+                search="string", skip="string", sort="string"),
+            "UpdateSensitiveDataProfile": falcon.update_sensitive_data_profile(id="string", apply_exact_match="string",
+                custom_regex="string", description="string",
+                name="string", predefined_piis="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
