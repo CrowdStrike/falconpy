@@ -50,6 +50,12 @@ _agents_endpoints = [
         "name": "id",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "query"
       }
     ]
   ],
@@ -70,6 +76,12 @@ _agents_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "query"
       }
     ]
   ],
@@ -81,6 +93,14 @@ _agents_endpoints = [
     "response differs from the previous one while the agent ID stays the same.",
     "agents",
     [
+      {
+        "type": "boolean",
+        "default": True,
+        "description": "Wait for the new version to finish registering before responding. Set to false to "
+        "respond immediately and poll GetAgentVersionsV1 for is_in_sync instead.",
+        "name": "wait_for_ready",
+        "in": "query"
+      },
       {
         "description": "Agent definition to create or update.",
         "name": "body",
@@ -108,6 +128,20 @@ _agents_endpoints = [
         "default": False,
         "description": "Validate publishing without publishing the agent.",
         "name": "dry_run",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": True,
+        "description": "Wait for the change to finish propagating downstream before responding. Set to false "
+        "to respond immediately and poll GetAgentVersionsV1 for is_in_sync instead.",
+        "name": "wait_for_ready",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
         "in": "query"
       },
       {
@@ -151,6 +185,12 @@ _agents_endpoints = [
         "type": "string",
         "description": "FQL query specifying the filter parameters.",
         "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
         "in": "query"
       }
     ]
