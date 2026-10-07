@@ -165,6 +165,7 @@ from .discover import Discover
 from .downloads import Downloads
 from .drift_indicators import DriftIndicators
 from .eval_cases import EvalCases
+from .eval_dataset_entries import EvalDatasetEntries
 from .event_streams import EventStreams
 from .exposure_management import ExposureManagement
 from .faas_execution import FaaSExecution
@@ -334,7 +335,8 @@ __all__ = [
     "Spotlight",
     "Serverless",
     "Firewall",
-    "Foundry", "EvalCases"
+    "Foundry", "EvalCases",
+    "EvalDatasetEntries"
     ]
 Seraphic = BrowserSecurity
 Guardian = AIDR

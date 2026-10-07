@@ -129,6 +129,7 @@ from ._discover import _discover_endpoints
 from ._downloads import _downloads_endpoints
 from ._drift_indicators import _drift_indicators_endpoints
 from ._eval_cases import _eval_cases_endpoints
+from ._eval_dataset_entries import _eval_dataset_entries_endpoints
 from ._event_streams import _event_streams_endpoints
 from ._exposure_management import _exposure_management_endpoints
 from ._faas_execution import _faas_execution_endpoints
@@ -273,6 +274,7 @@ api_endpoints.extend(_deployments_endpoints)
 api_endpoints.extend(_downloads_endpoints)
 api_endpoints.extend(_drift_indicators_endpoints)
 api_endpoints.extend(_eval_cases_endpoints)
+api_endpoints.extend(_eval_dataset_entries_endpoints)
 api_endpoints.extend(_event_streams_endpoints)
 api_endpoints.extend(_exposure_management_endpoints)
 api_endpoints.extend(_faas_execution_endpoints)
