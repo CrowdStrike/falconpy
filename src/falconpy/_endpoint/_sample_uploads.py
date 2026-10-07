@@ -125,7 +125,7 @@ _sample_uploads_endpoints = [
         "default": True,
         "description": "Defines visibility of this file, either via the API or the Falcon console.\n  true: "
         "File is only shown to users within your customer account  false: File can be seen by other CrowdStrike "
-        "customers \n\nDefault: True.",
+        "customers \n\nDefault: true.",
         "name": "is_confidential",
         "in": "query"
       },
@@ -188,7 +188,7 @@ _sample_uploads_endpoints = [
         "default": True,
         "description": "Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon "
         "console. For example, use --form is_confidential= when using cURL.\n  true: File is only shown to users within "
-        "your customer account  false: File can be seen by other CrowdStrike customers \n\nDefault: True.",
+        "your customer account  false: File can be seen by other CrowdStrike customers \n\nDefault: true.",
         "name": "is_confidential",
         "in": "formData"
       },
@@ -330,7 +330,7 @@ _sample_uploads_endpoints = [
         "default": True,
         "description": "Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon "
         "console.\n  true: File is only shown to users within your customer account  false: File can be seen by other "
-        "CrowdStrike customers \n\nDefault: True.",
+        "CrowdStrike customers \n\nDefault: true.",
         "name": "is_confidential",
         "in": "formData"
       }
