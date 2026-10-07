@@ -73,6 +73,8 @@ class Stream(ServiceClass):
         -----------------
         id : str or list[str]
             Invocation ID.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
