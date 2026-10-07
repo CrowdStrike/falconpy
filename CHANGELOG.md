@@ -1,3 +1,213 @@
+# Version 1.6.7
+## Added features and functionality
++ Updated: Added __Eval Cases__ and __Eval Dataset Entries__ and __Eval Datasets__ and __Eval Evaluators__ and __Eval Runs__ to the __AgenticStudio__ parent service collection.
+    - `agentic_studio.py`
+
++ Updated: Added `project_id` as an allowed parameter in the _GetAgentInvocationV3_ and _PatchAgentInvocationV3_ operations within the __Agent Invocation__ service collection.
+    - `_endpoint/_agent_invocation.py`
+    - `_payload/_agent_invocation.py`
+    - `agent_invocation.py`
+
++ Updated: Added `project_id` as an allowed parameter in the _GetAgentVersionsV1_ and _QueryAgentVersionsV1_ operations within the __Agent Versions__ service collection.
+    - `_endpoint/_agent_versions.py`
+    - `agent_versions.py`
+
++ Updated: Added `project_id` as an allowed parameter in the _DeleteAgentV1_, _GetAgentsV2_, _PatchAgentExternalV3_, and _QueryAgentsV2_ operations and added `wait_for_ready` as an allowed parameter in the _CreateOrEditAgentExternalV3_ and _PatchAgentExternalV3_ operations within the __Agents__ service collection.
+    - `_endpoint/_agents.py`
+    - `_payload/_agents.py`
+    - `agents.py`
+
++ Added: Added five new operations to the __Browser Security__ service collection.
+    - _get_sensitive_data_profiles_
+    - _create_sensitive_data_profile_
+    - _delete_sensitive_data_profile_
+    - _update_sensitive_data_profile_
+    - _query_sensitive_data_profiles_
+    - `_endpoint/_browser_security.py`
+    - `_payload/__init__.py`
+    - `_payload/_browser_security.py`
+    - `browser_security.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_browser_security.py`
+
++ Added: Added five new operations to the __Case Management__ service collection.
+    - _add_case_alert_evidence_v2_
+    - _add_case_access_tags_
+    - _remove_case_access_tags_
+    - _add_case_custom_evidence_
+    - _add_case_user_evidence_
+    - `_endpoint/_case_management.py`
+    - `_payload/__init__.py`
+    - `_payload/_case_management.py`
+    - `case_management.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_case_management.py`
+
++ Added: New __Eval Cases__ service collection with two operations.
+    - _get_eval_cases_
+    - _query_eval_cases_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_eval_cases.py`
+    - `_payload/__init__.py`
+    - `__init__.py`
+    - `eval_cases.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_eval_cases.py`
+
++ Added: New __Eval Dataset Entries__ service collection with five operations.
+    - _get_eval_dataset_entries_
+    - _update_eval_dataset_entry_
+    - _create_eval_dataset_entry_
+    - _delete_eval_dataset_entry_
+    - _query_eval_dataset_entries_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_eval_dataset_entries.py`
+    - `_payload/__init__.py`
+    - `_payload/_eval_dataset_entries.py`
+    - `__init__.py`
+    - `eval_dataset_entries.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_eval_dataset_entries.py`
+
++ Added: New __Eval Datasets__ service collection with six operations.
+    - _download_eval_dataset_
+    - _get_eval_datasets_
+    - _update_eval_dataset_
+    - _create_eval_dataset_
+    - _delete_eval_dataset_
+    - _query_eval_datasets_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_eval_datasets.py`
+    - `_payload/__init__.py`
+    - `_payload/_eval_datasets.py`
+    - `__init__.py`
+    - `eval_datasets.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_eval_datasets.py`
+
++ Added: New __Eval Evaluators__ service collection with five operations.
+    - _get_eval_evaluators_
+    - _update_eval_evaluator_
+    - _create_eval_evaluator_
+    - _delete_eval_evaluator_
+    - _query_eval_evaluators_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_eval_evaluators.py`
+    - `_payload/__init__.py`
+    - `_payload/_eval_evaluators.py`
+    - `__init__.py`
+    - `eval_evaluators.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_eval_evaluators.py`
+
++ Added: New __Eval Runs__ service collection with five operations.
+    - _get_eval_runs_
+    - _create_eval_run_
+    - _delete_eval_run_
+    - _perform_eval_run_action_
+    - _query_eval_runs_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_eval_runs.py`
+    - `_payload/__init__.py`
+    - `_payload/_eval_runs.py`
+    - `__init__.py`
+    - `eval_runs.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_eval_runs.py`
+
++ Updated: Added `device_policies.cloud-container-workload.applied`, `device_policies.cloud-container-workload.policy_id`, `device_policies.cloud-container-workload.policy_type` as allowed `sort` values in the _CombinedHiddenDevicesByFilter_ and _CombinedDevicesByFilter_ operations and added `skip_membership_validation` as an allowed parameter in the _entities_perform_action_ operation within the __Hosts__ service collection.
+    - `_endpoint/_hosts.py`
+    - `hosts.py`
+
++ Added: Added 13 new operations to the __IT Automation__ service collection.
+    - _aggregate_patch_deployment_configs_
+    - _aggregate_patch_deployment_executions_
+    - _aggregate_patch_host_deployments_
+    - _query_combined_patch_deployment_configs_
+    - _query_combined_patch_deployment_executions_
+    - _query_combined_host_deployment_patches_
+    - _query_combined_host_deployments_
+    - _query_combined_os_assessment_scan_
+    - _query_combined_os_assessments_
+    - _create_patch_deployment_config_
+    - _delete_patch_deployment_configs_
+    - _update_patch_deployment_config_
+    - _cancel_patch_deployment_executions_
+    - `_endpoint/_it_automation.py`
+    - `_payload/__init__.py`
+    - `_payload/_it_automation.py`
+    - `it_automation.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_it_automation.py`
+
++ Updated: Added `project_id` as an allowed parameter in the _CombinedKnowledgeBaseAuditEventsV1_, _EntitiesKnowledgeBaseAuditEventsV1_, and _QueriesKnowledgeBaseAuditEventsV1_ operations within the __Knowledge Base Audit Events__ service collection.
+    - `_endpoint/_knowledge_base_audit_events.py`
+    - `knowledge_base_audit_events.py`
+
++ Updated: Added `project_id` as an allowed parameter in the _EntitiesKnowledgeBaseFilesDownloadV1_, _EntitiesKnowledgeBaseFilesV1_, _EntitiesKnowledgeBaseFilesUpdateV1_, _EntitiesKnowledgeBaseFilesCreateV1_, _EntitiesKnowledgeBaseFilesDeleteV1_, and _QueriesKnowledgeBaseFilesV1_ operations within the __Knowledge Base Files__ service collection.
+    - `_endpoint/_knowledge_base_files.py`
+    - `knowledge_base_files.py`
+
++ Updated: Added `project_id` as an allowed parameter in the _CombinedKnowledgeBasesV1_, _EntitiesKnowledgeBasesV1_, _EntitiesKnowledgeBasesUpdateV1_, and _QueriesKnowledgeBasesV1_ operations within the __Knowledge Bases__ service collection.
+    - `_endpoint/_knowledge_bases.py`
+    - `_payload/_knowledge_bases.py`
+    - `knowledge_bases.py`
+
++ Added: Added five new operations to the __NGSIEM__ service collection.
+    - _get_scheduled_report_
+    - _create_scheduled_report_
+    - _delete_scheduled_report_
+    - _update_scheduled_report_
+    - _query_scheduled_reports_
+    - `_endpoint/_ngsiem.py`
+    - `_payload/__init__.py`
+    - `_payload/_ngsiem.py`
+    - `ngsiem.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ngsiem.py`
+
++ Updated: Added `scan_mode` as an allowed parameter and updated the `file` and `scan` parameter descriptions in the _UploadFileQuickScanPro_ operation within the __Quick Scan Pro__ service collection.
+    - `_endpoint/_quick_scan_pro.py`
+    - `quick_scan_pro.py`
+
++ Added: Added two new operations to the __SaaS Security__ service collection.
+    - _set_check_impact_
+    - _get_security_check_change_log_
+    - `_endpoint/_saas_security.py`
+    - `_payload/__init__.py`
+    - `_payload/_saas_security.py`
+    - `saas_security.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_saas_security.py`
+
++ Updated: Added `project_id` as an allowed parameter in the _EntitiesSkillsDownloadV2_, _EntitiesSkillsV1_, _EntitiesSkillsUpdateV1_, _EntitiesSkillsCreateV1_, _EntitiesSkillsDeleteV1_, and _QueriesSkillsV1_ operations within the __Skills__ service collection.
+    - `_endpoint/_skills.py`
+    - `skills.py`
+
++ Updated: Added `project_id` as an allowed parameter in the _EntitiesSpansV1_ and _QueriesSpansV1_ operations within the __Spans__ service collection.
+    - `_endpoint/_spans.py`
+    - `spans.py`
+
++ Updated: Added `project_id` as an allowed parameter in the _StreamInvocationResponseV1_ operation within the __Stream__ service collection.
+    - `_endpoint/_stream.py`
+    - `stream.py`
+
++ Updated: Added `project_id` as an allowed parameter in the _EntitiesToolsV1_ and _QueriesToolsV1_ operations within the __Tools__ service collection.
+    - `_endpoint/_tools.py`
+    - `tools.py`
+
++ Added: Added four new operations to the __User Management__ service collection.
+    - _get_permission_groups_
+    - _get_permissions_
+    - _get_role_permissions_
+    - _query_permissions_
+    - `_endpoint/_user_management.py`
+    - `_payload/__init__.py`
+    - `_payload/_user_management.py`
+    - `user_management.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_user_management.py`
+
 # Version 1.6.6
 ## Added Features and functionality
 + Added: New __AgenticStudio__ parent service collection aggregating all 12 Agentic Studio sub-services via multiple inheritance.
