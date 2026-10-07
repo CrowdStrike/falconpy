@@ -118,8 +118,8 @@ _spotlight_vulnerabilities_endpoints = [
         "host_info.asset_roles,\n\t\t\t\t\thost_info.internet_exposure, host_info.tags, host_info.groups, "
         "host_info.product_type_desc, host_info.platform_name, "
         "suppression_info.is_suppressed,\n\t\t\t\t\tsuppression_info.reason, host_info.instance_state, "
-        "assessment_status, assessment_reason, rule.name, rule.recommendation_id, "
-        "rule.cs_id,\n\t\t\t\t\tdata_providers.policy_id, data_providers.rule_group_id\n\t\t\tAvailable filter fields "
+        "assessment_status, assessment_reason, rule.name, rule.recommendation_id, rule.cs_id, "
+        "rule.type,\n\t\t\t\t\tdata_providers.policy_id, data_providers.rule_group_id\n\t\t\tAvailable filter fields "
         "that supports wildcard (*): N/A\n\t\t\tAvailable filter fields that supports range comparisons (>, <, >=, <=): "
         "created_timestamp, closed_timestamp, updated_timestamp, cve.base_score\n\t\t\t",
         "name": "filter",
@@ -223,8 +223,8 @@ _spotlight_vulnerabilities_endpoints = [
         "host_info.internet_exposure, host_info.tags, host_info.groups, host_info.product_type_desc, "
         "host_info.platform_name,\n\t\t\tsuppression_info.is_suppressed, suppression_info.reason, "
         "host_info.instance_state,\n\t\t\tassessment_status, assessment_reason, rule.name, rule.recommendation_id, "
-        "rule.cs_id, data_providers.policy_id, data_providers.rule_group_id\n\t\t\tAvailable filter fields that "
-        "supports wildcard (*): N/A\n\t\t\tAvailable filter fields that supports range comparisons (>, <, >=, <=): "
+        "rule.cs_id, rule.type, data_providers.policy_id, data_providers.rule_group_id\n\t\t\tAvailable filter fields "
+        "that supports wildcard (*): N/A\n\t\t\tAvailable filter fields that supports range comparisons (>, <, >=, <=): "
         "created_timestamp, closed_timestamp, updated_timestamp, cve.base_score\n\t\t\t",
         "name": "filter",
         "in": "query",
