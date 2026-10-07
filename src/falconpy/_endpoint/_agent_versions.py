@@ -54,6 +54,12 @@ _agent_versions_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "query"
       }
     ]
   ],
@@ -89,6 +95,12 @@ _agent_versions_endpoints = [
         "type": "string",
         "description": "FQL query specifying the filter parameters.",
         "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
         "in": "query"
       }
     ]
