@@ -105,6 +105,34 @@ class TestNGSIEM:
             "UpdatePersistedAggregation": falcon.update_persisted_aggregation(description="string", enabled="string",
                 id="string", labels="string", name="string",
                 search_domain="string"),
+            "CreateScheduledReport": falcon.create_scheduled_report(dashboard_id="string", description="string",
+                enabled="string", labels="string", name="string",
+                parameters="string", password="string",
+                recipients="string", time_interval_from="string",
+                view_name="string", footer_show_page_numbers="string",
+                max_number_of_rows="string", paper_layout="string",
+                paper_orientation="string", paper_size="string",
+                show_description="string", show_export_date="string",
+                show_parameters="string", show_title_frontpage="string",
+                show_title_header="string", cron_expression="string",
+                end_date="string", start_date="string",
+                time_zone="string"),
+            "DeleteScheduledReport": falcon.delete_scheduled_report(ids=["string"], search_domain="string"),
+            "GetScheduledReport": falcon.get_scheduled_report(ids=["string"], search_domain="string"),
+            "ListScheduledReports": falcon.query_scheduled_reports(limit="string", offset="string", filter="string",
+                view_name="string"),
+            "UpdateScheduledReport": falcon.update_scheduled_report(dashboard_id="string", description="string",
+                enabled="string", id="string", labels="string",
+                name="string", parameters="string", password="string",
+                recipients="string", time_interval_from="string",
+                view_name="string", footer_show_page_numbers="string",
+                max_number_of_rows="string", paper_layout="string",
+                paper_orientation="string", paper_size="string",
+                show_description="string", show_export_date="string",
+                show_parameters="string", show_title_frontpage="string",
+                show_title_header="string", cron_expression="string",
+                end_date="string", start_date="string",
+                time_zone="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
@@ -472,4 +500,6 @@ class TestNGSIEMStartSearchBody:
     def test_payload_coverage(self):
         """Exercise nested payload builder branches."""
         falcon.create_persisted_aggregation(backfill_amount="string", backfill_unit="string", interval="string", offset_seconds="string", timestamp_type="string")
+        falcon.create_scheduled_report(footer_show_page_numbers="string", max_number_of_rows="string", paper_layout="string", paper_orientation="string", paper_size="string", show_description="string", show_export_date="string", show_parameters="string", show_title_frontpage="string", show_title_header="string", cron_expression="string", end_date="string", start_date="string", time_zone="string")
+        falcon.update_scheduled_report(footer_show_page_numbers="string", max_number_of_rows="string", paper_layout="string", paper_orientation="string", paper_size="string", show_description="string", show_export_date="string", show_parameters="string", show_title_frontpage="string", show_title_header="string", cron_expression="string", end_date="string", start_date="string", time_zone="string")
         assert True
