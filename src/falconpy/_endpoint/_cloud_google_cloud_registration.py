@@ -90,7 +90,7 @@ _cloud_google_cloud_registration_endpoints = [
       {
         "type": "boolean",
         "default": False,
-        "description": "Include entities with any registration status (default: False)",
+        "description": "Include entities with any registration status (default: false)",
         "name": "include_all_statuses",
         "in": "query"
       }
