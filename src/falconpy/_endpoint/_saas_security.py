@@ -486,6 +486,27 @@ _saas_security_endpoints = [
     ]
   ],
   [
+    "SetCheckImpactV3",
+    "POST",
+    "/saas-security/entities/check-impact/v3",
+    "POST Set a Security Check Impact",
+    "saas_security",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Security Check ID",
+        "name": "id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetCheckJournalV3",
     "GET",
     "/saas-security/entities/check-journal/v3",
@@ -663,6 +684,65 @@ _saas_security_endpoints = [
         "name": "tag_id",
         "in": "query",
         "required": True
+      }
+    ]
+  ],
+  [
+    "GetSecurityCheckChangeLogV3",
+    "GET",
+    "/saas-security/entities/checks-change-log/v3",
+    "GET Security Check Change Log",
+    "saas_security",
+    [
+      {
+        "type": "string",
+        "description": "Actions to filter by, comma separated (e.g. renamed,impact_changed)",
+        "name": "action",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The maximum number of objects to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The starting index of the results",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Supported integration (app) ids to filter by, comma separated",
+        "name": "app",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Security check id - stable across a rename, so it returns the whole history",
+        "name": "check_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "format": "date-time",
+        "description": "From Date (in YYYY-MM-DD format)",
+        "name": "from_date",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "format": "date-time",
+        "description": "To Date (in YYYY-MM-DD format)",
+        "name": "to_date",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "description": "Fetch Total Count?",
+        "name": "total_count",
+        "in": "query"
       }
     ]
   ],

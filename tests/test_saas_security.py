@@ -66,6 +66,12 @@ class TestSaasSecurity:
             "RestoreSecurityCheckV3": falcon.restore_security_check(id="string"),
             "SetCheckParamV3": falcon.set_check_param(id="string", all_future_instances="string", param_name="string",
                 reason="string", value="string"),
+            "GetSecurityCheckChangeLogV3": falcon.get_security_check_change_log(action="string", limit=1, offset=1,
+                app="string", check_id="string",
+                from_date="string", to_date="string",
+                total_count=True),
+            "SetCheckImpactV3": falcon.set_check_impact(id="string", all_future_instances="string", impact="string",
+                reason="string"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
