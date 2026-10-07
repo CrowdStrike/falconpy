@@ -47,15 +47,15 @@ _cloud_oci_registration_endpoints = [
       {
         "type": "string",
         "description": "FQL (Falcon Query Language) string for filtering results. Allowed filters are "
-        "Set{overall_status, created_at, updated_at, registration_name, tenancy_ocid, tenancy_name, home_region, "
-        "key_age}",
+        "Set{home_region, key_age, overall_status, created_at, updated_at, registration_name, tenancy_ocid, "
+        "tenancy_name}",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Field and direction for sorting results - allowed sort fields are Set{created_at, "
-        "updated_at, registration_name, tenancy_ocid, tenancy_name, home_region, key_age, overall_status}",
+        "description": "Field and direction for sorting results - allowed sort fields are Set{home_region, "
+        "key_age, overall_status, created_at, updated_at, registration_name, tenancy_ocid, tenancy_name}",
         "name": "sort",
         "in": "query"
       },
