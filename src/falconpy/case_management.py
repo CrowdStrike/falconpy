@@ -35,12 +35,18 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0302
+# pylint: disable=C0302,R0904
 from typing import Dict, Union
 from ._result import Result
 from ._service_class import ServiceClass
 from ._util import force_default, process_service_request, generate_error_result, handle_single_argument
-from ._payload import entities_merge_post_v1_payload
+from ._payload import (
+    entities_merge_post_v1_payload,
+    add_case_alert_evidence_v2_payload,
+    add_case_access_tags_payload,
+    add_case_custom_evidence_payload,
+    add_case_user_evidence_payload,
+    )
 from ._endpoint._case_management import _case_management_endpoints as Endpoints
 from ._payload._case_management import (
     case_management_notification_groups_payload,
@@ -2551,14 +2557,243 @@ class CaseManagement(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def add_case_alert_evidence_v2(self: object,
+                                   body: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Add the given list of alert evidence to the specified case and returns the created evidence records.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.alert-evidence.post.v2
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "alerts": [
+                        {
+                            "id": "string"
+                        }
+                    ],
+                    "id": "string"
+                }
+        alerts : list
+            The alerts value.
+        id : str
+            The id value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = add_case_alert_evidence_v2_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_alert_evidence_post_v2",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def remove_case_access_tags(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Remove the specified access tags from the specified case.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.case-access-tags.delete.v1
+
+        Keyword arguments
+        -----------------
+        id : str
+            The ID of the case to remove access tags from.
+        access_tag_id : list
+            The ID of the access tag to remove from the case.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_case_access_tags_delete_v1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def add_case_access_tags(self: object,
+                             body: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Add the given list of access tags to the specified case.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.case-access-tags.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "access_tag_ids": [
+                        "string"
+                    ],
+                    "id": "string"
+                }
+        access_tag_ids : list
+            The access_tag_ids value.
+        id : str
+            The id value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = add_case_access_tags_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_case_access_tags_post_v1",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def add_case_custom_evidence(self: object,
+                                 body: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Add the given custom evidence to the specified case.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.custom-evidence.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "case_id": "string",
+                    "evidence": [
+                        {
+                            "name": "string",
+                            "type": "string"
+                        }
+                    ]
+                }
+        case_id : str
+            The case_id value.
+        evidence : list
+            The evidence value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = add_case_custom_evidence_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_custom_evidence_post_v1",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def add_case_user_evidence(self: object,
+                               body: dict = None,
+                               **kwargs
+                               ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Add user evidence to the specified case.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.user-evidence.post.v1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "id": "string",
+                    "users": [
+                        {
+                            "id": "string"
+                        }
+                    ]
+                }
+        id : str
+            The id value.
+        users : list
+            The users value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = add_case_user_evidence_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_user_evidence_post_v1",
+            body=body
+            )
+
     aggregates_file_details_post_v1 = aggregates_file_details_post_v1
     combined_file_details_get_v1 = query_file_details
+    entities_alert_evidence_post_v2 = add_case_alert_evidence_v2
+    entities_case_access_tags_delete_v1 = remove_case_access_tags
+    entities_case_access_tags_post_v1 = add_case_access_tags
+    entities_custom_evidence_post_v1 = add_case_custom_evidence
     entities_file_details_get_v1 = get_file_details
     entities_file_details_patch_v1 = update_file_details
     entities_files_bulk_download_post_v1 = bulk_download_files
     entities_files_download_get_v1 = download_existing_files
     entities_files_upload_post_v1 = upload_file
     entities_files_delete_v1 = delete_file_details
+    entities_user_evidence_post_v1 = add_case_user_evidence
     queries_file_details_get_v1 = query_file_detail_ids
     entities_get_rtr_file_metadata_post_v1 = get_rtr_file_metadata
     entities_retrieve_rtr_file_post_v1 = retrieve_rtr_file
