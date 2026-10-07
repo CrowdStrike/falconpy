@@ -168,6 +168,7 @@ from .eval_cases import EvalCases
 from .eval_dataset_entries import EvalDatasetEntries
 from .eval_datasets import EvalDatasets
 from .eval_evaluators import EvalEvaluators
+from .eval_runs import EvalRuns
 from .event_streams import EventStreams
 from .exposure_management import ExposureManagement
 from .faas_execution import FaaSExecution
@@ -339,7 +340,7 @@ __all__ = [
     "Firewall",
     "Foundry", "EvalCases",
     "EvalDatasetEntries", "EvalDatasets",
-    "EvalEvaluators"
+    "EvalEvaluators", "EvalRuns"
     ]
 Seraphic = BrowserSecurity
 Guardian = AIDR

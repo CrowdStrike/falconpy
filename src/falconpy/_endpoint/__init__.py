@@ -132,6 +132,7 @@ from ._eval_cases import _eval_cases_endpoints
 from ._eval_dataset_entries import _eval_dataset_entries_endpoints
 from ._eval_datasets import _eval_datasets_endpoints
 from ._eval_evaluators import _eval_evaluators_endpoints
+from ._eval_runs import _eval_runs_endpoints
 from ._event_streams import _event_streams_endpoints
 from ._exposure_management import _exposure_management_endpoints
 from ._faas_execution import _faas_execution_endpoints
@@ -279,6 +280,7 @@ api_endpoints.extend(_eval_cases_endpoints)
 api_endpoints.extend(_eval_dataset_entries_endpoints)
 api_endpoints.extend(_eval_datasets_endpoints)
 api_endpoints.extend(_eval_evaluators_endpoints)
+api_endpoints.extend(_eval_runs_endpoints)
 api_endpoints.extend(_event_streams_endpoints)
 api_endpoints.extend(_exposure_management_endpoints)
 api_endpoints.extend(_faas_execution_endpoints)
