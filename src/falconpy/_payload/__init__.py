@@ -282,6 +282,7 @@ from ._saas_security import (
     create_check_journal_comment_payload,
     create_user_journal_comment_payload,
     restore_affected_entity_payload,
+    set_check_impact_payload,
     set_check_param_payload,
     )
 from ._scanning_orchestrator import create_schedules_payload, trigger_scan_by_schedule_payload, update_schedules_payload
@@ -491,5 +492,5 @@ __all__ = [
     "aggregate_patch_deployment_configs_payload", "aggregate_patch_deployment_executions_payload",
     "aggregate_patch_host_deployments_payload", "create_patch_deployment_config_payload",
     "update_patch_deployment_config_payload", "create_scheduled_report_payload",
-    "update_scheduled_report_payload"
+    "update_scheduled_report_payload", "set_check_impact_payload"
 ]

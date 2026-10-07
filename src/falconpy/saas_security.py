@@ -44,6 +44,7 @@ from ._payload import (
     create_user_journal_comment_payload,
     restore_affected_entity_payload,
     set_check_param_payload,
+    set_check_impact_payload,
     )
 from ._result import Result
 from ._service_class import ServiceClass
@@ -1631,6 +1632,108 @@ class SaasSecurity(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_security_check_change_log(self: object,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """GET Security Check Change Log.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/GetSecurityCheckChangeLogV3
+
+        Keyword arguments
+        -----------------
+        action : str
+            Actions to filter by, comma separated (e.g. renamed,impact_changed)
+        limit : int
+            The maximum number of objects to return.
+        offset : int
+            The starting index of the results.
+        app : str
+            Supported integration (app) ids to filter by, comma separated.
+        check_id : str
+            Security check id - stable across a rename, so it returns the whole history.
+        from_date : str
+            From Date (in YYYY-MM-DD format)
+        to_date : str
+            To Date (in YYYY-MM-DD format)
+        total_count : bool
+            Fetch Total Count?
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetSecurityCheckChangeLogV3",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def set_check_impact(self: object,
+                         body: dict = None,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """POST Set a Security Check Impact.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/saas-security/SetCheckImpactV3
+
+        Keyword arguments
+        -----------------
+        id : str
+            Security Check ID.
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "all_future_instances": true,
+                    "impact": "string",
+                    "reason": "string"
+                }
+        all_future_instances : bool
+            Also apply this impact to future instances of the same SaaS.
+        impact : str
+            The new impact.
+        reason : str
+            Why the impact was changed. Recorded on the check's timeline.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = set_check_impact_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="SetCheckImpactV3",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
     ConnectCheckTagV3 = connect_check_tag
     CreateAppJournalCommentV3 = create_app_journal_comment
     CreateCheckJournalCommentV3 = create_check_journal_comment
@@ -1649,6 +1752,7 @@ class SaasSecurity(ServiceClass):
     GetSecurityCheckAffectedV3 = get_security_check
     DismissAffectedEntityV3 = dismiss_affected_entity
     DismissSecurityCheckV3 = dismiss_security_check
+    GetSecurityCheckChangeLogV3 = get_security_check_change_log
     GetSecurityChecksV3 = get_security_checks
     GetSecurityCheckComplianceV3 = get_security_check_compliance
     GetUserJournalV3 = get_user_journal
@@ -1666,4 +1770,5 @@ class SaasSecurity(ServiceClass):
     GetUserInventoryV3 = get_user_inventory
     RestoreAffectedEntityV3 = restore_affected_entity
     RestoreSecurityCheckV3 = restore_security_check
+    SetCheckImpactV3 = set_check_impact
     SetCheckParamV3 = set_check_param

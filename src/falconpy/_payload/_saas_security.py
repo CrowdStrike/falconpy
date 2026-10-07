@@ -127,3 +127,21 @@ def create_user_journal_comment_payload(passed_keywords: dict) -> dict:
             returned_payload[key] = passed_keywords.get(key)
 
     return returned_payload
+
+
+def set_check_impact_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a SetCheckImpactV3 request.
+
+    {
+        "all_future_instances": true,
+        "impact": "string",
+        "reason": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["all_future_instances", "impact", "reason"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
