@@ -167,6 +167,7 @@ from .drift_indicators import DriftIndicators
 from .eval_cases import EvalCases
 from .eval_dataset_entries import EvalDatasetEntries
 from .eval_datasets import EvalDatasets
+from .eval_evaluators import EvalEvaluators
 from .event_streams import EventStreams
 from .exposure_management import ExposureManagement
 from .faas_execution import FaaSExecution
@@ -337,7 +338,8 @@ __all__ = [
     "Serverless",
     "Firewall",
     "Foundry", "EvalCases",
-    "EvalDatasetEntries", "EvalDatasets"
+    "EvalDatasetEntries", "EvalDatasets",
+    "EvalEvaluators"
     ]
 Seraphic = BrowserSecurity
 Guardian = AIDR
