@@ -45,7 +45,8 @@ _browser_security_endpoints = [
     "browser_security",
     [
       {
-        "description": "Request body.",
+        "description": "Filter, sort and pagination for the agent search. limit accepts up to 2500. "
+        "filter.protection_type has no effect on this operation.",
         "name": "body",
         "in": "body",
         "required": True
@@ -60,7 +61,7 @@ _browser_security_endpoints = [
     "browser_security",
     [
       {
-        "description": "Request body.",
+        "description": "The domains to classify. At least one domain is required.",
         "name": "body",
         "in": "body",
         "required": True
@@ -75,7 +76,7 @@ _browser_security_endpoints = [
     "browser_security",
     [
       {
-        "description": "Request body.",
+        "description": "The IDs of the agents to activate. Required, must be non-empty.",
         "name": "body",
         "in": "body",
         "required": True
@@ -90,7 +91,7 @@ _browser_security_endpoints = [
     "browser_security",
     [
       {
-        "description": "Request body.",
+        "description": "The IDs of the agents to deactivate. Required, must be non-empty.",
         "name": "body",
         "in": "body",
         "required": True
@@ -112,7 +113,9 @@ _browser_security_endpoints = [
         "required": True
       },
       {
-        "description": "Request body.",
+        "description": "The actions to queue on the agent, and an optional ttl in hours (default 72, 1-168). "
+        "Each action is one of remove_browsing_data, close_all_windows, refresh_all_tabs or dispatch_notification; its "
+        "args depend on the action type.",
         "name": "body",
         "in": "body",
         "required": True
@@ -187,7 +190,8 @@ _browser_security_endpoints = [
     "browser_security",
     [
       {
-        "description": "Request body.",
+        "description": "The destination group to create. name is required; the IP, domain, country and "
+        "classification lists are all optional and combine into one group.",
         "name": "body",
         "in": "body",
         "required": True
@@ -225,7 +229,8 @@ _browser_security_endpoints = [
         "required": True
       },
       {
-        "description": "Request body.",
+        "description": "The fields to change on the destination group. Every field is optional; only those "
+        "present are updated.",
         "name": "body",
         "in": "body",
         "required": True
@@ -241,7 +246,14 @@ _browser_security_endpoints = [
     [
       {
         "type": "string",
-        "description": "The extension store.",
+        "enum": [
+          "google",
+          "mozilla",
+          "microsoft",
+          "apple",
+          "opera"
+        ],
+        "description": "The extension store platform.",
         "name": "store",
         "in": "query",
         "required": True
@@ -290,7 +302,84 @@ _browser_security_endpoints = [
         "required": True
       },
       {
-        "description": "Request body.",
+        "description": "The changes to apply. Each field is an independent partial update — extension IDs and "
+        "names to add or remove, target and destination-group changes, and activation status. These are not applied "
+        "transactionally; a combined body can half-apply.",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetSensitiveDataProfiles",
+    "GET",
+    "/seraphic-enterprise-browser/entities/sensitive-data-profiles/v1",
+    "Retrieve sensitive data profiles by ID, with the rules that reference them.",
+    "browser_security",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "One or more resource IDs.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "CreateSensitiveDataProfile",
+    "POST",
+    "/seraphic-enterprise-browser/entities/sensitive-data-profiles/v1",
+    "Create a sensitive data profile.",
+    "browser_security",
+    [
+      {
+        "description": "The sensitive data profile to create. name is required and must be at least 2 "
+        "characters; the predefined-PII and custom-regex lists are both optional and combine into one profile.",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DeleteSensitiveDataProfile",
+    "DELETE",
+    "/seraphic-enterprise-browser/entities/sensitive-data-profiles/v1",
+    "Delete a sensitive data profile.",
+    "browser_security",
+    [
+      {
+        "type": "string",
+        "description": "The resource ID.",
+        "name": "id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateSensitiveDataProfile",
+    "PATCH",
+    "/seraphic-enterprise-browser/entities/sensitive-data-profiles/v1",
+    "Partial-update a sensitive data profile.",
+    "browser_security",
+    [
+      {
+        "type": "string",
+        "description": "The resource ID.",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "description": "The fields to change on the sensitive data profile. Every field is optional, but at "
+        "least one must be present or console rejects the request.",
         "name": "body",
         "in": "body",
         "required": True
@@ -345,7 +434,8 @@ _browser_security_endpoints = [
     "browser_security",
     [
       {
-        "description": "Request body.",
+        "description": "The integration to add to, and the URLs and domains to add. Both fields are required "
+        "and urls must be non-empty.",
         "name": "body",
         "in": "body",
         "required": True
@@ -367,7 +457,8 @@ _browser_security_endpoints = [
         "required": True
       },
       {
-        "description": "Request body.",
+        "description": "The integration to remove from, and the URLs and domains to remove. Both fields are "
+        "required and urls must be non-empty.",
         "name": "body",
         "in": "body",
         "required": True
@@ -382,7 +473,8 @@ _browser_security_endpoints = [
     "browser_security",
     [
       {
-        "description": "Request body.",
+        "description": "Filter, sort and pagination for the agent search. limit accepts up to 1000. "
+        "filter.protection_type is honoured here.",
         "name": "body",
         "in": "body",
         "required": True
@@ -397,7 +489,7 @@ _browser_security_endpoints = [
     "browser_security",
     [
       {
-        "description": "Request body.",
+        "description": "Filter, sort, pagination and name exclusions for the destination-group search.",
         "name": "body",
         "in": "body",
         "required": True
@@ -413,13 +505,43 @@ _browser_security_endpoints = [
     [
       {
         "type": "string",
+        "enum": [
+          "general",
+          "protection",
+          "sessions_and_credentials",
+          "content_governance",
+          "dlp",
+          "privacy",
+          "it_hygiene",
+          "telemetry",
+          "proxy",
+          "extensions",
+          "applications"
+        ],
         "description": "The rule category to query.",
         "name": "category",
         "in": "query",
         "required": True
       },
       {
-        "description": "Request body.",
+        "description": "Filter, advanced filter, rule-ID selection, sort and pagination for the rule search. "
+        "Applies within the category given in the query string.",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "QuerySensitiveDataProfiles",
+    "POST",
+    "/seraphic-enterprise-browser/queries/sensitive-data-profiles/v1",
+    "Query sensitive data profiles by filter, sort and pagination.",
+    "browser_security",
+    [
+      {
+        "description": "Filter, advanced filter, sort, pagination and profile-ID exclusions for the sensitive-"
+        "data-profile search.",
         "name": "body",
         "in": "body",
         "required": True

@@ -38,12 +38,15 @@ from ._browser_security import (
     apply_agent_tasks_payload,
     classify_domains_payload,
     create_destination_group_payload,
+    create_sensitive_data_profile_payload,
     deactivate_agents_payload,
     query_combined_seraphic_agents_payload,
     query_destination_groups_payload,
+    query_sensitive_data_profiles_payload,
     query_seraphic_agents_payload,
     query_seraphic_rules_payload,
     update_destination_group_payload,
+    update_sensitive_data_profile_payload,
     update_seraphic_rule_payload,
     )
 from ._cloud_security_assets import cloud_security_assets_entities_post_payload
@@ -461,5 +464,7 @@ __all__ = [
     "create_check_journal_comment_payload", "create_user_journal_comment_payload",
     "restore_affected_entity_payload", "set_check_param_payload",
     "get_user_allowed_actions_payload", "get_user_invitations_payload",
-    "retrieve_users_v2_payload", "update_user_roles_payload"
+    "retrieve_users_v2_payload", "update_user_roles_payload",
+    "create_sensitive_data_profile_payload", "query_sensitive_data_profiles_payload",
+    "update_sensitive_data_profile_payload"
 ]
