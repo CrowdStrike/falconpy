@@ -84,6 +84,12 @@ _knowledge_base_audit_events_endpoints = [
         "description": "Include audit events for deleted knowledge bases. Defaults to false.",
         "name": "include_deleted",
         "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "query"
       }
     ]
   ],
@@ -117,6 +123,12 @@ _knowledge_base_audit_events_endpoints = [
         "default": False,
         "description": "Include audit events for deleted knowledge bases. Defaults to false.",
         "name": "include_deleted",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
         "in": "query"
       }
     ]
@@ -167,6 +179,12 @@ _knowledge_base_audit_events_endpoints = [
         "default": False,
         "description": "Include audit events for deleted knowledge bases. Defaults to false.",
         "name": "include_deleted",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
         "in": "query"
       }
     ]

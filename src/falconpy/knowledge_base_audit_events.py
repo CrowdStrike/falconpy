@@ -187,6 +187,8 @@ class KnowledgeBaseAuditEvents(ServiceClass):
             FQL query specifying the filter parameters.
         include_deleted : bool
             Include audit events for deleted knowledge bases. Defaults to false.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -226,6 +228,8 @@ class KnowledgeBaseAuditEvents(ServiceClass):
             IDs of audit events to retrieve.
         include_deleted : bool
             Include audit events for deleted knowledge bases. Defaults to false.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -271,6 +275,8 @@ class KnowledgeBaseAuditEvents(ServiceClass):
             FQL query specifying the filter parameters.
         include_deleted : bool
             Include audit events for deleted knowledge bases. Defaults to false.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
