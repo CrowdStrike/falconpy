@@ -50,6 +50,7 @@ class FoundryLogScale(ServiceClass):
         metadata: Optional[bool] = None,
         mode: Optional[str] = None,
         end: Optional[str] = None,
+        extra_log_fields: Optional[dict] = None,
         repo_or_view: Optional[str] = None,
         search_query: Optional[str] = None,
         search_query_args: Optional[dict] = None,
@@ -82,9 +83,11 @@ class FoundryLogScale(ServiceClass):
         match_response_schema: Optional[bool] = None,
         metadata: Optional[bool] = None,
         end: Optional[str] = None,
+        extra_log_fields: Optional[dict] = None,
         id: Optional[str] = None,
         mode: Optional[str] = None,
         name: Optional[str] = None,
+        parameters: Optional[dict] = None,
         start: Optional[str] = None,
         version: Optional[str] = None,
         with_in: Optional[dict] = None,
@@ -92,7 +95,6 @@ class FoundryLogScale(ServiceClass):
         with_renames: Optional[list] = None,
         with_sort: Optional[dict] = None,
         body: Optional[dict] = None,
-        parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
     def populate(

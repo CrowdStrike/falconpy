@@ -754,6 +754,69 @@ class NGSIEM(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def create_scheduled_report(
+        self,
+        *,
+        dashboard_id: Optional[str] = None,
+        description: Optional[str] = None,
+        enabled: Optional[bool] = None,
+        labels: Optional[Union[str, List[str]]] = None,
+        layout: Optional[dict] = None,
+        name: Optional[str] = None,
+        parameters: Optional[list] = None,
+        password: Optional[str] = None,
+        recipients: Optional[Union[str, List[str]]] = None,
+        schedule: Optional[dict] = None,
+        time_interval_from: Optional[str] = None,
+        view_name: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def delete_scheduled_report(
+        self,
+        *,
+        ids: Optional[Union[str, List[str]]] = None,
+        search_domain: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def get_scheduled_report(
+        self,
+        *,
+        ids: Optional[Union[str, List[str]]] = None,
+        search_domain: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def query_scheduled_reports(
+        self,
+        *,
+        limit: Optional[str] = None,
+        offset: Optional[str] = None,
+        filter: Optional[str] = None,
+        view_name: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def update_scheduled_report(
+        self,
+        *,
+        dashboard_id: Optional[str] = None,
+        description: Optional[str] = None,
+        enabled: Optional[bool] = None,
+        id: Optional[str] = None,
+        labels: Optional[Union[str, List[str]]] = None,
+        layout: Optional[dict] = None,
+        name: Optional[str] = None,
+        parameters: Optional[list] = None,
+        password: Optional[str] = None,
+        recipients: Optional[Union[str, List[str]]] = None,
+        schedule: Optional[dict] = None,
+        time_interval_from: Optional[str] = None,
+        view_name: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
     addDashboardLabels = add_dashboard_labels
     addFileLabels = add_file_labels
     addSavedQueryLabels = add_saved_query_labels
@@ -777,10 +840,14 @@ class NGSIEM(ServiceClass):
     bulkUpdateSavedQueryLabels = bulk_update_saved_query_labels
     CreateParserExtension = create_parser_extension
     CreatePersistedAggregation = create_persisted_aggregation
+    CreateScheduledReport = create_scheduled_report
     DeletePersistedAggregation = delete_persisted_aggregation
+    DeleteScheduledReport = delete_scheduled_report
     GetParserRollbackOptions = get_parser_rollback_options
     GetPersistedAggregation = get_persisted_aggregation
+    GetScheduledReport = get_scheduled_report
     ListPersistedAggregations = list_persisted_aggregations
+    ListScheduledReports = query_scheduled_reports
     removeDashboardLabels = remove_dashboard_labels
     removeFileLabels = remove_file_labels
     removeSavedQueryLabels = remove_saved_query_labels
@@ -790,6 +857,7 @@ class NGSIEM(ServiceClass):
     UpdateParserExtension = update_parser_extension
     UpdatePersistedAggregation = update_persisted_aggregation
     updateSavedQueryLabels = update_saved_query_labels
+    UpdateScheduledReport = update_scheduled_report
     UploadLookupV1 = upload_file
     GetLookupV1 = get_file
     GetLookupFromPackageWithNamespaceV1 = get_file_from_package_with_namespace

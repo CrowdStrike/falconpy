@@ -19,6 +19,7 @@ class KnowledgeBases(ServiceClass):
         *,
         ids: Optional[Union[str, List[str]]] = None,
         include_deleted: Optional[bool] = None,
+        project_id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -34,6 +35,7 @@ class KnowledgeBases(ServiceClass):
         id: Optional[str] = None,
         is_deleted: Optional[bool] = None,
         name: Optional[str] = None,
+        project_id: Optional[str] = None,
         updated_at: Optional[str] = None,
         updated_by: Optional[dict] = None,
         body: Optional[dict] = None,
@@ -42,6 +44,7 @@ class KnowledgeBases(ServiceClass):
     def entities_knowledge_bases_update_v1(
         self,
         *,
+        project_id: Optional[str] = None,
         attribution: Optional[dict] = None,
         created_at: Optional[str] = None,
         created_by: Optional[dict] = None,
@@ -64,6 +67,7 @@ class KnowledgeBases(ServiceClass):
         sort: Optional[str] = None,
         filter: Optional[str] = None,
         include_deleted: Optional[bool] = None,
+        project_id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -75,6 +79,7 @@ class KnowledgeBases(ServiceClass):
         sort: Optional[str] = None,
         filter: Optional[str] = None,
         include_deleted: Optional[bool] = None,
+        project_id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

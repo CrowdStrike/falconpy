@@ -327,16 +327,49 @@ class UserManagement(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def get_permission_groups(
+        self,
+        *,
+        ids: Optional[Union[str, List[str]]] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def get_permissions(
+        self,
+        *,
+        ids: Optional[Union[str, List[str]]] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def get_role_permissions(
+        self,
+        *args: Union[str, List[str]],
+        id: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def query_permissions(
+        self,
+        *,
+        offset: Optional[int] = None,
+        limit: Optional[int] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
     aggregateUsersV1 = aggregate_users
     aggregateUsersV2 = aggregate_users_v2
     combinedUserRolesV1 = get_user_grants_v1
     CombinedUserRolesV2 = get_user_grants
     CombinedUserRolesV3 = combined_user_roles_v3
+    entitiesPermissionGroupsGETV1 = get_permission_groups
+    entitiesPermissionsGETV1 = get_permissions
+    entitiesRolePermissionsV1 = get_role_permissions
     get_user_roles = get_user_grants
     get_user_roles_combined = get_user_grants
     entitiesRolesGETV2 = get_roles_mssp
     entitiesRolesV1 = get_roles_mssp_v1
     getUserInvitationsGETV1 = get_user_invitations
+    queriesPermissionsV1 = query_permissions
     queryUserInvitationsV1 = query_user_invitations
     queryUserV2 = query_users_v2
     retrieveUsersGETV2 = retrieve_users_v2
