@@ -164,6 +164,7 @@ from .device_control_policies import DeviceControlPolicies
 from .discover import Discover
 from .downloads import Downloads
 from .drift_indicators import DriftIndicators
+from .eval_cases import EvalCases
 from .event_streams import EventStreams
 from .exposure_management import ExposureManagement
 from .faas_execution import FaaSExecution
@@ -333,7 +334,7 @@ __all__ = [
     "Spotlight",
     "Serverless",
     "Firewall",
-    "Foundry"
+    "Foundry", "EvalCases"
     ]
 Seraphic = BrowserSecurity
 Guardian = AIDR
