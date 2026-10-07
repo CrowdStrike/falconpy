@@ -832,7 +832,7 @@ def aggregate_patch_host_deployments_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def create_patch_deployment_config_payload(passed_keywords: dict) -> dict:
+def create_patch_deployment_config_payload(passed_keywords: dict) -> dict:  # pylint: disable=R0912
     """Create a properly formatted payload for a CreateDeploymentConfig request.
 
     {
@@ -956,7 +956,12 @@ def create_patch_deployment_config_payload(passed_keywords: dict) -> dict:
         if passed_keywords.get(key, None) is not None:
             returned_payload["schedule"][key] = passed_keywords.get(key)
 
-    user_notification_options_keys = ["allow_end_user_to_defer", "user_notification", "user_notification_message", "user_notification_title"]
+    user_notification_options_keys = [
+        "allow_end_user_to_defer",
+        "user_notification",
+        "user_notification_message",
+        "user_notification_title"
+    ]
     if "user_notification_options" not in returned_payload:
         returned_payload["user_notification_options"] = {}
     for key in user_notification_options_keys:
@@ -966,7 +971,7 @@ def create_patch_deployment_config_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def update_patch_deployment_config_payload(passed_keywords: dict) -> dict:
+def update_patch_deployment_config_payload(passed_keywords: dict) -> dict:  # pylint: disable=R0912
     """Create a properly formatted payload for a UpdateDeploymentConfig request.
 
     {
@@ -1092,7 +1097,12 @@ def update_patch_deployment_config_payload(passed_keywords: dict) -> dict:
         if passed_keywords.get(key, None) is not None:
             returned_payload["schedule"][key] = passed_keywords.get(key)
 
-    user_notification_options_keys = ["allow_end_user_to_defer", "user_notification", "user_notification_message", "user_notification_title"]
+    user_notification_options_keys = [
+        "allow_end_user_to_defer",
+        "user_notification",
+        "user_notification_message",
+        "user_notification_title"
+    ]
     if "user_notification_options" not in returned_payload:
         returned_payload["user_notification_options"] = {}
     for key in user_notification_options_keys:
