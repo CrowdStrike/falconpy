@@ -83,6 +83,10 @@ from ._correlation_rules import (
     correlation_rules_template_payload
 )
 from ._case_management import (
+    add_case_access_tags_payload,
+    add_case_alert_evidence_v2_payload,
+    add_case_custom_evidence_payload,
+    add_case_user_evidence_payload,
     case_evidence_payload,
     case_manage_payload,
     case_management_create_notification_payload,
@@ -466,5 +470,7 @@ __all__ = [
     "get_user_allowed_actions_payload", "get_user_invitations_payload",
     "retrieve_users_v2_payload", "update_user_roles_payload",
     "create_sensitive_data_profile_payload", "query_sensitive_data_profiles_payload",
-    "update_sensitive_data_profile_payload"
+    "update_sensitive_data_profile_payload", "add_case_access_tags_payload",
+    "add_case_alert_evidence_v2_payload", "add_case_custom_evidence_payload",
+    "add_case_user_evidence_payload"
 ]

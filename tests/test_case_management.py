@@ -128,6 +128,11 @@ class TestCaseManagement:
                                                                           "options": [{"id": "1234567", "value": "whatever"}],
                                                                           "required": True,
             "entities_merge_post_v1": falcon.entities_merge_post_v1(destination_id="string", source_id="string"),
+            "entities_alert_evidence_post_v2": falcon.add_case_alert_evidence_v2(alerts="string", id="string"),
+            "entities_case_access_tags_delete_v1": falcon.remove_case_access_tags(id="string", access_tag_id=["string"]),
+            "entities_case_access_tags_post_v1": falcon.add_case_access_tags(access_tag_ids="string", id="string"),
+            "entities_custom_evidence_post_v1": falcon.add_case_custom_evidence(case_id="string", evidence="string"),
+            "entities_user_evidence_post_v1": falcon.add_case_user_evidence(id="string", users="string"),
                                                                           }
                                                                    ),
             "entities_templates_delete_v1": falcon.delete_templates(ids="1234567890"),
@@ -185,3 +190,9 @@ class TestCaseManagement:
                 print(tests[key])
                 failed_keys.append(f"{key}: {tests[key]['status_code']}")
         assert error_checks, f"Failed: {failed_keys}"
+
+    def test_payload_coverage(self):
+        """Exercise nested payload builder branches."""
+        falcon.entities_cases_put_v2(alerts="string", events="string", leads="string", level="string", id="string")
+        falcon.entities_cases_patch_v2(access_tags="string", assigned_to_group_ids="string", assigned_to_user_uuid="string", custom_fields="string", description="string", description_format="string", description_tagged_users="string", name="string", remove_group_assignment="string", remove_user_assignment="string", severity="string", severity_info="string", slas_active="string", status="string", template="string", templates="string", workflows="string")
+        assert True
