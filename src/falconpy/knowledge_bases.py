@@ -179,6 +179,8 @@ class KnowledgeBases(ServiceClass):
             IDs of entities to retrieve.
         include_deleted : bool
             Include deleted knowledge bases in the result. Defaults to false.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -272,6 +274,8 @@ class KnowledgeBases(ServiceClass):
             The is_deleted value.
         name : str
             The name value.
+        project_id : str
+            The project_id value.
         updated_at : str
             The updated_at value.
         updated_by : dict
@@ -373,6 +377,8 @@ class KnowledgeBases(ServiceClass):
             The updated_at value.
         updated_by : dict
             The updated_by value.
+        project_id : str
+            Scope the operation to a project.
 
         This method only supports keywords for providing arguments.
 
@@ -416,6 +422,8 @@ class KnowledgeBases(ServiceClass):
             FQL query specifying the filter parameters.
         include_deleted : bool
             Include deleted knowledge bases in the result. Defaults to false.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -459,6 +467,8 @@ class KnowledgeBases(ServiceClass):
             FQL query specifying the filter parameters.
         include_deleted : bool
             Include deleted knowledge bases in the result. Defaults to false.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
