@@ -73,6 +73,8 @@ class Tools(ServiceClass):
         -----------------
         ids : str or list[str]
             IDs of entities to retrieve.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -117,6 +119,8 @@ class Tools(ServiceClass):
             Possible order by fields: id, name, description, category. Ex: 'name|desc'
         filter : str
             FQL query specifying the filter parameters.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
