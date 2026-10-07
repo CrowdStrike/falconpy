@@ -266,7 +266,7 @@ _falconx_sandbox_endpoints = [
         "(optional): Command line script passed to the submitted file at runtime. Max length: 2048 "
         "characters\n\n**document_password** (optional): Auto-filled for Adobe or Office files that prompt for a "
         "password. Max length: 32 characters\n\n**enable_tor** (optional): Deprecated, please use network_settings "
-        "instead. If true, sandbox analysis routes network traffic via TOR. Default: False.\n\n**network_settings** "
+        "instead. If true, sandbox analysis routes network traffic via TOR. Default: false.\n\n**network_settings** "
         "(optional): Specifies the sandbox network_settings used for analysis. Values:\n  default: Fully operating "
         "network  tor: Route network traffic via TOR  simulated: Simulate network traffic  offline: No network "
         "traffic\n\n**submit_name** (optional): Name of the malware sample that's used for file type detection and "
@@ -412,7 +412,7 @@ _falconx_sandbox_endpoints = [
         "default": True,
         "description": "Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon "
         "console.\n  true: File is only shown to users within your customer account  false: File can be seen by other "
-        "CrowdStrike customers \n\nDefault: True.",
+        "CrowdStrike customers \n\nDefault: true.",
         "name": "is_confidential",
         "in": "formData"
       }
