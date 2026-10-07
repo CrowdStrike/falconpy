@@ -74,6 +74,8 @@ class Agents(ServiceClass):
         -----------------
         id : str or list[str]
             Agent ID.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -113,6 +115,8 @@ class Agents(ServiceClass):
         -----------------
         ids : str or list[str]
             IDs of entities to retrieve.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -215,10 +219,15 @@ class Agents(ServiceClass):
             The duplicate_from_agent_id value.
         id : str
             The id value.
+        project_id : str
+            The project_id value.
         template_id : str
             The template_id value.
         version_definition : dict
             The version_definition value.
+        wait_for_ready : bool
+            Wait for the new version to finish registering before responding. Set to false to respond immediately and poll
+            GetAgentVersionsV1 for is_in_sync instead.
 
         This method only supports keywords for providing arguments.
 
@@ -270,6 +279,11 @@ class Agents(ServiceClass):
             The is_published value.
         version_id : str
             The version_id value.
+        wait_for_ready : bool
+            Wait for the change to finish propagating downstream before responding. Set to false to respond immediately and
+            poll GetAgentVersionsV1 for is_in_sync instead.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -317,6 +331,8 @@ class Agents(ServiceClass):
                   'created_date|desc'.    Ex:
         filter : str
             FQL query specifying the filter parameters.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
