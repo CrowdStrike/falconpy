@@ -45,6 +45,8 @@ from ._payload import (
     retrieve_users_v2_payload,
     get_user_allowed_actions_payload,
     update_user_roles_payload,
+    get_permission_groups_payload,
+    get_permissions_payload,
     )
 from ._result import Result
 from ._service_class import ServiceClass
@@ -1745,6 +1747,166 @@ class UserManagement(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_permission_groups(self: object,
+                              body: dict = None,
+                              **kwargs
+                              ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get details about permission groups including name and description.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/entitiesPermissionGroupsGETV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids : list
+            The ids value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = get_permission_groups_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entitiesPermissionGroupsGETV1",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_permissions(self: object,
+                        body: dict = None,
+                        **kwargs
+                        ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get details about permissions including name, description, and which permission groups they belong to.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/entitiesPermissionsGETV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids : list
+            The ids value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = get_permissions_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entitiesPermissionsGETV1",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_role_permissions(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get permission IDs assigned to a given role.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/entitiesRolePermissionsV1
+
+        Keyword arguments
+        -----------------
+        id : str or list[str]
+            Role ID to get permission IDs for. Find a role ID from queriesRolesV1.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'id'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entitiesRolePermissionsV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_permissions(self: object,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """List all permission IDs available to your CID based on product subscriptions.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/queriesPermissionsV1
+
+        Keyword arguments
+        -----------------
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return. [1-5000]
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queriesPermissionsV1",
+            keywords=kwargs,
+            params=parameters
+            )
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
@@ -1753,11 +1915,15 @@ class UserManagement(ServiceClass):
     combinedUserRolesV1 = get_user_grants_v1
     CombinedUserRolesV2 = get_user_grants
     CombinedUserRolesV3 = combined_user_roles_v3
+    entitiesPermissionGroupsGETV1 = get_permission_groups
+    entitiesPermissionsGETV1 = get_permissions
+    entitiesRolePermissionsV1 = get_role_permissions
     get_user_roles = get_user_grants  # Helper alias
     get_user_roles_combined = get_user_grants  # Helper alias
     entitiesRolesGETV2 = get_roles_mssp
     entitiesRolesV1 = get_roles_mssp_v1
     getUserInvitationsGETV1 = get_user_invitations
+    queriesPermissionsV1 = query_permissions
     queryUserInvitationsV1 = query_user_invitations
     queryUserV2 = query_users_v2
     retrieveUsersGETV2 = retrieve_users_v2

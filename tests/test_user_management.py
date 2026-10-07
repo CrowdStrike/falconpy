@@ -153,6 +153,10 @@ class TestFalconUserManagement:
             "userAllowedActionsV1": falcon.get_user_allowed_actions(allowed_actions="string"),
             "userRolesActionV2": falcon.update_user_roles(action="string", cid="string", expires_at="string",
                 role_ids="string", uuid="string"),
+            "entitiesPermissionGroupsGETV1": falcon.get_permission_groups(ids="string"),
+            "entitiesPermissionsGETV1": falcon.get_permissions(ids="string"),
+            "entitiesRolePermissionsV1": falcon.get_role_permissions(id="12345678"),
+            "queriesPermissionsV1": falcon.query_permissions(offset=1, limit=1),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
