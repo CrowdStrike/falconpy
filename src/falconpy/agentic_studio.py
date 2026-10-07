@@ -48,6 +48,11 @@ from .skills import Skills
 from .spans import Spans
 from .tools import Tools
 from .stream import Stream
+from .eval_cases import EvalCases
+from .eval_dataset_entries import EvalDatasetEntries
+from .eval_datasets import EvalDatasets
+from .eval_evaluators import EvalEvaluators
+from .eval_runs import EvalRuns
 
 
 class AgenticStudio(Agents,  # pylint: disable=too-many-ancestors
@@ -61,7 +66,12 @@ class AgenticStudio(Agents,  # pylint: disable=too-many-ancestors
                     Skills,
                     Spans,
                     Tools,
-                    Stream):
+                    Stream,
+                    EvalCases,
+                    EvalDatasetEntries,
+                    EvalDatasets,
+                    EvalEvaluators,
+                    EvalRuns):
     """Combined AgenticStudio service collection providing access to all agentic studio operations.
 
     This class aggregates all AgenticStudio sub-service collections into a single interface
@@ -79,6 +89,11 @@ class AgenticStudio(Agents,  # pylint: disable=too-many-ancestors
     - Spans
     - Tools
     - Stream
+    - EvalCases
+    - EvalDatasetEntries
+    - EvalDatasets
+    - EvalEvaluators
+    - EvalRuns
 
     The only requirement to instantiate an instance of this class is one of the following.
 
