@@ -858,3 +858,179 @@ def update_persisted_aggregation_payload(passed_keywords: dict) -> dict:
             returned_payload[key] = passed_keywords.get(key)
 
     return returned_payload
+
+
+def create_scheduled_report_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a CreateScheduledReport request.
+
+    {
+        "dashboard_id": "string",
+        "description": "string",
+        "enabled": true,
+        "labels": [
+            "string"
+        ],
+        "layout": {
+            "footer_show_page_numbers": true,
+            "max_number_of_rows": 0,
+            "paper_layout": "string",
+            "paper_orientation": "string",
+            "paper_size": "string",
+            "show_description": true,
+            "show_export_date": true,
+            "show_parameters": true,
+            "show_title_frontpage": true,
+            "show_title_header": true
+        },
+        "name": "string",
+        "parameters": [
+            "string"
+        ],
+        "password": "string",
+        "recipients": [
+            "string"
+        ],
+        "schedule": {
+            "cron_expression": "string",
+            "end_date": 0,
+            "start_date": 0,
+            "time_zone": "string"
+        },
+        "time_interval_from": "string",
+        "view_name": "string"
+    }
+    """
+    returned_payload = {}
+    keys = [
+        "dashboard_id",
+        "description",
+        "enabled",
+        "labels",
+        "layout",
+        "name",
+        "parameters",
+        "password",
+        "recipients",
+        "schedule",
+        "time_interval_from",
+        "view_name"
+    ]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    layout_keys = [
+        "footer_show_page_numbers",
+        "max_number_of_rows",
+        "paper_layout",
+        "paper_orientation",
+        "paper_size",
+        "show_description",
+        "show_export_date",
+        "show_parameters",
+        "show_title_frontpage",
+        "show_title_header"
+    ]
+    if "layout" not in returned_payload:
+        returned_payload["layout"] = {}
+    for key in layout_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["layout"][key] = passed_keywords.get(key)
+
+    schedule_keys = ["cron_expression", "end_date", "start_date", "time_zone"]
+    if "schedule" not in returned_payload:
+        returned_payload["schedule"] = {}
+    for key in schedule_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["schedule"][key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def update_scheduled_report_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a UpdateScheduledReport request.
+
+    {
+        "dashboard_id": "string",
+        "description": "string",
+        "enabled": true,
+        "id": "string",
+        "labels": [
+            "string"
+        ],
+        "layout": {
+            "footer_show_page_numbers": true,
+            "max_number_of_rows": 0,
+            "paper_layout": "string",
+            "paper_orientation": "string",
+            "paper_size": "string",
+            "show_description": true,
+            "show_export_date": true,
+            "show_parameters": true,
+            "show_title_frontpage": true,
+            "show_title_header": true
+        },
+        "name": "string",
+        "parameters": [
+            "string"
+        ],
+        "password": "string",
+        "recipients": [
+            "string"
+        ],
+        "schedule": {
+            "cron_expression": "string",
+            "end_date": 0,
+            "start_date": 0,
+            "time_zone": "string"
+        },
+        "time_interval_from": "string",
+        "view_name": "string"
+    }
+    """
+    returned_payload = {}
+    keys = [
+        "dashboard_id",
+        "description",
+        "enabled",
+        "id",
+        "labels",
+        "layout",
+        "name",
+        "parameters",
+        "password",
+        "recipients",
+        "schedule",
+        "time_interval_from",
+        "view_name"
+    ]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    layout_keys = [
+        "footer_show_page_numbers",
+        "max_number_of_rows",
+        "paper_layout",
+        "paper_orientation",
+        "paper_size",
+        "show_description",
+        "show_export_date",
+        "show_parameters",
+        "show_title_frontpage",
+        "show_title_header"
+    ]
+    if "layout" not in returned_payload:
+        returned_payload["layout"] = {}
+    for key in layout_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["layout"][key] = passed_keywords.get(key)
+
+    schedule_keys = ["cron_expression", "end_date", "start_date", "time_zone"]
+    if "schedule" not in returned_payload:
+        returned_payload["schedule"] = {}
+    for key in schedule_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["schedule"][key] = passed_keywords.get(key)
+
+    return returned_payload

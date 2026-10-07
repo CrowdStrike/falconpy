@@ -81,6 +81,8 @@ from ._payload import (
     create_persisted_aggregation_payload,
     rollback_parser_payload,
     update_persisted_aggregation_payload,
+    create_scheduled_report_payload,
+    update_scheduled_report_payload,
     )
 from ._result import Result
 from ._service_class import ServiceClass
@@ -4383,6 +4385,321 @@ class NGSIEM(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_scheduled_report(self: object,
+                                body: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create a Scheduled Report in LogScale.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreateScheduledReport
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "dashboard_id": "string",
+                    "description": "string",
+                    "enabled": true,
+                    "labels": [
+                        "string"
+                    ],
+                    "layout": {
+                        "footer_show_page_numbers": true,
+                        "max_number_of_rows": 0,
+                        "paper_layout": "string",
+                        "paper_orientation": "string",
+                        "paper_size": "string",
+                        "show_description": true,
+                        "show_export_date": true,
+                        "show_parameters": true,
+                        "show_title_frontpage": true,
+                        "show_title_header": true
+                    },
+                    "name": "string",
+                    "parameters": [
+                        {
+                            "id": "string",
+                            "value": "string"
+                        }
+                    ],
+                    "password": "string",
+                    "recipients": [
+                        "string"
+                    ],
+                    "schedule": {
+                        "cron_expression": "string",
+                        "end_date": 0,
+                        "start_date": 0,
+                        "time_zone": "string"
+                    },
+                    "time_interval_from": "string",
+                    "view_name": "string"
+                }
+        dashboard_id : str
+            ID of the dashboard to report on.
+        description : str
+            Description of the scheduled report.
+        enabled : bool
+            Whether the report is enabled.
+        labels : list
+            Labels (max 10, max 60 chars each)
+        layout : dict
+            Report layout configuration.
+        name : str
+            Name of the scheduled report.
+        parameters : dict
+            Parameter values.
+        password : str
+            Password to protect generated reports.
+        recipients : list
+            Email recipients.
+        schedule : dict
+            Schedule configuration.
+        time_interval_from : str
+            Relative time interval start.
+        view_name : str
+            Name of the view or repo.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = create_scheduled_report_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateScheduledReport",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_scheduled_report(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete Scheduled Report(s) in LogScale.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/DeleteScheduledReport
+
+        Keyword arguments
+        -----------------
+        ids : list
+            scheduled report ID value(s). Supports single or multiple IDs for bulk delete.
+        search_domain : str
+            name of search domain (view or repo)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteScheduledReport",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_scheduled_report(self: object,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get Scheduled Report(s) in LogScale.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetScheduledReport
+
+        Keyword arguments
+        -----------------
+        ids : list
+            scheduled report ID value(s)
+        search_domain : str
+            name of search domain (view or repo)
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetScheduledReport",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_scheduled_reports(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """List Scheduled Reports in a view with Pagination and Filtering.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ListScheduledReports
+
+        Keyword arguments
+        -----------------
+        limit : str
+            maximum number of results to return.
+        offset : str
+            number of results to offset the returned results by.
+        filter : str
+            FQL filter to apply to the name of the content, only currently support text match on name field:
+            name:~'value'
+        view_name : str
+            name of view or repo.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ListScheduledReports",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_scheduled_report(self: object,
+                                body: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update a Scheduled Report in LogScale.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateScheduledReport
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "dashboard_id": "string",
+                    "description": "string",
+                    "enabled": true,
+                    "id": "string",
+                    "labels": [
+                        "string"
+                    ],
+                    "layout": {
+                        "footer_show_page_numbers": true,
+                        "max_number_of_rows": 0,
+                        "paper_layout": "string",
+                        "paper_orientation": "string",
+                        "paper_size": "string",
+                        "show_description": true,
+                        "show_export_date": true,
+                        "show_parameters": true,
+                        "show_title_frontpage": true,
+                        "show_title_header": true
+                    },
+                    "name": "string",
+                    "parameters": [
+                        {
+                            "id": "string",
+                            "value": "string"
+                        }
+                    ],
+                    "password": "string",
+                    "recipients": [
+                        "string"
+                    ],
+                    "schedule": {
+                        "cron_expression": "string",
+                        "end_date": 0,
+                        "start_date": 0,
+                        "time_zone": "string"
+                    },
+                    "time_interval_from": "string",
+                    "view_name": "string"
+                }
+        dashboard_id : str
+            New dashboard ID.
+        description : str
+            New description.
+        enabled : bool
+            Enable/disable.
+        id : str
+            ID of the scheduled report.
+        labels : list
+            New labels.
+        layout : dict
+            New layout.
+        name : str
+            New name.
+        parameters : dict
+            New parameters.
+        password : str
+            New password.
+        recipients : list
+            New recipients.
+        schedule : dict
+            New schedule.
+        time_interval_from : str
+            New time interval.
+        view_name : str
+            Name of the view or repo.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = update_scheduled_report_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateScheduledReport",
+            body=body
+            )
+
     addDashboardLabels = add_dashboard_labels
     addFileLabels = add_file_labels
     addSavedQueryLabels = add_saved_query_labels
@@ -4406,10 +4723,14 @@ class NGSIEM(ServiceClass):
     bulkUpdateSavedQueryLabels = bulk_update_saved_query_labels
     CreateParserExtension = create_parser_extension
     CreatePersistedAggregation = create_persisted_aggregation
+    CreateScheduledReport = create_scheduled_report
     DeletePersistedAggregation = delete_persisted_aggregation
+    DeleteScheduledReport = delete_scheduled_report
     GetParserRollbackOptions = get_parser_rollback_options
     GetPersistedAggregation = get_persisted_aggregation
+    GetScheduledReport = get_scheduled_report
     ListPersistedAggregations = list_persisted_aggregations
+    ListScheduledReports = query_scheduled_reports
     removeDashboardLabels = remove_dashboard_labels
     removeFileLabels = remove_file_labels
     removeSavedQueryLabels = remove_saved_query_labels
@@ -4419,6 +4740,7 @@ class NGSIEM(ServiceClass):
     UpdateParserExtension = update_parser_extension
     UpdatePersistedAggregation = update_persisted_aggregation
     updateSavedQueryLabels = update_saved_query_labels
+    UpdateScheduledReport = update_scheduled_report
     UploadLookupV1 = upload_file
     GetLookupV1 = get_file
     GetLookupFromPackageWithNamespaceV1 = get_file_from_package_with_namespace
