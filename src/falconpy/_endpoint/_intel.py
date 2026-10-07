@@ -546,8 +546,13 @@ _intel_endpoints = [
       {
         "type": "string",
         "description": "The rule news report type. Accepted values:\n\nsnort-suricata-master\n\nsnort-"
-        "suricata-update\n\nsnort-suricata-changelog\n\nyara-master\n\nyara-update\n\nyara-changelog\n\ncommon-event-"
-        "format\n\nnetwitness\n\ncql-master\n\ncql-update\n\ncql-changelog",
+        "suricata-update\n\nsnort-suricata-changelog (deprecated)\n\nyara-master\n\nyara-update\n\nyara-changelog "
+        "(deprecated)\n\ncommon-event-format\n\nnetwitness\n\ncql-master (deprecated)\n\ncql-update "
+        "(deprecated)\n\ncql-changelog (deprecated)\n\nNote: CQL rules (cql-master, cql-update, cql-changelog) and "
+        "Changelog rules (snort-suricata-changelog, yara-changelog) are deprecated starting 28 September 2026. cql-"
+        "changelog belongs to both families. No new rules of these types will be published after that date. Already-"
+        "published rules will continue to be available via other means (e.g. direct ID-based download, email "
+        "notifications).",
         "name": "type",
         "in": "query",
         "required": True
@@ -918,8 +923,13 @@ _intel_endpoints = [
       {
         "type": "string",
         "description": "The rule news report type. Accepted values:\n\nsnort-suricata-master\n\nsnort-"
-        "suricata-update\n\nsnort-suricata-changelog\n\nyara-master\n\nyara-update\n\nyara-changelog\n\ncommon-event-"
-        "format\n\nnetwitness\n\ncql-master\n\ncql-update\n\ncql-changelog",
+        "suricata-update\n\nsnort-suricata-changelog (deprecated)\n\nyara-master\n\nyara-update\n\nyara-changelog "
+        "(deprecated)\n\ncommon-event-format\n\nnetwitness\n\ncql-master (deprecated)\n\ncql-update "
+        "(deprecated)\n\ncql-changelog (deprecated)\n\nNote: CQL rules (cql-master, cql-update, cql-changelog) and "
+        "Changelog rules (snort-suricata-changelog, yara-changelog) are deprecated starting 28 September 2026. cql-"
+        "changelog belongs to both families. No new rules of these types will be published after that date. Already-"
+        "published rules will continue to be available via other means (e.g. direct ID-based download, email "
+        "notifications).",
         "name": "type",
         "in": "query",
         "required": True
