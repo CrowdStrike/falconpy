@@ -94,7 +94,7 @@ def create_or_update_agent_payload(passed_keywords: dict) -> dict:
     }
     """
     returned_payload = {}
-    keys = ["duplicate_from_agent_id", "id", "template_id", "version_definition"]
+    keys = ["duplicate_from_agent_id", "id", "project_id", "template_id", "version_definition"]
     for key in keys:
         if passed_keywords.get(key, None) is not None:
             returned_payload[key] = passed_keywords.get(key)
