@@ -57,6 +57,12 @@ _skills_endpoints = [
         "description": "Include deleted skills in the result. Defaults to false.",
         "name": "include_deleted",
         "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "query"
       }
     ]
   ],
@@ -84,6 +90,12 @@ _skills_endpoints = [
         "description": "Include deleted skills in the result. Defaults to false.",
         "name": "include_deleted",
         "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "query"
       }
     ]
   ],
@@ -107,6 +119,12 @@ _skills_endpoints = [
         "name": "skill_blob",
         "in": "formData",
         "required": True
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "formData"
       }
     ]
   ],
@@ -123,6 +141,12 @@ _skills_endpoints = [
         "name": "skill_blob",
         "in": "formData",
         "required": True
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "formData"
       }
     ]
   ],
@@ -139,6 +163,12 @@ _skills_endpoints = [
         "name": "id",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "query"
       }
     ]
   ],
@@ -181,6 +211,12 @@ _skills_endpoints = [
         "default": False,
         "description": "Include deleted skills in the result. Defaults to false.",
         "name": "include_deleted",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
         "in": "query"
       }
     ]
