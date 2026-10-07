@@ -23,6 +23,7 @@ class KnowledgeBaseAuditEvents(ServiceClass):
         sort: Optional[str] = None,
         filter: Optional[str] = None,
         include_deleted: Optional[bool] = None,
+        project_id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -32,6 +33,7 @@ class KnowledgeBaseAuditEvents(ServiceClass):
         knowledge_base_id: Optional[str] = None,
         ids: Optional[Union[str, List[str]]] = None,
         include_deleted: Optional[bool] = None,
+        project_id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -44,6 +46,7 @@ class KnowledgeBaseAuditEvents(ServiceClass):
         sort: Optional[str] = None,
         filter: Optional[str] = None,
         include_deleted: Optional[bool] = None,
+        project_id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

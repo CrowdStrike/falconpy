@@ -31,6 +31,7 @@ class QuickScanPro(ServiceClass):
         self,
         *,
         password: Optional[str] = None,
+        scan_mode: Optional[str] = None,
         sha256: Optional[str] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...

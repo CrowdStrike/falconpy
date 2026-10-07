@@ -446,7 +446,9 @@ class CaseManagement(ServiceClass):
         self,
         *,
         access_tags: Optional[list] = None,
+        assigned_to_group_ids: Optional[Union[str, List[str]]] = None,
         assigned_to_user_uuid: Optional[str] = None,
+        custom_fields: Optional[list] = None,
         description: Optional[str] = None,
         description_format: Optional[str] = None,
         description_tagged_users: Optional[Union[str, List[str]]] = None,
@@ -457,6 +459,7 @@ class CaseManagement(ServiceClass):
         status: Optional[str] = None,
         tags: Optional[Union[str, List[str]]] = None,
         template: Optional[dict] = None,
+        templates: Optional[list] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -504,13 +507,58 @@ class CaseManagement(ServiceClass):
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def add_case_alert_evidence_v2(
+        self,
+        *,
+        alerts: Optional[list] = None,
+        id: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def remove_case_access_tags(
+        self,
+        *,
+        id: Optional[str] = None,
+        access_tag_id: Optional[Union[str, List[str]]] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def add_case_access_tags(
+        self,
+        *,
+        access_tag_ids: Optional[Union[str, List[str]]] = None,
+        id: Optional[str] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def add_case_custom_evidence(
+        self,
+        *,
+        case_id: Optional[str] = None,
+        evidence: Optional[list] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def add_case_user_evidence(
+        self,
+        *,
+        id: Optional[str] = None,
+        users: Optional[list] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
     combined_file_details_get_v1 = query_file_details
+    entities_alert_evidence_post_v2 = add_case_alert_evidence_v2
+    entities_case_access_tags_delete_v1 = remove_case_access_tags
+    entities_case_access_tags_post_v1 = add_case_access_tags
+    entities_custom_evidence_post_v1 = add_case_custom_evidence
     entities_file_details_get_v1 = get_file_details
     entities_file_details_patch_v1 = update_file_details
     entities_files_bulk_download_post_v1 = bulk_download_files
     entities_files_download_get_v1 = download_existing_files
     entities_files_upload_post_v1 = upload_file
     entities_files_delete_v1 = delete_file_details
+    entities_user_evidence_post_v1 = add_case_user_evidence
     queries_file_details_get_v1 = query_file_detail_ids
     entities_get_rtr_file_metadata_post_v1 = get_rtr_file_metadata
     entities_retrieve_rtr_file_post_v1 = retrieve_rtr_file
