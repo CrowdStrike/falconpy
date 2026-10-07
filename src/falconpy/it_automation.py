@@ -49,7 +49,12 @@ from ._payload import (
     policy_host_group_payload,
     automation_live_query_payload,
     automation_user_group_payload,
-    cancel_task_execution_payload
+    cancel_task_execution_payload,
+    aggregate_patch_deployment_configs_payload,
+    aggregate_patch_deployment_executions_payload,
+    aggregate_patch_host_deployments_payload,
+    create_patch_deployment_config_payload,
+    update_patch_deployment_config_payload,
     )
 from ._result import Result
 from ._service_class import ServiceClass
@@ -2731,6 +2736,975 @@ class ITAutomation(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def aggregate_patch_deployment_configs(self: object,
+                                           body: dict = None,
+                                           **kwargs
+                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve deployment config aggregations.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/deployment-configs/AggregateDeploymentConfigsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                    ],
+                    "exclude": "string",
+                    "extended_bounds": {
+                        "max": "string",
+                        "min": "string"
+                    },
+                    "field": "string",
+                    "filter": "string",
+                    "filters_spec": {
+                        "filters": "string",
+                        "other_bucket": true,
+                        "other_bucket_key": "string"
+                    },
+                    "from": 0,
+                    "include": "string",
+                    "interval": "string",
+                    "max_doc_count": 0,
+                    "min_doc_count": 0,
+                    "missing": "string",
+                    "name": "string",
+                    "percents": [
+                        "string"
+                    ],
+                    "q": "string",
+                    "ranges": [
+                        {
+                            "From": 0.0,
+                            "To": 0.0
+                        }
+                    ],
+                    "size": 0,
+                    "sort": "string",
+                    "sub_aggregates": [
+                        "string"
+                    ],
+                    "time_zone": "string",
+                    "type": "string"
+                }
+        date_ranges : list
+            The date_ranges value.
+        exclude : str
+            The exclude value.
+        extended_bounds : dict
+            The extended_bounds value.
+        field : str
+            The field value.
+        filter : str
+            The filter value.
+        filters_spec : dict
+            The filters_spec value.
+        from : int
+            The from value.
+        include : str
+            The include value.
+        interval : str
+            The interval value.
+        max_doc_count : int
+            The max_doc_count value.
+        min_doc_count : int
+            The min_doc_count value.
+        missing : str
+            The missing value.
+        name : str
+            The name value.
+        percents : list
+            The percents value.
+        q : str
+            The q value.
+        ranges : list
+            The ranges value.
+        size : int
+            The size value.
+        sort : str
+            The sort value.
+        sub_aggregates : list
+            The sub_aggregates value.
+        time_zone : str
+            The time_zone value.
+        type : str
+            The type value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = aggregate_patch_deployment_configs_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="AggregateDeploymentConfigsV1",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def aggregate_patch_deployment_executions(self: object,
+                                              body: dict = None,
+                                              **kwargs
+                                              ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve deployment execution aggregations.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/deployment-executions/AggregateDeploymentExecutionsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                    ],
+                    "exclude": "string",
+                    "extended_bounds": {
+                        "max": "string",
+                        "min": "string"
+                    },
+                    "field": "string",
+                    "filter": "string",
+                    "filters_spec": {
+                        "filters": "string",
+                        "other_bucket": true,
+                        "other_bucket_key": "string"
+                    },
+                    "from": 0,
+                    "include": "string",
+                    "interval": "string",
+                    "max_doc_count": 0,
+                    "min_doc_count": 0,
+                    "missing": "string",
+                    "name": "string",
+                    "percents": [
+                        "string"
+                    ],
+                    "q": "string",
+                    "ranges": [
+                        {
+                            "From": 0.0,
+                            "To": 0.0
+                        }
+                    ],
+                    "size": 0,
+                    "sort": "string",
+                    "sub_aggregates": [
+                        "string"
+                    ],
+                    "time_zone": "string",
+                    "type": "string"
+                }
+        date_ranges : list
+            The date_ranges value.
+        exclude : str
+            The exclude value.
+        extended_bounds : dict
+            The extended_bounds value.
+        field : str
+            The field value.
+        filter : str
+            The filter value.
+        filters_spec : dict
+            The filters_spec value.
+        from : int
+            The from value.
+        include : str
+            The include value.
+        interval : str
+            The interval value.
+        max_doc_count : int
+            The max_doc_count value.
+        min_doc_count : int
+            The min_doc_count value.
+        missing : str
+            The missing value.
+        name : str
+            The name value.
+        percents : list
+            The percents value.
+        q : str
+            The q value.
+        ranges : list
+            The ranges value.
+        size : int
+            The size value.
+        sort : str
+            The sort value.
+        sub_aggregates : list
+            The sub_aggregates value.
+        time_zone : str
+            The time_zone value.
+        type : str
+            The type value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = aggregate_patch_deployment_executions_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="AggregateDeploymentExecutionsV1",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def aggregate_patch_host_deployments(self: object,
+                                         body: dict = None,
+                                         **kwargs
+                                         ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve host deployment aggregations.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-deployments/AggregateHostDeploymentsV1
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                    ],
+                    "exclude": "string",
+                    "extended_bounds": {
+                        "max": "string",
+                        "min": "string"
+                    },
+                    "field": "string",
+                    "filter": "string",
+                    "filters_spec": {
+                        "filters": "string",
+                        "other_bucket": true,
+                        "other_bucket_key": "string"
+                    },
+                    "from": 0,
+                    "include": "string",
+                    "interval": "string",
+                    "max_doc_count": 0,
+                    "min_doc_count": 0,
+                    "missing": "string",
+                    "name": "string",
+                    "percents": [
+                        "string"
+                    ],
+                    "q": "string",
+                    "ranges": [
+                        {
+                            "From": 0.0,
+                            "To": 0.0
+                        }
+                    ],
+                    "size": 0,
+                    "sort": "string",
+                    "sub_aggregates": [
+                        "string"
+                    ],
+                    "time_zone": "string",
+                    "type": "string"
+                }
+        date_ranges : list
+            The date_ranges value.
+        exclude : str
+            The exclude value.
+        extended_bounds : dict
+            The extended_bounds value.
+        field : str
+            The field value.
+        filter : str
+            The filter value.
+        filters_spec : dict
+            The filters_spec value.
+        from : int
+            The from value.
+        include : str
+            The include value.
+        interval : str
+            The interval value.
+        max_doc_count : int
+            The max_doc_count value.
+        min_doc_count : int
+            The min_doc_count value.
+        missing : str
+            The missing value.
+        name : str
+            The name value.
+        percents : list
+            The percents value.
+        q : str
+            The q value.
+        ranges : list
+            The ranges value.
+        size : int
+            The size value.
+        sort : str
+            The sort value.
+        sub_aggregates : list
+            The sub_aggregates value.
+        time_zone : str
+            The time_zone value.
+        type : str
+            The type value.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = aggregate_patch_host_deployments_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="AggregateHostDeploymentsV1",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def cancel_patch_deployment_executions(self: object,
+                                           *args,
+                                           parameters: dict = None,
+                                           **kwargs
+                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Cancel deployment executions by IDs.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/deployment-executions/CancelDeploymentExecutionsV1
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Comma separated values of deployment execution ids to cancel.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CancelDeploymentExecutionsV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_combined_os_assessment_scan(self: object,
+                                          parameters: dict = None,
+                                          **kwargs
+                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Search and retrieve OS assessment scan statuses in a single request.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/patch-mgmt/CombinedOSAssessmentScan
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression for searching assessment scans.
+        sort : str
+            Sort expression.
+        limit : int
+            Maximum number of records to return.
+        after : str
+            A pagination token used with the limit parameter to manage pagination of results. On your first request, don't
+            provide an after token. On subsequent requests, provide the after token from the previous response to continue
+            from that place in the results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CombinedOSAssessmentScan",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_combined_os_assessments(self: object,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Search and retrieve OS patch assessments in a single request.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/patch-mgmt/CombinedOSAssessments
+
+        Keyword arguments
+        -----------------
+        filter : str
+            FQL filter expression for searching assessments.
+        sort : str
+            Sort expression.
+        limit : int
+            Maximum number of records to return.
+        after : str
+            A pagination token used with the limit parameter to manage pagination of results. On your first request, don't
+            provide an after token. On subsequent requests, provide the after token from the previous response to continue
+            from that place in the results.
+        facets : str
+            Vulnerability facets to include in response: 'vulnerabilities' (full array), 'vulnerability_counts'
+            (summary). Default: vulnerability_counts.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CombinedOSAssessments",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_patch_deployment_config(self: object,
+                                       body: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create a new deployment configuration.
+
+        HTTP Method: POST
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/deployment-configs/CreateDeploymentConfig
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "block_filter_group_ids": [
+                        "string"
+                    ],
+                    "disabled": true,
+                    "name": "string",
+                    "patch_filter_group_ids": [
+                        "string"
+                    ],
+                    "platform": "string",
+                    "post_patch_script_options": {
+                        "content": "string",
+                        "enabled": true,
+                        "run_before_reboot": true,
+                        "script_type": "string"
+                    },
+                    "pre_patch_script_options": {
+                        "content": "string",
+                        "continue_on_failure": true,
+                        "enabled": true,
+                        "script_type": "string"
+                    },
+                    "prestage": true,
+                    "reboot_options": {
+                        "allow_end_user_to_defer": true,
+                        "occurrence": "string",
+                        "reboot": true,
+                        "reboot_user_notification_deferral_deadline_hours": 0,
+                        "reboot_user_notification_deferral_deadline_reference": "string",
+                        "user_notification": true,
+                        "user_notification_message": "string",
+                        "user_notification_title": "string"
+                    },
+                    "recurring": true,
+                    "run_now_no_schedule": true,
+                    "schedule": {
+                        "deployment_duration_minutes": 0,
+                        "deployment_start_time": "string",
+                        "recurrence_day_of_week": "string",
+                        "recurrence_frequency": "string",
+                        "recurrence_time_of_month": "string",
+                        "schedule_activate_date": "string",
+                        "schedule_terminate_date": "string"
+                    },
+                    "target_hosts": "string",
+                    "target_patches": "string",
+                    "user_notification_options": {
+                        "allow_end_user_to_defer": true,
+                        "user_notification": true,
+                        "user_notification_message": "string",
+                        "user_notification_title": "string"
+                    }
+                }
+        block_filter_group_ids : list
+            References to block filter groups (is_block=true, additive to global)
+        disabled : bool
+            Whether the deployment configuration is disabled.
+        name : str
+            Name of the deployment configuration.
+        patch_filter_group_ids : list
+            References to patch filter groups (is_block=false)
+        platform : str
+            Platforms which are targeted by this deployment configuration.
+        post_patch_script_options : dict
+            Post-patch script configuration options.
+        pre_patch_script_options : dict
+            Pre-patch script configuration options.
+        prestage : bool
+            Whether patches should be downloaded to a host ahead of installation.
+        reboot_options : dict
+            Advanced reboot configuration options.
+        recurring : bool
+            Whether the deployment is recurring or one-time scheduled.
+        run_now_no_schedule : bool
+            Whether the Deployment should run immediately.
+        schedule : dict
+            Schedule configuration.
+        target_hosts : str
+            FQL query for hosts to target. Supported fields: host.aid | host.name | host.device_type | host.os_version |
+            host.last_seen | host.asset_criticality | host.organizational_unit | host.country | host.tags | host.groups |
+            host.internet_exposure | last_scanned.
+        target_patches : str
+            FQL query for patches to apply. OS deployment supported fields: patch.id | patch.name | patch.version |
+            patch.severity | patch.type | patch.classifications | patch.release_date | patch.vendor_name | patch.vendor_url |
+            patch.size | patch.supersedence | patch.reboot_requirement | patch.repo | patch.description |
+            vulnerabilities.exprt_ai_rating | vulnerabilities.id. App deployment supported fields: available_update.id |
+            available_update.vendor | available_update.name | available_update.version | available_update.arch |
+            available_update.locale | available_update.scope | available_update.application_id | available_update.source |
+            available_update.publish_date | available_update.family_name | available_update.family_category |
+            available_update.vendor_name_version | available_update.version_sequence | available_update.is_latest_version |
+            available_update.is_in_place_update | installation_status | last_scanned | platform | vulnerabilities.id |
+            vulnerabilities.exprt_ai_rating | vulnerabilities.cvss_attack_vector.
+        user_notification_options : dict
+            Advanced user notification configuration options.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = create_patch_deployment_config_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateDeploymentConfig",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_patch_deployment_configs(self: object,
+                                        *args,
+                                        parameters: dict = None,
+                                        **kwargs
+                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete deployment configurations by IDs.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/deployment-configs/DeleteDeploymentConfigs
+
+        Keyword arguments
+        -----------------
+        ids : str or list[str]
+            Deployment config IDs to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ---------
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteDeploymentConfigs",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_combined_patch_deployment_configs(self: object,
+                                                parameters: dict = None,
+                                                **kwargs
+                                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve deployment configs by query.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/deployment-configs/GetDeploymentConfigsByQueryV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results.  Allowable categories are:
+        sort : str
+            The sort expression that should be used to sort the results.
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetDeploymentConfigsByQueryV1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_combined_patch_deployment_executions(self: object,
+                                                   parameters: dict = None,
+                                                   **kwargs
+                                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve deployment executions by query.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/deployment-executions/GetDeploymentExecutionsByQueryV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression. Optionally filter by deployment_config.id:'<uuid>' or status:'<value>'
+        sort : str
+            The sort expression that should be used to sort the results.
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetDeploymentExecutionsByQueryV1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_combined_host_deployment_patches(self: object,
+                                               parameters: dict = None,
+                                               **kwargs
+                                               ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve host deployment patch statuses by query.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-deployment-patches/GetHostDeploymentPatchesByQueryV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression. Must include host_deployment_id:'<uuid>'. Optionally filter by
+            status:'installed|not-installed'
+        sort : str
+            The sort expression that should be used to sort the results.
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetHostDeploymentPatchesByQueryV1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_combined_host_deployments(self: object,
+                                        parameters: dict = None,
+                                        **kwargs
+                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve deployment results by query.
+
+        HTTP Method: GET
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-deployments/GetHostDeploymentsByQueryV1
+
+        Keyword arguments
+        -----------------
+        filter : str
+            The filter expression that should be used to limit the results.  Allowable categories are:
+        sort : str
+            The sort expression that should be used to sort the results.
+        offset : int
+            The offset to start retrieving records from.
+        limit : int
+            The maximum records to return.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetHostDeploymentsByQueryV1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_patch_deployment_config(self: object,
+                                       body: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update an existing deployment configuration.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        -----------
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/deployment-configs/UpdateDeploymentConfig
+
+        Keyword arguments
+        -----------------
+        body : dict
+            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "block_filter_group_ids": [
+                        "string"
+                    ],
+                    "disabled": true,
+                    "id": "string",
+                    "name": "string",
+                    "patch_filter_group_ids": [
+                        "string"
+                    ],
+                    "platform": "string",
+                    "post_patch_script_options": {
+                        "content": "string",
+                        "enabled": true,
+                        "run_before_reboot": true,
+                        "script_type": "string"
+                    },
+                    "pre_patch_script_options": {
+                        "content": "string",
+                        "continue_on_failure": true,
+                        "enabled": true,
+                        "script_type": "string"
+                    },
+                    "prestage": true,
+                    "reboot_options": {
+                        "allow_end_user_to_defer": true,
+                        "occurrence": "string",
+                        "reboot": true,
+                        "reboot_user_notification_deferral_deadline_hours": 0,
+                        "reboot_user_notification_deferral_deadline_reference": "string",
+                        "user_notification": true,
+                        "user_notification_message": "string",
+                        "user_notification_title": "string"
+                    },
+                    "recurring": true,
+                    "run_now_no_schedule": true,
+                    "schedule": {
+                        "deployment_duration_minutes": 0,
+                        "deployment_start_time": "string",
+                        "recurrence_day_of_week": "string",
+                        "recurrence_frequency": "string",
+                        "recurrence_time_of_month": "string",
+                        "schedule_activate_date": "string",
+                        "schedule_terminate_date": "string"
+                    },
+                    "target_hosts": "string",
+                    "target_patches": "string",
+                    "user_notification_options": {
+                        "allow_end_user_to_defer": true,
+                        "user_notification": true,
+                        "user_notification_message": "string",
+                        "user_notification_title": "string"
+                    }
+                }
+        block_filter_group_ids : list
+            Block filter group refs (is_block=true). Omit to leave unchanged; send [] to clear.
+        disabled : bool
+            Whether the deployment configuration is disabled.
+        id : str
+            ID of the deployment configuration to update.
+        name : str
+            Name of the deployment configuration.
+        patch_filter_group_ids : list
+            References to patch filter groups (is_block=false). Omit to leave existing references unchanged; send [] to clear
+            all references.
+        platform : str
+            Platforms which are targeted by this deployment configuration.
+        post_patch_script_options : dict
+            Post-patch script configuration options.
+        pre_patch_script_options : dict
+            Pre-patch script configuration options.
+        prestage : bool
+            Whether patches should be downloaded to a host ahead of installation.
+        reboot_options : dict
+            Advanced reboot configuration options.
+        recurring : bool
+            Whether the deployment is recurring or one-time scheduled.
+        run_now_no_schedule : bool
+            Whether the Deployment should run immediately.
+        schedule : dict
+            Schedule configuration.
+        target_hosts : str
+            FQL query for hosts to target. Supported fields: host.aid | host.name | host.device_type | host.os_version |
+            host.last_seen | host.asset_criticality | host.organizational_unit | host.country | host.tags | host.groups |
+            host.internet_exposure | last_scanned.
+        target_patches : str
+            FQL query for patches to apply. OS deployment supported fields: patch.id | patch.name | patch.version |
+            patch.severity | patch.type | patch.classifications | patch.release_date | patch.vendor_name | patch.vendor_url |
+            patch.size | patch.supersedence | patch.reboot_requirement | patch.repo | patch.description |
+            vulnerabilities.exprt_ai_rating | vulnerabilities.id. App deployment supported fields: available_update.id |
+            available_update.vendor | available_update.name | available_update.version | available_update.arch |
+            available_update.locale | available_update.scope | available_update.application_id | available_update.source |
+            available_update.publish_date | available_update.family_name | available_update.family_category |
+            available_update.vendor_name_version | available_update.version_sequence | available_update.is_latest_version |
+            available_update.is_in_place_update | installation_status | last_scanned | platform | vulnerabilities.id |
+            vulnerabilities.exprt_ai_rating | vulnerabilities.cvss_attack_vector.
+        user_notification_options : dict
+            Advanced user notification configuration options.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        -------
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = update_patch_deployment_config_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateDeploymentConfig",
+            body=body
+            )
+
+    AggregateDeploymentConfigsV1 = aggregate_patch_deployment_configs
+    AggregateDeploymentExecutionsV1 = aggregate_patch_deployment_executions
+    AggregateHostDeploymentsV1 = aggregate_patch_host_deployments
+    CancelDeploymentExecutionsV1 = cancel_patch_deployment_executions
+    CombinedOSAssessments = query_combined_os_assessments
+    CombinedOSAssessmentScan = query_combined_os_assessment_scan
+    CreateDeploymentConfig = create_patch_deployment_config
+    DeleteDeploymentConfigs = delete_patch_deployment_configs
+    GetDeploymentConfigsByQueryV1 = query_combined_patch_deployment_configs
+    GetDeploymentExecutionsByQueryV1 = query_combined_patch_deployment_executions
+    GetHostDeploymentPatchesByQueryV1 = query_combined_host_deployment_patches
+    GetHostDeploymentsByQueryV1 = query_combined_host_deployments
     ITAutomationGetAssociatedTasks = get_associated_tasks
     ITAutomationCombinedScheduledTasks = scheduled_task_details
     ITAutomationGetTaskExecutionsByQuery = get_executions_by_query
@@ -2773,6 +3747,7 @@ class ITAutomation(ServiceClass):
     ITAutomationSearchTaskExecutions = search_task_executions
     ITAutomationSearchTaskGroups = search_task_groups
     ITAutomationSearchTasks = search_tasks
+    UpdateDeploymentConfig = update_patch_deployment_config
 
 
 F4IT = ITAutomation
