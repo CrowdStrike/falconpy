@@ -74,6 +74,8 @@ class KnowledgeBaseFiles(ServiceClass):
             ID of the knowledge base.
         id : str
             ID of entities to retrieve.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -113,6 +115,8 @@ class KnowledgeBaseFiles(ServiceClass):
             IDs of entities to retrieve.
         include_deleted : bool
             Include deleted knowledge base files in the result. Defaults to false.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -154,6 +158,8 @@ class KnowledgeBaseFiles(ServiceClass):
             New file content to replace the existing document.
         file_description : str
             New description for the document.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -208,6 +214,8 @@ class KnowledgeBaseFiles(ServiceClass):
             File to be uploaded.
         file_description : str
             Description for the uploaded file.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -258,6 +266,8 @@ class KnowledgeBaseFiles(ServiceClass):
             ID of the knowledge base.
         id : str
             ID of the document to delete.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -301,6 +311,8 @@ class KnowledgeBaseFiles(ServiceClass):
             FQL query specifying the filter parameters.
         include_deleted : bool
             Include deleted knowledge base files in the result. Defaults to false.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 

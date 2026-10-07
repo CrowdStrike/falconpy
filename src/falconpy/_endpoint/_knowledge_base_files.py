@@ -57,6 +57,12 @@ _knowledge_base_files_endpoints = [
         "name": "id",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "query"
       }
     ]
   ],
@@ -91,6 +97,12 @@ _knowledge_base_files_endpoints = [
         "description": "Include deleted knowledge base files in the result. Defaults to false.",
         "name": "include_deleted",
         "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "query"
       }
     ]
   ],
@@ -119,6 +131,12 @@ _knowledge_base_files_endpoints = [
         "type": "string",
         "description": "New description for the knowledge base file",
         "name": "file_description",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
         "in": "formData"
       }
     ]
@@ -149,6 +167,12 @@ _knowledge_base_files_endpoints = [
         "description": "Description for the uploaded file",
         "name": "file_description",
         "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "formData"
       }
     ]
   ],
@@ -172,6 +196,12 @@ _knowledge_base_files_endpoints = [
         "name": "id",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "query"
       }
     ]
   ],
@@ -215,6 +245,12 @@ _knowledge_base_files_endpoints = [
         "default": False,
         "description": "Include deleted knowledge base files in the result. Defaults to false.",
         "name": "include_deleted",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
         "in": "query"
       }
     ]
