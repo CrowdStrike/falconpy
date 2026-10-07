@@ -200,16 +200,21 @@ from ._ioa_exclusions import (
     ioa_ss_default_exclusion_payload
     )
 from ._it_automation import (
-    task_payload,
-    task_execution_payload,
+    aggregate_patch_deployment_configs_payload,
+    aggregate_patch_deployment_executions_payload,
+    aggregate_patch_host_deployments_payload,
+    automation_live_query_payload,
+    automation_policy_payload,
+    automation_user_group_payload,
+    cancel_task_execution_payload,
+    create_patch_deployment_config_payload,
     execution_results_search_payload,
+    policy_host_group_payload,
     rerun_payload,
     scheduled_task_payload,
-    automation_policy_payload,
-    policy_host_group_payload,
-    automation_live_query_payload,
-    automation_user_group_payload,
-    cancel_task_execution_payload
+    task_execution_payload,
+    task_payload,
+    update_patch_deployment_config_payload,
     )
 from ._mobile_enrollment import mobile_enrollment_payload
 from ._network_scan_global_configs import network_scan_global_configs_payload
@@ -480,5 +485,8 @@ __all__ = [
     "update_eval_dataset_entry_payload", "create_eval_dataset_payload",
     "update_eval_dataset_payload", "create_eval_evaluator_payload",
     "update_eval_evaluator_payload", "create_eval_run_payload",
-    "perform_eval_run_action_payload", "update_eval_run_payload"
+    "perform_eval_run_action_payload", "update_eval_run_payload",
+    "aggregate_patch_deployment_configs_payload", "aggregate_patch_deployment_executions_payload",
+    "aggregate_patch_host_deployments_payload", "create_patch_deployment_config_payload",
+    "update_patch_deployment_config_payload"
 ]

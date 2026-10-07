@@ -569,3 +569,534 @@ def automation_live_query_payload(passed_keywords: dict) -> dict:
             returned_payload[key] = passed_keywords.get(key, None)
 
     return returned_payload
+
+
+def aggregate_patch_deployment_configs_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a AggregateDeploymentConfigsV1 request.
+
+    {
+        "date_ranges": [
+            "string"
+        ],
+        "exclude": "string",
+        "extended_bounds": {
+            "max": "string",
+            "min": "string"
+        },
+        "field": "string",
+        "filter": "string",
+        "filters_spec": {
+            "filters": "string",
+            "other_bucket": true,
+            "other_bucket_key": "string"
+        },
+        "from": 0,
+        "include": "string",
+        "interval": "string",
+        "max_doc_count": 0,
+        "min_doc_count": 0,
+        "missing": "string",
+        "name": "string",
+        "percents": [
+            "string"
+        ],
+        "q": "string",
+        "ranges": [
+            "string"
+        ],
+        "size": 0,
+        "sort": "string",
+        "sub_aggregates": [
+            "string"
+        ],
+        "time_zone": "string",
+        "type": "string"
+    }
+    """
+    returned_payload = {}
+    keys = [
+        "date_ranges",
+        "exclude",
+        "extended_bounds",
+        "field",
+        "filter",
+        "filters_spec",
+        "from",
+        "include",
+        "interval",
+        "max_doc_count",
+        "min_doc_count",
+        "missing",
+        "name",
+        "percents",
+        "q",
+        "ranges",
+        "size",
+        "sort",
+        "sub_aggregates",
+        "time_zone",
+        "type"
+    ]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    extended_bounds_keys = ["max", "min"]
+    if "extended_bounds" not in returned_payload:
+        returned_payload["extended_bounds"] = {}
+    for key in extended_bounds_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["extended_bounds"][key] = passed_keywords.get(key)
+
+    filters_spec_keys = ["filters", "other_bucket", "other_bucket_key"]
+    if "filters_spec" not in returned_payload:
+        returned_payload["filters_spec"] = {}
+    for key in filters_spec_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["filters_spec"][key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def aggregate_patch_deployment_executions_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a AggregateDeploymentExecutionsV1 request.
+
+    {
+        "date_ranges": [
+            "string"
+        ],
+        "exclude": "string",
+        "extended_bounds": {
+            "max": "string",
+            "min": "string"
+        },
+        "field": "string",
+        "filter": "string",
+        "filters_spec": {
+            "filters": "string",
+            "other_bucket": true,
+            "other_bucket_key": "string"
+        },
+        "from": 0,
+        "include": "string",
+        "interval": "string",
+        "max_doc_count": 0,
+        "min_doc_count": 0,
+        "missing": "string",
+        "name": "string",
+        "percents": [
+            "string"
+        ],
+        "q": "string",
+        "ranges": [
+            "string"
+        ],
+        "size": 0,
+        "sort": "string",
+        "sub_aggregates": [
+            "string"
+        ],
+        "time_zone": "string",
+        "type": "string"
+    }
+    """
+    returned_payload = {}
+    keys = [
+        "date_ranges",
+        "exclude",
+        "extended_bounds",
+        "field",
+        "filter",
+        "filters_spec",
+        "from",
+        "include",
+        "interval",
+        "max_doc_count",
+        "min_doc_count",
+        "missing",
+        "name",
+        "percents",
+        "q",
+        "ranges",
+        "size",
+        "sort",
+        "sub_aggregates",
+        "time_zone",
+        "type"
+    ]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    extended_bounds_keys = ["max", "min"]
+    if "extended_bounds" not in returned_payload:
+        returned_payload["extended_bounds"] = {}
+    for key in extended_bounds_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["extended_bounds"][key] = passed_keywords.get(key)
+
+    filters_spec_keys = ["filters", "other_bucket", "other_bucket_key"]
+    if "filters_spec" not in returned_payload:
+        returned_payload["filters_spec"] = {}
+    for key in filters_spec_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["filters_spec"][key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def aggregate_patch_host_deployments_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a AggregateHostDeploymentsV1 request.
+
+    {
+        "date_ranges": [
+            "string"
+        ],
+        "exclude": "string",
+        "extended_bounds": {
+            "max": "string",
+            "min": "string"
+        },
+        "field": "string",
+        "filter": "string",
+        "filters_spec": {
+            "filters": "string",
+            "other_bucket": true,
+            "other_bucket_key": "string"
+        },
+        "from": 0,
+        "include": "string",
+        "interval": "string",
+        "max_doc_count": 0,
+        "min_doc_count": 0,
+        "missing": "string",
+        "name": "string",
+        "percents": [
+            "string"
+        ],
+        "q": "string",
+        "ranges": [
+            "string"
+        ],
+        "size": 0,
+        "sort": "string",
+        "sub_aggregates": [
+            "string"
+        ],
+        "time_zone": "string",
+        "type": "string"
+    }
+    """
+    returned_payload = {}
+    keys = [
+        "date_ranges",
+        "exclude",
+        "extended_bounds",
+        "field",
+        "filter",
+        "filters_spec",
+        "from",
+        "include",
+        "interval",
+        "max_doc_count",
+        "min_doc_count",
+        "missing",
+        "name",
+        "percents",
+        "q",
+        "ranges",
+        "size",
+        "sort",
+        "sub_aggregates",
+        "time_zone",
+        "type"
+    ]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    extended_bounds_keys = ["max", "min"]
+    if "extended_bounds" not in returned_payload:
+        returned_payload["extended_bounds"] = {}
+    for key in extended_bounds_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["extended_bounds"][key] = passed_keywords.get(key)
+
+    filters_spec_keys = ["filters", "other_bucket", "other_bucket_key"]
+    if "filters_spec" not in returned_payload:
+        returned_payload["filters_spec"] = {}
+    for key in filters_spec_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["filters_spec"][key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def create_patch_deployment_config_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a CreateDeploymentConfig request.
+
+    {
+        "block_filter_group_ids": [
+            "string"
+        ],
+        "disabled": true,
+        "name": "string",
+        "patch_filter_group_ids": [
+            "string"
+        ],
+        "platform": "string",
+        "post_patch_script_options": {
+            "content": "string",
+            "enabled": true,
+            "run_before_reboot": true,
+            "script_type": "string"
+        },
+        "pre_patch_script_options": {
+            "content": "string",
+            "continue_on_failure": true,
+            "enabled": true,
+            "script_type": "string"
+        },
+        "prestage": true,
+        "reboot_options": {
+            "allow_end_user_to_defer": true,
+            "occurrence": "string",
+            "reboot": true,
+            "reboot_user_notification_deferral_deadline_hours": 0,
+            "reboot_user_notification_deferral_deadline_reference": "string",
+            "user_notification": true,
+            "user_notification_message": "string",
+            "user_notification_title": "string"
+        },
+        "recurring": true,
+        "run_now_no_schedule": true,
+        "schedule": {
+            "deployment_duration_minutes": 0,
+            "deployment_start_time": "string",
+            "recurrence_day_of_week": "string",
+            "recurrence_frequency": "string",
+            "recurrence_time_of_month": "string",
+            "schedule_activate_date": "string",
+            "schedule_terminate_date": "string"
+        },
+        "target_hosts": "string",
+        "target_patches": "string",
+        "user_notification_options": {
+            "allow_end_user_to_defer": true,
+            "user_notification": true,
+            "user_notification_message": "string",
+            "user_notification_title": "string"
+        }
+    }
+    """
+    returned_payload = {}
+    keys = [
+        "block_filter_group_ids",
+        "disabled",
+        "name",
+        "patch_filter_group_ids",
+        "platform",
+        "post_patch_script_options",
+        "pre_patch_script_options",
+        "prestage",
+        "reboot_options",
+        "recurring",
+        "run_now_no_schedule",
+        "schedule",
+        "target_hosts",
+        "target_patches",
+        "user_notification_options"
+    ]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    post_patch_script_options_keys = ["content", "enabled", "run_before_reboot", "script_type"]
+    if "post_patch_script_options" not in returned_payload:
+        returned_payload["post_patch_script_options"] = {}
+    for key in post_patch_script_options_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["post_patch_script_options"][key] = passed_keywords.get(key)
+
+    pre_patch_script_options_keys = ["content", "continue_on_failure", "enabled", "script_type"]
+    if "pre_patch_script_options" not in returned_payload:
+        returned_payload["pre_patch_script_options"] = {}
+    for key in pre_patch_script_options_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["pre_patch_script_options"][key] = passed_keywords.get(key)
+
+    reboot_options_keys = [
+        "allow_end_user_to_defer",
+        "occurrence",
+        "reboot",
+        "reboot_user_notification_deferral_deadline_hours",
+        "reboot_user_notification_deferral_deadline_reference",
+        "user_notification",
+        "user_notification_message",
+        "user_notification_title"
+    ]
+    if "reboot_options" not in returned_payload:
+        returned_payload["reboot_options"] = {}
+    for key in reboot_options_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["reboot_options"][key] = passed_keywords.get(key)
+
+    schedule_keys = [
+        "deployment_duration_minutes",
+        "deployment_start_time",
+        "recurrence_day_of_week",
+        "recurrence_frequency",
+        "recurrence_time_of_month",
+        "schedule_activate_date",
+        "schedule_terminate_date"
+    ]
+    if "schedule" not in returned_payload:
+        returned_payload["schedule"] = {}
+    for key in schedule_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["schedule"][key] = passed_keywords.get(key)
+
+    user_notification_options_keys = ["allow_end_user_to_defer", "user_notification", "user_notification_message", "user_notification_title"]
+    if "user_notification_options" not in returned_payload:
+        returned_payload["user_notification_options"] = {}
+    for key in user_notification_options_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["user_notification_options"][key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def update_patch_deployment_config_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a UpdateDeploymentConfig request.
+
+    {
+        "block_filter_group_ids": [
+            "string"
+        ],
+        "disabled": true,
+        "id": "string",
+        "name": "string",
+        "patch_filter_group_ids": [
+            "string"
+        ],
+        "platform": "string",
+        "post_patch_script_options": {
+            "content": "string",
+            "enabled": true,
+            "run_before_reboot": true,
+            "script_type": "string"
+        },
+        "pre_patch_script_options": {
+            "content": "string",
+            "continue_on_failure": true,
+            "enabled": true,
+            "script_type": "string"
+        },
+        "prestage": true,
+        "reboot_options": {
+            "allow_end_user_to_defer": true,
+            "occurrence": "string",
+            "reboot": true,
+            "reboot_user_notification_deferral_deadline_hours": 0,
+            "reboot_user_notification_deferral_deadline_reference": "string",
+            "user_notification": true,
+            "user_notification_message": "string",
+            "user_notification_title": "string"
+        },
+        "recurring": true,
+        "run_now_no_schedule": true,
+        "schedule": {
+            "deployment_duration_minutes": 0,
+            "deployment_start_time": "string",
+            "recurrence_day_of_week": "string",
+            "recurrence_frequency": "string",
+            "recurrence_time_of_month": "string",
+            "schedule_activate_date": "string",
+            "schedule_terminate_date": "string"
+        },
+        "target_hosts": "string",
+        "target_patches": "string",
+        "user_notification_options": {
+            "allow_end_user_to_defer": true,
+            "user_notification": true,
+            "user_notification_message": "string",
+            "user_notification_title": "string"
+        }
+    }
+    """
+    returned_payload = {}
+    keys = [
+        "block_filter_group_ids",
+        "disabled",
+        "id",
+        "name",
+        "patch_filter_group_ids",
+        "platform",
+        "post_patch_script_options",
+        "pre_patch_script_options",
+        "prestage",
+        "reboot_options",
+        "recurring",
+        "run_now_no_schedule",
+        "schedule",
+        "target_hosts",
+        "target_patches",
+        "user_notification_options"
+    ]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    post_patch_script_options_keys = ["content", "enabled", "run_before_reboot", "script_type"]
+    if "post_patch_script_options" not in returned_payload:
+        returned_payload["post_patch_script_options"] = {}
+    for key in post_patch_script_options_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["post_patch_script_options"][key] = passed_keywords.get(key)
+
+    pre_patch_script_options_keys = ["content", "continue_on_failure", "enabled", "script_type"]
+    if "pre_patch_script_options" not in returned_payload:
+        returned_payload["pre_patch_script_options"] = {}
+    for key in pre_patch_script_options_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["pre_patch_script_options"][key] = passed_keywords.get(key)
+
+    reboot_options_keys = [
+        "allow_end_user_to_defer",
+        "occurrence",
+        "reboot",
+        "reboot_user_notification_deferral_deadline_hours",
+        "reboot_user_notification_deferral_deadline_reference",
+        "user_notification",
+        "user_notification_message",
+        "user_notification_title"
+    ]
+    if "reboot_options" not in returned_payload:
+        returned_payload["reboot_options"] = {}
+    for key in reboot_options_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["reboot_options"][key] = passed_keywords.get(key)
+
+    schedule_keys = [
+        "deployment_duration_minutes",
+        "deployment_start_time",
+        "recurrence_day_of_week",
+        "recurrence_frequency",
+        "recurrence_time_of_month",
+        "schedule_activate_date",
+        "schedule_terminate_date"
+    ]
+    if "schedule" not in returned_payload:
+        returned_payload["schedule"] = {}
+    for key in schedule_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["schedule"][key] = passed_keywords.get(key)
+
+    user_notification_options_keys = ["allow_end_user_to_defer", "user_notification", "user_notification_message", "user_notification_title"]
+    if "user_notification_options" not in returned_payload:
+        returned_payload["user_notification_options"] = {}
+    for key in user_notification_options_keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload["user_notification_options"][key] = passed_keywords.get(key)
+
+    return returned_payload

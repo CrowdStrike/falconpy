@@ -55,8 +55,9 @@ _it_automation_endpoints = [
       {
         "type": "string",
         "description": "The filter expression that should be used to limit the results. Allowed filter fields: "
-        " [access_type, created_by, created_time, last_run_time, modified_by, modified_time, name, runs, task_type] "
-        "Example: example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'",
+        " [access_type, created_by, created_time, has_task_parameters, last_run_time, modified_by, modified_time, name, "
+        " runs, task_type] Example: "
+        "example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'",
         "name": "filter",
         "in": "query"
       },
@@ -68,18 +69,18 @@ _it_automation_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "Starting index for record retrieval. Example: 100",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 1,
         "type": "integer",
         "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
         "description": "The maximum records to return. Example: 50",
         "name": "limit",
         "in": "query"
@@ -112,18 +113,18 @@ _it_automation_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "Starting index for record retrieval. Example: 100",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 1,
         "type": "integer",
         "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
         "description": "The maximum records to return. Example: 50",
         "name": "limit",
         "in": "query"
@@ -156,18 +157,18 @@ _it_automation_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "Starting index for record retrieval. Example: 100",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 1,
         "type": "integer",
         "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
         "description": "The maximum records to return. Example: 50",
         "name": "limit",
         "in": "query"
@@ -198,18 +199,18 @@ _it_automation_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "Starting index for record retrieval. Example: 100",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 1,
         "type": "integer",
         "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
         "description": "The maximum records to return. Example: 50",
         "name": "limit",
         "in": "query"
@@ -226,8 +227,9 @@ _it_automation_endpoints = [
       {
         "type": "string",
         "description": "The filter expression that should be used to limit the results. Allowed filter fields: "
-        " [access_type, created_by, created_time, last_run_time, modified_by, modified_time, name, runs, task_type] "
-        "Example: example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'",
+        " [access_type, created_by, created_time, has_task_parameters, last_run_time, modified_by, modified_time, name, "
+        " runs, task_type] Example: "
+        "example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'",
         "name": "filter",
         "in": "query"
       },
@@ -240,18 +242,18 @@ _it_automation_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "Starting index for record retrieval. Example: 100",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 1,
         "type": "integer",
         "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
         "description": "The maximum records to return. Example: 50",
         "name": "limit",
         "in": "query"
@@ -293,6 +295,26 @@ _it_automation_endpoints = [
     ]
   ],
   [
+    "ITAutomationDeleteUserGroup",
+    "DELETE",
+    "/it-automation/entities/it-user-groups/v1",
+    "Deletes user groups for each provided ids",
+    "it_automation",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Comma separated values of user group ids to delete",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ITAutomationUpdateUserGroup",
     "PATCH",
     "/it-automation/entities/it-user-groups/v1",
@@ -309,26 +331,6 @@ _it_automation_endpoints = [
       {
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "ITAutomationDeleteUserGroup",
-    "DELETE",
-    "/it-automation/entities/it-user-groups/v1",
-    "Deletes user groups for each provided ids",
-    "it_automation",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "Comma separated values of user group ids to delete",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -435,6 +437,26 @@ _it_automation_endpoints = [
     ]
   ],
   [
+    "ITAutomationDeletePolicy",
+    "DELETE",
+    "/it-automation/entities/policies/v1",
+    "Deletes 1 or more policies.",
+    "it_automation",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "list of task ids to delete",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ITAutomationUpdatePolicies",
     "PATCH",
     "/it-automation/entities/policies/v1",
@@ -460,26 +482,6 @@ _it_automation_endpoints = [
         "transfers.",
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "ITAutomationDeletePolicy",
-    "DELETE",
-    "/it-automation/entities/policies/v1",
-    "Deletes 1 or more policies.",
-    "it_automation",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "list of task ids to delete",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -519,6 +521,26 @@ _it_automation_endpoints = [
     ]
   ],
   [
+    "ITAutomationDeleteScheduledTasks",
+    "DELETE",
+    "/it-automation/entities/scheduled-tasks/v1",
+    "Delete one or more scheduled tasks by providing the scheduled tasks IDs",
+    "it_automation",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Comma separated values of scheduled task IDs to delete",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ITAutomationUpdateScheduledTask",
     "PATCH",
     "/it-automation/entities/scheduled-tasks/v1",
@@ -535,26 +557,6 @@ _it_automation_endpoints = [
       {
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "ITAutomationDeleteScheduledTasks",
-    "DELETE",
-    "/it-automation/entities/scheduled-tasks/v1",
-    "Delete one or more scheduled tasks by providing the scheduled tasks IDs",
-    "it_automation",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "Comma separated values of scheduled task IDs to delete",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -608,18 +610,18 @@ _it_automation_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "Starting index for record retrieval. Example: 100",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 1,
         "type": "integer",
         "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
         "description": "The maximum records to return. Example: 50",
         "name": "limit",
         "in": "query"
@@ -644,7 +646,7 @@ _it_automation_endpoints = [
     "ITAutomationGetExecutionResultsSearchStatus",
     "GET",
     "/it-automation/entities/task-execution-results-search/v1",
-    "Get the status of an async task execution results. \n\nLook for `is_pending: False` to know search is complete.",
+    "Get the status of an async task execution results. \n\nLook for `is_pending: false` to know search is complete.",
     "it_automation",
     [
       {
@@ -689,9 +691,9 @@ _it_automation_endpoints = [
         "required": True
       },
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "The offset to start retrieving records from",
         "name": "offset",
         "in": "query"
@@ -781,6 +783,26 @@ _it_automation_endpoints = [
     ]
   ],
   [
+    "ITAutomationDeleteTaskGroups",
+    "DELETE",
+    "/it-automation/entities/task-groups/v1",
+    "Delete one or more task groups by providing the task group IDs",
+    "it_automation",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Comma separated values of task group IDs to delete",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ITAutomationUpdateTaskGroup",
     "PATCH",
     "/it-automation/entities/task-groups/v1",
@@ -797,26 +819,6 @@ _it_automation_endpoints = [
       {
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "ITAutomationDeleteTaskGroups",
-    "DELETE",
-    "/it-automation/entities/task-groups/v1",
-    "Delete one or more task groups by providing the task group IDs",
-    "it_automation",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "Comma separated values of task group IDs to delete",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -856,6 +858,26 @@ _it_automation_endpoints = [
     ]
   ],
   [
+    "ITAutomationDeleteTask",
+    "DELETE",
+    "/it-automation/entities/tasks/v1",
+    "Deletes tasks for each provided ID",
+    "it_automation",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "IDs of tasks to delete. Use ITAutomationSearchTasks to fetch IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ITAutomationUpdateTask",
     "PATCH",
     "/it-automation/entities/tasks/v1",
@@ -872,26 +894,6 @@ _it_automation_endpoints = [
       {
         "name": "body",
         "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "ITAutomationDeleteTask",
-    "DELETE",
-    "/it-automation/entities/tasks/v1",
-    "Deletes tasks for each provided ID",
-    "it_automation",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "IDs of tasks to delete. Use ITAutomationSearchTasks to fetch IDs",
-        "name": "ids",
-        "in": "query",
         "required": True
       }
     ]
@@ -921,18 +923,18 @@ _it_automation_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "Starting index for record retrieval. Example: 100",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 1,
         "type": "integer",
         "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
         "description": "The maximum records to return. Example: 50",
         "name": "limit",
         "in": "query"
@@ -947,8 +949,8 @@ _it_automation_endpoints = [
     "it_automation",
     [
       {
-        "minimum": 0,
         "type": "integer",
+        "minimum": 0,
         "description": "The offset to start retrieving records from. Defaults to 0 if not specified.",
         "name": "offset",
         "in": "query"
@@ -969,12 +971,12 @@ _it_automation_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
         "enum": [
           "Windows",
           "Mac",
           "Linux"
         ],
-        "type": "string",
         "description": "The platform of policies to retrieve",
         "name": "platform",
         "in": "query",
@@ -1008,18 +1010,18 @@ _it_automation_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "Starting index for record retrieval. Example: 100",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 1,
         "type": "integer",
         "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
         "description": "The maximum records to return. Example: 50",
         "name": "limit",
         "in": "query"
@@ -1051,18 +1053,18 @@ _it_automation_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "Starting index for record retrieval. Example: 100",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 1,
         "type": "integer",
         "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
         "description": "The maximum records to return. Example: 50",
         "name": "limit",
         "in": "query"
@@ -1093,18 +1095,18 @@ _it_automation_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "Starting index for record retrieval. Example: 100",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 1,
         "type": "integer",
         "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
         "description": "The maximum records to return. Example: 50",
         "name": "limit",
         "in": "query"
@@ -1121,8 +1123,9 @@ _it_automation_endpoints = [
       {
         "type": "string",
         "description": "The filter expression that should be used to limit the results. Allowed filter fields: "
-        " [access_type, created_by, created_time, last_run_time, modified_by, modified_time, name, runs, task_type] "
-        "Example: example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'",
+        " [access_type, created_by, created_time, has_task_parameters, last_run_time, modified_by, modified_time, name, "
+        " runs, task_type] Example: "
+        "example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'",
         "name": "filter",
         "in": "query"
       },
@@ -1135,21 +1138,346 @@ _it_automation_endpoints = [
         "in": "query"
       },
       {
-        "minimum": 0,
         "type": "integer",
         "default": 0,
+        "minimum": 0,
         "description": "Starting index for record retrieval. Example: 100",
         "name": "offset",
         "in": "query"
       },
       {
-        "maximum": 1000,
-        "minimum": 1,
         "type": "integer",
         "default": 100,
+        "maximum": 1000,
+        "minimum": 1,
         "description": "The maximum records to return. Example: 50",
         "name": "limit",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "AggregateDeploymentConfigsV1",
+    "POST",
+    "/patch-mgmt/aggregates/deployment-configs/v1",
+    "Retrieve deployment config aggregations",
+    "it_automation",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "AggregateDeploymentExecutionsV1",
+    "POST",
+    "/patch-mgmt/aggregates/deployment-executions/v1",
+    "Retrieve deployment execution aggregations",
+    "it_automation",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "AggregateHostDeploymentsV1",
+    "POST",
+    "/patch-mgmt/aggregates/host-deployments/v1",
+    "Retrieve host deployment aggregations",
+    "it_automation",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetDeploymentConfigsByQueryV1",
+    "GET",
+    "/patch-mgmt/combined/deployment-configs/v1",
+    "Retrieve deployment configs by query",
+    "it_automation",
+    [
+      {
+        "type": "string",
+        "description": "The filter expression that should be used to limit the results.\n\nAllowable categories are: ...",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The sort expression that should be used to sort the results",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset to start retrieving records from",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The maximum records to return",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetDeploymentExecutionsByQueryV1",
+    "GET",
+    "/patch-mgmt/combined/deployment-executions/v1",
+    "Retrieve deployment executions by query",
+    "it_automation",
+    [
+      {
+        "type": "string",
+        "description": "The filter expression. Optionally filter by deployment_config.id:'<uuid>' or status:'<value>'.",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The sort expression that should be used to sort the results",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset to start retrieving records from",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The maximum records to return",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetHostDeploymentPatchesByQueryV1",
+    "GET",
+    "/patch-mgmt/combined/host-deployment-patches/v1",
+    "Retrieve host deployment patch statuses by query",
+    "it_automation",
+    [
+      {
+        "type": "string",
+        "description": "The filter expression. Must include host_deployment_id:'<uuid>'. Optionally filter by "
+        "status:'installed|not-installed'.",
+        "name": "filter",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "The sort expression that should be used to sort the results",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset to start retrieving records from",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The maximum records to return",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetHostDeploymentsByQueryV1",
+    "GET",
+    "/patch-mgmt/combined/host-deployments/v1",
+    "Retrieve deployment results by query",
+    "it_automation",
+    [
+      {
+        "type": "string",
+        "description": "The filter expression that should be used to limit the results.\n\nAllowable categories are: ...",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The sort expression that should be used to sort the results",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset to start retrieving records from",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The maximum records to return",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CombinedOSAssessmentScan",
+    "GET",
+    "/patch-mgmt/combined/os-assessment-scan/v1",
+    "Search and retrieve OS assessment scan statuses in a single request",
+    "it_automation",
+    [
+      {
+        "type": "string",
+        "description": "FQL filter expression for searching assessment scans",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort expression",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "Maximum number of records to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
+        "previous response to continue from that place in the results.",
+        "name": "after",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CombinedOSAssessments",
+    "GET",
+    "/patch-mgmt/combined/os-assessments/v1",
+    "Search and retrieve OS patch assessments in a single request",
+    "it_automation",
+    [
+      {
+        "type": "string",
+        "description": "FQL filter expression for searching assessments",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort expression",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "Maximum number of records to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
+        "previous response to continue from that place in the results.",
+        "name": "after",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Vulnerability facets to include in response: 'vulnerabilities' (full array), "
+        "'vulnerability_counts' (summary). Default: vulnerability_counts",
+        "name": "facets",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateDeploymentConfig",
+    "POST",
+    "/patch-mgmt/entities/deployment-configs/v1",
+    "Creates a new deployment configuration",
+    "it_automation",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DeleteDeploymentConfigs",
+    "DELETE",
+    "/patch-mgmt/entities/deployment-configs/v1",
+    "Deletes deployment configurations by IDs",
+    "it_automation",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "maxItems": 200,
+        "description": "Deployment config IDs to delete",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateDeploymentConfig",
+    "PATCH",
+    "/patch-mgmt/entities/deployment-configs/v1",
+    "Updates an existing deployment configuration",
+    "it_automation",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "CancelDeploymentExecutionsV1",
+    "DELETE",
+    "/patch-mgmt/entities/deployment-executions/v1",
+    "Cancel deployment executions by IDs",
+    "it_automation",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "maxItems": 200,
+        "description": "Comma separated values of deployment execution ids to cancel",
+        "name": "ids",
+        "in": "query",
+        "required": True
       }
     ]
   ]
