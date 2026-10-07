@@ -66,6 +66,12 @@ _agent_invocation_endpoints = [
         "name": "id",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "query"
       }
     ]
   ],
@@ -78,6 +84,12 @@ _agent_invocation_endpoints = [
     "terminal state succeeds without changing it.",
     "agent_invocation",
     [
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "query"
+      },
       {
         "description": "Invocation ID and the status to move it to. Only cancelled is accepted.",
         "name": "body",

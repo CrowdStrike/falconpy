@@ -140,6 +140,8 @@ class AgentInvocation(ServiceClass):
             The id value.
         messages : list
             The messages value.
+        project_id : str
+            The project_id value.
 
         This method only supports keywords for providing arguments.
 
@@ -176,6 +178,8 @@ class AgentInvocation(ServiceClass):
         -----------------
         id : str or list[str]
             Invocation ID.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -278,6 +282,8 @@ class AgentInvocation(ServiceClass):
             The id value.
         messages : list
             The messages value.
+        project_id : str
+            The project_id value.
         version_id : str
             The version_id value.
 
@@ -323,6 +329,8 @@ class AgentInvocation(ServiceClass):
             The id value.
         status : str
             The status value.
+        project_id : str
+            Scope the operation to a project.
 
         This method only supports keywords for providing arguments.
 

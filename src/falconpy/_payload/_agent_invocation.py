@@ -50,7 +50,7 @@ def invoke_published_agent_external_v1_payload(passed_keywords: dict) -> dict:
     }
     """
     returned_payload = {}
-    keys = ["credit_cents_limit", "deadline_seconds", "id", "messages"]
+    keys = ["credit_cents_limit", "deadline_seconds", "id", "messages", "project_id"]
     for key in keys:
         if passed_keywords.get(key, None) is not None:
             returned_payload[key] = passed_keywords.get(key)
@@ -72,7 +72,7 @@ def invoke_agent_version_external_v1_payload(passed_keywords: dict) -> dict:
     }
     """
     returned_payload = {}
-    keys = ["credit_cents_limit", "deadline_seconds", "id", "messages", "version_id"]
+    keys = ["credit_cents_limit", "deadline_seconds", "id", "messages", "project_id", "version_id"]
     for key in keys:
         if passed_keywords.get(key, None) is not None:
             returned_payload[key] = passed_keywords.get(key)
