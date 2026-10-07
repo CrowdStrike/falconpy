@@ -106,7 +106,7 @@ _cloud_security_endpoints = [
       },
       {
         "type": "integer",
-        "default": "0",
+        "default": 0,
         "format": "int64",
         "description": "The starting position of the list operation.",
         "name": "offset",
@@ -114,7 +114,7 @@ _cloud_security_endpoints = [
       },
       {
         "type": "integer",
-        "default": "100",
+        "default": 100,
         "format": "int64",
         "description": "The maximum number of cloud groups to retrieve.",
         "name": "limit",
@@ -212,7 +212,7 @@ _cloud_security_endpoints = [
       },
       {
         "type": "integer",
-        "default": "0",
+        "default": 0,
         "format": "int64",
         "description": "The starting position of the list operation.",
         "name": "offset",
@@ -220,7 +220,7 @@ _cloud_security_endpoints = [
       },
       {
         "type": "integer",
-        "default": "100",
+        "default": 100,
         "format": "int64",
         "description": "The maximum number of cloud groups to retrieve.",
         "name": "limit",
