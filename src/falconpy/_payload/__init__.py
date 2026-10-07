@@ -52,6 +52,7 @@ from ._browser_security import (
 from ._cloud_security_assets import cloud_security_assets_entities_post_payload
 from ._cloud_security_detections import cspm_evaluations_iom_entities_post_payload
 from ._code_security import exchange_github_app_code_payload, register_scm_app_payload
+from ._eval_dataset_entries import create_eval_dataset_entry_payload, update_eval_dataset_entry_payload
 from ._falcon_id import update_third_party_passkey_registry_payload
 from ._federated_connections import patch_federated_connections_config_payload, post_federated_connections_config_payload
 from ._generic import (
@@ -472,5 +473,6 @@ __all__ = [
     "create_sensitive_data_profile_payload", "query_sensitive_data_profiles_payload",
     "update_sensitive_data_profile_payload", "add_case_access_tags_payload",
     "add_case_alert_evidence_v2_payload", "add_case_custom_evidence_payload",
-    "add_case_user_evidence_payload"
+    "add_case_user_evidence_payload", "create_eval_dataset_entry_payload",
+    "update_eval_dataset_entry_payload"
 ]
