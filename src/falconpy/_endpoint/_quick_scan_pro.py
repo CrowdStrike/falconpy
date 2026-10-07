@@ -49,7 +49,7 @@ _quick_scan_pro_endpoints = [
       {
         "type": "file",
         "description": "Binary file to be uploaded. Max file size: 256 MB. Use --data-binary @$FILE_PATH for "
-        "octet-stream/cURL uploads",
+        "octet-stream/cURL uploads.",
         "name": "file",
         "in": "formData",
         "required": True
@@ -63,8 +63,23 @@ _quick_scan_pro_endpoints = [
       {
         "type": "boolean",
         "default": False,
-        "description": "If true, after upload, it starts scanning immediately. Default scan mode is 'false'",
+        "description": "If true, after upload, it starts scanning immediately. Default scan mode is 'false'.",
         "name": "scan",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "default": "standard",
+        "enum": [
+          "fast",
+          "standard",
+          "deep"
+        ],
+        "description": "Sets the scan mode for the scan started when 'scan' is true. Default is "
+        "'standard'.\n\n'fast': less than 5 seconds, ML-based detection and signature matching.\n'standard': less than "
+        "30 seconds, adds heuristic analysis to fast scan coverage.\n'deep': less than 90 seconds, adds static analysis "
+        "and dynamic execution monitoring to standard scan coverage.",
+        "name": "scan_mode",
         "in": "formData"
       },
       {
@@ -154,6 +169,14 @@ _quick_scan_pro_endpoints = [
     "quick_scan_pro",
     [
       {
+        "description": "Each resource must include 'sha256' (required); 'password' and 'scan_mode' are "
+        "optional:\n<b>sha256</b> (required): SHA256 of a file uploaded through "
+        "'/quickscanpro/entities/files/v1'.\n<b>password</b> (optional): Password for encrypted archives or "
+        "documents.\n<b>scan_mode</b> (optional): How thorough the scan should be. Default is "
+        "'standard':\n&nbsp;&nbsp;&nbsp;&nbsp; • fast: less than 5 seconds, ML-based detection and signature "
+        "matching.\n&nbsp;&nbsp;&nbsp;&nbsp; • standard: less than 30 seconds, adds heuristic analysis to fast scan "
+        "coverage.\n&nbsp;&nbsp;&nbsp;&nbsp; • deep: less than 90 seconds, adds static analysis and dynamic execution "
+        "monitoring to standard scan coverage.",
         "name": "body",
         "in": "body",
         "required": True

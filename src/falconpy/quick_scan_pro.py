@@ -85,6 +85,11 @@ class QuickScanPro(ServiceClass):
         x_file_password : str
             OCTET-STREAM ONLY - Password for encrypted archives (use for octet-stream uploads).
             If 'scan' is true, the value is used for the scan just starting.
+        scan_mode : str
+            Sets the scan mode for the scan started when 'scan' is true. Default is 'standard'. 'fast': less than 5 seconds,
+            ML-based detection and signature matching. 'standard': less than 30 seconds, adds heuristic analysis to fast scan
+            coverage. 'deep': less than 90 seconds, adds static analysis and dynamic execution monitoring to standard scan
+            coverage.
 
         This method only supports keywords for providing arguments.
 
