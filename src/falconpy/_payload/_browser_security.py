@@ -207,7 +207,7 @@ def apply_agent_tasks_payload(passed_keywords: dict) -> dict:
     }
     """
     returned_payload = {}
-    keys = ["actions", "ttl"]
+    keys = ["actions", "ttlHours"]
     for key in keys:
         if passed_keywords.get(key, None) is not None:
             returned_payload[key] = passed_keywords.get(key)
@@ -516,6 +516,80 @@ def query_seraphic_rules_payload(passed_keywords: dict) -> dict:
     """
     returned_payload = {}
     keys = ["advanced_filter", "exclude", "filter", "limit", "rule_ids", "search", "skip", "sort"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def create_sensitive_data_profile_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a CreateSensitiveDataProfile request.
+
+    {
+        "apply_exact_match": true,
+        "custom_regex": [
+            "string"
+        ],
+        "description": "string",
+        "name": "string",
+        "predefined_piis": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["apply_exact_match", "custom_regex", "description", "name", "predefined_piis"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def query_sensitive_data_profiles_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a QuerySensitiveDataProfiles request.
+
+    {
+        "advanced_filter": "string",
+        "exclude": [
+            "string"
+        ],
+        "filter": "string",
+        "limit": 0,
+        "search": "string",
+        "skip": 0,
+        "sort": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["advanced_filter", "exclude", "filter", "limit", "search", "skip", "sort"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def update_sensitive_data_profile_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a UpdateSensitiveDataProfile request.
+
+    {
+        "apply_exact_match": true,
+        "custom_regex": [
+            "string"
+        ],
+        "description": "string",
+        "name": "string",
+        "predefined_piis": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["apply_exact_match", "custom_regex", "description", "name", "predefined_piis"]
     for key in keys:
         if passed_keywords.get(key, None) is not None:
             returned_payload[key] = passed_keywords.get(key)
