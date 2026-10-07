@@ -10,6 +10,7 @@ class Agents(ServiceClass):
         self,
         *args: Union[str, List[str]],
         id: Optional[str] = None,
+        project_id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -17,14 +18,17 @@ class Agents(ServiceClass):
         self,
         *args: Union[str, List[str]],
         ids: Optional[Union[str, List[str]]] = None,
+        project_id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
     def create_or_update_agent(
         self,
         *,
+        wait_for_ready: Optional[bool] = None,
         duplicate_from_agent_id: Optional[str] = None,
         id: Optional[str] = None,
+        project_id: Optional[str] = None,
         template_id: Optional[str] = None,
         version_definition: Optional[dict] = None,
         body: Optional[dict] = None,
@@ -35,6 +39,8 @@ class Agents(ServiceClass):
         *,
         id: Optional[str] = None,
         dry_run: Optional[bool] = None,
+        wait_for_ready: Optional[bool] = None,
+        project_id: Optional[str] = None,
         is_enabled: Optional[bool] = None,
         is_published: Optional[bool] = None,
         version_id: Optional[str] = None,
@@ -49,6 +55,7 @@ class Agents(ServiceClass):
         limit: Optional[int] = None,
         sort: Optional[str] = None,
         filter: Optional[str] = None,
+        project_id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

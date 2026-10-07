@@ -43,7 +43,7 @@ class BrowserSecurity(ServiceClass):
         *,
         agent_id: Optional[str] = None,
         actions: Optional[list] = None,
-        ttl: Optional[int] = None,
+        ttlHours: Optional[int] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -209,16 +209,71 @@ class BrowserSecurity(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def create_sensitive_data_profile(
+        self,
+        *,
+        apply_exact_match: Optional[bool] = None,
+        custom_regex: Optional[list] = None,
+        description: Optional[str] = None,
+        name: Optional[str] = None,
+        predefined_piis: Optional[list] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def delete_sensitive_data_profile(
+        self,
+        *args: Union[str, List[str]],
+        id: Optional[str] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def get_sensitive_data_profiles(
+        self,
+        *args: Union[str, List[str]],
+        ids: Optional[Union[str, List[str]]] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def query_sensitive_data_profiles(
+        self,
+        *,
+        advanced_filter: Optional[dict] = None,
+        exclude: Optional[Union[str, List[str]]] = None,
+        filter: Optional[dict] = None,
+        limit: Optional[int] = None,
+        search: Optional[str] = None,
+        skip: Optional[int] = None,
+        sort: Optional[list] = None,
+        body: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def update_sensitive_data_profile(
+        self,
+        *,
+        id: Optional[str] = None,
+        apply_exact_match: Optional[bool] = None,
+        custom_regex: Optional[list] = None,
+        description: Optional[str] = None,
+        name: Optional[str] = None,
+        predefined_piis: Optional[list] = None,
+        body: Optional[dict] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
     CombinedQueryAgents = query_combined_seraphic_agents
     ClassifyDomains = classify_domains
     ActivateAgents = activate_agents
+    CreateSensitiveDataProfile = create_sensitive_data_profile
     DeactivateAgents = deactivate_agents
     ApplyAgentTasks = apply_agent_tasks
+    DeleteSensitiveDataProfile = delete_sensitive_data_profile
     GetAgents = get_seraphic_agents
     GetAuditLogsMixin0 = get_seraphic_audit_logs
     GetDestinationGroups = get_destination_groups
     CreateDestinationGroup = create_destination_group
     DeleteDestinationGroup = delete_destination_group
+    GetSensitiveDataProfiles = get_sensitive_data_profiles
+    QuerySensitiveDataProfiles = query_sensitive_data_profiles
     UpdateDestinationGroup = update_destination_group
     GetExtensionAnalysis = get_extension_analysis
     GetRules = get_seraphic_rules
@@ -230,3 +285,4 @@ class BrowserSecurity(ServiceClass):
     QueryAgents = query_seraphic_agents
     QueryDestinationGroups = query_destination_groups
     QueryRulesMixin0 = query_seraphic_rules
+    UpdateSensitiveDataProfile = update_sensitive_data_profile

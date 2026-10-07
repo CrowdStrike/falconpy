@@ -33,6 +33,7 @@ class Hosts(ServiceClass):
         ids: Optional[Union[str, List[str]]] = None,
         action_name: Optional[str] = None,
         disable_hostname_check: Optional[bool] = None,
+        skip_membership_validation: Optional[bool] = None,
         action_parameters: Optional[list] = None,
         body: Optional[dict] = None,
         parameters: Optional[dict] = None,

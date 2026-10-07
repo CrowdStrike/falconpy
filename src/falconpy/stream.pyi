@@ -10,6 +10,7 @@ class Stream(ServiceClass):
         self,
         *args: Union[str, List[str]],
         id: Optional[str] = None,
+        project_id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 

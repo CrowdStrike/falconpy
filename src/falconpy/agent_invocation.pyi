@@ -13,6 +13,7 @@ class AgentInvocation(ServiceClass):
         deadline_seconds: Optional[int] = None,
         id: Optional[str] = None,
         messages: Optional[list] = None,
+        project_id: Optional[str] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -20,6 +21,7 @@ class AgentInvocation(ServiceClass):
         self,
         *args: Union[str, List[str]],
         id: Optional[str] = None,
+        project_id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -30,6 +32,7 @@ class AgentInvocation(ServiceClass):
         deadline_seconds: Optional[int] = None,
         id: Optional[str] = None,
         messages: Optional[list] = None,
+        project_id: Optional[str] = None,
         version_id: Optional[str] = None,
         body: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
@@ -37,6 +40,7 @@ class AgentInvocation(ServiceClass):
     def update_agent_invocation(
         self,
         *,
+        project_id: Optional[str] = None,
         id: Optional[str] = None,
         status: Optional[str] = None,
         body: Optional[dict] = None,

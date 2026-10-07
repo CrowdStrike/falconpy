@@ -363,6 +363,31 @@ class SaasSecurity(ServiceClass):
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
+    def get_security_check_change_log(
+        self,
+        *,
+        action: Optional[str] = None,
+        limit: Optional[int] = None,
+        offset: Optional[int] = None,
+        app: Optional[str] = None,
+        check_id: Optional[str] = None,
+        from_date: Optional[str] = None,
+        to_date: Optional[str] = None,
+        total_count: Optional[bool] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
+    def set_check_impact(
+        self,
+        *,
+        id: Optional[str] = None,
+        all_future_instances: Optional[bool] = None,
+        impact: Optional[str] = None,
+        reason: Optional[str] = None,
+        body: Optional[dict] = None,
+        parameters: Optional[dict] = None,
+    ) -> Union[Dict[str, Union[int, dict]], Result]: ...
+
     ConnectCheckTagV3 = connect_check_tag
     CreateAppJournalCommentV3 = create_app_journal_comment
     CreateCheckJournalCommentV3 = create_check_journal_comment
@@ -381,6 +406,7 @@ class SaasSecurity(ServiceClass):
     GetSecurityCheckAffectedV3 = get_security_check
     DismissAffectedEntityV3 = dismiss_affected_entity
     DismissSecurityCheckV3 = dismiss_security_check
+    GetSecurityCheckChangeLogV3 = get_security_check_change_log
     GetSecurityChecksV3 = get_security_checks
     GetSecurityCheckComplianceV3 = get_security_check_compliance
     GetUserJournalV3 = get_user_journal
@@ -398,4 +424,5 @@ class SaasSecurity(ServiceClass):
     GetUserInventoryV3 = get_user_inventory
     RestoreAffectedEntityV3 = restore_affected_entity
     RestoreSecurityCheckV3 = restore_security_check
+    SetCheckImpactV3 = set_check_impact
     SetCheckParamV3 = set_check_param

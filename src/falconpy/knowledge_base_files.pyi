@@ -11,6 +11,7 @@ class KnowledgeBaseFiles(ServiceClass):
         *,
         knowledge_base_id: Optional[str] = None,
         id: Optional[str] = None,
+        project_id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -20,6 +21,7 @@ class KnowledgeBaseFiles(ServiceClass):
         knowledge_base_id: Optional[str] = None,
         ids: Optional[Union[str, List[str]]] = None,
         include_deleted: Optional[bool] = None,
+        project_id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -40,6 +42,7 @@ class KnowledgeBaseFiles(ServiceClass):
         *,
         knowledge_base_id: Optional[str] = None,
         id: Optional[str] = None,
+        project_id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
@@ -51,6 +54,7 @@ class KnowledgeBaseFiles(ServiceClass):
         limit: Optional[int] = None,
         filter: Optional[str] = None,
         include_deleted: Optional[bool] = None,
+        project_id: Optional[str] = None,
         parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
