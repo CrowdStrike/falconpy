@@ -55,6 +55,7 @@ from ._code_security import exchange_github_app_code_payload, register_scm_app_p
 from ._eval_dataset_entries import create_eval_dataset_entry_payload, update_eval_dataset_entry_payload
 from ._eval_datasets import create_eval_dataset_payload, update_eval_dataset_payload
 from ._eval_evaluators import create_eval_evaluator_payload, update_eval_evaluator_payload
+from ._eval_runs import create_eval_run_payload, perform_eval_run_action_payload, update_eval_run_payload
 from ._falcon_id import update_third_party_passkey_registry_payload
 from ._federated_connections import patch_federated_connections_config_payload, post_federated_connections_config_payload
 from ._generic import (
@@ -478,5 +479,6 @@ __all__ = [
     "add_case_user_evidence_payload", "create_eval_dataset_entry_payload",
     "update_eval_dataset_entry_payload", "create_eval_dataset_payload",
     "update_eval_dataset_payload", "create_eval_evaluator_payload",
-    "update_eval_evaluator_payload"
+    "update_eval_evaluator_payload", "create_eval_run_payload",
+    "perform_eval_run_action_payload", "update_eval_run_payload"
 ]
