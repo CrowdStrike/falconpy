@@ -77,6 +77,12 @@ _knowledge_bases_endpoints = [
         "description": "Include deleted knowledge bases in the result. Defaults to false.",
         "name": "include_deleted",
         "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "query"
       }
     ]
   ],
@@ -104,6 +110,12 @@ _knowledge_bases_endpoints = [
         "description": "Include deleted knowledge bases in the result. Defaults to false.",
         "name": "include_deleted",
         "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "query"
       }
     ]
   ],
@@ -129,6 +141,12 @@ _knowledge_bases_endpoints = [
     "Update an existing knowledge base.",
     "knowledge_bases",
     [
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
+        "in": "query"
+      },
       {
         "description": "Knowledge base definition with updated fields",
         "name": "body",
@@ -176,6 +194,12 @@ _knowledge_bases_endpoints = [
         "default": False,
         "description": "Include deleted knowledge bases in the result. Defaults to false.",
         "name": "include_deleted",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Scope the operation to a project.",
+        "name": "project_id",
         "in": "query"
       }
     ]

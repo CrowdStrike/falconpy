@@ -92,6 +92,7 @@ def entities_knowledge_bases_create_v1_payload(passed_keywords: dict) -> dict:
         "id",
         "is_deleted",
         "name",
+        "project_id",
         "updated_at",
         "updated_by"
     ]
@@ -195,6 +196,7 @@ def entities_knowledge_bases_update_v1_payload(passed_keywords: dict) -> dict:
         "id",
         "is_deleted",
         "name",
+        "project_id",
         "updated_at",
         "updated_by"
     ]
