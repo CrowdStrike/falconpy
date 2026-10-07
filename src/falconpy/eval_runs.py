@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request
-from ._payload import create_eval_run_payload, perform_eval_run_action_payload, update_eval_run_payload
+from ._payload import create_eval_run_payload, perform_eval_run_action_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._eval_runs import _eval_runs_endpoints as Endpoints
@@ -305,187 +305,6 @@ class EvalRuns(ServiceClass):
             )
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
-    def update_eval_run(self: object,
-                        body: dict = None,
-                        parameters: dict = None,
-                        **kwargs
-                        ) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Update an existing evaluation run metadata.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        -----------
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/eval-runs/EntitiesEvalRunsUpdateV1
-
-        Keyword arguments
-        -----------------
-        project_id : str
-            Scope the operation to a project.
-        body : dict
-            Full body payload as a JSON formatted dictionary. Not required if using other keywords.
-                {
-                    "actual_cost": 0.0,
-                    "agent_id": "string",
-                    "agent_version_id": "string",
-                    "completed_at": "string",
-                    "created_at": "string",
-                    "created_by": {
-                        "access_granted_at": "string",
-                        "cid": "string",
-                        "created_at": "string",
-                        "factors": [
-                            "string"
-                        ],
-                        "first_name": "string",
-                        "last_login_at": "string",
-                        "last_name": "string",
-                        "status": "string",
-                        "uid": "string",
-                        "updated_at": "string",
-                        "user_type": "string",
-                        "uuid": "string",
-                        "api_client_id": "string",
-                        "email": "string",
-                        "name": "string"
-                    },
-                    "dataset_entry_ids": [
-                        "string"
-                    ],
-                    "dataset_ids": [
-                        "string"
-                    ],
-                    "entry_tags": [
-                        "string"
-                    ],
-                    "estimated_cost": 0.0,
-                    "evaluator_ids": [
-                        "string"
-                    ],
-                    "id": "string",
-                    "is_deleted": true,
-                    "metadata": "string",
-                    "name": "string",
-                    "owner": "string",
-                    "progress": {
-                        "completed_cases": 0,
-                        "error_cases": 0,
-                        "total_cases": 0
-                    },
-                    "project_id": "string",
-                    "status": "string",
-                    "summary": {
-                        "average_latency": 0,
-                        "average_score": 0.0,
-                        "error_cases": 0,
-                        "evaluator_results": [
-                            {
-                                "average_score": 0.0,
-                                "error_cases": 0,
-                                "evaluator_id": "string",
-                                "evaluator_name": "string",
-                                "failed_cases": 0,
-                                "passed_cases": 0
-                            }
-                        ],
-                        "failed_cases": 0,
-                        "median_score": 0.0,
-                        "passed_cases": 0,
-                        "std_deviation": 0.0,
-                        "total_cases": 0,
-                        "total_duration": 0
-                    },
-                    "updated_at": "string",
-                    "updated_by": {
-                        "access_granted_at": "string",
-                        "cid": "string",
-                        "created_at": "string",
-                        "factors": [
-                            "string"
-                        ],
-                        "first_name": "string",
-                        "last_login_at": "string",
-                        "last_name": "string",
-                        "status": "string",
-                        "uid": "string",
-                        "updated_at": "string",
-                        "user_type": "string",
-                        "uuid": "string",
-                        "api_client_id": "string",
-                        "email": "string",
-                        "name": "string"
-                    },
-                    "variable_values": "string"
-                }
-        actual_cost : str
-            The actual_cost value. Float.
-        agent_id : str
-            The agent_id value.
-        agent_version_id : str
-            The agent_version_id value.
-        completed_at : str
-            The completed_at value.
-        created_at : str
-            The created_at value.
-        created_by : dict
-            The created_by value.
-        dataset_entry_ids : list
-            The dataset_entry_ids value.
-        dataset_ids : list
-            The dataset_ids value.
-        entry_tags : list
-            The entry_tags value.
-        estimated_cost : str
-            The estimated_cost value. Float.
-        evaluator_ids : list
-            The evaluator_ids value.
-        id : str
-            The id value.
-        is_deleted : bool
-            The is_deleted value.
-        metadata : dict
-            The metadata value.
-        name : str
-            The name value.
-        owner : str
-            The owner value.
-        progress : dict
-            The progress value.
-        project_id : str
-            The project_id value.
-        status : str
-            The status value.
-        summary : dict
-            The summary value.
-        updated_at : str
-            The updated_at value.
-        updated_by : dict
-            The updated_by value.
-        variable_values : dict
-            The variable_values value.
-        parameters : dict
-            Full parameters payload. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns
-        -------
-        dict
-            Dictionary object containing API response.
-        """
-        if not body:
-            body = update_eval_run_payload(passed_keywords=kwargs)
-
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="EntitiesEvalRunsUpdateV1",
-            keywords=kwargs,
-            params=parameters,
-            body=body
-            )
-
-    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
     def perform_eval_run_action(self: object,
                                 body: dict = None,
                                 parameters: dict = None,
@@ -591,6 +410,5 @@ class EvalRuns(ServiceClass):
     EntitiesEvalRunsV1 = get_eval_runs
     EntitiesEvalRunsCreateV1 = create_eval_run
     EntitiesEvalRunsDeleteV1 = delete_eval_run
-    EntitiesEvalRunsUpdateV1 = update_eval_run
     EntitiesEvalRunsActionV1 = perform_eval_run_action
     QueriesEvalRunsV1 = query_eval_runs

@@ -101,27 +101,6 @@ _eval_runs_endpoints = [
     ]
   ],
   [
-    "EntitiesEvalRunsUpdateV1",
-    "PATCH",
-    "/agentic-studio-evals/entities/runs/v1",
-    "Update an existing evaluation run metadata.",
-    "eval_runs",
-    [
-      {
-        "type": "string",
-        "description": "Scope the operation to a project.",
-        "name": "project_id",
-        "in": "query"
-      },
-      {
-        "description": "Evaluation run definition with updated fields",
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "EntitiesEvalRunsActionV1",
     "POST",
     "/agentic-studio-evals/entities/runs/v1/action",
