@@ -166,8 +166,8 @@ _recon_endpoints = [
     "GET",
     "/recon/entities/exports/v1",
     "Get the status of export jobs based on their IDs. Export jobs can be launched by calling "
-    "CreateExportJobsV1 When a job is complete, use the job ID to download the file(s) associated with it using GET "
-    "entities/export-files/v1.",
+    "CreateExportJobsV1. When a job is complete, use the job ID to download the file(s) associated with it using "
+    "GET entities/export-files/v1.",
     "recon",
     [
       {
@@ -187,7 +187,7 @@ _recon_endpoints = [
     "CreateExportJobsV1",
     "POST",
     "/recon/entities/exports/v1",
-    "Launch asynchronous export job. Use the job ID to poll the status of the job using GetExportJobsV1",
+    "Launch asynchronous export job. Use the job ID to poll the status of the job using GetExportJobsV1.",
     "recon",
     [
       {
@@ -434,7 +434,7 @@ _recon_endpoints = [
     "QueryActionsV1",
     "GET",
     "/recon/queries/actions/v1",
-    "Query actions based on provided criteria. Use the IDs from this response to get the action entities on GetActionsV1",
+    "Query actions based on provided criteria. Use the IDs from this response to get the action entities on GetActionsV1.",
     "recon",
     [
       {
@@ -529,7 +529,7 @@ _recon_endpoints = [
     "/recon/queries/notifications/v1",
     "Query notifications based on provided criteria. Use the IDs from this response to get the notification "
     "+entities on GetNotificationsV1, GetNotificationsDetailedV1, +GetNotificationsTranslatedV1 or "
-    "GetNotificationsDetailedTranslatedV1",
+    "GetNotificationsDetailedTranslatedV1.",
     "recon",
     [
       {
