@@ -295,7 +295,7 @@ _aidr_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more installation IDs (repeatable). Use the Id value from queryAgentInstallationsV1",
+        "description": "One or more installation IDs (repeatable). Use the Id value from queryAgentInstallationsV1.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -339,7 +339,7 @@ _aidr_endpoints = [
         },
         "collectionFormat": "multi",
         "description": "One or more session IDs (repeatable: ids=A&ids=B). Use the Id value from "
-        "queryAgentSessionsV1 This is the AIAgentSession entity key, not a ThreatGraph vertex key.",
+        "queryAgentSessionsV1. This is the AIAgentSession entity key, not a ThreatGraph vertex key.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -439,7 +439,7 @@ _aidr_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more AIModelName IDs (repeatable). Use the Id value from queryModelNamesV1",
+        "description": "One or more AIModelName IDs (repeatable). Use the Id value from queryModelNamesV1.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -523,7 +523,7 @@ _aidr_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more skill frontmatter IDs (repeatable). Use the Id value from querySkillsV1",
+        "description": "One or more skill frontmatter IDs (repeatable). Use the Id value from querySkillsV1.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -543,7 +543,7 @@ _aidr_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more AITool IDs (repeatable: ids=A&ids=B). Use the Id value from queryToolsV1",
+        "description": "One or more AITool IDs (repeatable: ids=A&ids=B). Use the Id value from queryToolsV1.",
         "name": "ids",
         "in": "query",
         "required": True
