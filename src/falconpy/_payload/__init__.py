@@ -351,6 +351,8 @@ from ._cloud_snapshots import (
     snapshot_launch_payload
     )
 from ._user_management import (
+    get_permission_groups_payload,
+    get_permissions_payload,
     get_user_allowed_actions_payload,
     get_user_invitations_payload,
     retrieve_users_v2_payload,
@@ -492,5 +494,6 @@ __all__ = [
     "aggregate_patch_deployment_configs_payload", "aggregate_patch_deployment_executions_payload",
     "aggregate_patch_host_deployments_payload", "create_patch_deployment_config_payload",
     "update_patch_deployment_config_payload", "create_scheduled_report_payload",
-    "update_scheduled_report_payload", "set_check_impact_payload"
+    "update_scheduled_report_payload", "set_check_impact_payload",
+    "get_permission_groups_payload", "get_permissions_payload"
 ]
