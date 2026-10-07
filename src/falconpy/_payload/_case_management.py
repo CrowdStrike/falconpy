@@ -419,3 +419,79 @@ def entities_merge_post_v1_payload(passed_keywords: dict) -> dict:
             returned_payload[key] = passed_keywords.get(key)
 
     return returned_payload
+
+
+def add_case_access_tags_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a entities_case_access_tags_post_v1 request.
+
+    {
+        "access_tag_ids": [
+            "string"
+        ],
+        "id": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["access_tag_ids", "id"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def add_case_alert_evidence_v2_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a entities_alert_evidence_post_v2 request.
+
+    {
+        "alerts": [
+            "string"
+        ],
+        "id": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["alerts", "id"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def add_case_custom_evidence_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a entities_custom_evidence_post_v1 request.
+
+    {
+        "case_id": "string",
+        "evidence": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["case_id", "evidence"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def add_case_user_evidence_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted payload for a entities_user_evidence_post_v1 request.
+
+    {
+        "id": "string",
+        "users": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["id", "users"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload

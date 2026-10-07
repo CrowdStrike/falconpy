@@ -1044,6 +1044,60 @@ _case_management_endpoints = [
     ]
   ],
   [
+    "entities_alert_evidence_post_v2",
+    "POST",
+    "/cases/entities/alert-evidence/v2",
+    "Adds the given list of alert evidence to the specified case and returns the created evidence records.",
+    "case_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_case_access_tags_post_v1",
+    "POST",
+    "/cases/entities/case-access-tags/v1",
+    "Adds the given list of access tags to the specified case.",
+    "case_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_case_access_tags_delete_v1",
+    "DELETE",
+    "/cases/entities/case-access-tags/v1",
+    "Removes the specified access tags from the specified case.",
+    "case_management",
+    [
+      {
+        "type": "string",
+        "description": "The ID of the case to remove access tags from.",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The ID of the access tag to remove from the case.",
+        "name": "access_tag_id",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "entities_case_tags_post_v1",
     "POST",
     "/cases/entities/case-tags/v1",
@@ -1127,6 +1181,20 @@ _case_management_endpoints = [
     ]
   ],
   [
+    "entities_custom_evidence_post_v1",
+    "POST",
+    "/cases/entities/custom-evidence/v1",
+    "Adds the given custom evidence to the specified case.",
+    "case_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_event_evidence_post_v1",
     "POST",
     "/cases/entities/event-evidence/v1",
@@ -1145,6 +1213,20 @@ _case_management_endpoints = [
     "POST",
     "/cases/entities/merge/v1",
     "Merges a source case into a destination case.",
+    "case_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_user_evidence_post_v1",
+    "POST",
+    "/cases/entities/user-evidence/v1",
+    "Adds user evidence to the specified case.",
     "case_management",
     [
       {
