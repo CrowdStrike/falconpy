@@ -74,6 +74,8 @@ class Skills(ServiceClass):
             ID of the skill to download.
         include_deleted : bool
             Include deleted skills in the result. Defaults to false.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -111,6 +113,8 @@ class Skills(ServiceClass):
             IDs of skills to retrieve.
         include_deleted : bool
             Include deleted skills in the result. Defaults to false.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -150,6 +154,8 @@ class Skills(ServiceClass):
             ID of the skill to update.
         skill_blob : str
             Updated skill zip archive.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -201,6 +207,8 @@ class Skills(ServiceClass):
             Name to use for the uploaded file.
         skill_blob : str
             Skill zip archive to upload.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -249,6 +257,8 @@ class Skills(ServiceClass):
         -----------------
         id : str or list[str]
             ID of the skill to delete.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
@@ -297,6 +307,8 @@ class Skills(ServiceClass):
             FQL query specifying the filter parameters.
         include_deleted : bool
             Include deleted skills in the result. Defaults to false.
+        project_id : str
+            Scope the operation to a project.
         parameters : dict
             Full parameters payload. Not required if using other keywords.
 
