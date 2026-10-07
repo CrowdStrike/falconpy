@@ -60,14 +60,14 @@ _audit_endpoints = [
       },
       {
         "type": "boolean",
-        "description": "When true, includes descriptions for category and action fields (default: False)",
+        "description": "When true, includes descriptions for category and action fields (default: false)",
         "name": "include_descriptions",
         "in": "query"
       },
       {
         "type": "boolean",
         "description": "When true, filters extension keys based on audit definition YAML and includes "
-        "descriptions for extension keys (default: False)",
+        "descriptions for extension keys (default: false)",
         "name": "include_extension_metadata",
         "in": "query"
       }
@@ -101,14 +101,14 @@ _audit_endpoints = [
       },
       {
         "type": "boolean",
-        "description": "When true, includes descriptions for category and action fields (default: False)",
+        "description": "When true, includes descriptions for category and action fields (default: false)",
         "name": "include_descriptions",
         "in": "query"
       },
       {
         "type": "boolean",
         "description": "When true, filters extension keys based on audit definition YAML and includes "
-        "descriptions for extension keys (default: False)",
+        "descriptions for extension keys (default: false)",
         "name": "include_extension_metadata",
         "in": "query"
       }
