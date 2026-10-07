@@ -1460,6 +1460,84 @@ _ngsiem_endpoints = [
     ]
   ],
   [
+    "GetScheduledReport",
+    "GET",
+    "/ngsiem-content/entities/scheduled-reports/v1",
+    "Get Scheduled Report(s) in LogScale",
+    "ngsiem",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "scheduled report ID value(s)",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo)",
+        "name": "search_domain",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateScheduledReport",
+    "POST",
+    "/ngsiem-content/entities/scheduled-reports/v1",
+    "Create a Scheduled Report in LogScale",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DeleteScheduledReport",
+    "DELETE",
+    "/ngsiem-content/entities/scheduled-reports/v1",
+    "Delete Scheduled Report(s) in LogScale",
+    "ngsiem",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "scheduled report ID value(s). Supports single or multiple IDs for bulk delete.",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo)",
+        "name": "search_domain",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "UpdateScheduledReport",
+    "PATCH",
+    "/ngsiem-content/entities/scheduled-reports/v1",
+    "Update a Scheduled Report in LogScale",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ListDashboards",
     "GET",
     "/ngsiem-content/queries/dashboards/v1",
@@ -1695,6 +1773,45 @@ _ngsiem_endpoints = [
         ],
         "description": "name of search domain (view or repo)",
         "name": "search_domain",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ListScheduledReports",
+    "GET",
+    "/ngsiem-content/queries/scheduled-reports/v1",
+    "List Scheduled Reports in a view with Pagination and Filtering. Returns scheduled report details. "
+    "Supports pagination (default limit: 50) and optional name filtering.",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "default": "50",
+        "pattern": "^\\d{1,4}$",
+        "description": "maximum number of results to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "default": "0",
+        "pattern": "^\\d{1,4}$",
+        "description": "number of results to offset the returned results by",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "FQL filter to apply to the name of the content, only currently support text match on "
+        "name field: name:~'value'",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of view or repo",
+        "name": "view_name",
         "in": "query"
       }
     ]

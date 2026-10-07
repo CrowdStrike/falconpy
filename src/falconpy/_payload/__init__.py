@@ -259,6 +259,7 @@ from ._ngsiem import (
     bulk_update_saved_query_labels_payload,
     create_parser_extension_payload,
     create_persisted_aggregation_payload,
+    create_scheduled_report_payload,
     ngsiem_auto_update_policy_payload,
     ngsiem_bulk_install_parsers_payload,
     ngsiem_clone_parser_payload,
@@ -273,6 +274,7 @@ from ._ngsiem import (
     update_parser_extension_payload,
     update_persisted_aggregation_payload,
     update_saved_query_labels_payload,
+    update_scheduled_report_payload,
     )
 from ._prevention_policy import prevention_policy_payload
 from ._saas_security import (
@@ -488,5 +490,6 @@ __all__ = [
     "perform_eval_run_action_payload", "update_eval_run_payload",
     "aggregate_patch_deployment_configs_payload", "aggregate_patch_deployment_executions_payload",
     "aggregate_patch_host_deployments_payload", "create_patch_deployment_config_payload",
-    "update_patch_deployment_config_payload"
+    "update_patch_deployment_config_payload", "create_scheduled_report_payload",
+    "update_scheduled_report_payload"
 ]
