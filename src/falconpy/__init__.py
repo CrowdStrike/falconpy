@@ -111,7 +111,7 @@ from .admission_control_policies import AdmissionControlPolicies
 from .agent_invocation import AgentInvocation
 from .agent_templates import AgentTemplates
 from .agent_versions import AgentVersions
-from .agentic_studio import AgenticStudio
+from .charlotte import Charlotte
 from .agents import Agents
 from .aidr import AIDR
 from .alerts import Alerts
@@ -333,15 +333,17 @@ __all__ = [
     "CodeSecurity", "NetworkContainment",
     "NetworkScanDetections", "Skills",
     "Guardian", "Seraphic",
-    "AgenticStudio",
+    "Charlotte",
     "ContainerSecurity",
     "Spotlight",
     "Serverless",
     "Firewall",
     "Foundry", "EvalCases",
     "EvalDatasetEntries", "EvalDatasets",
-    "EvalEvaluators", "EvalRuns"
+    "EvalEvaluators", "EvalRuns",
+    "AgenticStudio"
     ]
+AgenticStudio = Charlotte
 Seraphic = BrowserSecurity
 Guardian = AIDR
 """

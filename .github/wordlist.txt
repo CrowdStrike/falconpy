@@ -1999,6 +1999,7 @@ AgentTemplates
 AgentInvocation
 AgentStudio
 AgenticStudio
+Charlotte
 Khaitan
 Yashvardhan
 MRX
