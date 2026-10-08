@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon AgenticStudio API interface class.
+"""CrowdStrike Falcon AgenticStudio API interface class (backward compatibility).
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,78 +35,5 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-
-from .agents import Agents
-from .agent_invocation import AgentInvocation
-from .agent_templates import AgentTemplates
-from .agent_versions import AgentVersions
-from .knowledge_bases import KnowledgeBases
-from .knowledge_base_files import KnowledgeBaseFiles
-from .knowledge_base_audit_events import KnowledgeBaseAuditEvents
-from .models import Models
-from .skills import Skills
-from .spans import Spans
-from .tools import Tools
-from .stream import Stream
-from .eval_cases import EvalCases
-from .eval_dataset_entries import EvalDatasetEntries
-from .eval_datasets import EvalDatasets
-from .eval_evaluators import EvalEvaluators
-from .eval_runs import EvalRuns
-
-
-class AgenticStudio(Agents,  # pylint: disable=too-many-ancestors
-                    AgentInvocation,
-                    AgentTemplates,
-                    AgentVersions,
-                    KnowledgeBases,
-                    KnowledgeBaseFiles,
-                    KnowledgeBaseAuditEvents,
-                    Models,
-                    Skills,
-                    Spans,
-                    Tools,
-                    Stream,
-                    EvalCases,
-                    EvalDatasetEntries,
-                    EvalDatasets,
-                    EvalEvaluators,
-                    EvalRuns):
-    """Combined AgenticStudio service collection providing access to all agentic studio operations.
-
-    This class aggregates all AgenticStudio sub-service collections into a single interface
-    via multiple inheritance. Operations are provided by the following sub-services:
-
-    - Agents
-    - AgentInvocation
-    - AgentTemplates
-    - AgentVersions
-    - KnowledgeBases
-    - KnowledgeBaseFiles
-    - KnowledgeBaseAuditEvents
-    - Models
-    - Skills
-    - Spans
-    - Tools
-    - Stream
-    - EvalCases
-    - EvalDatasetEntries
-    - EvalDatasets
-    - EvalEvaluators
-    - EvalRuns
-
-    The only requirement to instantiate an instance of this class is one of the following.
-
-    - a valid client_id and client_secret provided as keywords.
-    - a credential dictionary with client_id and client_secret containing valid API credentials
-      {
-          "client_id": "CLIENT_ID_HERE",
-          "client_secret": "CLIENT_SECRET_HERE"
-      }
-    - a previously-authenticated instance of the authentication service class (oauth2.py)
-    - a valid token provided by the authentication service class (oauth2.py)
-    """
-
-
-# Backward compatibility alias
-Agentic_Studio = AgenticStudio  # pylint: disable=C0103
+# The AgenticStudio parent service collection is now Charlotte; this module keeps the 1.6.6 import path working.
+from .charlotte import AgenticStudio, Agentic_Studio, Charlotte  # noqa: F401  pylint: disable=W0611
