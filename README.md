@@ -81,6 +81,35 @@ Representing a single CrowdStrike Falcon API service collection, each Service Cl
 For each CrowdStrike Falcon API service collection, a matching Service Class is available in the FalconPy library. For a complete list of service collections and their related Service Class, please review the [Operations by Collection](https://developer.crowdstrike.com/api-reference/operations-by-collection/) page on the [CrowdStrike Developer Center](https://developer.crowdstrike.com).
 
 
+#### Parent Service Classes
+Some CrowdStrike Falcon API service collections are closely related. A _Parent Service Class_ combines these service collections into a single class using multiple inheritance, providing a method for [every operation available](https://developer.crowdstrike.com/api-reference/operations-by-collection/) within each of the service collections it includes. The Service Class for each individual service collection remains available.
+
+<!-- specter: parent service classes -->
+| Parent Service Class | Included Service Classes |
+| :-- | :-- |
+| `Charlotte` | `Agents`, `AgentInvocation`, `AgentTemplates`, `AgentVersions`, `KnowledgeBases`, `KnowledgeBaseFiles`, `KnowledgeBaseAuditEvents`, `Models`, `Skills`, `Spans`, `Tools`, `Stream`, `EvalCases`, `EvalDatasetEntries`, `EvalDatasets`, `EvalEvaluators`, `EvalRuns` |
+| `ContainerSecurity` | `ContainerAlerts`, `ContainerDetections`, `ContainerImageCompliance`, `ContainerImages`, `ContainerVulnerabilities`, `DriftIndicators`, `ImageAssessmentPolicies` |
+| `Firewall` | `FirewallPolicies`, `FirewallManagement` |
+| `Foundry` | `FoundryLookupFiles`, `FoundryLogScale`, `CustomStorage`, `FaaSExecution` |
+| `NetworkScan` | `NetworkScanGlobalConfigs`, `NetworkScanScanRunReports`, `NetworkScanScanRuns`, `NetworkScanScanners`, `NetworkScanTemplates`, `NetworkScanNetworks`, `NetworkScanScans`, `NetworkScanZones`, `NetworkScanDetections` |
+| `Serverless` | `ServerlessExports`, `ServerlessVulnerabilities` |
+| `Spotlight` | `SpotlightVulnerabilities`, `SpotlightVulnerabilityMetadata`, `SpotlightEvaluationLogic` |
+<!-- /specter: parent service classes -->
+
+```python
+import os
+from falconpy import Charlotte
+
+charlotte = Charlotte(client_id=os.getenv("FALCON_CLIENT_ID"),
+                      client_secret=os.getenv("FALCON_CLIENT_SECRET")
+                      )
+
+# Operations from the Agents and Eval Datasets service collections are available from the same class
+agents = charlotte.query_studio_agents(limit=10)
+datasets = charlotte.query_eval_datasets(limit=10)
+```
+
+
 #### Service Class benefits
 
 - Closely follows Python and OpenAPI best practice for code style and syntax. PEP-8 compliant.
