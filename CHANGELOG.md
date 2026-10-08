@@ -1,7 +1,9 @@
 # Version 1.6.7
 ## Added features and functionality
-+ Updated: Added __Eval Cases__ and __Eval Dataset Entries__ and __Eval Datasets__ and __Eval Evaluators__ and __Eval Runs__ to the __AgenticStudio__ parent service collection.
++ Updated: Renamed the __AgenticStudio__ parent service collection to __Charlotte__, since every one of its sub-services requires a Charlotte AI scope, and added __Eval Cases__, __Eval Dataset Entries__, __Eval Datasets__, __Eval Evaluators__ and __Eval Runs__ to it. `AgenticStudio` remains available as a backward compatible alias, including from `falconpy.agentic_studio`.
+    - `__init__.py`
     - `agentic_studio.py`
+    - `charlotte.py`
 
 + Updated: Added `project_id` as an allowed parameter in the _GetAgentInvocationV3_ and _PatchAgentInvocationV3_ operations within the __Agent Invocation__ service collection.
     - `_endpoint/_agent_invocation.py`
