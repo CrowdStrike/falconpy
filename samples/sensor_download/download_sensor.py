@@ -105,7 +105,8 @@ def get_version_map(sensor_versions: list):  # pylint: disable=R0914
         prev = False
         eldest = False
         if plat and os_name:
-            for os_type, os_detail in version_map.get(plat, {}).items():
+            # Platforms other than the ones listed above (VMware, for example) are added when they are found
+            for os_type, os_detail in version_map.setdefault(plat, {}).items():
                 if os_type == f"{os_name} {os_ver}".strip():
                     if not os_detail.get("current", {}):
                         os_detail["current"] = {}
