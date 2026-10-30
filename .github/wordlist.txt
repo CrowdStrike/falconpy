@@ -16,6 +16,8 @@ BatchGetCmd
 BatchGetCmdStatus
 BatchInitSessions
 BatchRefreshSessions
+booleans
+CAs
 CCID
 CID
 CIDs
