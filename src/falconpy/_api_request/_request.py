@@ -278,6 +278,6 @@ class APIRequest:
         return self.connection.timeout
 
     @property
-    def verify(self) -> bool:
+    def verify(self) -> Union[bool, str]:
         """Return the SSL verification setting."""
         return self.connection.verify

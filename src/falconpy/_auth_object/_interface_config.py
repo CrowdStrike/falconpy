@@ -35,8 +35,28 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+import os
 from typing import Dict, Union, Optional
 import requests
+
+
+def _normalize_ssl_verify(value: Optional[Union[bool, str, os.PathLike]]) -> Union[bool, str]:
+    """Return a value that is safe to hand to requests as the verify argument.
+
+    requests accepts a boolean, or the path to a CA_BUNDLE file or a directory of
+    trusted certificates. Path-like objects are converted to a string path.
+
+    Empty or whitespace-only strings are treated as "not provided" and fall back to True.
+    requests treats an empty string as falsy and would silently disable verification.
+    Any other unsupported value also falls back to True so verification stays enabled.
+    """
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, os.PathLike):
+        value = os.fspath(value)
+    if isinstance(value, str) and value.strip():
+        return value
+    return True
 
 
 class InterfaceConfiguration:
@@ -51,7 +71,7 @@ class InterfaceConfiguration:
                  proxy: Optional[Dict[str, str]] = None,
                  timeout: Optional[Union[int, tuple]] = None,
                  user_agent: Optional[str] = None,
-                 ssl_verify: Optional[bool] = True,
+                 ssl_verify: Optional[Union[bool, str, os.PathLike]] = True,
                  session: Optional[requests.Session] = None
                  ):
         """Construct an instance of the InterfaceConfiguration class."""
@@ -60,10 +80,8 @@ class InterfaceConfiguration:
         self._timeout: Optional[Union[int, tuple]] = timeout
         self._user_agent: Optional[str] = user_agent
         self._session: Optional[requests.Session] = session
-
-        self._ssl_verify: bool = True
-        if isinstance(ssl_verify, bool):
-            self._ssl_verify = ssl_verify
+        # Boolean, or the path to a CA_BUNDLE file / directory of trusted certificates.
+        self._ssl_verify: Union[bool, str] = _normalize_ssl_verify(ssl_verify)
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
@@ -111,14 +129,14 @@ class InterfaceConfiguration:
         self._user_agent = value
 
     @property
-    def ssl_verify(self) -> bool:
-        """Return the SSL verification setting."""
+    def ssl_verify(self) -> Union[bool, str]:
+        """Return the SSL verification setting (a boolean or a CA_BUNDLE path)."""
         return self._ssl_verify
 
     @ssl_verify.setter
-    def ssl_verify(self, value: bool):
-        """Change the SSL verification setting."""
-        self._ssl_verify = value
+    def ssl_verify(self, value: Union[bool, str, os.PathLike]):
+        """Change the SSL verification setting (a boolean or a CA_BUNDLE path)."""
+        self._ssl_verify = _normalize_ssl_verify(value)
 
     @property
     def session(self) -> Optional[requests.Session]:
