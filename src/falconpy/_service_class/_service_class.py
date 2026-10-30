@@ -94,8 +94,9 @@ class ServiceClass(BaseServiceClass):
             CrowdStrike API URL to use for requests. [Default: US-1]
         ext_headers : dict
             Additional headers to be prepended to the default headers dictionary.
-        ssl_verify : bool
-            Flag specifying if SSL verification should be used. [Default: True]
+        ssl_verify : bool or str
+            Flag specifying if SSL verification should be used, or the path to a CA_BUNDLE
+            file or directory of trusted certificates. [Default: True]
         proxy : dict
             Dictionary of proxies to be used for requests.
         timeout : float or tuple

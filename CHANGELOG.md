@@ -210,6 +210,21 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_user_management.py`
 
+## Issues resolved
++ Fixed: A CA_BUNDLE path (file or directory of trusted certificates) provided to the `ssl_verify` keyword was silently discarded and replaced with `True` when passed to the constructor of the Uber Class (`APIHarnessV2`), the __OAuth2__ class, or any Service Class. Requests were then verified against the default trust store, breaking connectivity behind TLS-inspecting proxies and private CAs. This was a regression introduced in v1.3.0; the legacy Uber Class and v1.2.x Service Classes accepted a path. The constructor and the `ssl_verify` property setter now share the same handling: booleans and CA_BUNDLE paths (`str` or `os.PathLike`) are passed to requests, while empty strings and unsupported types fall back to `True` so verification is never disabled unintentionally. Closes #1521.
+    - `_api_request/_request.py`
+    - `_api_request/_request_connection.py`
+    - `_auth_object/_falcon_interface.py`
+    - `_auth_object/_interface_config.py`
+    - `_auth_object/_uber_interface.py`
+    - `_service_class/_base_service_class.py`
+    - `_service_class/_service_class.py`
+    - `_util/_functions.py`
+    - `oauth2.py`
+    > Unit testing expanded to cover `ssl_verify` normalization and CA_BUNDLE path handling.
+    - `tests/test_ssl_verify.py`
+    - Thanks go out to @tsullivan06 for identifying and reporting this issue! 🙇
+
 # Version 1.6.6
 ## Added Features and functionality
 + Added: New __AgenticStudio__ parent service collection aggregating all 12 Agentic Studio sub-services via multiple inheritance.

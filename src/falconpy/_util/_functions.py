@@ -371,7 +371,8 @@ def perform_request(endpoint: str = "",  # noqa: C901
         - Example: {"limit": 1, "sort": "state.asc"}
     body: dict - HTTP body payload to send to the API
         - Example: {"ids": ["123456789abcdefg", "987654321zyxwvutsr"]}
-    verify: bool - Enable / Disable SSL certificate checks
+    verify: bool or str - Enable / Disable SSL certificate checks, or the path to a CA_BUNDLE
+        file or directory of trusted certificates.
         - Example: True
     data - Encoded data to send to the API
         - Example: PAYLOAD = open(FILENAME, 'rb').read()

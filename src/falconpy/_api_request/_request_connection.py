@@ -49,7 +49,7 @@ class RequestConnection:
     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
     #
     user_agent: Optional[str] = None
-    verify: bool = True
+    verify: Union[bool, str] = True
     timeout: Optional[Union[int, tuple]] = None
     proxy: Optional[Dict[str, str]] = None
     session: Optional[requests.Session] = None

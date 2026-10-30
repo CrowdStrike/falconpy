@@ -85,7 +85,7 @@ class FalconInterface(BaseFalconAuth):
                  client_id: Optional[str] = None,
                  client_secret: Optional[str] = None,
                  member_cid: Optional[str] = None,
-                 ssl_verify: Optional[bool] = True,
+                 ssl_verify: Optional[Union[bool, str, os.PathLike]] = True,
                  proxy: Optional[Dict[str, str]] = None,
                  timeout: Optional[Union[float, tuple]] = None,
                  user_agent: Optional[str] = None,
@@ -425,12 +425,12 @@ class FalconInterface(BaseFalconAuth):
         self.config.base_url = value
 
     @property
-    def ssl_verify(self) -> bool:
+    def ssl_verify(self) -> Union[bool, str]:
         """Return the SSL verification setting from the configuration object."""
         return self.config.ssl_verify
 
     @ssl_verify.setter
-    def ssl_verify(self, value: bool):
+    def ssl_verify(self, value: Union[bool, str, os.PathLike]):
         self.config.ssl_verify = value
 
     @property
