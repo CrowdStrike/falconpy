@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+import os
 from traceback import extract_tb
 from typing import Dict, List, Optional, Union
 import requests
@@ -71,7 +72,7 @@ class UberInterface(FalconInterface):
                  client_id: Optional[str] = None,
                  client_secret: Optional[str] = None,
                  member_cid: Optional[str] = None,
-                 ssl_verify: Optional[bool] = True,
+                 ssl_verify: Optional[Union[bool, str, os.PathLike]] = True,
                  proxy: Optional[dict] = None,
                  timeout: Optional[Union[float, tuple]] = None,
                  user_agent: Optional[str] = None,
@@ -91,7 +92,9 @@ class UberInterface(FalconInterface):
 
         Keyword arguments:
         base_url: CrowdStrike API URL to use for requests. [Default: US-1]
-        ssl_verify: Boolean specifying if SSL verification should be used. [Default: True]
+        ssl_verify: Boolean specifying if SSL verification should be used or string representing
+                    the path to a CA_BUNDLE file or directory of trusted certificates.
+                    [Default: True]
         proxy: Dictionary of proxies to be used for requests.
         timeout: Float or tuple specifying timeouts to use for requests.
         creds: Dictionary containing CrowdStrike API credentials.

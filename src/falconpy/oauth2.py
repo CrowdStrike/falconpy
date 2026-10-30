@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=R0902,R0913
+import os
 from logging import Logger
 from typing import Dict, Optional, Union
 import requests
@@ -81,7 +82,7 @@ class OAuth2(FalconInterface):
     def __init__(self,
                  access_token: Optional[Union[str, bool]] = False,
                  base_url: Optional[str] = "https://api.crowdstrike.com",
-                 ssl_verify: Optional[bool] = True,
+                 ssl_verify: Optional[Union[bool, str, os.PathLike]] = True,
                  proxy: Optional[Dict[str, str]] = None,
                  timeout: Optional[Union[float, tuple]] = None,
                  creds: Optional[Dict[str, str]] = None,
@@ -107,8 +108,9 @@ class OAuth2(FalconInterface):
         -----------------
         base_url : str
             CrowdStrike API URL to use for requests. [Default: US-1]
-        ssl_verify : bool
-            Flag specifying if SSL verification should be used. [Default: True]
+        ssl_verify : bool or str
+            Flag specifying if SSL verification should be used, or the path to a CA_BUNDLE
+            file or directory of trusted certificates. [Default: True]
         proxy : dict
             Dictionary of proxies to be used for requests.
         timeout : float or tuple

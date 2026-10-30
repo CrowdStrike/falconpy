@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import inspect
+import os
 from abc import ABC, abstractmethod
 from logging import Logger, getLogger
 from typing import Dict, Type, Union, Optional
@@ -153,13 +154,13 @@ class BaseServiceClass(ABC):
         self.auth_object.base_url = value
 
     @property
-    def ssl_verify(self) -> bool:
+    def ssl_verify(self) -> Union[bool, str]:
         """Provide the ssl_verify value to legacy code."""
         return self.auth_object.ssl_verify
 
     # Changing this setting will impact all traffic thru the interface.
     @ssl_verify.setter
-    def ssl_verify(self, value: bool):
+    def ssl_verify(self, value: Union[bool, str, os.PathLike]):
         """Allow code to flip the underlying SSL verify flag via the this class."""
         self.auth_object.ssl_verify = value
 
