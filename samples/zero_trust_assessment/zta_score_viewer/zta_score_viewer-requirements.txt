@@ -7,4 +7,4 @@ crowdstrike-falconpy==1.6.0
 dearpygui==2.2
 idna==3.11
 requests==2.32.5
-urllib3==2.6.3
+urllib3==2.8.0
