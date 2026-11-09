@@ -10,4 +10,4 @@ PySide6-Addons==6.10.2
 PySide6-Essentials==6.10.2
 requests==2.32.5
 shiboken6==6.10.2
-urllib3==2.6.3
+urllib3==2.8.0

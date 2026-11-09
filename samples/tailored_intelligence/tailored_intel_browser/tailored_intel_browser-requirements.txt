@@ -11,4 +11,4 @@ kivy==2.3.1
 kivy-garden==0.1.5
 Pygments==2.19.2
 requests==2.32.5
-urllib3==2.6.3
+urllib3==2.8.0
