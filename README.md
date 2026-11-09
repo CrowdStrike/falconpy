@@ -97,12 +97,10 @@ Some CrowdStrike Falcon API service collections are closely related. A _Parent S
 <!-- /specter: parent service classes -->
 
 ```python
-import os
 from falconpy import Charlotte
 
-charlotte = Charlotte(client_id=os.getenv("FALCON_CLIENT_ID"),
-                      client_secret=os.getenv("FALCON_CLIENT_SECRET")
-                      )
+# This example authenticates using Environment Authentication
+charlotte = Charlotte()
 
 # Operations from the Agents and Eval Datasets service collections are available from the same class
 agents = charlotte.query_studio_agents(limit=10)
