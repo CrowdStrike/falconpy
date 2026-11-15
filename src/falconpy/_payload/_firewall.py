@@ -471,8 +471,10 @@ def network_locations_create_payload(passed_keywords: dict) -> dict:
             "https_reachable_hosts", "icmp_request_targets", "name", "modified_by", "created_by",
             "created_on"
             ]
+    bool_keys = ["enabled"]
     for key in keys:
-        if passed_keywords.get(key, None):
-            returned_payload[key] = passed_keywords.get(key)
+        value = passed_keywords.get(key, None)
+        if value or (key in bool_keys and value is not None):
+            returned_payload[key] = value
 
     return returned_payload

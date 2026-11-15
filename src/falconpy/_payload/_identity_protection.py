@@ -130,11 +130,13 @@ def idp_policy_payload(passed_keywords: dict) -> dict:
         "source_endpoint": "sourceEndpoint",
         "source_user": "sourceUser"
     }
+    bool_keys = ["enabled", "simulationMode", "simulation_mode"]
     for key in keys:
-        if passed_keywords.get(key, None):
+        value = passed_keywords.get(key, None)
+        if value or (key in bool_keys and value is not None):
             keyset = key
             if keymap.get(key, None):
                 keyset = keymap[key]
-            returned[keyset] = passed_keywords.get(key)
+            returned[keyset] = value
 
     return returned
