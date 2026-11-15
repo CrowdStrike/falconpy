@@ -108,7 +108,7 @@ def sensor_policy_payload(passed_keywords: dict) -> Dict[str, List[dict]]:
         settings["build"] = passed_keywords.get("build", None)
     if passed_keywords.get("scheduler", None):
         settings["scheduler"] = passed_keywords.get("scheduler", None)
-    if passed_keywords.get("show_early_adopter_builds", None):
+    if passed_keywords.get("show_early_adopter_builds", None) is not None:
         settings["show_early_adopter_builds"] = passed_keywords.get("show_early_adopter_builds", None)
     if passed_keywords.get("uninstall_protection", None):
         settings["uninstall_protection"] = passed_keywords.get("uninstall_protection", "DISABLED")
