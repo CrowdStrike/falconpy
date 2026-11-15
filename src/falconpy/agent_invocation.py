@@ -304,9 +304,10 @@ class AgentInvocation(ServiceClass):
             body=body
             )
 
-    @force_default(defaults=["body"], default_types=["dict"])
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
     def update_agent_invocation(self: object,
                                 body: dict = None,
+                                parameters: dict = None,
                                 **kwargs
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Modify an in-flight agent invocation.
@@ -331,6 +332,8 @@ class AgentInvocation(ServiceClass):
             The status value.
         project_id : str
             Scope the operation to a project.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
@@ -346,7 +349,9 @@ class AgentInvocation(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="PatchAgentInvocationV3",
-            body=body
+            keywords=kwargs,
+            body=body,
+            params=parameters
             )
     InvokePublishedAgentExternalV1 = invoke_published_agent_external_v1
     GetAgentInvocationV3 = get_agent_invocation_v3

@@ -1769,6 +1769,7 @@ class Hosts(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="QueryDeviceLoginHistoryV2",
+            keywords=kwargs,
             body=body,
             params=parameters,
             body_validator={"ids": list} if self.validate_payloads else None,

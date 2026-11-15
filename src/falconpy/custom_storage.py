@@ -755,8 +755,12 @@ class CustomStorage(ServiceClass):
                                              )
         return returned
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def upload_version(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def upload_version(self: object,
+                       body: dict = None,
+                       parameters: dict = None,
+                       **kwargs
+                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Put the specified new object at the given key or overwrite an existing object at the given key.
 
         HTTP Method: PUT
@@ -809,6 +813,7 @@ class CustomStorage(ServiceClass):
                 operation_id="PutObjectByVersion",
                 keywords=kwargs,
                 body=body,
+                params=parameters,
                 headers=header_payload,
                 collection_name=collection_name,
                 collection_version=collection_version,

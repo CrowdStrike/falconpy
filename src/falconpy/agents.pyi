@@ -32,6 +32,7 @@ class Agents(ServiceClass):
         template_id: Optional[str] = None,
         version_definition: Optional[dict] = None,
         body: Optional[dict] = None,
+        parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
     def update_agent(

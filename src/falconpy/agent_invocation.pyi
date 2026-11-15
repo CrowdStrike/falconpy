@@ -44,6 +44,7 @@ class AgentInvocation(ServiceClass):
         id: Optional[str] = None,
         status: Optional[str] = None,
         body: Optional[dict] = None,
+        parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
     InvokePublishedAgentExternalV1 = invoke_published_agent_external_v1
