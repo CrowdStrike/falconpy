@@ -219,6 +219,7 @@ class RealTimeResponse(ServiceClass):
         origin: Optional[str] = None,
         queue_offline: Optional[bool] = None,
         body: Optional[dict] = None,
+        parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
     def delete_session(

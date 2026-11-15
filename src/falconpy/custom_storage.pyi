@@ -147,6 +147,7 @@ class CustomStorage(ServiceClass):
         dry_run: Optional[bool] = None,
         object_key: Optional[str] = None,
         body: Optional[dict] = None,
+        parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
     def delete_version(

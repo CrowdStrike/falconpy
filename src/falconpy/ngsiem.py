@@ -2412,6 +2412,7 @@ class NGSIEM(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="ExternalUpdateDataConnection",
+            keywords=kwargs,
             body=body,
             params=parameters
             )

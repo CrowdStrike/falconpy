@@ -445,6 +445,7 @@ class FalconXSandbox(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="Submit",
+            keywords=kwargs,
             body=body,
             params=parameters
             )

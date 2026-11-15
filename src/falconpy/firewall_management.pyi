@@ -203,6 +203,7 @@ class FirewallManagement(ServiceClass):
         modified_on: Optional[str] = None,
         name: Optional[str] = None,
         body: Optional[dict] = None,
+        parameters: Optional[dict] = None,
     ) -> Union[Dict[str, Union[int, dict]], Result]: ...
 
     def update_network_locations(

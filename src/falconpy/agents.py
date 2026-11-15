@@ -138,9 +138,10 @@ class Agents(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    @force_default(defaults=["body"], default_types=["dict"])
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
     def create_or_update_agent(self: object,
                                body: dict = None,
+                               parameters: dict = None,
                                **kwargs
                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create or update an agent.
@@ -228,6 +229,8 @@ class Agents(ServiceClass):
         wait_for_ready : bool
             Wait for the new version to finish registering before responding. Set to false to respond immediately and poll
             GetAgentVersionsV1 for is_in_sync instead.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
@@ -243,7 +246,9 @@ class Agents(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="CreateOrEditAgentExternalV3",
-            body=body
+            keywords=kwargs,
+            body=body,
+            params=parameters
             )
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])

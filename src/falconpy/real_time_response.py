@@ -1058,8 +1058,12 @@ class RealTimeResponse(ServiceClass):
             body=body
             )
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def init_session(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def init_session(self: object,
+                     body: dict = None,
+                     parameters: dict = None,
+                     **kwargs
+                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Initialize a new session with the RTR cloud.
 
         HTTP Method: POST
@@ -1089,6 +1093,8 @@ class RealTimeResponse(ServiceClass):
             Timeout duration for how long to wait for the request in duration syntax.
             Example: 10s  Valid units: ns, us, ms, s, m, h
             Maximum is 10 minutes.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
@@ -1104,7 +1110,9 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_InitSession",
-            body=body
+            keywords=kwargs,
+            body=body,
+            params=parameters
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])

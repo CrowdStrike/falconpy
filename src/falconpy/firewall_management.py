@@ -622,6 +622,7 @@ class FirewallManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="update_network_locations_metadata",
+            keywords=kwargs,
             body=body,
             params=parameters
             )
@@ -671,6 +672,7 @@ class FirewallManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="update_network_locations_precedence",
+            keywords=kwargs,
             body=body,
             params=parameters
             )
@@ -823,8 +825,8 @@ class FirewallManagement(ServiceClass):
             params=parameters
             )
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def upsert_network_locations(self: object, body: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def upsert_network_locations(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
         """Update the network locations provided and return the ID.
 
         HTTP Method: PUT
@@ -940,7 +942,8 @@ class FirewallManagement(ServiceClass):
             endpoints=Endpoints,
             operation_id="upsert_network_locations",
             keywords=kwargs,
-            body=body
+            body=body,
+            params=parameters
             )
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
