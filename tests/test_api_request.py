@@ -27,6 +27,7 @@ from falconpy._util._functions import (
     log_api_payloads,
     perform_request,
     sanitize_dictionary,
+    sanitize_proxy,
 )
 
 auth = Authorization.TestAuthorization()
@@ -351,3 +352,47 @@ class TestSanitizeDictionary:
     def test_non_dictionary_input_is_returned_unchanged(self):
         """A non-dictionary argument must pass straight through."""
         assert sanitize_dictionary("plain string") == "plain string"
+
+    def test_nested_secrets_are_redacted(self):
+        """Secret values must be redacted at any depth of the payload."""
+        dirty = {
+            "resources": [{"client_email": "a@b.c", "private_key": "real_key", "private_key_id": "kid"}],
+            "credentials": {"details": {"Password": "real_password", "webhook_secret": b"real_secret"}},
+            "body": {"resources": [{"client_secret": "real_secret", "reset_password": True}]},
+        }
+        cleaned = sanitize_dictionary(dirty, record_max=5)
+        assert cleaned["resources"][0]["private_key"] == "REDACTED"
+        assert cleaned["resources"][0]["private_key_id"] == "kid"
+        assert cleaned["resources"][0]["client_email"] == "a@b.c"
+        assert cleaned["credentials"]["details"]["Password"] == "REDACTED"
+        assert cleaned["credentials"]["details"]["webhook_secret"] == "REDACTED"
+        assert cleaned["body"]["resources"][0]["client_secret"] == "REDACTED"
+        assert cleaned["body"]["resources"][0]["reset_password"] is True
+
+
+class TestSanitizeProxy:
+    """Cover _util/_functions.py sanitize_proxy credential removal."""
+
+    def test_credentials_are_removed_from_proxy_urls(self):
+        """User name and password must not survive in a logged proxy URL."""
+        cleaned = sanitize_proxy({
+            "https": "http://user:real_password@proxy.example:8080/path",
+            "http": "user:p@ss@proxy.example:3128",
+        })
+        assert cleaned["https"] == "http://REDACTED@proxy.example:8080/path"
+        assert cleaned["http"] == "REDACTED@proxy.example:3128"
+
+    def test_proxy_urls_without_credentials_are_unchanged(self):
+        """A proxy URL without credentials, or with an @ in its path, is left as is."""
+        proxy = {"https": "http://proxy.example:8080", "http": "http://proxy.example/a@b"}
+        assert sanitize_proxy(proxy) == proxy
+
+    def test_original_proxy_dictionary_is_not_modified(self):
+        """The dictionary used for requests must keep its credentials."""
+        proxy = {"https": "http://user:real_password@proxy.example:8080"}
+        sanitize_proxy(proxy)
+        assert proxy["https"] == "http://user:real_password@proxy.example:8080"
+
+    def test_non_dictionary_input_is_returned_unchanged(self):
+        """A missing proxy setting must pass straight through."""
+        assert sanitize_proxy(None) is None

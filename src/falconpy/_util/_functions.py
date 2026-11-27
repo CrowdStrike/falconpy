@@ -944,6 +944,45 @@ def autodiscover_region(provided_base_url: str, auth_result: dict):
     return new_base_url
 
 
+def _redact_nested(item: Any):
+    """Redact secret values at any depth of a logged dictionary or list.
+
+    A key is treated as secret when it is named "private_key" or when its name
+    contains "password" or "secret". Only string and bytes values are replaced.
+    """
+    if isinstance(item, dict):
+        for key, val in item.items():
+            name = str(key).lower()
+            if isinstance(val, (dict, list)):
+                _redact_nested(val)
+            elif isinstance(val, (str, bytes)) and (
+                    name == "private_key" or "password" in name or "secret" in name
+                    ):
+                item[key] = "REDACTED"
+    elif isinstance(item, list):
+        for element in item:
+            _redact_nested(element)
+
+
+def sanitize_proxy(proxy: Any) -> Any:
+    """Strip the credentials from the URLs of a logged proxy dictionary."""
+    cleaned = proxy
+    if isinstance(proxy, dict):
+        cleaned = {}
+        for scheme, target in proxy.items():
+            address = str(target)
+            prefix, found, remainder = address.partition("://")
+            if not found:
+                prefix, remainder = "", address
+            authority, slash, path = remainder.partition("/")
+            if "@" in authority:
+                authority = f"REDACTED@{authority.rpartition('@')[2]}"
+                address = f"{prefix}{found}{authority}{slash}{path}"
+            cleaned[scheme] = address
+
+    return cleaned
+
+
 def sanitize_dictionary(dirty: Any, record_max: int = MAX_DEBUG_RECORDS) -> dict:
     """Strip confidential data from logged dictionaries."""
     cleaned = dirty
@@ -966,6 +1005,7 @@ def sanitize_dictionary(dirty: Any, record_max: int = MAX_DEBUG_RECORDS) -> dict
                                                                         )):]
         if "Authorization" in cleaned:
             cleaned["Authorization"] = "Bearer REDACTED"
+        _redact_nested(cleaned)
 
     return cleaned
 
@@ -979,7 +1019,9 @@ def log_class_startup(interface: Union[FalconInterface, ServiceClass, APIHarness
     log_device.debug("CONFIG: Base URL set to %s", interface.base_url)
     log_device.debug("CONFIG: SSL verification is set to %s", str(interface.ssl_verify))
     log_device.debug("CONFIG: Timeout set to %s seconds", str(interface.timeout))
-    log_device.debug("CONFIG: Proxy dictionary: %s", str(interface.proxy))
+    log_device.debug("CONFIG: Proxy dictionary: %s",
+                     str(sanitize_proxy(interface.proxy) if interface.sanitize_log else interface.proxy)
+                     )
     log_device.debug("CONFIG: User-Agent string set to: %s", interface.user_agent)
     log_device.debug("CONFIG: Token renewal window set to %s seconds",
                      str(interface.renew_window)

@@ -54,6 +54,7 @@ from ._functions import (
     base_url_regions,
     autodiscover_region,
     sanitize_dictionary,
+    sanitize_proxy,
     calc_content_return,
     log_class_startup,
     deprecated_operation,
@@ -77,7 +78,7 @@ __all__ = ["create_uber_header_payload", "handle_body_payload_ids", "scrub_targe
            "service_request", "perform_request", "generate_error_result", "generate_ok_result",
            "get_default", "args_to_params", "process_service_request", "confirm_base_url",
            "confirm_base_region", "return_preferred_default", "base_url_regions",
-           "_ALLOWED_METHODS", "login_payloads", "logout_payloads", "sanitize_dictionary",
+           "_ALLOWED_METHODS", "login_payloads", "logout_payloads", "sanitize_dictionary", "sanitize_proxy",
            "calc_content_return", "log_class_startup", "service_override_payload",
            "deprecated_operation", "deprecated_class", "review_provided_credentials",
            "params_to_keywords", "encode_path_segment"
