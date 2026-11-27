@@ -812,8 +812,17 @@ def encode_path_segment(value: Any) -> str:
     the forward slash -- so a caller supplied value cannot introduce additional
     path segments or dot-segment sequences that the HTTP client would later
     normalize into a different, unintended API route.
+
+    A value that is itself a dot segment ("." or "..") contains nothing to
+    escape, and escaping the dots does not help because the HTTP client decodes
+    them again before it normalizes the path. Such a value is never a valid
+    identifier, so it is refused.
     """
-    return quote(str(value), safe="")
+    encoded = quote(str(value), safe="")
+    if encoded in (".", ".."):
+        raise ValueError(f"'{encoded}' is not a valid value for a path parameter.")
+
+    return encoded
 
 
 def handle_path_variables(passed: dict, route_url: str):

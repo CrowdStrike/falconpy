@@ -10,6 +10,7 @@
 # These tests are fully mocked -- no live credentials and no network access.
 import os
 import sys
+import pytest
 from requests import Request
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
@@ -51,9 +52,26 @@ class TestEncodePathSegment:
         """Braces must not survive into a subsequent str.format call."""
         assert encode_path_segment("{evil}") == "%7Bevil%7D"
 
+    def test_dot_segments_are_refused(self):
+        """A value that is exactly a dot segment must not reach the route."""
+        for dots in [".", ".."]:
+            with pytest.raises(ValueError):
+                encode_path_segment(dots)
+
+    def test_values_containing_dots_are_unchanged(self):
+        """Dots inside a longer identifier are not dot segments."""
+        for benign in ["...", "v1.2", ".hidden", "name."]:
+            assert encode_path_segment(benign) == benign
+
 
 class TestServiceClassPathEncoding:
     """handle_path_variables is the Service Class chokepoint."""
+
+    def test_dot_segment_collection_name_is_refused(self):
+        """A collection name of '..' must not shorten the route."""
+        route = "https://api.example/customobjects/v1/collections/{collection_name}/objects/{object_key}"
+        with pytest.raises(ValueError):
+            handle_path_variables({"collection_name": "..", "object_key": "k1"}, route)
 
     def test_benign_value_is_unchanged(self):
         assert handle_path_variables({"path_id": "9"}, ASPM_ROUTE).endswith("/group/9")
